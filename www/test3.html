@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+    .rating-star{
+        width: 25px;
+    }
+    .send-rating{
+        border: none;
+        border-radius: 10px;
+        background-color: royalblue;
+        color: #d4dee8;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+</head>
+<body>
+<div>
+    <img id="20" class="rating-star" src="../www/img/Additional_icons/star.png">
+    <img id="40" class="rating-star" src="../www/img/Additional_icons/star.png">
+    <img id="60" class="rating-star" src="../www/img/Additional_icons/star.png">
+    <img id="80" class="rating-star" src="../www/img/Additional_icons/star.png">
+    <img id="100" class="rating-star" src="../www/img/Additional_icons/star.png">
+    <br>
+    <input type="range" min="20" max="100" value="80" onchange="checkRatingValue(this)">
+    <span class="send-rating">Send Review</span>
+    <div>You rating this item for: <span id="scoring">80</span></div>
+</div>
+
+</body>
+<script>
+	function checkRatingValue(x){
+        if(($(x).val()) < 20){
+            $(x).val(20);
+        }else if(($(x).val()) < 20){
+            $(x).val(20);
+        }else if(($(x).val()) > 20 && ($(x).val()) < 40){
+            $(x).val(40);
+        }else if(($(x).val()) > 40 && ($(x).val()) < 60){
+            $(x).val(60);
+        }else if(($(x).val()) > 60 && ($(x).val()) < 80){
+            $(x).val(80);
+        }else if(($(x).val()) > 80 && ($(x).val()) < 100){
+            $(x).val(100);
+        }
+        $("#scoring").html($(x).val());
+	}
+</script>
+</html>

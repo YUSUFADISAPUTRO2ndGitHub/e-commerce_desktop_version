@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+    .slides {display: none;}
+    img {vertical-align: middle;}
+    #image1{
+        display: block;
+    }
+</style>
+</head>
+<body>
+<div>
+    <img id="image1" class="slides" src="../www/img/ADS_SLIDES/1.jpg" style="width:100%">
+    <img id="image2" class="slides" src="../www/img/ADS_SLIDES/2.jpg" style="width:100%">
+    <img id="image3" class="slides" src="../www/img/ADS_SLIDES/3.jpg" style="width:100%">
+</div>
+<script>
+    var slideIndex = 1;
+    $(document).ready(function(){
+        setInterval(function(){ 
+            console.log(slideIndex);
+            if(slideIndex == 0){
+                $(".slides").css("display", "none");
+                $("#image1").css("display", "block");
+            }else if(slideIndex == 1){
+                $(".slides").css("display", "none");
+                $("#image2").css("display", "block");
+            }else if(slideIndex == 2){
+                $(".slides").css("display", "none");
+                $("#image3").css("display", "block");
+            }
+            slideIndex++;
+            if(slideIndex > 2){
+                slideIndex = 0;
+            }
+        }, 3000);
+    });
+</script>
+
+</body>
+</html> 

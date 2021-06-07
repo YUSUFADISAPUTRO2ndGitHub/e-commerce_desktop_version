@@ -18,7 +18,7 @@ function getToken(){
 
 function getProfile(Customer_Code){
     var settings = {
-        "url": `http://147.139.168.202:3002/get-customer-information?Customer_Code=${Customer_Code}`,
+        "url": `http://customers.sold.co.id/get-customer-information?Customer_Code=${Customer_Code}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -27,36 +27,16 @@ function getProfile(Customer_Code){
 
 function getUnpaidOrderPerProduct(Product_Code, Customer_Code){
     var settings = {
-        "url": `http://147.139.168.202:3003/get-unpaid-group-buy-sales-order-per-customer?Group_Buy_Purchase_PC=${Product_Code}&Customer_Code=${Customer_Code}`,
+        "url": `http://sales.sold.co.id/get-unpaid-group-buy-sales-order-per-customer?Group_Buy_Purchase_PC=${Product_Code}&Customer_Code=${Customer_Code}`,
         "method": "POST",
         "timeout": 0,
     };
-    return $.ajax(settings);
-}
-
-// customers
-function getAllCustomersWithPagination(access_token, session_id, page){
-    var settings = {
-        "url": "http://147.139.168.202:8888/get-customer?accessToken=" + access_token + "&sessionId=" + session_id + "&page=" + page,
-        "method": "POST",
-        "timeout": 0,
-    };
-    return $.ajax(settings);
-}
-
-function getAllCustomersWithoutPagination(access_token, session_id){
-    var settings = {
-        "url": "http://147.139.168.202:8888/get-customer-all?accessToken=" + access_token + "&sessionId=" + session_id + "",
-        "method": "POST",
-        "timeout": 10000,
-    };
-    
     return $.ajax(settings);
 }
 
 function getCustomersWithCustomerNo(customerNo){
     var settings = {
-        "url": `http://147.139.168.202:3002/get-customer-information?Customer_Code=${customerNo}`,
+        "url": `http://customers.sold.co.id/get-customer-information?Customer_Code=${customerNo}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -66,7 +46,7 @@ function getCustomersWithCustomerNo(customerNo){
 
 function loginRequestAPI(Email, Password){
     var settings = {
-        "url": `http://147.139.168.202:3002/customer-login-request?Email=${Email}&Password=${Password}`,
+        "url": `http://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -76,7 +56,7 @@ function loginRequestAPI(Email, Password){
 
 function createCustomerNo(){
     var settings = {
-        "url": `http://147.139.168.202:3002/get-customer-code`,
+        "url": `http://customers.sold.co.id/get-customer-code`,
         "method": "POST",
         "timeout": 0,
     };
@@ -86,7 +66,7 @@ function createCustomerNo(){
 
 function createNewCustomer(access_token, session_id, data){
     var settings = {
-        "url": "http://147.139.168.202:3002/create-new-customer-direct-from-user",
+        "url": "http://customers.sold.co.id/create-new-customer-direct-from-user",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -119,7 +99,7 @@ function createNewCustomer(access_token, session_id, data){
 
 function updateCustomer(data){
     var settings = {
-        "url": "http://147.139.168.202:3002/update-customer-data-by-user-themselves",
+        "url": "http://customers.sold.co.id/update-customer-data-by-user-themselves",
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -154,25 +134,16 @@ function updateCustomer(data){
 
 function get_upaid_order_from_product_code_and_customer_code(access_token, Product_Code){
     var settings = {
-        "url": "http://147.139.168.202:3001/get-unpaid-sales-order-specific-for-a-product?Product_Code=" + Product_Code + "&Customer_Code=" + access_token,
+        "url": "http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=" + Product_Code + "&Customer_Code=" + access_token,
         "method": "POST",
         "timeout": 0,
     };
     return $.ajax(settings);
 }
 
-function getAllProductsWithPagination(access_token, session_id, page){
-    var settings = {
-        "url": "http://147.139.168.202:8888/get-item?accessToken=" + access_token + "&sessionId=" + session_id + "&page=" + page,
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
 function getAllProductsWithoutPagination(access_token, session_id){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?`,
+        "url": `http://products.sold.co.id/get-product-details?`,
         "method": "POST",
         "timeout": 0,
     };
@@ -182,7 +153,7 @@ function getAllProductsWithoutPagination(access_token, session_id){
 
 function getAllProductsBasedOnSubCategory(subcategory){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?subcategory=${subcategory}`,
+        "url": `http://products.sold.co.id/get-product-details?subcategory=${subcategory}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -191,7 +162,7 @@ function getAllProductsBasedOnSubCategory(subcategory){
 }
 function getAllProductsWithoutPaginationWithFilter(access_token, session_id, sortBy, sortDirection, itemName){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?product_name=${itemName}`,
+        "url": `http://products.sold.co.id/get-product-details?product_name=${itemName}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -201,7 +172,7 @@ function getAllProductsWithoutPaginationWithFilter(access_token, session_id, sor
 
 function getAllProductsInGroupBuy(access_token, session_id){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?GroupBuy_Purchase=true`,
+        "url": `http://products.sold.co.id/get-product-details?GroupBuy_Purchase=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -211,7 +182,7 @@ function getAllProductsInGroupBuy(access_token, session_id){
 
 function getAllProductsInNew(access_token, session_id){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?Categorize_NEW=true`,
+        "url": `http://products.sold.co.id/get-product-details?Categorize_NEW=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -221,7 +192,7 @@ function getAllProductsInNew(access_token, session_id){
 
 function getProductsWithProductNo(access_token, session_id, productNo){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?product_code=${productNo}`,
+        "url": `http://products.sold.co.id/get-product-details?product_code=${productNo}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -231,7 +202,7 @@ function getProductsWithProductNo(access_token, session_id, productNo){
 
 function getPaymentMethods(){
     var settings = {
-        "url": `http://147.139.168.202:3005/get-all-payment-method`,
+        "url": `http://paymntmthd.sold.co.id/get-all-payment-method`,
         "method": "POST",
         "timeout": 0,
     };
@@ -239,25 +210,16 @@ function getPaymentMethods(){
     return $.ajax(settings);
 }
 
-function getProductsWithProductName(access_token, session_id, productName){
-    var settings = {
-        "url": "http://147.139.168.202:8888/get-item-details-by-name?completeName=" + productName + "&accessToken=" + access_token + "&sessionId=" + session_id + "",
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
 function getAllUnpaidOrdersForThisCustomer(Customer_Code, Order_Number){
     if(Order_Number == ""){
         var settings = {
-            "url": `http://147.139.168.202:3003/get-unpaid-sales-order-per-customer?Customer_Code=${Customer_Code}`,
+            "url": `http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${Customer_Code}`,
             "method": "POST",
             "timeout": 0,
         };
     }else{
         var settings = {
-            "url": `http://147.139.168.202:3003/get-unpaid-sales-order-per-customer?Order_Number=${Order_Number}`,
+            "url": `http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${Order_Number}`,
             "method": "POST",
             "timeout": 0,
         };
@@ -267,13 +229,13 @@ function getAllUnpaidOrdersForThisCustomer(Customer_Code, Order_Number){
 function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
     if(Order_Number == ""){
         var settings = {
-            "url": `http://147.139.168.202:3003/get-sales-order-data-per-customer?Customer_Code=${Customer_Code}`,
+            "url": `http://sales.sold.co.id/get-sales-order-data-per-customer?Customer_Code=${Customer_Code}`,
             "method": "POST",
             "timeout": 0,
         };
     }else{
         var settings = {
-            "url": `http://147.139.168.202:3003/get-sales-order-data-per-customer?Order_Number=${Order_Number}`,
+            "url": `http://sales.sold.co.id/get-sales-order-data-per-customer?Order_Number=${Order_Number}`,
             "method": "POST",
             "timeout": 0,
         };
@@ -283,7 +245,7 @@ function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
 }
 function createNewSalesOrder(items, customerDetails){
     var settings = {
-        "url": "http://147.139.168.202:3003/create-new-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
+        "url": "http://sales.sold.co.id/create-new-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -300,7 +262,7 @@ function createNewSalesOrder(items, customerDetails){
 
 function createNewSalesOrderWithGroupBuy(items, customerDetails){
     var settings = {
-        "url": "http://147.139.168.202:3003/create-new-group-buy-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
+        "url": "http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -317,7 +279,7 @@ function createNewSalesOrderWithGroupBuy(items, customerDetails){
 
 function createNewTempSalesOrder(items, customerDetails){
     var settings = {
-        "url": "http://147.139.168.202:3003/save-temp-order-details-from-customer?customerNo=" + customerDetails.customerNo + "&address=" + customerDetails.address + "&paymentTermName=" + customerDetails.paymentTermName + "&transDate=" + customerDetails.transDate + "",
+        "url": "http://sales.sold.co.id/save-temp-order-details-from-customer?customerNo=" + customerDetails.customerNo + "&address=" + customerDetails.address + "&paymentTermName=" + customerDetails.paymentTermName + "&transDate=" + customerDetails.transDate + "",
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -333,7 +295,7 @@ function createNewTempSalesOrder(items, customerDetails){
 
 function cancelSalesOrder(Order_Number){
     var settings = {
-        "url": "http://147.139.168.202:3003/update-sales-order-payment-status-to-cancelled?Order_Number=" + Order_Number,
+        "url": "http://sales.sold.co.id/update-sales-order-payment-status-to-cancelled?Order_Number=" + Order_Number,
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -344,29 +306,9 @@ function cancelSalesOrder(Order_Number){
     return $.ajax(settings);
 }
 
-function getAllPaymentTerms(access_token, session_id){
-    var settings = {
-        "url": "http://147.139.168.202:8888/get-payment-term?accessToken=" + access_token + "&sessionId=" + session_id,
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
-
-function getGroupBuyQuantitySoFar(product_code){
-    var settings = {
-        "url": "http://147.139.168.202:8888/check-group-buy-quantity-so-far?product_code=" + product_code,
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
-
 function getGroupBuyQuantitySoFarGross(product_code){
     var settings = {
-        "url": "http://147.139.168.202:3003/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=" + product_code,
+        "url": "http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=" + product_code,
         "method": "POST",
         "timeout": 0,
     };
@@ -376,7 +318,7 @@ function getGroupBuyQuantitySoFarGross(product_code){
 
 function closeGroupBuyStatusOnProduct(product_code){
     var settings = {
-        "url": "http://147.139.168.202:3003/check-group-buy-quantity-so-far-gross?Product_Code=" + product_code,
+        "url": "http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Product_Code=" + product_code,
         "method": "POST",
         "timeout": 0,
     };
@@ -386,7 +328,7 @@ function closeGroupBuyStatusOnProduct(product_code){
 
 function getAllCategories(access_token, session_id){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?Get_ALL_Category=true`,
+        "url": `http://products.sold.co.id/get-product-details?Get_ALL_Category=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -396,7 +338,7 @@ function getAllCategories(access_token, session_id){
 
 function getAllSubCategories(Get_ALL_Sub_Category_Based_On_Category){
     var settings = {
-        "url": `http://147.139.168.202:3001/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Get_ALL_Sub_Category_Based_On_Category}`,
+        "url": `http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Get_ALL_Sub_Category_Based_On_Category}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -404,40 +346,9 @@ function getAllSubCategories(Get_ALL_Sub_Category_Based_On_Category){
     return $.ajax(settings);
 }
 
-function getItemsFromCategory(access_token, session_id, categoryId){
-    var settings = {
-        "url": "http://147.139.168.202:8888/get-item-all-by-category-id?categoryId=" + categoryId + "&accessToken=" + access_token + "&sessionId=" + session_id,
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
-
-function getGroupBuyCurrentStatusDetails(access_token, session_id, productCode){
-    var url = "http://147.139.168.202:8888/get-group-buy-status-details?productCode=" + productCode;
-    var settings = {
-        "url": url,
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
-
-function getGroupBuyCurrentStatusDetails(){
-    var url = "http://147.139.168.202:8888/get-faq";
-    var settings = {
-        "url": url,
-        "method": "POST",
-        "timeout": 0,
-    };
-    
-    return $.ajax(settings);
-}
 function getforgotpasswordrequest(Email, Birthday, PrimaryContactNumber, requestedNewPassword){
     var settings = {
-        "url": "http://147.139.168.202:3002/customer-forgot-password-request?Email=" + Email + "&Birthday=" + Birthday + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
+        "url": "http://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&Birthday=" + Birthday + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
         "method": "POST",
         "timeout": 10000,
     };
@@ -446,7 +357,7 @@ function getforgotpasswordrequest(Email, Birthday, PrimaryContactNumber, request
 }
 function encryptPassword(Password){
     var settings = {
-        "url": "http://147.139.168.202:3002/password-generator?Password=" + Password,
+        "url": "http://customers.sold.co.id/password-generator?Password=" + Password,
         "method": "POST",
         "timeout": 10000,
     };
