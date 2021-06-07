@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../www/css/bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../www/js/sweetalert.js"></script>
+        <!-- <script src="../www/js/navigation.js"></script> -->
+        <script src="../www/js/login_action.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        background-color: #f2f2f2;
+        padding-top: 10%;
+    }
+    h1{
+        margin-right: 60%;
+        margin-left: 1%;
+        padding: 20px;
+        color: #98928b;
+    }
+    h2{
+    	margin-right: 22%;
+        line-height: 2px;
+        padding-left: 20px;
+    }
+    h3{
+        padding: 10px;
+        margin-right: 33%;
+        font-size: 14px;
+        color: #98928b ;
+        line-height: 10px;
+
+    }
+
+    .input-group{
+        margin-left: 10%;
+        width: 85%;
+    }
+    .already{
+    	padding: 10%;
+    }
+    
+    
+    .input-group-text{
+        width: 120px;
+    }
+</style>
+<body>
+    <div>
+        <h1>Log in</h1>
+    </div>
+    <div>
+        <h2>
+            <h2>Hi, <span style="color: #48B6E5;">Have a Good Day!</span></h2>
+        </h2>
+    </div>
+    <div>
+        <h3>Please Sign In to continue</h3>
+    </div>
+    
+    <div>
+        
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                </div>
+                    <input type="text" id="login-email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+                </div>
+                    <input type="text" id="login-password" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+
+            
+            <button style="margin-left: 70% ;" type="submit" id="login-button" class="btn btn-primary" onclick="loginRequest()">LOGIN</button>
+        
+    </div>
+
+    <div class="already">
+
+        <label class="form-check-label" >Don't have an account? <span style="color: #48B6E5;"><a href="./signup.html"> Sign up</a></span></label>
+    </div>
+
+</body>
+<!-- <script>
+    $(document).ready(function(){
+        $.get("http://147.139.168.202:8080/login.jsp?email=" + $("#login-email").val() + "&password=" + $("#login-password").val(), function(data, status){
+            datas = JSON.parse(data);
+            alert(datas);
+        });
+    });
+</script> -->
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../www/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../www/js/sweetalert.js"></script>
+    <!-- <script src="../www/js/navigation.js"></script> -->
+    <script src="../www/js/login_action.js"></script>
+    <script src="../www/js/IndonesiaAddress.js"></script>
+    <script src="../www/js/IndonesiaAddressLocal.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style>
+        .profile-picture{
+            width: 100%;
+        }
+        .list-group-item{
+            background-color: transparent;
+            color: white;
+            border: none;
+        }
+        .left{
+            width: 30%;
+        }
+        .right{
+            width: 70%;
+        }
+        .card{
+            background-image: linear-gradient(to bottom right, #217384, #37ced5);
+        }
+        img{
+            border-radius: 50%;
+            width: 50px !important;
+            height: 50px !important;
+        }
+        p{
+            text-align: center;
+        }
+        .all-buttons{
+            text-align: center;
+        }
+        .input-group-text{
+            width: 180px;
+        }
+
+        li{
+            list-style: none;
+        }
+        .city-selection{
+            display: none;
+        }
+        .district-selection{
+            display: none;
+        }
+        #secondary-address-exist{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item left">
+                    <img class="profile-picture" src="../www/img/Additional_icons/accounts.png">
+                </li>
+                <li class="list-group-item right">
+                    <h5 class="card-title">PROFILE ACCOUNT</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="all-buttons">
+            <a class="btn btn-primary" href="./contact.html">Contact US For More Info</a>
+        </div>
+
+        <p class="card-text" id="profile-store1">MUHAMMAD FAUZI</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text">Storename</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-store2">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text">Owner's Fullname</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-owner-fullname" disabled>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text">Manager's Fullname</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-manager-fullname">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text">Type of Your Retail</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-type-retail">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text">No. KTP</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-ktp">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Email</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-email">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                <span class="input-group-text">No. Telp</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-telp">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Password</span>
+                </div>
+                    <input type="text" class="form-control" id="profile-password">
+            </div>
+            
+            <div>
+                <label>Primary Address:</label>
+                <div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Province</span>
+                        <select class="form-control" id="option-province-local" onchange="provinceSelectedLocal(this)">
+                        </select>
+                    </div>
+                    <div class="city-selection-local">
+                        <div class="input-group mb-3">
+                                <span class="input-group-text">City</span>
+                                <select class="form-control" id="option-city-local" onchange="citySelectedLocal(this)">
+                                </select>
+                        </div>
+                    </div>
+                    <div class="district-selection-local">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">District</span>
+                            <select class="form-control" id="option-district-local">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Zip Code</span>
+                    </div>
+                        <input type="text" class="form-control" id="profile-code-local">
+                </div>
+    
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Street</span>
+                    </div>
+                        <input type="text" class="form-control" id="profile-street-local">
+                </div>
+            </div>
+            <!-- add new address -->
+            <li class="new-address-section-list">
+
+            </li>
+            <button type="button" class="btn btn-primary" id="add-address" onclick="addaddress()">+ ADD ADDRESS</button> 
+
+            <!-- other address exist -->
+            <div id="secondary-address-exist">
+                <label>Secondary Address:</label>
+                <div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Province</span>
+                        <select class="form-control" id="option-province-local-other" onchange="provinceSelectedLocalOther(this)">
+                        </select>
+                    </div>
+                    <div class="city-selection-local">
+                        <div class="input-group mb-3">
+                                <span class="input-group-text">City</span>
+                                <select class="form-control" id="option-city-local-other" onchange="citySelectedLocalOther(this)">
+                                </select>
+                        </div>
+                    </div>
+                    <div class="district-selection-local">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">District</span>
+                            <select class="form-control" id="option-district-local-other">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Zip Code</span>
+                    </div>
+                        <input type="text" class="form-control" id="profile-code-local-other">
+                </div>
+    
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Street</span>
+                    </div>
+                        <input type="text" class="form-control" id="profile-street-local-other">
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <p class="card-text">STATUS: CUSTOMER</p>
+            <div class="all-buttons">
+                <button type="submit" class="btn btn-primary" onclick="editProfile()">SAVE EDIT</button> 
+                <a href="./sign-in.html" type="submit" class="btn btn-danger" style="text-decoration: none;" onclick="logoutRequest()">LOG OUT</a> 
+            </div>
+    </div>
+</body>
+</html>

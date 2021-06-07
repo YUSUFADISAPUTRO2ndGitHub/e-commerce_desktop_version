@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../www/js/login_action.js"></script>
+        <script src="../www/js/IndonesiaAddress.js"></script>
+        <script src="../www/js/sweetalert.js"></script>
+        <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title></title>
+</head>
+<style>
+    .card{
+        border-radius: 0;
+        border-bottom: solid 1px black;
+    }
+    .sign-up-title{
+        background-color: #217384;
+        color: white;
+        font-weight: bold;
+    }
+    .sign-up-button-area{
+        background-color: #217384;
+        color: white;
+        text-align: center;
+    }
+    .clear-button-area{
+        background-color: darkred;
+        color: white;
+        text-align: center;
+        display: none;
+    }
+    #now{
+        color: #37ced5;
+    }
+    .form-control{
+        border-radius: 0;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="card sign-up-title">
+        <div class="card-body">
+          <h5 class="card-title">Daftar <span id="now">sekarang!</span></h5>
+          <p class="card-text">Halo selamat datang! Silakan daftar untuk melanjutkan</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label>Alamat Email</label>
+                <input type="email" id="signup-email" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signup-password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label>Nama Depan Anda</label>
+                <input type="text" id="signup-owner-first-name" class="form-control" placeholder="Nama Depan">
+            </div>
+            <div class="form-group">
+                <label>Nama Belakang Anda</label>
+                <input type="text" id="signup-owner-last-name" class="form-control" placeholder="Nama Belakang">
+            </div>
+            <div class="form-group">
+                <label>No KTP</label>
+                <input type="text" id="signup-id-number" class="form-control" placeholder="Isi bila memiliki">
+            </div>
+            <div class="form-group">
+                <label>Tanggal Lahir Tahun</label>
+                <input type="number" id="profile-db-year" class="form-control" placeholder="1996">
+                <label>Tanggal Lahir Bulan</label>
+                <input type="number" id="profile-db-month" class="form-control" placeholder="09">
+                <label>Tanggal Lahir Hari</label>
+                <input type="number" id="profile-db-day" class="form-control" placeholder="25">
+            </div>
+            <div class="form-group">
+                <label>Nomor Telp Utama</label>
+                <input type="text" id="signup-telp" class="form-control" placeholder="0812 8888 7777">
+            </div>
+            <div class="form-group">
+                <label>Nomor Telp Kedua</label>
+                <input type="text" id="signup-telp-2" class="form-control" placeholder="0812 8888 7777">
+            </div>
+            <div class="form-group">
+                <label>Alamat lengkap</label>
+                <input type="text" id="signup-address" class="form-control" placeholder="Alamat lengkap">
+            </div>
+            <div class="sign-up-form">
+            </div>
+            <br>
+            <div class="form-group">
+                <button type="button" class="btn btn-success" onclick="appendNewAddressField()">
+                    (+) Tambah Alamat
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card clear-button-area" onclick="removeAddtionalAddresses()">
+        <div class="card-body">
+            (-) Hapus semua alamat tambahan Anda
+        </div>
+    </div>
+    <div class="card sign-up-button-area" onclick="signupRequest()">
+        <div class="card-body">
+            Kumpulkan
+        </div>
+    </div>
+</body>
+</html>

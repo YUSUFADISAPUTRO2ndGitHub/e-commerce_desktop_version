@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Account</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../www/css/bootstrap.css">
+    <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+    <script src="../www/js/app_version_checks.js"></script>
+    <script src="../www/js/sweetalert.js"></script>
+    <script src="../www/js/login_action.js"></script>
+    <!-- <script src="../www/js/IndonesiaAddress.js"></script> -->
+    <!-- <script src="../www/js/IndonesiaAddressLocal.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style>
+        .card{
+            border-radius: 0;
+            border-bottom: solid 1px black;
+        }
+        .sign-up-title{
+            background-color: #217384;
+            color: white;
+            font-weight: bold;
+        }
+        .save-button-area{
+            background-color: #217384;
+            color: white;
+            text-align: center;
+        }
+        .log-out-button-area{
+            background-color: darkred;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+        #now{
+            color: #37ced5;
+        }
+        .profile-details{
+            background-color: #d4dee8;
+        }
+        .form-control{
+            border-radius: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card sign-up-title">
+        <div class="card-body">
+          <h5 class="card-title">Profil Akun <span id="now">Anda!</span></h5>
+          <p class="card-text">Halo selamat datang! Semoga hari Anda menyenangkan</p>
+        </div>
+    </div>
+    <div class="card profile-details">
+        <div class="card-body" id="profile-info-details">
+            <div class="form-group">
+                <label>No KTP</label>
+                <input type="email" id="profile-ktp" class="form-control" placeholder="No KTP">
+            </div>
+            <div class="form-group">
+                <label>Alamat Email</label>
+                <input type="email" id="profile-email" class="form-control" placeholder="Email" disabled>
+            </div>
+            <div class="form-group">
+                <label>Tanggal Lahir Tahun</label>
+                <input type="number" id="profile-db-year" class="form-control" placeholder="1996">
+                <label>Tanggal Lahir Bulan</label>
+                <input type="number" id="profile-db-month" class="form-control" placeholder="09">
+                <label>Tanggal Lahir Hari</label>
+                <input type="number" id="profile-db-day" class="form-control" placeholder="25">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signup-password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label>Nama Depan</label>
+                <input type="text" id="profile-owner-firstname" class="form-control" placeholder="Nama Depan">
+            </div>
+            <div class="form-group">
+                <label>Nama Belakang</label>
+                <input type="text" id="profile-owner-lastname" class="form-control" placeholder="Nama Belakang">
+            </div>
+            <div class="form-group">
+                <label>Nomor Telp Utama</label>
+                <input type="text" id="profile-telp" class="form-control" placeholder="0812 8888 7777">
+            </div>
+            <div class="form-group">
+                <label>Alamat lengkap</label>
+                <input type="text" id="profile-address-local" class="form-control" placeholder="Alamat Lengkap">
+            </div>
+        </div>
+    </div>
+    <div class="card save-button-area" onclick="editProfile()">
+        <div class="card-body">
+            Simpan hasil edit (ubah info) Anda
+        </div>
+    </div>
+    <a href="./sign-in.html" class="card log-out-button-area" onclick="logoutRequest()">
+        <div class="card-body">
+            Keluar
+        </div>
+    </a>
+</body>
+</html>

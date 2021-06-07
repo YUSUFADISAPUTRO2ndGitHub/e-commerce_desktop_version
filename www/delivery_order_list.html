@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../www/css/bootstrap.css">
+        <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../www/js/navigation.js"></script>
+        <script src="../www/js/delivery.js"></script>
+        <script src="../www/js/sweetalert.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<style>
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #37ced5; 
+    }
+    
+    th, td{
+        margin: 0;
+        padding: 0;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    th{
+        background-color: white;
+        color: black !important;
+    }
+    td{
+        background-color: #217384;
+        color: whitesmoke;
+    }
+    .date-header-table{
+        border-radius: 10px 0 0 10px;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .orderNum-header-table{
+        border-radius: 0;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .paymentterm-header-table{
+        border-radius: 0 10px 10px 0;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .date-body-table{
+        width: 50px;
+        word-break: break-all;
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 0;
+        /* background-image: linear-gradient(to bottom right, #217384, #37ced5); */
+        color: white;
+        text-align: center;
+    }
+    .orderNum-body-table{
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: 0;
+        margin-top: 0;
+        /* background-image: linear-gradient(to bottom right, #217384, #37ced5); */
+        color: white;
+        text-align: center;
+        word-break: break-all;
+    }
+    .paymentterm-body-table{
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 0;
+        /* background-image: linear-gradient(to bottom right, #217384, #37ced5); */
+        color: white;
+        text-align: center;
+        word-break: break-all;
+    }
+    .cancel-body-table{
+        color: #217384;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .loading-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: red;
+        position: fixed;
+        animation-name: example;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+    @keyframes example {
+        0%   {background-color:red; left:43%; top: 40%;}
+        25%  {background-color:transparent; left:43%; top:50%;}
+        50%  {background-color:green; left:43%; top:60%;}
+        75%  {background-color:transparent; left:43%; top:50%;}
+        100% {background-color:red; left:43%; top: 40%;}
+    }
+    .loading-area{
+        display: table;
+        margin: auto;
+    }
+    .card{
+        color: black;
+        text-align: center;
+        /* background-image: url('../www/img/Additional_icons/bca.png');
+        background-repeat: no-repeat; 
+        background-size: 100%; */
+        position: relative;
+        top: -500px;
+        display: block;
+        animation: announcement 120s;
+    }
+
+    @keyframes announcement{
+        0%{
+            top: 0;
+        }
+        100%{
+            top: 0;
+        }
+    }
+    .card-text{
+        background-color: #217384;
+        color: whitesmoke;
+        padding: 10px;
+    }
+    .important-notes{
+        background-color: #217384;
+        color: whitesmoke;
+        padding: 10px;
+    }
+</style>
+<body>
+    <div class="card">
+        <div class="card-body">
+            <!-- <h5 class="card-title">If you have unpaid orders and you payment term was BCA Transfer, then please make your payment by transferring to</h5> -->
+            <p class="card-text">Pembayaran BCA TRANSFER bersifat manual, order Anda hanya akan di process jika pembayaran sudah di terima oleh pihak finance kami. Jika Anda merasa sudah membayar, silahkan hubungi atau me-WhatsApp customer service kami di 085315801777</p>
+            <p class="card-text">Jika Anda memiliki pesanan yang belum dibayar dan metode pembayaran Anda adalah Transfer BCA, maka harap lakukan pembayaran Anda dengan mentransfer ke</p>
+            <p class="card-text">No. Rek: 8650555717</p>
+            <p class="card-text">Nama Rekening: PT. Vantsing International Group</p>
+        </div>
+    </div>
+    <table id="table-delivery-order" style="width:100%">
+        <tr class="header-table">
+            <th><div class="date-header-table">DATE</div></th>
+            <th><div class="orderNum-header-table">ORDER NUMBER</div></th> 
+            <th><div class="paymentterm-header-table">PAYMENT TERM</div></th> 
+            <th><div class="paymentterm-header-table">CANCEL AND REFUND</div></th> 
+        </tr>
+    </table>
+    <div class="card">
+        <div class="card-body">
+            <p class="card-text important-notes">Kalau order Anda tidak terlihat disini, mohon kembali lagi dalam waktu 2-4 jam untuk pemrosesan. Kami memerlukan waktu untuk verifikasi dan memproses order Anda. Terima Kasih</p>
+        </div>
+    </div>
+    <dib class="loading-area">
+        <br>
+        <div class="loading-icon">
+        </div>
+    </dib>
+</body>
+</html>

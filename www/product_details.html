@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../www/css/bootstrap.css">
+        <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../www/js/product_details.js"></script>
+        <script src="../www/js/expressCheckout.js"></script>
+        <script src="../www/js/expressCheckout.js"></script>
+        <script src="../www/js/sweetalert.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!-- <script src="../www/js/IndonesiaAddress.js"></script> -->
+        <script src="../www/js/inputChecker.js"></script>
+        <script src="../www/js/time.js"></script>
+        <script src="../www/js/navigation.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v9.0" nonce="W4kcd74M"></script>
+    </head>
+<style>
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #37ced5; 
+    }
+    
+    .red-vantsing-text{
+        color: #37ced5;
+    }
+    .grey-vantsing-text{
+        color: gray;
+    }
+    body{
+        background-color: grey;
+    }
+    .centering{
+        display: table;
+        margin: auto;
+    }
+
+    /* local */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: transparent;
+    }
+
+    .main-structure {
+        position: relative;
+        top: -0.5px;
+        left: -0.5px;
+        width: 100%;
+        height: 100vh;
+        border-collapse: collapse;
+        text-align: left;
+    }
+    .top-structure-header{
+        position: fixed;
+        z-index: 2;
+        height: 5%;
+        width: 100%;
+        text-align: center;
+        background-color: white;
+    }
+    .top-structure{
+        height: 20%;
+        position: relative;
+        top: 5%;
+    }
+    .middle-structure{
+        position: relative;
+        top: 5%;
+        height: 7%;
+    }
+    .bottom-structure{
+        position: relative;
+        top: 5%;
+        height: auto;
+        word-break: break-all;
+    }
+    .category-icon-background{
+        display: table;
+        margin: auto;
+        border-radius: 50%;
+        background-color: #FFE9D0;
+        width: 60%;
+    }
+    .category-icon{
+        width: 100%;
+        padding: 10%;
+    }
+    .notification {
+        position: relative;
+        display: inline-block;
+    }
+    .notification .homemade-badge {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 2.5px 5px;
+        border-radius: 50%;
+        background-color: #FFE9D0 !important;
+        font-size: x-small;
+    }
+    .category-icon-badge{
+        display: table;
+        margin: auto;
+        border-radius: 50%;
+        background-color: #FFE9D0;
+        width: 20%;
+    }
+    .card{
+        border: none;
+        border-radius: 0px;
+        background-color: white;
+        margin-top: 1%;
+    }
+    .card:hover{
+        border-top: 3px solid #217384;
+        border-bottom: 3px solid #217384;
+    }
+    /* img{
+        border-radius: 30px !important;
+    } */
+    .directory-explainator{
+        text-align: center;
+        opacity: 0.5 !important;
+    }
+    .active{
+        background-color: #d4dee8;
+        opacity: 1 !important;
+        border-radius: 10px;
+    }
+    .product-details-button{
+        width: 100%;
+        border: none;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .back-button{
+        background-color: #217384;
+        color: white;
+    }
+    .add-cart-button{
+        background-color: white;
+        color: black;
+        /* text-shadow: 0 0 10px white, 0 0 20px green, 0 0 30px green, 0 0 40px green, 0 0 50px green, 0 0 60px green, 0 0 70px green; */
+    }
+    .generate-group-buy-button{
+        background-color: darkgreen;
+        color: #d4dee8;
+        transition: transform 1s;
+        border: solid 1px grey;
+    }
+    /* .generate-group-buy-button:hover {
+        transform: rotateY(360deg);
+    } */
+    .group-code-generated{
+        border: solid 1px #217384;
+        display: none ;
+    }
+    .choose-group-code{
+        border: solid 1px #217384;
+        background-color: lightgray;
+    }
+    a{
+        text-decoration: none;
+        color: green;
+    }
+    .independent-cart-icon{
+        width: 15px;
+        border-radius: 0% !important;
+    }
+    .independent-voucher-icon{
+        width: 30px;
+        border-radius: 0% !important;
+    }
+    .independent-share-wa-icon{
+        width: 20px;
+        border-radius: 0% !important;
+    }
+    .btn-success{
+        display: table;
+    }
+    #main-price{
+        color: #37ced5;
+    }
+    #main-name{
+        font-weight:900;
+        color: #217384;
+        text-transform: uppercase;
+    }
+    #group-code-selection{
+        border: red 3px solid;
+    }
+    #main-period{
+        font-size: 25px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #37ced5;
+    }
+    #link-app{
+        color: darkorange;
+    }
+
+    /* MODAL */
+    /* The Modal (background) */
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+
+    .payment-received{
+        display: none;
+    }
+    #payment-not-received{
+        display: none;
+    }
+    .join-status-of-group-buy{
+        display: none;
+    }
+    #address-selection-sub-saved-address{
+        display: block;
+        text-align: left;
+    }
+    #new-address-section{
+        display: none;
+        text-align: left;
+    }
+    .card-img-top{
+        border: none !important;
+    }
+    label{
+        color:#217384;
+        font-weight: bold;
+    }
+    .quick-add-to-cart{
+        background-color: #37ced5;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .share-target{
+        background-color: transparent;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .hidden-forever{
+        display: none;
+    }
+    /* .centered{
+        display: table;
+        margin: auto;
+    } */
+    .notification{
+        position: fixed;
+        display: none; /* temporary disabled */
+        animation-name: example;
+        animation-duration: 10s;
+        animation-iteration-count: 1;
+        z-index: 5;
+        top:-500px;
+    }
+
+    @keyframes example {
+        0%   {top:-500px}
+        25% {top:0px}
+        75% {top:0px}
+        100% {top:-500px}
+    }
+    .rating-star{
+        width: 22px;
+        float: left;
+    }
+    .rating-star-section{
+        display: none;
+    }
+    .list-group-item{
+        width:100% !important;
+        border-radius: 0 !important;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        max-width: 50%;
+    }
+    .product-card{
+        height: auto;
+        border: solid 1px grey;
+        background-color: #ebf1f4;
+        color:#217384;
+        height: 370px !important;
+    }
+    .product-card-images{
+        border-radius: 10px 10px 0 0;
+        width: 100%;
+    }
+    .product-card-name{
+        padding: 10px;
+    }
+    .Highlighted-options{
+        text-align: center;
+        padding: 10px;
+        background-color: #edf1f4;
+        color: #217384;
+    }
+    .rating-bar{
+        display: none;
+        width: 30%;
+    }
+    .product-details{
+        display: block;
+    }
+    #love{
+        position:absolute;
+        top: 5%;
+        right: 5%;
+        z-index: 8;
+    }
+    .progress-bar{
+        background-color: #217384;
+    }
+</style>
+<body>
+    <div class="alert alert-info notification" role="alert">
+        <h5 class="card-title">Attention</h5>
+        <p class="card-text">Salah satu alamat yang tersimpan di account Anda, berada di luar area Jakarta. Pengiriman di luar Jakarta akan di kenakan biaya, dan pembayaran biaya pengiriman akan dilakukan secara COD</p>
+    </div>
+    <!-- The Modal -->
+    <div id="modal-group-purchase" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="alert alert-primary" role="alert">
+                KUANTITAS BARANG
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control quantity-express-buy" value=1 onclick="checkQuantityBuyLimit(this)">
+            </div>
+            <br>
+            <div class="alert alert-primary" role="alert">
+                METODE PEMBAYARAN
+            </div>
+            <select class="form-control" id="payment-selection">
+                <!-- <option>BCA VA TRANSFER</option> -->
+            </select>
+            <br>
+            <div class="alert alert-primary" role="alert">
+                PENGIRIMAN KE ALAMAT
+            </div>
+            <select class="form-control" id="address-selection" onchange="addressOptionSelected(this)">
+                <option>TO SAVED ADDRESS</option>
+                <option>DELIVER TO NEW ADDRESS</option>
+            </select>
+            <div class="form-group" id="address-selection-sub-saved-address">
+                <br>
+                <div class="alert alert-primary" role="alert">
+                    PILIH ALAMAT TERSIMPAN
+                </div>
+                <select class="form-control" id="sub-saved-address">
+                </select>
+            </div>
+            <div class="form-group" id="new-address-section">
+
+                <!-- <div>
+                    <div class="city-selection">
+                        <label>Kota</label>
+                        <select id="option-city" class="form-control option-province" onchange="provinceSelected(this)">
+                        </select>
+                    </div>
+                    <div class="district-selection">
+                        <label>Kecamatan</label>
+                        <select class="form-control option-province" onchange="provinceSelected(this)">
+                        </select>
+                    </div>
+                    <label>Provinsi</label>
+                    <select class="form-control option-province" onchange="provinceSelected(this)">
+                    </select>
+                </div>
+
+                <label>Zip Code (Kode Pos)</label>
+                <input id="zipcode" type="text" class="form-control" placeholder="Type your zip code / kode pos here..." onchange="checkingSpecialCharacter(this)" required> -->
+                <label>Alamat Pengiriman Anda</label>
+                <textarea id="street" class="form-control" placeholder="Pastikan untuk menuliskan Kota dan Provinsi" onchange="checkingSpecialCharacter(this)" rows="3" required></textarea>
+            </div>
+            <br>
+            <div class="alert alert-primary" role="alert">
+                Biaya pengiriman saat ini gratis
+            </div>
+            <!-- <select class="form-control">
+                <option>
+                        Tiki
+                </option>
+            </select> -->
+            <br>
+            <button type="button" class="btn btn-primary" onclick="confirmedPurchaseGroupBuy()">BUY NOW!</button>
+        </div>
+    
+    </div>
+    
+    <table class="main-structure">
+        <tr>
+            <td class="top-structure-header" >
+                <table>
+                    <tr>
+                        <th>
+                            <table>
+                                <tr>
+                                    <th>
+                                        <div class="directory-explainator" id="price" onclick="highlightSectionPrice()">
+                                            <a href="#product-price">Harga</a>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="directory-explainator" id="details" onclick="highlightSectionDetails()">
+                                            <a href="#product-price">Rincian</a>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="directory-explainator" id="terms" onclick="highlightSectionTerms()">
+                                            <a href="#Highlighted-options">Terms and Cond</a>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </table>
+                        </th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="top-structure" >
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div id="main-product-images" class="carousel-inner">
+                        <!-- <div class="carousel-item active">
+                            <img src="../www/img/ADS_SLIDES/1.jpg" class="d-block w-100">
+                        </div> -->
+                        <!-- <div class="carousel-item">
+                            <img src="../www/img/ADS_SLIDES/2.jpg" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="../www/img/ADS_SLIDES/3.jpg" class="d-block w-100">
+                        </div> -->
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+          <td class="middle-structure" >
+            <table>
+                <tr>
+                    <th>
+                        <!-- subtable -->
+                        <table>
+                            <tr>
+                                <th>
+                                    <button type="button" id="back-button" class="product-details-button back-button">
+                                        Pencarian <img class="independent-cart-icon" src="../www/img/Additional_icons/search.png" class="category-icon" >
+                                    </button>
+                                </th>
+                                <th>
+                                    <input type="text" id="product-id" style="display: none;" >
+                                    <button type="button" class="product-details-button add-cart-button" onclick="addToCartDirectlyFromProductDetails()">
+                                        Tambah <img class="independent-cart-icon" src="../www/img/Additional_icons/shopping-cart.png" class="category-icon" >
+                                    </button>
+                                </th>
+                                <!-- <th id="discount-code">
+                                    <input type="text" id="product-id" style="display: none;" >
+                                    <button type="button" class="product-details-button generate-group-buy-button" onclick="generateGroupBuy(this)">
+                                        Beli-Diskon
+                                        <img class="independent-cart-icon" src="../www/img/Additional_icons/bank.png" class="category-icon" >
+                                    </button>
+                                </th> -->
+                            </tr>
+                        </table>
+                        <!-- subtable -->
+                    </th>
+                </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+            <td class="bottom-structure" >
+                <table>
+                    <tr>
+                        <div class="card product-price" id="product-price">
+                            <div class="card-body">
+                                <div>
+                                    <div class="rating-star-section">
+                                        <img id="20" class="rating-star" src="../www/img/Additional_icons/star.png">
+                                        <img id="40" class="rating-star" src="../www/img/Additional_icons/star.png">
+                                        <img id="60" class="rating-star" src="../www/img/Additional_icons/star.png">
+                                        <img id="80" class="rating-star" src="../www/img/Additional_icons/star.png">
+                                        <img id="100" class="rating-star" src="../www/img/Additional_icons/star.png">
+                                    </div>
+                                    <!-- <br> -->
+                                    <input type="range" class="form-range rating-bar" id="rating-slide-bar" min="1" max="100" value="80" onchange="checkRatingValue(this)">
+                                    <span class="send-rating" onclick="submitRatingReview(this)">
+                                        <img id="love" class="rating-star" src="../www/img/Additional_icons/not_liked.png">
+                                    </span>
+                                    <!-- <div class="rating-bar"></div><span id="scoring">80%</span> -->
+                                    <br>
+                                </div>
+                                <h5 id="main-name"class="card-text">
+                                </h5>
+                                <h5 class="card-text">
+                                    Harga Normal:
+                                    <span id="main-price" class="card-title">RP. 25.000</span>
+                                </h5>
+                                <a class="share-target" href="https://api.whatsapp.com/send?text=Download ya APP-nya, buat online shopping sekarang > bit.ly/YusufAdisaputro" target="_blank">
+                                    Bagikan APP ini melalui <img class="independent-share-wa-icon" src="../www/img/Additional_icons/whatsapp.png" class="category-icon" >
+                                </a>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="card join-status-of-group-buy main-group-buy">
+                            <div class="card-body">
+                                <div class="alert alert-success payment-received" role="alert">
+                                    Kamu pernah membeli barang ini dengan group diskon
+                                    <!-- <div class="payment-received">and You have paid for this group buy order</div> -->
+                                </div>
+                                <div id="payment-not-received" class="alert alert-danger" role="alert">
+                                    Kamu memiliki order untuk product ini yang belum dibayarkan
+                                    Tolong periksa kembali pembayaran Anda
+                                </div>
+                                <h5 class="card-title hidden-forever">Ongoing purchase <span id="group-purchase-quantity-target"></span></h5>
+                                <h5 class="card-text payment-received">Kamu telah membeli sebanyak: <input type="number" id="group-purchase-quantity-ordered" disabled></input></h5>
+                                <h5 class="card-title main-group-buy">
+                                    Harga Diskon
+                                    <img class="independent-voucher-icon" src="../www/img/Additional_icons/voucher.png" class="category-icon" >
+                                </h5>
+                                <p id="main-period" class="card-text">
+                                    RP. 23.750
+                                </p>
+                                <button id="discount-code" type="button" class="product-details-button generate-group-buy-button" onclick="generateGroupBuy(this)">
+                                    Beli langsung dengan harga diskon
+                                </button>
+                                <label class="main-group-buy">Buruan Beli Sekarang! dengan mengklik tombol Group-Diskon diatas!</label>
+                                <div class="progress main-group-buy">
+                                    <div class="progress-bar" role="progressbar" style="width:0%">
+                                        <span id="group-purchase-quantity-sofar"></span>
+                                    </div>
+                                </div>
+                                <div class="card-text target-quantity main-group-buy">Telah Terjual Secara Group Diskon</div>
+                                <!-- <h5 class="card-text hidden-forever">Achieved group quantity so far = <span id="group-purchase-quantity-sofar"></span></h5> -->
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="card product-price group-price">
+                            <video class="d-block w-100" autoplay loop muted>
+                                <source src="../www/img/ADS_SLIDES/videoplayback.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card product-price">
+                            <div class="card-body">
+                                <h5 class="card-title">CASH ON DELIVERY</h5>
+                                <p id="main-cod" class="card-text">
+                                    RP. 25.000
+                                </p>
+                                <h5 class="card-title">
+                                    HARGA PERIODE
+                                </h5>
+                                <label>Hanya tersedia melalui direct sales, silahkan hubungi customer service kami</label>
+                                <p id="main-period-2" class="card-text">
+                                    RP. 25.000
+                                </p>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="card product-details">
+                            <div class="card-body">
+                                <h5 class="card-title">Details</h5>
+                                <p id="main-details" class="card-text">
+                                    Tipe : H668; Spesifikasi : 300ml; 
+                                    Warna Transparan; 
+                                    Daya Tahan : 20 Tahun
+                                </p>
+                            </div>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="card-body" id="Highlighted-options">
+                            <h5 class="card-title Highlighted-options">More Options</h5>
+                        </div>
+                        <div class="other-product-area">
+                        </div>
+                    </tr>
+                    <tr>
+                        <div class="card product-terms">
+                            <img class="card-img-top" src="../www/img/SAMPLE/terms.jpg">
+                        </div>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+<script>
+    // Get the modal
+    var modal = document.getElementById("modal-group-purchase");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>
+</html>

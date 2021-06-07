@@ -1,0 +1,16 @@
+position = total amount of this order, 
+phone = payment method, 
+email = delivery method, 
+angency_id=orderid, 
+goods_names= address,
+create_on=creationtime
+bill_type = b
+creator = customername
+status = waitpay
+
+va number = 12943 + orderid
+orderid = time(yyyymmddhhmmss)
+
+http://147.139.168.202:8080/insertEnquiry.jsp?total_price=20&payment_method=paymethod&delivery_method=devmethod&order_id=orderId&address=address&customer_name=customerName
+
+http://147.139.168.202:8080/insertEnquiryDetails.jsp?enquiry_id=20&goodsName=paymethod&price_per_item=123&quantity=123&total_price=123&goods_id=123

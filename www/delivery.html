@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../www/css/bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+        <script src="../www/js/navigation.js"></script>
+        <script src="../www/js/delivery_status.js"></script>
+        <script src="../www/js/sweetalert.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<style>
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #37ced5; 
+    }
+    
+    body{
+        background-color: #F2F2F2;
+    }
+    .header{
+        background-color: #217384;
+        text-align: center;
+        color: white;
+        padding: 30px;
+    }
+    .body{
+        background-color: grey;
+        text-align: center;
+        color: white;
+        padding: 30px;
+    }
+    .indicator{
+        width: 100%;
+    }
+    .centerized{
+        display: table;
+        margin: auto;
+    }
+    .list-group-item{
+        border: none !important;
+    }
+    .left{
+        max-width: 25%;
+    }
+    .if-order-is-unpaid{
+        display: none;
+    }
+    .order-details{
+        display: none;
+        width: 100%;
+    }
+    .transfer-information{
+        background-color: #217384;
+        color: white;
+        border: none;
+        text-align: center;
+    }
+    .emphasis{
+        font-weight: bold;
+    }
+</style>
+<body>
+    <div class="card header">
+        <div class="card-body">
+            <h5 class="card-title">
+                CHECK STATUS ORDER
+            </h5>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item left">
+                            <img src="../www/img/CATEGORY_ICONS/checklist.png" class="indicator" id="indicator-received">
+                        </li>
+                        <li class="list-group-item">
+                            ORDER RECEIVED
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item left">
+                            <img src="../www/img/CATEGORY_ICONS/more.png" class="indicator">
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item left">
+                            <img src="../www/img/CATEGORY_ICONS/fast-delivery.png" class="indicator" id="indicator-approved">
+                        </li>
+                        <li class="list-group-item">
+                            ORDER APPROVED
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item left">
+                            <img src="../www/img/CATEGORY_ICONS/more.png" class="indicator">
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item left">
+                            <img src="../www/img/CATEGORY_ICONS/fast-delivery.png" class="indicator" id="indicator-delivered">
+                        </li>
+                        <li class="list-group-item">
+                            ORDER DELIVERED
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="order-details">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="unpaid-orders">
+                    </tbody>
+                </table>
+            </div>
+            <div class="if-order-is-unpaid">
+                <div class="card">
+                    <img class="card-img-top" src="../www/img/Additional_icons/bca.png" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Anda dapat melalukan pembayaran sesuai keterangan di bawah ini:</h5>
+                      <p class="card-text">No. VA BCA: <span id="va-number-based-on-order-number"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body centerized">
+                <button type="button" class="btn btn-primary" id="contact-us">FAQ</button>
+            </div>
+            <div class="card-body transfer-information">
+                <p class="card-text">Jika Anda <span class="emphasis">MERASA</span> pesanan ini <span class="emphasis">BELUM</span> dibayar, maka harap lakukan pembayaran Anda dengan mentransfer ke</p>
+                <p class="card-text">No. Rek: 8650555717</p>
+                <p class="card-text">Jika Anda <span class="emphasis">MERASA</span> sudah membayar, harap memberikan photo bukti pembayaran kepada Customer Service kami, melalui WhatsApp di 0853-1580-1777.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

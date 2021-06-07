@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../www/css/bootstrap.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../www/js/app_version_checks.js"></script>
+        <script src="../www/js/time.js"></script>
+        <script src="../www/js/checkout.js"></script>
+        <script src="../www/js/IndonesiaAddress.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="../www/js/inputChecker.js"></script>
+        <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+        <script src="../www/js/sweetalert.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<style>
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #37ced5; 
+    }
+    
+    .header{
+        background-image: linear-gradient(to bottom right, #217384, #37ced5);
+        text-align: center;
+        color: white;
+        padding: 30px;
+    }
+    body{
+        background-color: lightgrey !important;
+        color: black;
+    }
+    .centerized{
+        display: table;
+        margin: auto;
+        text-align: center;
+    }
+    button{
+        margin-top: 10px !important;
+        width: 100%;
+    }
+    #new-address-section{
+        display: none;
+        text-align: left;
+    }
+    #period-selection{
+        display: none;
+        text-align: left;
+    }
+    #normal-transfer-selected{
+        display: none;
+        background-image: url('../www/img/Additional_icons/bca.png');
+        background-repeat: no-repeat; 
+        background-size: 100%;
+    }
+    .card{
+        border-radius: 0;
+    }
+
+    .city-selection{
+        display: none;
+    }
+    .district-selection{
+        display: none;
+    }
+    #address-selection-sub-saved-address{
+        display: block;
+        text-align: left;
+    }
+
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        word-break: break-all;
+    }
+    .independent-cart-icon{
+        width: 50px;
+        border-radius: 0% !important;
+    }
+    .background-white{
+        background-color: #004883;
+        color: white;
+        border-radius: 10px;
+        padding: 5px;
+    }
+</style>
+<body class=".body">
+    <div class="card header">
+        <div class="card-body">
+            <h5 class="card-title">
+                FINAL STEP
+            </h5>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-primary" role="alert">
+                METODE PEMBAYARAN
+            </div>
+            <select class="form-control" id="payment-selection" onchange="periodOptionSelected(this)">
+                <!-- <option>COD</option> -->
+                <!-- <option>PERIOD</option> -->
+                <!-- <option>BCA VA TRANSFER</option>
+                <option>BCA TRANSFER</option> -->
+            </select>
+            <br>
+            <div class="form-control" id="normal-transfer-selected">
+                <div class="card-body">
+                    <img class="independent-cart-icon" src="../www/img/Additional_icons/transfer_payment.png" class="category-icon" >
+                    <h5 class="background-white card-title">PAYMENT WITH BCA TRANSFER</h5>
+                    <p class="background-white card-text">No. Rek: 8650555717</p>
+                    <p class="background-white card-text">Nama Rekening: PT. Vantsing International Group</p>
+                    <p class="background-white card-text">Bank: BCA KCU PIK</p>
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    <p class="card-text">Don't forget to take a screenshot of above information to make your payment</p>
+                    <p class="card-text">Jangan lupa untuk simpan informasi diatas, untuk melakukan pembayaran</p>
+                </div>
+            </div>
+            <select class="form-control" id="period-selection">
+                <option>30 Days</option>
+                <option>60 Days</option>
+            </select>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-primary" role="alert">
+                PENGIRIMAN KE ALAMAT
+            </div>
+            <select class="form-control" id="address-selection" onchange="addressOptionSelected(this)">
+                <option>TO SAVED ADDRESS</option>
+                <option>DELIVER TO NEW ADDRESS</option>
+            </select>
+            <div class="form-group" id="address-selection-sub-saved-address">
+                <br>
+                <div class="alert alert-primary" role="alert">
+                    PILIH ALAMAT TERSIMPAN
+                </div>
+                <select class="form-control" id="sub-saved-address">
+                </select>
+            </div>
+            <div class="form-group" id="new-address-section">
+
+                <!-- <div>
+                    <label>Province</label>
+                    <select class="form-control option-province" onchange="provinceSelected(this)">
+                    </select>
+                    <div class="city-selection">
+                        <label>City</label>
+                        <select class="form-control" id="option-city" onchange="citySelected(this)">
+                        </select>
+                    </div>
+                    <div class="district-selection">
+                        <label>District</label>
+                        <select class="form-control" id="option-district">
+                        </select>
+                    </div>
+                </div> -->
+
+                <!-- <label>Zip Code (Kode Pos)</label>
+                <input id="zipcode" type="text" class="form-control" placeholder="Type your zip code / kode pos here..." onchange="checkingSpecialCharacter(this)" required> -->
+                <label>Street (Alamat lengkap pengiriman)</label>
+                <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
+            </div>
+            <br>
+            <div class="alert alert-primary" role="alert">
+                BARANG-BARANG UNTUK DI BELI SEKARANG
+            </div>
+            <table class="final_checkout">
+                <tr>
+                    <th>PRODUCT NAME</th>
+                    <th>QUANTITY</th>
+                    <th>TOTAL PRICE</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="card ">
+        <!-- <div class="alert alert-warning fade show">
+            <strong>PERHATIAN!</strong>
+            Jika Anda memiliki kode grup yang diberi tag ke salah satu item pembayaran Anda, harga diskon akan diterapkan jika kode diverifikasi (jika dan hanya jika 2 orang atau lebih menggunakan kode grup yang sama untuk produk yang sama)
+            <strong>JIKA DALAM WAKTU 24 JAM, kode grup Anda tidak diverifikasi maka harga normal akan diberlakukan untuk pesanan Anda</strong>
+        </div> -->
+        <div class="card-body centerized">
+            <button type="submit" class="btn btn-primary" id="submitRequestFinalButton" onclick="requestToFinish()">Submit</button>
+            <br>
+            <button type="submit" class="btn btn-danger" id="backtocartRequestFinalButton" onclick="redirectToCart()">Kembali Ke Keranjang</button>
+        </div>
+    </div>
+    <!-- <div>
+        <button type="button" class="screenshot-button" onclick="screenshotRequest()">Take a Screenshot</button>
+    </div> -->
+</body>
+</html>

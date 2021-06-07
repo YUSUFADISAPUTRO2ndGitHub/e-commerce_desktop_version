@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../www/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../www/js/sweetalert.js"></script>
+    <script src="../www/js/unpaidOrderDetails.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style>
+    </style>
+</head>
+<style>
+    table{
+        background-color: #217384 !important;
+        border-radius: 0 ;
+        color: #d4dee8 !important;
+        text-transform: uppercase;
+    }
+    td{
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #37ced5 !important;
+    }
+    .card{
+        text-align: center;
+        margin: 10px;
+    }
+    .card-img-top{
+        width: 20%;
+        display: table;
+        margin: auto;
+    }
+</style>
+<body>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody id="unpaid-orders">
+        </tbody>
+    </table>
+    <div>
+        <div class="card">
+            <img class="card-img-top" src="../www/img/Additional_icons/bca.png">
+            <div class="card-body">
+              <h5 class="card-title">Anda dapat melalukan pembayaran sesuai keterangan di bawah ini:</h5>
+              <p class="card-text">No. VA BCA: <input type="text" id="va-number-based-on-order-number" disabled></input></p>
+              <button onclick="copyBCAVANumber()">Copy BCA VA to clipboard</button>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">
+                    Pembayaran melalui ATM BCA
+                </h5>
+                <p class="card-text">
+                    Masukkan Kartu ATM BCA & ketik PIN Anda
+                    Pilih menu Transaksi Lainnya > Transfer > ke Rekening BCA Virtual Account
+                    Masukkan nomor Virtual Account: 12943**********
+                    Pastikan detail pembayaran sudah sesuai; seperti No VA, Nama, Perusahaan/Produk dan Total Tagihan
+                    Masukkan Jumlah Transfer sesuai dengan Total Tagihan
+                    Ikuti instruksi untuk menyelesaikan transaksi
+                    Simpan struk transaksi sebagai bukti pembayaran
+                </p>
+                <h5 class="card-text">
+                    Pembayaran melalui Mobile BCA
+                </h5>
+                <p class="card-text">
+                    Silakan log in pada aplikasi BCA Mobile
+                    Pilih menu m-BCA, kemudian masukkan kode akses m-BCA
+                    Pilih m-Transfer > BCA Virtual Account
+                    Pilih dari Daftar Transfer, atau masukkan nomor Virtual Account: 12943**********
+                    Masukkan jumlah yang ingin dibayarkan
+                    Masukkan pin m-BCA
+                    Pembayaran selesai. Simpan notifikasi yang muncul sebagai bukti pembayaran
+                </p>
+                <h5 class="card-text">
+                    Pembayaran melalui Klik BCA
+                </h5>
+                <p class="card-text">
+                    Silakan log in pada aplikasi KlikBCA Individual (https://ibank.klikbca.com/)
+                    Masukkan User ID dan PIN
+                    Pilih Transfer Dana > Transfer ke BCA Virtual Account
+                    Masukkan nomor Virtual Account: 12943**********
+                    Masukkan jumlah yang ingin dibayarkan
+                    Validasi pembayaran
+                    Cetak nomor referensi sebagai bukti transaksi Anda
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
