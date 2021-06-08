@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./js/home.js"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <title>SOLD</title>
@@ -61,19 +62,20 @@
                   <p>Hi <span style='color:#37CED5'> there!</span> <br> Hi,Welcome!</p>
                 </div>
                 <div class="modal-body box-login-body">
-                    <div class="register-form">
+                    <div class="register-form">       
                         <div class="reg-form-1">
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Alamat Email</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Alamat Email">
+                                <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email"
+                                pattern=".+@globex.com" size="30" required>
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Tahun Lahir</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Tahun Lahir">
+                                <input type="number" class="name-form" placeholder="Tahun Lahir">
                             </div>
                         </div>    
                         <div class="reg-form-1">
@@ -87,7 +89,7 @@
                                 <div class="box-name">
                                     <p>Bulan Lahir</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Bulan Lahir">
+                                <input type="number" class="name-form" placeholder="Bulan Lahir">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -101,7 +103,7 @@
                                 <div class="box-name">
                                     <p>Tanggal Lahir</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Tanggal Lahir">
+                                <input type="number" class="name-form" placeholder="Tanggal Lahir">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -115,7 +117,7 @@
                                 <div class="box-name">
                                     <p>No telp utama</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="No telp utama"> 
+                                <input type="number" class="name-form" placeholder="No telp utama"> 
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -123,7 +125,7 @@
                                 <div class="box-name">
                                     <p>No KTP</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No KTP">
+                                <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
@@ -140,22 +142,22 @@
                                 <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap">
                             </div>
                         </div> 
-                        <div class="tambah-alamat">
+                        <div class="tambah-alamat" onclick="addAddress()">
                             <p>Tambah Alamat (+)</p>
                         </div>
                         <div class="box-kumpulkan">
                             <div class="btn-kumpulkan">
                                 <p>Kumpulkan</p>
                             </div>
-                        </div>
-                        
-                    </div>    
+                        </div>            
+                    </div>  
                 </div>
               </div>
             </div>
           </div>
         <!-- REGISTER MODALS -->
 
+       
 
 
     <div class="main-structure">

@@ -185,8 +185,8 @@ body{
 input::-webkit-input-placeholder {
     transition: 0.2s ease-in;
     position: relative;
-    left:30px;
-    padding-left:20px;
+    /* left:30px; */
+    padding-left:10px;
 }
 
 .input-btn{
@@ -507,6 +507,7 @@ input::-webkit-input-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
 }
 
 .login-form{
@@ -676,4 +677,17 @@ input::-webkit-input-placeholder {
     color:white;
     position: relative;
     top:5px;
+}
+
+input:focus{
+    color:#217283;
+    padding-left:10px;
+}
+
+
+.testingjquery{
+    display: none;
+}
+.testingjquery2{
+    display: show;
 }
