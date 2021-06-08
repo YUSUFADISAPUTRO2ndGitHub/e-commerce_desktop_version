@@ -76,10 +76,10 @@
     /* background-color: green; */
 }
 .item-1{
-    height:50px;
+    height:40px;
     width:90%;
     /* background-color: purple; */
-    margin-bottom:5px;
+    /* margin-bottom:5px; */
     position: relative;
     left: 20px;
 }
@@ -87,7 +87,7 @@
     height:70px;
     width:90%;
     /* background-color: pink; */
-    margin-bottom:5px;
+    /* margin-bottom:5px; */
     display: flex;
     flex-direction: column;
     line-height: 0.9;
@@ -100,7 +100,7 @@
 }
 .item-2 p:nth-child(2){
     color:#37CED5;
-    font: 10px;
+    font-size: 12px !important;
     position: relative;
     top:-10px;
 }
