@@ -11,6 +11,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <title>SOLD</title>
+    <style>
+        .category-menu{
+            width: 18%;
+            position: absolute;
+            top: 3%;
+            left: 4.7%;
+            z-index: 10;
+        }
+        .semua-kategori-name{
+            border: none !important;
+            background-color: transparent !important;
+            color: black !important;
+        }
+        .category-list{
+            border: none;
+            background-color: transparent;
+        }
+        .category-list:hover{
+            border: none;
+            background-color: #217384;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <!-- LOGIN MODALS -->
@@ -155,16 +178,7 @@
     <div class="main-structure">
         <div class="main-header">
             <div class="header-cat">
-                <div class="box-category">
-                    <div class="category-top">           
-                        <div class="cat-item">
-                            <img src="../WEB/img/categories.png" alt="error" class="icon-opt">
-                        </div>
-                        <div class="cat-name">
-                            <p>Semua Kategori</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="header-search">
                 <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name"  >
@@ -191,29 +205,33 @@
 
         </div>
 
-        
+        <div class="card category-menu">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="../WEB/img/categories.png" alt="error" class="icon-opt">
+                            </span>
+                        </div>
+                        <!-- <p class="form-control">Semua Kategori</p> -->
+                        <input class="form-control semua-kategori-name" placeholder="Semua Kategori" disabled>
+                    </div>
+                </h5>
+                <ul class="list-group">
+                    <li class="list-group-item category-list">ADHESIVE</li>
+                    <li class="list-group-item category-list">APD</li>
+                    <li class="list-group-item category-list">HARDWARE</li>
+                    <li class="list-group-item category-list">INTERIOR</li>
+                    <li class="list-group-item category-list">SANITARY</li>
+                </ul>
+                
+            </div>
+        </div>
 
         <div class="box-ads">
             <div class="ads-1">
-                <div class="category-top2">           
-                    <div class="list-item-cat">
-                        <div class="item-cat">
-                            <p>ADHESIVE</p>
-                        </div>
-                        <div class="item-cat">
-                            <p>APD</p>
-                        </div>
-                        <div class="item-cat">
-                            <p>HARDWARE</p>
-                        </div>
-                        <div class="item-cat">
-                            <p>INTERIOR</p>
-                        </div>
-                        <div class="item-cat">
-                            <p>SANITARY</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="ads-2">
                 <h1>ADS SPACE</h1>
