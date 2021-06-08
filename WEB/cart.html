@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../www/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../www/js/app_version_checks.js"></script>
+    <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+    <script src="../www/js/navigation.js"></script>
+    <script src="../www/js/sweetalert.js"></script>
+    <script src="../www/js/cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<style>
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #37ced5; 
+    }
+    .btn-info{
+        border-radius: 0;
+        background-color: #37ced5;
+    }
+    
+    tbody {
+        width: 100%;
+        table-layout: fixed;
+        word-break: break-all;
+        border-collapse: collapse;
+        background-color: #37ced5 !important;
+    }
+    td{
+        color: #d4dee8;
+        background-color: #217384 !important;
+    }
+    .card{
+        width: 100%;
+        height: 20vh;
+        border-radius: 0%;
+        background-color: #217384;
+    }
+
+    .title{
+        display: table;
+        margin: auto;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        color: white;
+    }
+    .fake{
+      border: none;
+      background-color: transparent;
+      width: 20%;
+      text-align: center;
+    }
+    .fake-1{
+      border: none;
+      background-color: transparent;
+      width: 100%;
+      text-align: left;
+      word-break: break-all;
+    }
+    .product-names{
+      width: 40% !important;
+    }
+    .groupon-code{
+        word-break: break-all;
+        border: solid 1px black;
+        background-color: #d4dee8;
+    }
+    .button-checkout{
+        width: 100%;
+        border: none;
+        background-color: #217384;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        padding: 20px;
+    }
+    .button-checkout-all{
+        width: 100%;
+        border: none;
+        background-color: green;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        padding: 20px;
+    }
+    .category-icon{
+        width: 20px;
+    }
+    #button-checkout-in-store{
+        background-color: darkred;
+        color: white;
+    }
+</style>
+
+<body>
+    
+    <div class="card" style="width: 100%;">
+        <div class="title">CART/KERANJANG</div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody id="cart-list">
+            
+        </tbody>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Total Price</th>
+                <th scope="col" id="total_selected_price">0</th>
+            </tr>
+        </thead>
+    </table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <div class="button-checkout" onclick="checkingout()">
+                        Pesan barang Tercentang
+                    </div>
+                </th>
+                <th>
+                    <div class="button-checkout-all" onclick="checkingoutAll()">
+                        Pesan semua barang
+                    </div>
+                </th>
+                <th>
+                    <div id="button-checkout-in-store" class="button-checkout-all" onclick="checkingoutAllInStore()">
+                        Pesan semua di Toko
+                    </div>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</body>
+</html>

@@ -34,6 +34,18 @@
             background-color: #217384;
             color: white;
         }
+        .iframe{
+            position: absolute;
+            z-index: 20;
+            right: 100px;
+            top: 100px;
+            width: 500px;
+            height: 500px;
+            display: none;
+        }
+        .background_grey{
+            background-color: darkgray;
+        }
     </style>
 </head>
 <body>
@@ -201,7 +213,7 @@
                     <img src="../WEB/img/truck.png" alt="error" class="icon-opt">
                     <p>Pengiriman</p>
                 </div>
-                <div class="option-1">
+                <div class="option-1" onclick="cart_requested(this)">
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
                     <p>Keranjang</p>
                 </div>
@@ -210,6 +222,7 @@
                     <p>Log in</p>
                 </div>
             </div>
+            <iframe class="iframe" src="https://www.w3schools.com/"></iframe>
 
         </div>
 
