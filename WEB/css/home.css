@@ -503,7 +503,7 @@ input::-webkit-input-placeholder {
 
 .box-login-body{
     width:100%;
-    height:500px;
+    height:600px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -533,6 +533,13 @@ input::-webkit-input-placeholder {
     position: relative;
     /* left:-75px; */
 }
+.login-name-2{
+    width:100%;
+    height:70px;
+    display: flex;
+    flex-direction: column;
+}
+
 .login-pass{
     width:100%;
     height:70px;
@@ -549,12 +556,17 @@ input::-webkit-input-placeholder {
     height:30px;
     position: relative;
     top:10px;
+    
 }
 
 .name-form{
     width:250px;
     height:30px;
     background-color: #C4C4C4;
+    border-width:0px;
+}
+.name-form::placeholder{
+    color:#217283;
 }
 .box-option-login{
     position: relative;
@@ -577,7 +589,51 @@ input::-webkit-input-placeholder {
     top:10px;
     
 }
+.login-option:hover{
+    cursor: pointer;
+}
 
 .option-1:hover{
     cursor: pointer;
+}
+
+/* REGISTER FORM MODALS */
+
+.register-form{
+    width:70%;
+    height:500px;
+    display: flex;
+    flex-direction: column;
+}
+.reg-form-1{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height:50px;
+    margin:10px;
+}
+.reg-form-2{
+    width:92%;
+    height:50px;
+    margin:10px;
+    /* background-color: red; */
+    position: relative;
+    left:25px;
+    line-height:0.5;
+}
+
+.form-reg-nama{
+ width:555px;
+ height:30px;
+ background-color: #C4C4C4;
+ border-width:0px;
+
+}
+
+.form-reg-nama::placeholder{
+    color:#217283;
+}
+
+.tambah-alamat{
+    
 }
