@@ -1,0 +1,14 @@
+.box-notfound{
+    height:100vh;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D4DEE8;
+}
+
+.notfound{
+    width:70%;
+    height:70%;
+
+}

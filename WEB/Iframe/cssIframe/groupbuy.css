@@ -1,0 +1,193 @@
+.box-groupbuy{
+    width:650px;
+    height:500px;
+    background-color: #217384;
+    border-radius:5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.group-left{
+    width:40%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    /* background-color: red; */
+}
+
+.group-right{
+    width:60%;
+    height:100%;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+}
+
+.groupbuy-form{
+    width:100%;
+    height:100%;
+    /* background-color: blue; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+.login-name{
+    width:100%;
+    height:70px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height:0.5;
+    align-items: center;
+}
+.login-name p{
+    display: flex;
+    position: relative;
+    /* left:-75px; */
+}
+.box-name{
+    width:250px;
+    height:30px;
+    position: relative;
+    top:10px;
+    
+}
+
+.name-form{
+    width:240px;
+    height:30px;
+    background-color: #C4C4C4;
+    border-width:0px;
+}
+.name-form::placeholder{
+    color:white;
+    font-size: 12px;
+}
+
+input:focus{
+    color:#217283;
+    padding-left:10px;
+    outline:0px;
+}
+
+.login-pass{
+    width:100%;
+    height:70px;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height:0.5;
+    align-items: center;
+}
+
+.box-name{
+    width:100%;
+    height:30px;
+    position: relative;
+    top:10px;
+    
+}
+
+.box-name p {
+    color:white;
+}
+
+
+/* right */
+
+.gr-1{
+    display: flex;
+    width:100%;
+    height:100px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-pesan{
+    width:180px;
+    height:40px;
+    border-radius:5px;
+    background-color: #41D862;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.btn-pesan p {
+    position: relative;
+    top:10px;
+    color:white; 
+    margin-right:5px;
+}
+.btn-pesan:hover{
+    cursor: pointer;
+}
+
+.box-total-price{
+    width:50%;
+    height:80px;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    line-height:0.5;
+    padding-left:20px;
+}
+.box-total-price p {
+    font-size: 20px;
+    color:white;
+}
+.box-total-price:hover{
+    cursor: pointer;
+}
+
+.total-price{
+    width:130px;
+    height:30px;
+    border-radius:5px;
+    background-color: #37CED5;
+    display: flex;
+    justify-content: center;
+    align-items: centers;
+    position: relative;
+    top:-5px;
+}
+.total-price p {
+    position: relative;
+    top:10px;
+    color:white;
+    font-size: 13px;
+}
+
+
+.icon-home{
+    height:25px;
+    width:25px;
+}
+
+.gr-2 {
+    width:100%;
+    height:350px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-img-gr{
+    height:300px;
+    width:250px;
+    background-color: blue;
+}
+.img-gr{
+    width:100%;
+    height:100%;
+}

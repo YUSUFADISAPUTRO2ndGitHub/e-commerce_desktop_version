@@ -5,12 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../WEB/css/home.css">
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./js/home.js"></script>
     <script type="text/javascript" src="./js/jquery.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <title>SOLD</title>
     <style>
@@ -199,6 +202,9 @@
         <div class="main-header">
             <div class="header-cat">
                 
+            </div>
+            <div class="logo-header">
+                <img src="../WEB/img/logo.png" alt="" class="icon-logo">
             </div>
             <div class="header-search">
                 <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name"  >
@@ -571,6 +577,62 @@
             </div>
 
         </div>
+        <div class="carousel-wrap">
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=1" />
+                  <span class="img-text">nightlife</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=2" />
+                  <span class="img-text">abstract</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=3" />
+                  <span class="img-text">animals</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=4" />
+                  <span class="img-text">nature</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=5" />
+                  <span class="img-text">business</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=6" />
+                  <span class="img-text">cats</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=7" />
+                  <span class="img-text">city</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=8" />
+                  <span class="img-text">food</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=9" />
+                  <span class="img-text">fashion</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=10" />
+                  <span class="img-text">people</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=11" />
+                  <span class="img-text">sports</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=12" />
+                  <span class="img-text">technics</span>
+                </div>
+                <div class="item">
+                  <img src="https://picsum.photos/640/480?pic=13" />
+                  <span class="img-text">transport</span>
+                </div>
+            </div>
+          </div>
 
          <div class="box-product">
             <div class="product-item">
@@ -602,11 +664,8 @@
 
             </div>
 
-        </div>  
-
-   
-   
-
+        </div> 
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </html>
