@@ -273,6 +273,42 @@ input::-webkit-input-placeholder {
     flex-direction: column;
     padding-top:30px;
 }
+.box-information{
+    width:300px;
+    height:200px;
+    background-color: white;
+    display: none;
+    /* visibility: hidden; */
+    flex-direction: column;
+    /* position: relative; */
+    /* left:300px; */
+
+}
+.box-close{
+    width:100%;
+    height:40px;
+    /* background-color: blue; */
+    color:#217384;
+    display: flex;
+    justify-content: flex-end;
+
+}
+.icon-close:hover{
+    cursor: pointer;
+}
+.box-num{
+    height:150px;
+    width:100%;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+}
+.icon-close{
+    font-size: 30px;
+    position: relative;
+    top:5px;
+    right:10px;
+}
 .cust-1{
     display: flex;
     justify-content: center;
@@ -352,11 +388,13 @@ input::-webkit-input-placeholder {
 .scrollable-card::-webkit-scrollbar{
     width:0px;
 }
+
 .box-prev{
     width:20px;
     height:100%;
     background-color: #CBE1F3;
 }
+
 .box-card{
     width:100%;
     height:350px;
@@ -374,6 +412,7 @@ input::-webkit-input-placeholder {
     /* background: white; */
     border:1px solid  #D4DEE8;
     padding:5px;
+    margin-left:2px;
     margin-right:2px;
     border-radius:5px;
     position: relative;
@@ -381,8 +420,32 @@ input::-webkit-input-placeholder {
 }
 .img-card{
     width:100%;
-    height:250px;
+    height:200px;
     /* border:1px solid black; */
+}
+.img-produk{
+    width:200px;
+    height:150px;
+    margin-bottom:10px;
+    /* background-color: red; */
+}
+.img-produk-lengkap{
+    width:150px;
+    height:150px;
+    margin-bottom:10px;
+    /* background-color: red; */
+}
+.img-pembayaran{
+    width:150px;
+    height:150px;
+    margin-bottom:10px;
+    /* background-color: red; */
+}
+.img-delivery{
+    width:250px;
+    height:150px;
+    margin-bottom:10px;
+    /* background-color: red; */
 }
 .split-item{
     width:100%;
@@ -405,6 +468,9 @@ input::-webkit-input-placeholder {
     position: relative;
     left:15px;
 }
+.icon-buy:hover{
+    cursor: pointer;
+}
 .box-detail-price{
     /* background-color: red; */
     width:100%;
@@ -420,7 +486,8 @@ input::-webkit-input-placeholder {
     /* align-items: center; */
 
     width:100%;
-    height:100px;
+    height:130px;
+    background-color: white;
     /* background: green; */
     /* line-height:0.3; */
     flex-direction: column;
@@ -485,6 +552,8 @@ input::-webkit-input-placeholder {
     /* padding:50px; */
     border-top:3px solid gray;
     margin-top:12px;
+    padding-left:100px;
+    padding-right:100px;
 }
 
 .product-item:nth-child(1){
@@ -500,18 +569,23 @@ input::-webkit-input-placeholder {
     /* background-color:red; */
     padding-top:10px;
     padding-bottom:10px;
-    padding-right:50px;
-    padding-left:50px;
+    /* padding-right:50px; */
+    /* padding-left:50px; */
     width:25%;
     height:70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     /* align-items: center; */
 }
 .product-item p:nth-child(2){
     font-weight: 700;
     /* background: red; */
+}
+.product-item p:nth-child(3){
+    /* background-color: red; */
+    width:70%;
 }
 
 .box-login{
@@ -717,4 +791,27 @@ input:focus{
 }
 .testingjquery2{
     display: show;
+}
+
+
+
+/* testing slide ads-3 */
+
+.close-btn{
+    position: absolute;
+    color:#fff;
+    font-size: 20px;
+    right:0;
+    margin:25px;
+    cursor: pointer;
+}
+.active {
+    width: 500px;
+    background-color: red;
+    display: show;
+}
+
+.box-customer .active{
+    width:500px;
+    background-color: red;
 }
