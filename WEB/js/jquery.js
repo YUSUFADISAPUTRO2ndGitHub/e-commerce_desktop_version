@@ -42,21 +42,37 @@ $(function(){
                 $('modals-lk').addClass('background_grey')
             }
             console.log(item)
-      
-            $('.modals-lk').toggle(500)
+            $('.modals-lk').show(1000) // masih ada bug
+            // $('.modals-lk').addClass('melihat') // ini bisa hampir
+            // $('.modals-lk').toggle(500)
+            // $('.modals-lk').css('display','block')
+            
             $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')   
         }else {
 
         }
     })
   
-    $('.get-item').on('mouseleave',function(){
-        $('.modals-lk').css('display','none')
-    })
+    // $('.modals-lk').on('mouseleave',function(){
+    //     $('.modals-lk').css('display','none')
+    // })
 
 
     
-    
+    var data = []
+
+    $.get({
+        url: 'http://products.sold.co.id/get-product-details',            
+        method: 'POST',
+        type: 'json',
+        success: function (response) {
+            console.log(response);
+            data = response
+        },
+        error: function (error) {
+            console.log(error);
+        }
+        });
 
 
 })

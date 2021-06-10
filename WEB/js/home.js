@@ -11,6 +11,10 @@ function cart_requested(x){
     $(".iframe").attr("src", "./cart.html");
 }
 
+const commision_check=()=>{
+    $('#profileModal').modal('hide')
+}
+
 const addAddress=()=>{
     console.log('jalan')
     $("#iframeAddress").removeClass('testingjquery')

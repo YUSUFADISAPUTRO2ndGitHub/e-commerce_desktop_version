@@ -2,121 +2,65 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Owl Carousel 2 Custom Navigation Arrows Example</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-  <link rel="stylesheet" href="../Iframe/cssIframe/Card.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Owl Carousel 2 Custom Navigation Arrows Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../Iframe/cssIframe/Card.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript" src="../js/jquery.js"></script>
 </head>
 
 <body>
 
-  <div class="carousel-wrapper">
-    <div class="owl-carousel owl-theme">
-        <div class="card-item">
-            <img src="../img/testing4.jpeg" alt="" class="img-card">   
-            <div class="card-item-list">
-                <p>Silikon Sealant Asam</p>
-                <div class="split-item">
-                    <div class="item-price">
-                        <p>Rp.30.000</p>
-                        <p>Rp.20.000</p>
-                    </div>
-                    <div class="buy-icon">
-                        <img src="../img/cart.png" alt="" class="icon-buy">
-                    </div>
-                </div>
-            </div>
+    <div class="carousel-wrapper">
+        <div class="owl-carousel owl-theme" id="card-item">
+            <script>
+                const newRender = async () => {
+                    // new Promise(async (resolve, reject) => {
+                        await $.get({
+                            url: 'http://products.sold.co.id/get-product-details',
+                            method: 'POST',
+                            type: 'json',
+                            success: async function (response) {
+                                await response.map(async (val, index) => {
+                                    console.log(val);
+                                    $('#card-item').append(
+                                    ` 
+                                        <div class="card-item">
+                                            <img src="../img/testing4.jpeg" alt="" class="img-card">   
+                                            <div class="card-item-list">
+                                                <p>Silikon Sealant Asam</p>
+                                                <div class="split-item">
+                                                    <div class="item-price">
+                                                        <p>${val.creator}</p>
+                                                        <p>Rp.20.000</p>
+                                                    </div>
+                                                    <div class="buy-icon">
+                                                        <img src="../img/cart.png" alt="" class="icon-buy">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        `
+                                    )
+                                })
+                            }
+                        })
+                    // });
+                }
+                console.log(newRender())
+            </script>
         </div>
-        <div class="card-item">
-            <img src="../img/testing4.jpeg" alt="" class="img-card">   
-            <div class="card-item-list">
-                <p>Silikon Sealant Asam</p>
-                <div class="split-item">
-                    <div class="item-price">
-                        <p>Rp.30.000</p>
-                        <p>Rp.20.000</p>
-                    </div>
-                    <div class="buy-icon">
-                        <img src="../img/cart.png" alt="" class="icon-buy">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-item">
-            <img src="../img/testing4.jpeg" alt="" class="img-card">   
-            <div class="card-item-list">
-                <p>Silikon Sealant Asam</p>
-                <div class="split-item">
-                    <div class="item-price">
-                        <p>Rp.30.000</p>
-                        <p>Rp.20.000</p>
-                    </div>
-                    <div class="buy-icon">
-                        <img src="../img/cart.png" alt="" class="icon-buy">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-item">
-            <img src="../img/testing4.jpeg" alt="" class="img-card">   
-            <div class="card-item-list">
-                <p>Silikon Sealant Asam</p>
-                <div class="split-item">
-                    <div class="item-price">
-                        <p>Rp.30.000</p>
-                        <p>Rp.20.000</p>
-                    </div>
-                    <div class="buy-icon">
-                        <img src="../img/cart.png" alt="" class="icon-buy">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-item">
-            <img src="../img/testing4.jpeg" alt="" class="img-card">   
-            <div class="card-item-list">
-                <p>Silikon Sealant Asam</p>
-                <div class="split-item">
-                    <div class="item-price">
-                        <p>Rp.30.000</p>
-                        <p>Rp.20.000</p>
-                    </div>
-                    <div class="buy-icon">
-                        <img src="../img/cart.png" alt="" class="icon-buy">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-item">
-            <img src="../img/testing4.jpeg" alt="" class="img-card">   
-            <div class="card-item-list">
-                <p>Silikon Sealant Asam</p>
-                <div class="split-item">
-                    <div class="item-price">
-                        <p>Rp.30.000</p>
-                        <p>Rp.20.000</p>
-                    </div>
-                    <div class="buy-icon">
-                        <img src="../img/cart.png" alt="" class="icon-buy">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
-  </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="../Iframe/jsIframe/card.js"></script>
 
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <script type="text/javascript" src="../Iframe/jsIframe/card.js"></script>
- 
 </body>
 
 </html>

@@ -119,3 +119,9 @@
 .icon-buy:hover{
   cursor: pointer;
 }
+
+
+#card-item{
+  display: flex;
+  flex-direction: row;
+}
