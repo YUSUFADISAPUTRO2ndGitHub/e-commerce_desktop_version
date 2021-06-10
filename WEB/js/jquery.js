@@ -31,4 +31,32 @@ $(function(){
         }
     }
 });
+    $('.get-item').on('mouseenter',function(){
+        var item = $(this).attr('val')
+        console.log('function jalan 36')
+        if(item){
+            console.log('function jalan 36')
+            if($('modals-lk').hasClass("background_grey")){
+                $('modals-lk').removeClass("background_grey")
+            }else {
+                $('modals-lk').addClass('background_grey')
+            }
+            console.log(item)
+      
+            $('.modals-lk').toggle(500)
+            $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')   
+        }else {
+
+        }
+    })
+  
+    $('.get-item').on('mouseleave',function(){
+        $('.modals-lk').css('display','none')
+    })
+
+
+    
+    
+
+
 })
