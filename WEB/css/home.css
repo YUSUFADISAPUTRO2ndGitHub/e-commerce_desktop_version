@@ -240,6 +240,46 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 
+.option-2{
+    width:20%;
+    height:100px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top:10px;
+}
+.option-2 p{
+    color:#535353;
+    font-size: 12px;
+}
+.option-2:hover{
+    cursor: pointer;
+}
+
+.option-3{
+    width:20%;
+    height:100px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top:10px;
+}
+.option-3 p{
+    color:#535353;
+    font-size: 12px;
+}
+.option-3:hover{
+    cursor: pointer;
+}
+
 .icon-opt{
     width:30px;
     width:30px;
@@ -880,9 +920,6 @@ input::-webkit-input-placeholder {
     cursor: pointer;
 }
 
-.option-1:hover{
-    cursor: pointer;
-}
 
 /* REGISTER FORM MODALS */
 

@@ -1,13 +1,20 @@
 function sign_up_request(){
     $("#loginModal").modal("hide");
+    
 }
 function cart_requested(x){
+    console.log(x)
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
     }else{
         $(x).addClass("background_grey");
     }
     $(".iframe").toggle();
+    $('.iframe').css('display','block')
+    $('.modals-pengiriman').css("display",'none')
+    $('.modals-check-harga').css("display",'none')
+    $('.option-1').removeClass('background_grey')
+    $('.option-2').removeClass('background_grey')
     $(".iframe").attr("src", "./cart.html");
 }
 
@@ -19,10 +26,12 @@ function pengiriman_requested(x){
     }
     $(".modals-pengiriman").toggle();
     $(".modals-pengiriman").attr("src", "./Iframe/delivery_order_list.html");
+    $('.modals-check-harga').css('display','none')
+    $('.modals-cart').css('display','none')
+    $('.option-1').removeClass('background_grey')
+    $('.option-3').removeClass('background_grey')
 }
-const commision_check=()=>{
-    $('#profileModal').modal('hide')
-}
+
 
 function cek_harga_requested(x){
     if($(x).hasClass("background_grey")){
@@ -31,7 +40,17 @@ function cek_harga_requested(x){
         $(x).addClass("background_grey");
     }
     $(".modals-check-harga").toggle();
+    $('.modals-check-harga').css('display','block')
     $(".modals-check-harga").attr("src", "./Iframe/product_scanner.html");
+    $('.modals-pengiriman').css('display','none')
+    $('.modals-cart').css('display','none')
+    $('.option-2').removeClass('background_grey')
+    $('.option-3').removeClass('background_grey')
+   
+}
+
+const commision_check=()=>{
+    $('#profileModal').modal('hide')
 }
 
 const addAddress=()=>{
