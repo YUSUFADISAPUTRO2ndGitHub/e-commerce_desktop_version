@@ -10,7 +10,7 @@ function cart_requested(x){
         $(x).addClass("background_grey");
     }
     $(".iframe").toggle();
-    $('.iframe').css('display','block')
+    // $('.iframe').css('display','block')
     $('.modals-pengiriman').css("display",'none')
     $('.modals-check-harga').css("display",'none')
     $('.option-1').removeClass('background_grey')
@@ -26,8 +26,8 @@ function pengiriman_requested(x){
     }
     $(".modals-pengiriman").toggle();
     $(".modals-pengiriman").attr("src", "./Iframe/delivery_order_list.html");
-    $('.modals-check-harga').css('display','none')
-    $('.modals-cart').css('display','none')
+    $(".modals-check-harga").css('display','none')
+    $(".iframe").css('display','none')
     $('.option-1').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
 }
@@ -40,10 +40,10 @@ function cek_harga_requested(x){
         $(x).addClass("background_grey");
     }
     $(".modals-check-harga").toggle();
-    $('.modals-check-harga').css('display','block')
+    // $('.modals-check-harga').css('display','block')
     $(".modals-check-harga").attr("src", "./Iframe/product_scanner.html");
     $('.modals-pengiriman').css('display','none')
-    $('.modals-cart').css('display','none')
+    $('.iframe').css('display','none')
     $('.option-2').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
    
