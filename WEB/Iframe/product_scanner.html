@@ -4,11 +4,11 @@
     <title>QR Code Scanner</title>
     <meta charset="UTF-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="../Iframe/cssIframe/product_scanner.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
-    <script src="../www/js/sweetalert.js"></script>
-    <script src="./js/qrReader.js"></script>
+    <script src="../js/sweetalert.js"></script>
+    <script src="./jsIframe/qrReader.js"></script>
     <style>
       .productPreview{
         position: fixed;
@@ -49,15 +49,28 @@
         opacity: 0.9;
         display: none;
       }
+      #container{
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #container p{
+        font-size: 15px !important;
+        padding-left:50px;
+        padding-right:50px;
+        /* padding-left:20px; */
+      }
     </style>
   </head>
   <body onclick="clearPopup()">
         <div id="container">
             <h1>Scan Barcode Produk</h1>
-            <h5>Tekan tombol di bawah dan sejajarkan kode batang ke kamera Anda</h5>
+            <p>Tekan tombol di bawah dan sejajarkan kode batang ke kamera Anda</p>
 
             <a id="btn-scan-qr">
-                <img src="./img/Additional_icons/qr-scan.png">
+                <img src="../img/qr-scan.png">
             </a>
 
             <div class="help-line-left"></div>

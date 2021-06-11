@@ -18,6 +18,7 @@ axios.post('http://products.sold.co.id/get-product-details')
     renderItemNew()
     renderItemAll()
     filterCategory()
+    renderCategory()
 }).catch((err)=>{
     console.log(err)
 })
@@ -135,9 +136,23 @@ const filterCategory=()=>{
 }
 
 
-const renderSubCategory=()=>{
+const renderCategory=()=>{
     var subCat = 'ADHESIVE'
-    
+
+    axios.post('http://products.sold.co.id/get-product-details?Get_ALL_Category=true')
+    .then((res)=>{
+        console.log(res.data)
+        res.data.map((val,index)=>{
+            $('.list-group').append(
+                ` 
+                <li class="list-group-item category-list get-item" val="${val.Category.toUpperCase()}">${val.Category.toUpperCase()}</li>
+                `
+                )
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+
 
 }
 
