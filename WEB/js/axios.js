@@ -19,6 +19,8 @@ axios.post('http://products.sold.co.id/get-product-details')
     renderItemAll()
     filterCategory()
     renderCategory()
+    renderSubCategory('ADHESIVE')
+    renderItemBasedOnSubCategory('SEALANT')
 }).catch((err)=>{
     console.log(err)
 })
@@ -137,8 +139,7 @@ const filterCategory=()=>{
 
 
 const renderCategory=()=>{
-    var subCat = 'ADHESIVE'
-
+    // var subCat = 'ADHESIVE'
     axios.post('http://products.sold.co.id/get-product-details?Get_ALL_Category=true')
     .then((res)=>{
         console.log(res.data)
@@ -154,6 +155,57 @@ const renderCategory=()=>{
     })
 
 
+}
+
+const renderSubCategory=(subCategory)=>{
+    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${subCategory}`)
+    .then((res)=>{
+        console.log(res.data)
+        res.data.map((val,index)=>{
+            $('.box-list-kategori').append(
+                `
+                <div class="card-lk">
+                    <div class="box-img-lk">
+                        <img src="${val.Picture_1}" alt="">
+                    </div>
+                    <p>${val.Subcategory}</p>
+                </div>
+                `
+            )
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+const renderItemBasedOnSubCategory=(subCategory)=>{
+    axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
+    .then((res)=>{
+        console.log(res.data)
+        res.data.map((val,index)=>{
+            $('.box.list.kategori2').append(
+              `
+                <div class="card-item">
+                    <img src="${val.Picture_1}" alt="" class="img-card">   
+                    <div class="card-item-list">
+                        <p>${val.Name}</p>
+                        <div class="split-item">
+                            <div class="item-price">
+                                <p>RP. ${hargaTotal}</p>
+                                <p>Rp. ${hargaAwal}</p>
+                            </div>
+                            <div class="buy-icon">
+                                <img src="./img/cart.png" alt="" class="icon-buy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
 }
 
 
