@@ -42,8 +42,8 @@ $(function(){
                 $('modals-lk').addClass('background_grey')
             }
             console.log(item)
-            $('.modals-lk').show(1000) // masih ada bug
-            // $('.modals-lk').addClass('melihat') // ini bisa hampir
+            // $('.modals-lk').show(1000) // masih ada bug
+            $('.modals-lk').addClass('melihat') // ini bisa hampir
             // $('.modals-lk').toggle(500)
             // $('.modals-lk').css('display','block')
             
@@ -74,5 +74,12 @@ $(function(){
         }
         });
 
+
+        // DATE PICKER
+
+        // $('.icon-date').datepicker()
+        // $('.icon-date').datetimepicker();
+
+        // date PICKER
 
 })
