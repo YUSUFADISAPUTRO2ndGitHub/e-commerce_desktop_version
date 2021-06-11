@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QR Code Scanner</title>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="../www/js/accessingAccurateAPIsGroup1.js"></script>
+    <script src="../www/js/sweetalert.js"></script>
+    <script src="./js/qrReader.js"></script>
+    <style>
+      .productPreview{
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        width: 90%;
+        height: 80%;
+        margin: -45%;
+        border-radius: 10px;
+        border: solid 2px grey;
+        opacity: 0.97;
+        display: none;
+      }
+      #add-item-to-cart-button{
+        display: none;
+      }
+
+      .help-line-left{
+        position: absolute;
+        top:  39%;
+        left: 41.5%;
+        background-color: grey;
+        width: 5px;
+        height: 50px;
+        z-index: 12;
+        opacity: 0.9;
+        display: none;
+      }
+
+      .help-line-right{
+        position: absolute;
+        top:  39%;
+        right: 40%;
+        background-color: grey;
+        width: 5px;
+        height: 50px;
+        z-index: 12;
+        opacity: 0.9;
+        display: none;
+      }
+    </style>
+  </head>
+  <body onclick="clearPopup()">
+        <div id="container">
+            <h1>Scan Barcode Produk</h1>
+            <h5>Tekan tombol di bawah dan sejajarkan kode batang ke kamera Anda</h5>
+
+            <a id="btn-scan-qr">
+                <img src="./img/Additional_icons/qr-scan.png">
+            </a>
+
+            <div class="help-line-left"></div>
+            <div class="help-line-right"></div>
+            <canvas hidden="" id="qr-canvas">
+            </canvas>
+            <h5 class="helper-warning">Harap sejajarkan barcode dengan baik</h5>
+
+            <div class="form-group">
+                <label>Atau masukkan kode produk sebagai gantinya:</label>
+                <input type="text" id="product_code_manual" class="form-control" onchange="checkItemCode(this)" placeholder="Product code here">
+            </div>
+            <div id="qr-result" hidden="">
+                <b>Product code detected:</b> <span id="outputData"></span>
+            </div>
+            <button type="button" id="add-item-to-cart-button" class="btn btn-outline-dark" onclick="addToCart()">Add to cart</button>
+        </div>
+
+        <iframe class="productPreview" src=""></iframe>
+    <script src="./js/qrCodeScanner.js"></script>
+  </body>
+</html>

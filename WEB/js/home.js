@@ -11,6 +11,15 @@ function cart_requested(x){
     $(".iframe").attr("src", "./cart.html");
 }
 
+function pengiriman_requested(x){
+    if($(x).hasClass("background_grey")){
+        $(x).removeClass("background_grey");
+    }else{
+        $(x).addClass("background_grey");
+    }
+    $(".modals-pengiriman").toggle();
+    $(".modals-pengiriman").attr("src", "./Iframe/delivery.html");
+}
 const commision_check=()=>{
     $('#profileModal').modal('hide')
 }

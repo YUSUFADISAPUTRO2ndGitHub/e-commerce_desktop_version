@@ -52,27 +52,7 @@ $(function(){
 
         }
     })
-  
-    // $('.modals-lk').on('mouseleave',function(){
-    //     $('.modals-lk').css('display','none')
-    // })
-
-
-    
-    var data = []
-
-    $.get({
-        url: 'http://products.sold.co.id/get-product-details',            
-        method: 'POST',
-        type: 'json',
-        success: function (response) {
-            console.log(response);
-            data = response
-        },
-        error: function (error) {
-            console.log(error);
-        }
-        });
+ 
 
 
         // DATE PICKER
