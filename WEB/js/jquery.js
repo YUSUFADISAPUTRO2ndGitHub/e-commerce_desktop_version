@@ -31,34 +31,6 @@ $(function(){
         }
     }
 });
-    $('.get-item').on('mouseenter',function(){
-        var item = $(this).attr('val')
-        console.log('function jalan 36')
-        if(item){
-            console.log('function jalan 36')
-            if($('modals-lk').hasClass("background_grey")){
-                $('modals-lk').removeClass("background_grey")
-            }else {
-                $('modals-lk').addClass('background_grey')
-            }
-            console.log(item)
-            // $('.modals-lk').show(1000) // masih ada bug
-            $('.modals-lk').addClass('melihat') // ini bisa hampir
-            // $('.modals-lk').toggle(500)
-            // $('.modals-lk').css('display','block')
-            
-            $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')   
-        }else {
-
-        }
-    })
-
-
-    // $('.icon-date').on('click',function(){
-    //     console.log('icon date jalan')
-        
-    // })
-  
 
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
@@ -73,14 +45,4 @@ $(function(){
     
     );
    
- 
-
-
-        // DATE PICKER
-
-        // $('.icon-date').datepicker()
-        // $('.icon-date').datetimepicker();
-
-        // date PICKER
-
 })

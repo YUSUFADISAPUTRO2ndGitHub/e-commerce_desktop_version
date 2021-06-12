@@ -1084,7 +1084,7 @@ input:focus{
     top:100px;
     /* left:105px; */
     right:172px;
-    height:650px;
+    height:380px;
     width:400px;
     background-color: white;
     display:none;
@@ -1128,12 +1128,26 @@ input:focus{
 
 /* modals delivery list*/
 
+/* MODALS LIST ITEM BY SUB CATEGORY */
+.modals-lk {
+    position: absolute;
+    z-index:20;
+    top:100px;
+    left:327px;
+    height:450px;
+    width:400px;
+    /* background-color: red; */
+    display:none;
+    transition: 2s ease-out;
+}
+
+/* MODALS LIST ITEM BY SUB CATEGORY */
 
 
 
 /* MODALS LIST KATEGORI */
 
-.modals-lk {
+.modals-item {
     position: absolute;
     z-index:20;
     top:100px;
@@ -1401,4 +1415,67 @@ overflow-y:hidden;
     display: none;
 }
 
+/* kategori item  */
 
+.card-all-item{
+
+    width:48%;
+    height:auto;
+    /* min-width: 250px;
+    min-height:350px; */
+    /* background: red; */
+    border:1px solid  #D4DEE8;
+    padding:5px;
+    margin-left:2px;
+    margin-right:2px;
+    border-radius:5px;
+    position: relative;
+    /* left:-30px; */
+}
+.img-all-card{
+    width:100%;
+    height:200px;
+    /* border:1px solid black; */
+}
+
+.card-all-item-list{
+    padding-top:5px;
+    padding-left:20px;
+    display: flex;
+    width:100%;
+    height:130px;
+    background-color: white;
+    flex-direction: column;
+}
+
+.split-all-item{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+}
+.item-all-price{
+    width:50%;
+    /* background-color: blue; */
+    line-height:0.7;
+}
+
+.item-all-price p:nth-child(1){
+    text-decoration: line-through;
+    font-size: 14px;
+}
+.item-all-price p:nth-child(2){
+    /* text-decoration: line-through; */
+    font-size: 14px;
+}
+
+.icon-buy{
+    width:30px;
+    height:30px;
+    position: relative;
+    left:15px;
+}
+.icon-buy:hover{
+    cursor: pointer;
+}

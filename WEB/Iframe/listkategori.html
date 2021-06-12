@@ -5,40 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Iframe/cssIframe/listkategori.css">
+    <link rel="stylesheet" href="../css/home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../js/axios.js"></script>
     <title>List Kategori</title>
 </head>
 <body>
     <div class="box-list-kategori get-item" >
-        <div class="card-lk">
-            <div class="box-img-lk">
-                <img src="../img/testing3.jpg" alt="">
-            </div>
-            <p>Vibrator Beton</p>
-        </div>
-        <div class="card-lk">
-            <div class="box-img-lk">
-                <img src="../img/testing3.jpg" alt="">
-            </div>
-            <p>Vibrator Beton</p>
-        </div>
-        <div class="card-lk">
-            <div class="box-img-lk">
-                <img src="../img/testing3.jpg" alt="">
-            </div>
-            <p>Vibrator Beton</p>
-        </div>
-        <div class="card-lk">
+
+
+        <div class="card-lk" onclick="getAllItem('sealant')">
             <div class="box-img-lk">
                 <img src="../img/testing3.jpg" alt="">
             </div>
             <p>Vibrator Beton</p>
         </div>
 
+
     </div>
    
 </body>
+
+<script>
+const renderItemBasedOnSubCategory=(subCategory)=>{
+    axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
+    .then((res)=>{
+        console.log(res.data)
+        res.data.map((val,index)=>{
+            var hargaAwal = parseInt(val.Sell_Price)
+            var discount = parseInt(val.Sell_Price * 0.1)
+            var hargaTotal = hargaAwal + discount
+            $('.box-list-kategori').append(
+              `
+                <div class="card-all-item">
+                    <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                    <div class="card-all-item-list">
+                        <p>${val.Name}</p>
+                        <div class="split-all-item">
+                            <div class="item-all-price">
+                                <p>RP. ${hargaTotal}</p>
+                                <p>Rp. ${hargaAwal}</p>
+                            </div>
+                            <div class="buy-icon">
+                                <img src="../img/cart.png" alt="" class="icon-buy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        }) 
+    }).catch((err)=>{
+        console.log(err)
+    })
+    $('.modals-item').addClass('melihat') // ini bisa hampir
+    $('.modals-item').attr('src','../WEB/Iframe/kategoriItem.html')  
+}
+
+    const getAllItem=(subcategory)=>{
+        console.log(subcategory)
+        renderItemBasedOnSubCategory(subcategory)
+    }
+
+</script>
+
+<script type="text/javascript" src="../js/home.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
 </html>

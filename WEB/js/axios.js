@@ -17,7 +17,6 @@ axios.post('http://products.sold.co.id/get-product-details')
     renderItemPromo()
     renderItemNew()
     renderItemAll()
-    filterCategory()
     renderCategory()
     // renderSubCategory('ADHESIVE')
     // renderItemBasedOnSubCategory('SEALANT')
@@ -25,10 +24,11 @@ axios.post('http://products.sold.co.id/get-product-details')
     console.log(err)
 })
 }
+getAllData()
 
 // RENDER DATA HOME
 const renderItemPromo=()=>{
-    console.log(allData)
+
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -118,25 +118,6 @@ const renderItemAll=()=>{
 
 // RENDER DATA HOME
 
-const filterCategory=()=>{
-    var dataAll = allData
-    var category=[]
-    // dataAll.map((val,index)=>{
-    //     var data = val
-    //    data.filter((filtering)=>{
-    //          category.push(filtering.Category)
-    //      })
-        
-    // })
-    let allItem = dataAll.filter(function(category){
-        return category.Category
-    })
-    // console.log(allItem)
-
-    // console.log(dataAll, ' ini data All')
-    // console.log(category)
-}
-
 
 const renderCategory=()=>{
     // var subCat = 'ADHESIVE'
@@ -144,70 +125,49 @@ const renderCategory=()=>{
     .then((res)=>{
         // console.log(res.data)
         res.data.map((val,index)=>{
+            var sub = val.Category.toUpperCase()
             $('.list-group').append(
                 ` 
-                <li class="list-group-item category-list get-item" val="${val.Category.toUpperCase()}">${val.Category.toUpperCase()}</li>
+                <li class="list-group-item category-list get-item testing-2" val="${sub}" onclick="findSubCategory('${sub}')">${sub}</li>
                 `
                 )
         })
     }).catch((err)=>{
         console.log(err)
     })
-
-
 }
 
-const renderSubCategory=(subCategory)=>{
-    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${subCategory}`)
+
+
+
+const findSubCategory=(sub)=>{
+    // alert(category)
+    console.log(sub)
+    renderItemBasedOnCategory(sub)
+}
+const renderItemBasedOnCategory=(Category)=>{
+    $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html') 
+    $('.modals-lk').css('display','block')  
+    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
     .then((res)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
+            console.log('render jalan 189s')
             $('.box-list-kategori').append(
                 `
-                <div class="card-lk">
+                <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
                     <div class="box-img-lk">
-                        <img src="${val.Picture_1}" alt="">
+                    <img src="${val.Picture_1}" alt="">
                     </div>
                     <p>${val.Subcategory}</p>
                 </div>
                 `
-            )
+                )
+            })
+        }).catch((err)=>{
+            console.log(err)
         })
-    }).catch((err)=>{
-        console.log(err)
-    })
+        $('.modals-lk').addClass('melihat') // ini bisa hampir
+       
 }
-
-const renderItemBasedOnSubCategory=(subCategory)=>{
-    axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
-    .then((res)=>{
-        console.log(res.data)
-        res.data.map((val,index)=>{
-            $('.box-list-kategori').append(
-              `
-                <div class="card-item">
-                    <img src="${val.Picture_1}" alt="" class="img-card">   
-                    <div class="card-item-list">
-                        <p>${val.Name}</p>
-                        <div class="split-item">
-                            <div class="item-price">
-                                <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
-                            </div>
-                            <div class="buy-icon">
-                                <img src="./img/cart.png" alt="" class="icon-buy">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `
-            )
-        })
-    }).catch((err)=>{
-        console.log(err)
-    })
-}
-
-
-getAllData()
 console.log(allData, 'line 44')
