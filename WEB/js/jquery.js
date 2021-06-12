@@ -53,9 +53,25 @@ $(function(){
         }
     })
 
- 
-    $('#datetimepicker1').datetimepicker();
 
+    // $('.icon-date').on('click',function(){
+    //     console.log('icon date jalan')
+        
+    // })
+  
+
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4',
+        format:'dd-mm-yyy',
+        onSelect: function() { 
+            
+            var dateObject = $(this).datepicker('getDate'); 
+            console.log(dateObject)
+        }
+        
+    }
+    
+    );
    
  
 

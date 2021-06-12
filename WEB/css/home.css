@@ -1353,3 +1353,31 @@ overflow-y:hidden;
         
         }
 /* render item */
+
+
+/* date picker */
+
+.input-date{
+    /* background-color: red; */
+    width:120px;
+    height:40px;
+    background-color: #217283;
+    border-radius:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    padding-left:10px;
+}
+.input-date ::placeholder{
+    font-size: 25px;;
+}
+
+.ui-datepicker-prev {
+    display: none;
+}
+.ui-datepicker-right {
+    display: none;
+}
+
+
