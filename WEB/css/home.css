@@ -1165,7 +1165,7 @@ input:focus{
 .modal-form-top{
     display: flex;
     width:100%;
-    height:30%;
+    height:40%;
     /* background-color: red; */
     padding-left:10px;
     padding-right:10px;
@@ -1191,9 +1191,30 @@ input:focus{
 }
 .comm-top-1 p{
     color:white;
+    line-height:1;
+}
+.comm-top-download{
+    width:100%;
+    height:20px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right:20px;
+}
+.comm-top-download p{
+    color:white;
     font-size: 12px;
-    /* line-height: 1.5; */
+    /* line-height: 1.5; */ 
+
     margin-bottom:0px !important;
+}
+.icon-download{
+    font-size: 30px;
+    color:white;
+}
+.icon-download:hover{
+cursor: pointer;
 }
 .comm-top-2{
     background-color: white;
