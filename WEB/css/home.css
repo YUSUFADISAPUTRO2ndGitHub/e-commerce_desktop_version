@@ -179,9 +179,14 @@ body{
     width:100%;
 }
 .input-name{
+
     width:90%;
     height:50px;
-    border-radius:50px;
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
+    /* border-radius:50px; */
     border:2px solid #217384;
     /* background: blue; */
 }
@@ -1479,3 +1484,55 @@ overflow-y:hidden;
 .icon-buy:hover{
     cursor: pointer;
 }
+
+
+/* CAROUSEL IKLAN */
+.carousel-item{
+    height:400px;
+    width:100%;
+}
+.carousel-item img{
+    height:400px;
+    width:100%
+}
+
+/* CAROUSEL IKLAN */
+
+
+/* box render search */
+.box-render-search{
+    /* height:300px; */
+    width:623px;
+    background-color: #ecf0f1;
+    position:absolute;
+    top:75px;
+    left:424px;
+    z-index: 30;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    /* border-radius:10px; */
+    border:2px solid #217283;
+    display: none;
+    flex-direction: column;
+    padding-left:10px;
+    padding-right:10px;
+  
+}
+.box-render-search ul li {
+    color: black;
+    padding-left:5px;
+    margin:3px;
+    position: relative;
+    left:-30px;
+}
+.box-render-search ul li:hover {
+background-color: #217283;
+border-radius:5px;
+cursor: pointer;
+}
+ul {
+    
+    list-style-type: none;
+  }
+
+/* box render search */
