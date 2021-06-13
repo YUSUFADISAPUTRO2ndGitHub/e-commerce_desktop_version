@@ -328,6 +328,7 @@ input::-webkit-input-placeholder {
     flex-direction: row;
     /* background-color: red; */
     justify-content: flex-end;
+    z-index:30;
 }
 
 .box-customer{
@@ -685,8 +686,8 @@ input::-webkit-input-placeholder {
 
 
 .box-back{
-    width:80px;
-    height:80px;
+    width:60px;
+    height:60px;
     background: rgb(255, 255, 255,0.5); /* fallback color */
     /* border:1px solid black; */
     position: relative;
@@ -700,6 +701,19 @@ input::-webkit-input-placeholder {
 }
 .box-back:hover{
     cursor: pointer;
+    
+}
+.box-next:hover .icon-next{
+    /* border:3px solid black; */
+    
+    color:#217283;
+    transition:0.5s ease-in;
+}
+.box-back:hover .icon-prev{
+    /* border:3px solid black; */
+    
+    color:#217283;
+    transition:0.5s ease-in;
 }
 .box-next:hover{
     cursor: pointer;
@@ -1520,7 +1534,7 @@ overflow-y:hidden;
     border-bottom-right-radius: 25px;
     /* border-radius:10px; */
     border:2px solid #217283;
-    display: none;
+    /* display: none; */
     flex-direction: column;
     padding-left:10px;
     padding-right:10px;
@@ -1528,14 +1542,14 @@ overflow-y:hidden;
 
   
 }
-.box-render-search ul li {
+.box-render-search .card-body ul li {
     color: black;
     padding-left:5px;
     margin:3px;
     position: relative;
     left:-30px;
 }
-.box-render-search ul li:hover {
+.box-render-search .card-body ul li:hover {
 background-color: #217283;
 border-radius:5px;
 cursor: pointer;
@@ -1545,6 +1559,18 @@ ul {
     list-style-type: none;
   }
 
+
+  .box-search-menu {
+    position: absolute !important;;
+    border-bottom-left-radius: 25px !important;
+    border-bottom-right-radius: 25px !important;
+    /* border-radius:10px; */
+    border:2px solid #217283 !important;
+    height:auto;
+    max-height:400px;
+    display: none;
+  }
+  
 /* box render search */
 
 

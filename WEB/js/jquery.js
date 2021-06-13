@@ -55,6 +55,7 @@ $(function(){
             if(value.length>2){
                 console.log('masuk ke if')
                 $('.box-render-search').css('display','block')
+                $('.box-search-menu').css('display','block')
                 $('.input-name').css('border-bottom-left-radius','0px')
                 $('.input-name').css('border-bottom-right-radius','0px')
                 $('.render-li-search').empty()
