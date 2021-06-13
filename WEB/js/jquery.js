@@ -1,4 +1,6 @@
 $(function(){
+    
+
     $('.carousel').carousel()
 
    $('.icon-cust').on('click',function(){
@@ -81,5 +83,8 @@ $(function(){
 
           })
     })
+
+
+    
    
 })
