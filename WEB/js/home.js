@@ -5,6 +5,10 @@ function sign_up_request(){
     $("#loginModal").modal("hide");
     
 }
+
+function forgot_modal_request(){
+    $('#loginModal').modal('hide')
+}
 function cart_requested(x){
     console.log(x)
     if($(x).hasClass("background_grey")){

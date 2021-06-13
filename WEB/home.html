@@ -28,7 +28,7 @@
         .category-menu{
             width: 18%;
             position: absolute;
-            top: 3%;
+            top: 2%;
             left: 4.7%;
             z-index: 10;
         }
@@ -92,7 +92,7 @@
                         <div class="login-option"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#profileModal">
                             <p>Bergabung Sekarang</p>
                         </div>
-                        <div class="login-option">
+                        <div class="login-option" onclick="forgot_modal_request()" data-bs-toggle="modal" data-bs-target="#forgotModal">
                             <p>Lupa Password</p>
                         </div>
                     </div>
@@ -102,6 +102,83 @@
         </div>
       </div>
     <!-- LOGIN MODALS -->
+
+        <!-- FORGOT PASSWORD MODALS -->
+        <div class="modal  fade " id="forgotModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog box-login ">
+              <div class="modal-content ">
+                <div class="modal-header box-login-header">
+                  <p>Hi <span style='color:#37CED5'> there!</span> <br> Please Verify yourself to change your password</p>
+                </div>
+                <div class="modal-body box-login-body">
+                    <div class="register-form">       
+                        <div class="reg-form-1">
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>Apa Alamat Email anda yang terdaftar ?</p>
+                                </div>
+                                <input type="text" class="forgot-form" placeholder="Alamat Email" type="email" id="email"
+                                pattern=".+@globex.com" size="30" required>
+                            </div>
+                           
+                        </div>    
+                        <div class="reg-form-1">
+                            
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>Tanggal Lahir </p>
+                                </div>
+                                <input type="number" class="forgot-form" placeholder="Tanggal Lahir">
+                            </div>
+                        </div>  
+                        <div class="reg-form-1">
+                            
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>Bulan  Lahir</p>
+                                </div>
+                                <input type="number" class="forgot-form" placeholder="Bulan Lahir">
+                            </div>
+                        </div>  
+                        <div class="reg-form-1">
+                            
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>Tahun Lahir</p>
+                                </div>
+                                <input type="number" class="forgot-form" placeholder="Tahun Lahir"> 
+                            </div>
+                        </div>  
+                        <div class="reg-form-1">
+                           
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>No telp Primary Anda Sewaktu Mendaftar</p>
+                                </div>
+                                <input type="number" class="forgot-form" placeholder="No Telp">
+                            </div>
+                        </div>  
+                        <div class="reg-form-1">
+                            
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>Masukan Password Baru Yang anda inginkan</p>
+                                </div>
+                                <input type="text" class="forgot-form" placeholder="Password Baru">
+                            </div>
+                        </div>  
+                               
+                        <div class="box-kumpulkan-forgot">
+                            <div class="btn-kumpulkan-forgot">
+                                <p>Verifikasikan Saya</p>
+                            </div>
+                        </div>            
+                    </div>  
+                </div>
+              </div>
+            </div>
+    </div>
+    <!-- FORGOT PASSWORD MODALS -->
 
     <!-- REGISTER MODALS -->
     <div class="modal  fade " id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

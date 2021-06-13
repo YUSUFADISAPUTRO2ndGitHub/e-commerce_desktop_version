@@ -34,7 +34,7 @@ const renderItemPromo=()=>{
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
-        console.log(hargaTotal)
+        // console.log(hargaTotal)
         $('.box-render-promo').append(
         ` 
             <div class="card-item">
@@ -158,6 +158,9 @@ const renderCategory=()=>{
 
 
 
+$('.testing-2').on('click',function(){
+    console.log('get item jalan 161')
+})
 
 const findSubCategory=(sub)=>{
     // alert(category)
