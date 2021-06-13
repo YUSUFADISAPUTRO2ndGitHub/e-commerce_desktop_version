@@ -1,4 +1,4 @@
-// const axios = require('axios');
+
 
 console.log('axios jalan')
 var allData = []
@@ -34,7 +34,7 @@ const renderItemPromo=()=>{
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
-    //  console.log(hargaTotal)
+        console.log(hargaTotal)
         $('.box-render-promo').append(
         ` 
             <div class="card-item">
@@ -56,6 +56,25 @@ const renderItemPromo=()=>{
         )
     })
 }
+
+
+// SLICK SLIDER 
+
+// $('.box-render-promo').slick({
+//     dots: false,
+//     infinite: true,
+//     speed: 300,
+//     slidesToShow: 3,
+//     centerMode: true,
+//     variableWidth: true,
+//     prevArrow: $('.slick-prev'),
+//     nextArrow: $('.slick-next'),
+//   });
+// $('.box-render-promo').slick({
+//     slidesToShow: 4,
+//     slidesToScroll: 4
+//   });
+// SLICK SLIDER
 
 const renderItemNew=()=>{
     // console.log(allData)

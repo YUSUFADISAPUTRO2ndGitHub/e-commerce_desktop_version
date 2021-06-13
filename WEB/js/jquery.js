@@ -1,7 +1,7 @@
 $(function(){
     
 
-    $('.carousel').carousel()
+    // $('.carousel').carousel()
 
    $('.icon-cust').on('click',function(){
        console.log('testing jalan')
@@ -18,23 +18,23 @@ $(function(){
    
    
 
-   $('.owl-carousel').owlCarousel({
-    margin: 10,
-    nav: true,
-    dots:false,
-    navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
-    responsive: {
-        0: {
-            items: 1
-        },
-        600: {
-            items: 3
-        },
-        1000: {
-            items: 3
-        }
-    }
-});
+//    $('.owl-carousel').owlCarousel({
+//     margin: 10,
+//     nav: true,
+//     dots:false,
+//     navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+//     responsive: {
+//         0: {
+//             items: 1
+//         },
+//         600: {
+//             items: 3
+//         },
+//         1000: {
+//             items: 3
+//         }
+//     }
+// });
 
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4',
@@ -91,7 +91,7 @@ $(function(){
                 $('.input-name').css('border-bottom-right-radius','25px')
             }
 
-        }, 2000));
+        }, 500));
       
     // });
 

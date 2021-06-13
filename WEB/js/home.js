@@ -110,6 +110,77 @@ var data = [
 				}
 			}
     })
+    
+// SCROLLING ITEM
+
+ var scrollNextPromo = 0   
+ var scrollNextNew = 0   
+ var scrollNextAll = 0   
+ 
+ $('.box-next').on('click',function(event){
+     
+     
+     
+     var jenis = $(this).attr("id")
+     if(jenis === 'promo'){
+        scrollNextPromo += 350
+         horizontalNavigationPromo(scrollNextPromo, event);
+         console.log(jenis)
+     }else if (jenis === 'new'){
+        scrollNextNew += 350
+        horizontalNavigationNew(scrollNextNew, event);
+     }else {
+        scrollNextAll += 350
+        horizontalNavigationAll(scrollNextAll, event);
+     }
+ })   
+ $('.box-back').on('click',function(event){
+    
+    
+    
+    var jenis = $(this).attr("id")
+  
+
+    if(scrollNextPromo <0){
+        scrollNextPromo = 0
+    }else if (scrollNextAll <0){
+        scrollNextAll = 0
+    }else if ( scrollNextNew < 0 ){
+        scrollNextNew = 0
+    }
+    if(jenis === 'promo'){
+
+        scrollNextPromo -= 350
+        horizontalNavigationPromo(scrollNextPromo, event);
+        console.log(jenis, ' ini jenis back')
+    }else if (jenis === 'new'){
+        scrollNextNew -= 350
+       horizontalNavigationNew(scrollNextNew, event);
+    }else  if(jenis === 'all'){
+        scrollNextAll -= 350
+       horizontalNavigationAll(scrollNextAll, event);
+    }
+
+//    horizontalNavigationPromo(scrollNext, event);
+})
+
+ function horizontalNavigationPromo(position, event) {
+     console.log('jalan')
+    $('.box-render-promo').animate({scrollLeft: position}, 350);
+    event.preventDefault();
+}
+function horizontalNavigationNew(position, event) {
+    console.log('jalan')
+   $('.box-render-new').animate({scrollLeft: position}, 350);
+   event.preventDefault();
+}
+function horizontalNavigationAll(position, event) {
+    console.log('jalan')
+   $('.box-render-all').animate({scrollLeft: position}, 350);
+   event.preventDefault();
+}
+
+ // SCROLLING ITEM
 
     //  SCROLL KATEGORI
 

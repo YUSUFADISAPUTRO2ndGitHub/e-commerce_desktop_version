@@ -1,30 +1,50 @@
-$(function(){
-    $('.owl-carousel').owlCarousel({
-        margin: 15,
-        nav: true,
-        dots:false,
-        navText: ["<div class='nav-button owl-prev'><i class='fa fa-chevron-left'></i></div>", "<div class='nav-button owl-next'><i class='fa fa-chevron-right'></i></div>"],
-        responsive: {
-          0: {
-            items: 1
-          },
-          600: {
-            items: 2
-          },
-          1000: {
-            items: 3
-          }
-        }
-      });
-      var owl = $('.owl-carousel');
-    
-      owl.on('mousewheel', '.owl-stage', function (e) {
-      if (e.deltaY>0) {
-          owl.trigger('next.owl');
-      } else {
-          owl.trigger('prev.owl');
-      }
-      e.preventDefault();
-    });
+var allData = []
 
-});
+const getAllData2=()=>{
+    // console.log(dataRender)
+    
+    axios.post('http://products.sold.co.id/get-product-details')
+    .then((res)=>{
+        allData = res.data
+        // console.log(res.data)
+        // renderItemPromo()
+        renderItemPromoCard()
+       
+        // renderSubCategory('ADHESIVE')
+        // renderItemBasedOnSubCategory('SEALANT')
+    }).catch((err)=>{
+        console.log(err)
+    })
+    }
+    getAllData2()
+
+
+const renderItemPromoCard=()=>{
+
+
+    allData.map((val,index)=>{
+        var hargaAwal = parseInt(val.Sell_Price)
+        var discount = parseInt(val.Sell_Price * 0.1)
+        var hargaTotal = hargaAwal + discount
+     console.log(hargaTotal)
+        $('.box-render-promo-2').append(
+        ` 
+            <div class="card-item">
+                <img src="${val.Picture_1}" alt="" class="img-card">   
+                <div class="card-item-list">
+                    <p>${val.Name}</p>
+                    <div class="split-item">
+                        <div class="item-price">
+                            <p>RP. ${hargaTotal}</p>
+                            <p>Rp. ${hargaAwal}</p>
+                        </div>
+                        <div class="buy-icon">
+                            <img src="./img/cart.png" alt="" class="icon-buy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+        )
+    })
+}
