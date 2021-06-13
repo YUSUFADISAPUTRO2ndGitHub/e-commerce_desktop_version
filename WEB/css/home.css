@@ -1503,6 +1503,8 @@ overflow-y:hidden;
 .box-render-search{
     /* height:300px; */
     width:623px;
+    height:auto;
+    max-height:400px;
     background-color: #ecf0f1;
     position:absolute;
     top:75px;
@@ -1516,6 +1518,8 @@ overflow-y:hidden;
     flex-direction: column;
     padding-left:10px;
     padding-right:10px;
+    overflow:scroll !important;
+
   
 }
 .box-render-search ul li {
