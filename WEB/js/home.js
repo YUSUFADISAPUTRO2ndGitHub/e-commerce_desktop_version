@@ -25,6 +25,12 @@ function cart_requested(x){
     $('.option-1').removeClass('background_grey')
     $('.option-2').removeClass('background_grey')
     $(".iframe").attr("src", "./cart.html");
+
+      // SEARCH ITEM BACK TO NORMAL
+      $('.box-render-search').css('display','none')
+      $('.input-name').css('border-bottom-left-radius','25px')
+      $('.input-name').css('border-bottom-right-radius','25px')
+      $('.input-name').val(null)
 }
 
 function pengiriman_requested(x){
@@ -40,6 +46,12 @@ function pengiriman_requested(x){
     $(".iframe").css('display','none')
     $('.option-1').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
+
+      // SEARCH ITEM BACK TO NORMAL
+      $('.box-render-search').css('display','none')
+      $('.input-name').css('border-bottom-left-radius','25px')
+      $('.input-name').css('border-bottom-right-radius','25px')
+      $('.input-name').val(null)
     
 }
 
@@ -52,12 +64,19 @@ function cek_harga_requested(x){
         $(x).addClass("background_grey");
     }
     $(".modals-check-harga").toggle();
+    
     // $('.modals-check-harga').css('display','block')
     $(".modals-check-harga").attr("src", "./Iframe/product_scanner.html");
     $('.modals-pengiriman').css('display','none')
     $('.iframe').css('display','none')
     $('.option-2').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
+
+    // SEARCH ITEM BACK TO NORMAL
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','25px')
+    $('.input-name').css('border-bottom-right-radius','25px')
+    $('.input-name').val(null)
    
 }
 

@@ -146,7 +146,7 @@ const renderCategory=()=>{
             var sub = val.Category.toUpperCase()
             $('.list-group').append(
                 ` 
-                <li class="list-group-item category-list get-item " val="${sub}" onclick="findSubCategory('${sub}')">${sub}</li>
+                <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')">${sub}</li>
                 `
                 )
         })
@@ -169,9 +169,16 @@ const findSubCategory=(sub)=>{
     $('.option-1').removeClass("background_grey")
     $('.option-2').removeClass("background_grey")
     $('.option-3').removeClass("background_grey")
-    
+    $('.box-render-search').css('display','none')
     $('.modals-lk').css('display','block')
     $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?category=${sub}`)
+
+    // SEARCH ITEM BACK TO NORMAL
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','25px')
+    $('.input-name').css('border-bottom-right-radius','25px')
+    $('.input-name').val(null)
+    
     
     // renderItemBasedOnCategory(sub)
 }

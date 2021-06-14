@@ -3,10 +3,15 @@ $(function(){
 
     // $('.carousel').carousel()
 
-   $('.icon-cust').on('click',function(){
+   $('.cust-1').on('click',function(){
        console.log('testing jalan')
     //    $('.box-information').css('display','block')
     $('.box-information').show(1000)
+    // SEARCH ITEM BACK TO NORMAL
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','25px')
+    $('.input-name').css('border-bottom-right-radius','25px')
+    $('.input-name').val(null)
     //    $('.box-customer').toggle('active')
    })
 
@@ -21,15 +26,19 @@ $(function(){
         $('.option-1').removeClass("background_grey")
         $('.option-2').removeClass("background_grey")
         $('.option-3').removeClass("background_grey")
+          // SEARCH ITEM BACK TO NORMAL
+        $('.box-render-search').css('display','none')
+        $('.input-name').css('border-bottom-left-radius','25px')
+        $('.input-name').css('border-bottom-right-radius','25px')
         // $('.option-4').removeClass("background_grey")
    })
 
    $('.category-name').on('click',function(){
-    $('.closeByLogin').css('display','none')
-    $('.option-1').removeClass("background_grey")
-    $('.option-2').removeClass("background_grey")
-    $('.option-3').removeClass("background_grey")
-
+        $('.closeByLogin').css('display','none')
+        $('.option-1').removeClass("background_grey")
+        $('.option-2').removeClass("background_grey")
+        $('.option-3').removeClass("background_grey")
+        
    })
 
     // $('#datepicker').datepicker({
