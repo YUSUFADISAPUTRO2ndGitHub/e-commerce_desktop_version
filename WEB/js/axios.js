@@ -3,6 +3,22 @@
 // console.log('axios jalan')
 var allData = []
 
+$( document ).ready(function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const category = urlParams.get('category');
+    const subcategory = urlParams.get('subcategory');
+    if(category != undefined){
+        if(category.length > 0){
+            renderItemBasedOnCategory(category);
+        }
+    }else if(subcategory != undefined){
+        if(subcategory.length > 0){
+            renderItemBasedOnSubCategory(subcategory);
+        }
+    }
+});
+
 
 
 
@@ -178,10 +194,11 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
             console.log('masuk ke line 47')
+            console.log(val)
             var hargaAwal = parseInt(val.Sell_Price)
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
-            $('.box-list-all-item').append(
+            $('.box-list-kategori').append(
               `
                 <div class="card-all-item">
                     <img src="${val.Picture_1}" alt="" class="img-all-card">   
@@ -220,28 +237,28 @@ const getAllItem=(subcategory)=>{
 
 
 const renderItemBasedOnCategory=(Category)=>{
-    var myFrame = $(".modals-item").contents().find('.box-list-kategori');
+    // var myFrame = $(".modals-item").contents().find('.box-list-kategori');
     
     
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
     .then((res)=>{
         console.log(res.data)
-        //  res.data.map((val,index)=>{
-        //     console.log(val)
-        //     console.log('render jalan 189s')
-        //     $('.box-list-kategori').append(
-        //         `
-        //         <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
-        //         <div class="box-img-lk">
-        //         <img src="${val.Picture_1}" alt="">
-        //         </div>
-        //         <p>${val.Subcategory}</p>
-        //         </div>
-        //         `
-        //         )
-        //     })
-        var test = 'testing yok'
-            myFrame.html(test);
+         res.data.map((val,index)=>{
+            console.log(val)
+            console.log('render jalan 189s')
+            $('.box-list-kategori').append(
+                `
+                <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
+                <div class="box-img-lk">
+                <img src="${val.Picture_1}" alt="">
+                </div>
+                <p>${val.Subcategory}</p>
+                </div>
+                `
+                )
+            })
+        // var test = 'testing yok'
+        //     myFrame.html(test);
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html') 
             $('.modals-lk').css('display','block')  
@@ -249,4 +266,35 @@ const renderItemBasedOnCategory=(Category)=>{
             console.log(err)
         })
 }
+
+// const renderItemBasedOnSubCategory=(subcategory)=>{
+//     // var myFrame = $(".modals-item").contents().find('.box-list-kategori');
+    
+    
+//     axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subcategory}`)
+//     .then((res)=>{
+//         console.log(res.data)
+//          res.data.map((val,index)=>{
+//             console.log(val)
+//             console.log('render jalan 189s')
+//             $('.box-list-kategori').append(
+//                 `
+//                 <div class="card-lk" onclick="getAllItem('${val.Product_Code}')">
+//                 <div class="box-img-lk">
+//                 <img src="${val.Picture_1}" alt="">
+//                 </div>
+//                 <p>${val.Name}</p>
+//                 </div>
+//                 `
+//                 )
+//             })
+//         // var test = 'testing yok'
+//         //     myFrame.html(test);
+//             $('.modals-lk').addClass('melihat') // ini bisa hampir
+//             $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html') 
+//             $('.modals-lk').css('display','block')  
+//         }).catch((err)=>{
+//             console.log(err)
+//         })
+// }
 // console.log(allData, 'line 44')
