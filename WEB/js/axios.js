@@ -3,6 +3,7 @@
 // console.log('axios jalan')
 var allData = []
 
+
 $( document ).ready(function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -353,3 +354,24 @@ const renderItemBasedOnCategory=(Category)=>{
     })
  }
 
+
+
+ var idAddress=1
+ function addAddress(){
+    // alert('jalan')
+    idAddress++
+    if(idAddress <=5){
+        $('.box-tambah-alamat').append(
+            `
+            <div class="login-name">
+                <div class="box-name">
+                    <p>Alamat Lengkap ${idAddress}</p>
+                </div>
+                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap ${idAddress}" minlength="4" maxlength="8" id="alamat_lengkap_${idAddress}">
+            </div>
+            `
+        )
+    }else {
+        idAddress--
+    }
+}

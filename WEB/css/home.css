@@ -871,7 +871,7 @@ input::-webkit-input-placeholder {
     height:650px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: row;
 }
 
@@ -884,6 +884,24 @@ input::-webkit-input-placeholder {
     align-items: center;
     flex-direction: column;
 }
+.register-rekening{
+    width:100%;
+    height:70px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height:0.5;
+    align-items: center;
+    position: relative;
+    left:25px;
+}
+.login-name p{
+    display: flex;
+    position: relative;
+    /* left:-75px; */
+}
+
 
 .login-name{
     width:100%;
@@ -901,7 +919,7 @@ input::-webkit-input-placeholder {
     /* left:-75px; */
 }
 
-.alamat-name{}
+
 
 .login-name-2{
     width:100%;
@@ -935,11 +953,16 @@ input::-webkit-input-placeholder {
 
 .box-name{
     width:250px;
-    height:30px;
+    height:40px;
     position: relative;
     top:10px;
+    /* left:25px; */
+    /* background-color: red; */
+
     
 }
+
+
 .box-name-forgot{
     width:550px;
     height:30px;
@@ -1015,6 +1038,15 @@ input::-webkit-input-placeholder {
     margin:10px;
     /* background-color: red; */
 }
+.new-reg-form{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /* background-color: blue; */
+    margin-top:5px;
+    padding-right:48px;
+}
 .reg-form-2{
     width:92%;
     height:50px;
@@ -1042,6 +1074,20 @@ input::-webkit-input-placeholder {
     color:#217283;
 }
 
+.box-tambah-alamat{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-color: red; */
+    height:150px;
+    width:100%;
+    overflow-x: scroll;
+    
+    position: relative;
+    /* left:25px; */
+}
+
 .tambah-alamat{
     width:250px;
     height:35px;
@@ -1050,7 +1096,7 @@ input::-webkit-input-placeholder {
     position: relative;
     margin-top:20px;
     margin-left:10px;
-    top:10px;
+    /* top:10px; */
     left:25px;
     display: flex;
     justify-content: center;
@@ -1070,6 +1116,14 @@ input::-webkit-input-placeholder {
     justify-content: center;
     align-items: center;
     /* background-color: red; */
+}
+.box-new-tambah-alamat{
+    width:100%;
+    height:300px;
+    /* background-color: pink; */
+    position: relative;
+    top:20px;
+
 }
 .btn-kumpulkan{
     width:250px;

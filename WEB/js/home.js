@@ -99,7 +99,8 @@ var data = [
     ['Moo', 'Reindeer Hunter']
  ];
   
-  
+    
+
  function download_csv() {
      var csv = 'Name,Title\n';
      data.forEach(function(row) {
@@ -207,6 +208,7 @@ function horizontalNavigationAll(position, event) {
    $('.box-render-all').animate({scrollLeft: position}, 350);
    event.preventDefault();
 }
+
 
 
     

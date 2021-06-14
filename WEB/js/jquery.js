@@ -72,13 +72,6 @@ $(function(){
                             item.Name.toLowerCase().includes(searchString) 
                         );
                     });
-                    // filterSearch.map((val,index)=>{
-                    //     $('.render-li-search').append(
-                    //         `
-                    //         <li>${val.Name}</li>
-                    //     `)
-                    // })
-                    // searchItem = filterSearch
                     filterSearch.map((val,index)=>{
                         $('.render-li-search').append(
                             `

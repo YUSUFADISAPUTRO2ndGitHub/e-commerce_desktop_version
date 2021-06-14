@@ -23,6 +23,7 @@
     <script type="text/javascript" src="./css/slick/slick.min.js"></script>
     <script type="text/javascript" src="./Iframe/jsIframe/card.js"></script>
     <script type="text/javascript" src="./css/slick/slick.js"></script>
+    
     <title>SOLD</title>
     <style>
         .category-menu{
@@ -92,19 +93,19 @@
                         <div class="box-name" >
                             <p>Alamat Email</p>
                         </div>
-                        <input type="text" class="name-form" placeholder="Alamat Email">
+                        <input type="text" class="name-form" placeholder="Alamat Email" id="email_login">
                     </div>
                     <div class="login-pass">
                         <div class="box-name">
                             <p>Password</p>
                         </div>
-                        <input type="text" class="name-form" placeholder="Password">     
+                        <input type="text" class="name-form" placeholder="Password" id="password_login">     
                     </div>
-                    <div class="box-option-login">
+                    <div class="box-option-login" onclick="sign_in_request()">
                         <div class="login-option">
                             <p>Kumpulkan</p>
                         </div>
-                        <div class="login-option"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <div class="login-option"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#registerModal">
                             <p>Bergabung Sekarang</p>
                         </div>
                         <div class="login-option" onclick="forgot_modal_request()" data-bs-toggle="modal" data-bs-target="#forgotModal">
@@ -209,14 +210,14 @@
                                 <div class="box-name">
                                     <p>Alamat Email</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email"
+                                <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email_reg"
                                 pattern=".+@globex.com" size="30" required>
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Tahun Lahir</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="Tahun Lahir">
+                                <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_reg"> 
                             </div>
                         </div>    
                         <div class="reg-form-1">
@@ -224,13 +225,13 @@
                                 <div class="box-name">
                                     <p>Password</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Password">
+                                <input type="text" class="name-form" placeholder="Password" id="password_reg">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Bulan Lahir</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="Bulan Lahir">
+                                <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_reg">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -238,13 +239,13 @@
                                 <div class="box-name">
                                     <p>Nama Depan</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Nama Depan">
+                                <input type="text" class="name-form" placeholder="Nama Depan" id="nama_depan_reg">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Tanggal Lahir</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="Tanggal Lahir">
+                                <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_reg">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -252,13 +253,13 @@
                                 <div class="box-name">
                                     <p>Nama Belakang</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Nama Belakang">
+                                <input type="text" class="name-form" placeholder="Nama Belakang" id="nama_belakang_reg">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No telp utama</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No telp utama"> 
+                                <input type="number" class="name-form" placeholder="No telp utama" id="no_telp_reg"> 
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -266,45 +267,53 @@
                                 <div class="box-name">
                                     <p>No KTP</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8">
+                                <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8" id="no_ktp_reg">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No telp kedua</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No telp kedua">
+                                <input type="number" class="name-form" placeholder="No telp kedua" id="no_telp_2_reg">
                             </div>
                         </div>  
                         <div class="reg-form-1">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
+                            <div class="box-tambah-alamat">
+                                <div class="login-name">
+                                    <div class="box-name">
+                                        <p>Alamat Lengkap</p>
+                                    </div>
+                                    <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="8" id="alamat_lengkap_1">
                                 </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="8">
+                                
+                                
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No Rekening</p>
                                 </div>
-                                <input type="type" class="name-form" placeholder="No Rekening">
+                                <input type="type" class="name-form" placeholder="No Rekening" id="no_rekening_reg">
                             </div>
                         </div>  
-                        <div class="reg-form-1">
-                            <div class="tambah-alamat" onclick="addAddress()">
-                                <p>Tambah Alamat (+)</p>
-                            </div>
+                        
+                        <div class="new-reg-form">
                             <div class="login-name-3">
                                 <div class="box-name">
                                     <p>Customer referral Code</p>
                                 </div>
-                                <input type="type" class="name-form" placeholder="Custome Referral Code">
+                                <input type="type" class="name-form" placeholder="Custome Referral Code" id="signup_referral">
                             </div>
-                        </div>         
-                        <div class="box-kumpulkan">
-                            <div class="btn-kumpulkan">
-                                <p>Simpan</p>
-                            </div>
-                        </div>            
+                        </div> 
+                        <div class="box-new-tambah-alamat">
+                            <div class="tambah-alamat" onclick="addAddress()">
+                                <p>Tambah Alamat (+)</p>
+                            </div>       
+                            <div class="box-kumpulkan" id="simpan_reg" >
+                                <div class="btn-kumpulkan" >
+                                    <p>Simpan</p>
+                                </div>
+                            </div>            
+
+                        </div> 
                     </div>  
                 </div>
               </div>
@@ -836,8 +845,8 @@
         </div> 
     </div>
 </body>
-
 <script type="text/javascript" src="./js/axios.js"></script>
+<script type="text/javascript" src="./js/auth.js"></script>
 <script type="text/javascript" src="./js/home.js"></script>
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script> 
