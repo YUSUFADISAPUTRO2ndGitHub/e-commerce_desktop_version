@@ -566,6 +566,7 @@ input::-webkit-input-placeholder {
     /* background: pink; */
 }
 .sm-ads-name{
+    color: #217384;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -573,6 +574,9 @@ input::-webkit-input-placeholder {
     width:15%;
     height:100px;
     /* background: red; */
+}
+.sm-ads-name:hover{
+    color: #36ced5;
 }
 .sm-ads-name p{
     position: relative;
@@ -864,7 +868,7 @@ input::-webkit-input-placeholder {
 
 .box-login-body{
     width:100%;
-    height:600px;
+    height:650px;
     display: flex;
     justify-content: center;
     align-items: center;
