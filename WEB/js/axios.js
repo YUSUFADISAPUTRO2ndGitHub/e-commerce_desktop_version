@@ -298,8 +298,6 @@ const renderItemBasedOnCategory=(Category)=>{
  const render_get_product_detail=(product_id)=>{
     console.log(product_id, ' ini product id')
     // $('.modals-lk').css('display','none')
-    // $('.modals-product-detail').css('display','block')
-    // $('.modals-product-detail').attr('src',`../WEB/Iframe/itemDetail.html?item_category=${product_id}`)
     // location.replace(`../Iframe/itemDetail.html`)
     // location.replace(`../Iframe/itemDetail.html`)
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)

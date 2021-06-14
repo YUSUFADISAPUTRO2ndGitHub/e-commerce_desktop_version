@@ -124,7 +124,7 @@ var data = [
     //   console.log(scrolled)
 			// console.log(isHome)
 			if(isHome){
-				if (scrolled > 300) {
+				if (scrolled > 1000) {
                     element[0].classList.remove("scroll")
 					setIsScroll = true
                     $('.list-group').css('display','none')

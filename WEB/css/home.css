@@ -1239,8 +1239,10 @@ input:focus{
     top:100px;
     /* left:327px; */
     left:22.8%;
-    height:450px;
-    width:400px;
+    /* height:450px; datalama */
+    /* width:400px; datalama*/
+    height: 600px;
+    width:1000px;
     /* background-color: red; */
     display:none;
     transition: 2s ease-out;
@@ -1252,14 +1254,14 @@ input:focus{
 .modals-product-detail {
     position: absolute;
     z-index:20;
-    top:300px;
+    top:200px;
     /* left:327px; */
     left:22.8%;
-    height:450px;
-    width:800px;
+    height:500px;
+    width:900px;
     /* background-color: red; */
     /* display:none; */
-    transition: 2s ease-out;
+    /* transition: 2s ease-out; */
 }
 
 /* MODALS Product Detail BY SUB CATEGORY */
