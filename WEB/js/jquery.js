@@ -73,7 +73,7 @@ $(function(){
                     filterSearch.map((val,index)=>{
                         $('.render-li-search').append(
                             `
-                                <li>${val.Name}</li>
+                                <li onclick="replace_value_to(this)">${val.Name}</li>
                             `
                         )
                     })
@@ -100,3 +100,8 @@ $(function(){
     
    
 })
+
+function replace_value_to(x){
+    // alert($(x).html());
+    $(".input-name").val($(x).html());
+}   
