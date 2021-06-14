@@ -143,12 +143,14 @@ body{
 }
 
 .header-search{
-    width:60%;
+    width:500px;
     /* background-color: pink; */
     height:100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    left:13px;
     /* border-radius:50px; */
 }
 
@@ -180,7 +182,8 @@ body{
 }
 .input-name{
 
-    width:90%;
+    /* width:90%; */
+    width:500px;
     height:50px;
     border-top-left-radius:25px;
     border-top-right-radius:25px;
@@ -604,9 +607,9 @@ input::-webkit-input-placeholder {
 .card-item{
 
     width:250px;
-    height:350px;
+    height:300px;
     min-width: 250px;
-    min-height:350px;
+    min-height:280px;
     /* background: white; */
     border:1px solid  #D4DEE8;
     padding:5px;
@@ -1571,13 +1574,13 @@ overflow-y:hidden;
 /* box render search */
 .box-render-search{
     /* height:300px; */
-    width:623px;
+    width:475px;
     height:auto;
     max-height:400px;
     background-color: #ecf0f1;
     position:absolute;
     top:75px;
-    left:424px;
+    /* left:10px; */
     z-index: 30;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -1585,8 +1588,8 @@ overflow-y:hidden;
     border:2px solid #217283;
     /* display: none; */
     flex-direction: column;
-    padding-left:10px;
-    padding-right:10px;
+    /* padding-left:10px; */
+    /* padding-right:10px; */
     overflow:scroll !important;
 
   
@@ -1610,13 +1613,12 @@ ul {
 
 
   .box-search-menu {
-    position: absolute !important;;
+    position: absolute !important;
     border-bottom-left-radius: 25px !important;
     border-bottom-right-radius: 25px !important;
-    /* border-radius:10px; */
     border:2px solid #217283 !important;
-    height:auto;
-    max-height:400px;
+    height:50px;
+    max-height:500px;
     display: none;
   }
   
@@ -1643,4 +1645,15 @@ ul {
 .slick-slider{
     display: relative !important;
     width:500px !important;
+}
+
+.main-header-search{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width:40%;
+    height:auto;
+    align-items: center;
+    /* background-color: blue; */
+    
 }
