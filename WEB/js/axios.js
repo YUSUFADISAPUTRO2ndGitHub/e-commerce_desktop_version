@@ -174,7 +174,9 @@ const findSubCategory=(sub)=>{
 const getAllItem=(item)=>{
     console.log(item)
     // console.log($('.modals-lk'))
-    $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
+    console.log($('.modals-lk').attr('src'))
+    // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
+    location.replace(`../Iframe/listkategori.html?subcategory=${item}`)
 }
 
 const renderItemBasedOnSubCategory=(subCategory)=>{
