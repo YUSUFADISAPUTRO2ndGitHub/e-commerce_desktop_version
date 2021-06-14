@@ -17,16 +17,16 @@ $(function(){
    })
    
 
-    $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4',
-        format:'dd-mm-yyy',
-        onSelect: function() { 
+    // $('#datepicker').datepicker({
+    //     uiLibrary: 'bootstrap4',
+    //     format:'dd-mm-yyy',
+    //     onSelect: function() { 
             
-            var dateObject = $(this).datepicker('getDate'); 
-            console.log(dateObject)
-        }
+    //         var dateObject = $(this).datepicker('getDate'); 
+    //         console.log(dateObject)
+    //     }
         
-    });
+    // });
 
 
     // var searchItem = []

@@ -3,6 +3,22 @@
 // console.log('axios jalan')
 var allData = []
 
+$( document ).ready(function() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const category = urlParams.get('category');
+    const subcategory = urlParams.get('subcategory');
+    if(category != undefined){
+        if(category.length > 0){
+            renderItemBasedOnCategory(category);
+        }
+    }else if(subcategory != undefined){
+        if(subcategory.length > 0){
+            renderItemBasedOnSubCategory(subcategory);
+        }
+    }
+});
+
 
 
 
@@ -58,23 +74,6 @@ const renderItemPromo=()=>{
 }
 
 
-// SLICK SLIDER 
-
-// $('.box-render-promo').slick({
-//     dots: false,
-//     infinite: true,
-//     speed: 300,
-//     slidesToShow: 3,
-//     centerMode: true,
-//     variableWidth: true,
-//     prevArrow: $('.slick-prev'),
-//     nextArrow: $('.slick-next'),
-//   });
-// $('.box-render-promo').slick({
-//     slidesToShow: 4,
-//     slidesToScroll: 4
-//   });
-// SLICK SLIDER
 
 const renderItemNew=()=>{
     // console.log(allData)
@@ -167,22 +166,30 @@ const findSubCategory=(sub)=>{
     // alert(category)
     console.log(sub)
     $('.modals-lk').css('display','block')
-    $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')
+    $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?category=${sub}`)
     
     // renderItemBasedOnCategory(sub)
+}
+
+const getAllItem=(item)=>{
+    console.log(item)
+    // console.log($('.modals-lk'))
+    $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
 }
 
 const renderItemBasedOnSubCategory=(subCategory)=>{
     console.log('masuk ke line 174 render item based on sub cat')
     axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
     .then((res)=>{
+        $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
         console.log(res.data)
         res.data.map((val,index)=>{
             console.log('masuk ke line 47')
+            console.log(val)
             var hargaAwal = parseInt(val.Sell_Price)
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
-            $('.box-list-all-item').append(
+            $('.box-list-kategori').append(
               `
                 <div class="card-all-item">
                     <img src="${val.Picture_1}" alt="" class="img-all-card">   
@@ -202,9 +209,8 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                 `
             )
         }) 
-        $('.modals-item').addClass('melihat') // ini bisa hampir
-        $('.modals-item').attr('src','../WEB/Iframe/kategoriItem.html')  
-        $('.modals-item').css('display','block')
+        $('.modals-lk').addClass('melihat') // ini bisa hampir
+        $('.modals-lk').css('display','block')
         console.log('finish render item based on sub cat')
         
     }).catch((err)=>{
@@ -213,33 +219,33 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
 }
 
 const renderItemBasedOnCategory=(Category)=>{
-    var myFrame = $(".modals-item").contents().find('.box-list-kategori');
+    // var myFrame = $(".modals-item").contents().find('.box-list-kategori');
     
     
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
     .then((res)=>{
         console.log(res.data)
-        //  res.data.map((val,index)=>{
-        //     console.log(val)
-        //     console.log('render jalan 189s')
-        //     $('.box-list-kategori').append(
-        //         `
-        //         <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
-        //         <div class="box-img-lk">
-        //         <img src="${val.Picture_1}" alt="">
-        //         </div>
-        //         <p>${val.Subcategory}</p>
-        //         </div>
-        //         `
-        //         )
-        //     })
-        var test = 'testing yok'
-            myFrame.html(test);
+         res.data.map((val,index)=>{
+            console.log(val)
+            console.log('render jalan 189s')
+            $('.box-list-kategori').append(
+                `
+                <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
+                <div class="box-img-lk">
+                <img src="${val.Picture_1}" alt="">
+                </div>
+                <p>${val.Subcategory}</p>
+                </div>
+                `
+                )
+            })
+        // var test = 'testing yok'
+        //     myFrame.html(test);
             $('.modals-lk').addClass('melihat') // ini bisa hampir
-            $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html') 
+            // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
             $('.modals-lk').css('display','block')  
         }).catch((err)=>{
             console.log(err)
         })
 }
-// console.log(allData, 'line 44')
+
