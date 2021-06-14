@@ -1209,7 +1209,7 @@ input:focus{
     height:450px;
     width:400px;
     /* background-color: red; */
-    display:none;
+    /* display:none; */
     transition: 2s ease-out;
 }
 
@@ -1223,7 +1223,8 @@ input:focus{
     position: absolute;
     z-index:20;
     top:100px;
-    left:325px;
+    /* left:325px; */
+    left:730px;
     height:450px;
     width:400px;
     /* background-color: red; */

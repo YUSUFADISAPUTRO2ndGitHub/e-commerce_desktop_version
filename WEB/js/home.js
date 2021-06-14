@@ -97,10 +97,10 @@ var data = [
  var element = document.getElementsByClassName("main-structure")
     document.addEventListener("scroll", e => {
       let scrolled = document.scrollingElement.scrollTop
-      console.log(scrolled)
+    //   console.log(scrolled)
 			// console.log(isHome)
 			if(isHome){
-				if (scrolled > 60) {
+				if (scrolled > 300) {
                     element[0].classList.remove("scroll")
 					setIsScroll = true
                     $('.list-group').css('display','none')

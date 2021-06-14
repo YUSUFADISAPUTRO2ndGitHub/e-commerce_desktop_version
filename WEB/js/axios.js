@@ -1,6 +1,6 @@
 
 
-console.log('axios jalan')
+// console.log('axios jalan')
 var allData = []
 
 
@@ -163,33 +163,90 @@ $('.testing-2').on('click',function(){
 })
 
 const findSubCategory=(sub)=>{
+    // $('.modals-lk').css('display','block')
     // alert(category)
     console.log(sub)
+    $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')
+    
     renderItemBasedOnCategory(sub)
 }
-const renderItemBasedOnCategory=(Category)=>{
-    $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html') 
-    $('.modals-lk').css('display','block')  
-    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
+
+const renderItemBasedOnSubCategory=(subCategory)=>{
+    console.log('masuk ke line 174 render item based on sub cat')
+    axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
     .then((res)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
-            console.log('render jalan 189s')
-            $('.box-list-kategori').append(
-                `
-                <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
-                    <div class="box-img-lk">
-                    <img src="${val.Picture_1}" alt="">
+            console.log('masuk ke line 47')
+            var hargaAwal = parseInt(val.Sell_Price)
+            var discount = parseInt(val.Sell_Price * 0.1)
+            var hargaTotal = hargaAwal + discount
+            $('.box-list-all-item').append(
+              `
+                <div class="card-all-item">
+                    <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                    <div class="card-all-item-list">
+                        <p>${val.Name}</p>
+                        <div class="split-all-item">
+                            <div class="item-all-price">
+                                <p>RP. ${hargaTotal}</p>
+                                <p>Rp. ${hargaAwal}</p>
+                            </div>
+                            <div class="buy-icon">
+                                <img src="../img/cart.png" alt="" class="icon-buy">
+                            </div>
+                        </div>
                     </div>
-                    <p>${val.Subcategory}</p>
                 </div>
                 `
-                )
-            })
+            )
+        }) 
+        $('.modals-item').addClass('melihat') // ini bisa hampir
+        $('.modals-item').attr('src','../WEB/Iframe/kategoriItem.html')  
+        $('.modals-item').css('display','block')
+        console.log('finish render item based on sub cat')
+        
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+const getAllItem=(subcategory)=>{
+    console.log(subcategory,' ini line 77')
+    
+    // $('.modals-item').css('display','block')
+    renderItemBasedOnSubCategory(subcategory)
+}
+
+
+const renderItemBasedOnCategory=(Category)=>{
+    var myFrame = $(".modals-item").contents().find('.box-list-kategori');
+    
+    
+    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
+    .then((res)=>{
+        console.log(res.data)
+        //  res.data.map((val,index)=>{
+        //     console.log(val)
+        //     console.log('render jalan 189s')
+        //     $('.box-list-kategori').append(
+        //         `
+        //         <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
+        //         <div class="box-img-lk">
+        //         <img src="${val.Picture_1}" alt="">
+        //         </div>
+        //         <p>${val.Subcategory}</p>
+        //         </div>
+        //         `
+        //         )
+        //     })
+        var test = 'testing yok'
+            myFrame.html(test);
+            $('.modals-lk').addClass('melihat') // ini bisa hampir
+            $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html') 
+            $('.modals-lk').css('display','block')  
         }).catch((err)=>{
             console.log(err)
         })
-        $('.modals-lk').addClass('melihat') // ini bisa hampir
-       
 }
-console.log(allData, 'line 44')
+// console.log(allData, 'line 44')
