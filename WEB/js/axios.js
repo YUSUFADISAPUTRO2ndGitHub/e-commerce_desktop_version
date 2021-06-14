@@ -182,7 +182,7 @@ const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
     // alert(category)
     console.log(sub)
-    $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')
+    $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?category=${sub}`)
     
     renderItemBasedOnCategory(sub)
 }
@@ -191,6 +191,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
     console.log('masuk ke line 174 render item based on sub cat')
     axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
     .then((res)=>{
+        $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
         console.log(res.data)
         res.data.map((val,index)=>{
             console.log('masuk ke line 47')
@@ -218,9 +219,8 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                 `
             )
         }) 
-        $('.modals-item').addClass('melihat') // ini bisa hampir
-        $('.modals-item').attr('src','../WEB/Iframe/kategoriItem.html')  
-        $('.modals-item').css('display','block')
+        $('.modals-lk').addClass('melihat') // ini bisa hampir
+        $('.modals-lk').css('display','block')
         console.log('finish render item based on sub cat')
         
     }).catch((err)=>{
