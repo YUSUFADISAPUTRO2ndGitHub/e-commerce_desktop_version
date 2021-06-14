@@ -179,23 +179,15 @@ $(document).on('click',".box-kumpulkan",function(){
 
    
 
-    // $('.box-kumpulkan').on('click',function(){
-    //     console.log('function jalan')
-    //     // console.log(customer_data)
-        
-    // })
-// })
 
 
 // LOGIN
 
 
+$(document).on('click',".box-option-login",function(){
 
-
-function sign_in_request(){
-    var email = $('#email_login')
-    var password = $('#password')
-
+    var email = $('#email_login').val()
+    var password = $('#password').val()
     axios.post(`http://customers.sold.co.id/customer-login-request`,{
         params:{
             Email:email,
@@ -206,8 +198,12 @@ function sign_in_request(){
     }).catch((err)=>{
         console.log(err)
     })
-    
-}
+  
+    alert('sign in jalan')
+
+})
+
+
 
 
 
