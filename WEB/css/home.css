@@ -1608,6 +1608,7 @@ overflow-y:hidden;
     /* background-color: red; */
 }
 .render-li-search{
+    margin: 10px;
     position: relative;
     left:-30px;
 }
@@ -1619,6 +1620,7 @@ overflow-y:hidden;
 background-color: #217283;
 border-radius:5px;
 cursor: pointer;
+color: white;
 }
 ul {
     
