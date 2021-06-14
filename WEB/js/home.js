@@ -208,8 +208,5 @@ function horizontalNavigationAll(position, event) {
    event.preventDefault();
 }
 
- // SCROLLING ITEM
-
-    //  SCROLL KATEGORI
 
     
