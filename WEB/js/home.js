@@ -4,12 +4,14 @@
 function sign_up_request(){
     $("#loginModal").modal("hide");
     
+    
 }
 
 function forgot_modal_request(){
     $('#loginModal').modal('hide')
 }
 function cart_requested(x){
+    $('.close').css('display','none')
     console.log(x)
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
@@ -26,6 +28,7 @@ function cart_requested(x){
 }
 
 function pengiriman_requested(x){
+    $('.close').css('display','none')
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
     }else{
@@ -37,10 +40,12 @@ function pengiriman_requested(x){
     $(".iframe").css('display','none')
     $('.option-1').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
+    
 }
 
 
 function cek_harga_requested(x){
+    $('.close').css('display','none')
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
     }else{

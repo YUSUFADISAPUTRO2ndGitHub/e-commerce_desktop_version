@@ -16,6 +16,21 @@ $(function(){
        console.log('jalan box information')
    })
    
+   $('.option-4').on('click',function(){
+        $('.closeByLogin').css('display','none')
+        $('.option-1').removeClass("background_grey")
+        $('.option-2').removeClass("background_grey")
+        $('.option-3').removeClass("background_grey")
+        // $('.option-4').removeClass("background_grey")
+   })
+
+   $('.category-name').on('click',function(){
+    $('.closeByLogin').css('display','none')
+    $('.option-1').removeClass("background_grey")
+    $('.option-2').removeClass("background_grey")
+    $('.option-3').removeClass("background_grey")
+
+   })
 
     // $('#datepicker').datepicker({
     //     uiLibrary: 'bootstrap4',
@@ -64,6 +79,11 @@ $(function(){
                     })
                     
                     console.log(filterSearch)
+                    $('.closeByLogin').css('display','none')
+                    $('.option-1').removeClass("background_grey")
+                    $('.option-2').removeClass("background_grey")
+                    $('.option-3').removeClass("background_grey")
+                    $('.box-information').hide(1000)
                 
             }else {
                 // searchItem = null

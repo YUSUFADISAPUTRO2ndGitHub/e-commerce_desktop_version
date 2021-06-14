@@ -239,9 +239,29 @@ input::-webkit-input-placeholder {
     color:#535353;
     font-size: 12px;
 }
+.option-4:hover{
+    cursor: pointer;
+}
+.option-4{
+    width:20%;
+    height:100px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top:10px;
+}
+.option-4 p{
+    color:#535353;
+    font-size: 12px;
+}
 .option-1:hover{
     cursor: pointer;
 }
+
 
 .option-2{
     width:20%;
@@ -1155,7 +1175,8 @@ input:focus{
     z-index:20;
     top:100px;
     /* left:105px; */
-    right:172px;
+    /* right:172px; */
+    right:14%;
     height:380px;
     width:400px;
     background-color: white;
@@ -1170,9 +1191,10 @@ input:focus{
 .modals-check-harga {
     position: absolute;
     z-index:20;
-    top:110px;
+    top:100px;
     /* left:105px; */
-    right:242px;
+    /* right:242px; */
+    right:20%;
     height:455px;
     width:400px;
     /* background-color: red; */
@@ -1513,13 +1535,18 @@ overflow-y:hidden;
 }
 
 .card-all-item-list{
+    /* padding-bottom:5px; */
     padding-top:5px;
-    padding-left:20px;
+    padding-left:10px;
     display: flex;
     width:100%;
     height:130px;
     background-color: white;
     flex-direction: column;
+}
+.card-all-item-list p {
+    font-size: 13px;
+    
 }
 
 .split-all-item{
@@ -1530,9 +1557,15 @@ overflow-y:hidden;
     /* background-color: red; */
 }
 .item-all-price{
-    width:50%;
+    width:60%;
     /* background-color: blue; */
     line-height:0.7;
+}
+.buy-icon{
+    width:40%;
+    display: flex;
+    /* justify-self: center; */
+    align-items: flex-start;
 }
 
 .item-all-price p:nth-child(1){

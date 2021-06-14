@@ -146,7 +146,7 @@ const renderCategory=()=>{
             var sub = val.Category.toUpperCase()
             $('.list-group').append(
                 ` 
-                <li class="list-group-item category-list get-item testing-2" val="${sub}" onclick="findSubCategory('${sub}')">${sub}</li>
+                <li class="list-group-item category-list get-item " val="${sub}" onclick="findSubCategory('${sub}')">${sub}</li>
                 `
                 )
         })
@@ -165,6 +165,11 @@ const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
     // alert(category)
     console.log(sub)
+    $('.closeByLogin').css('display','none')
+    $('.option-1').removeClass("background_grey")
+    $('.option-2').removeClass("background_grey")
+    $('.option-3').removeClass("background_grey")
+    
     $('.modals-lk').css('display','block')
     $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?category=${sub}`)
     
@@ -233,10 +238,10 @@ const renderItemBasedOnCategory=(Category)=>{
             $('.box-list-kategori').append(
                 `
                 <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
-                <div class="box-img-lk">
-                <img src="${val.Picture_1}" alt="">
-                </div>
-                <p>${val.Subcategory}</p>
+                    <div class="box-img-lk">
+                        <img src="${val.Picture_1}" alt="">
+                    </div>
+                    <p>${val.Subcategory}</p>
                 </div>
                 `
                 )

@@ -40,7 +40,7 @@
 
 .box-img-lk{
     width:70%;
-    border: 1px solid #535353;
+    /* border: 1px solid #535353; */
     height:130px;
     border-radius:10px;
     position: relative;
@@ -58,14 +58,14 @@ font-weight: 600;
 }
 .card-lk:hover {
     cursor: pointer;
-    border: 2px solid #217283;
+    /* border: 2px solid #217283; */
     /* transition-delay: 0.1s; */
     transition-timing-function: ease-in;
     transition-duration: 0.2s;
     border-radius:5px;
 }
 .card-lk:hover .box-img-lk{
-    border:2px solid #217283;
+    /* border:2px solid #217283; */
     transition-duration: 0.2s;
 }
 
