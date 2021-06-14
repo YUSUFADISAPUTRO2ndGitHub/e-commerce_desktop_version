@@ -166,9 +166,10 @@ const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
     // alert(category)
     console.log(sub)
+    $('.modals-lk').css('display','block')
     $('.modals-lk').attr('src','../WEB/Iframe/listkategori.html')
     
-    renderItemBasedOnCategory(sub)
+    // renderItemBasedOnCategory(sub)
 }
 
 const renderItemBasedOnSubCategory=(subCategory)=>{
@@ -210,14 +211,6 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
         console.log(err)
     })
 }
-
-const getAllItem=(subcategory)=>{
-    console.log(subcategory,' ini line 77')
-    
-    // $('.modals-item').css('display','block')
-    renderItemBasedOnSubCategory(subcategory)
-}
-
 
 const renderItemBasedOnCategory=(Category)=>{
     var myFrame = $(".modals-item").contents().find('.box-list-kategori');
