@@ -59,6 +59,9 @@
             background-color: #dfe4ea;
             border-radius:10px;
         }
+        .header-search{
+            width: 700px;
+        }
     </style>
 </head>
 <body>
@@ -561,9 +564,19 @@
             <div class="logo-header">
                 <img src="../WEB/img/logo.png" alt="" class="icon-logo">
             </div>
-            <div class="header-search">
-                <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name"  >
-                <i class="fas fa-search icon-search" ></i>
+            <div>
+                <div class="header-search">
+                    <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name"  >
+                    <i class="fas fa-search icon-search" ></i>
+                </div>
+                <div class="box-render-search card box-search-menu" style="display:none">
+                    <div class="card-body ">
+                        <ul class="render-li-search">
+            
+                        </ul>
+        
+                    </div>
+                </div>
             </div>
             <div class="header-option">
                 <div class="option-1" onclick="cek_harga_requested(this)">
@@ -593,15 +606,6 @@
             
             <!-- <iframe class="modals-cart" src="https://www.w3schools.com/"></iframe> Header Cart  -->
 
-        </div>
-
-        <div class="box-render-search card box-search-menu" style="display:none">
-            <div class="card-body ">
-                <ul class="render-li-search">
-    
-                </ul>
-
-            </div>
         </div>
 
         <div class="card category-menu">
