@@ -405,15 +405,15 @@ function checkingoutAll(){
                 console.log(localStorage.getItem("itemsToCheckout"));
             }
             swal.fire("Final Step","","success");
-            window.location.href = "./checkout.html";
+            window.location.href = "./Iframe/checkout.html";
         }else{
             swal.fire("Something is missing","You do not have anything in Cart","warning");
         }
     }else{
         swal.fire("Something is missing","You have not logged-in","warning");
-        if(token == ""){
-            window.location.href = "./sign-in.html";
-        }
+        // if(token == ""){
+        //     window.location.href = "./Iframe/sign-in.html";
+        // }
     }
 }
 
