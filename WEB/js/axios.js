@@ -211,7 +211,8 @@ const getAllItem=(item)=>{
 
 const get_product_detail=(product_id)=>{
     $('.box-list-kategori').empty()
-    $('.box-list-kategori').addClass('product-detail-resize')
+    $('.box-list-kategori').css('display','none')
+    $('.box-list-kategori').css('display','none')
     $('.modals-product-detail').css('display','block')
     $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}`)
     console.log( $('.modals-product-detail').attr('src'))
@@ -309,46 +310,96 @@ const renderItemBasedOnCategory=(Category)=>{
         var discount = parseInt(item.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
         console.log(res.data,' 301 axios')
-        $('.box-item-detail').append(
-            `
-            <div class="item-img">
-                <div class="box-back">
-                    <i class="fas fa-chevron-left icon-prev" ></i>
-                </div>
-                <img src="${item.Picture_1}" alt="" class="img-icon">
-                <div class="box-next">
-                    <i class="fas fa-chevron-right icon-prev" ></i>
-                </div>
-            </div>
-            <div class="item-detail">
-                <div class="detail-1">
-                    <div class="item-1">
-                        <p>${item.Name}</p>
+        $('.box-item-detail').empty();
+        if(item.GroupBuy_SellPrice == "NULL"){
+            $('.box-item-detail').append(
+                `
+                <div class="item-img">
+                    <div class="box-back">
+                        <i class="fas fa-chevron-left icon-prev" ></i>
                     </div>
-                    <div class="item-2">
-                        <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
-                        <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
-                    </div>
-                    <div class="item-1">
-                        <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
-                    </div>
-                    <div class="box-add">
-                        <div class="add-1">
-                            <p>Add to Cart</p>
-                        </div>
-                        <div class="add-2">
-                            <img src="../img/cart.png" alt="" class="img-cart">
-                        </div>
-                    </div>
-                    <div class="box-discount">
-                        <div class="add-discount">
-                            <p>Beli dengan diskon GROUP BUY</p>
-                        </div>
+                    <img src="${item.Picture_1}" alt="" class="img-icon">
+                    <div class="box-next">
+                        <i class="fas fa-chevron-right icon-prev" ></i>
                     </div>
                 </div>
-            </div>
-            `
-        )
+                <div class="item-detail">
+                    <div class="detail-1">
+                        <div class="item-1">
+                            <p>${item.Name}</p>
+                        </div>
+                        <div class="item-2">
+                            <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
+                            <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
+                        </div>
+                        <ul class="box-add">
+                            <li>
+                                <p>Add to Cart</p>
+                            </li>
+                            <li>
+                                <img src="../img/cart.png" alt="" class="img-cart">
+                            </li>
+                        </ul>
+                        <br>
+                        <br>
+                        <div class="deskripsi">
+                            <p>Deskripsi :</p>
+                            <p>${item.Description}</p>
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        }else{
+            $('.box-item-detail').append(
+                `
+                <div class="item-img">
+                    <div class="box-back">
+                        <i class="fas fa-chevron-left icon-prev" ></i>
+                    </div>
+                    <img src="${item.Picture_1}" alt="" class="img-icon">
+                    <div class="box-next">
+                        <i class="fas fa-chevron-right icon-prev" ></i>
+                    </div>
+                </div>
+                <div class="item-detail">
+                    <div class="detail-1">
+                        <div class="item-1">
+                            <p>${item.Name}</p>
+                        </div>
+                        <div class="item-2">
+                            <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
+                            <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
+                        </div>
+                        <div class="item-1">
+                            <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
+                        </div>
+                        <ul class="box-add">
+                            <li>
+                                <p>Add to Cart</p>
+                            </li>
+                            <li>
+                                <img src="../img/cart.png" alt="" class="img-cart">
+                            </li>
+                        </ul>
+                        <br>
+                        <br>
+                        <div class="box-discount">
+                            <div class="add-discount">
+                                <p>Beli dengan diskon GROUP BUY</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="deskripsi">
+                            <p>Deskripsi :</p>
+                            <p>${item.Description}</p>
+                        </div>
+                    </div>
+                </div>
+                `
+            )
+        }
+        
     }).catch((err)=>{
         console.log(err)
     })
