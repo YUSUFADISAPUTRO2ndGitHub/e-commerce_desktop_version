@@ -64,8 +64,13 @@ $(document).on('click',"#simpan_reg",function(){
         }).then((res)=>{
             console.log(res.data)
             // alert('berhasil daftars')
-            localStorage.setItem('token',res.data)
-            $('#registerModal').modal('hide')
+            if(res.data === true){
+                $('#registerModal').modal('hide')
+                swal.fire("Register Berhasil", "", "success");
+            }else {
+                $('#registerModal').modal('hide')
+                swal.fire("Register Gagal", "", "info");
+            }
         }).catch((err)=>{
             console.log(err)
         })
