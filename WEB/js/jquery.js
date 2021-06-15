@@ -157,50 +157,66 @@ $('.icon-buy').on('click',function(){
     console.log(product_id)
 })
 
-var data_cart = [
-    {
-        "productNo":"6900005030114",
-        "quantity":1
-    }
-]
+
+function groupbuy(product_id){
+    console.log(product_id)
+    // $('.box-list-kategori').css('display','none')
+    // $('.modals-group-buy').css('display','block')
+    // $('.modals-group-buy').attr('src',`../Iframe/groupbuy.html?product_id=${product_id}`)
+    location.replace(`../Iframe/groupbuy.html?product_id=${product_id}`)
+}
+
+
+
 function addToCart(product_id){
     console.log(product_id)
     
-        var dataParse = JSON.parse(localStorage.getItem("cart"))
-        console.log(dataParse,' ini data parse')
+    var dataParse = JSON.parse(localStorage.getItem("cart"))
+    console.log(dataParse,' ini data parse')
 
-    var dataStringify = JSON.stringify(data_cart)
-    localStorage.setItem('cart',dataStringify)
+    if(dataParse){
+        console.log(dataParse)
 
-    // console.log(dataFilter[0].quantity++)
-    
-    // var dataNew = (dataFilter[0].quantity +1)
-    // console.log(dataNew)
-
-    var filterData = dataStringify.filter((filtering)=>{
-
-    })
-    
-    
-
-
-    for(var i =0; i<data_cart.length; i++){
-        if(data_cart[i].productNo === product_id){
-            console.log(data_cart[i].quantity)
-            data_cart[i].quantity = data_cart[i].quantity + 1
-            break;
-        }else {
-            var dataPush = {
-                "productNo":product_id,
-                "quantity":1
+        var filterdatakosong = dataParse.filter((filtering)=>{
+            if(filtering.productNo === product_id){
+                return filtering
             }
-            data_cart.push(dataPush)
-            console.log('masuk ke else')
-            console.log(product_id,' 186')
-            break;
+        })
+        if(filterdatakosong.length){
+            console.log('masuk ke if 201')
+            
+            var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
+            dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
+            $('.cart-counter').text(dataParse.length)
+            swal.fire("Berhasil Menambahkan Quantity", "", "success");
+        }else {
+            console.log('masuk ke else  205')
+            var data = {
+            "productNo":product_id,
+            "quantity":1
+            }
+            dataParse.push(data)
+            $('.cart-counter').text(dataParse.length)
+            swal.fire("Berhasil Menambahkan ke Cart", "", "success");
         }
+
+        var pushToStorage = JSON.stringify(dataParse)
+        localStorage.setItem('cart',pushToStorage)
+
+    }else {
+        console.log('local storage kosong')
+        var cart = [
+            {
+            "productNo":product_id,
+            "quantity":1
+            }
+        ]
+        var pushToStorage2 = JSON.stringify(cart)
+        localStorage.setItem('cart',pushToStorage2)     
     }
+  
+  
+
     
-    console.log(data_cart,' new data')
 
 }

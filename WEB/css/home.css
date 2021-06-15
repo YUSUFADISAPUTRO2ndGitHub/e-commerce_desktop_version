@@ -1429,10 +1429,21 @@ input:focus{
     height:500px;
     width:900px;
     display: none;
-    background-color: red;
+    /* background-color: red; */
 }
 
 /* MODALS Product Detail BY SUB CATEGORY */
+
+/* MODALS group buy BY SUB CATEGORY */
+.modals-group-buy {
+    z-index:20;
+    height:500px;
+    width:900px;
+    display: none;
+    /* background-color: red; */
+}
+
+/* MODALS group buy BY SUB CATEGORY */
 
 
 

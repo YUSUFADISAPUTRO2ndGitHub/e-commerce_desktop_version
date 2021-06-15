@@ -298,3 +298,39 @@ var data = {
 console.log(data)
 })
 
+
+
+$(document).on('click',"#btn-save-forgot",function(){
+alert('button forgot password jalan')
+var data = {
+    customer_data : {
+        requestedNewPassword :$('#password_forgot').val(),
+       Email : $('#email_forgot').val(),
+       PrimaryContactNumber : $("#no_telp_forgot").val(),
+       Ktp:$('#ktp_forgot').val(),
+      
+    //    account_number: $("#no_rekening_supp").val(),
+       
+   }
+}
+
+var password = $('#password_forgot').val()
+
+    
+   Email =$('#email_forgot').val(),
+   PrimaryContactNumber = $("#no_telp_forgot").val(),
+   Ktp=$('#ktp_forgot').val(),
+axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+.then((res)=>{
+    var newPassword = res.data
+    axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${newPassword}`)
+    .then((res)=>{
+        console.log(res.data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+}).catch((err)=>{
+    console.log(err)
+})
+console.log(data)
+})

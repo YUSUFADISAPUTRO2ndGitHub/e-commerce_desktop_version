@@ -20,6 +20,7 @@
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="./js/sweetalert.js"></script>
     <script type="text/javascript" src="./css/slick/slick.min.js"></script>
     <script type="text/javascript" src="./Iframe/jsIframe/card.js"></script>
     <script type="text/javascript" src="./css/slick/slick.js"></script>
@@ -27,7 +28,6 @@
     <script type="text/javascript" src="./js/auth.js"></script>
     <script type="text/javascript" src="./js/home.js"></script>
     <script type="text/javascript" src="./js/jquery.js"></script>
-    <script type="text/javascript" src="./js/sweetalert.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script> 
     
     <title>SOLD</title>
@@ -158,36 +158,18 @@
                                 <div class="box-name-forgot">
                                     <p>Apa Alamat Email anda yang terdaftar ?</p>
                                 </div>
-                                <input type="text" class="forgot-form" placeholder="Alamat Email" type="email" id="email"
+                                <input type="text" class="forgot-form" placeholder="Alamat Email" type="email" id="email_forgot"
                                 pattern=".+@globex.com" size="30" required>
-                            </div>
-                           
+                            </div>                           
                         </div>    
+       
                         <div class="reg-form-1">
                             
                             <div class="forgot-name">
                                 <div class="box-name-forgot">
-                                    <p>Tanggal Lahir </p>
+                                    <p>KTP</p>
                                 </div>
-                                <input type="number" class="forgot-form" placeholder="Tanggal Lahir">
-                            </div>
-                        </div>  
-                        <div class="reg-form-1">
-                            
-                            <div class="forgot-name">
-                                <div class="box-name-forgot">
-                                    <p>Bulan  Lahir</p>
-                                </div>
-                                <input type="number" class="forgot-form" placeholder="Bulan Lahir">
-                            </div>
-                        </div>  
-                        <div class="reg-form-1">
-                            
-                            <div class="forgot-name">
-                                <div class="box-name-forgot">
-                                    <p>Tahun Lahir</p>
-                                </div>
-                                <input type="number" class="forgot-form" placeholder="Tahun Lahir"> 
+                                <input type="number" class="forgot-form" placeholder="ktp" id="ktp_forgot"> 
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -196,7 +178,7 @@
                                 <div class="box-name-forgot">
                                     <p>No telp Primary Anda Sewaktu Mendaftar</p>
                                 </div>
-                                <input type="number" class="forgot-form" placeholder="No Telp">
+                                <input type="number" class="forgot-form" placeholder="No Telp" id="no_telp_forgot">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -205,12 +187,12 @@
                                 <div class="box-name-forgot">
                                     <p>Masukan Password Baru Yang anda inginkan</p>
                                 </div>
-                                <input type="text" class="forgot-form" placeholder="Password Baru">
+                                <input type="text" class="forgot-form" placeholder="Password Baru" id="password_forgot">
                             </div>
                         </div>  
                                
                         <div class="box-kumpulkan-forgot">
-                            <div class="btn-kumpulkan-forgot">
+                            <div class="btn-kumpulkan-forgot" id="btn-save-forgot">
                                 <p>Verifikasikan Saya</p>
                             </div>
                         </div>            
@@ -307,13 +289,13 @@
                             <div class="box-name">
                                 <p>Alamat Lengkap Gudang</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Alamat Lengkap Gudang" minlength="4" maxlength="8" id="alamat_gudang_supp">
+                            <input type="text" class="name-form" placeholder="Alamat Lengkap Gudang" minlength="4" maxlength="8" id="alamat_gudang_supp">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>Nama Perusahaan</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Nama Perusahaan" id="nama_perusahaan_supp">
+                            <input type="text" class="name-form" placeholder="Nama Perusahaan" id="nama_perusahaan_supp">
                         </div>
                     </div>   
                  
@@ -800,6 +782,7 @@
             <iframe class="modals-check-harga closeByLogin" src=""></iframe> <!-- Modals Check Harga  -->
             <iframe class="modals-delivery-list close" src=""></iframe> <!-- Modals Delivery  -->
             <iframe class="modals-product-detail" src=""></iframe> <!-- Modals product detail  -->
+            <iframe class="modals-group-buy" src=""></iframe> <!-- Modals product detail  -->
             
             <!-- <iframe class="modals-cart" src=""></iframe> Header Cart  -->
 

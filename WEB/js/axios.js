@@ -1,6 +1,15 @@
 
 
 // console.log('axios jalan')
+
+$(document).ready(function(){
+    var dataParse = JSON.parse(localStorage.getItem("cart"))
+    console.log(dataParse)
+    $('.cart-counter').text(dataParse.length)
+    var test =$('.cart-counter').val()
+    console.log(test)
+
+})
 var allData = []
 
 
@@ -10,6 +19,7 @@ $( document ).ready(function() {
     const category = urlParams.get('category');
     const subcategory = urlParams.get('subcategory');
     const item_category = urlParams.get('product_id');
+    const group_buy = urlParams.get('product_id')
     // console.log(item_category, 'line category')
     console.log(queryString,' queryString')
     console.log(urlParams,' urlParams')
@@ -30,7 +40,11 @@ $( document ).ready(function() {
         console.log('masuk ke line 21 axios js')
         // get_product_detail(item_category)
         render_get_product_detail(item_category)
-    }else {
+    }else if (group_buy != undefined){
+        console.log('masuk ke line 44 axios js')
+        render_group_buy(group_buy)
+    }
+    else {
         console.log('error masuk ke else 33')
     }
 });
@@ -110,7 +124,7 @@ const renderItemNew=()=>{
                             <p>RP. ${hargaTotal}</p>
                             <p>Rp. ${hargaAwal}</p>
                         </div>
-                        <div class="buy-icon">
+                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                             <img src="./img/cart.png" alt="" class="icon-buy">
                         </div>
                     </div>
@@ -139,7 +153,7 @@ const renderItemAll=()=>{
                             <p>RP. ${hargaTotal}</p>
                             <p>Rp. ${hargaAwal}</p>
                         </div>
-                        <div class="buy-icon">
+                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                             <img src="./img/cart.png" alt="" class="icon-buy">
                         </div>
                     </div>
@@ -313,6 +327,78 @@ const renderItemBasedOnCategory=(Category)=>{
 }
 
 
+const render_group_buy=(product_id)=>{
+
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        console.log(res.data)
+        $('.box-groupbuy').append(`
+        <div class="group-left">
+            <div class="groupbuy-form">
+                <div class="login-name">
+                    <div class="box-name" >
+                        <p>Kuantitas Permintaan</p>
+                    </div>
+                    <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
+                </div>
+                <div class="login-pass">
+                    <div class="box-name">
+                        <p>Metode Pembayaran</p>
+                    </div>
+                    <input type="text" class="name-form" placeholder="Metode Pembayaran" id="pembayaran_groupbuy">     
+                </div>
+                <div class="login-name">
+                    <div class="box-name" >
+                        <p>Delivery Fee</p>
+                    </div>
+                    <input type="text" class="name-form" placeholder="Delivery Fee" id="delivery_free_groupbuy>
+                </div>
+                <div class="login-pass">
+                    <div class="box-name">
+                        <p>Pilih Alamat Tersimpan</p>
+                    </div>
+                    <input type="text" class="name-form" placeholder="Pilih Alamat Tersimpan" id="alamat_groupbuy">     
+                </div>
+                <div class="login-name">
+                    <div class="box-name" >
+                        <p>Delivery Fee</p>
+                    </div>
+                    <input type="text" class="name-form" placeholder="Delivery Fee" id="">
+                </div>
+                <div class="login-pass">
+                    <div class="box-name">
+                        <p>Pengiriman ke Alamat</p>
+                    </div>
+                    <input type="text" class="name-form" placeholder="Pengiriman ke Alamat">     
+                </div>     
+            </div>  
+        </div>
+            <div class="group-right">
+                <div class="gr-1">
+                    <div class="btn-pesan">
+                            <p>Pesan Sekarang!</p>
+                            <img src="../img/home.png" alt="" class="icon-home">
+                    </div>
+                    <div class="box-total-price">
+                            <p>Total Price</p>
+                            <div class="total-price">
+                                <p>100.000</p>
+                            </div>
+                        </div>
+                </div>
+            <div class="gr-2">
+                <div class="box-img-gr">
+                    <img src="${val.Picture_1} alt="" class="img-gr">
+                </div>
+            </div>
+        </div>
+        `)
+    }).catch((err)=>{
+        console.log(err)
+    })
+    console.log(product_id)
+}
+
 //  SHOW PRODUCT CODE
 
  const render_get_product_detail=(product_id)=>{
@@ -367,7 +453,7 @@ const renderItemBasedOnCategory=(Category)=>{
                             <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
-                            <ul class="box-add">
+                            <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
                                 <li>
                                     <p>Add to Cart</p>
                                 </li>
@@ -426,7 +512,7 @@ const renderItemBasedOnCategory=(Category)=>{
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
                         </div>
                         <div class="box-detail-option">
-                            <ul class="box-add">
+                            <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
                                 <li>
                                     <p>Add to Cart</p>
                                 </li>
@@ -435,7 +521,7 @@ const renderItemBasedOnCategory=(Category)=>{
                                 </li>
                             </ul>
                     
-                            <div class="box-discount">
+                            <div class="box-discount" onclick="groupbuy('${item.Product_Code}')">
                                 <div class="add-discount">
                                     <p>Beli dengan diskon GROUP BUY</p>
                                 </div>
