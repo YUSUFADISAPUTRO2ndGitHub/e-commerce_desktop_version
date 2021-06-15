@@ -21,7 +21,44 @@ $(function(){
        console.log('jalan box information')
    })
    
+
+//    OPEN MODALS PROFILE
    $('.option-4').on('click',function(){
+        
+    var token = localStorage.getItem('token')
+    console.log(token)
+
+        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            var data_customer = res.data
+            if(data_customer){
+                console.log(data_customer)
+                console.log(data_customer.Customer_Code)
+                var tahun = data_customer.Birthday.slice(0,4)
+                var bulan = data_customer.Birthday.slice(5,7)
+                var hari = data_customer.Birthday.slice(8,10)
+                $('#email_user').val(`${data_customer.Email}`)
+                $('#tahun_lahir_user').val(tahun)
+                $('#bulan_lahir_user').val(bulan)
+                $('#tanggal_lahir_user').val(hari)
+                $('#nama_depan_user').val(`${data_customer.First_Name}`)
+                $('#nama_belakang_user').val(`${data_customer.Last_Name}`)
+                $('#no_telp1_user').val(`${data_customer.Contact_Number_1}`)
+                $('#no_telp2_user').val(`${data_customer.Contact_Number_2}`)
+                $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
+                $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
+                $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
+                $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
+                $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
+                $('#rekening_user').val(`${data_customer.extra_column_1}`)
+                $('#referral-profile').val(`${data_customer.extra_column_2}`)
+                $('#profileModal').modal('show')
+            }else {
+                $('#loginModal').modal('show')
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
         $('.closeByLogin').css('display','none')
         $('.option-1').removeClass("background_grey")
         $('.option-2').removeClass("background_grey")

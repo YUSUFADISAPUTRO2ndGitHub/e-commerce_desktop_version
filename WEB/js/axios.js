@@ -209,6 +209,10 @@ const getAllItem=(item)=>{
     
 }
 
+function sign_up_request(){
+    $("#loginModal").modal("hide");
+}
+
 const get_product_detail=(product_id)=>{
     $('.box-list-kategori').empty()
     $('.box-list-kategori').addClass('product-detail-resize')

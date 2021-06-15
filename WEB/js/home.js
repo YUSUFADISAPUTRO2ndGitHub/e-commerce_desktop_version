@@ -1,11 +1,10 @@
 
 
 
-function sign_up_request(){
-    $("#loginModal").modal("hide");
-    
-    
-}
+
+// $('.login-btn').on('click',function(){
+//          $("#loginModal").modal("hide");
+// })
 
 function forgot_modal_request(){
     $('#loginModal').modal('hide')

@@ -873,12 +873,13 @@ input::-webkit-input-placeholder {
     justify-content: center;
     /* align-items: center; */
     flex-direction: row;
+    /* background-color: blue; */
 }
 
 .login-form{
-    width:450px;
+    width:700px;
     height:400px;
-    /* background-color: blue; */
+    /* background-color: pink; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -896,6 +897,8 @@ input::-webkit-input-placeholder {
     position: relative;
     left:25px;
 }
+
+
 .login-name p{
     display: flex;
     position: relative;
@@ -912,11 +915,6 @@ input::-webkit-input-placeholder {
     justify-content: center;
     line-height:0.5;
     align-items: center;
-}
-.login-name p{
-    display: flex;
-    position: relative;
-    /* left:-75px; */
 }
 
 
@@ -957,9 +955,15 @@ input::-webkit-input-placeholder {
     position: relative;
     top:10px;
     /* left:25px; */
-    /* background-color: red; */
-
-    
+    /* background-color: red; */  
+}
+.box-name-alamat{
+    width:90%;
+    height:40px;
+    position: relative;
+    top:10px;
+    /* left:25px; */
+    /* background-color: red;   */
 }
 
 
@@ -998,6 +1002,21 @@ input::-webkit-input-placeholder {
 .box-option-login{
     position: relative;
     top:30px;
+    /* background-color: green; */
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-new-login{
+    width:100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-option{
@@ -1061,6 +1080,34 @@ input::-webkit-input-placeholder {
     align-items: center;
 }
 
+.reg-form-3{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height:50px;
+    margin:10px;
+    /* background-color: red; */
+    position: relative;
+    top:80px;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+
+.alamat-supplier{
+    width:91%;
+    height:50px;
+    background-color: #C4C4C4;
+    border-width:0px;
+    /* border-radius:5px; */
+   
+   }
+   
+   .alamat-supplier::placeholder{
+       color:#217283;
+   }
+   
+
 .form-reg-nama{
  width:250px;
  height:50px;
@@ -1104,6 +1151,25 @@ input::-webkit-input-placeholder {
 }
 .tambah-alamat p {
     color:white;
+    position: relative;
+    top:5px;
+}
+.check_status_barang{
+    width:250px;
+    height:35px;
+    border-radius:50px;
+    background-color: white;
+    position: relative;
+    margin-top:20px;
+    margin-left:10px;
+    /* top:10px; */
+    left:25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.check_status_barang p {
+    color:blue;
     position: relative;
     top:5px;
 }
@@ -1173,7 +1239,9 @@ input::-webkit-input-placeholder {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: red; */
+    /* background-color: blue; */
+    position: relative;
+    top:100px;
 }
 
 .btn-komisi{

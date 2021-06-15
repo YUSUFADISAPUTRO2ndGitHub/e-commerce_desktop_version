@@ -105,8 +105,14 @@
                         <div class="login-option">
                             <p>Login</p>
                         </div>
-                        <div class="login-option"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#registerModal">
-                            <p>Bergabung Sekarang</p>
+                        <div class="box-new-login">
+                            <div class="login-option login-btn"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                <p>Bergabung Sebagai Customer</p>
+                            </div>
+                            <div class="login-option login-btn"  onclick="signup_supplier()" data-bs-toggle="modal" data-bs-target="#supplierModal">
+                                <p>Bergabung Sebagai Supplier</p>
+                            </div>
+
                         </div>
                         <div class="login-option" onclick="forgot_modal_request()" data-bs-toggle="modal" data-bs-target="#forgotModal">
                             <p>Lupa Password</p>
@@ -196,6 +202,120 @@
     </div>
     <!-- FORGOT PASSWORD MODALS -->
 
+
+      <!-- Supplier Register form MODALS -->
+      <div class="modal  fade " id="supplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box-login ">
+          <div class="modal-content ">
+            <div class="modal-header box-login-header">
+              <p>Hi <span style='color:#37CED5'> there!</span> <br> Hi,Supplier!</p>
+            </div>
+            <div class="modal-body box-login-body">
+                <div class="register-form">       
+                    <div class="reg-form-1">
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Alamat Email PIC</p>
+                            </div>
+                            <input type="text" class="name-form" placeholder="Alamat Email PIC" type="email" id="email_supp"
+                            pattern=".+@globex.com" size="30" required>
+                        </div>
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>No Telp utama Gudang</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="no Telp utama Gudang" id="telp_gudang_supp"> 
+                        </div>
+                    </div>    
+                    <div class="reg-form-1">
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Password</p>
+                            </div>
+                            <input type="password" class="name-form" placeholder="Password" id="password_supp">
+                        </div>
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>No Telp Kedua Gudang</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="No Telp Kedua Gudang" id="bulan_lahir_supp">
+                        </div>
+                    </div>  
+                    <div class="reg-form-1">
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Nama Depan PIC</p>
+                            </div>
+                            <input type="text" class="name-form" placeholder="Nama Depan PIC" id="nama_depan_supp">
+                        </div>
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Nomor Rekening Perusahaan</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="Nomor Rekening Perusahaan" id="tanggal_lahir_supp">
+                        </div>
+                    </div>  
+                    <div class="reg-form-1">
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Nama Belakang PIC</p>
+                            </div>
+                            <input type="text" class="name-form" placeholder="Nama Belakang PIC" id="nama_belakang_supp">
+                        </div>
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>NPWP</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="NPWP" id="npwp_supp"> 
+                        </div>
+                    </div>  
+                    <div class="reg-form-1">
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>No KTP PIC</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="No KTP PIC" minlength="4" maxlength="8" id="no_ktp_supp">
+                        </div>
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>NIK PIC ( No Induk Karyawan )</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="NIK" id="nik_supp">
+                        </div>
+                    </div>  
+                    <div class="reg-form-1">
+                        <div class="box-tambah-alamat">
+                            <div class="login-name">
+                                <div class="box-name-alamat">
+                                    <p>Alamat Lengkap Gudang</p>
+                                </div>
+                                <input type="text" class="alamat-supplier" placeholder="Alamat Lengkap Gudang" minlength="4" maxlength="15" id="alamat_gudang_supp">
+                            </div>
+                            
+                            
+                        </div>
+                       
+                    </div>  
+                    
+                    
+                    <div class="box-new-tambah-alamat">
+                        <div class="tambah-alamat" onclick="addAddressSupp()">
+                            <p>Tambah Alamat (+)</p>
+                        </div>       
+                        <div class="box-kumpulkan" id="simpan_supplier" >
+                            <div class="btn-kumpulkan" >
+                                <p>Simpan</p>
+                            </div>
+                        </div>            
+
+                    </div> 
+                </div>  
+            </div>
+          </div>
+        </div>
+        </div>
+    <!-- Supplier Register form MODALS -->
+
     <!-- REGISTER MODALS -->
     <div class="modal  fade " id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog box-login ">
@@ -225,7 +345,7 @@
                                 <div class="box-name">
                                     <p>Password</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Password" id="password_reg">
+                                <input type="password" class="name-form" placeholder="Password" id="password_reg">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
@@ -282,16 +402,14 @@
                                     <div class="box-name">
                                         <p>Alamat Lengkap</p>
                                     </div>
-                                    <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="8" id="alamat_lengkap_1">
-                                </div>
-                                
-                                
+                                    <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap_1">
+                                </div>       
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No Rekening</p>
                                 </div>
-                                <input type="type" class="name-form" placeholder="No Rekening" id="no_rekening_reg">
+                                <input type="type" class="name-form" placeholder="No Rekening" id="no_rekening_reg" minlength="4" maxlength="15">
                             </div>
                         </div>  
                         
@@ -307,7 +425,7 @@
                             <div class="tambah-alamat" onclick="addAddress()">
                                 <p>Tambah Alamat (+)</p>
                             </div>       
-                            <div class="box-kumpulkan" id="simpan_reg" >
+                            <div class="box-kumpulkan btn-register" id="simpan_reg" >
                                 <div class="btn-kumpulkan" >
                                     <p>Simpan</p>
                                 </div>
@@ -329,7 +447,7 @@
               <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
               <div class="box-code-referral">
                 <p>Your Customer Code for Referral :</p>
-                <p>1238198BA18293YU</p>
+                <p id="referral-profile">1238198BA18293YU</p>
               </div>
             </div>
             <div class="modal-body box-login-body">
@@ -339,14 +457,14 @@
                             <div class="box-name">
                                 <p>Alamat Email</p>
                             </div>
-                            <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email"
+                            <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email_user"
                             pattern=".+@globex.com" size="30" required>
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>Tahun Lahir</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Tahun Lahir">
+                            <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_user">
                         </div>
                     </div>    
                     <div class="reg-form-1">
@@ -354,13 +472,13 @@
                             <div class="box-name">
                                 <p>Password</p>
                             </div>
-                            <input type="text" class="name-form" placeholder="Password">
+                            <input type="text" class="name-form" placeholder="Password" id="password_user">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>Bulan Lahir</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Bulan Lahir">
+                            <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_user">
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -368,13 +486,13 @@
                             <div class="box-name">
                                 <p>Nama Depan</p>
                             </div>
-                            <input type="text" class="name-form" placeholder="Nama Depan">
+                            <input type="text" class="name-form" placeholder="Nama Depan" id="nama_depan_user">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>Tanggal Lahir</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Tanggal Lahir">
+                            <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_user">
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -382,13 +500,13 @@
                             <div class="box-name">
                                 <p>Nama Belakang</p>
                             </div>
-                            <input type="text" class="name-form" placeholder="Nama Belakang">
+                            <input type="text" class="name-form" placeholder="Nama Belakang" id="nama_belakang_user">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>No telp utama</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="No telp utama"> 
+                            <input type="number" class="name-form" placeholder="No telp utama" id="no_telp1_user"> 
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -396,37 +514,67 @@
                             <div class="box-name">
                                 <p>No KTP</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8">
+                            <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8" id="no_ktp_user">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>No telp kedua</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="No telp kedua">
+                            <input type="number" class="name-form" placeholder="No telp kedua" id="no_telp2_user">
                         </div>
                     </div>  
                     <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Alamat Lengkap</p>
-                            </div>
-                            <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="8">
+                        <div class="box-tambah-alamat">
+                            <div class="login-name">
+                                <div class="box-name">
+                                    <p>Alamat Lengkap</p>
+                                </div>
+                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap1_user">
+                            </div>   
+                            <div class="login-name">
+                                <div class="box-name">
+                                    <p>Alamat Lengkap</p>
+                                </div>
+                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
+                            </div>  
+                            <div class="login-name">
+                                <div class="box-name">
+                                    <p>Alamat Lengkap</p>
+                                </div>
+                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
+                            </div>  
+                            <div class="login-name">
+                                <div class="box-name">
+                                    <p>Alamat Lengkap</p>
+                                </div>
+                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
+                            </div>      
+                            <div class="login-name">
+                                <div class="box-name">
+                                    <p>Alamat Lengkap</p>
+                                </div>
+                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
+                            </div>  
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>No Rekening</p>
                             </div>
-                            <input type="type" class="name-form" placeholder="No Rekening">
+                            <input type="type" class="name-form" placeholder="No Rekening" id="rekening_user">
                         </div>
                     </div>  
-                    <div class="reg-form-1">
-                        <div class="tambah-alamat" onclick="addAddress()">
+                  
+                    <div class="box-kumpulkan-profile" onclick="addAddress()">
+                        <!-- <div class="btn-kumpulkan">
                             <p>Tambah Alamat (+)</p>
-                        </div>        
+                        </div> -->
+                        <div class="btn-komisi" onclick="check_status_item()">
+                            <p>Lihat Status Barang Anda</p>
+                        </div>
                     </div> 
                     <div class="box-kumpulkan-profile">
-                        <div class="btn-kumpulkan">
-                            <p>Kumpulkan</p>
+                        <div class="btn-kumpulkan save-user">
+                            <p>Simpan Data </p>
                         </div>
                         <div class="btn-komisi" onclick="commision_check()" data-bs-toggle="modal" data-bs-target="#commisionModal">
                             <p>Lihat Komisi Anda</p>
@@ -612,7 +760,7 @@
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
                     <p>Keranjang</p>
                 </div>
-                <div class="option-4" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <div class="option-4" data-bs-toggle="modal" >
                     <img src="../WEB/img/login.png" alt="error" class="icon-opt">
                     <p>Log in</p>
                 </div>
@@ -843,6 +991,7 @@
             </div>
 
         </div> 
+        
     </div>
 </body>
 <script type="text/javascript" src="./js/axios.js"></script>
