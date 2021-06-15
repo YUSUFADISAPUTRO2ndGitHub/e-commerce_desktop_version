@@ -32,8 +32,8 @@ $(document).on('click',"#simpan_reg",function(){
                     Status : "pending",
                     User_Type : "Customer",
                     account_number: $("#no_rekening_reg").val(),
-                    referral_customer_code: $("#signup_referral").val(),
-                    ktp:$('#no_ktp_user').val()
+                    referral_customer_code: $(".id-referral").val(),
+                    ktp:$("#no_ktp_reg").val()
                 }
             }
             console.log(data,' line 36 data')

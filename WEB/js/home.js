@@ -124,9 +124,9 @@ var data = [
 					setIsScroll = true
                     $('.list-group').css('display','none')
                     $('.modals-lk').css('display','none')
-                    console.log('masuk line 94')
+                    // console.log('masuk line 94')
 				} else {
-                    console.log('masuk line 98')
+                    // console.log('masuk line 98')
 					element[0].classList.add("scroll")
 					setIsScroll = false
                     $('.list-group').css('display','block')

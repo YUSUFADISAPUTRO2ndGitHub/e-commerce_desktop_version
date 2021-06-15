@@ -24,13 +24,16 @@ $(function(){
 
 //    OPEN MODALS PROFILE
    $('.option-4').on('click',function(){
-        
+    
+    // alert('function option-4 login modals')
     var token = localStorage.getItem('token')
     console.log(token)
 
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
+            // console.log(res.data,'line 33 option -4')
             var data_customer = res.data
+            // console.log(data_customer)
             if(data_customer){
                 console.log(data_customer)
                 console.log(data_customer.Customer_Code)
@@ -54,11 +57,13 @@ $(function(){
                 $('#referral-profile').val(`${data_customer.extra_column_2}`)
                 $('#profileModal').modal('show')
             }else {
+                // alert('57 login modal show')
                 $('#loginModal').modal('show')
             }
         }).catch((err)=>{
             console.log(err)
         })
+
         $('.closeByLogin').css('display','none')
         $('.option-1').removeClass("background_grey")
         $('.option-2').removeClass("background_grey")
@@ -68,6 +73,7 @@ $(function(){
         $('.input-name').css('border-bottom-left-radius','25px')
         $('.input-name').css('border-bottom-right-radius','25px')
         // $('.option-4').removeClass("background_grey")
+        console.log('functioin selesai 74')
    })
 
    $('.category-name').on('click',function(){
@@ -171,7 +177,7 @@ function addToCart(product_id){
     // console.log(dataNew)
 
     var filterData = dataStringify.filter((filtering)=>{
-        
+
     })
     
     

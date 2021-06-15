@@ -215,8 +215,10 @@ function sign_up_request(){
         axios.post(`http://customers.sold.co.id/get-available-referral-codes
         `).then((res)=>{
             res.data.map((val,index)=>{
+                console.log(val)
+                console.log(val.Customer_Code)
                 $('.option-referral').append(`
-                    <option value="${val.Product_Code}" class="id-referral">${val.First_Name} ${val.Last_Name} - ${val.Nama_Perusahaan}</option>
+                    <option value="${val.Customer_Code}" class="id-referral">${val.First_Name} ${val.Last_Name} - ${val.Nama_Perusahaan}</option>
                 `)
             })
         }).catch((err)=>{
@@ -391,14 +393,14 @@ const renderItemBasedOnCategory=(Category)=>{
                         <div class="item-1">
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
                         </div>
-                        <ul class="box-add">
-                            <li>
-                                <p>Add to Cart</p>
-                            </li>
-                            <li>
-                                <img src="../img/cart.png" alt="" class="img-cart">
-                            </li>
-                        </ul>
+                            <ul class="box-add">
+                                <li>
+                                    <p>Add to Cart</p>
+                                </li>
+                                <li>
+                                    <img src="../img/cart.png" alt="" class="img-cart">
+                                </li>
+                            </ul>
                         <br>
                         <br>
                         <div class="box-discount">
