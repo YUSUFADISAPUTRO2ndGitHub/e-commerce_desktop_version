@@ -1374,16 +1374,9 @@ input:focus{
 
 /* MODALS Product Detail BY SUB CATEGORY */
 .modals-product-detail {
-    position: absolute;
     z-index:20;
-    top:200px;
-    /* left:327px; */
-    left:22.8%;
     height:500px;
     width:900px;
-    /* background-color: red; */
-    /* display:none; */
-    /* transition: 2s ease-out; */
 }
 
 /* MODALS Product Detail BY SUB CATEGORY */
