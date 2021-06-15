@@ -6,9 +6,12 @@ var counter = 0;
 function populateDeliveryTable(){
     console.log(localStorage.getItem("token"));
     getAllOrdersForThisCustomer(localStorage.getItem("token"), "").done(function (response) {
+        console.log(response);
         if(response.length == 0){
             $(".loading-area").css("display", "none");
+            console.log(response);
         }else{
+            console.log(response);
             loadingMessage(response.length);
             var i = 0;
             $(".loading-area").css("display", "none");
