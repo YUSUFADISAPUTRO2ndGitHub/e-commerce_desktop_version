@@ -55,6 +55,7 @@ $(function(){
                 $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
                 $('#rekening_user').val(`${data_customer.extra_column_1}`)
                 $('#referral-profile').val(`${data_customer.extra_column_2}`)
+                $('#no_ktp_user').val(`${data_customer.ktp}`)
                 $('#profileModal').modal('show')
             }else {
                 // alert('57 login modal show')

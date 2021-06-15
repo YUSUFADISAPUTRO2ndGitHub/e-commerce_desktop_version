@@ -107,10 +107,11 @@ $(document).on('click',".box-option-login",function(){
             }).then((res)=>{
                 console.log(res.data ,' berhasil login 201')
                 if(res.data){
-                    // alert('berhasil login')
+                    swal.fire("Login Berhasil", "", "success");
                     localStorage.setItem('token',res.data)
                     $('#loginModal').modal('hide')
                 }else {
+                    swal.fire("Login Berhasil", "", "alert");
                     console.log('gagal login')
                 }
             }).catch((err)=>{
@@ -131,7 +132,7 @@ $(document).on('click',".box-option-login",function(){
 // UPDATE DATA BY USER
 
 $(document).on('click',".save-user",function(){
-
+  
         var data = {
             customer_data : {
                Customer_Code : localStorage.getItem("token"),
@@ -156,8 +157,8 @@ $(document).on('click',".save-user",function(){
                ktp:$('#no_ktp_user').val()
            }
        }
-       console.log(data.customer_data)
-       axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
+       console.log(data)
+       axios.post(`http://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
         headers:{
             "Content-Type":'application/json'
         },
@@ -179,16 +180,19 @@ $(document).on('click',".save-user",function(){
             "Address_5": data.customer_data.Address_5,
             "Status": data.customer_data.Status,
             "User_Type": data.customer_data.User_Type,
-            "ktp":data.customer_data.ktp
+            "ktp":data.customer_data.ktp,
+            "account_number":data.customer_data.account_number
         })
     }).then((res)=>{
         if(res.data != false){
+            swal.fire("Simpan Data Berhasil", "", "success");
             $('#profileModal').modal('hide')
-            localStorage.setItem('token',res.data)
-            alert('berhasil ngedit')
+            // localStorage.setItem('token',res.data)
+            
 
         }else {
-            alert('save gagal')
+            swal.fire("Simpan Data Gagal", "", "info");
+            $('#profileModal').modal('hide')
         }
         
         console.log(res.data)
