@@ -78,8 +78,8 @@ const renderItemPromo=()=>{
                             <p>RP. ${hargaTotal}</p>
                             <p>Rp. ${hargaAwal}</p>
                         </div>
-                        <div class="buy-icon">
-                            <img src="./img/cart.png" alt="" class="icon-buy">
+                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                            <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,20 @@ const getAllItem=(item)=>{
 
 function sign_up_request(){
     $("#loginModal").modal("hide");
+        alert('form jalan')
+        axios.post(`http://customers.sold.co.id/get-available-referral-codes
+        `).then((res)=>{
+            res.data.map((val,index)=>{
+                $('.option-referral').append(`
+                    <option value="${val.Product_Code}" class="id-referral">${val.First_Name} ${val.Last_Name} - ${val.Nama_Perusahaan}</option>
+                `)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
 }
+
+
 
 const get_product_detail=(product_id)=>{
     $('.box-list-kategori').empty()

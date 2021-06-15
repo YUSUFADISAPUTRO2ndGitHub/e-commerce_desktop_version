@@ -10,6 +10,7 @@ function forgot_modal_request(){
     $('#loginModal').modal('hide')
 }
 function cart_requested(x){
+    
     $('.close').css('display','none')
     console.log(x)
     if($(x).hasClass("background_grey")){
@@ -83,13 +84,7 @@ const commision_check=()=>{
     $('#profileModal').modal('hide')
 }
 
-const addAddress=()=>{
-    console.log('jalan')
-    $("#iframeAddress").removeClass('testingjquery')
-    $("iframeAddress").addClass('testingjquery2')
-    
-    console.log(a)
-}
+
 
 
 var data = [
@@ -211,3 +206,8 @@ function horizontalNavigationAll(position, event) {
 
 
     
+
+$('.id-referral').on('click',function(){
+   var option =  $(this).val()
+   console.log(option)
+})

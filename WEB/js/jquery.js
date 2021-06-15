@@ -144,3 +144,56 @@ function replace_value_to(x){
     // alert($(x).html());
     $(".input-name").val($(x).html());
 }   
+
+$('.icon-buy').on('click',function(){
+    var product_id = $(this).val()
+    console.log(product_id)
+})
+
+var data_cart = [
+    {
+        "productNo":"6900005030114",
+        "quantity":1
+    }
+]
+function addToCart(product_id){
+    console.log(product_id)
+    
+        var dataParse = JSON.parse(localStorage.getItem("cart"))
+        console.log(dataParse,' ini data parse')
+
+    var dataStringify = JSON.stringify(data_cart)
+    localStorage.setItem('cart',dataStringify)
+
+    // console.log(dataFilter[0].quantity++)
+    
+    // var dataNew = (dataFilter[0].quantity +1)
+    // console.log(dataNew)
+
+    var filterData = dataStringify.filter((filtering)=>{
+        
+    })
+    
+    
+
+
+    for(var i =0; i<data_cart.length; i++){
+        if(data_cart[i].productNo === product_id){
+            console.log(data_cart[i].quantity)
+            data_cart[i].quantity = data_cart[i].quantity + 1
+            break;
+        }else {
+            var dataPush = {
+                "productNo":product_id,
+                "quantity":1
+            }
+            data_cart.push(dataPush)
+            console.log('masuk ke else')
+            console.log(product_id,' 186')
+            break;
+        }
+    }
+    
+    console.log(data_cart,' new data')
+
+}

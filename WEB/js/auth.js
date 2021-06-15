@@ -1,6 +1,9 @@
 $(document).on('click',"#simpan_reg",function(){
 
     var password_awal = $('#password_reg').val()
+    var referral_code = $('.id-referral').val()
+    console.log(referral_code)
+    
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
     .then((res)=>{
         var final_pass = res.data
@@ -280,9 +283,12 @@ var data = {
        Address_1 : $("#alamat_gudang_supp").val(),
        Status : "pending",
        User_Type : "Customer",
+       Company:$('#nama_perusahaan_supp')
     //    account_number: $("#no_rekening_supp").val(),
        
    }
 }
+
 console.log(data)
 })
+

@@ -23,6 +23,11 @@
     <script type="text/javascript" src="./css/slick/slick.min.js"></script>
     <script type="text/javascript" src="./Iframe/jsIframe/card.js"></script>
     <script type="text/javascript" src="./css/slick/slick.js"></script>
+    <script type="text/javascript" src="./js/axios.js"></script>
+    <script type="text/javascript" src="./js/auth.js"></script>
+    <script type="text/javascript" src="./js/home.js"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script> 
     
     <title>SOLD</title>
     <style>
@@ -282,20 +287,22 @@
                             </div>
                             <input type="number" class="name-form" placeholder="NIK" id="nik_supp">
                         </div>
-                    </div>  
+                    </div> 
                     <div class="reg-form-1">
-                        <div class="box-tambah-alamat">
-                            <div class="login-name">
-                                <div class="box-name-alamat">
-                                    <p>Alamat Lengkap Gudang</p>
-                                </div>
-                                <input type="text" class="alamat-supplier" placeholder="Alamat Lengkap Gudang" minlength="4" maxlength="15" id="alamat_gudang_supp">
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Alamat Lengkap Gudang</p>
                             </div>
-                            
-                            
+                            <input type="number" class="name-form" placeholder="Alamat Lengkap Gudang" minlength="4" maxlength="8" id="alamat_gudang_supp">
                         </div>
-                       
-                    </div>  
+                        <div class="login-name">
+                            <div class="box-name">
+                                <p>Nama Perusahaan</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="Nama Perusahaan" id="nama_perusahaan_supp">
+                        </div>
+                    </div>   
+                 
                     
                     
                     <div class="box-new-tambah-alamat">
@@ -414,12 +421,17 @@
                         </div>  
                         
                         <div class="new-reg-form">
-                            <div class="login-name-3">
+                            <select class="form-select option-referral" aria-label="Default select example">
+                                <option selected>Select Referral Code</option>
+                                
+                              </select>
+                            <!-- <div class="login-name-3">
                                 <div class="box-name">
                                     <p>Customer referral Code</p>
                                 </div>
                                 <input type="type" class="name-form" placeholder="Custome Referral Code" id="signup_referral">
-                            </div>
+                            </div> -->
+                        
                         </div> 
                         <div class="box-new-tambah-alamat">
                             <div class="tambah-alamat" onclick="addAddress()">
@@ -564,7 +576,7 @@
                         </div>
                     </div>  
                   
-                    <div class="box-kumpulkan-profile" onclick="addAddress()">
+                    <div class="box-kumpulkan-profile" onclick="addAddressProfile()">
                         <!-- <div class="btn-kumpulkan">
                             <p>Tambah Alamat (+)</p>
                         </div> -->
@@ -755,7 +767,7 @@
                 <div class="option-2" onclick="pengiriman_requested(this)">
                     <img src="../WEB/img/truck.png" alt="error" class="icon-opt">
                     <p>Pengiriman</p>
-                </div>
+                </div>  
                 <div class="option-3" onclick="cart_requested(this)">
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
                     <p>Keranjang</p>
@@ -991,13 +1003,9 @@
             </div>
 
         </div> 
-        
+
     </div>
 </body>
-<script type="text/javascript" src="./js/axios.js"></script>
-<script type="text/javascript" src="./js/auth.js"></script>
-<script type="text/javascript" src="./js/home.js"></script>
-<script type="text/javascript" src="./js/jquery.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script> 
+
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 </html>

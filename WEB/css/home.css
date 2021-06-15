@@ -935,7 +935,7 @@ input::-webkit-input-placeholder {
     line-height:0.5;
     align-items: center;
     position: relative;
-    left:45px;
+    left:10px;
 }
 
 .login-pass{
@@ -1060,11 +1060,12 @@ input::-webkit-input-placeholder {
 .new-reg-form{
     width:100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: flex-end;
     justify-content: flex-end;
     /* background-color: blue; */
     margin-top:5px;
-    padding-right:48px;
+    /* padding-right:48px; */
 }
 .reg-form-2{
     width:92%;
@@ -1136,7 +1137,7 @@ input::-webkit-input-placeholder {
 }
 
 .tambah-alamat{
-    width:250px;
+    width:400px;
     height:35px;
     border-radius:50px;
     background-color: #217283;
@@ -1181,6 +1182,8 @@ input::-webkit-input-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    left:35px;
     /* background-color: red; */
 }
 .box-new-tambah-alamat{
@@ -1189,6 +1192,8 @@ input::-webkit-input-placeholder {
     /* background-color: pink; */
     position: relative;
     top:20px;
+    display: flex;
+    
 
 }
 .btn-kumpulkan{
@@ -1242,6 +1247,7 @@ input::-webkit-input-placeholder {
     /* background-color: blue; */
     position: relative;
     top:100px;
+    
 }
 
 .btn-komisi{
@@ -1377,6 +1383,7 @@ input:focus{
     z-index:20;
     height:500px;
     width:900px;
+    display: none;
 }
 
 /* MODALS Product Detail BY SUB CATEGORY */
@@ -1843,4 +1850,14 @@ ul {
     align-items: center;
     /* background-color: blue; */
     
+}
+
+
+
+
+.form-select {
+    width:41% !important;
+    position: relative;
+    top:45% !important;
+    right: 2.9% !important;;
 }
