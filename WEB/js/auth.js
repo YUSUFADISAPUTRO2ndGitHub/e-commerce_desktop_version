@@ -269,7 +269,7 @@ function loadingMessage(){
 }
 
 
-
+// REGISTER DATA SUPPLIER
 $(document).on('click',"#simpan_supplier",function(){
 alert('simpan supplier jalan')
 var data = {
@@ -294,6 +294,42 @@ var data = {
        
    }
 }
+var password = $('password_supp').val()
+
+axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+.then((res)=>{
+    var newPassword = res.data
+    axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
+        headers:{
+            "Content-Type":'application/json'
+        },
+        "data":JSON.stringify({
+            "Customer_Code": data.customer_data.Customer_Code,
+            "First_Name": data.customer_data.First_Name,
+            "Last_Name": data.customer_data.Last_Name,
+            "User_Password": newPassword,
+            "Birthday": data.customer_data.Birthday,
+            "Created_Date": data.customer_data.Created_Date,
+            "Last_Login": data.customer_data.Last_Login,
+            "Email": data.customer_data.Email,
+            "Contact_Number_1": data.customer_data.Contact_Number_1,
+            "Contact_Number_2": data.customer_data.Contact_Number_2,
+            "Npwp":data.customer_data.Npwp,
+            "ktp":data.customer_data.ktp,
+            "Address_1":data.customer_data.Address_1,
+            "Status": data.customer_data.Status,
+            "User_Type": data.customer_data.User_Type,
+            "Company":data.customer_data.Company
+        })
+    })
+    .then((res)=>{
+        console.log(res.data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+}).catch((err)=>{
+    console.log(err)
+})
 
 console.log(data)
 })
@@ -313,24 +349,25 @@ var data = {
        
    }
 }
-
 var password = $('#password_forgot').val()
 
     
    Email =$('#email_forgot').val(),
    PrimaryContactNumber = $("#no_telp_forgot").val(),
    Ktp=$('#ktp_forgot').val(),
-axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
-.then((res)=>{
-    var newPassword = res.data
-    axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${newPassword}`)
+    axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
-        console.log(res.data)
+        var newPassword = res.data
+        axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${newPassword}`)
+        .then((res)=>{
+            console.log(res.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
     }).catch((err)=>{
         console.log(err)
     })
-}).catch((err)=>{
-    console.log(err)
-})
-console.log(data)
+    console.log(data)
+
+
 })
