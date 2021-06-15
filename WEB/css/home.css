@@ -710,6 +710,43 @@ input::-webkit-input-placeholder {
     flex-direction: column;
 }
 
+.box-back-detail{
+    width:40px;
+    height:40px;
+    background: rgb(255, 255, 255,0.5); /* fallback color */
+    /* border:1px solid black; */
+    position: relative;
+    top:70px;
+    /* left:80px; */
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.box-back-detail:hover{
+cursor: pointer;
+}
+
+.box-next-detail{
+
+    width:40px;
+    height:40px;
+    background: rgb(255, 255, 255,0.5); /* fallback color */
+    /* border:1px solid black; */
+    position: relative;
+    top:70px;
+    /* left:-60px; */
+    border-radius:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.box-next-detail:hover{
+    cursor: pointer;
+}
+
 
 .box-back{
     width:60px;
@@ -765,7 +802,15 @@ input::-webkit-input-placeholder {
     opacity: 1;
     /* background: red; */
 }
+.icon-prev-detail{
+    font-size: 30px;
+    color:#37ced5;
+}
 
+.img-icon{
+    width:200px;
+    height:200px;
+}
 
 /* BOX - PRODUCT */
 .box-product{
@@ -1384,6 +1429,7 @@ input:focus{
     height:500px;
     width:900px;
     display: none;
+    background-color: red;
 }
 
 /* MODALS Product Detail BY SUB CATEGORY */

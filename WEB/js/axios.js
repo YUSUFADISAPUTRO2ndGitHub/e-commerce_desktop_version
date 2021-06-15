@@ -333,12 +333,12 @@ const renderItemBasedOnCategory=(Category)=>{
             $('.box-item-detail').append(
                 `
                 <div class="item-img">
-                    <div class="box-back">
-                        <i class="fas fa-chevron-left icon-prev" ></i>
+                    <div class="box-back-detail">
+                        <i class="fas fa-chevron-left icon-prev-detail" ></i>
                     </div>
                     <img src="${item.Picture_1}" alt="" class="img-icon">
-                    <div class="box-next">
-                        <i class="fas fa-chevron-right icon-prev" ></i>
+                    <div class="box-next-detail">
+                        <i class="fas fa-chevron-right icon-prev-detail" ></i>
                     </div>
                 </div>
                 <div class="item-detail">
@@ -364,7 +364,31 @@ const renderItemBasedOnCategory=(Category)=>{
                             <p>Deskripsi :</p>
                             <p>${item.Description}</p>
                         </div>
+                        <div class="rating-box">
+                            <div class="rating-top">
+                                <p>Rating : </p>
+                                <p>4</p>
+
+                            </div>
+                            <div class="rating-bottom">
+                                <div class="star-box">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star last-star"></i>
+                                </div>
+
+                                <div class="simpan-item">
+                                    <p>Simpan</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        
                     </div>
+                    
                 </div>
                 `
             )

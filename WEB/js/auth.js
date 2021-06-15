@@ -98,6 +98,7 @@ $(document).on('click',".box-option-login",function(){
     var password = $('#password_login').val() 
     console.log(email)
     console.log(password)
+    alert('button login jalan')
         
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}`,{
                 params:{
@@ -107,11 +108,11 @@ $(document).on('click',".box-option-login",function(){
             }).then((res)=>{
                 console.log(res.data ,' berhasil login 201')
                 if(res.data){
-                    swal.fire("Login Berhasil", "", "success");
+                    swal.fire("Login Berhasil-2", "", "success");
                     localStorage.setItem('token',res.data)
                     $('#loginModal').modal('hide')
                 }else {
-                    swal.fire("Login Berhasil", "", "alert");
+                    swal.fire("Login Gagal", "", "info");
                     console.log('gagal login')
                 }
             }).catch((err)=>{
@@ -204,11 +205,7 @@ $(document).on('click',".save-user",function(){
 
 
 
-// UPDATE DATA BY USER
-
-
-
-
+//  end UPDATE DATA BY USER
 
 
 function checkIfSignUpInputNull(){
