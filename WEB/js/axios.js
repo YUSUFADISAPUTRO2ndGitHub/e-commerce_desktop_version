@@ -332,13 +332,30 @@ const renderItemBasedOnCategory=(Category)=>{
         if(item.GroupBuy_SellPrice == "NULL"){
             $('.box-item-detail').append(
                 `
-                <div class="item-img">
-                    <div class="box-back-detail">
-                        <i class="fas fa-chevron-left icon-prev-detail" ></i>
+                <div class="box-item-img">
+                    <div class="item-img"> 
+                        <div class="box-back-detail">
+                            <i class="fas fa-chevron-left icon-prev-detail" ></i>
+                        </div>
+                        <img src="${item.Picture_1}" alt="" class="img-icon">
+                        <div class="box-next-detail">
+                            <i class="fas fa-chevron-right icon-prev-detail" ></i>
+                        </div>
                     </div>
-                    <img src="${item.Picture_1}" alt="" class="img-icon">
-                    <div class="box-next-detail">
-                        <i class="fas fa-chevron-right icon-prev-detail" ></i>
+                    
+                    <div class="rating-bottom">
+                        <div class="star-box">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star last-star"></i>
+                        </div>
+
+                        <div class="simpan-item">
+                            <p>Simpan</p>
+
+                        </div>
                     </div>
                 </div>
                 <div class="item-detail">
@@ -350,58 +367,50 @@ const renderItemBasedOnCategory=(Category)=>{
                             <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
-                        <ul class="box-add">
-                            <li>
-                                <p>Add to Cart</p>
-                            </li>
-                            <li>
-                                <img src="../img/cart.png" alt="" class="img-cart">
-                            </li>
-                        </ul>
+                            <ul class="box-add">
+                                <li>
+                                    <p>Add to Cart</p>
+                                </li>
+                                <li>
+                                    <img src="../img/cart.png" alt="" class="img-cart">
+                                </li>
+                            </ul>
                         <br>
                         <br>
                         <div class="deskripsi">
                             <p>Deskripsi :</p>
                             <p>${item.Description}</p>
-                        </div>
-                        <div class="rating-box">
-                            <div class="rating-top">
-                                <p>Rating : </p>
-                                <p>4</p>
-
-                            </div>
-                            <div class="rating-bottom">
-                                <div class="star-box">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star last-star"></i>
-                                </div>
-
-                                <div class="simpan-item">
-                                    <p>Simpan</p>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        
-                    </div>
-                    
+                        </div>      
                 </div>
                 `
             )
         }else{
             $('.box-item-detail').append(
                 `
-                <div class="item-img">
-                    <div class="box-back">
-                        <i class="fas fa-chevron-left icon-prev" ></i>
+                <div class="box-item-img">
+                    <div class="item-img"> 
+                        <div class="box-back-detail">
+                            <i class="fas fa-chevron-left icon-prev-detail" ></i>
+                        </div>
+                        <img src="${item.Picture_1}" alt="" class="img-icon">
+                        <div class="box-next-detail">
+                            <i class="fas fa-chevron-right icon-prev-detail" ></i>
+                        </div>
                     </div>
-                    <img src="${item.Picture_1}" alt="" class="img-icon">
-                    <div class="box-next">
-                        <i class="fas fa-chevron-right icon-prev" ></i>
+                    
+                    <div class="rating-bottom">
+                        <div class="star-box">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star last-star"></i>
+                        </div>
+
+                        <div class="simpan-item">
+                            <p>Simpan</p>
+
+                        </div>
                     </div>
                 </div>
                 <div class="item-detail">
@@ -416,6 +425,7 @@ const renderItemBasedOnCategory=(Category)=>{
                         <div class="item-1">
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
                         </div>
+                        <div class="box-detail-option">
                             <ul class="box-add">
                                 <li>
                                     <p>Add to Cart</p>
@@ -424,13 +434,15 @@ const renderItemBasedOnCategory=(Category)=>{
                                     <img src="../img/cart.png" alt="" class="img-cart">
                                 </li>
                             </ul>
-                        <br>
-                        <br>
-                        <div class="box-discount">
-                            <div class="add-discount">
-                                <p>Beli dengan diskon GROUP BUY</p>
+                    
+                            <div class="box-discount">
+                                <div class="add-discount">
+                                    <p>Beli dengan diskon GROUP BUY</p>
+                                </div>
                             </div>
+                    
                         </div>
+
                         <br>
                         <div class="deskripsi">
                             <p>Deskripsi :</p>
