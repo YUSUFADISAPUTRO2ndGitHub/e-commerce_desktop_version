@@ -211,7 +211,6 @@ const getAllItem=(item)=>{
 
 function sign_up_request(){
     $("#loginModal").modal("hide");
-        alert('form jalan')
         axios.post(`http://customers.sold.co.id/get-available-referral-codes
         `).then((res)=>{
             res.data.map((val,index)=>{
