@@ -351,7 +351,7 @@ alert('render group buy jalan')
                     </div>
                     <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
                 </div>
-                <div class="login-pass">
+                <div class="login-name">
                     <div class="box-name">
                         <p>Metode Pembayaran</p>
                     </div>
@@ -359,28 +359,22 @@ alert('render group buy jalan')
                 </div>
                 <div class="login-name">
                     <div class="box-name" >
-                        <p>Delivery Fee</p>
+                        <p>PENGIRIMAN KE ALAMAT</p>
                     </div>
-                    <input type="text" class="name-form" placeholder="Delivery Fee" id="delivery_free_groupbuy>
+                    <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
                 </div>
-                <div class="login-pass">
+                <div class="login-name">
                     <div class="box-name">
-                        <p>Pilih Alamat Tersimpan</p>
+                        <p>PILIH ALAMAT TERSIMPAN</p>
                     </div>
-                    <input type="text" class="name-form" placeholder="Pilih Alamat Tersimpan" id="alamat_groupbuy">     
+                    <input type="text" class="name-form" placeholder="Metode Pembayaran" id="pembayaran_groupbuy">     
                 </div>
                 <div class="login-name">
                     <div class="box-name" >
-                        <p>Delivery Fee</p>
+                        <p>BIAYA PENGIRIMAN</p>
                     </div>
-                    <input type="text" class="name-form" placeholder="Delivery Fee" id="">
+                    <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
                 </div>
-                <div class="login-pass">
-                    <div class="box-name">
-                        <p>Pengiriman ke Alamat</p>
-                    </div>
-                    <input type="text" class="name-form" placeholder="Pengiriman ke Alamat">     
-                </div>     
             </div>  
         </div>
             <div class="group-right">
