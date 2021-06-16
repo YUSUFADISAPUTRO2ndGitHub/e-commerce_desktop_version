@@ -1,4 +1,10 @@
 $( document ).ready(function() {
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const search = urlParams.get('search');
+    alert(search);
+
     // category-list
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
     .then((res)=>{
