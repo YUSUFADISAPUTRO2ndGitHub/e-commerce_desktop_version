@@ -1439,15 +1439,15 @@ input:focus{
 
 /* MODALS Product Detail BY SUB CATEGORY */
 .modals-product-detail {
-    border: solid 1px #217384;
+    /* border: solid 1px #217384; */
     border-radius: 5px;
     z-index:50;
     height:500px;
     width:1000px;
     display: none;
     position: fixed;
-    top: 10%;
-    left: 50%;
+    top: 3%;
+    left: 25%;
     margin-left: -25%;
     /* background-color: red; */
 }
