@@ -27,20 +27,11 @@
 .groupbuy-form{
     width:100%;
     height:100%;
-    /* background-color: blue; */
-    display: flex;
-    /* justify-content: center; */
     align-items: center;
-    flex-direction: column;
 }
 .login-name{
     width:100%;
     height:70px;
-    /* background-color: red; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height:0.5;
     align-items: center;
 }
 .login-name p{
@@ -51,16 +42,14 @@
 .box-name{
     width:250px;
     height:30px;
-    position: relative;
-    top:10px;
     
 }
 
 .name-form{
     width:240px;
-    height:30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: #C4C4C4;
-    border-width:0px;
 }
 .name-form::placeholder{
     color:white;
@@ -76,20 +65,7 @@ input:focus{
 .login-pass{
     width:100%;
     height:70px;
-    /* background-color: pink; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height:0.5;
     align-items: center;
-}
-
-.box-name{
-    width:100%;
-    height:30px;
-    position: relative;
-    top:10px;
-    
 }
 
 .box-name p {
@@ -114,7 +90,7 @@ input:focus{
     width:180px;
     height:40px;
     border-radius:5px;
-    background-color: #41D862;
+    background-color: turquoise;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -152,8 +128,7 @@ input:focus{
 .total-price{
     width:130px;
     height:30px;
-    border-radius:5px;
-    background-color: #37CED5;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: centers;
@@ -163,7 +138,7 @@ input:focus{
 .total-price p {
     position: relative;
     top:10px;
-    color:white;
+    color: #217384 !important;
     font-size: 13px;
 }
 
