@@ -65,6 +65,7 @@ function zoomIn(x){
 }
 
 function eraseItem(id){
+    console.log(id);
     var checkBox = document.getElementById("checklist" + id);
     if (checkBox.checked == true){
         checkBox.checked = false;
@@ -74,6 +75,7 @@ function eraseItem(id){
     }
     var i = 0;
     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+    console.log(cartToJson);
     for(i; i < cartToJson.length; i ++){
         if(cartToJson[i].productNo == id){
             cartToJson.splice(i, 1);

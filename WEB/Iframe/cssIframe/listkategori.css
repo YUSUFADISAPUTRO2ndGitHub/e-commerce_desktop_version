@@ -25,16 +25,14 @@
 .card-lk {
     width:196px;
     height:205px;
-    border-radius:5px;
-    background-color: white;
+    background-color: #217384;
+    color: white;
     position: relative;
-    /* left:5px; */
     top:5px;
     margin:2px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* align-items: center; */
 }
 
 .box-img-lk{

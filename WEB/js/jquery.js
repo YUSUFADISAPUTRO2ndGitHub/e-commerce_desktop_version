@@ -84,20 +84,6 @@ $(function(){
         $('.option-3').removeClass("background_grey")
         
    })
-
-    // $('#datepicker').datepicker({
-    //     uiLibrary: 'bootstrap4',
-    //     format:'dd-mm-yyy',
-    //     onSelect: function() { 
-            
-    //         var dateObject = $(this).datepicker('getDate'); 
-    //         console.log(dateObject)
-    //     }
-        
-    // });
-
-
-    // var searchItem = []
         $('.input-name').on('keyup', _.debounce(function () {
             console.log('hi');
             var value = $(this).val()
@@ -171,7 +157,7 @@ function groupbuy(product_id){
 function addToCart(product_id){
     console.log(product_id)
     
-    var dataParse = JSON.parse(localStorage.getItem("cart"))
+    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse,' ini data parse')
 
     if(dataParse){
@@ -201,7 +187,7 @@ function addToCart(product_id){
         }
 
         var pushToStorage = JSON.stringify(dataParse)
-        localStorage.setItem('cart',pushToStorage)
+        localStorage.setItem('itemsInCart',pushToStorage)
 
     }else {
         console.log('local storage kosong')
@@ -212,7 +198,7 @@ function addToCart(product_id){
             }
         ]
         var pushToStorage2 = JSON.stringify(cart)
-        localStorage.setItem('cart',pushToStorage2)     
+        localStorage.setItem('itemsInCart',pushToStorage2)     
     }
   
   

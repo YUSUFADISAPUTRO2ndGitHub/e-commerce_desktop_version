@@ -3,13 +3,18 @@
 // console.log('axios jalan')
 
 $(document).ready(function(){
-    var dataParse = JSON.parse(localStorage.getItem("cart"))
+    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse)
     $('.cart-counter').text(dataParse.length)
     var test =$('.cart-counter').val()
     console.log(test)
 
 })
+
+setInterval(() => {
+    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+    $('.cart-counter').text(dataParse.length)
+}, 1000);
 var allData = []
 
 
@@ -83,7 +88,7 @@ const renderItemPromo=()=>{
         // console.log(hargaTotal)
         $('.box-render-promo').append(
         ` 
-            <div class="card-item">
+            <div class="card-item" onclick="get_product_detail('${val.Product_Code}')">
                 <img src="${val.Picture_1}" alt="" class="img-card">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
@@ -276,9 +281,6 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                             <div class="item-all-price">
                                 <p>RP. ${hargaTotal}</p>
                                 <p>Rp. ${hargaAwal}</p>
-                            </div>
-                            <div class="buy-icon">
-                                <img src="../img/cart.png" alt="" class="icon-buy">
                             </div>
                         </div>
                     </div>
