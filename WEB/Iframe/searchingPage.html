@@ -5,31 +5,96 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Iframe/cssIframe/searchingPage.css">
+    <link rel="stylesheet" href="../Iframe/cssIframe/listkategori.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
+    <script src="../js/search_page.js"></script>
+    
+
     <title>Searching Page</title>
+    <style>
+        body{
+            background-color: #d4dee8;
+        }
+        .kategori-item p{
+            color: #217283;
+        }
+        .list-group-item{
+            color: #217283;
+        }
+        .list-group-item:hover{
+            background-color: #217283 !important;
+            color: white;
+        }
+        .box-list-kategori{
+            z-index: 10;
+            width: 75%;
+            height: 100%;
+            background-color: chartreuse;
+            position: absolute;
+            top: 12.5%;
+            left: 25%;
+            display: flex;
+            flex-direction: row;
+        }
+        .card-all-item{
+            float: left;
+            width:196px;
+            height:auto;
+            padding:5px;
+            margin-left:2px;
+            margin-right:2px;
+            position: relative;
+            background-color: #217384;
+            color: white;
+        }
+        .card-all-item:hover{
+            cursor: pointer;
+        }
+        .img-all-card{
+            width:100%;
+            height:200px;
+        }
+
+        .card-all-item-list{
+            padding-top:5px;
+            padding-left:10px;
+            display: flex;
+            width:100%;
+            background-color: transparent;
+            flex-direction: column;
+        }
+        .card-all-item-list p {
+            font-size: 28px;
+            
+        }
+    </style>
 </head>
 <body>
     <div class="box-searching">
         <div class="searching-left">
             <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active list-item" aria-current="page">Search Result for : 'your future'</li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active list-item" aria-current="page">Search Result for : 'your future'</li>
                 </ol>
-              </nav>
-              <div class="kategori-item">
-                <p>Kategori</p>
-                <ul class="list-group">
-                    <li class="list-group-item category-list">ADHESIVE</li>
-                    <li class="list-group-item category-list">APD</li>
-                    <li class="list-group-item category-list">HARDWARE</li>
-                    <li class="list-group-item category-list">INTERIOR</li>
-                    <li class="list-group-item category-list">SANITARY</li>
-                </ul>
+                </nav>
+                <div class="kategori-item">
+                    <p>Kategori</p>
+                    <ul class="list-group category-list">
+                        <!-- <li class="list-group-item category-list">ADHESIVE</li>
+                        <li class="list-group-item category-list">APD</li>
+                        <li class="list-group-item category-list">HARDWARE</li>
+                        <li class="list-group-item category-list">INTERIOR</li>
+                        <li class="list-group-item category-list">SANITARY</li> -->
+                    </ul>
 
-              </div>
+                </div>
+                <div class="box-list-kategori get-item" >
+                </div>
         </div>
         <div class="searching-right">
             <div class="item-detail-1">
