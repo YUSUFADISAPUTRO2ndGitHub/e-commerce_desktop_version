@@ -1435,6 +1435,14 @@ input:focus{
     transition: 2s ease-out;
 }
 
+.modals-search-result{
+    z-index: 99;
+    position: absolute;
+    top: 97px;
+    width: 100%;
+    height: 500vh;
+}
+
 /* MODALS LIST ITEM BY SUB CATEGORY */
 
 /* MODALS Product Detail BY SUB CATEGORY */
