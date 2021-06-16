@@ -154,26 +154,33 @@ $('.icon-buy').on('click',function(){
 
 
 function groupbuy(product_id){
-    axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
-    .then((res)=>{
-        console.log(res.data)
-    }).catch((err)=>{
-        console.log(err)
-    })
-
+    // alert('jalan groupbuy')
+    var data;
     
-
-    console.log(product_id)
-    // $('.box-list-kategori').css('display','none')
+    console.log(data)
+    
     $('.modals-product-detail').empty()
     $('.modals-product-detail').css('display','none')
-    // $('.modals-group-buy').css('display','block')
-    // $('.modals-group-buy').attr('src',`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
-    console.log($('.modals-group-buy').attr('src'))
+ 
+    
     location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
+
+    console.log(product_id)
 }
 
-
+function payment_groupbuy(product_id){
+    var data = {
+        customer_data  :{
+            Customer_Code:localStorage.getItem('token'),
+            qty : $('#qty_groupbuy').val(),
+            Address_1: $('#alamat_gb').val(),
+            payment : $('#payment_gb').val(),
+            pengirimanFee: $('#pengiriman-fee').val(),
+            alamatLain : $('#alamat_lain').val()
+        }
+    }
+    console.log(data)
+}
 
 
 function addToCart(product_id){
@@ -236,12 +243,18 @@ function addressMethod(item){
     if(item.value === 'Alamat Terdaftar'){
         // alert('masuk ke alamt terdaftar')
         $('.option-alamat-gb').css('display','block')
+        $('.alamat-pengiriman').css('display','none')
     }else if (item.value === 'Alamat Baru'){
         // alert('masuk ke alamt terdaftar')
+        $('.option-alamat-gb').css('display','none')
         $('.alamat-pengiriman').css('display','block')
     }
 }
 
+
+function resultAddress(item){
+
+}
 $('.id-address-gb').on('click',function(){
     var data = $(this).val()
     console.log(data)

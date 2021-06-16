@@ -40,7 +40,7 @@
     width:100%;
     height:100%;
     align-items: center;
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     /* justify-content: center; */
     flex-direction: column;
@@ -181,4 +181,30 @@ input:focus{
 .img-gr{
     width:100%;
     height:100%;
+}
+
+.option-alamat-gb{
+    position: relative;
+    top:10px;
+    width:95% !important;
+    
+}
+.option-pengiriman-gb{
+    
+    
+    width: 95% !important;
+}
+.alamat-pengiriman {
+    /* background-color: blue; */
+    position: relative;
+    left:5px;
+    
+    
+    
+    margin-bottom:10px;
+}
+
+.box-pengiriman {
+    position: relative;
+    top:20px;
 }

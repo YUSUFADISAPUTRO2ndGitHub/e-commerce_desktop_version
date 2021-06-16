@@ -327,7 +327,6 @@ const renderItemBasedOnCategory=(Category)=>{
                 `
                 )
             })
-        // var test = 'testing yok'
         //     myFrame.html(test);
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
@@ -346,77 +345,115 @@ function close_all_open_window(){
 const render_group_buy=(product_id)=>{
 // alert('render group buy jalan')
 
-    
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    .then((res)=>{
-        // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)  
-        console.log(res.data)
-        // alert(res.data.Picture_1)
-        $('.box-groupbuy').append(`
-        <div class="group-left">
-            <div class="groupbuy-form">
-                <div class="login-name">
-                    <div class="box-name" >
-                        <p>Kuantitas Permintaan</p>
-                    </div>
-                    <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
-                </div>
-                <select class="form-select option-payment-gb" aria-label="Default select example">
-                     <option selected>Select Payment Method</option>    
-                     <option >Select Payment Method</option>    
-                     <option >Select Payment Me thod</option>            
-                     <option >Select Payment Method</option>    
-                     <option >Select Payment Method</option>    
-                </select>
-                <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)">
-                    <option selected>Select Address Method</option>    
-                    <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
-                    <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
-                </select>
-                <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="addressMethod(this)">
-                    <option selected>Pilihan Alamat</option>    
-                    <option value="jalanan 1" class="id-address-gb">jalanan 1</option>    
-                    <option value="jalanan 2" class="id-address-gb">Jalanan2</option>           
-                </select>
+        var option_payment
+        axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
+        .then((res)=>{          
+            option_payment = res.data
+             $('.box-groupbuy').append(`
+             <div class="group-left">
+                 <div class="groupbuy-form">
+                     <div class="login-name">
+                         <div class="box-name" >
+                             <p>Kuantitas Permintaan</p>
+                         </div>
+                         <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
+                     </div>
+                     <select class="form-select option-payment-gb" aria-label="Default select example">
+                          <option selected>Select Payment Method</option>    
+                           
+                     </select>
+                     <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)" >
+                         <option selected>Select Address Method</option>    
+                         <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
+                         <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
+                     </select>
 
-                <div class="login-name alamat-pengiriman" >
-                    <div class="box-name" >
-                        <p>PENGIRIMAN KE ALAMAT</p>
-                    </div>
-                    <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
-                </div>
-                <div class="login-name">
-                    <div class="box-name" >
-                        <p>BIAYA PENGIRIMAN</p>
-                    </div>
-                    <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
-                </div>
-            </div>  
-        </div>
-            <div class="group-right">
-                <div class="gr-1">
-                    <div class="btn-pesan">
+                     <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
+                         <option selected>Pilihan Alamat2</option>            
+                     </select>
+     
+                     <div class="login-name alamat-pengiriman" style="display:none">
+                         <div class="box-name" >
+                             <p>PENGIRIMAN KE ALAMAT</p>
+                         </div>
+                         <input type="text" class="name-form" placeholder="alamat Pengiriman" id="alamat_lain">
+                     </div>
+     
+                     <div class="login-name box-pengiriman" >
+                         <div class="box-name" >
+                             <p>BIAYA PENGIRIMAN</p>
+                         </div>
+                        <select class="form-select option-pengiriman-gb" aria-label="Default select example">
+                            <option selected>Pengiriman Fee</option>            
+                            <option  id="pengiriman-fee">JNE</option>   
+                            <option id="pengiriman-fee">TIKI</option>   
+                            <option id="pengiriman-fee">OK KIRIM</option>   
+                        </select>
+                     </div>
+                 </div>  
+             </div>
+                 <div class="group-right">
+                     <div class="gr-1">
+                         <div class="btn-pesan" onclick="payment_groupbuy('${product_id}')">
                             <p>Pesan Sekarang!</p>
                             <img src="../img/home.png" alt="" class="icon-home">
-                    </div>
-                    <div class="box-total-price">
-                            <p>Total Price</p>
-                            <div class="total-price">
-                                <p>100.000</p>
-                            </div>
-                        </div>
-                </div>
-            <div class="gr-2">
-                <div class="box-img-gr">
-                    <img src="${res.data.Picture_1}" alt="" class="img-gr">
-                </div>
-            </div>
-        </div>
-        `)
-    }).catch((err)=>{
-        console.log(err)
-    })
-    console.log(product_id)
+                         </div>
+                         <div class="box-total-price">
+                                 <p>Total Price</p>
+                                 <div class="total-price">
+                                     <p>100.000</p>
+                                 </div>
+                             </div>
+                     </div>
+                 <div class="gr-2">
+                     <div class="box-img-gr">
+                         <img src="${res.data.Picture_1}" alt="" class="img-gr">
+                     </div>
+                 </div>
+             </div>
+             `)
+            // alert(res.data)
+            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            .then((res)=>{
+                // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)      
+                console.log(res.data)
+
+                option_payment.map((val,index)=>{
+                    console.log(val.Payment_Method_Desc)
+                    console.log(val.Payment_Method_Desc === 'BCA VA TRANSFER')
+                    if(val.Payment_Method_Desc === 'BCA VA TRANSFER'){
+                        $('.option-payment-gb').append(`
+                            <option id="payment_gb" value="${val.Payment_Method_Desc}">${val.Payment_Method_Desc}</option> 
+                        `)
+                    }
+                })
+                var token = localStorage.getItem('token')
+                console.log(token,' ini token 427')
+                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                .then((res)=>{
+                    $('.option-alamat-gb').append(`
+                        <option value="${res.data.Address_1}" id="alamat_gb">${res.data.Address_1}</option> 
+                        <option value="${res.data.Address_2}" id="alamat_gb">${res.data.Address_2}</option> 
+                        <option value="${res.data.Address_3}" id="alamat_gb">${res.data.Address_3}</option> 
+                        <option value="${res.data.Address_4}" id="alamat_gb">${res.data.Address_4}</option> 
+                        <option value="${res.data.Address_5}" id="alamat_gb">${res.data.Address_5}</option> 
+                    `)
+                 
+                    
+                 
+                }).catch((err)=>{
+                    console.log(err)
+                })
+                
+            }).catch((err)=>{
+                console.log(err)
+            })
+        
+            }).catch((err)=>{
+                console.log(err)
+            })
+
+    
 }
 
 //  SHOW PRODUCT CODE
