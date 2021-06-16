@@ -1180,6 +1180,20 @@ cursor: pointer;
     position: relative;
     /* left:25px; */
 }
+.box-tambah-alamat-supplier{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background-color: red; */
+    height:150px;
+    width:100%;
+    overflow-x: scroll;
+    position: relative;
+    
+    /* left:25px; */
+}
+
 
 .tambah-alamat{
     width:400px;
@@ -1236,7 +1250,7 @@ cursor: pointer;
     height:300px;
     /* background-color: pink; */
     position: relative;
-    top:20px;
+    top:70px;
     display: flex;
     
 
@@ -1439,6 +1453,9 @@ input:focus{
     z-index:20;
     height:500px;
     width:900px;
+    position: absolute;
+    top:100px;
+    left:22%;
     display: none;
     /* background-color: red; */
 }
@@ -1918,4 +1935,9 @@ ul {
     position: relative;
     top:45% !important;
     right: 2.9% !important;;
+}
+
+.icon-logout{
+    font-size: 30px;
+    color:white;
 }

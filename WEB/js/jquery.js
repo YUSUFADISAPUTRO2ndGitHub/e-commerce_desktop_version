@@ -41,6 +41,7 @@ $(function(){
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)
                 $('#email_user').val(`${data_customer.Email}`)
+                $('#nama_user_profile').val(`${data_customer.First_Name}`)
                 $('#tahun_lahir_user').val(tahun)
                 $('#bulan_lahir_user').val(bulan)
                 $('#tanggal_lahir_user').val(hari)
@@ -147,9 +148,12 @@ $('.icon-buy').on('click',function(){
 function groupbuy(product_id){
     console.log(product_id)
     // $('.box-list-kategori').css('display','none')
+    $('.modals-product-detail').empty()
+    $('.modals-product-detail').css('display','none')
     // $('.modals-group-buy').css('display','block')
-    // $('.modals-group-buy').attr('src',`../Iframe/groupbuy.html?product_id=${product_id}`)
-    location.replace(`../Iframe/groupbuy.html?product_id=${product_id}`)
+    // $('.modals-group-buy').attr('src',`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
+    console.log($('.modals-group-buy').attr('src'))
+    location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
 }
 
 

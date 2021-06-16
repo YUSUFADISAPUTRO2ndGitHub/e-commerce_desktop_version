@@ -131,7 +131,7 @@
                             <div class="login-option login-btn"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#registerModal">
                                 <p>Bergabung Sebagai Customer</p>
                             </div>
-                            <div class="login-option login-btn"  onclick="signup_supplier()" data-bs-toggle="modal" data-bs-target="#supplierModal">
+                            <div class="login-option login-btn"   data-bs-toggle="modal" data-bs-target="#supplierModal">
                                 <p>Bergabung Sebagai Supplier</p>
                             </div>
 
@@ -242,7 +242,7 @@
                             <div class="box-name">
                                 <p>No Telp Kedua Gudang</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="No Telp Kedua Gudang" id="bulan_lahir_supp">
+                            <input type="number" class="name-form" placeholder="No Telp Kedua Gudang" id="telp_gudang2_supp">
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -256,7 +256,7 @@
                             <div class="box-name">
                                 <p>Nomor Rekening Perusahaan</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Nomor Rekening Perusahaan" id="tanggal_lahir_supp">
+                            <input type="number" class="name-form" placeholder="Nomor Rekening Perusahaan" id="no_rek_perusahaan_supp">
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -288,11 +288,13 @@
                         </div>
                     </div> 
                     <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Alamat Lengkap Gudang</p>
-                            </div>
-                            <input type="text" class="name-form" placeholder="Alamat Lengkap Gudang" minlength="4" maxlength="8" id="alamat_gudang_supp">
+                        <div class="box-tambah-alamat-supplier">
+                            <div class="login-name">
+                                <div class="box-name">
+                                    <p>Alamat Lengkap</p>
+                                </div>
+                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap_1_supp">
+                            </div>       
                         </div>
                         <div class="login-name">
                             <div class="box-name">
@@ -302,7 +304,6 @@
                         </div>
                     </div>   
                  
-                    
                     
                     <div class="box-new-tambah-alamat">
                         <div class="tambah-alamat" onclick="addAddressSupp()">
@@ -455,11 +456,12 @@
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-profile">
-              <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
-              <div class="box-code-referral">
-                <p>Your Customer Code for Referral :</p>
-                <p id="referral-profile">1238198BA18293YU</p>
-              </div>
+                <p>Hi <span style='color:#37CED5' id="nama_user_profile"> User!</span> <br> Hi,Welcome!</p>
+                <div class="box-code-referral">
+                    <p>Your Customer Code for Referral :</p>
+                    <p id="referral-profile">1238198BA18293YU</p>
+                </div>
+                <i class="fas fa-sign-out-alt icon-logout"></i>
             </div>
             <div class="modal-body box-login-body">
                 <div class="register-form">       
@@ -785,7 +787,7 @@
             <iframe class="modals-check-harga closeByLogin" src=""></iframe> <!-- Modals Check Harga  -->
             <iframe class="modals-delivery-list close" src=""></iframe> <!-- Modals Delivery  -->
             <iframe class="modals-product-detail" src=""></iframe> <!-- Modals product detail  -->
-            <iframe class="modals-group-buy" src=""></iframe> <!-- Modals product detail  -->
+            <iframe class="modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
             
             <!-- <iframe class="modals-cart" src=""></iframe> Header Cart  -->
 
@@ -907,14 +909,14 @@
         </div>
         <!-- RENDER PROMO ITEM -->
         <div class="box-card">
-            <div class="box-back" id="promo">
+            <div class="box-back" id="promo" onclick="backItem('promo')">
                 <i class="fas fa-chevron-left icon-prev icon-back" ></i>
             </div>
            
             <div class="box-render-promo">
                 
             </div>
-            <div class="box-next " id="promo">
+            <div class="box-next next-promo" id="promo" onclick="nextItem('promo')">
                 <i class="fas fa-chevron-right icon-prev icon-next" ></i>
             </div>
             
@@ -933,13 +935,13 @@
         </div>
         <!-- RENDER  NEW ITEM -->
         <div class="box-card">
-            <div class="box-back" id="new">
+            <div class="box-back" id="new" onclick="backItem('new')">
                 <i class="fas fa-chevron-left icon-prev icon-back" ></i>
             </div>
             <div class="box-render-new">
                
             </div>
-            <div class="box-next" id="new">
+            <div class="box-next" id="new" onclick="nextItem('new')" >
                 <i class="fas fa-chevron-right icon-prev icon-next" ></i>
             </div>
         </div>
@@ -958,13 +960,13 @@
 
         <!-- RENDER  ALL ITEM -->
         <div class="box-card">
-            <div class="box-back" id="all">
+            <div class="box-back" id="all" onclick="backItem('all')">
                 <i class="fas fa-chevron-left icon-prev icon-back" ></i>
             </div>
             <div class="box-render-all">
                
             </div>
-            <div class="box-next" id="all">
+            <div class="box-next" id="all" onclick="nextItem('all')">
                 <i class="fas fa-chevron-right icon-prev icon-next" ></i>
             </div>
         </div>   

@@ -24,7 +24,7 @@ $( document ).ready(function() {
     const category = urlParams.get('category');
     const subcategory = urlParams.get('subcategory');
     const item_category = urlParams.get('product_id');
-    const group_buy = urlParams.get('product_id')
+    const group_buy = urlParams.get('groupbuy_id')
     // console.log(item_category, 'line category')
     console.log(queryString,' queryString')
     console.log(urlParams,' urlParams')
@@ -255,7 +255,7 @@ const get_product_detail=(product_id)=>{
     console.log( $('.modals-product-detail').attr('src'))
     // $('.modals-lk').remove()
     console.log(product_id, 'product_id 206')
-    render_get_product_detail(product_id)
+    // render_get_product_detail(product_id)
     // location.assign(`../Iframe/itemDetail.html`)
 }
 
@@ -330,9 +330,12 @@ const renderItemBasedOnCategory=(Category)=>{
 
 
 const render_group_buy=(product_id)=>{
+alert('render group buy jalan')
 
+    
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
+        $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)  
         console.log(res.data)
         $('.box-groupbuy').append(`
         <div class="group-left">
@@ -567,4 +570,25 @@ const render_group_buy=(product_id)=>{
     }else {
         idAddress--
     }
+}
+
+
+var idAddressSupp=1
+function addAddressSupp(){
+   // alert('jalan')
+   idAddressSupp++
+   if(idAddressSupp <=5){
+       $('.box-tambah-alamat-supplier').append(
+           `
+           <div class="login-name">
+               <div class="box-name">
+                   <p>Alamat Lengkap ${idAddressSupp}</p>
+               </div>
+               <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap ${idAddressSupp}" minlength="4" maxlength="8" id="alamat_lengkap_${idAddressSupp}_supp">
+           </div>
+           `
+       )
+   }else {
+    idAddressSupp--
+   }
 }

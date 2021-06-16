@@ -5,6 +5,7 @@
 // $('.login-btn').on('click',function(){
 //          $("#loginModal").modal("hide");
 // })
+console.log('home js aktif')
 
 function forgot_modal_request(){
     $('#loginModal').modal('hide')
@@ -140,23 +141,52 @@ var data = [
  var scrollNextNew = 0   
  var scrollNextAll = 0   
  
- $('.box-next').on('click',function(event){
-     
-     
-     
-     var jenis = $(this).attr("id")
-     if(jenis === 'promo'){
+const nextItem=(id)=>{
+    console.log(id)
+    // var jenis = $('.next-promo').attr("id")
+    
+    if(id === 'promo'){
         scrollNextPromo += 350
          horizontalNavigationPromo(scrollNextPromo, event);
-         console.log(jenis)
-     }else if (jenis === 'new'){
+         console.log(id)
+     }else if (id === 'new'){
         scrollNextNew += 350
         horizontalNavigationNew(scrollNextNew, event);
      }else {
         scrollNextAll += 350
         horizontalNavigationAll(scrollNextAll, event);
      }
- })   
+ 
+}
+
+const backItem=(id)=>{
+    console.log(id)
+    // var jenis = $('.next-promo').attr("id")
+    
+    if(scrollNextPromo <0){
+        scrollNextPromo = 0
+    }else if (scrollNextAll <0){
+        scrollNextAll = 0
+    }else if ( scrollNextNew < 0 ){
+        scrollNextNew = 0
+    }
+    if(id === 'promo'){
+
+        scrollNextPromo -= 350
+        horizontalNavigationPromo(scrollNextPromo, event);
+        console.log(id, ' ini id back')
+    }else if (id === 'new'){
+        scrollNextNew -= 350
+       horizontalNavigationNew(scrollNextNew, event);
+    }else  if(id === 'all'){
+        scrollNextAll -= 350
+       horizontalNavigationAll(scrollNextAll, event);
+    }
+
+ 
+}
+
+
  $('.box-back').on('click',function(event){
     
     

@@ -65,10 +65,11 @@ $(document).on('click',"#simpan_reg",function(){
             console.log(res.data)
             // alert('berhasil daftars')
             if(res.data === true){
-                $('#registerModal').modal('hide')
+                
                 swal.fire("Register Berhasil", "", "success");
+                $('#supplierModal').modal('hide')
             }else {
-                $('#registerModal').modal('hide')
+                $('#supplierModal').modal('hide')
                 swal.fire("Register Gagal", "", "info");
             }
         }).catch((err)=>{
@@ -272,69 +273,93 @@ function loadingMessage(){
 // REGISTER DATA SUPPLIER
 $(document).on('click',"#simpan_supplier",function(){
 alert('simpan supplier jalan')
-var data = {
-    customer_data : {
-       Customer_Code : localStorage.getItem("token"),
-       First_Name : $("#nama_depan_supp").val(),
-       Last_Name : $("#nama_belakang_supp").val(),
-       User_Password :$('#password_supp').val(),
-       Birthday : $("#tahun_lahir_supp").val() + "/" + $("#bulan_lahir_supp").val() + "/" + $("#tanggal_lahir_supp").val(),
-       Created_Date : "CURRENT_TIMESTAMP()",
-       Last_Login : "CURRENT_TIMESTAMP()",
-       Email : $('#email_supp').val(),
-       Contact_Number_1 : $("#no_telp_supp").val(),
-       Contact_Number_2 : $("#no_telp_2_supp").val(),
-       Npwp:$('#npwp_supp').val(),
-       Ktp:$('#no_ktp_supp').val(),
-       Address_1 : $("#alamat_gudang_supp").val(),
-       Status : "pending",
-       User_Type : "Customer",
-       Company:$('#nama_perusahaan_supp')
-    //    account_number: $("#no_rekening_supp").val(),
-       
-   }
-}
-var password = $('password_supp').val()
 
-axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+axios.post(`http://customers.sold.co.id/get-customer-code`)
 .then((res)=>{
-    var newPassword = res.data
-    axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
-        headers:{
-            "Content-Type":'application/json'
-        },
-        "data":JSON.stringify({
-            "Customer_Code": data.customer_data.Customer_Code,
-            "First_Name": data.customer_data.First_Name,
-            "Last_Name": data.customer_data.Last_Name,
-            "User_Password": newPassword,
-            "Birthday": data.customer_data.Birthday,
-            "Created_Date": data.customer_data.Created_Date,
-            "Last_Login": data.customer_data.Last_Login,
-            "Email": data.customer_data.Email,
-            "Contact_Number_1": data.customer_data.Contact_Number_1,
-            "Contact_Number_2": data.customer_data.Contact_Number_2,
-            "Npwp":data.customer_data.Npwp,
-            "ktp":data.customer_data.ktp,
-            "Address_1":data.customer_data.Address_1,
-            "Status": data.customer_data.Status,
-            "User_Type": data.customer_data.User_Type,
-            "Company":data.customer_data.Company
-        })
-    })
+    localStorage.setItem('token',res.data)
+    var data = {
+        customer_data : {
+            Customer_Code : localStorage.getItem("token"),
+            First_Name : $("#nama_depan_supp").val(),
+            Last_Name : $("#nama_belakang_supp").val(),
+            User_Password : $('#password_supp').val(),
+            Created_Date : "CURRENT_TIMESTAMP()",
+            Last_Login : "CURRENT_TIMESTAMP()",
+            Email : $("#email_supp").val(),
+            Contact_Number_1 : $("#telp_gudang_supp").val(),
+            Contact_Number_2 : $("#telp_gudang2_supp").val(),
+            Address_1 : (typeof $("#alamat_lengkap_1_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_1_supp").val(),
+            Address_2 : (typeof $("#alamat_lengkap_2_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_2_supp").val(),
+            Address_3 : (typeof $("#alamat_lengkap_3_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_3_supp").val(),
+            Address_4 : (typeof $("#alamat_lengkap_4_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_4_supp").val(),
+            Address_5 : (typeof $("#alamat_lengkap_5_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_5_supp").val(),
+            Status : "pending",
+            User_Type : "Customer",
+            account_number: $("#no_rek_perusahaan_supp").val(),
+            npwp: $("#npwp_supp").val(),
+            ktp: (typeof $("#no_ktp_supp").val() === 'undefined') ? "NULL" : $("#no_ktp_supp").val(),
+            nik: $("#nik_supp").val(),
+            Nama_Perusahaan: $("#nama_perusahaan_supp").val(),
+        }
+    };
+    
+    var password = $('password_supp').val()
+    axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
-        console.log(res.data)
+        var newPassword = res.data
+        axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
+            headers:{
+                "Content-Type":'application/json'
+            },
+            "data":JSON.stringify({
+                "Customer_Code": data.customer_data.Customer_Code,
+                "First_Name": data.customer_data.First_Name,
+                "Last_Name": data.customer_data.Last_Name,
+                "User_Password": newPassword,
+                "Created_Date": data.customer_data.Created_Date,
+                "Last_Login": data.customer_data.Last_Login,
+                "Email": data.customer_data.Email,
+                "Contact_Number_1": data.customer_data.Contact_Number_1,
+                "Contact_Number_2": data.customer_data.Contact_Number_2,
+                "Address_1" : data.customer_data.Address_1,
+                "Address_2" : data.customer_data.Address_2,
+                "Address_3" : data.customer_data.Address_3,
+                "Address_4" : data.customer_data.Address_4,
+                "Address_5" : data.customer_data.Address_5,
+                "Status": data.customer_data.Status,
+                "User_Type": data.customer_data.User_Type,
+                "account_number": data.customer_data.account_number,
+                "Npwp":data.customer_data.Npwp,
+                "ktp":data.customer_data.ktp,
+                "nik":data.customer_data.nik,
+                "Company":data.customer_data.Company
+            })
+        })
+        .then((res)=>{
+            if(res.data){
+                swal.fire("Register Supplier Berhasil", "", "success");
+            }else{
+                swal.fire("Register Supplier Gagal", "", "alert");
+            }
+            
+        }).catch((err)=>{
+            console.log(err)
+        })
     }).catch((err)=>{
         console.log(err)
     })
+
 }).catch((err)=>{
-    console.log(err)
-})
 
-console.log(data)
 })
 
 
+})
+
+
+
+
+//  FORGOT PASSWORD
 
 $(document).on('click',"#btn-save-forgot",function(){
 alert('button forgot password jalan')

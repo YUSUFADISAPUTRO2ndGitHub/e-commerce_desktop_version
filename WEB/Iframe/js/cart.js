@@ -385,7 +385,8 @@ function checkingout(){
 function checkingoutAll(){
     var token = localStorage.getItem("token");
     console.log("token " + token);
-    if((token != "" || token == null)){
+    // console.log(token.length > 0, ' 388')
+    if(token != "" && token != null){
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
         if(cartToJson.length != 0){
             var array = [];
