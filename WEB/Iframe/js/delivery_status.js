@@ -14,17 +14,17 @@ $(document).ready(function(){
         vaNumber = vaNumber + "" + orderNumber;
     }
     if(status.Status == "pending"){
-        $("#indicator-received").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
-        $("#indicator-approved").attr("src","../www/img/CATEGORY_ICONS/fast-delivery.png");
-        $("#indicator-delivered").attr("src","../www/img/CATEGORY_ICONS/fast-delivery.png");
+        $("#indicator-received").attr("src","./img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-approved").attr("src","./img/CATEGORY_ICONS/fast-delivery.png");
+        $("#indicator-delivered").attr("src","./img/CATEGORY_ICONS/fast-delivery.png");
     }else if(status.status == "approving"){
-        $("#indicator-received").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
-        $("#indicator-approved").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
-        $("#indicator-delivered").attr("src","../www/img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-received").attr("src","./img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-approved").attr("src","./img/CATEGORY_ICONS/checklist.png");
+        $("#indicator-delivered").attr("src","./img/CATEGORY_ICONS/checklist.png");
     }else{
-        $("#indicator-received").attr("src","../www/img/CATEGORY_ICONS/rejected.png");
-        $("#indicator-approved").attr("src","../www/img/CATEGORY_ICONS/rejected.png");
-        $("#indicator-delivered").attr("src","../www/img/CATEGORY_ICONS/rejected.png");
+        $("#indicator-received").attr("src","./img/CATEGORY_ICONS/rejected.png");
+        $("#indicator-approved").attr("src","./img/CATEGORY_ICONS/rejected.png");
+        $("#indicator-delivered").attr("src","./img/CATEGORY_ICONS/rejected.png");
     }
     if(status.Payment_Method.toUpperCase() == "BCA VA TRANSFER".toUpperCase() && (status.Payment_Status == null || status.Payment_Status != "payment")){
         window.location.assign("./unpaidOrderDetails.html?orderNumber=" + orderNumber + "&vaNumber=" + status.VA_Number);
@@ -39,10 +39,12 @@ function populateOrdersTable(datas){
     getAllOrdersForThisCustomer("", datas.Order_Number).done(function (response) {
         console.log(response);
         if(response.length > 0){
-            if(response[0].Payment_Status.toUpperCase() == "PAYMENT"){
-                $(".transfer-information").css("display", "none");
-            }else if(response[0].Payment_Method.toUpperCase() == "BCA VA TRANSFER"){
-                $(".transfer-information").css("display", "none");
+            if(response[0].Payment_Status != undefined){
+                if(response[0].Payment_Status.toUpperCase() == "PAYMENT"){
+                    $(".transfer-information").css("display", "none");
+                }else if(response[0].Payment_Method.toUpperCase() == "BCA VA TRANSFER"){
+                    $(".transfer-information").css("display", "none");
+                }
             }
             var i = 0;
             for(i ; i < response.length; i++){
