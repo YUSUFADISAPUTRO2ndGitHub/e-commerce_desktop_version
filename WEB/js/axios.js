@@ -120,7 +120,7 @@ const renderItemPromo=()=>{
 
 
 const renderItemNew=()=>{
-    // console.log(allData)
+    
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -149,7 +149,7 @@ const renderItemNew=()=>{
     })
 }
 const renderItemAll=()=>{
-    // console.log(allData)
+    
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -270,7 +270,7 @@ const get_product_detail=(product_id)=>{
 
 const renderItemBasedOnSubCategory=(subCategory)=>{
     console.log('masuk ke line 174 render item based on sub cat')
-    axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
+   axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
     .then((res)=>{
         $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
         console.log(res.data)
@@ -289,7 +289,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                         <div class="split-all-item">
                             <div class="item-all-price">
                                 <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
+                                 <p>Rp. ${hargaAwal}</p>
                             </div>
                         </div>
                     </div>

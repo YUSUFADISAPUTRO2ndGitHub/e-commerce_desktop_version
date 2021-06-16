@@ -100,7 +100,7 @@ $(function(){
                 $('.input-name').css('border-bottom-left-radius','0px')
                 $('.input-name').css('border-bottom-right-radius','0px')
                 $('.render-li-search').empty()
-            //   console.log(allData)
+              console.log(allData,' all data 103')
                 const searchString = value.toLowerCase()
                 console.log(searchString)
                     const filterSearch = allData.filter((item)=>{
@@ -142,6 +142,10 @@ $(function(){
 function replace_value_to(x){
     // alert($(x).html());
     $(".input-name").val($(x).html());
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','25px')
+    $('.input-name').css('border-bottom-right-radius','25px')
+
 }   
 
 $('.icon-buy').on('click',function(){
@@ -149,6 +153,13 @@ $('.icon-buy').on('click',function(){
     console.log(product_id)
 })
 
+const search_item=()=>{
+    console.log('159 jalan search')
+    var item = $('.input-name').val()
+    
+    $('.modals-search-result').css('display','block')
+    $('.modals-search-result').attr('src',`./Iframe/searchingPage.html`)
+}
 
 
 
@@ -185,7 +196,7 @@ function payment_groupbuy(product_id){
 
 function addToCart(product_id){
     console.log(product_id)
-    
+    alert('addtocart jalanm 199')
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse,' ini data parse')
 

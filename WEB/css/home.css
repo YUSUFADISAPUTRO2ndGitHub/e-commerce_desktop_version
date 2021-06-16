@@ -639,7 +639,7 @@ input::-webkit-input-placeholder {
     margin-left:2px;
     margin-right:2px;
     border-radius:5px;
-    position: relative;
+    /* position: relative; */
     /* left:-30px; */
 }
 .img-card{
@@ -706,7 +706,7 @@ input::-webkit-input-placeholder {
     display: flex;
     width:100%;
     height:130px;
-    background-color: white;
+    /* background-color: white; */
     flex-direction: column;
 }
 
@@ -741,7 +741,7 @@ cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 30;
 }
 .box-next-detail:hover{
     cursor: pointer;
@@ -793,7 +793,7 @@ cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 30;
 }
 
 .icon-prev{
@@ -1440,7 +1440,8 @@ input:focus{
     position: absolute;
     top: 97px;
     width: 100%;
-    height: 500vh;
+    height: 100vh;
+    display: none;
 }
 
 /* MODALS LIST ITEM BY SUB CATEGORY */
