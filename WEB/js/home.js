@@ -94,6 +94,11 @@ var data = [
     ['Moo', 'Reindeer Hunter']
  ];
   
+
+ const logoutProfile=()=>{
+    localStorage.removeItem("token");
+
+ }
     
 
  function download_csv() {
