@@ -351,12 +351,19 @@ alert('render group buy jalan')
                     </div>
                     <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
                 </div>
-                <div class="login-name">
-                    <div class="box-name">
-                        <p>Metode Pembayaran</p>
-                    </div>
-                    <input type="text" class="name-form" placeholder="Metode Pembayaran" id="pembayaran_groupbuy">     
-                </div>
+                <select class="form-select option-payment-gb" aria-label="Default select example">
+                     <option selected>Select Payment Method</option>    
+                     <option >Select Payment Method</option>    
+                     <option >Select Payment Method</option>            
+                     <option >Select Payment Method</option>    
+                     <option >Select Payment Method</option>    
+                </select>
+                <select class="form-select option-address-gb" aria-label="Default select example">
+                    <option selected>Select Address Method</option>    
+                    <option >Alamat  Terdaftar</option>    
+                    <option >Alamat Baru</option>           
+                </select>
+
                 <div class="login-name">
                     <div class="box-name" >
                         <p>PENGIRIMAN KE ALAMAT</p>

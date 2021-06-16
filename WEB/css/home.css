@@ -998,7 +998,7 @@ cursor: pointer;
     width:250px;
     height:40px;
     position: relative;
-    top:10px;
+    top:15px;
     /* left:25px; */
     /* background-color: red; */  
 }
@@ -1936,7 +1936,7 @@ ul {
 
 
 
-.form-select {
+.option-referral {
     width:41% !important;
     position: relative;
     top:45% !important;

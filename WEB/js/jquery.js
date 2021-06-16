@@ -33,10 +33,14 @@ $(function(){
         .then((res)=>{
             // console.log(res.data,'line 33 option -4')
             var data_customer = res.data
-            // console.log(data_customer)
+            console.log(data_customer)
             if(data_customer){
                 console.log(data_customer)
                 console.log(data_customer.Customer_Code)
+                if(data_customer.User_Type === 'Customer'){
+                    $('.btn-status-barang').css('display','none')
+                }
+    
                 var tahun = data_customer.Birthday.slice(0,4)
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)

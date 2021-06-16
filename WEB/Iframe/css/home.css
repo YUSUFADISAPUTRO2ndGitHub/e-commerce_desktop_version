@@ -1270,6 +1270,29 @@ input::-webkit-input-placeholder {
 .btn-komisi:hover{
     cursor: pointer;
 }
+
+.btn-status-barang{
+    width:250px;
+    border-radius:50px;
+    height:35px;
+    background-color: white;
+    border:1px solid #217283;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-status-barang p {
+    color:#217283;
+    position: relative;
+    top:8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+.btn-status-barang:hover{
+    cursor: pointer;
+}
+
+
 input:focus{
     color:#217283;
     padding-left:10px;

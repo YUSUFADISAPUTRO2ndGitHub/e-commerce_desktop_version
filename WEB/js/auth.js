@@ -67,9 +67,9 @@ $(document).on('click',"#simpan_reg",function(){
             if(res.data === true){
                 
                 swal.fire("Register Berhasil", "", "success");
-                $('#supplierModal').modal('hide')
+                $('#loginModal').modal('hide')
             }else {
-                $('#supplierModal').modal('hide')
+                $('#loginModal').modal('hide')
                 // swal.fire("Register Gagal", "", "info");
                 Swal.fire({
                     icon: 'error',
@@ -343,7 +343,9 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
         })
         .then((res)=>{
             if(res.data){
+                
                 swal.fire("Register Supplier Berhasil", "", "success");
+                $('#supplierModal').modal('hide')
             }else{
                 swal.fire("Register Supplier Gagal", "", "alert");
             }
@@ -368,36 +370,46 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
 //  FORGOT PASSWORD
 
 $(document).on('click',"#btn-save-forgot",function(){
-alert('button forgot password jalan')
+// alert('button forgot password jalan')
 var data = {
     customer_data : {
         requestedNewPassword :$('#password_forgot').val(),
-       Email : $('#email_forgot').val(),
-       PrimaryContactNumber : $("#no_telp_forgot").val(),
-       Ktp:$('#ktp_forgot').val(),
+        Email : $('#email_forgot').val(),
+        PrimaryContactNumber : $("#no_telp_forgot").val(),
+        Ktp:$('#ktp_forgot').val(),
       
     //    account_number: $("#no_rekening_supp").val(),
        
    }
 }
-var password = $('#password_forgot').val()
 
-    
-   Email =$('#email_forgot').val(),
-   PrimaryContactNumber = $("#no_telp_forgot").val(),
-   Ktp=$('#ktp_forgot').val(),
-    axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
-    .then((res)=>{
-        var newPassword = res.data
-        axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${newPassword}`)
+    var password = $('#password_forgot').val()
+   var Email =$('#email_forgot').val()
+   var PrimaryContactNumber = $("#no_telp_forgot").val()
+   var Ktp=$('#ktp_forgot').val()
+   
+   
+  
+        
+        axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${Ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${password}`)
         .then((res)=>{
+            if(res.data){
+                $('#forgotModal').modal('hide')
+                swal.fire("Ganti Password Berhasil", "", "success");
+            }else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ganti Password gagal!',
+                    // footer: '<a href="">Why do I have this issue?</a>'
+                  })
+            }
             console.log(res.data)
+            // console.log(newPassword)
         }).catch((err)=>{
             console.log(err)
         })
-    }).catch((err)=>{
-        console.log(err)
-    })
+    
     console.log(data)
 
 

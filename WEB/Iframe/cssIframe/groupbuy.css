@@ -12,7 +12,7 @@
     height:100%;
     display: flex;
     flex-direction: column;
-    padding:10px;
+    /* padding:10px; */
     /* background-color: red; */
 }
 
@@ -23,11 +23,27 @@
     display: flex;
     flex-direction: column;
 }
+.option-payment-gb{
+    width:95% !important;
+    position: relative;
+    top:15px;
+    margin-bottom:20px;
+}
 
+.option-address-gb {
+    width:95% !important;
+    position: relative;
+    top:15px;
+    margin-bottom:20px;
+}
 .groupbuy-form{
     width:100%;
     height:100%;
     align-items: center;
+    background-color: red;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
 }
 .login-name{
     width:100%;
