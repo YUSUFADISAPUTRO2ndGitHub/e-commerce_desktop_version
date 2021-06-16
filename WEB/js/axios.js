@@ -15,6 +15,10 @@ $( document ).ready(function() {
     $('.cart-counter').text(dataParse.length)
     var test =$('.cart-counter').val()
     console.log(test)
+
+    
+
+
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const category = urlParams.get('category');
@@ -334,14 +338,14 @@ const renderItemBasedOnCategory=(Category)=>{
 
 
 const render_group_buy=(product_id)=>{
-alert('render group buy jalan')
+// alert('render group buy jalan')
 
     
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
         // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)  
         console.log(res.data)
-        alert(res.data.Picture_1)
+        // alert(res.data.Picture_1)
         $('.box-groupbuy').append(`
         <div class="group-left">
             <div class="groupbuy-form">
@@ -354,27 +358,26 @@ alert('render group buy jalan')
                 <select class="form-select option-payment-gb" aria-label="Default select example">
                      <option selected>Select Payment Method</option>    
                      <option >Select Payment Method</option>    
-                     <option >Select Payment Method</option>            
+                     <option >Select Payment Me thod</option>            
                      <option >Select Payment Method</option>    
                      <option >Select Payment Method</option>    
                 </select>
-                <select class="form-select option-address-gb" aria-label="Default select example">
+                <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)">
                     <option selected>Select Address Method</option>    
-                    <option >Alamat  Terdaftar</option>    
-                    <option >Alamat Baru</option>           
+                    <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
+                    <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
+                </select>
+                <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="addressMethod(this)">
+                    <option selected>Pilihan Alamat</option>    
+                    <option value="jalanan 1" class="id-address-gb">jalanan 1</option>    
+                    <option value="jalanan 2" class="id-address-gb">Jalanan2</option>           
                 </select>
 
-                <div class="login-name">
+                <div class="login-name alamat-pengiriman" >
                     <div class="box-name" >
                         <p>PENGIRIMAN KE ALAMAT</p>
                     </div>
                     <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
-                </div>
-                <div class="login-name">
-                    <div class="box-name">
-                        <p>PILIH ALAMAT TERSIMPAN</p>
-                    </div>
-                    <input type="text" class="name-form" placeholder="Metode Pembayaran" id="pembayaran_groupbuy">     
                 </div>
                 <div class="login-name">
                     <div class="box-name" >
@@ -399,7 +402,7 @@ alert('render group buy jalan')
                 </div>
             <div class="gr-2">
                 <div class="box-img-gr">
-                    <img src="${res.data.Picture_1} alt="" class="img-gr">
+                    <img src="${res.data.Picture_1}" alt="" class="img-gr">
                 </div>
             </div>
         </div>

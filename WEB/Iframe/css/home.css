@@ -756,7 +756,7 @@ input::-webkit-input-placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 48;
 }
 
 .icon-prev{
@@ -1875,4 +1875,13 @@ ul {
     position: relative;
     top:45% !important;
     right: 2.9% !important;;
+}
+
+.alamat-pengiriman{
+    display: none;
+}
+
+.option-alamat-gb{
+    display: none;
+    background-color: blue;
 }

@@ -414,3 +414,13 @@ var data = {
 
 
 })
+
+$(document).on('change','#option-address-gb',function(){
+    // $('.option-address-gb').on('change',function(){
+        var value = $('#option-address-gb :selected').val();
+        console.log(value)
+    // })
+    var test = $('#option-address-gb').val()
+    console.log(test)
+
+})

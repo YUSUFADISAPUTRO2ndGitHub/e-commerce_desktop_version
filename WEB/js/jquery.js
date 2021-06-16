@@ -28,7 +28,8 @@ $(function(){
     // alert('function option-4 login modals')
     var token = localStorage.getItem('token')
     console.log(token)
-
+ 
+    
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             // console.log(res.data,'line 33 option -4')
@@ -149,7 +150,19 @@ $('.icon-buy').on('click',function(){
 })
 
 
+
+
+
 function groupbuy(product_id){
+    axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
+    .then((res)=>{
+        console.log(res.data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    
+
     console.log(product_id)
     // $('.box-list-kategori').css('display','none')
     $('.modals-product-detail').empty()
@@ -159,6 +172,7 @@ function groupbuy(product_id){
     console.log($('.modals-group-buy').attr('src'))
     location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
 }
+
 
 
 
@@ -214,3 +228,21 @@ function addToCart(product_id){
     
 
 }
+
+
+function addressMethod(item){
+    console.log(item.value)
+    // $('.option-address-gb').text(item.value)
+    if(item.value === 'Alamat Terdaftar'){
+        // alert('masuk ke alamt terdaftar')
+        $('.option-alamat-gb').css('display','block')
+    }else if (item.value === 'Alamat Baru'){
+        // alert('masuk ke alamt terdaftar')
+        $('.alamat-pengiriman').css('display','block')
+    }
+}
+
+$('.id-address-gb').on('click',function(){
+    var data = $(this).val()
+    console.log(data)
+})

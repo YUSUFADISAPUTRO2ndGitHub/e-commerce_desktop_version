@@ -176,7 +176,7 @@ input:focus{
 .box-img-gr{
     height:300px;
     width:250px;
-    background-color: blue;
+    /* background-color: blue; */
 }
 .img-gr{
     width:100%;
