@@ -1448,7 +1448,7 @@ input:focus{
 
 .modals-product-detail-position-home {
     position: fixed;
-    top: 3%;
+    top: 10%;
     left: 50%;
     margin-left: -25%;
 }

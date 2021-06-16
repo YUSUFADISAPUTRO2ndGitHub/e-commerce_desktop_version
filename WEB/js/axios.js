@@ -75,6 +75,7 @@ getAllData()
 
 const get_product_detail_from_main_page=(product_id)=>{
     $('.modals-product-detail').css('display','block')
+    $('.close-button').css('display','block')
     $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}`)
     console.log( $('.modals-product-detail').attr('src'))
     console.log(product_id, 'product_id 206')
@@ -330,6 +331,11 @@ const renderItemBasedOnCategory=(Category)=>{
         }).catch((err)=>{
             console.log(err)
         })
+}
+
+function close_all_open_window(){
+    $(".force-close-all-command").css("display", "none");
+    
 }
 
 
