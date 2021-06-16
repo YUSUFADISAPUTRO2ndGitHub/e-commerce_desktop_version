@@ -77,6 +77,14 @@ axios.post('http://products.sold.co.id/get-product-details')
 }
 getAllData()
 
+const get_product_detail_from_main_page=(product_id)=>{
+    $('.modals-product-detail').css('display','block')
+    $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}`)
+    console.log( $('.modals-product-detail').attr('src'))
+    console.log(product_id, 'product_id 206')
+    render_get_product_detail(product_id)
+}
+
 // RENDER DATA HOME
 const renderItemPromo=()=>{
 
@@ -89,7 +97,7 @@ const renderItemPromo=()=>{
         $('.box-render-promo').append(
         ` 
             <div class="card-item">
-                <img src="${val.Picture_1}" alt="" class="img-card">   
+                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
