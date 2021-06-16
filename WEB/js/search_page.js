@@ -19,7 +19,8 @@ function show_subcategory(choosen_parent_category){
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
     .then((res)=>{
         console.log(res);
-        $('.box-list-kategori').css("display", "block")
+        // $('.box-list-kategori').css("display", "block")
+        $('.box-list-kategori').toggle()
         $('.box-list-kategori').empty()
         res.data.map((val,index)=>{
             $('.box-list-kategori').append(
