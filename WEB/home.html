@@ -97,6 +97,18 @@
         .closeByLogin{
             z-index: 50;
         }
+        .close-button{
+            display: none;
+            z-index: 48;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: darkgray;
+            opacity: 0.5;
+            color: coral;
+        }
     </style>
 </head>
 <body>
@@ -779,14 +791,18 @@
                 </div>
             </div>
             
-            <iframe class="iframe closeByLogin" src=""></iframe> <!-- Header Cart  -->
-            <iframe class="modals-lk close closeByLogin" src=""></iframe> <!-- List  SubKategori  -->
-            <iframe class="modals-item close closeByLogin" src=""></iframe> <!-- List All Item by SubCategory-->
-            <iframe class="modals-pengiriman closeByLogin" src=""></iframe> <!-- Header Cart  -->
-            <iframe class="modals-check-harga closeByLogin" src=""></iframe> <!-- Modals Check Harga  -->
-            <iframe class="modals-delivery-list close" src=""></iframe> <!-- Modals Delivery  -->
-            <iframe class="modals-product-detail" src=""></iframe> <!-- Modals product detail  -->
-            <iframe class="modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
+            <iframe class="force-close-all-command iframe closeByLogin" src=""></iframe> <!-- Header Cart  -->
+            <iframe class="force-close-all-command modals-lk close closeByLogin" src=""></iframe> <!-- List  SubKategori  -->
+            <iframe class="force-close-all-command modals-item close closeByLogin" src=""></iframe> <!-- List All Item by SubCategory-->
+            <iframe class="force-close-all-command modals-pengiriman closeByLogin" src=""></iframe> <!-- Header Cart  -->
+            <iframe class="force-close-all-command modals-check-harga closeByLogin" src=""></iframe> <!-- Modals Check Harga  -->
+            <iframe class="force-close-all-command modals-delivery-list close" src=""></iframe> <!-- Modals Delivery  -->
+            <div>
+                <iframe class="force-close-all-command modals-product-detail modals-product-detail-position-home" src="">
+                </iframe> <!-- Modals product detail  -->
+                <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
+            </div>
+            <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
             
             <!-- <iframe class="modals-cart" src=""></iframe> Header Cart  -->
 
