@@ -2,15 +2,6 @@
 
 // console.log('axios jalan')
 
-$(document).ready(function(){
-    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-    console.log(dataParse)
-    $('.cart-counter').text(dataParse.length)
-    var test =$('.cart-counter').val()
-    console.log(test)
-
-})
-
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     $('.cart-counter').text(dataParse.length)
@@ -19,13 +10,18 @@ var allData = []
 
 
 $( document ).ready(function() {
+    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+    console.log(dataParse)
+    $('.cart-counter').text(dataParse.length)
+    var test =$('.cart-counter').val()
+    console.log(test)
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const category = urlParams.get('category');
     const subcategory = urlParams.get('subcategory');
     const item_category = urlParams.get('product_id');
     const group_buy = urlParams.get('groupbuy_id')
-    // console.log(item_category, 'line category')
+    // console.log(group_buy, 'group_buy')
     console.log(queryString,' queryString')
     console.log(urlParams,' urlParams')
     console.log(category,' category')
@@ -129,7 +125,7 @@ const renderItemNew=()=>{
         $('.box-render-new').append(
         ` 
             <div class="card-item">
-                <img src="${val.Picture_1}" alt="" class="img-card">   
+                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
@@ -158,7 +154,7 @@ const renderItemAll=()=>{
         $('.box-render-all').append(
         ` 
             <div class="card-item">
-                <img src="${val.Picture_1}" alt="" class="img-card">   
+                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
@@ -343,8 +339,9 @@ alert('render group buy jalan')
     
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
-        $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)  
+        // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)  
         console.log(res.data)
+        alert(res.data.Picture_1)
         $('.box-groupbuy').append(`
         <div class="group-left">
             <div class="groupbuy-form">
@@ -401,7 +398,7 @@ alert('render group buy jalan')
                 </div>
             <div class="gr-2">
                 <div class="box-img-gr">
-                    <img src="${val.Picture_1} alt="" class="img-gr">
+                    <img src="${res.data.Picture_1} alt="" class="img-gr">
                 </div>
             </div>
         </div>
