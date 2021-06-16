@@ -70,7 +70,13 @@ $(document).on('click',"#simpan_reg",function(){
                 $('#supplierModal').modal('hide')
             }else {
                 $('#supplierModal').modal('hide')
-                swal.fire("Register Gagal", "", "info");
+                // swal.fire("Register Gagal", "", "info");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Register gagal!',
+                    // footer: '<a href="">Why do I have this issue?</a>'
+                  })
             }
         }).catch((err)=>{
             console.log(err)

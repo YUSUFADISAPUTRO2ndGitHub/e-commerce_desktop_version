@@ -97,6 +97,8 @@ var data = [
 
  const logoutProfile=()=>{
     localStorage.removeItem("token");
+    $('#profileModal').modal('hide')
+
 
  }
     
