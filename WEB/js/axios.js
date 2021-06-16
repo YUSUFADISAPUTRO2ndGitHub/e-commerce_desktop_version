@@ -88,7 +88,7 @@ const renderItemPromo=()=>{
         // console.log(hargaTotal)
         $('.box-render-promo').append(
         ` 
-            <div class="card-item" onclick="get_product_detail('${val.Product_Code}')">
+            <div class="card-item">
                 <img src="${val.Picture_1}" alt="" class="img-card">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
