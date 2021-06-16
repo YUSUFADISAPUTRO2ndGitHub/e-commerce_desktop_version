@@ -30,7 +30,7 @@ function locally_append_customer_chat(){
     $("#li-" + number_of_chat).append("<div class=\"card-body\" id=\"div-" + number_of_chat + "\">");
     $("#div-" + number_of_chat).append("<p class=\"card-text\" id=\"p-" + number_of_chat + "\">");
     $("#p-" + number_of_chat).append("<span class=\"customer\">" + $(".chat-options").val() + "</span>");
-    $("#p-" + number_of_chat).append("<img src=\"../www/img/CATEGORY_ICONS/customer-service.png\" class=\"card-img-top\">");
+    $("#p-" + number_of_chat).append("<img src=\"../img/CATEGORY_ICONS/customer-service.png\" class=\"card-img-top\">");
     return number_of_chat++;
 }
 
@@ -38,7 +38,7 @@ function locally_append_customer_service_chat(answer){
     $(".list-group").append("<li class=\"list-group-item align-left\" id=\"li-" + number_of_chat + "\">");
     $("#li-" + number_of_chat).append("<div class=\"card-body\" id=\"div-" + number_of_chat + "\">");
     $("#div-" + number_of_chat).append("<p class=\"card-text\" id=\"p-" + number_of_chat + "\">");
-    $("#p-" + number_of_chat).append("<img src=\"../www/img/CATEGORY_ICONS/customer-service.png\" class=\"card-img-top\">");
+    $("#p-" + number_of_chat).append("<img src=\"../img/CATEGORY_ICONS/customer-service.png\" class=\"card-img-top\">");
     $("#p-" + number_of_chat).append("<span class=\"customer-service\">" + answer + "</span>");
     return number_of_chat++;
 }

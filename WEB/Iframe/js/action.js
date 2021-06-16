@@ -12,7 +12,7 @@
 //         $("." + product[2]).append("<img class=\"product-image\" src=" + product[1] + ">");
 
 //         $(".slideshow-container").append("<div class=\"mySlides " + product[2] + "123\"></div>");
-//         $("." + product[2] + "123").append("<img class=\"product-image\" src=\"../www/img/gun.png\">");
+//         $("." + product[2] + "123").append("<img class=\"product-image\" src=\"../img/gun.png\">");
 
 //         $(".slideshow-container").append("<a class=\"prev\" onclick=\"plusSlides(-1)\">PREV <</a>");
 //         $(".slideshow-container").append("<a class=\"next\" onclick=\"plusSlides(1)\">> NEXT</a>");
@@ -45,7 +45,7 @@ function detail_product_requested(x) {
         $("." + product[2]).append("<img src="+ product[1] +" class=\"d-block w-100\">");
 
         $(".carousel-inner").append("<div class=\"carousel-item " + product[2] + "123\">");
-        $("." + product[2] + "123").append("<img src=\"../www/img/gun.png\" class=\"d-block w-100\">");
+        $("." + product[2] + "123").append("<img src=\"../img/gun.png\" class=\"d-block w-100\">");
 
         $("#carouselExampleControls").append("<a class=\"carousel-control-prev\" href=\"#carouselExampleControls\" role=\"button\" data-bs-slide=\"prev\">");
         $(".carousel-control-prev").append("<span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>");

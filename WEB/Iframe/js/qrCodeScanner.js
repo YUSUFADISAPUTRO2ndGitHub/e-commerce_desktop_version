@@ -12,7 +12,7 @@ let scanning = false;
 
 qrcode.callback = res => {
     if (res) {
-        var audio = new Audio('../www/img/cashier_sound.mp3');
+        var audio = new Audio('../img/cashier_sound.mp3');
         audio.play();
         var result = res.split("/");
         var product_code = "";

@@ -90,15 +90,15 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#card-body-right" + product_row).append("<div class=\"card-text\" id=\"card-text-right"+ product_row +"\">");
         $("#card-text-right" + product_row).append("<del class=\"grey-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100) + "</del>");
         $("#card-text-right" + product_row).append("<div class=\"red-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1)* 100)/ 100) + "</div>");
-        $("#card-text-right" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+        $("#card-text-right" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../img/Additional_icons/cart.png\"><span></div>");
         // badge
         if(data.GroupBuy_Purchase == "yes"){
             $("#product-card-right" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-right"+ product_row +"\">");
-            $("#badge-right" + product_row).append("<img src=\"../www/img/Additional_icons/sale.png\" class=\"category-icon\" >");
+            $("#badge-right" + product_row).append("<img src=\"../img/Additional_icons/sale.png\" class=\"category-icon\" >");
         } 
         if(data.Categorize_NEW == "yes"){
             $("#product-card-right" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-right"+ product_row +"\">");
-            $("#badge-right" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
+            $("#badge-right" + product_row).append("<img src=\"../img/Additional_icons/new.png\" class=\"category-icon\" >");
         }  
     }else{
         console.log("product_row inside 2 " + product_row);
@@ -113,15 +113,15 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#card-body-left" + product_row).append("<div class=\"card-text\" id=\"card-text-left"+ product_row +"\">");
         $("#card-text-left" + product_row).append("<del class=\"grey-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1.2)* 100)/ 100) + "</del>");
         $("#card-text-left" + product_row).append("<div class=\"red-vantsing-text\">Rp. " + commafy(Math.round((data.Sell_Price*1)* 100)/ 100) + "</div>");
-        $("#card-text-left" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../www/img/Additional_icons/cart.png\"><span></div>");
+        $("#card-text-left" + product_row).append("<div class=\"add-to-cart\" onclick=\"addToCartDirectly(\'" + data.Product_Code + "\')\"><span class=\"add-to-cart-button\"><img class=\"independent-cart-icon\" src=\"../img/Additional_icons/cart.png\"><span></div>");
         // badge
         if(data.GroupBuy_Purchase == "yes"){
             $("#product-card-left" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-left"+ product_row +"\">");
-            $("#badge-left" + product_row).append("<img src=\"../www/img/Additional_icons/sale.png\" class=\"category-icon\" >");
+            $("#badge-left" + product_row).append("<img src=\"../img/Additional_icons/sale.png\" class=\"category-icon\" >");
         } 
         if(data.Categorize_NEW == "yes"){
             $("#product-card-left" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-left"+ product_row +"\">");
-            $("#badge-left" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
+            $("#badge-left" + product_row).append("<img src=\"../img/Additional_icons/new.png\" class=\"category-icon\" >");
         }
     }
 }
@@ -141,7 +141,7 @@ function generatehomeleftOnly(product_row, leftdata, dataLength){
     // badge
     if(leftdata.Categorize_NEW == "new"){
         $("#product-card-left" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-left"+ product_row +"\">");
-        $("#badge-left" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
+        $("#badge-left" + product_row).append("<img src=\"../img/Additional_icons/new.png\" class=\"category-icon\" >");
     }
     // right
     $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
@@ -156,7 +156,7 @@ function generatehomeleftOnly(product_row, leftdata, dataLength){
     // badge
     if(leftdata.Categorize_NEW == "new"){
         $("#product-card-right" + product_row).append("<div class=\"homemade-badge category-icon-badge\" id=\"badge-right"+ product_row +"\">");
-        $("#badge-right" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
+        $("#badge-right" + product_row).append("<img src=\"../img/Additional_icons/new.png\" class=\"category-icon\" >");
     }
 }
 
