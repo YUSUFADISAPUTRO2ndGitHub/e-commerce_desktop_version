@@ -139,13 +139,11 @@ $(function(){
                 $('.input-name').css('border-bottom-right-radius','25px')
             }
 
-        }, 500));
-      
-    // });
-
-    
+        }, 500)); 
    
 })
+
+
 
 function replace_value_to(x){
     // alert($(x).html());
@@ -191,55 +189,247 @@ function groupbuy(product_id){
 }
 
 function payment_groupbuy(product_id){
+    var token = localStorage.getItem('token')
     var total_price = $('#tp_sp').val()
     console.log(total_price)
 
     var detail_product; 
-
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    .then((res)=>{
-        console.log(res.data)
-        detail_product = res.data
-    }).catch((err)=>{
-        console.log(err)
-    })
-
-  
-    var token = localStorage.getItem('token')
     var data_customer;
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    .then((res)=>{
-        data_customer = res.data
-        console.log(data_customer)
-        
-            customerDetails  ={
-                Customer_Code:token,
-                Total_Price: total_price,
-                Total_Quantity : $('#qty_groupbuy').val(),
-                Unit:"pcs",
-                Shipping_Address: $('#alamat_gb').val(),
-                Payment_Method : $('#payment_gb').val(),
-                Shipping_Fee: $('#pengiriman-fee').val(),
-                alamatLain : $('#alamat_lain').val(),
-                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+    var items =[]
+    var total_qty_from_user = parseInt($('.qty_groupbuy').val())
+    var total_item_kebeli;
+    if(total_qty_from_user>0){
+        axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
+        .then((res)=>{
+            total_item_kebeli = res.data
+            console.log(res.data)
+            if(res.data === null){
+                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                .then((res)=>{
+                    console.log(res.data)
+                    detail_product = res.data
+                    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                    .then((res)=>{
+                        data_customer = res.data
+                        console.log(data_customer)
+                        
+                            customerDetails  ={
+                                Customer_Code:token,
+                                Total_Price: total_price,
+                                Total_Quantity : $('.qty_groupbuy').val(),
+                                Unit:"pcs",
+                                Shipping_Address: $('#alamat_gb').val(),
+                                Payment_Method : $('#payment_gb').val(),
+                                Shipping_Fee: $('#pengiriman-fee').val(),
+                                alamatLain : $('#alamat_lain').val(),
+                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                            }         
+                            items.push( {
+                                    Customer_Code: token,
+                                    Product_Code: product_id,
+                                    Product_Name: detail_product.Name,
+                                    Quantity_Requested: $('.qty_groupbuy').val(),
+                                    Price_Based_On_Total_Quantity: total_price
+            
+                            }) 
+                            var data = {
+                                "Sales_Order_Data": customerDetails,
+                                "Sales_Order_Detail_data": items
+                            }
+                
+                          
+                            console.log(data)
+                            console.log(customerDetails,' ini customer detail')
+                            console.log(items, ' ini items')
+            
+                            axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                headers:{
+                                    "Content-Type":'application/json'
+                                },
+                                "data":JSON.stringify({
+                                    "Sales_Order_data":customerDetails,
+                                    "Sales_Order_Detail_data": items
+                                })
+                            }).then((res)=>{
+                                console.log(res.data)
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                    
+                            swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                            $('.groupbuy_sp').css('display','none')
+                
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }).catch((err)=>{
+                    console.log(err)
+                })
+
+            }else {
+                // hasil dari res.data.Total_Quantity di kurang sama qty yang di beli dari customer
+                // = res.data.Total_Quantity-
+                // yang bisa di beli => data_product_GroupBuy_SellQuantity - res.data.total_quantity
+                console.log(res.data)
+                
+                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                .then((response)=>{ // res.data == detail product
+                    
+                    console.log(response.data)
+                    console.log(total_item_kebeli)
+                    var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
+                    console.log(item_tersedia)
+                    if(total_qty_from_user > item_tersedia){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: `Hanya Bisa Membeli ${item_tersedia}`,
+                            // footer: '<a href="">Why do I have this issue?</a>'
+                          })
+                          axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                          .then((res)=>{
+                              console.log(res.data)
+                              detail_product = res.data
+                              axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                              .then((res)=>{
+                                  console.log(res.data)
+                                  data_customer = res.data
+                                  var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
+                                  console.log(harga_pembelian)
+
+
+
+                                      customerDetails  ={
+                                          Customer_Code:token,
+                                          Total_Price: harga_pembelian,
+                                          Total_Quantity : item_tersedia,
+                                          Unit:"pcs",
+                                          Shipping_Address: $('#alamat_gb').val(),
+                                          Payment_Method : $('#payment_gb').val(),
+                                          Shipping_Fee: $('#pengiriman-fee').val(),
+                                          alamatLain : $('#alamat_lain').val(),
+                                          Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                      }         
+                                      items.push( {
+                                              Customer_Code: token,
+                                              Product_Code: product_id,
+                                              Product_Name: detail_product.Name,
+                                              Quantity_Requested: item_tersedia,
+                                              Price_Based_On_Total_Quantity: harga_pembelian
+                      
+                                      }) 
+                                      var data = {
+                                          "Sales_Order_Data": customerDetails,
+                                          "Sales_Order_Detail_data": items
+                                      }
+                          
+                                    
+                                      console.log(data)
+                                      console.log(customerDetails,' ini customer detail')
+                                      console.log(items, ' ini items')
+                      
+                                      axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                          headers:{
+                                              "Content-Type":'application/json'
+                                          },
+                                          "data":JSON.stringify({
+                                              "Sales_Order_data":customerDetails,
+                                              "Sales_Order_Detail_data": items
+                                          })
+                                      }).then((res)=>{
+                                          console.log(res.data)
+                                      }).catch((err)=>{
+                                          console.log(err)
+                                      })
+                              
+                          
+                          
+                              }).catch((err)=>{
+                                  console.log(err)
+                              })
+                          }).catch((err)=>{
+                              console.log(err)
+                          })
+                    }else { // pembelian jika total qty dari user tidak melebihi item yang tersedia
+                        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                        .then((res)=>{
+                            console.log(res.data)
+                            detail_product = res.data
+                            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                            .then((res)=>{
+                                data_customer = res.data
+                                console.log(data_customer) 
+                                    customerDetails  ={
+                                        Customer_Code:token,
+                                        Total_Price: total_price,
+                                        Total_Quantity : $('.qty_groupbuy').val(),
+                                        Unit:"pcs",
+                                        Shipping_Address: $('#alamat_gb').val(),
+                                        Payment_Method : $('#payment_gb').val(),
+                                        Shipping_Fee: $('#pengiriman-fee').val(),
+                                        alamatLain : $('#alamat_lain').val(),
+                                        Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                    }         
+                                    items.push( {
+                                            Customer_Code: token,
+                                            Product_Code: product_id,
+                                            Product_Name: detail_product.Name,
+                                            Quantity_Requested: $('.qty_groupbuy').val(),
+                                            Price_Based_On_Total_Quantity: total_price
+                    
+                                    }) 
+                                    var data = {
+                                        "Sales_Order_Data": customerDetails,
+                                        "Sales_Order_Detail_data": items
+                                    }     
+                                    console.log(data)
+                                    console.log(customerDetails,' ini customer detail')
+                                    console.log(items, ' ini items')
+                    
+                                    axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                        headers:{
+                                            "Content-Type":'application/json'
+                                        },
+                                        "data":JSON.stringify({
+                                            "Sales_Order_data":customerDetails,
+                                            "Sales_Order_Detail_data": items
+                                        })
+                                    }).then((res)=>{
+                                        console.log(res.data)
+                                    }).catch((err)=>{
+                                        console.log(err)
+                                    })
+                            
+                                    
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+                    }
+                    swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                    $('.groupbuy_sp').css('display','none')
+                }).catch((err)=>{
+
+                })
+                // console.log(item_tersedia)
+
+
             }
+        }).catch((err)=>{
+            console.log(err)
+        })
 
+    }
+
+
+
+    // BATAS
     
-            items = {
-                    Customer_Code: token,
-                    Product_Code: product_id,
-                    Product_Name: productArr[i].name,
-                    Quantity_Requested: productArr[i].quantity,
-                    Price_Based_On_Total_Quantity: productArr[i].totalPrice
-
-            }
-        
+    console.log(detail_product.Name)
     
-
-
-    }).catch((err)=>{
-        console.log(err)
-    })
+   
 
 
     console.log(data)

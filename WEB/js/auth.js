@@ -453,40 +453,6 @@ $(document).on('change','.qty_groupbuy',function(){
     })
 
 
-    if(total_qty_from_user>0){
-        axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${total_qty_from_user}`)
-        .then((res)=>{
-            console.log(res.data)
-            if(res.data === null){
-                // var data = {
-                //     "Sales_Order_Data":customer_information,
-                //     "Sales_Order_Detail_data":items
-                // }
-
-                //     customer_information={
-                //         Customer_Code: customerDetails.customerId,
-                //         Total_Price: total_price,
-                //         Total_Quantity: total_quantity,
-                //         Unit: "pcs",
-                //         Shipping_Address: customerDetails.address,
-                //         Shipping_Contact_Number: response.Contact_Number_1,
-                //         Payment_Method: customerDetails.paymentMethod,
-                //         Shipping_Fee: "0",
-                //         Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
-                //         }
-
-            }else {
-                // hasil dari res.data.Total_Quantity di kurang sama qty yang di beli dari customer
-                // = res.data.Total_Quantity-
-                if(res.data.Total_Quantity > total_qty_from_user){
-
-                }
-            }
-        }).catch((err)=>{
-            console.log(err)
-        })
-
-    }
 
     
 })

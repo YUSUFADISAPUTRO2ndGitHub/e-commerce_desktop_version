@@ -369,7 +369,9 @@ function groupbuy_sp_form(product_id){
 
 const render_searching_page=(product_name)=>{
     console.log(product_name)
+    alert(product_name,'372')
 
-    axios.post(``)
+
+    // axios.post(``)
 }
 
