@@ -433,8 +433,8 @@ $(document).on('change','.qty_groupbuy',function(){
     .then((res)=>{
         total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
         harga_satuan = res.data.GroupBuy_SellPrice
+        var total_harga = harga_satuan * total_qty_from_user
         if(total_qty_from_api > total_qty_from_user) {
-              var total_harga = harga_satuan * total_qty_from_user
               $('#tp_sp').val(total_harga)
               console.log($('#tp_sp').val())
         }else {
@@ -444,7 +444,9 @@ $(document).on('change','.qty_groupbuy',function(){
                 text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
                 // footer: '<a href="">Why do I have this issue?</a>'
               })
-              $('.qty_groupbuy').val(total_qty_from_api)
+              
+              alert(total_qty_from_api)
+              $('#tp_sp').val(total_harga)
         }
 
 
