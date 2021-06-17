@@ -1758,8 +1758,8 @@ overflow-y:hidden;
     width:196px;
     height:auto;
     padding:5px;
-    margin-left:2px;
-    margin-right:2px;
+    margin-left:10px;
+    margin-right:10px;
     position: relative;
     background-color: #217384;
     color: white;
@@ -1970,4 +1970,17 @@ ul {
     position: relative;
     top:575px;
     background-color: white;
+}
+
+.card_sp{
+    margin-left:10px !important;
+    margin-right:10px !important;
+}
+
+.ref-profile{
+    background-color: transparent;
+    border:none;
+    font-size: 15px;
+    color:white;
+    width:100px;
 }

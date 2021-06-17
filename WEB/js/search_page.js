@@ -8,7 +8,7 @@ $( document ).ready(function() {
     //     alert('masuk ke if sub category')
     //     subcategory_searching_page(subcategory)
     // }
-    alert(search,' line 11');
+    // alert(search,' line 11');
 
     // category-list
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
@@ -54,7 +54,7 @@ function show_subcategory(choosen_parent_category){
 }
 
 function show_jenisproduct(jenis_product){
-    alert(jenis_product,' 57 jenis product jalan')
+    // alert(jenis_product,' 57 jenis product jalan')
 
     $('.box-list-kategori').css('display','none')
     $('.box-list-subcategory').css('display','block')
@@ -70,7 +70,7 @@ function show_jenisproduct(jenis_product){
             var hargaTotal = hargaAwal + discount
             $('.render-item-sub').append(
               `
-                <div class="card-item">
+                <div class="card-item card_sp">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p>${val.Name}</p>

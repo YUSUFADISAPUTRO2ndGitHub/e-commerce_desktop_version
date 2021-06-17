@@ -45,6 +45,9 @@ $(function(){
                 var tahun = data_customer.Birthday.slice(0,4)
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)
+                var newReferralCode = data_customer.Customer_Code
+                console.log(data_customer.Customer_Code)
+                $('#referral-profile').val(newReferralCode)
                 $('#email_user').val(`${data_customer.Email}`)
                 $('#nama_user_profile').val(`${data_customer.First_Name}`)
                 $('#tahun_lahir_user').val(tahun)
