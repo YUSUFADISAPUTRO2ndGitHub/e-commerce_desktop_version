@@ -10,10 +10,7 @@ var allData = []
 
 
 $( document ).ready(function() {
-    $('.qty_groupbuy_home').on('change',function(){
-        alert('jalan')
-    })
-
+    
 
 
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
@@ -401,7 +398,7 @@ const render_group_buy=(product_id)=>{
             </div>
                 <div class="group-right">
                     <div class="gr-1">
-                        <div class="btn-pesan" onclick="payment_groupbuy('${product_id}')">
+                        <div class="btn-pesan" onclick="payment_groupbuy_home('${product_id}')">
                             <p>Pesan Sekarang!</p>
                             <img src="../img/home.png" alt="" class="icon-home">
                         </div>
