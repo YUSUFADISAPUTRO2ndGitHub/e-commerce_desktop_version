@@ -461,8 +461,7 @@ const render_group_buy=(product_id)=>{
  const render_get_product_detail=(product_id)=>{
     console.log(product_id, ' ini product id')
     // $('.modals-lk').css('display','none')
-    // location.replace(`../Iframe/itemDetail.html`)
-    // location.replace(`../Iframe/itemDetail.html`)
+
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
     
@@ -470,7 +469,7 @@ const render_group_buy=(product_id)=>{
         var hargaAwal = parseInt(item.Sell_Price)
         var discount = parseInt(item.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
-        console.log(res.data,' 301 axios')
+        console.log(res.data,' 473 axios')
         $('.box-item-detail').empty();
         if(item.GroupBuy_SellPrice == "NULL"){
             $('.box-item-detail').append(
@@ -528,6 +527,8 @@ const render_group_buy=(product_id)=>{
                 `
             )
         }else{
+
+            console.log(`${item.GroupBuy_SellPrice}`, '531')
             $('.box-item-detail').append(
                 `
                 <div class="box-item-img">

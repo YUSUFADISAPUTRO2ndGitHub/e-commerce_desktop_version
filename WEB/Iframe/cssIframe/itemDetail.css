@@ -195,6 +195,22 @@
     font-size: 18px;
 }
 
+.deskripsi-sp {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #217384;
+    width:95%;
+    height:150px;
+    overflow: scroll;
+    position: relative;
+    top:-40px;
+
+}
+.deskripsi-sp p{
+    color: white !important;
+    font-size: 18px;
+}
+
 
 .rating-box {
     height:100px;

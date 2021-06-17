@@ -278,7 +278,6 @@ function loadingMessage(){
 
 // REGISTER DATA SUPPLIER
 $(document).on('click',"#simpan_supplier",function(){
-alert('simpan supplier jalan')
 
 axios.post(`http://customers.sold.co.id/get-customer-code`)
 .then((res)=>{
@@ -423,4 +422,71 @@ $(document).on('change','#option-address-gb',function(){
     var test = $('#option-address-gb').val()
     console.log(test)
 
+})
+
+$(document).on('change','.qty_groupbuy',function(){
+    var total_qty_from_user = parseInt($(this).val())
+    var product_id = $(this).attr('id')
+    var total_qty_from_api;
+    var harga_satuan;
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
+        harga_satuan = res.data.GroupBuy_SellPrice
+        if(total_qty_from_api > total_qty_from_user) {
+              var total_harga = harga_satuan * total_qty_from_user
+              $('#tp_sp').val(total_harga)
+              console.log($('#tp_sp').val())
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
+                // footer: '<a href="">Why do I have this issue?</a>'
+              })
+              $('.qty_groupbuy').val(total_qty_from_api)
+        }
+
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+    if(total_qty_from_user>0){
+        axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${total_qty_from_user}`)
+        .then((res)=>{
+            console.log(res.data)
+            if(res.data === null){
+                // var data = {
+                //     "Sales_Order_Data":customer_information,
+                //     "Sales_Order_Detail_data":items
+                // }
+
+                //     customer_information={
+                //         Customer_Code: customerDetails.customerId,
+                //         Total_Price: total_price,
+                //         Total_Quantity: total_quantity,
+                //         Unit: "pcs",
+                //         Shipping_Address: customerDetails.address,
+                //         Shipping_Contact_Number: response.Contact_Number_1,
+                //         Payment_Method: customerDetails.paymentMethod,
+                //         Shipping_Fee: "0",
+                //         Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
+                //         }
+
+            }else {
+                // hasil dari res.data.Total_Quantity di kurang sama qty yang di beli dari customer
+                // = res.data.Total_Quantity-
+                if(res.data.Total_Quantity > total_qty_from_user){
+
+                }
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    }
+
+    
 })

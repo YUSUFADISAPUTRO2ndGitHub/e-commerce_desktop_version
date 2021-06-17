@@ -96,6 +96,8 @@ $(function(){
         $('.option-3').removeClass("background_grey")
         
    })
+
+
         $('.input-name').on('keyup', _.debounce(function () {
             console.log('hi');
             var value = $(this).val()
@@ -161,10 +163,13 @@ $('.icon-buy').on('click',function(){
 
 const search_item=()=>{
     console.log('159 jalan search')
+
     var item = $('.input-name').val()
+    var item_search = $('#search_item').val()
+    // console.log(item_search)
     $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
-    $('.modals-search-result').attr('src',`./Iframe/searchingPage.html`)
+    $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
 }
 
 
@@ -186,23 +191,63 @@ function groupbuy(product_id){
 }
 
 function payment_groupbuy(product_id){
-    var data = {
-        customer_data  :{
-            Customer_Code:localStorage.getItem('token'),
-            qty : $('#qty_groupbuy').val(),
-            Address_1: $('#alamat_gb').val(),
-            payment : $('#payment_gb').val(),
-            pengirimanFee: $('#pengiriman-fee').val(),
-            alamatLain : $('#alamat_lain').val()
-        }
-    }
+    var total_price = $('#tp_sp').val()
+    console.log(total_price)
+
+    var detail_product; 
+
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        console.log(res.data)
+        detail_product = res.data
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+  
+    var token = localStorage.getItem('token')
+    var data_customer;
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        data_customer = res.data
+        console.log(data_customer)
+        
+            customerDetails  ={
+                Customer_Code:token,
+                Total_Price: total_price,
+                Total_Quantity : $('#qty_groupbuy').val(),
+                Unit:"pcs",
+                Shipping_Address: $('#alamat_gb').val(),
+                Payment_Method : $('#payment_gb').val(),
+                Shipping_Fee: $('#pengiriman-fee').val(),
+                alamatLain : $('#alamat_lain').val(),
+                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+            }
+
+    
+            items = {
+                    Customer_Code: token,
+                    Product_Code: product_id,
+                    Product_Name: productArr[i].name,
+                    Quantity_Requested: productArr[i].quantity,
+                    Price_Based_On_Total_Quantity: productArr[i].totalPrice
+
+            }
+        
+    
+
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
     console.log(data)
 }
 
 
 function addToCart(product_id){
     console.log(product_id)
-    alert('addtocart jalanm 199')
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse,' ini data parse')
 
@@ -256,7 +301,6 @@ function addToCart(product_id){
 
 function addressMethod(item){
     console.log(item.value)
-    // $('.option-address-gb').text(item.value)
     if(item.value === 'Alamat Terdaftar'){
         // alert('masuk ke alamt terdaftar')
         $('.option-alamat-gb').css('display','block')
@@ -276,3 +320,4 @@ $('.id-address-gb').on('click',function(){
     var data = $(this).val()
     console.log(data)
 })
+
