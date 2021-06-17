@@ -46,8 +46,8 @@ $(function(){
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)
                 var newReferralCode = data_customer.Customer_Code
-                console.log(data_customer.Customer_Code)
-                $('#referral-profile').val(newReferralCode)
+                console.log(newReferralCode)
+                console.log(token)
                 $('#email_user').val(`${data_customer.Email}`)
                 $('#nama_user_profile').val(`${data_customer.First_Name}`)
                 $('#tahun_lahir_user').val(tahun)
@@ -65,6 +65,9 @@ $(function(){
                 $('#rekening_user').val(`${data_customer.extra_column_1}`)
                 $('#referral-profile').val(`${data_customer.extra_column_2}`)
                 $('#no_ktp_user').val(`${data_customer.ktp}`)
+                $('.ref-profile').val(token)
+                var a = $('#refer-profile').val()
+                console.log(a)
                 $('#profileModal').modal('show')
             }else {
                 // alert('57 login modal show')
