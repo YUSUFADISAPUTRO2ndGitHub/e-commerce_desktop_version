@@ -10,6 +10,12 @@ var allData = []
 
 
 $( document ).ready(function() {
+    $('.qty_groupbuy_home').on('change',function(){
+        alert('jalan')
+    })
+
+
+
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse)
     $('.cart-counter').text(dataParse.length)
@@ -129,8 +135,8 @@ const renderItemNew=()=>{
     //  console.log(hargaTotal)
         $('.box-render-new').append(
         ` 
-            <div class="card-item">
-                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+          <div class="card-item card_sp">
+                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
@@ -139,7 +145,7 @@ const renderItemNew=()=>{
                             <p>Rp. ${hargaAwal}</p>
                         </div>
                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                            <img src="./img/cart.png" alt="" class="icon-buy">
+                            <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
                         </div>
                     </div>
                 </div>
@@ -351,67 +357,68 @@ const render_group_buy=(product_id)=>{
         .then((res)=>{          
             option_payment = res.data
              $('.box-groupbuy').append(`
-             <div class="group-left">
-                 <div class="groupbuy-form">
-                     <div class="login-name">
-                         <div class="box-name" >
-                             <p>Kuantitas Permintaan</p>
-                         </div>
-                         <input type="text" class="name-form" placeholder="Kuantitas Permintaan" id="qty_groupbuy">
-                     </div>
-                     <select class="form-select option-payment-gb" aria-label="Default select example">
-                          <option selected>Select Payment Method</option>    
-                           
-                     </select>
-                     <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)" >
-                         <option selected>Select Address Method</option>    
-                         <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
-                         <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
-                     </select>
+             <div class="group-left" >
+                <div class="groupbuy-form">
+                    <div class="login-name">
+                        <div class="box-name" >
+                            <p>Kuantitas Permintaan</p>
+                        </div>
+                        <input type="text" class="name-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)">
+                    </div>
+                    <select class="form-select option-payment-gb" aria-label="Default select example">
+                        <option selected>Select Payment Method</option>    
+                        
+                    </select>
+                    <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)" >
+                        <option selected>Select Address Method</option>    
+                        <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
+                        <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
+                    </select>
 
-                     <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
-                         <option selected>Pilihan Alamat2</option>            
-                     </select>
-     
-                     <div class="login-name alamat-pengiriman" style="display:none">
-                         <div class="box-name" >
-                             <p>PENGIRIMAN KE ALAMAT</p>
-                         </div>
-                         <input type="text" class="name-form" placeholder="alamat Pengiriman" id="alamat_lain">
-                     </div>
-     
-                     <div class="login-name box-pengiriman" >
-                         <div class="box-name" >
-                             <p>BIAYA PENGIRIMAN</p>
-                         </div>
+                    <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
+                        <option selected>Pilihan Alamat2</option>            
+                    </select>
+    
+                    <div class="login-name alamat-pengiriman" style="display:none">
+                        <div class="box-name" >
+                            <p>PENGIRIMAN KE ALAMAT</p>
+                        </div>
+                        <input type="text" class="name-form" placeholder="alamat Pengiriman" id="alamat_lain">
+                    </div>
+    
+                    <div class="login-name box-pengiriman" >
+                        <div class="box-name" >
+                            <p>BIAYA PENGIRIMAN</p>
+                        </div>
                         <select class="form-select option-pengiriman-gb" aria-label="Default select example">
                             <option selected>Pengiriman Fee</option>            
                             <option  id="pengiriman-fee">JNE</option>   
                             <option id="pengiriman-fee">TIKI</option>   
                             <option id="pengiriman-fee">OK KIRIM</option>   
                         </select>
-                     </div>
-                 </div>  
-             </div>
-                 <div class="group-right">
-                     <div class="gr-1">
-                         <div class="btn-pesan" onclick="payment_groupbuy('${product_id}')">
+                    </div>
+                </div>  
+            </div>
+                <div class="group-right">
+                    <div class="gr-1">
+                        <div class="btn-pesan" onclick="payment_groupbuy('${product_id}')">
                             <p>Pesan Sekarang!</p>
                             <img src="../img/home.png" alt="" class="icon-home">
-                         </div>
-                         <div class="box-total-price">
-                                 <p>Total Price</p>
-                                 <div class="total-price">
-                                     <p>100.000</p>
-                                 </div>
-                             </div>
-                     </div>
-                 <div class="gr-2">
-                     <div class="box-img-gr">
-                         <img src="${res.data.Picture_1}" alt="" class="img-gr">
-                     </div>
-                 </div>
-             </div>
+                        </div>
+                        <div class="box-total-price">
+                                <p>Total Price</p>
+                                <div class="total-price">
+                                    <input type="text" disabled class="name-form total_price_iframe"  id="tp_iframe">
+                                
+                                </div>
+                            </div>
+                    </div>
+                <div class="gr-2">
+                    <div class="box-img-gr">
+                        <img src="${res.data.Picture_1}" alt="" class="img-gr">
+                    </div>
+                </div>
+            </div>
              `)
             // alert(res.data)
             axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)

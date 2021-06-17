@@ -97,44 +97,37 @@ $(function(){
         
    })
 
-
         $('.input-name').on('keyup', _.debounce(function () {
             console.log('hi');
             var value = $(this).val()
-            if(value.length>2){
-                console.log('masuk ke if')
-                $('.box-render-search').css('display','block')
-                $('.box-search-menu').css('display','block')
-                $('.input-name').css('border-bottom-left-radius','0px')
-                $('.input-name').css('border-bottom-right-radius','0px')
-                $('.render-li-search').empty()
-              console.log(allData,' all data 103')
-                const searchString = value.toLowerCase()
-                console.log(searchString)
-                    const filterSearch = allData.filter((item)=>{
-                        return (
-                            item.Name.toLowerCase().includes(searchString) 
-                        );
-                    });
-                    filterSearch.map((val,index)=>{
-                        $('.render-li-search').append(
-                            `
-                                <li onclick="replace_value_to(this)">${val.Name}</li>
-                            `
-                        )
+            console.log(value)
+            if(value.length > 2){
+                axios.post(`http://products.sold.co.id/get-product-details?product_name=${value}`)
+                .then((res)=>{
+                    console.log(res.data)
+                    $('.box-render-search').css('display','block')
+                    $('.box-search-menu').css('display','block')
+                    $('.input-name').css('border-bottom-left-radius','0px')
+                    $('.input-name').css('border-bottom-right-radius','0px')
+                    $('.render-li-search').empty()
+                    res.data.map((val,index)=>{
+                        $('.render-li-search').append(`
+                            <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
+                        `)
+
                     })
-                    
-                    console.log(filterSearch)
+                 
                     $('.closeByLogin').css('display','none')
                     $('.option-1').removeClass("background_grey")
                     $('.option-2').removeClass("background_grey")
                     $('.option-3').removeClass("background_grey")
                     $('.box-information').hide(1000)
-                
+                }).catch((err)=>{
+                    console.log(err)
+                })
+
             }else {
-                // searchItem = null
-            console.log('masuk ke if')
-                $('.box-render-search').css('display','none')
+                 $('.box-render-search').css('display','none')
                 $('.input-name').css('border-bottom-left-radius','25px')
                 $('.input-name').css('border-bottom-right-radius','25px')
             }
@@ -142,7 +135,7 @@ $(function(){
         }, 500)); 
 
 
-        
+
    
 })
 
@@ -167,14 +160,55 @@ const search_item=()=>{
 
     var item = $('.input-name').val()
     var item_search = $('#search_item').val()
-    // console.log(item_search)
+    var product_name = $('#search_item').attr('id')
+    console.log(item_search)
+    console.log(product_name)
     $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
 }
 
 
+function check_qty(val){
+    alert(val)
+    // $('.qty_groupbuy_home').val('testing')
+    var total_qty_from_user = val
+    console.log(total_qty_from_user)
+    var product_id = $('.qty_groupbuy_home').attr('id')
+    console.log(product_id)
+    var total_qty_from_api;
+    var harga_satuan;
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        console.log(res.data)
+        total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
+        harga_satuan = res.data.GroupBuy_SellPrice
+        var total_harga = harga_satuan * total_qty_from_user
+        if(total_qty_from_api > total_qty_from_user) {
+            // $('#tp_sp').val(total_harga)
+            $('#tp_iframe').val(total_harga)
+            console.log('masuk ke if 190')
+      }else {
+        console.log('masuk ke else 192')
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
+              // footer: '<a href="">Why do I have this issue?</a>'
+            })
+            var total_price = harga_satuan * total_qty_from_api
+            $('.qty_groupbuy_home').val(total_price)
+            alert(total_qty_from_api)
+            // $('#tp_sp').val(total_harga)
+            $('#tp_iframe').val(total_price)
+      }
 
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+}
 
 function groupbuy(product_id){
     // alert('jalan groupbuy')

@@ -55,7 +55,7 @@ function show_subcategory(choosen_parent_category){
 }
 
 function show_jenisproduct(jenis_product){
-    // alert(jenis_product,' 57 jenis product jalan')
+    alert(jenis_product,' 57 jenis product jalan')
 
     $('.box-list-kategori').css('display','none')
     $('.box-list-subcategory').css('display','block')
@@ -310,7 +310,7 @@ function groupbuy_sp_form(product_id){
                          <div class="box-total-price">
                                  <p>Total Price</p>
                                  <div class="total-price">
-                                    <input type="text" disabled class="name-form"  id="tp_sp">
+                                    <input type="text" disabled class="name-form total_price_iframe"  id="tp_sp">
                                 
                                  </div>
                              </div>
@@ -371,7 +371,39 @@ const render_searching_page=(product_name)=>{
     console.log(product_name)
     alert(product_name,'372')
 
+    axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
+    .then((res)=>{
+        console.log(res.data)
+
+        res.data.map((val,index)=>{
+            var hargaAwal = parseInt(val.Sell_Price)
+            var discount = parseInt(val.Sell_Price * 0.1)
+            var hargaTotal = hargaAwal + discount
+            $('.new-box-card').append(`
+            <div class="card-item card_sp">
+                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                <div class="card-item-list">
+                    <p>${val.Name}</p>
+                    <div class="split-item">
+                        <div class="item-price">
+                            <p>RP. ${hargaTotal}</p>
+                            <p>Rp. ${hargaAwal}</p>
+                        </div>
+                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                            <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+
 
     // axios.post(``)
+
+   
 }
 

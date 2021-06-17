@@ -424,7 +424,10 @@ $(document).on('change','#option-address-gb',function(){
 
 })
 
+
+
 $(document).on('change','.qty_groupbuy',function(){
+    alert('group buy jalan')
     var total_qty_from_user = parseInt($(this).val())
     var product_id = $(this).attr('id')
     var total_qty_from_api;
@@ -436,6 +439,7 @@ $(document).on('change','.qty_groupbuy',function(){
         var total_harga = harga_satuan * total_qty_from_user
         if(total_qty_from_api > total_qty_from_user) {
               $('#tp_sp').val(total_harga)
+              $('#tp_iframe').val(total_harga)
               console.log($('#tp_sp').val())
         }else {
             Swal.fire({
@@ -444,9 +448,11 @@ $(document).on('change','.qty_groupbuy',function(){
                 text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
                 // footer: '<a href="">Why do I have this issue?</a>'
               })
-              
+              var total_price = harga_satuan * total_qty_from_api
               alert(total_qty_from_api)
-              $('#tp_sp').val(total_harga)
+              $('#tp_sp').val(total_price)
+            //   $('#tp_iframe').val(total_harga)
+              $('.qty_groupbuy').val(total_qty_from_api)
         }
 
 

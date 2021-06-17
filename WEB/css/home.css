@@ -2005,3 +2005,13 @@ ul {
     justify-content: center;
     align-items: center;
 }
+
+#tp_iframe{
+    width:100%;
+    height:100%;
+
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
