@@ -9,7 +9,6 @@ function populateDeliveryTable(){
         console.log(response);
         if(response.length == 0){
             $(".loading-area").css("display", "none");
-            console.log(response);
         }else{
             console.log(response);
             loadingMessage(response.length);
@@ -27,7 +26,11 @@ function generateRowsDelivery(i, datas){
     $("#" + i).append("<td><div class=\"date-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Update_date + "</div></td>");
     $("#" + i).append("<td><div class=\"orderNum-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Order_Number + "</div></td>");
     $("#" + i).append("<td><div class=\"paymentterm-body-table\" onclick=\"orderDetailRequest(\'" + datas.Order_Number + "\')\">" + datas.Payment_Method + "</div></td>");
-    $("#" + i).append("<td><div class=\"cancel-body-table\" onclick=\"cancelOrderRequest(\'" + datas.Order_Number + "\')\">Cancel</div></td>");
+    if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
+        $("#" + i).append("<td><div class=\"cancel-body-table\" onclick=\"cancelOrderRequest(\'" + datas.Order_Number + "\')\">Cancel</div></td>");
+    }else{
+        $("#" + i).append("<td><div class=\"cancel-body-table\">You've cancelled this order</div></td>");
+    }
 }
 
 function orderDetailRequest(orderNumber){
@@ -36,6 +39,7 @@ function orderDetailRequest(orderNumber){
             if(response.length == 0){
                 $(".loading-area").css("display", "none");
             }else{
+                console.log(response);
                 loadingMessage(response.length);
                 var i = 0;
                 for(i ; i < response.length; i++){
