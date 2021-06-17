@@ -336,6 +336,7 @@ const renderItemBasedOnCategory=(Category)=>{
         })
 }
 
+
 function close_all_open_window(){
     $(".force-close-all-command").css("display", "none");
     
