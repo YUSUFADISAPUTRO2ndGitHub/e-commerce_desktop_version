@@ -142,7 +142,7 @@ const renderItemNew=()=>{
                             <p>Rp. ${hargaAwal}</p>
                         </div>
                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                            <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                            <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
                         </div>
                     </div>
                 </div>

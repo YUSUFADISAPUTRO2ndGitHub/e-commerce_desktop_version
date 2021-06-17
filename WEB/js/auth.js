@@ -67,9 +67,9 @@ $(document).on('click',"#simpan_reg",function(){
             if(res.data === true){
                 
                 swal.fire("Register Berhasil", "", "success");
-                $('#loginModal').modal('hide')
+                $('#registerModal').modal('hide')
             }else {
-                $('#loginModal').modal('hide')
+                $('#registerModal').modal('hide')
                 // swal.fire("Register Gagal", "", "info");
                 Swal.fire({
                     icon: 'error',
@@ -427,7 +427,7 @@ $(document).on('change','#option-address-gb',function(){
 
 
 $(document).on('change','.qty_groupbuy',function(){
-    alert('group buy jalan')
+    // alert('group buy jalan')
     var total_qty_from_user = parseInt($(this).val())
     var product_id = $(this).attr('id')
     var total_qty_from_api;

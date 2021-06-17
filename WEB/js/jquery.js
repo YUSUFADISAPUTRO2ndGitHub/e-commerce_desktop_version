@@ -97,7 +97,7 @@ $(function(){
         
    })
 
-        $('.input-name').on('keyup', _.debounce(function () {
+        $('.input-name').on('keyup',function () {
             console.log('hi');
             var value = $(this).val()
             console.log(value)
@@ -132,7 +132,7 @@ $(function(){
                 $('.input-name').css('border-bottom-right-radius','25px')
             }
 
-        }, 500)); 
+        }); 
 
 
 
@@ -158,7 +158,7 @@ $('.icon-buy').on('click',function(){
 const search_item=()=>{
     console.log('159 jalan search')
 
-    var item = $('.input-name').val()
+    // var item = $('.input-name').val()
     var item_search = $('#search_item').val()
     var product_name = $('#search_item').attr('id')
     console.log(item_search)
@@ -170,7 +170,7 @@ const search_item=()=>{
 
 
 function check_qty(val){
-    alert(val)
+    // alert(val)
     // $('.qty_groupbuy_home').val('testing')
     var total_qty_from_user = val
     console.log(total_qty_from_user)
@@ -198,7 +198,7 @@ function check_qty(val){
             })
             var total_price = harga_satuan * total_qty_from_api
             $('.qty_groupbuy_home').val(total_price)
-            alert(total_qty_from_api)
+            // alert(total_qty_from_api)
             // $('#tp_sp').val(total_harga)
             $('#tp_iframe').val(total_price)
       }
@@ -212,22 +212,28 @@ function check_qty(val){
 
 function groupbuy(product_id){
     // alert('jalan groupbuy')
-    var data;
-    
-    console.log(data)
-    
-    $('.modals-product-detail').empty()
-    $('.modals-product-detail').css('display','none')
- 
-    
-    location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
+    var token = localStorage.getItem('token')
+    axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
+    .then((res)=>{
+        if(res.data){
+            
+            $('.modals-product-detail').empty()
+            $('.modals-product-detail').css('display','none')
+            location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
+            
+        }else {
+            alert('anda punya hutang')
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
 
     console.log(product_id)
 }
 
 
 function payment_groupbuy_home(product_id){
-    alert('button jalan')
+    // alert('button jalan')
     var token = localStorage.getItem('token')
     var total_price = $('#tp_iframe').val()
     var detail_product;
@@ -284,7 +290,8 @@ function payment_groupbuy_home(product_id){
                         }).catch((err)=>{
                             console.log(err)
                         })
-                            
+                        swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                        $('.modals-product-detail').css('display','none')
 
                     }).catch((err)=>{
                         console.log(err)
@@ -293,7 +300,7 @@ function payment_groupbuy_home(product_id){
                     console.log(err)
                 })
             }else {
-                alert('masuk ke else  296')
+                
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                 .then((response)=>{
                     console.log(response.data)
@@ -346,19 +353,21 @@ function payment_groupbuy_home(product_id){
                                 console.log(data)
                                       console.log(customerDetails,' ini customer detail')
                                       console.log(items, ' ini items')
-                                axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-                                    headers:{
-                                        "Content-Type":'application/json'
-                                    },
-                                    "data":JSON.stringify({
-                                        "Sales_Order_data":customerDetails,
-                                        "Sales_Order_Detail_data": items
-                                    })
-                                }).then((res)=>{
-                                    console.log(res.data)
-                                }).catch((err)=>{
-                                    console.log(err)
-                                })         
+                                    axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                        headers:{
+                                            "Content-Type":'application/json'
+                                        },
+                                        "data":JSON.stringify({
+                                            "Sales_Order_data":customerDetails,
+                                            "Sales_Order_Detail_data": items
+                                        })
+                                    }).then((res)=>{
+                                        console.log(res.data)
+                                        // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                        // $('.modals-product-detail').css('display','none')
+                                    }).catch((err)=>{
+                                        console.log(err)
+                                    })         
                               }).catch((err)=>{
                                   console.log(err)
                               })
@@ -366,7 +375,7 @@ function payment_groupbuy_home(product_id){
                               console.log(err)
                           })
                     }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
-                        alert('masuk ke line 363')
+                        
                         axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                         .then((res)=>{
                             detail_product = res.data
@@ -410,7 +419,16 @@ function payment_groupbuy_home(product_id){
                                         "Sales_Order_Detail_data": items
                                     })
                                 }).then((res)=>{
-                                    console.log(res.data)
+                                    if(res.data.status){
+                                        console.log(res.data)
+                                        swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                        // close_all_open_window()
+                                        $('.modals-product-detail').css('display','none')
+                                        window.location.reload()
+                                    }else {
+                                        swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                                        $('.modals-product-detail').css('display','none')
+                                    }
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
@@ -431,7 +449,7 @@ function payment_groupbuy_home(product_id){
             console.log(err)
         })
     }else {
-        alert('masuk ke else  302')
+        console.log('masuk ke else 434')
     }
 }
 

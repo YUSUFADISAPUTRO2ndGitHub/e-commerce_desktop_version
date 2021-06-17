@@ -249,6 +249,11 @@ const get_product_detail_from_searching_page=(product_id)=>{
 
 
 function groupbuy_sp_form(product_id){
+    var token = localStorage.getItem('token')
+    axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
+    .then((res)=>{
+        if(res.data){
+
     $('.groupbuy_sp').empty()
     $('.item_detail_sp').css('display','none')
     $('.groupbuy_sp').css('display','flex')
@@ -363,6 +368,18 @@ function groupbuy_sp_form(product_id){
                 console.log(err)
             })
     console.log(product_id)
+            
+           
+            
+        }else {
+            alert('anda punya hutang')
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+
 }
 
 

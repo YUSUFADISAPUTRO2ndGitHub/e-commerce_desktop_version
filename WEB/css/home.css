@@ -2015,3 +2015,180 @@ ul {
     justify-content: center;
     align-items: center;
 }
+
+
+
+/*  MY PRODUCT MODALS*/
+.product_right_modals{
+    width:65%;
+    height:100%;
+    background-color: #217283;
+    display: flex;
+    flex-direction: column;
+    border-radius:10px;
+    padding:10px;
+    margin:5px;
+}
+
+.box_profile_sold{
+    width:35%;
+    height:100%;
+    background-color: #217283;
+    display: flex;
+    flex-direction: column;
+    border-radius:10px;
+    padding:10px;
+    margin:5px;
+}
+
+
+
+.profile-top-2{
+    background-color: white;
+    border-radius:5px;
+    height:30px;
+    /* width:200px; */
+    min-width: 200px;
+    width:fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#217283;
+    line-height:0.5;
+}
+
+.box-right-top{
+   
+    
+    /* background-color: red; */
+    width:85%;
+    height:50%;
+    display: flex;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+}
+.box-right-top p {
+    font-size: 18px;
+    color:white;
+}
+.box-right-bottom{
+    /* background-color: blue; */
+    width:100%;
+    height:50%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.br-status{
+    padding-top:10px;
+    width:40px;
+    height:100%;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 0.5;
+}
+.br-option-input{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height:100%;
+    /* background-color: purple; */
+    position: relative;
+    top:-10px;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.icon-edit{
+    width:20px;
+    height:20px;
+    font-size: 20px;
+    color:white;
+    position: relative;
+    left:5px;
+    top:5px;
+}
+.form_product {
+    width:75%;
+    height:30px;
+    border-radius:5px;
+    border:none;
+
+}
+.br-status p:nth-child(1){
+    color:white;
+    font-size: 20px;
+}
+.br-status p:nth-child(2){
+    color: white;
+    font-size: 40px;;
+}
+.br-option{
+    width:110px;
+    height:100%;
+    /* background-color: yellow; */
+    margin-right:5px;
+    margin-left:5px;
+    position: relative;
+    top:7%;
+}
+.br-option p{
+    font-size: 15px;
+    color:white;
+    /* line-height: 1; */
+}
+
+
+
+
+/*  MY PRODUCT MODALS*/
+
+
+/* DETAIL PRODUCT MODALS */
+.detail_form_top{
+    width:100%;
+    height:70px;
+    /* background-color: red; */
+    display: flex;
+    text-align: left;
+    align-items: center;
+
+}
+.detail_form_top p {
+    font-size: 35px;
+    color:#217283;
+}
+
+.detail-form-bot{
+    display: flex;
+    width:100%;
+    height:80%;
+    /* background-color: blue; */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left:10px;
+    padding-right:10px;
+    /* overflow-y: scroll; */
+    overflow:auto;
+    
+    
+}
+
+.item_detail_bot{
+    width:20%;
+    min-width: 150px;
+    height:90%;
+    border:3px solid #217283;
+    border-radius:10px;
+    margin:1px;
+    
+
+
+}
+
+/* DETAIL PRODUCT MODALS */

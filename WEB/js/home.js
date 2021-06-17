@@ -248,3 +248,9 @@ $('.id-referral').on('click',function(){
    var option =  $(this).val()
    console.log(option)
 })
+
+
+const to_detail_product=(id)=>{
+    console.log(id)
+    $('#detailProductModal').modal('show')
+}
