@@ -156,7 +156,7 @@ $('.icon-buy').on('click',function(){
 const search_item=()=>{
     console.log('159 jalan search')
     var item = $('.input-name').val()
-    
+    $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html`)
 }

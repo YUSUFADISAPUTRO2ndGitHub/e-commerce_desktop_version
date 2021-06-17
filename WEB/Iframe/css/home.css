@@ -18,6 +18,12 @@ body{
     align-items: center;
     /* border:1px solid black; */
 }
+.main-header{
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+}
 
 .header-cat{
     width:30%;
