@@ -8,7 +8,7 @@ $( document ).ready(function() {
     if(searching != undefined){
         render_searching_page(searching)
     }
-    alert(search,' line 11');
+    // alert(search,' line 11');
 
     // category-list
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
@@ -55,7 +55,7 @@ function show_subcategory(choosen_parent_category){
 }
 
 function show_jenisproduct(jenis_product){
-    alert(jenis_product,' 57 jenis product jalan')
+    // alert(jenis_product,' 57 jenis product jalan')
 
     $('.box-list-kategori').css('display','none')
     $('.box-list-subcategory').css('display','block')
@@ -372,7 +372,25 @@ function groupbuy_sp_form(product_id){
            
             
         }else {
-            alert('anda punya hutang')
+            Swal.fire({
+                title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Lihat Daftar Tagihan`,
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $(".force-close-all-command").css("display", "none");
+                    $('#daftarHutangModal').modal('show')
+                    //   Swal.fire('ini tagihan anda!', '', 'info')
+                    render_daftar_hutang()
+                } else if (result.isDenied) {
+                    Swal.fire('Cancel berhasil', '', 'success')
+                    $(".force-close-all-command").css("display", "none");
+                }
+                
+              })
         }
     }).catch((err)=>{
         console.log(err)
@@ -381,6 +399,24 @@ function groupbuy_sp_form(product_id){
 
 
 }
+const search_item=()=>{
+    console.log('159 jalan search')
+
+    // var item = $('.input-name').val()
+    var item_search = $('#search_item').val()
+    var product_name = $('#search_item').attr('id')
+    console.log(item_search)
+    console.log(product_name)
+    $('.main-body').css('display','none')
+    $('.modals-search-result').css('display','block')
+    $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
+}
+
+
+// const testing=()=>{
+//     alert('jalan')
+//     $('#daftarHutangModal').modal('show')
+// }
 
 
 
@@ -424,3 +460,83 @@ const render_searching_page=(product_name)=>{
    
 }
 
+
+
+
+const render_daftar_hutang=()=>{
+    const token = localStorage.getItem('token')
+    // alert(token)
+    axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code given_date=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        if(res.data){
+
+        }else {
+            $('.box_daftar_hutang').append(`
+                <div class="modal-content ">
+                    <div class="modal-header box-login-profile">
+                        <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                        <div class="box-code-referral">
+                            <p>Your Customer Code for Referral :</p>
+                            <p>1238198BA18293YU</p>
+                        </div>
+                    </div>
+                    <div class="modal-body box-login-body">
+                        <div class="commision-form">     
+                            <div class="detail_form_top">
+                                <p>Daftar hutang testing</p>      
+                            </div>  
+                            <div class="detail-form-bot">
+                                <div class="item_detail_bot" style="visibility: hidden;">
+                                    <div class="comm-1-header">
+                                        <p>Product Code</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>123123</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>123123</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>123123</p>
+                                    </div>
+                                </div>
+                                <div class="item_detail_bot">
+                                    <div class="comm-1-header">
+                                        <p>Product Name</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>123</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>10</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>90</p>
+                                    </div>
+                                </div>
+                                <div class="item_detail_bot">
+                                    <div class="comm-1-header">
+                                        <p>Product Sell Price</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>100.000</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>1000</p>
+                                    </div>
+                                    <div class="comm-1-list">
+                                        <p>100.000.000</p>
+                                    </div>
+                                </div>                
+                            </div>         
+                        </div>  
+                    </div>
+                </div>
+            `)
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+}

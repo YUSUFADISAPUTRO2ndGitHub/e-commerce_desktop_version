@@ -211,6 +211,7 @@ $('.testing-2').on('click',function(){
 const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
     // alert(category)
+    $('.close-button').css('display','block')
     console.log(sub)
     $('.closeByLogin').css('display','none')
     $('.option-1').removeClass("background_grey")
@@ -241,7 +242,9 @@ const getAllItem=(item)=>{
 }
 
 function sign_up_request(){
+    // alert('sign up jalan')
     $("#loginModal").modal("hide");
+    // $("#daftarHutangModal").modal('show')
         axios.post(`http://customers.sold.co.id/get-available-referral-codes
         `).then((res)=>{
             res.data.map((val,index)=>{

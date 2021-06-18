@@ -1,5 +1,5 @@
 $(function(){
-    
+    $( "#datepicker" ).datepicker();
 
     // $('.carousel').carousel()
 
@@ -155,23 +155,23 @@ $('.icon-buy').on('click',function(){
     console.log(product_id)
 })
 
-const search_item=()=>{
-    console.log('159 jalan search')
+// const search_item=()=>{
+//     console.log('159 jalan search')
 
-    // var item = $('.input-name').val()
-    var item_search = $('#search_item').val()
-    var product_name = $('#search_item').attr('id')
-    console.log(item_search)
-    console.log(product_name)
-    $('.main-body').css('display','none')
-    $('.modals-search-result').css('display','block')
-    $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
-}
+//     // var item = $('.input-name').val()
+//     var item_search = $('#search_item').val()
+//     var product_name = $('#search_item').attr('id')
+//     console.log(item_search)
+//     console.log(product_name)
+//     $('.main-body').css('display','none')
+//     $('.modals-search-result').css('display','block')
+//     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
+// }
 
 
 function check_qty(val){
     // alert(val)
-    // $('.qty_groupbuy_home').val('testing')
+   
     var total_qty_from_user = val
     console.log(total_qty_from_user)
     var product_id = $('.qty_groupbuy_home').attr('id')
@@ -222,7 +222,26 @@ function groupbuy(product_id){
             location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
             
         }else {
-            alert('anda punya hutang')
+            Swal.fire({
+                title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Lihat Daftar Tagihan`,
+                denyButtonText: `Cancel`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    
+                  Swal.fire('ini tagihan anda!', '', 'info')
+                  console.log('masuk kesini 236')
+                  $('.modals-product-detail').css('display','none')
+                  $('#daftarHutangModal').modal('show')
+                } else if (result.isDenied) {
+                    Swal.fire('Cancel berhasil', '', 'success')
+                    $('.modals-product-detail').css('display','none')
+                }
+                
+              })
         }
     }).catch((err)=>{
         console.log(err)

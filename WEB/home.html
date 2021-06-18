@@ -13,7 +13,9 @@
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>   
+    <!-- <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>   -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     
@@ -28,7 +30,8 @@
     <script type="text/javascript" src="./js/auth.js"></script>
     <script type="text/javascript" src="./js/home.js"></script>
     <script type="text/javascript" src="./js/jquery.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script> 
+    <script type="text/javascript" src="./js/search_page.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>  -->
     
     <title>SOLD</title>
     <style>
@@ -1039,6 +1042,8 @@
         </div>
     </div>
     <!--DETAIL PRODUCT MODALS -->
+
+  
        
 
 
@@ -1048,7 +1053,7 @@
                 
             </div>
             <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
-                <img src="../WEB/img/logo.png" alt="" class="icon-logo" data-bs-toggle="modal" data-bs-target="#productModal">
+                <img src="../WEB/img/logo.png" alt="" class="icon-logo" data-bs-toggle="modal" data-bs-target="#productModal" >
             </div>
             
             <div class="main-header-search">
@@ -1084,8 +1089,11 @@
                 </div>
             </div>
             
+            <div>
+                <iframe class="force-close-all-command modals-lk close closeByLogin" src=""></iframe> <!-- List  SubKategori  -->
+                <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
+            </div>
             <iframe class="force-close-all-command iframe closeByLogin" src=""></iframe> <!-- Header Cart  -->
-            <iframe class="force-close-all-command modals-lk close closeByLogin" src=""></iframe> <!-- List  SubKategori  -->
             <iframe class="force-close-all-command modals-item close closeByLogin" src=""></iframe> <!-- List All Item by SubCategory-->
             <iframe class="force-close-all-command modals-pengiriman closeByLogin" src=""></iframe> <!-- Header Cart  -->
             <iframe class="force-close-all-command modals-check-harga closeByLogin" src=""></iframe> <!-- Modals Check Harga  -->

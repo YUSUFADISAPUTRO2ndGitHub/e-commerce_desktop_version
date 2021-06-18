@@ -874,6 +874,12 @@ cursor: pointer;
     height:500px;
 }
 
+.box_daftar_hutang{
+    max-width:900px !important;
+    width:900px;
+    height:500px;
+}
+
 
 .box-login-header{
     background-color: #217283;
@@ -1861,7 +1867,7 @@ overflow-y:hidden;
     position:absolute;
     top:75px;
     /* left:10px; */
-    z-index: 30;
+    z-index: 100;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     border:2px solid #217283;
@@ -2192,3 +2198,5 @@ ul {
 }
 
 /* DETAIL PRODUCT MODALS */
+
+
