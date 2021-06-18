@@ -487,21 +487,8 @@ const render_daftar_hutang=()=>{
                                 <p>Daftar hutang testing</p>      
                             </div>  
                             <div class="detail-form-bot">
-                                <div class="item_detail_bot" style="visibility: hidden;">
-                                    <div class="comm-1-header">
-                                        <p>Product Code</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>123123</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>123123</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>123123</p>
-                                    </div>
-                                </div>
-                                <div class="item_detail_bot">
+                            
+                                <div class="item_detail_bot" onclick="item_detail_for_hutang(1)">
                                     <div class="comm-1-header">
                                         <p>Product Name</p>
                                     </div>
@@ -538,5 +525,15 @@ const render_daftar_hutang=()=>{
     }).catch((err)=>{
         console.log(err)
     })
+
+}
+
+
+
+const item_detail_for_hutang=(id)=>{
+    alert(id)
+
+    $('#daftarHutangModal').modal('hide')
+    $('#detailHutangModal').modal('show')
 
 }
