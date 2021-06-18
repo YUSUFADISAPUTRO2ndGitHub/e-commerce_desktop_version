@@ -534,6 +534,6 @@ const item_detail_for_hutang=(id)=>{
     alert(id)
 
     $('#daftarHutangModal').modal('hide')
-    $('#detailHutangModal').modal('show')
+    $('#detailHutangModal').modal('show ')
 
 }
