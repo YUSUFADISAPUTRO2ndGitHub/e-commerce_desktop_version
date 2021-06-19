@@ -1441,10 +1441,10 @@ input:focus{
     top:100px;
     /* left:327px; */
     left:22.8%;
-    /* height:450px; datalama */
-    /* width:400px; datalama*/
-    height: 250px;
-    width:450px;
+    height:500px; 
+    width:1000px; 
+    /* height: 250px; */
+    /* width:450px; */
     /* background-color: red; */
     display:none;
     transition: 2s ease-out;
@@ -2006,7 +2006,7 @@ ul {
 .active_search{
     z-index:99;
     position: relative;
-    top:575px;
+    /* top:575px; */
     background-color: white;
 }
 

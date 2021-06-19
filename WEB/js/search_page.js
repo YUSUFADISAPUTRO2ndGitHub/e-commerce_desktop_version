@@ -101,11 +101,13 @@ function show_jenisproduct(jenis_product){
 }
 
 const get_product_detail_from_searching_page=(product_id)=>{
-    
+    // alert('eek')
     $('.item_detail_sp').empty()
+    $(this).scrollTop('.item_detail_sp')
     $('.box-list-subcategory').css('display','none')
     $('.item_detail_sp').css('display','flex')
     $('.close-button').css('display','block')
+
 
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
@@ -408,6 +410,7 @@ const search_item=()=>{
     var product_name = $('#search_item').attr('id')
     console.log(item_search)
     console.log(product_name)
+    $('.active_search').css('top','575px')
     $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
@@ -430,7 +433,7 @@ const render_searching_page=(product_name)=>{
             var hargaTotal = hargaAwal + discount
             $('.new-box-card').append(`
             <div class="card-item card_sp">
-                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                    <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
