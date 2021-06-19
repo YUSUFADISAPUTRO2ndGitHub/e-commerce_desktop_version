@@ -25,7 +25,7 @@ $(function(){
 //    OPEN MODALS PROFILE
    $('.option-4').on('click',function(){
     
-    // alert('function option-4 login modals')
+    
     var token = localStorage.getItem('token')
     console.log(token)
  
@@ -40,6 +40,8 @@ $(function(){
                 console.log(data_customer.Customer_Code)
                 if(data_customer.User_Type === 'Customer'){
                     $('.btn-status-barang').css('display','none')
+                }else {
+                    $('.btn-status-barang').css('display','block')
                 }
     
                 var tahun = data_customer.Birthday.slice(0,4)
@@ -70,7 +72,7 @@ $(function(){
                 console.log(a)
                 $('#profileModal').modal('show')
             }else {
-                // alert('57 login modal show')
+                
                 $('#loginModal').modal('show')
             }
         }).catch((err)=>{
@@ -155,18 +157,6 @@ $('.icon-buy').on('click',function(){
     console.log(product_id)
 })
 
-// const search_item=()=>{
-//     console.log('159 jalan search')
-
-//     // var item = $('.input-name').val()
-//     var item_search = $('#search_item').val()
-//     var product_name = $('#search_item').attr('id')
-//     console.log(item_search)
-//     console.log(product_name)
-//     $('.main-body').css('display','none')
-//     $('.modals-search-result').css('display','block')
-//     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
-// }
 
 
 function check_qty(val){
@@ -211,7 +201,7 @@ function check_qty(val){
 }
 
 function groupbuy(product_id){
-    // alert('jalan groupbuy')
+    
     var token = localStorage.getItem('token')
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
@@ -222,6 +212,7 @@ function groupbuy(product_id){
             location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
             
         }else {
+            close_all_open_window()
             Swal.fire({
                 title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
                 showDenyButton: true,
@@ -231,11 +222,12 @@ function groupbuy(product_id){
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                    render_daftar_hutang()
                     
-                  Swal.fire('ini tagihan anda!', '', 'info')
-                  console.log('masuk kesini 236')
-                  $('.modals-product-detail').css('display','none')
+                    // location.replace(`../Iframe/groupbuy.html?list_hutang=${product_id}`)
+                  $(".force-close-all-command").css("display", "none");
                   $('#daftarHutangModal').modal('show')
+                  $('.modals-product-detail').css('display','none')
                 } else if (result.isDenied) {
                     Swal.fire('Cancel berhasil', '', 'success')
                     $('.modals-product-detail').css('display','none')
@@ -252,7 +244,7 @@ function groupbuy(product_id){
 
 
 function payment_groupbuy_home(product_id){
-    // alert('button jalan')
+   
     var token = localStorage.getItem('token')
     var total_price = $('#tp_iframe').val()
     var detail_product;
@@ -719,7 +711,7 @@ function payment_groupbuy(product_id){
 
 
 function addToCart(product_id){
-    console.log(product_id)
+   
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse,' ini data parse')
 
@@ -774,11 +766,11 @@ function addToCart(product_id){
 function addressMethod(item){
     console.log(item.value)
     if(item.value === 'Alamat Terdaftar'){
-        // alert('masuk ke alamt terdaftar')
+        
         $('.option-alamat-gb').css('display','block')
         $('.alamat-pengiriman').css('display','none')
     }else if (item.value === 'Alamat Baru'){
-        // alert('masuk ke alamt terdaftar')
+        
         $('.option-alamat-gb').css('display','none')
         $('.alamat-pengiriman').css('display','block')
     }

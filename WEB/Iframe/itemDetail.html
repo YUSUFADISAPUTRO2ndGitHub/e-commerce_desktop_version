@@ -15,16 +15,142 @@
     <script type="text/javascript" src="../js/axios.js"></script>
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/sweetalert.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script type="text/javascript" src="../js/search_page.js"></script>
     <title>item Detail</title>
 </head>
 <style>
     body{
         background-color: #ECF1F5;
-        padding: 50px;
+        /* padding: 50px; */
     }
 </style>
 <body>
+     <!--DAFTAR HUTANG MODALS -->
+     <div class="modal  fade daftar_hutang_ID" id="daftarHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box_daftar_hutang ">
+            <div class="modal-content ">
+                <div class="modal-header box-login-profile">
+                    <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                    <div class="box-code-referral">
+                        <p>Your Customer Code for Referral :</p>
+                        <p>1238198BA18293YU</p>
+                    </div>
+                </div>
+                <div class="modal-body box-login-body">
+                    <div class="commision-form comm-form-id">     
+                        <div class="detail_form_top">
+                            <p>List Unpaid</p>      
+                        </div>  
+                        <div class="detail-form-bot detail_ID">
+                            <!-- <div class="item_detail_bot id_unpaid" onclick="item_detail_for_hutang(1)">
+                                <div class="comm-1-header">
+                                    <p>ID</p>
+                                </div>
+                                
+                            </div> -->
+                            <div class="item_detail_bot qty_unpaid"">
+                                <div class="comm-1-header">
+                                    <p>Quantity</p>
+                                </div>
+                                
+                            </div>  
+                            <div class="item_detail_bot order_unpaid"">
+                                <div class="comm-1-header">
+                                    <p>Order Number</p>
+                                </div>
+                                
+                            </div>  
+                            <div class="item_detail_bot harga_unpaid"">
+                                <div class="comm-1-header">
+                                    <p>Total Harga</p>
+                                </div>
+                                
+                            </div> 
+                                        
+                        </div>         
+                    </div>  
+                </div>
+            </div>
+        
+        </div>
+        </div>
+    <!---DAFTAR HUTANG MODALS -->
+         <!--item detail MODALS -->
+      <div class="modal  fade  detail_hutang_ID" id="detailHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box_daftar_hutang ">
+            <div class="modal-content ">
+                <div class="modal-header box-login-profile">
+                    <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                    <div class="box-code-referral">
+                        <p>Your Customer Code for Referral :</p>
+                        <p>1238198BA18293YU</p>
+                    </div>
+                </div>
+                <div class="modal-body box-login-body">
+                    <div class="commision-form">     
+                        <div class="detail_form_top">
+                            <p>List Unpaid</p>      
+                        </div>  
+                        <div class="detail_hutang_form detail_ID">
+                            
+                           
+                            <!-- <div class="item_detail_bot id_detail_hutang">
+                                <div class="comm-1-header">
+                                    <p>ID</p>
+                                </div>
+                               
+                            </div> -->
+                            <div class="item_detail_bot id_detailorder_hutang"">
+                                <div class="comm-1-header">
+                                    <p>Order Number</p>
+                                </div>
+                               
+                            </div>  
+                            <div class="item_detail_bot id_detailtotal_hutang"">
+                                <div class="comm-1-header">
+                                    <p>Total Price</p>
+                                </div>
+                             
+                            </div>  
+                            <div class="item_detail_bot id_detailpayment_hutang"">
+                                <div class="comm-1-header">
+                                    <p>Payment Method</p>
+                                </div>
+                              
+                            </div> 
+                            <div class="item_detail_bot id_detailshipping_hutang">
+                                <div class="comm-1-header">
+                                    <p>Shipping Fee</p>
+                                </div>
+                         
+                            </div>
+                            <div class="item_detail_bot id_detailaddress_hutang">
+                                <div class="comm-1-header">
+                                    <p>Shipping Address</p>
+                                </div>
+                          
+                            </div>
+                            <div class="item_detail_bot id_detailvirtual_hutang">
+                                <div class="comm-1-header">
+                                    <p>Virtual Number</p>
+                                </div>
+                            
+                            </div>
+                                       
+                        </div>         
+                    </div>  
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <!---item detail HUTANG MODALS -->
+
+
+
   <div class="box-item-detail">
+
     <div class="item-img">
         <div class="box-back-id">
             <i class="fas fa-chevron-left icon-prev-1" ></i>

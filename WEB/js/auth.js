@@ -63,7 +63,7 @@ $(document).on('click',"#simpan_reg",function(){
             })
         }).then((res)=>{
             console.log(res.data)
-            // alert('berhasil daftars')
+            
             if(res.data === true){
                 
                 swal.fire("Register Berhasil", "", "success");
@@ -105,7 +105,7 @@ $(document).on('click',".btn-login",function(){
     var password = $('#password_login').val() 
     console.log(email)
     console.log(password)
-    // alert('button login jalan')
+    
         
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}`,{
                 params:{
@@ -130,7 +130,7 @@ $(document).on('click',".btn-login",function(){
     
 
   
-    // alert('sign in jalan')
+
 
 })
 
@@ -299,7 +299,7 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
             Address_4 : (typeof $("#alamat_lengkap_4_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_4_supp").val(),
             Address_5 : (typeof $("#alamat_lengkap_5_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_5_supp").val(),
             Status : "pending",
-            User_Type : "Customer",
+            User_Type : "Supplier",
             account_number: $("#no_rek_perusahaan_supp").val(),
             npwp: $("#npwp_supp").val(),
             ktp: (typeof $("#no_ktp_supp").val() === 'undefined') ? "NULL" : $("#no_ktp_supp").val(),
@@ -369,7 +369,7 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
 //  FORGOT PASSWORD
 
 $(document).on('click',"#btn-save-forgot",function(){
-// alert('button forgot password jalan')
+
 var data = {
     customer_data : {
         requestedNewPassword :$('#password_forgot').val(),
@@ -427,7 +427,7 @@ $(document).on('change','#option-address-gb',function(){
 
 
 $(document).on('change','.qty_groupbuy',function(){
-    // alert('group buy jalan')
+    
     var total_qty_from_user = parseInt($(this).val())
     var product_id = $(this).attr('id')
     var total_qty_from_api;

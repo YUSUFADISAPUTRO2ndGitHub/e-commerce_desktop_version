@@ -1281,8 +1281,8 @@ input::-webkit-input-placeholder {
     width:250px;
     border-radius:50px;
     height:35px;
-    background-color: white;
-    border:1px solid #217283;
+    background-color: #217283;
+    border:1px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1389,23 +1389,6 @@ input:focus{
 
 /* modals delivery list*/
 
-/* MODALS LIST ITEM BY SUB CATEGORY */
-.modals-lk {
-    position: absolute;
-    z-index:20;
-    top:100px;
-    /* left:327px; */
-    left:22.8%;
-    /* height:450px; datalama */
-    /* width:400px; datalama*/
-    height: 600px;
-    width:1000px;
-    /* background-color: red; */
-    display:none;
-    transition: 2s ease-out;
-}
-
-/* MODALS LIST ITEM BY SUB CATEGORY */
 
 
 

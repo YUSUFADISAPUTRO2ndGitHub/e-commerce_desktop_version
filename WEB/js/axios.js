@@ -28,6 +28,7 @@ $( document ).ready(function() {
     const subcategory = urlParams.get('subcategory');
     const item_category = urlParams.get('product_id');
     const group_buy = urlParams.get('groupbuy_id')
+    const list_hutang = urlParams.get('list_hutang')
     // console.log(group_buy, 'group_buy')
     console.log(queryString,' queryString')
     console.log(urlParams,' urlParams')
@@ -50,7 +51,10 @@ $( document ).ready(function() {
         render_get_product_detail(item_category)
     }else if (group_buy != undefined){
         console.log('masuk ke line 44 axios js')
+        alert(group_buy)
         render_group_buy(group_buy)
+    }else if (list_hutang !=undefined){
+        render_daftar_hutang()
     }
     else {
         console.log('error masuk ke else 33')
@@ -124,6 +128,7 @@ const renderItemPromo=()=>{
 
 const renderItemNew=()=>{
     
+    
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -133,7 +138,7 @@ const renderItemNew=()=>{
         $('.box-render-new').append(
         ` 
           <div class="card-item card_sp">
-                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
@@ -242,7 +247,7 @@ const getAllItem=(item)=>{
 }
 
 function sign_up_request(){
-    // alert('sign up jalan')
+    
     $("#loginModal").modal("hide");
     // $("#daftarHutangModal").modal('show')
         axios.post(`http://customers.sold.co.id/get-available-referral-codes
@@ -350,7 +355,7 @@ function close_all_open_window(){
 
 
 const render_group_buy=(product_id)=>{
-// alert('render group buy jalan')
+
 
         var option_payment
         axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
@@ -615,7 +620,7 @@ const render_group_buy=(product_id)=>{
 
  var idAddress=1
  function addAddress(){
-    // alert('jalan')
+    
     idAddress++
     if(idAddress <=5){
         $('.box-tambah-alamat').append(
@@ -636,7 +641,7 @@ const render_group_buy=(product_id)=>{
 
 var idAddressSupp=1
 function addAddressSupp(){
-   // alert('jalan')
+   
    idAddressSupp++
    if(idAddressSupp <=5){
        $('.box-tambah-alamat-supplier').append(

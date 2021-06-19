@@ -8,7 +8,7 @@ $( document ).ready(function() {
     if(searching != undefined){
         render_searching_page(searching)
     }
-    // alert(search,' line 11');
+    
 
     // category-list
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
@@ -55,7 +55,7 @@ function show_subcategory(choosen_parent_category){
 }
 
 function show_jenisproduct(jenis_product){
-    // alert(jenis_product,' 57 jenis product jalan')
+    
 
     $('.box-list-kategori').css('display','none')
     $('.box-list-subcategory').css('display','block')
@@ -101,6 +101,7 @@ function show_jenisproduct(jenis_product){
 }
 
 const get_product_detail_from_searching_page=(product_id)=>{
+    
     $('.item_detail_sp').empty()
     $('.box-list-subcategory').css('display','none')
     $('.item_detail_sp').css('display','flex')
@@ -327,7 +328,7 @@ function groupbuy_sp_form(product_id){
                  </div>
              </div>
              `)
-            // alert(res.data)
+            
             axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
             .then((res)=>{
                 // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)      
@@ -383,7 +384,7 @@ function groupbuy_sp_form(product_id){
                 if (result.isConfirmed) {
                     $(".force-close-all-command").css("display", "none");
                     $('#daftarHutangModal').modal('show')
-                    //   Swal.fire('ini tagihan anda!', '', 'info')
+                    
                     render_daftar_hutang()
                 } else if (result.isDenied) {
                     Swal.fire('Cancel berhasil', '', 'success')
@@ -413,16 +414,11 @@ const search_item=()=>{
 }
 
 
-// const testing=()=>{
-//     alert('jalan')
-//     $('#daftarHutangModal').modal('show')
-// }
-
 
 
 const render_searching_page=(product_name)=>{
     console.log(product_name)
-    alert(product_name,'372')
+    
 
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
@@ -465,63 +461,35 @@ const render_searching_page=(product_name)=>{
 
 const render_daftar_hutang=()=>{
     const token = localStorage.getItem('token')
-    // alert(token)
-    axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code given_date=${token}`)
+    
+    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
     .then((res)=>{
         console.log(res.data)
-        if(res.data){
-
-        }else {
-            $('.box_daftar_hutang').append(`
-                <div class="modal-content ">
-                    <div class="modal-header box-login-profile">
-                        <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
-                        <div class="box-code-referral">
-                            <p>Your Customer Code for Referral :</p>
-                            <p>1238198BA18293YU</p>
-                        </div>
-                    </div>
-                    <div class="modal-body box-login-body">
-                        <div class="commision-form">     
-                            <div class="detail_form_top">
-                                <p>Daftar hutang testing</p>      
-                            </div>  
-                            <div class="detail-form-bot">
-                            
-                                <div class="item_detail_bot" onclick="item_detail_for_hutang(1)">
-                                    <div class="comm-1-header">
-                                        <p>Product Name</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>123</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>10</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>90</p>
-                                    </div>
-                                </div>
-                                <div class="item_detail_bot">
-                                    <div class="comm-1-header">
-                                        <p>Product Sell Price</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>100.000</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>1000</p>
-                                    </div>
-                                    <div class="comm-1-list">
-                                        <p>100.000.000</p>
-                                    </div>
-                                </div>                
-                            </div>         
-                        </div>  
-                    </div>
+        res.data.map((val,index)=>{
+            // $('.id_unpaid').append(`
+            //     <div class="comm-1-list">
+            //         <p>${val.sys_id}</p>
+            //     </div>
+            // `)
+            $('.qty_unpaid').append(`
+                <div class="comm-1-list">
+                    <p>${val.Total_Quantity}</p>
                 </div>
             `)
-        }
+
+            $('.order_unpaid').append(`
+                <div class="comm-1-list " onclick="item_detail_for_hutang('${val.Order_Number}')">
+                    <p class="limited-text">${val.Order_Number}</p>
+                </div>
+            `)
+            $('.harga_unpaid').append(`
+                <div class="comm-1-list">
+                    <p>RP.${numeral(val.Total_Price).format('0,0')}
+                </div>
+            `)
+        })
+        
+       
     }).catch((err)=>{
         console.log(err)
     })
@@ -530,10 +498,56 @@ const render_daftar_hutang=()=>{
 
 
 
-const item_detail_for_hutang=(id)=>{
-    alert(id)
+const item_detail_for_hutang=(order_number)=>{
+    
+    
+    // $('#daftarHutangModal').modal('hide')
+    $('#detailHutangModal').modal('show')
+    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${order_number}`)
+    .then((res)=>{
+        $('.ref_code_detail_hutang').val(res.data.Customer_Code)
+        $('.customer_name_hutang').val(res.data.Primary_Recipient_Name)
 
-    $('#daftarHutangModal').modal('hide')
-    $('#detailHutangModal').modal('show ')
+        res.data.map((val,index)=>{
+            // $('.id_detail_hutang').append(`
+            //     <div class="comm-1-list">
+            //         <p>${val.sys_id}</p>
+            //     </div>
+            // `)
+            $('.id_detailorder_hutang').append(`
+            <div class="comm-1-list">
+                <p class="limited-text">${val.Order_Number}</p>
+            </div>
+            `)
+            $('.id_detailtotal_hutang').append(`
+            <div class="comm-1-list">
+                <p>RP.${numeral(val.Total_Price).format('0,0')}
+            </div>
+            `)
+            $('.id_detailpayment_hutang').append(`
+            <div class="comm-1-list">
+                <p>${val.Payment_Method}</p>
+            </div>
+            `)
+            $('.id_detailshipping_hutang').append(`
+            <div class="comm-1-list">
+                <p>${val.Shipping_Fee}</p>
+            </div>
+            `)
+            $('.id_detailaddress_hutang').append(`
+            <div class="comm-1-list">
+                <p>${val.Shipping_Address}</p>
+            </div>
+            `)
+            $('.id_detailvirtual_hutang').append(`
+            <div class="comm-1-list">
+                <p style="word-break: break-all">${val.VA_Number}</p>
+            </div>
+            `)
+        })
+
+    }).catch((err)=>{
+        console.log(err)
+    })
 
 }

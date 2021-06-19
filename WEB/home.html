@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
@@ -592,7 +592,7 @@
                         <!-- <div class="btn-kumpulkan">
                             <p>Tambah Alamat (+)</p>
                         </div> -->
-                        <div class="btn-status-barang" onclick="check_status_item()">
+                        <div class="btn-status-barang box-status-barang" onclick="check_status_item()">
                             <p>Lihat Status Barang Anda</p>
                         </div>
                     </div> 
@@ -1038,6 +1038,136 @@
     </div>
     <!--DETAIL PRODUCT MODALS -->
 
+    <!--DAFTAR HUTANG MODALS -->
+        <div class="modal  fade " id="daftarHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box_daftar_hutang ">
+            <div class="modal-content ">
+                <div class="modal-header box-login-profile">
+                    <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                    <div class="box-code-referral">
+                        <p>Your Customer Code for Referral :</p>
+                        <p>1238198BA18293YU</p>
+                    </div>
+                </div>
+                <div class="modal-body box-login-body">
+                    <div class="commision-form">     
+                        <div class="detail_form_top">
+                            <p>List Unpaid</p>      
+                        </div>  
+                        <div class="detail-form-bot">
+                            <div class="item_detail_bot id_unpaid" onclick="item_detail_for_hutang(1)">
+                                <div class="comm-1-header">
+                                    <p>ID</p>
+                                </div>
+                                
+                            </div>
+                            <div class="item_detail_bot qty_unpaid"">
+                                <div class="comm-1-header">
+                                    <p>Quantity</p>
+                                </div>
+                                
+                            </div>  
+                            <div class="item_detail_bot order_unpaid"">
+                                <div class="comm-1-header">
+                                    <p>Order Number</p>
+                                </div>
+                                
+                            </div>  
+                            <div class="item_detail_bot harga_unpaid"">
+                                <div class="comm-1-header">
+                                    <p>Total Harga</p>
+                                </div>
+                                
+                            </div> 
+                                        
+                        </div>         
+                    </div>  
+                </div>
+            </div>
+        
+        </div>
+        </div>
+    <!---DAFTAR HUTANG MODALS -->
+      <!--item detail MODALS -->
+      <div class="modal  fade " id="detailHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box_daftar_hutang ">
+            <div class="modal-content ">
+                <div class="modal-header box-login-profile">
+                    <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                    <div class="box-code-referral">
+                        <p>Your Customer Code for Referral :</p>
+                        <p>1238198BA18293YU</p>
+                    </div>
+                </div>
+                <div class="modal-body box-login-body">
+                    <div class="commision-form">     
+                        <div class="detail_form_top">
+                            <p>List Unpaid</p>      
+                        </div>  
+                        <div class="detail_hutang_form">
+                            <div class="item_detail_bot id_detail_hutang" style="visibility: hidden;">
+                                <div class="comm-1-header">
+                                    <p>ID</p>
+                                </div>
+                            </div>
+                            <div class="item_detail_bot id_detail_hutang" style="visibility: hidden;">
+                                <div class="comm-1-header">
+                                    <p>ID</p>
+                                </div>
+                            </div>
+                            <div class="item_detail_bot id_detail_hutang">
+                                <div class="comm-1-header">
+                                    <p>ID</p>
+                                </div>
+                               
+                            </div>
+                            <div class="item_detail_bot id_detailorder_hutang"">
+                                <div class="comm-1-header">
+                                    <p>Order Number</p>
+                                </div>
+                               
+                            </div>  
+                            <div class="item_detail_bot id_detailtotal_hutang"">
+                                <div class="comm-1-header">
+                                    <p>Total Price</p>
+                                </div>
+                             
+                            </div>  
+                            <div class="item_detail_bot id_detailpayment_hutang"">
+                                <div class="comm-1-header">
+                                    <p>Payment Method</p>
+                                </div>
+                              
+                            </div> 
+                            <div class="item_detail_bot id_detailshipping_hutang">
+                                <div class="comm-1-header">
+                                    <p>Shipping Fee</p>
+                                </div>
+                         
+                            </div>
+                            <div class="item_detail_bot id_detailaddress_hutang">
+                                <div class="comm-1-header">
+                                    <p>Shipping Address</p>
+                                </div>
+                          
+                            </div>
+                            <div class="item_detail_bot id_detailvirtual_hutang">
+                                <div class="comm-1-header">
+                                    <p>Virtual Number</p>
+                                </div>
+                            
+                            </div>
+                                       
+                        </div>         
+                    </div>  
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <!---item detail HUTANG MODALS -->
+
+
    
        
 
@@ -1048,7 +1178,7 @@
                 
             </div>
             <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
-                <img src="../WEB/img/logo.png" alt="" class="icon-logo" data-bs-toggle="modal" data-bs-target="#productModal" >
+                <img src="../WEB/img/logo.png" alt="" class="icon-logo" data-bs-toggle="modal" data-bs-target="#detailHutangModal" >
             </div>
             
             <div class="main-header-search">
@@ -1139,7 +1269,7 @@
                     <div id="slider">
                         <figure>
                               <img src="./img/promo3.png">
-                              <img src="./img/promo2.png">
+                              <img src="./img/promo5.png">
                               <img src="./img/promo1.png">
                         </figure>
                     </div>
@@ -1215,7 +1345,7 @@
                     <p>Promo</p>
                 </div>
                 <div class="lg-ads-name">
-                    <p>ADS SPACE</p>
+                    <img src="./img/ads_panjang.png" alt="" class="ads_panjang">
                 </div>
             </div>
             <!-- RENDER PROMO ITEM -->
