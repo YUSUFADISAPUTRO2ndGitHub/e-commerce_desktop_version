@@ -345,6 +345,7 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
                 
                 swal.fire("Register Supplier Berhasil", "", "success");
                 $('#supplierModal').modal('hide')
+                $('#loginModal').modal('hide')
             }else{
                 swal.fire("Register Supplier Gagal", "", "alert");
             }

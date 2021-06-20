@@ -2202,7 +2202,8 @@ ul {
     align-items: center;
     padding-left:10px;
     padding-right:10px;
-    /* overflow-y: scroll; */
+    overflow:scroll;
+    overflow-y: scroll;
     /* overflow:auto; */
     
     
@@ -2289,15 +2290,29 @@ ul {
     height:100%;
 }
 
-.box-status-barang{
+.btn-status-barang{
     width:250px;
     border-radius:50px;
     height:35px;
     background-color: #217283;
+    /* background-color: red; */
     border:1px solid white;
+    display: flex;
+   
+}
+.btn-status-barang p {
+    color:white;
+    /* background-color: red; */
+    position: relative;
+    top:8px;
+    font-size: 13px;
+    font-weight: 700;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.btn-status-barang:hover{
+    cursor: pointer;
 }
 
 .daftar_hutang_ID{
@@ -2322,3 +2337,4 @@ ul {
     position: relative;
     top:-50px;
 }
+

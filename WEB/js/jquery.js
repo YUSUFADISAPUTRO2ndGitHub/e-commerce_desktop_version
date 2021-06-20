@@ -785,3 +785,15 @@ $('.id-address-gb').on('click',function(){
     console.log(data)
 })
 
+
+
+const check_status_item=()=>{
+    alert('function check status jalan')
+    $('#productModal').modal('show')
+}
+
+const toDetailProduct=(id)=>{
+    alert('jalan id jquery js', id)
+    $('#productModal').show('hide')
+    $('#detailProductModal').modal('show')
+}
