@@ -8,6 +8,7 @@
     justify-content: center;
     /* align-items: center; */
     flex-direction: row;
+    overflow:hidden;
     /* border:1px solid black; */
 }
 .box-item-img{
@@ -254,11 +255,12 @@
 }
 .star-box{
     height:100%;
-    width:50%;
+    width:auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
 }
 .fa-star {
     font-size: 20px;;

@@ -2338,3 +2338,8 @@ ul {
     top:-50px;
 }
 
+.star-iframe{
+    background-color: red !important;
+    height:30px;
+    width:100%;
+}
