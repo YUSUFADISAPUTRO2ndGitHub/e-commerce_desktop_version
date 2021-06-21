@@ -1,6 +1,12 @@
 $(function(){
     $( "#datepicker" ).datepicker();
 
+    $(window).on('scroll',function (event) {
+        var scroll = $(window).scrollTop();
+        console.log(scroll)
+        // Do something
+    });
+
     // $('.carousel').carousel()
 
    $('.cust-1').on('click',function(){

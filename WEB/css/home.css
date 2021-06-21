@@ -11,12 +11,19 @@ body{
 
 .main-header{
     width:100%;
-    height:100px;
+    /* height:100px; */
+    height:10vh;
     /* background-color: red; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     /* border:1px solid black; */
+}
+.main-body {
+    width:100%;
+    height:70vh;
+    overflow:scroll;
+
 }
 
 .header-cat{
@@ -824,7 +831,8 @@ cursor: pointer;
 /* BOX - PRODUCT */
 .box-product{
     width:100%;
-    height:450px;
+    /* height:450px; */
+    height:20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1455,7 +1463,8 @@ input:focus{
     position: absolute;
     top: 97px;
     width: 100%;
-    height: 80%;
+    /* height: 80%; */
+    height:80vh;
     display: none;
 }
 
