@@ -790,6 +790,24 @@ $('.id-address-gb').on('click',function(){
 const check_status_item=()=>{
     alert('function check status jalan')
     $('#productModal').modal('show')
+    var token = localStorage.getItem('token')
+    var creator;
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        console.log(res.data.Creator)
+        creator = res.data.Creator
+
+        // FIND DATA BY CREATOR
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${creator}`)
+        .then((res)=>{
+            console.log(res.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
 }
 
 const toDetailProduct=(id)=>{
