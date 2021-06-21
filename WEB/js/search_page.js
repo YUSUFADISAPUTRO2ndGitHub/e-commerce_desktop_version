@@ -135,11 +135,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                     
                     <div class="rating-bottom">
                         <div class="star-box">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star last-star"></i>
+                            <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>
 
                         <div class="simpan-item">
@@ -190,11 +186,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                     
                     <div class="rating-bottom">
                         <div class="star-box">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star last-star"></i>
+                            <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>
 
                         <div class="simpan-item">
