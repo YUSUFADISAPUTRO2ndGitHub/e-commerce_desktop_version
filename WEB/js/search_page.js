@@ -443,9 +443,39 @@ const render_searching_page=(product_name)=>{
     Swal.fire({
         title: 'Please Wait',
         icon: 'warning',
+        onBeforeOpen: () => {
+             Swal.showLoading()
+        },
     }).then(()=>{
-        Swal.showLoading()
         alert('jalan')
+        
+    })
+
+    // Swal.fire({
+        
+    //     text: 'You will not be able to recover this imaginary file!',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Yes, delete it!',
+    //     cancelButtonText: 'No, keep it'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'Your imaginary file has been deleted.',
+    //         'success'
+    //       )
+    //     // For more information about handling dismissals please visit
+    //     // https://sweetalert2.github.io/#handling-dismissals
+    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //       Swal.fire(
+    //         'Cancelled',
+    //         'Your imaginary file is safe :)',
+    //         'error'
+    //       )
+    //     }
+    //   })
+      
+
 
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
@@ -483,36 +513,6 @@ const render_searching_page=(product_name)=>{
     }).catch((err)=>{
         console.log(err)
     })
-
-
-        
-    })
-
-    // Swal.fire({
-        
-    //     text: 'You will not be able to recover this imaginary file!',
-    //     showCancelButton: true,
-    //     confirmButtonText: 'Yes, delete it!',
-    //     cancelButtonText: 'No, keep it'
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       Swal.fire(
-    //         'Deleted!',
-    //         'Your imaginary file has been deleted.',
-    //         'success'
-    //       )
-    //     // For more information about handling dismissals please visit
-    //     // https://sweetalert2.github.io/#handling-dismissals
-    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //       Swal.fire(
-    //         'Cancelled',
-    //         'Your imaginary file is safe :)',
-    //         'error'
-    //       )
-    //     }
-    //   })
-      
-
 
 
     // axios.post(``)

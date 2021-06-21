@@ -1,7 +1,7 @@
 
 
 // console.log('axios jalan')
-
+// alert('axios page jalan')
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     $('.cart-counter').text(dataParse.length)
@@ -67,11 +67,12 @@ $( document ).ready(function() {
 
 const getAllData=()=>{
 // console.log(dataRender)
-
+alert('get all data 70 jalan')
 axios.post('http://products.sold.co.id/get-product-details')
 .then((res)=>{
+    alert('masuk ke alldata line 73')
     allData = res.data
-    // console.log(res.data)
+    console.log(res.data)
     renderItemPromo()
     renderItemNew()
     renderItemAll()
@@ -128,7 +129,7 @@ const renderItemPromo=()=>{
 
 const renderItemNew=()=>{
     
-    
+    alert('render new item jalan')
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
