@@ -72,14 +72,14 @@ function show_jenisproduct(jenis_product){
             var hargaTotal = hargaAwal + discount
             $('.render-item-sub').append(
               `
-                <div class="card-item card_sp">
+                <div class="card-item card_sp hvr-float-shadow">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p>${val.Name}</p>
                         <div class="split-item">
                             <div class="item-price">
-                                <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
+                                <p>RP. ${numeral(hargaTotal).format('0,0')}</p>
+                                <p>RP. ${numeral(hargaAwal).format('0,0')}</p>
                             </div>
                             <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                 <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -413,25 +413,63 @@ const search_item=()=>{
 
 const render_searching_page=(product_name)=>{
     console.log(product_name)
-    
+    // Swal.fire({
+    //     title: 'Please Wait !',
+    //     html: 'data uploading',// add html attribute if you want or remove
+    //     allowOutsideClick: false,
+    //     onBeforeOpen: () => {
+    //         Swal.showLoading()
+    //     },
+    // });
+
+
+    // let timerInterval 
+    // Swal.fire({ 
+    //     title: 'Auto close alert!', 
+    //     html: 'I will close in <b></b> milliseconds.', 
+    //     timer: 2000, 
+    //     timerProgressBar: true, 
+    //     didOpen: () => { Swal.showLoading() 
+    //         timerInterval = setInterval(() => 
+    //         { const content = Swal.getHtmlContainer() 
+    //             if (content) { const b = content.querySelector('b') 
+    //             if (b) { b.textContent = Swal.getTimerLeft() } } }, 100) },
+    //              willClose: () => { clearInterval(timerInterval) } }).then((result) => { 
+    //             if (result.dismiss === Swal.DismissReason.timer)
+    //             { console.log('I was closed by the timer') } 
+            
+    //         })
+
+    Swal.fire({
+        title: 'Please Wait',
+        icon: 'warning',
+    }).then(()=>{
+        Swal.showLoading()
+        alert('jalan')
 
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
         console.log(res.data)
+        // alert(product_name)
+        if(product_name){
+            $('.sp_name').val(product_name)
+        }else {
+            $('.sp_name').val('All')
+        }
 
         res.data.map((val,index)=>{
             var hargaAwal = parseInt(val.Sell_Price)
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
             $('.new-box-card').append(`
-            <div class="card-item card_sp">
+            <div class="card-item card_sp hvr-float-shadow">
                     <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
+                            <p>RP. ${numeral(hargaTotal).format('0,0')}</p>
+                            <p>RP. ${numeral(hargaAwal).format('0,0')}</p>
                         </div>
                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                             <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -441,9 +479,40 @@ const render_searching_page=(product_name)=>{
             </div>
             `)
         })
+        Swal.hideLoading()	
     }).catch((err)=>{
         console.log(err)
     })
+
+
+        
+    })
+
+    // Swal.fire({
+        
+    //     text: 'You will not be able to recover this imaginary file!',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Yes, delete it!',
+    //     cancelButtonText: 'No, keep it'
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'Your imaginary file has been deleted.',
+    //         'success'
+    //       )
+    //     // For more information about handling dismissals please visit
+    //     // https://sweetalert2.github.io/#handling-dismissals
+    //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //       Swal.fire(
+    //         'Cancelled',
+    //         'Your imaginary file is safe :)',
+    //         'error'
+    //       )
+    //     }
+    //   })
+      
+
 
 
     // axios.post(``)
@@ -479,7 +548,7 @@ const render_daftar_hutang=()=>{
             `)
             $('.harga_unpaid').append(`
                 <div class="comm-1-list">
-                    <p>RP.${numeral(val.Total_Price).format('0,0')}
+                    <p>RP.${numeral(val.Total_Price).format('0,0')}</p>
                 </div>
             `)
         })
@@ -516,7 +585,7 @@ const item_detail_for_hutang=(order_number)=>{
             `)
             $('.id_detailtotal_hutang').append(`
             <div class="comm-1-list">
-                <p>RP.${numeral(val.Total_Price).format('0,0')}
+                <p>RP.${numeral(val.Total_Price).format('0,0')}</p>
             </div>
             `)
             $('.id_detailpayment_hutang').append(`

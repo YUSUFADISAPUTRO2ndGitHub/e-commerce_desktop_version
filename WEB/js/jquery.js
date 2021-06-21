@@ -1,13 +1,7 @@
 $(function(){
-    $( "#datepicker" ).datepicker();
+    $("#datepicker").datepicker();
 
-    $(window).on('scroll',function (event) {
-        var scroll = $(window).scrollTop();
-        console.log(scroll)
-        // Do something
-    });
-
-    // $('.carousel').carousel()
+ 
 
    $('.cust-1').on('click',function(){
        console.log('testing jalan')
@@ -149,6 +143,7 @@ $(function(){
 
 
 
+
 function replace_value_to(x){
     // alert($(x).html());
     $(".input-name").val($(x).html());
@@ -218,7 +213,7 @@ function groupbuy(product_id){
             location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
             
         }else {
-            close_all_open_window()
+            // close_all_open_window()
             Swal.fire({
                 title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
                 showDenyButton: true,

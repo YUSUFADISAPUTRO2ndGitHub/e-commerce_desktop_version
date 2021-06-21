@@ -121,21 +121,21 @@ var data = [
 //  SCROLL KATEGORI
  var isHome = true
  var setIsScroll = false
- var element = document.getElementsByClassName("main-structure")
+ var element = document.getElementsByClassName("new_body")
     document.addEventListener("scroll", e => {
       let scrolled = document.scrollingElement.scrollTop
-    //   console.log(scrolled)
+      console.log(scrolled)
 			// console.log(isHome)
 			if(isHome){
-				if (scrolled > 1000) {
-                    element[0].classList.remove("scroll")
+				if (scrolled > 50) {
+                    // element[0].classList.remove("scroll")
 					setIsScroll = true
                     $('.list-group').css('display','none')
                     $('.modals-lk').css('display','none')
                     // console.log('masuk line 94')
 				} else {
                     // console.log('masuk line 98')
-					element[0].classList.add("scroll")
+					// element[0].classList.add("scroll")
 					setIsScroll = false
                     $('.list-group').css('display','block')
 				}

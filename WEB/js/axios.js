@@ -104,14 +104,14 @@ const renderItemPromo=()=>{
         // console.log(hargaTotal)
         $('.box-render-promo').append(
         ` 
-            <div class="card-item">
+            <div class="card-item hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
+                            <p>RP. ${numeral(hargaTotal).format('0,0')}</p>
+                            <p>RP. ${numeral(hargaAwal).format('0,0')}</p>
                         </div>
                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                             <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -137,14 +137,14 @@ const renderItemNew=()=>{
     //  console.log(hargaTotal)
         $('.box-render-new').append(
         ` 
-          <div class="card-item card_sp">
+          <div class="card-item card_sp hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
+                            <p>RP. ${numeral(hargaTotal).format('0,0')}</p>
+                            <p>RP. ${numeral(hargaAwal).format('0,0')}</p>
                         </div>
                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                             <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -166,14 +166,14 @@ const renderItemAll=()=>{
     //  console.log(hargaTotal)
         $('.box-render-all').append(
         ` 
-            <div class="card-item">
+            <div class="card-item hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
+                            <p>RP. ${numeral(hargaTotal).format('0,0')}</p>
+                            <p>RP. ${numeral(hargaAwal).format('0,0')}</p>
                         </div>
                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                             <img src="./img/cart.png" alt="" class="icon-buy">
@@ -299,8 +299,8 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                         <p>${val.Name}</p>
                         <div class="split-all-item">
                             <div class="item-all-price">
-                                <p>RP. ${hargaTotal}</p>
-                                 <p>Rp. ${hargaAwal}</p>
+                                <p>RP. ${numeral(hargaTotal).format('0,0')}</p>
+                                <p>RP. ${numeral(hargaAwal).format('0,0')}</p>
                             </div>
                         </div>
                     </div>
@@ -351,6 +351,12 @@ const renderItemBasedOnCategory=(Category)=>{
 function close_all_open_window(){
     $(".force-close-all-command").css("display", "none");
     
+}
+
+function back_to_home(){
+    $(".force-close-all-command").css("display", "none");
+    $('.main-body').css('display','block')
+    $('.active_search').css('top','0px')
 }
 
 

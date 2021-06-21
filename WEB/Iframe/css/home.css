@@ -706,15 +706,14 @@ input::-webkit-input-placeholder {
     width:100%;
     height:100px;
 }
-.card-item-list{
+/* .card-item-list{
     padding-top:5px;
     padding-left:20px;
     display: flex;
     width:100%;
     height:130px;
-    /* background-color: white; */
     flex-direction: column;
-}
+} */
 
 
 .box-back{
