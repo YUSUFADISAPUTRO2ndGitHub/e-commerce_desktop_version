@@ -16,7 +16,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border:1px solid black; */
+
 }
 .main-header{
     width:100%;

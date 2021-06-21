@@ -81,8 +81,132 @@ function cek_harga_requested(x){
    
 }
 
+$('#datepicker').on('click',function(){
+    $(this).datepicker();
+})
+
 const commision_check=()=>{
     $('#profileModal').modal('hide')
+    var token = localStorage.getItem('token')
+    console.log(token)
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    newdate = year + "-" + month + "-" + day;
+    var thismonth = year + "-" + month + "-" + "1"
+    console.log(thismonth)
+    var percent;
+    console.log(newdate)
+    console.log(typeof newdate)
+  
+
+    // TOTAL  CUSTOMER MAKE PURCHASE
+    axios.post(`http://customers.sold.co.id/get-total-active-customers-of-a-referral-code?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        $('.total_cust_make_purchase').val(res.data[0].total_active_customers)
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    // TOTAL ACTIVE CUSTOMER
+    axios.post(`http://customers.sold.co.id/get-total-customers-of-a-referral-code?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        $('.total_cust_with_referral').val(res.data[0].Total_Customers)
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    // CUSTOMER INFORMATION  FOR TOTAL COMMISION
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        var tanggalAwalBuat = res.data.Created_Date
+        console.log(res.data.extra_column_3)
+        if(res.data.extra_column_3 === '3%'){
+            percent = 0.03
+        }else if ( res.data.extra_column_3 === '7.5%'){
+            percent = 0.075
+        }
+         
+        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggalAwalBuat}`)
+    .then((res)=>{
+            console.log(res.data)
+            var total_commision = res.data[0].Total_Price * percent
+            // Total_Price
+            $('.total_commision').val(total_commision)
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+        // DATA UNTUK RENDER TABLE
+
+        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
+        .then((res)=>{
+            console.log(res.data)
+            // $('.date-commision').val(newdate)
+            // var a = $('.date-commision').val()
+
+            res.data.map((val,index)=>{
+      
+                var untung = percent * val.Total_Price  
+                $('.comm-order-num').append(`
+                <div class="comm-1-list">
+                    <p class="limited-text">${val.Order_Number}</p>
+                </div>
+                `)
+    
+                $('.comm-qty').append(`
+                <div class="comm-1-list">
+                    <p>${val.Total_Quantity}</p>
+                </div>
+                `)
+                $('.comm-total-price').append(`
+                <div class="comm-1-list">
+                    <p>${val.Total_Price}</p>
+                </div>
+                `)
+                $('.comm-percent').append(`
+                <div class="comm-1-list">
+                    <p>3%</p>
+                </div>
+                `)
+                $('.comm-total-untung').append(`
+                <div class="comm-1-list">
+                    <p>${untung}</p>
+                </div>
+                `)
+    
+    
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+         // CUSTOMER TOTAL COMMISION THIS MONTH
+        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
+        .then((res)=>{
+            console.log(res.data)
+            console.log(res.data[0].Total_Price)
+            console.log(percent)
+            console.log(thismonth)
+            var total_commision = res.data[0].Total_Price * percent
+            console.log(total_commision)
+            // Total_Price
+            $('.commision_this_month').val(total_commision)
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+
+        
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+   
 }
 
 
@@ -244,10 +368,6 @@ function horizontalNavigationAll(position, event) {
 
     
 
-$('.id-referral').on('click',function(){
-   var option =  $(this).val()
-   console.log(option)
-})
 
 
 const to_detail_product=(id)=>{

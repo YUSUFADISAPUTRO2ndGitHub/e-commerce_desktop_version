@@ -11,7 +11,10 @@ var allData = []
 
 $( document ).ready(function() {
     
-
+    $('.ref-cod').on('change',function(){
+        var selectedVal = $('.ref-cod option:selected').val()
+        // alert(selectedVal)
+    })
 
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     console.log(dataParse)
@@ -266,6 +269,8 @@ function sign_up_request(){
 
 
 
+
+
 const get_product_detail=(product_id)=>{
     $('.box-list-kategori').empty()
     $('.box-list-kategori').css('display','none')
@@ -351,6 +356,12 @@ const renderItemBasedOnCategory=(Category)=>{
 function close_all_open_window(){
     $(".force-close-all-command").css("display", "none");
     
+}
+
+function back_to_home(){
+    $(".force-close-all-command").css("display", "none");
+    $('.main-body').css('display','block')
+    $('.active_search').css('top','0px')
 }
 
 

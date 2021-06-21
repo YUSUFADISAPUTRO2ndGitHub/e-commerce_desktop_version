@@ -110,7 +110,7 @@
         }
     </style>
 </head>
-<body>
+<body >
 
     
     <!-- LOGIN MODALS -->
@@ -204,8 +204,20 @@
                                 <input type="text" class="forgot-form" placeholder="Password Baru" id="password_forgot">
                             </div>
                         </div>  
+                        <div class="reg-form-1">
+                            
+                            <div class="forgot-name">
+                                <div class="box-name-forgot">
+                                    <p>Masukan OTP</p>
+                                </div>
+                                <input type="text" class="forgot-form" placeholder="OTP" id="otp_forgot">
+                            </div>
+                        </div> 
                                
-                        <div class="box-kumpulkan-forgot">
+                        <div class="box-kumpulkan-forgot" >
+                            <div class="btn-otp" id="btn-send-otp" onclick="send_otp()">
+                                <p>Kirim OTP</p>
+                            </div>
                             <div class="btn-kumpulkan-forgot" id="btn-save-forgot">
                                 <p>Verifikasikan Saya</p>
                             </div>
@@ -432,7 +444,7 @@
                         </div>  
                         
                         <div class="new-reg-form">
-                            <select class="form-select option-referral" aria-label="Default select example">
+                            <select class="form-select option-referral ref-cod" aria-label="Default select example">
                                 <option selected>Select Referral Code</option>
                                 
                             </select>
@@ -629,22 +641,25 @@
                         <div class="commision-top-1">
                             <div class="comm-top-1">
                                 <p>Total Customer With Your Referral</p>
-                                <div class="comm-top-2">
+                                <input type="text" class="comm-top-2 total_cust_with_referral" disabled placeholder="">
+                                <!-- <div class="comm-top-2">
                                     10
-                                </div>
+                                </div> -->
                             </div>
                             <div class="comm-top-1">
                                 <p>Total Customer make purchase because of you</p>
-                                <div class="comm-top-2">
+                                <input type="text" class="comm-top-2 total_cust_make_purchase" disabled placeholder="">
+                                <!-- <div class="comm-top-2">
                                     1
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="commision-top-2">
-                            <input id="datepicker" class="input-date" placeholder="Today"
+                            <input id="datepicker"  class="input-date date-commision" placeholder="Today"
                             min="2021-05-01" max="2021-07-01"
                             />      
-                            <i class="fas fa-chevron-circle-down icon-date" data-date="12/03/2012">
+                            <!-- <i class="fas fa-chevron-circle-down icon-date" data-date="12/03/2012"> -->
+                                <!-- <input type="date"   value="yyyy-mm-dd" class="input-medium search-query" onkeypress="return false"> -->
                                 <!-- <input id="datepicker" width="100"  height="20"/> -->
                             </i>
                             
@@ -656,89 +671,54 @@
                                     <p>Total Commision</p>
                                     <i class="fas fa-arrow-circle-down icon-download" onclick="download_csv()"></i>
                                 </div>
-                                <div class="comm-top-2">
+                                <input type="text" class="comm-top-2 total_commision" disabled placeholder="">
+                                <!-- <div class="comm-top-2">
                                     3600
-                                </div>
+                                </div> -->
                             </div>
                             <div class="comm-top-1">
                                 <p>Total Commision this month</p>
-                                <div class="comm-top-2">
-                                    1.200.000
-                                </div>
+                                <input type="text" class="comm-top-2 commision_this_month" disabled placeholder="">
+                                
                             </div>
                         </div>
                     </div>  
                     <div class="modal-form-bot">
-                        <div class="commision-bot-1">
+                        <div class="commision-bot-1 comm-order-num">
                             <div class="comm-1-header">
                                 <p>Order Number</p>
                             </div>
-                            <div class="comm-1-list">
-                                <p>123123</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>123123</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>123123</p>
-                            </div>
+                           
+                          
                         </div>
-                        <div class="commision-bot-1">
+                        <div class="commision-bot-1 comm-qty">
                             <div class="comm-1-header">
                                 <p>Total Quantity</p>
                             </div>
-                            <div class="comm-1-list">
-                                <p>123</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>10</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>90</p>
-                            </div>
+                          
+                            
                         </div>
-                        <div class="commision-bot-1">
-                            <div class="comm-1-header">
+                        <div class="commision-bot-1 comm-total-price">
+                            <div class="comm-1-header ">
                                 <p>Total Payment</p>
                             </div>
-                            <div class="comm-1-list">
-                                <p>100.000</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>1000</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>100.000.000</p>
-                            </div>
+                           
+                           
                         </div>
-                        <div class="commision-bot-1">
+                        <div class="commision-bot-1 comm-percent">
                             <div class="comm-1-header">
                                 <p>Your %</p>
                             </div>
-                            <div class="comm-1-list">
-                                <p>3%</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>3%</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>3%</p>
-                            </div>
+                         
+                         
 
                         </div>
-                        <div class="commision-bot-1">
+                        <div class="commision-bot-1 comm-total-untung">
                             <div class="comm-1-header">
                                 <p>Commision Amt</p>
                             </div>
-                            <div class="comm-1-list">
-                                <p>Rp.3.333.3</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>Rp.30</p>
-                            </div>
-                            <div class="comm-1-list">
-                                <p>Rp.3.333.333</p>
-                            </div>
+                           
+                         
                         </div>
                     </div>         
                 </div>  
@@ -1183,7 +1163,7 @@
             <div class="main-header-search">
                 <div class="header-search">
                     <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name" id="search_item" >
-                    <i class="fas fa-search icon-search" onclick="search_item()"></i>
+                    <i class="fas fa-search icon-search" onclick="back_to_home()"></i>
                 </div>
                 <div class="box-render-search card box-search-menu" style="display: none;">
                     <div class="card-body ">

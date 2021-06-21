@@ -1,7 +1,7 @@
 $(document).on('click',"#simpan_reg",function(){
 
     var password_awal = $('#password_reg').val()
-    var referral_code = $('.id-referral').val()
+    var referral_code = $('.ref-cod option:selected').val()
     console.log(referral_code)
     
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
@@ -32,7 +32,7 @@ $(document).on('click',"#simpan_reg",function(){
                     Status : "pending",
                     User_Type : "Customer",
                     account_number: $("#no_rekening_reg").val(),
-                    referral_customer_code: $(".id-referral").val(),
+                    referral_customer_code: $('.ref-cod option:selected').val(),
                     ktp:$("#no_ktp_reg").val()
                 }
             }
@@ -308,6 +308,7 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
         }
     };
     
+    
     var password = $('password_supp').val()
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
@@ -377,6 +378,7 @@ var data = {
         Email : $('#email_forgot').val(),
         PrimaryContactNumber : $("#no_telp_forgot").val(),
         Ktp:$('#ktp_forgot').val(),
+        otp:$('#otp_forgot').val()
       
     //    account_number: $("#no_rekening_supp").val(),
        
@@ -387,11 +389,12 @@ var data = {
    var Email =$('#email_forgot').val()
    var PrimaryContactNumber = $("#no_telp_forgot").val()
    var Ktp=$('#ktp_forgot').val()
+   var otp = $('#otp_forgot').val()
    
    
   
         
-        axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${Ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${password}`)
+        axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${Ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${password}&otp=${otp}`)
         .then((res)=>{
             if(res.data){
                 $('#forgotModal').modal('hide')
@@ -465,3 +468,9 @@ $(document).on('change','.qty_groupbuy',function(){
 
     
 })
+
+// SEND OTP
+
+const send_otp=()=>{
+
+}

@@ -1,6 +1,6 @@
 $(function(){
-    $( "#datepicker" ).datepicker();
-
+    
+    // $('#datepicker').datepicker();
     // $('.carousel').carousel()
 
    $('.cust-1').on('click',function(){
