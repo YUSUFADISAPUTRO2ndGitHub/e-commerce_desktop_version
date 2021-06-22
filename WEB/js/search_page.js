@@ -137,11 +137,6 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         <div class="star-box">
                             <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>
-
-                        <div class="simpan-item">
-                            <p>Simpan</p>
-
-                        </div>
                     </div>
                 </div>
                 <div class="item-detail">
@@ -189,10 +184,6 @@ const get_product_detail_from_searching_page=(product_id)=>{
                             <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>
 
-                        <div class="simpan-item">
-                            <p>Simpan</p>
-
-                        </div>
                     </div>
                 </div>
                 <div class="item-detail">
