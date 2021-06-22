@@ -195,11 +195,12 @@ body{
     padding-right: 50px;
     width:475px;
     height:50px;
-    border-top-left-radius:25px;
-    border-top-right-radius:25px;
-    border-bottom-left-radius:25px;
-    border-bottom-right-radius:25px;
-    border:2px solid #217283;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    border:1px solid #217283;
+    /* box-shadow: 3px 5px #0a3d62; */
     
 }
 
@@ -245,6 +246,7 @@ input::-webkit-input-placeholder {
     flex-direction: column;
     position: relative;
     top:10px;
+    z-index:100;
 }
 .option-1 p{
     color:#535353;
@@ -264,6 +266,7 @@ input::-webkit-input-placeholder {
     flex-direction: column;
     position: relative;
     top:10px;
+    z-index:100;
 }
 .option-4 p{
     color:#535353;
@@ -285,6 +288,7 @@ input::-webkit-input-placeholder {
     flex-direction: column;
     position: relative;
     top:10px;
+    z-index:100;
 }
 .option-2 p{
     color:#535353;
@@ -305,6 +309,7 @@ input::-webkit-input-placeholder {
     flex-direction: column;
     position: relative;
     top:10px;
+    z-index:100;
 }
 .option-3 p{
     color:#535353;
@@ -1512,7 +1517,8 @@ input:focus{
 .modals-check-harga {
     position: absolute;
     z-index:20;
-    top:100px;
+    top:75px;
+    border-radius:10px;
     /* left:105px; */
     /* right:242px; */
     right:20%;
@@ -1522,6 +1528,7 @@ input:focus{
     display:none;
     transition: 2s ease-out;
     z-index:100;
+    box-shadow: 5px 8px #0a3d62;
 }
 
 /* modals check harga */
@@ -2014,11 +2021,12 @@ overflow-y:hidden;
     z-index: 100;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    border:2px solid #217283;
+    /* border:0.5px solid black !important; */
     flex-direction: column;
     /* padding-left:10px; */
     /* padding-right:10px; */
     overflow:scroll !important;
+    /* box-shadow: 3px 5px #0a3d62; */
 
   
 } */
@@ -2059,12 +2067,15 @@ ul {
 
   .box-search-menu {
     position: absolute !important;
+    border-top-left-radius:0px !important;
+    border-top-right-radius:0px !important;
     border-bottom-left-radius: 25px !important;
     border-bottom-right-radius: 25px !important;
-    border:2px solid #217283 !important;
+    border:1px solid #217283 !important;
     /* height:50px; */
     max-height:500px;
     display: none;
+
   }
   
 /* box render search */
