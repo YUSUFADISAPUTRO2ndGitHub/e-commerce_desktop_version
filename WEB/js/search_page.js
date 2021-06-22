@@ -101,7 +101,7 @@ function show_jenisproduct(jenis_product){
 }
 
 const get_product_detail_from_searching_page=(product_id)=>{
-    // alert('eek')
+    
     $('.item_detail_sp').empty()
     $(this).scrollTop('.item_detail_sp')
     $('.box-list-subcategory').css('display','none')
@@ -259,8 +259,6 @@ function groupbuy_sp_form(product_id){
                          <input type="text" class="name-form qty_groupbuy" placeholder="Kuantitas Permintaan" id="${product_id}">
                      </div>
                      <select class="form-select option-payment-gb" aria-label="Default select example">
-                          <option selected>Select Payment Method</option>    
-                           
                      </select>
                      <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)" >
                          <option selected>Select Address Method</option>    
@@ -269,7 +267,6 @@ function groupbuy_sp_form(product_id){
                      </select>
 
                      <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
-                         <option selected>Pilihan Alamat2</option>            
                      </select>
      
                      <div class="login-name alamat-pengiriman" style="display:none">

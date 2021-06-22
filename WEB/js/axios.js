@@ -13,7 +13,7 @@ $( document ).ready(function() {
     
     $('.ref-cod').on('change',function(){
         var selectedVal = $('.ref-cod option:selected').val()
-        // alert(selectedVal)
+        
     })
 
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
@@ -54,7 +54,7 @@ $( document ).ready(function() {
         render_get_product_detail(item_category)
     }else if (group_buy != undefined){
         console.log('masuk ke line 44 axios js')
-        alert(group_buy)
+        // alert(group_buy)
         render_group_buy(group_buy)
     }else if (list_hutang !=undefined){
         render_daftar_hutang()
@@ -382,7 +382,6 @@ const render_group_buy=(product_id)=>{
                         <input type="text" class="name-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)">
                     </div>
                     <select class="form-select option-payment-gb" aria-label="Default select example">
-                        <option selected>Select Payment Method</option>    
                         
                     </select>
                     <select class="form-select option-address-gb" aria-label="Default select example" onchange="addressMethod(this)" >
@@ -392,7 +391,7 @@ const render_group_buy=(product_id)=>{
                     </select>
 
                     <select class="form-select option-alamat-gb" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
-                        <option selected>Pilihan Alamat2</option>            
+                        
                     </select>
     
                     <div class="login-name alamat-pengiriman" style="display:none">
@@ -455,15 +454,30 @@ const render_group_buy=(product_id)=>{
                 console.log(token,' ini token 427')
                 axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                 .then((res)=>{
-                    $('.option-alamat-gb').append(`
-                        <option value="${res.data.Address_1}" id="alamat_gb">${res.data.Address_1}</option> 
-                        <option value="${res.data.Address_2}" id="alamat_gb">${res.data.Address_2}</option> 
-                        <option value="${res.data.Address_3}" id="alamat_gb">${res.data.Address_3}</option> 
-                        <option value="${res.data.Address_4}" id="alamat_gb">${res.data.Address_4}</option> 
-                        <option value="${res.data.Address_5}" id="alamat_gb">${res.data.Address_5}</option> 
-                    `)
-                 
                     
+                    if(res.data.Address_1 !== 'NULL'){
+                        $('.option-alamat-gb').append(`
+                        <option value="${res.data.Address_1}" id="alamat_gb">${res.data.Address_1}</option> 
+                        `)
+                    }else if ( res.data.Address_2 !== 'NULL'){
+                        $('.option-alamat-gb').append(`
+                        <option value="${res.data.Address_2}" id="alamat_gb">${res.data.Address_2}</option> 
+                        `)  
+                    }else if (res.data.Address_3 !== 'NULL'){
+                        $('.option-alamat-gb').append(`
+                        <option value="${res.data.Address_3}" id="alamat_gb">${res.data.Address_3}</option> 
+                        `) 
+                    }else if (res.data.Address_4 !== 'NULL'){
+                        $('.option-alamat-gb').append(`
+                        <option value="${res.data.Address_4}" id="alamat_gb">${res.data.Address_4}</option> 
+                        `) 
+                    }else if (res.data.Address_5 !== 'NULL'){
+                        $('.option-alamat-gb').append(`
+                        <option value="${res.data.Address_5}" id="alamat_gb">${res.data.Address_5}</option> 
+                        `) 
+                    }else {
+                        console.log('masuk ke else')
+                    }
                  
                 }).catch((err)=>{
                     console.log(err)

@@ -1429,7 +1429,7 @@ input:focus{
     background-color: white;
     display:none;
     transition: 2s ease-out;
-    z-index:20;
+    z-index:100;
 }
 
 /* modals pengiriman */
@@ -1447,7 +1447,7 @@ input:focus{
     /* background-color: red; */
     display:none;
     transition: 2s ease-out;
-    z-index:25;
+    z-index:100;
 }
 
 /* modals check harga */
