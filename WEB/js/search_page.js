@@ -42,7 +42,7 @@ function show_subcategory(choosen_parent_category){
                 <div class="card-all-item" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
                     <img src="${val.Picture_1}" alt="" class="img-all-card">   
                     <div class="card-all-item-list">
-                        <p>${val.Subcategory}</p>
+                        <p class="limited-text-short">${val.Subcategory}</p>
                     </div>
                 </div>
                 `
