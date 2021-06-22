@@ -415,7 +415,7 @@ const render_searching_page=(product_name)=>{
             <div class="card-item card_sp hvr-float-shadow">
                     <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                 <div class="card-item-list">
-                    <p>${val.Name}</p>
+                    <p class="limited-text-short">${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
                             <p>RP. ${hargaTotal}</p>
