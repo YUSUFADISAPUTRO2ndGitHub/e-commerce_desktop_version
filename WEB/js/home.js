@@ -148,9 +148,10 @@ const commision_check=()=>{
             console.log(res.data)
             // $('.date-commision').val(newdate)
             // var a = $('.date-commision').val()
+            
 
             res.data.map((val,index)=>{
-      
+                console.log(val)
                 var untung = percent * val.Total_Price  
                 $('.comm-order-num').append(`
                 <div class="comm-1-list">

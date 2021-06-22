@@ -832,7 +832,7 @@ cursor: pointer;
 .box-product{
     width:100%;
     /* height:450px; */
-    height:20vh;
+    height:30vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -842,6 +842,10 @@ cursor: pointer;
     margin-top:12px;
     padding-left:100px;
     padding-right:100px;
+    background-color: red;
+}
+.box-img-bp{
+    
 }
 
 .product-item:nth-child(1){
@@ -869,10 +873,12 @@ cursor: pointer;
 }
 .product-item p:nth-child(2){
     font-weight: 700;
+    font-size: 1em;
     /* background: red; */
 }
 .product-item p:nth-child(3){
     /* background-color: red; */
+    font-size: 0.8em;
     width:70%;
 }
 
