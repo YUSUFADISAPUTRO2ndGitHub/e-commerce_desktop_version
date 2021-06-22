@@ -788,7 +788,7 @@ $('.id-address-gb').on('click',function(){
 
 
 const check_status_item=()=>{
-    alert('function check status jalan')
+    // alert('function check status jalan')
     $('#productModal').modal('show')
     var token = localStorage.getItem('token')
     var creator;
