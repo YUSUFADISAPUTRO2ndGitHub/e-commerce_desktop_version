@@ -72,7 +72,7 @@ function show_jenisproduct(jenis_product){
             var hargaTotal = hargaAwal + discount
             $('.render-item-sub').append(
               `
-                <div class="card-item card_sp">
+                <div class="card-item card_sp hvr-float-shadow">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p>${val.Name}</p>
@@ -412,7 +412,7 @@ const render_searching_page=(product_name)=>{
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
             $('.new-box-card').append(`
-            <div class="card-item card_sp">
+            <div class="card-item card_sp hvr-float-shadow">
                     <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>

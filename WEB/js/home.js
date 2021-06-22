@@ -99,8 +99,53 @@ const commision_check=()=>{
     var percent;
     console.log(newdate)
     console.log(typeof newdate)
-  
 
+      // DATA UNTUK RENDER TABLE
+
+      axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
+      .then((res)=>{
+          console.log(res.data,' 107')
+          console.log(token,' token')
+          console.log(newdate , ' newdate')
+          
+          $('.date-commision').val(newdate)
+          // var a = $('.date-commision').val()
+          res.data.map((val,index)=>{
+              console.log(val)
+              var untung = percent * val.Total_Price  
+              $('.comm-order-num').append(`
+              <div class="comm-1-list">
+                  <p class="limited-text">${val.Order_Number}</p>
+              </div>
+              `)
+  
+              $('.comm-qty').append(`
+              <div class="comm-1-list">
+                  <p>${val.Total_Quantity}</p>
+              </div>
+              `)
+              $('.comm-total-price').append(`
+              <div class="comm-1-list">
+                  <p>${val.Total_Price}</p>
+              </div>
+              `)
+              $('.comm-percent').append(`
+              <div class="comm-1-list">
+                  <p>3%</p>
+              </div>
+              `)
+              $('.comm-total-untung').append(`
+              <div class="comm-1-list">
+                  <p>${untung}</p>
+              </div>
+              `) 
+          })
+      }).catch((err)=>{
+          console.log(err)
+      })
+
+
+  
     // TOTAL  CUSTOMER MAKE PURCHASE
     axios.post(`http://customers.sold.co.id/get-total-active-customers-of-a-referral-code?Customer_Code=${token}`)
     .then((res)=>{
@@ -131,60 +176,9 @@ const commision_check=()=>{
             percent = 0.075
         }
          
-        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggalAwalBuat}`)
-    .then((res)=>{
-            console.log(res.data)
-            var total_commision = res.data[0].Total_Price * percent
-            // Total_Price
-            $('.total_commision').val(total_commision)
-        }).catch((err)=>{
-            console.log(err)
-        })
-
-        // DATA UNTUK RENDER TABLE
-
-        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
-        .then((res)=>{
-            console.log(res.data)
-            // $('.date-commision').val(newdate)
-            // var a = $('.date-commision').val()
-            
-
-            res.data.map((val,index)=>{
-                console.log(val)
-                var untung = percent * val.Total_Price  
-                $('.comm-order-num').append(`
-                <div class="comm-1-list">
-                    <p class="limited-text">${val.Order_Number}</p>
-                </div>
-                `)
     
-                $('.comm-qty').append(`
-                <div class="comm-1-list">
-                    <p>${val.Total_Quantity}</p>
-                </div>
-                `)
-                $('.comm-total-price').append(`
-                <div class="comm-1-list">
-                    <p>${val.Total_Price}</p>
-                </div>
-                `)
-                $('.comm-percent').append(`
-                <div class="comm-1-list">
-                    <p>3%</p>
-                </div>
-                `)
-                $('.comm-total-untung').append(`
-                <div class="comm-1-list">
-                    <p>${untung}</p>
-                </div>
-                `)
-    
-    
-            })
-        }).catch((err)=>{
-            console.log(err)
-        })
+
+      
 
          // CUSTOMER TOTAL COMMISION THIS MONTH
         axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
@@ -203,6 +197,18 @@ const commision_check=()=>{
 
 
         
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    // TOTAL COMMISION
+
+    axios.post(`http://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        console.log(res.data[0].Total_Price)
+        var total_commision = parseInt(res.data[0].Total_Price) * percent
+        $('.total_commision').val(total_commision)
     }).catch((err)=>{
         console.log(err)
     })
