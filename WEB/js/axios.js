@@ -107,7 +107,7 @@ const renderItemPromo=()=>{
         // console.log(hargaTotal)
         $('.box-render-promo').append(
         ` 
-            <div class="card-item">
+            <div class="card-item hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
@@ -140,7 +140,7 @@ const renderItemNew=()=>{
     //  console.log(hargaTotal)
         $('.box-render-new').append(
         ` 
-          <div class="card-item card_sp">
+          <div class="card-item card_sp hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
@@ -169,7 +169,7 @@ const renderItemAll=()=>{
     //  console.log(hargaTotal)
         $('.box-render-all').append(
         ` 
-            <div class="card-item">
+            <div class="card-item hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p>${val.Name}</p>
