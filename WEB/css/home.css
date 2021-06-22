@@ -323,7 +323,7 @@ input::-webkit-input-placeholder {
 
 .box-ads{
     width:100%;
-    height:400px;
+    height:300px;
     /* background: red; */
     display: flex;
     justify-content: center;
@@ -676,14 +676,14 @@ input::-webkit-input-placeholder {
     /* background-color: red; */
 }
 .img-pembayaran{
-    width:150px;
-    height:150px;
+    width:200px;
+    height:200px;
     margin-bottom:10px;
     /* background-color: red; */
 }
 .img-delivery{
     width:250px;
-    height:150px;
+    height:200px;
     margin-bottom:10px;
     /* background-color: red; */
 }
@@ -842,10 +842,17 @@ cursor: pointer;
     margin-top:12px;
     padding-left:100px;
     padding-right:100px;
-    background-color: red;
+    /* background-color: red; */
 }
 .box-img-bp{
-    
+    /* background-color: red; */
+    position: relative;
+    top:-40px;
+    height:200px;
+    width:200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-item:nth-child(1){
