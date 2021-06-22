@@ -8,6 +8,9 @@
     /* margin:5px; */
     /* justify-content: center; */
     overflow-x: hidden;
+    padding-left:20px;
+    
+    
 }
 .box-list-all-item{
     width:400px;

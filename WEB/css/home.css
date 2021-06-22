@@ -1542,12 +1542,11 @@ input:focus{
     /* left:327px; */
     left:22.8%;
     height:500px; 
-    width:1000px; 
-    /* height: 250px; */
-    /* width:450px; */
-    /* background-color: red; */
+    width:900px; 
     display:none;
     transition: 2s ease-out;
+    /* padding-left:100px; */
+
 }
 
 .modals-search-result{
@@ -1805,6 +1804,12 @@ cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.limited-text-short {
+    white-space: nowrap;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .comm-1-list:hover {
     cursor: pointer;
     background-color: #217283;
@@ -1897,13 +1902,15 @@ overflow-y:hidden;
 
 .card-all-item{
     width:196px;
-    height:auto;
+    height:300px;
     padding:5px;
     margin-left:10px;
     margin-right:10px;
     position: relative;
-    background-color: #217384;
-    color: white;
+    background-color: white;
+    color: #217283;
+    margin:10px;
+    border-radius:10px;
 }
 .card-all-item:hover{
     cursor: pointer;
@@ -1927,7 +1934,7 @@ overflow-y:hidden;
     flex-direction: column;
 }
 .card-all-item-list p {
-    font-size: 13px;
+    font-size: 1em;
     
 }
 
@@ -1952,11 +1959,13 @@ overflow-y:hidden;
 
 .item-all-price p:nth-child(1){
     text-decoration: line-through;
-    font-size: 14px;
+    font-size: 1em;
+    color:#37ced5;
 }
 .item-all-price p:nth-child(2){
     /* text-decoration: line-through; */
-    font-size: 14px;
+    font-size: 1em;
+    color:#217283;
 }
 
 .icon-buy{
@@ -2107,7 +2116,7 @@ ul {
 
 
 .active_search{
-    z-index:99;
+    z-index:100;
     position: relative;
     /* top:575px; */
     background-color: white;

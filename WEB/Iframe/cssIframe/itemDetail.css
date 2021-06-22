@@ -35,7 +35,8 @@
 }
 
 .item-detail{
-    width:650px;
+    /* width:500px; */
+    width:70%;
     height:100%;
     /* background-color: red; */
     display: flex;
@@ -92,14 +93,19 @@
 }
 .detail-1 {
     /* height:300px; */
-    width:100%;
+    width:auto;
     position: relative;
     /* top:20px; */
     /* background-color: green; */
 }
+.item-1 {
+    /* background-color: red; */
+    position: relative;
+    top:20px;
+}
 .item-1 p{
     color:#217384;
-    font-size: 20px ;
+    font-size: 30px ;
 }
 .item-3{
     height:fit-content;
@@ -110,17 +116,29 @@
     left: 20px;
     top:-40px;
 }
+#span_harga{
+    font-size: 30px;
+    color: #37CED5;
+}
 .item-3 p {
     color:#217384;
     font-size: 15px;;
 }
 .item-2 p {
-    font-size: 32px !important;
+    font-size: 20px !important;
     color:#217384;
 }
 .item-2 p:nth-child(2){
     color:#37CED5;
     font-size: 20px !important;
+}
+.item-4 {
+    position: relative;
+    top:0px;
+}
+.item-4 p {
+    color:#217384;
+    font-size: 20px ;
 }
 
 .box-detail-option{
@@ -165,7 +183,7 @@
 }
 
 .box-discount{
-    width:300px;
+    width:280px;
     height:46px;
     background:#37CED5;
     border-radius:5px;
@@ -177,7 +195,25 @@
 .add-discount p{
     padding: 10px;
     color: white;
+    font-size: 1em;
 }
+
+.deskripsi_gb {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #217384;
+    width:80%;
+    height:300px;
+    overflow: scroll;
+    position: relative;
+    top:-70px;
+
+}
+.deskripsi_gb p{
+    color: white !important;
+    font-size: 18px;
+}
+
 
 
 
@@ -186,9 +222,11 @@
     border-radius: 5px;
     padding: 10px;
     background-color: #217384;
-    width:90%;
+    width:80%;
     height:300px;
     overflow: scroll;
+    position: relative;
+    top:-40px;
 
 }
 .deskripsi p{

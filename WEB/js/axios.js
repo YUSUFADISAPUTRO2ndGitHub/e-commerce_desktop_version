@@ -301,7 +301,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                 <div class="card-all-item" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
                     <img src="${val.Picture_1}" alt="" class="img-all-card">   
                     <div class="card-all-item-list">
-                        <p>${val.Name}</p>
+                        <p class="limited-text-short">${val.Name}</p>
                         <div class="split-all-item">
                             <div class="item-all-price">
                                 <p>RP. ${hargaTotal}</p>
@@ -526,9 +526,7 @@ const render_group_buy=(product_id)=>{
                     <div class="rating-bottom">
                         <div class="star-box">
                          <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                        </div>
-
-                        
+                        </div>          
                     </div>
                 </div>
                 <div class="item-detail">
@@ -577,8 +575,6 @@ const render_group_buy=(product_id)=>{
                         <div class="star-box">
                             <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>
-
-                        
                     </div>
                 </div>
                 <div class="item-detail">
@@ -587,10 +583,10 @@ const render_group_buy=(product_id)=>{
                             <p>${item.Name}</p>
                         </div>
                         <div class="item-2">
-                            <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
+                            <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
-                        <div class="item-1">
+                        <div class="item-4">
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
                         </div>
                         <div class="box-detail-option">
@@ -612,7 +608,7 @@ const render_group_buy=(product_id)=>{
                         </div>
 
                         <br>
-                        <div class="deskripsi">
+                        <div class="deskripsi_gb">
                             <p>Deskripsi :</p>
                             <p>${item.Description}</p>
                         </div>
