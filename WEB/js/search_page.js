@@ -139,7 +139,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         </div>
                     </div>
                 </div>
-                <div class="item-detail">
+                <div class="item-detail det-sp">
                     <div class="detail-1">
                         <div class="item-1">
                             <p>${item.Name}</p>
@@ -186,7 +186,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
 
                     </div>
                 </div>
-                <div class="item-detail">
+                <div class="item-detail det-sp">
                     <div class="detail-1">
                         <div class="item-1">
                             <p>${item.Name}</p>
@@ -385,7 +385,6 @@ function groupbuy_sp_form(product_id){
 const search_item=()=>{
     console.log('159 jalan search')
 
-    // var item = $('.input-name').val()
     var item_search = $('#search_item').val()
     var product_name = $('#search_item').attr('id')
     console.log(item_search)
@@ -394,6 +393,8 @@ const search_item=()=>{
     $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
+    
+    
 }
 
 
@@ -401,6 +402,12 @@ const search_item=()=>{
 
 const render_searching_page=(product_name)=>{
     console.log(product_name)
+    var data = product_name
+    if(data){
+        $('.sp_name').val(data)
+    }else {
+        $('.sp_name').val('All')
+    }
     
 
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)

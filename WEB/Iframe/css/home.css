@@ -1648,7 +1648,7 @@ overflow-y:hidden;
 
 /* kategori item  */
 
-.card-all-item{
+/* .card-all-item{
     width:196px;
     height:auto;
     padding:5px;
@@ -1656,7 +1656,7 @@ overflow-y:hidden;
     margin-right:2px;
     border-radius:5px;
     position: relative;
-}
+} */
 .card-all-item:hover{
     cursor: pointer;
     /* background-color: #37ced5; */
