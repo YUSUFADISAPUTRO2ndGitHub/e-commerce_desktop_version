@@ -24,7 +24,7 @@
 
 .card-lk {
     width:196px;
-    height:205px;
+    height:200px;
     background-color: #217384;
     color: white;
     position: relative;
@@ -33,6 +33,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    border-radius:10px;
 }
 
 .box-img-lk{

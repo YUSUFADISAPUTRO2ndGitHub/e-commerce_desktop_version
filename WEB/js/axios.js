@@ -334,7 +334,7 @@ const renderItemBasedOnCategory=(Category)=>{
             console.log('render jalan 189s')
             $('.box-list-kategori').append(
                 `
-                <div class="card-lk" onclick="getAllItem('${val.Subcategory}')">
+                <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
                     <div class="box-img-lk">
                         <img src="${val.Picture_1}" alt="">
                     </div>

@@ -845,7 +845,7 @@ cursor: pointer;
     /* background-color: red; */
 }
 .box-img-bp{
-    /* background-color: red; */
+    /* background-color: blue; */
     position: relative;
     top:-40px;
     height:200px;
@@ -860,9 +860,13 @@ cursor: pointer;
 }
 .product-item:nth-child(2){
     border-right:1px solid black;
+    position: relative;
+    top:-20px;
 }
 .product-item:nth-child(3){
     border-right:1px solid black;
+    position: relative;
+    top:-20px;
 }
 .product-item{
     /* background-color:red; */
@@ -878,12 +882,73 @@ cursor: pointer;
     align-items: center;
     /* align-items: center; */
 }
-.product-item p:nth-child(2){
+.box-name-product{
+    width:100%;
+    height:auto;
+    /* background-color: pink; */
+    position: relative;
+    top:-20px;
+    left:25%;
+}
+.box-name-product2{
+    width:100%;
+    height:auto;
+    position: relative;
+    left:20%;
+    /* background-color: pink; */
+}
+.box-name-product3{
+    width:100%;
+    height:auto;
+    /* background-color: pink; */
+    position: relative;
+    bottom:12px;
+    left:20%;
+}
+.box-name-product4{
+    width:100%;
+    height:auto;
+    /* background-color: pink; */
+    position: relative;
+    bottom:42px;
+    left:20%;
+}
+.box-name-product p:nth-child(1){
     font-weight: 700;
     font-size: 1em;
     /* background: red; */
 }
-.product-item p:nth-child(3){
+.box-name-product p:nth-child(2){
+    /* background-color: red; */
+    font-size: 0.8em;
+    width:70%;
+}
+.box-name-product2 p:nth-child(1){
+    font-weight: 700;
+    font-size: 1em;
+    /* background: red; */
+}
+.box-name-product2 p:nth-child(2){
+    /* background-color: red; */
+    font-size: 0.8em;
+    width:70%;
+}
+.box-name-product3 p:nth-child(1){
+    font-weight: 700;
+    font-size: 1em;
+    /* background: red; */
+}
+.box-name-product3 p:nth-child(2){
+    /* background-color: red; */
+    font-size: 0.8em;
+    width:70%;
+}
+.box-name-product4 p:nth-child(1){
+    font-weight: 700;
+    font-size: 1em;
+    /* background: red; */
+}
+.box-name-product4 p:nth-child(2){
     /* background-color: red; */
     font-size: 0.8em;
     width:70%;
