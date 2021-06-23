@@ -1622,8 +1622,8 @@ overflow-y:hidden;
 
 /* date picker */
 
-.input-date{
-    /* background-color: red; */
+/* .input-date{
+ 
     width:120px;
     height:40px;
     background-color: #217283;
@@ -1636,7 +1636,7 @@ overflow-y:hidden;
 }
 .input-date ::placeholder{
     font-size: 25px;;
-}
+} */
 
 .ui-datepicker-prev {
     display: none;

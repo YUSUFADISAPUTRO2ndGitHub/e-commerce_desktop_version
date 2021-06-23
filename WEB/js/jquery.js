@@ -811,7 +811,33 @@ const check_status_item=()=>{
 }
 
 const toDetailProduct=(id)=>{
-    alert('jalan id jquery js', id)
+    // alert('jalan id jquery js', id)
     $('#productModal').show('hide')
     $('#detailProductModal').modal('show')
 }
+
+
+
+
+// CALENDAR COMMISION
+
+$(function() {
+    $( "#datepicker" ).datepicker({
+        dateFormat:'yy-mm-dd'
+    });
+    var a = $( "#datepicker" ).datepicker("getDate");
+    console.log(a,' ini a')
+    
+    
+    
+ });
+
+
+// $("input").on("change", function() {
+//     this.setAttribute(
+//         "data-date",
+//         moment(this.value, "YYYY-MM-DD")
+//         .format( this.getAttribute("data-date-format") )
+//     )
+    
+// }).trigger("change")

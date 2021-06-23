@@ -381,3 +381,72 @@ const to_detail_product=(id)=>{
     console.log(id)
     $('#detailProductModal').modal('show')
 }
+
+const date_commision=()=>{
+    
+    var tanggal = $('.input-date').val()
+    var token = localStorage.getItem('token')
+    var percent;
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+
+        console.log(res.data)
+        var tanggalAwalBuat = res.data.Created_Date
+        console.log(res.data.extra_column_3)
+        if(res.data.extra_column_3 === '3%'){
+            percent = 0.03
+        }else if ( res.data.extra_column_3 === '7.5%'){
+            percent = 0.075
+        }
+
+        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggal}`)
+    .then((res)=>{
+        console.log(res.data,' 107')
+        console.log(token,' token')
+        console.log(newdate , ' newdate')
+        
+        $('.date-commision').val(tanggal)
+        // var a = $('.date-commision').val()
+        res.data.map((val,index)=>{
+            console.log(val)
+            var untung = percent * val.Total_Price  
+            $('.comm-order-num').append(`
+            <div class="comm-1-list">
+                <p class="limited-text">${val.Order_Number}</p>
+            </div>
+            `)
+
+            $('.comm-qty').append(`
+            <div class="comm-1-list">
+                <p>${val.Total_Quantity}</p>
+            </div>
+            `)
+            $('.comm-total-price').append(`
+            <div class="comm-1-list">
+                <p>${val.Total_Price}</p>
+            </div>
+            `)
+            $('.comm-percent').append(`
+            <div class="comm-1-list">
+                <p>3%</p>
+            </div>
+            `)
+            $('.comm-total-untung').append(`
+            <div class="comm-1-list">
+                <p>${untung}</p>
+            </div>
+            `) 
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+         
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+
+    
+
+}

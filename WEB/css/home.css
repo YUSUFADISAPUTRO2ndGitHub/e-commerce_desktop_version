@@ -1895,7 +1895,7 @@ overflow-y:hidden;
 
 .input-date{
     /* background-color: red; */
-    width:120px;
+    width:150px;
     height:40px;
     background-color: #217283;
     border-radius:10px;
@@ -1904,6 +1904,7 @@ overflow-y:hidden;
     align-items: center;
     color:white;
     padding-left:10px;
+    border:none;
 }
 .input-date ::placeholder{
     font-size: 25px;;
@@ -2019,7 +2020,8 @@ overflow-y:hidden;
     background-color: #ecf0f1;
     position:absolute;
     top:8.3%;
-    left:35.9%;
+    margin-left:1px;
+    /* left:35.9%; */
     /* left:10px; */
     z-index: 100;
     border-bottom-left-radius: 10px;
@@ -2032,7 +2034,7 @@ overflow-y:hidden;
     /* box-shadow: 3px 5px #0a3d62; */
 
   
-} */
+} 
 
 .box-render-search .card-body ul li {
     color: red;
@@ -2531,3 +2533,36 @@ ul {
   .det-sp{
       top:-30px !important;
   }
+  /* ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    color:white;
+} */
+
+
+
+.input_date_commision {
+    position: relative;
+    width: 150px; 
+    height: 30px;
+    color: white;
+}
+
+.input_date_commision:before {
+    position: absolute;
+    top: 3px; left: 3px;
+    content: attr(data-date);
+    display: inline-block;
+    color: black;
+}
+
+.input_date_commision::-webkit-datetime-edit, .input_date_commision::-webkit-inner-spin-button, .input_date_commision::-webkit-clear-button {
+    display: none;
+}
+
+.input_date_commision::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: black;
+    opacity: 1;
+}
