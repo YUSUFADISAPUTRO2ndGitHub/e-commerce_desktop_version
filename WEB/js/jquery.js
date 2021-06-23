@@ -799,9 +799,58 @@ const check_status_item=()=>{
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${creator}`)
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=Gilang`)
         .then((res)=>{
             console.log(res.data)
+            res.data.map((val,index)=>{
+                $('.tbody_product').append(`
+                <tr>
+                    <td>${val.Product_Code}</td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>    
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>      
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                           
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                            
+                        </div>
+                    </td>
+                    <td>${val.Last_Updated}</td>
+                </tr>
+                `)
+            })
         }).catch((err)=>{
             console.log(err)
         })
@@ -832,12 +881,111 @@ $(function() {
     
  });
 
+//  QTY
+ const edit_product_qty=(product_id)=>{
+    $("#"+product_id+"-qty").prop('disabled',false) 
+    $("#"+product_id+"-qty").css('background-color','#ddd')
 
-// $("input").on("change", function() {
-//     this.setAttribute(
-//         "data-date",
-//         moment(this.value, "YYYY-MM-DD")
-//         .format( this.getAttribute("data-date-format") )
-//     )
+
+    $("#"+product_id+"-box_edit_qty").css('display','none') // icon 
+    $("#"+product_id+"-save_qty").css('display','block') // icon
+ }
+
+//  
+ const save_edit_qty=(product_id)=>{
+    $("#"+product_id+"-qty").prop('disabled',true) 
+    $("#"+product_id+"-box_edit_qty").css('display','block') // icon 
+    $("#"+product_id+"-save_qty").css('display','none') // icon
+    $("#"+product_id+"-qty").css('background-color','transparent')
+
+    var nama = $("#"+product_id+"-name").val()
+    var harga = $("#"+product_id+"-harga").val()
+    var qty = $("#"+product_id+"-qty").val()
+
+    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}`)
+    .then((res)=>{
+        if(res.data){
+            swal.fire("Berhasil Mengubah Data", "", "success");
+        }else {
+            swal.fire("Gagal Mengubah Data", "", "error");
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+ }
+
+
+// HARGA
+const edit_product_harga=(product_id)=>{
+    $("#"+product_id+"-harga").prop('disabled',false) 
+    $("#"+product_id+"-harga").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_harga").css('display','none') // icon 
+    $("#"+product_id+"-save_harga").css('display','block') // icon
     
-// }).trigger("change")
+}
+
+const save_edit_harga=(product_id)=>{
+    $("#"+product_id+"-harga").prop('disabled',true) 
+    $("#"+product_id+"-box_edit_harga").css('display','block') // icon 
+    $("#"+product_id+"-save_harga").css('display','none') // icon
+    $("#"+product_id+"-harga").css('background-color','transparent')
+
+    var nama = $("#"+product_id+"-name").val()
+    var harga = $("#"+product_id+"-harga").val()
+    var qty = $("#"+product_id+"-qty").val()
+
+    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}`)
+    .then((res)=>{
+        if(res.data){
+            swal.fire("Berhasil Mengubah Data", "", "success");
+        }else {
+            swal.fire("Gagal Mengubah Data", "", "error");
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+
+// NAME
+const edit_product_name=(product_id)=>{
+    // $("input").prop('disabled', true);
+    // alert(product_id)
+    // $(".prod_name").prop('disabled', false); 6900005030114
+    console.log(product_id)
+    $("#"+product_id+"-name").prop('disabled',false) 
+    $("#"+product_id+"-name").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_name").css('display','none') // icon 
+    $("#"+product_id+"-save_name").css('display','block') // icon
+  
+
+}
+
+
+const save_edit_name=(product_id)=>{
+    // alert($("#"+product_id+"-name").val())
+    $("#"+product_id+"-name").prop('disabled',true) 
+    $("#"+product_id+"-box_edit_name").css('display','block') // icon 
+    $("#"+product_id+"-save_name").css('display','none') // icon
+    $("#"+product_id+"-name").css('background-color','transparent')
+
+    var nama = $("#"+product_id+"-name").val()
+    var harga = $("#"+product_id+"-harga").val()
+    var qty = $("#"+product_id+"-qty").val()
+
+    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}`)
+    .then((res)=>{
+        if(res.data){
+            swal.fire("Berhasil Mengubah Data", "", "success");
+        }else {
+            swal.fire("Gagal Mengubah Data", "", "error");
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+

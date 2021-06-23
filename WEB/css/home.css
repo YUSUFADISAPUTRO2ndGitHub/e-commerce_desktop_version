@@ -2306,6 +2306,9 @@ ul {
     left:5px;
     top:5px;
 }
+.icon-edit:hover{
+    cursor: pointer;
+}
 .form_product {
     width:75%;
     height:30px;
@@ -2664,9 +2667,9 @@ table {
     padding: 8px;
   }
   
-  tr:nth-child(even) {
+  /* tr:nth-child(even) {
     background-color: #217283;
-  }
+  } */
 
  
 
@@ -2677,8 +2680,36 @@ table {
     /* height:250px; */
     height:250px;
     width:100%;
+    background-color: #217283;
     }
 .tableFixHead thead th { 
+    position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { 
+    background:#217283;
+    color:white;
+}
+
+/* Borders (if you need them) */
+.tableFixHead,
+.tableFixHead td {
+  border:2px solid #217283;
+  color:white;
+}
+
+
+.tableFixHead_product{
+    margin-top:20px;
+    overflow: auto;
+    /* height:250px; */
+    height:350px;
+    width:100%;
+    /* background-color: #217283; */
+    }
+.tableFixHead_product thead th { 
     position: sticky; top: 0; z-index: 1; }
 
 /* Just common table stuff. Really. */
@@ -2687,7 +2718,95 @@ th, td { padding: 8px 16px; }
 th     { background:#217283; }
 
 /* Borders (if you need them) */
-.tableFixHead,
-.tableFixHead td {
+.tableFixHead_product,
+.tableFixHead_product td {
   border:2px solid #217283;
+  color:#217283;
+}
+
+.box-prod-name {
+    width:100%;
+    height:30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+ 
+}
+.box-prod-name:hover{
+    cursor: pointer;
+}
+
+.prod_name{
+    background-color: transparent;
+    border:none;
+    width:auto;
+    color:#217283;
+}
+
+.prod_name::placeholder {
+    color:#217283;
+    /* background-color: #ddd; */
+}
+.prod_sell{
+    /* background-color: red; */
+    border:none;
+    width:auto;
+    color:#217283;
+}
+.prod_sell::placeholder{
+    color:#217283;
+}
+.prod_qty::placeholder{
+    color:#217283;
+}
+.prod_qty{
+    background-color: transparent;
+    border:none;
+    width:auto;
+    color:#217283;
+}
+
+.icon-edit-prod{
+    width:20px;
+    height:20px;
+    font-size: 20px;
+    color:#217283;
+    position: relative;
+    left:5px;
+    top:5px;
+}
+
+.icon-save-prod{
+    width:20px;
+    height:20px;
+    font-size: 20px;
+    color:#217283;
+    position: relative;
+    left:5px;
+    top:5px;
+    margin-left:5px;
+    margin-bottom:5px;
+}
+.save-prod {
+    font-size: 1em;
+    position: relative;
+    top:5px;
+}
+.icon-save-prod small{
+    font-size: 0.5em !important;
+}
+.icon-edit-prod:hover{
+    cursor: pointer;
+}
+
+.box-name-edit{
+    display: flex;
+    flex-direction: column;
+}
+.box-name-save{
+    display: flex;
+    flex-direction: column;
+
 }
