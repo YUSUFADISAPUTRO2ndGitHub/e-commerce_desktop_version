@@ -488,7 +488,7 @@
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-profile">
-                <p>Hi <span style='color:#37CED5' id="nama_user_profile"> User!</span> <br> Hi,Welcome!</p>
+                <p>Hi<input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
                 <div class="box-code-referral">
                     <p>Your Customer Code for Referral :</p>
                     <input type="text" disabled  id="refer-profile" class="ref-profile">
@@ -638,10 +638,10 @@
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-profile">
-              <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+              <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
               <div class="box-code-referral">
                 <p>Your Customer Code for Referral :</p>
-                <p>1238198BA18293YU</p>
+                <input type="text" disabled  id="refer-profile" class="ref-profile">
               </div>
             </div>
             <div class="modal-body box-login-body">
@@ -664,7 +664,7 @@
                             </div>
                         </div>
                         <div class="commision-top-2">
-                            <input  id="datepicker"   class="input-date date-commision" placeholder="dd/mm/yyyy"
+                            <input  id="datepicker"   class="input-date date-commision hvr-grow" placeholder="dd/mm/yyyy"
                             min="2021-05-01" max="2021-07-01"
                             onchange="date_commision()"
                             />          
@@ -738,10 +738,11 @@
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-profile">
-              <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+              <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
               <div class="box-code-referral">
                 <p>Your Customer Code for Referral :</p>
-                <p>1238198BA18293YU</p>
+                <input type="text" disabled  id="refer-profile" class="ref-profile">
+                
               </div>
             </div>
             <div class="modal-body box-login-body">
@@ -874,10 +875,10 @@
         <div class="modal-dialog box-login ">
           <div class="modal-content">
             <div class="modal-header box-login-profile">
-              <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+              <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"><br> Hi,Welcome!</p>
               <div class="box-code-referral">
                 <p>Your Customer Code for Referral :</p>
-                <p>1238198BA18293YU</p>
+                <input type="text" disabled  id="refer-profile" class="ref-profile">
               </div>
             </div>
             <div class="modal-body box-login-body">
@@ -1012,10 +1013,10 @@
         <div class="modal-dialog box_daftar_hutang ">
             <div class="modal-content ">
                 <div class="modal-header box-login-profile">
-                    <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                    <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
                     <div class="box-code-referral">
                         <p>Your Customer Code for Referral :</p>
-                        <p>1238198BA18293YU</p>
+                        <input type="text" disabled  id="refer-profile" class="ref-profile">
                     </div>
                 </div>
                 <div class="modal-body box-login-body">
@@ -1062,10 +1063,10 @@
         <div class="modal-dialog box_daftar_hutang ">
             <div class="modal-content ">
                 <div class="modal-header box-login-profile">
-                    <p>Hi <span style='color:#37CED5'> User!</span> <br> Hi,Welcome!</p>
+                    <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
                     <div class="box-code-referral">
                         <p>Your Customer Code for Referral :</p>
-                        <p>1238198BA18293YU</p>
+                        <input type="text" disabled  id="refer-profile" class="ref-profile">
                     </div>
                 </div>
                 <div class="modal-body box-login-body">
@@ -1320,16 +1321,22 @@
             </div>
             <!-- RENDER PROMO ITEM -->
             <div class="box-card">
-                <div class="box-back" id="promo" onclick="backItem('promo')">
-                    <i class="fas fa-chevron-left icon-prev icon-back" ></i>
+                <div class="promo_card">
+
                 </div>
-               
-                <div class="box-render-promo">
-                    
+                <div class="ins_card">
+                    <div class="box-back" id="promo" onclick="backItem('promo')">
+                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
+                    </div>
+                  
+                    <div class="box-render-promo">
+                        
+                    </div>
+                    <div class="box-next next-promo" id="promo" onclick="nextItem('promo')">
+                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+                    </div>
                 </div>
-                <div class="box-next next-promo" id="promo" onclick="nextItem('promo')">
-                    <i class="fas fa-chevron-right icon-prev icon-next" ></i>
-                </div>
+              
                 
             </div>
     

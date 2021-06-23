@@ -88,17 +88,16 @@ $('#datepicker').on('click',function(){
 const commision_check=()=>{
     $('#profileModal').modal('hide')
     var token = localStorage.getItem('token')
-    console.log(token)
+    
     var dateObj = new Date();
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
+    var percent;
     newdate = year + "-" + month + "-" + day;
     var thismonth = year + "-" + month + "-" + "1"
-    console.log(thismonth)
-    var percent;
-    console.log(newdate)
-    console.log(typeof newdate)
+
+    
 
       // DATA UNTUK RENDER TABLE
 
@@ -195,15 +194,7 @@ const commision_check=()=>{
             console.log(err)
         })
 
-
-        
-    }).catch((err)=>{
-        console.log(err)
-    })
-
-    // TOTAL COMMISION
-
-    axios.post(`http://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
+        axios.post(`http://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
     .then((res)=>{
         console.log(res.data)
         console.log(res.data[0].Total_Price)
@@ -213,6 +204,16 @@ const commision_check=()=>{
         console.log(err)
     })
 
+
+
+        
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+    // TOTAL COMMISION
+
+    
    
 }
 

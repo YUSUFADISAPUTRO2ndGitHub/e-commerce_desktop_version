@@ -39,7 +39,7 @@ function show_subcategory(choosen_parent_category){
         res.data.map((val,index)=>{
             $('.box-list-kategori').append(
               `
-                <div class="card-all-item" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
+                <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
                     <img src="${val.Picture_1}" alt="" class="img-all-card">   
                     <div class="card-all-item-list">
                         <p class="limited-text-short">${val.Subcategory}</p>

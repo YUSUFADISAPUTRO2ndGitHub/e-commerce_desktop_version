@@ -298,7 +298,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
             var hargaTotal = hargaAwal + discount
             $('.box-list-kategori').append(
               `
-                <div class="card-all-item" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
+                <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
                     <img src="${val.Picture_1}" alt="" class="img-all-card">   
                     <div class="card-all-item-list">
                         <p class="limited-text-short">${val.Name}</p>

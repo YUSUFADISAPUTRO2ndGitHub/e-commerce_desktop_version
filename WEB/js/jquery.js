@@ -51,7 +51,7 @@ $(function(){
                 console.log(newReferralCode)
                 console.log(token)
                 $('#email_user').val(`${data_customer.Email}`)
-                $('#nama_user_profile').val(`${data_customer.First_Name}`)
+                $('.nama_user_profile').val(`${data_customer.First_Name}`)
                 $('#tahun_lahir_user').val(tahun)
                 $('#bulan_lahir_user').val(bulan)
                 $('#tanggal_lahir_user').val(hari)
