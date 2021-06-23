@@ -9,8 +9,8 @@ $(function(){
     $('.box-information').show(1000)
     // SEARCH ITEM BACK TO NORMAL
     $('.box-render-search').css('display','none')
-    $('.input-name').css('border-bottom-left-radius','25px')
-    $('.input-name').css('border-bottom-right-radius','25px')
+    $('.input-name').css('border-bottom-left-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
     $('.input-name').val(null)
     //    $('.box-customer').toggle('active')
    })
@@ -85,8 +85,8 @@ $(function(){
         $('.option-3').removeClass("background_grey")
           // SEARCH ITEM BACK TO NORMAL
         $('.box-render-search').css('display','none')
-        $('.input-name').css('border-bottom-left-radius','25px')
-        $('.input-name').css('border-bottom-right-radius','25px')
+        $('.input-name').css('border-bottom-left-radius','10px')
+        $('.input-name').css('border-bottom-right-radius','10px')
         // $('.option-4').removeClass("background_grey")
         console.log('functioin selesai 74')
    })
@@ -130,8 +130,8 @@ $(function(){
 
             }else {
                  $('.box-render-search').css('display','none')
-                $('.input-name').css('border-bottom-left-radius','25px')
-                $('.input-name').css('border-bottom-right-radius','25px')
+                $('.input-name').css('border-bottom-left-radius','10px')
+                $('.input-name').css('border-bottom-right-radius','10px')
             }
 
         }); 
@@ -147,8 +147,8 @@ function replace_value_to(x){
     // alert($(x).html());
     $(".input-name").val($(x).html());
     $('.box-render-search').css('display','none')
-    $('.input-name').css('border-bottom-left-radius','25px')
-    $('.input-name').css('border-bottom-right-radius','25px')
+    $('.input-name').css('border-bottom-left-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
 
 }   
 

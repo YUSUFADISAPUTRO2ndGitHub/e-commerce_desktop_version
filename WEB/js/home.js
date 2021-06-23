@@ -29,8 +29,8 @@ function cart_requested(x){
 
       // SEARCH ITEM BACK TO NORMAL
       $('.box-render-search').css('display','none')
-      $('.input-name').css('border-bottom-left-radius','25px')
-      $('.input-name').css('border-bottom-right-radius','25px')
+      $('.input-name').css('border-bottom-left-radius','10px')
+      $('.input-name').css('border-bottom-right-radius','10px')
       $('.input-name').val(null)
 }
 
@@ -50,8 +50,8 @@ function pengiriman_requested(x){
 
       // SEARCH ITEM BACK TO NORMAL
       $('.box-render-search').css('display','none')
-      $('.input-name').css('border-bottom-left-radius','25px')
-      $('.input-name').css('border-bottom-right-radius','25px')
+      $('.input-name').css('border-bottom-left-radius','10px')
+      $('.input-name').css('border-bottom-right-radius','10px')
       $('.input-name').val(null)
     
 }
@@ -75,8 +75,8 @@ function cek_harga_requested(x){
 
     // SEARCH ITEM BACK TO NORMAL
     $('.box-render-search').css('display','none')
-    $('.input-name').css('border-bottom-left-radius','25px')
-    $('.input-name').css('border-bottom-right-radius','25px')
+    $('.input-name').css('border-bottom-left-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
     $('.input-name').val(null)
    
 }
