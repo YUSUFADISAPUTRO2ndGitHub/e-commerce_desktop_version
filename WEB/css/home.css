@@ -1842,6 +1842,14 @@ cursor: pointer;
     width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
+    /* background-color: red; */
+}
+.limited-text-commision{
+    white-space: nowrap;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* background-color: red; */
 }
 .comm-1-list:hover {
     cursor: pointer;
@@ -2057,7 +2065,7 @@ overflow-y:hidden;
 } 
 
 .box-render-search .card-body ul li {
-    color: red;
+    /* color: red; */
     padding-left:5px;
     margin:3px;
     position: relative;
@@ -2637,4 +2645,49 @@ ul {
     min-width:30px;
     width:100px;
     color:white;
+}
+
+/* table for commision */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border:3px solid #217283;
+    border-radius:10px;
+    overflow:auto;
+    
+  }
+  
+  td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #217283;
+  }
+
+ 
+
+
+
+.tableFixHead{
+    overflow: auto;
+    /* height:250px; */
+    height:250px;
+    width:100%;
+    }
+.tableFixHead thead th { 
+    position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#217283; }
+
+/* Borders (if you need them) */
+.tableFixHead,
+.tableFixHead td {
+  border:2px solid #217283;
 }

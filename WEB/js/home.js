@@ -112,32 +112,42 @@ const commision_check=()=>{
           res.data.map((val,index)=>{
               console.log(val)
               var untung = percent * val.Total_Price  
-              $('.comm-order-num').append(`
-              <div class="comm-1-list">
-                  <p class="limited-text">${val.Order_Number}</p>
-              </div>
+              $('.tbody_commision').append(`
+                <tr>
+                    <td> <p  class="limited-text"> ${val.Order_Number}</p>
+                    <td>${val.Total_Quantity}</td>
+                    <td>${val.Total_Price}</td>
+                    <td>3%</td>
+                    <td>${untung}</td>
+                    
+                </tr>
               `)
+            //   $('.comm-order-num').append(`
+            //   <div class="comm-1-list">
+            //       <p class="limited-text">${val.Order_Number}</p>
+            //   </div>
+            //   `)
   
-              $('.comm-qty').append(`
-              <div class="comm-1-list">
-                  <p>${val.Total_Quantity}</p>
-              </div>
-              `)
-              $('.comm-total-price').append(`
-              <div class="comm-1-list">
-                  <p>${val.Total_Price}</p>
-              </div>
-              `)
-              $('.comm-percent').append(`
-              <div class="comm-1-list">
-                  <p>3%</p>
-              </div>
-              `)
-              $('.comm-total-untung').append(`
-              <div class="comm-1-list">
-                  <p>${untung}</p>
-              </div>
-              `) 
+            //   $('.comm-qty').append(`
+            //   <div class="comm-1-list">
+            //       <p>${val.Total_Quantity}</p>
+            //   </div>
+            //   `)
+            //   $('.comm-total-price').append(`
+            //   <div class="comm-1-list">
+            //       <p>${val.Total_Price}</p>
+            //   </div>
+            //   `)
+            //   $('.comm-percent').append(`
+            //   <div class="comm-1-list">
+            //       <p>3%</p>
+            //   </div>
+            //   `)
+            //   $('.comm-total-untung').append(`
+            //   <div class="comm-1-list">
+            //       <p>${untung}</p>
+            //   </div>
+            //   `) 
           })
       }).catch((err)=>{
           console.log(err)
@@ -384,7 +394,7 @@ const to_detail_product=(id)=>{
 }
 
 const date_commision=()=>{
-    
+   $('.tbody_commision').empty()
     var tanggal = $('.input-date').val()
     var token = localStorage.getItem('token')
     var percent;
@@ -410,33 +420,44 @@ const date_commision=()=>{
         // var a = $('.date-commision').val()
         res.data.map((val,index)=>{
             console.log(val)
-            var untung = percent * val.Total_Price  
-            $('.comm-order-num').append(`
-            <div class="comm-1-list">
-                <p class="limited-text">${val.Order_Number}</p>
-            </div>
-            `)
+            var untung = percent * val.Total_Price
+            $('.tbody_commision').append(`
+            <tr>
+                <td> <p  class="limited-text"> ${val.Order_Number}</p>
+                </td>
+                <td>${val.Total_Quantity}</td>
+                <td>${val.Total_Price}</td>
+                <td>3%</td>
+                <td>${untung}</td>
+                
+            </tr>
+          `)  
+            // $('.comm-order-num').append(`
+            // <div class="comm-1-list">
+            //     <p class="limited-text">${val.Order_Number}</p>
+            // </div>
+            // `)
 
-            $('.comm-qty').append(`
-            <div class="comm-1-list">
-                <p>${val.Total_Quantity}</p>
-            </div>
-            `)
-            $('.comm-total-price').append(`
-            <div class="comm-1-list">
-                <p>${val.Total_Price}</p>
-            </div>
-            `)
-            $('.comm-percent').append(`
-            <div class="comm-1-list">
-                <p>3%</p>
-            </div>
-            `)
-            $('.comm-total-untung').append(`
-            <div class="comm-1-list">
-                <p>${untung}</p>
-            </div>
-            `) 
+            // $('.comm-qty').append(`
+            // <div class="comm-1-list">
+            //     <p>${val.Total_Quantity}</p>
+            // </div>
+            // `)
+            // $('.comm-total-price').append(`
+            // <div class="comm-1-list">
+            //     <p>${val.Total_Price}</p>
+            // </div>
+            // `)
+            // $('.comm-percent').append(`
+            // <div class="comm-1-list">
+            //     <p>3%</p>
+            // </div>
+            // `)
+            // $('.comm-total-untung').append(`
+            // <div class="comm-1-list">
+            //     <p>${untung}</p>
+            // </div>
+            // `) 
         })
     }).catch((err)=>{
         console.log(err)
