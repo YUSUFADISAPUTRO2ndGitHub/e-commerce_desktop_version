@@ -1507,7 +1507,8 @@ input:focus{
     display:none;
     transition: 2s ease-out;
     z-index:100;
-    box-shadow:5px 8px #0a3d62;
+    /* box-shadow:5px 8px #0a3d62; */
+    box-shadow: 5px 5px 20px #217283;
 
 }
 
@@ -1528,7 +1529,8 @@ input:focus{
     display:none;
     transition: 2s ease-out;
     z-index:100;
-    box-shadow: 5px 8px #0a3d62;
+    /* box-shadow: 5px 8px #0a3d62; */
+    box-shadow: 5px 5px 20px #217283;
 }
 
 /* modals check harga */
