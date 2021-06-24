@@ -423,7 +423,7 @@ input::-webkit-input-placeholder {
     align-items: center;
     border-radius:5px;
     margin:2px;
-    border-right:1px solid black;
+    /* border-right:1px solid black; */
 }
 .box-whatsapp p{
     color:white;
@@ -2882,4 +2882,9 @@ padding-left:0px;
     position: relative;
     top:-10px;
     left:-10px;
+}
+
+.detail_prod_input{
+    position: relative;
+    top:5px;
 }

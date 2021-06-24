@@ -97,63 +97,9 @@ const commision_check=()=>{
     newdate = year + "-" + month + "-" + day;
     var thismonth = year + "-" + month + "-" + "1"
 
-    
+    $('.tbody_commision').empty()
 
-      // DATA UNTUK RENDER TABLE
 
-      axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
-      .then((res)=>{
-          console.log(res.data,' 107')
-          console.log(token,' token')
-          console.log(newdate , ' newdate')
-          
-          $('.date-commision').val(newdate)
-          // var a = $('.date-commision').val()
-          res.data.map((val,index)=>{
-              console.log(val)
-              var untung = percent * val.Total_Price  
-              $('.tbody_commision').append(`
-                <tr>
-                    <td> <p  class="limited-text"> ${val.Order_Number}</p>
-                    <td>${val.Total_Quantity}</td>
-                    <td>${val.Total_Price}</td>
-                    <td>3%</td>
-                    <td>${untung}</td>
-                    
-                </tr>
-              `)
-
-              
-            //   $('.comm-order-num').append(`
-            //   <div class="comm-1-list">
-            //       <p class="limited-text">${val.Order_Number}</p>
-            //   </div>
-            //   `)
-  
-            //   $('.comm-qty').append(`
-            //   <div class="comm-1-list">
-            //       <p>${val.Total_Quantity}</p>
-            //   </div>
-            //   `)
-            //   $('.comm-total-price').append(`
-            //   <div class="comm-1-list">
-            //       <p>${val.Total_Price}</p>
-            //   </div>
-            //   `)
-            //   $('.comm-percent').append(`
-            //   <div class="comm-1-list">
-            //       <p>3%</p>
-            //   </div>
-            //   `)
-            //   $('.comm-total-untung').append(`
-            //   <div class="comm-1-list">
-            //       <p>${untung}</p>
-            //   </div>
-            //   `) 
-          })
-      }).catch((err)=>{
-          console.log(err)
-      })
 
 
   
@@ -186,10 +132,6 @@ const commision_check=()=>{
         }else if ( res.data.extra_column_3 === '7.5%'){
             percent = 0.075
         }
-         
-    
-
-      
 
          // CUSTOMER TOTAL COMMISION THIS MONTH
         axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
@@ -207,14 +149,44 @@ const commision_check=()=>{
         })
 
         axios.post(`http://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
-    .then((res)=>{
-        console.log(res.data)
-        console.log(res.data[0].Total_Price)
-        var total_commision = parseInt(res.data[0].Total_Price) * percent
-        $('.total_commision').val(total_commision)
-    }).catch((err)=>{
-        console.log(err)
-    })
+        .then((res)=>{
+            console.log(res.data)
+            console.log(res.data[0].Total_Price)
+            var total_commision = parseInt(res.data[0].Total_Price) * percent
+            $('.total_commision').val(total_commision)
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+          // DATA UNTUK RENDER TABLE
+
+          axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
+          .then((res)=>{
+              console.log(res.data,' 107')
+              console.log(token,' token')
+              console.log(newdate , ' newdate')
+              
+              $('.date-commision').val(newdate)
+              // var a = $('.date-commision').val()
+              res.data.map((val,index)=>{
+                  console.log(val)
+                  var untung = percent * val.Total_Price  
+                  console.log(untung)
+                  console.log(percent)
+                  $('.tbody_commision').append(`
+                    <tr>
+                        <td> <p  class="limited-text"> ${val.Order_Number}</p>
+                        <td>${val.Total_Quantity}</td>
+                        <td>${val.Total_Price}</td>
+                        <td>3%</td>
+                        <td>${untung}</td>
+                        
+                    </tr>
+                  `)
+              })
+          }).catch((err)=>{
+              console.log(err)
+          })
 
 
 

@@ -868,9 +868,9 @@ const check_status_item=()=>{
                              <td>
                                  <div class="br-option">
                                      <div class="br-option-input">
-                                         <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount">
+                                         <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled>
                                          <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                             <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                             <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                              
                                          </div>
                                          <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
@@ -883,7 +883,7 @@ const check_status_item=()=>{
                              <td>
                                  <div class="br-option">
                                      <div class="br-option-input">
-                                         <input type="text" class="form_product">
+                                         <input type="text" class="form_product detail_prod_input" disabled>
                                          <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                              <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                              
@@ -977,18 +977,6 @@ $(function() {
     
     var b = $('.form-check-input').val()
     console.log(b)
-//    $('.form-check-input').bootstrapSwitch({
-//        onSwitchChange:function(e,state){
-//            alert(state)
-//        }
-//    })
-
-//    $("#boot_switch").bootstrapSwitch({
-//     onSwitchChange: function(e,state) {
-//     //   alert(e.target.value);
-//       alert(state)
-//     }
-//   });
 
   $("#flexSwitchCheckDefault").bootstrapSwitch({
       onSwitchChange: function(e,state){
@@ -1008,6 +996,18 @@ $(function() {
     }
     alert(result)
  }
+
+// TABLE ATAS PRODUCT
+
+
+
+
+const edit_product_discount=(product_id)=>{
+
+}
+
+
+
 
 //  QTY
  const edit_product_qty=(product_id)=>{
