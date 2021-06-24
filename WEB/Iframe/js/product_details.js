@@ -232,7 +232,6 @@ function fillingInInformations(productNo){
                                         $(".group-price").css("display", "none");
                                         $("#main-period").css("display", "none");
                                         $(".main-group-buy").css("display", "none");
-                                        window.location.href = "./home.html";
                                         // $.get("http://147.139.168.202:8080/deleteAllTransactionsWithConditionAndSetItemForNonSale.jsp?productCode=" + productCode, function(data, status){
                                         //     console.log("this product has been removed from group buy sale"); 
                                         //     window.location.href = "./home.html";
