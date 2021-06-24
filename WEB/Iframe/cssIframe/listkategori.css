@@ -1,6 +1,6 @@
 .box-list-kategori{
     /* width:100%; */
-    height:auto;
+    height:500px;
     /* background-color: red; */
     display: flex;
     flex-direction: row;
@@ -15,7 +15,7 @@
 .box-list-all-item{
     width:400px;
     height:450px;
-    background-color: #E7E7E7;
+    background-color: transparent;
     border-radius:5px;
     display: flex;
     flex-direction: row;
@@ -28,8 +28,8 @@
 .card-lk {
     width:196px;
     height:200px;
-    background-color: #217384;
-    color: white;
+    background-color: white;
+    color: #217384;
     position: relative;
     top:5px;
     margin:2px;
@@ -37,6 +37,7 @@
     align-items: center;
     flex-direction: column;
     border-radius:10px;
+    box-shadow: 5px 5px 20px #217283 !important;
 }
 
 .box-img-lk{

@@ -182,7 +182,11 @@ body{
     padding: 10px;
     width:70px;
     height:70px;
+    transition: 1s;
     /* background-color: red; */
+}
+.logo-header:hover{
+    box-shadow: 5px 5px 20px #217283;
 }
 .icon-logo{
     height:100%;
@@ -1602,6 +1606,8 @@ input:focus{
     width:900px; 
     display:none;
     transition: 2s ease-out;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px #217283;
     /* padding-left:100px; */
 
 }
