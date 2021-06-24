@@ -11,6 +11,7 @@ function forgot_modal_request(){
     $('#loginModal').modal('hide')
 }
 function cart_requested(x){
+    $('.close-button').css('display','block')
     
     $('.close').css('display','none')
     console.log(x)
@@ -35,6 +36,7 @@ function cart_requested(x){
 }
 
 function pengiriman_requested(x){
+    $('.close-button').css('display','block')
     $('.close').css('display','none')
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
@@ -58,6 +60,7 @@ function pengiriman_requested(x){
 
 
 function cek_harga_requested(x){
+    $('.close-button').css('display','block')
     $('.close').css('display','none')
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
@@ -175,7 +178,13 @@ const commision_check=()=>{
                   console.log(percent)
                   $('.tbody_commision').append(`
                     <tr>
-                        <td> <p  class="limited-text"> ${val.Order_Number}</p>
+                        <td>
+                            <div class="wrapper">
+                                <div class="marquee">
+                                    <p > ${val.Order_Number}</p> 
+                                </div>
+                            </div>   
+                        </td>
                         <td>${val.Total_Quantity}</td>
                         <td>${val.Total_Price}</td>
                         <td>3%</td>

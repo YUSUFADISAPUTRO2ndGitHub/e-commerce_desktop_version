@@ -42,7 +42,8 @@
     display: flex;
     align-items: center;
     position: relative;
-    top:60px;
+    top:40px;
+    /* overflow:hidden; */
 }
 .img-icon{
     width:50px;
@@ -203,7 +204,7 @@
     padding: 10px;
     background-color: #217384;
     width:80%;
-    height:300px;
+    height:200px;
     overflow: scroll;
     position: relative;
     top:-70px;
@@ -223,7 +224,7 @@
     padding: 10px;
     background-color: #217384;
     width:80%;
-    height:300px;
+    height:200px;
     overflow: scroll;
     position: relative;
     top:-40px;

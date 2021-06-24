@@ -106,27 +106,55 @@ const render_sort_price=(product_name,condition)=>{
 // batas
 function show_subcategory(choosen_parent_category){
     $('.close-button').css('display','block')
-    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
-    .then((res)=>{
-        console.log(res);
-        // $('.box-list-kategori').css("display", "block")
-        $('.box-list-kategori').toggle()
-        $('.box-list-kategori').empty()
-        res.data.map((val,index)=>{
-            $('.box-list-kategori').append(
-              `
-                <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
-                    <img src="${val.Picture_1}" alt="" class="img-all-card">   
-                    <div class="card-all-item-list">
-                        <p class="limited-text-short">${val.Subcategory}</p>
+
+    let timerInterval
+    Swal.fire({
+    title: 'Please Wait',
+    // html: 'I will close in <b></b> milliseconds.',
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+        const content = Swal.getHtmlContainer()
+        if (content) {
+            const b = content.querySelector('b')
+            if (b) {
+            b.textContent = Swal.getTimerLeft()
+            }
+        }
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+    }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
+        .then((res)=>{
+            console.log(res);
+            // $('.box-list-kategori').css("display", "block")
+            $('.box-list-kategori').toggle()
+            $('.box-list-kategori').empty()
+            res.data.map((val,index)=>{
+                $('.box-list-kategori').append(
+                  `
+                    <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
+                        <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                        <div class="card-all-item-list">
+                            <p class="limited-text-short">${val.Subcategory}</p>
+                        </div>
                     </div>
-                </div>
-                `
-            )
-        }) 
-        
-    }).catch((err)=>{
-        console.log(err)
+                    `
+                )
+            }) 
+            
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     })
 }
 
@@ -137,42 +165,70 @@ function show_jenisproduct(jenis_product){
     $('.box-list-subcategory').css('display','block')
     $('.close-button').css('display','block')
 
-    axios.post(`http://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
-    .then((res)=>{
-        console.log(res.data)
-        res.data.map((val,index)=>{
-            console.log('masuk ke line 47')
-            console.log(val)
-            var hargaAwal = parseInt(val.Sell_Price)
-            var discount = parseInt(val.Sell_Price * 0.1)
-            var hargaTotal = hargaAwal + discount
-            $('.render-item-sub').append(
-              `
-                <div class="card-item card_sp hvr-float-shadow">
-                    <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                    <div class="card-item-list">
-                        <p>${val.Name}</p>
-                        <div class="split-item">
-                            <div class="item-price">
-                                <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
-                            </div>
-                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+    let timerInterval
+    Swal.fire({
+    title: 'Please Wait',
+    // html: 'I will close in <b></b> milliseconds.',
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+        const content = Swal.getHtmlContainer()
+        if (content) {
+            const b = content.querySelector('b')
+            if (b) {
+            b.textContent = Swal.getTimerLeft()
+            }
+        }
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+    }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+        axios.post(`http://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+                console.log('masuk ke line 47')
+                console.log(val)
+                var hargaAwal = parseInt(val.Sell_Price)
+                var discount = parseInt(val.Sell_Price * 0.1)
+                var hargaTotal = hargaAwal + discount
+                $('.render-item-sub').append(
+                  `
+                    <div class="card-item card_sp hvr-float-shadow">
+                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `
-            )
-        }) 
-        // $('.modals-lk').addClass('melihat') // ini bisa hampir
-        
-        console.log('finish render item based on sub cat')
-        
-    }).catch((err)=>{
-        console.log(err)
+                    `
+                )
+            }) 
+            // $('.modals-lk').addClass('melihat') // ini bisa hampir
+            
+            console.log('finish render item based on sub cat')
+            
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     })
+
 
 }
 

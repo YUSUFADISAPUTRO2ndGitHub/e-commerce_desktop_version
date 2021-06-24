@@ -1036,12 +1036,12 @@ cursor: pointer;
     color:white;
 }
 .box-code-referral{
-    width:50%;
+    width:40%;
     height:100%;
-    /* background-color: blue; */
+    /* background-color: pink; */
     display: flex;
     flex-direction: column;
-    line-height:0.5;
+    line-height:1;
     justify-content: center;
     align-items: center; 
     position: relative;
@@ -1049,7 +1049,7 @@ cursor: pointer;
     
 }
 .box-code-referral p {
-    /* width:300px; */
+    width:250px !important;
     /* height:30px; */
     font-size: 15px;
     
@@ -1066,6 +1066,20 @@ cursor: pointer;
 }
 .box-login-profile p{
     color:white;
+}
+.box-login-product{
+    background-color: #217283;
+    /* background-color: red; */
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left:20px;
+    padding-right:20px;
+}
+.box-login-product p{
+    width:200px;
+    color:white;
+    /* background-color: blue; */
 }
 
 
@@ -1873,6 +1887,7 @@ cursor: pointer;
     width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
+    height:30px;
     /* background-color: red; */
 }
 .limited-text-commision{
@@ -2448,6 +2463,7 @@ ul {
     height:100%;
 	position: relative;
 	animation: 12s slider infinite;
+    top:-15px;
 }
 
 
@@ -2677,7 +2693,7 @@ ul {
     background-color: transparent;
     border:none;
     min-width:30px;
-    width:100px;
+    width:auto;
     color:white;
 }
 
@@ -2709,6 +2725,8 @@ table {
     width:100%;
     background-color: #217283;
     /* scrollbar-color: initial; */
+    -webkit-overflow-scrolling: touch;
+
     }
 .tableFixHead_groupbuy thead th { 
     position: sticky; top: 0; z-index: 1; }
@@ -2975,3 +2993,116 @@ padding-left:0px;
     text-align: center;
 
 }
+
+.box-download_product{
+    display: flex;
+    flex-direction: column;
+    width:20%;
+    /* background-color: red; */
+    height:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-download_product p {
+    font-size: 0.7em;
+    text-align: left;
+}
+
+
+
+/* SCROLL TEXT */
+.wrapper {
+    max-width: 200px;
+    overflow: hidden;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+  }
+  .marquee:hover{
+      animation: marquee 3s linear infinite;
+
+  }
+  .marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width:auto;
+  }
+  
+  .marquee p {
+    display: inline-block;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  
+  /* .marquee2 p {
+    animation-delay: 2.5s;
+  }
+   */
+  /* @keyframes marquee {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-100%, 0);
+    }
+  } */
+
+  /* SCROLL TEXT */
+
+  .icon-opt {
+    /* width:200px;
+    height: 200px; */
+    /* background: red; */
+    -webkit-animation: fadein 2s linear forwards;
+    animation: fadein 2s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadein {
+  100% { opacity: 1; }
+}
+
+@keyframes fadein {
+  100% { opacity: 1; }
+}
+
+.modals-check-harga {
+    -webkit-animation: fadein 1s linear forwards;
+    animation: fadein 1s linear forwards;
+    opacity: 0;
+}
+.modals-pengiriman {
+    -webkit-animation: fadein 1s linear forwards;
+    animation: fadein 1s linear forwards;
+    opacity: 0;
+}
+.iframe{
+    -webkit-animation: fadein 1s linear forwards;
+    animation: fadein 1s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadein {
+    100% { opacity: 1; }
+  }
+  
+  @keyframes fadein {
+    100% { opacity: 1; }
+  }
+  
+
+
+  .ads_main{
+      width:100%;
+      height:100%;
+      position: relative;
+      left:-40px;
+  }

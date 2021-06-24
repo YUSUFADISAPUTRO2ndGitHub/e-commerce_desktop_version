@@ -10,12 +10,19 @@
     <link rel="stylesheet" type ="text/css" href="../WEB/css/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="./css/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
     <script src=”https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js”></script>
     <script src=”https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js”></script>
     <link href=”http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css” rel=”stylesheet” type=”text/css” />
     
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.3.4/dist/aos.js"></script>
+
+
+    
+
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap2/bootstrap-switch.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>     -->
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
@@ -119,10 +126,11 @@
             width: 100%;
             height: 100vh;
             background-color: darkgray;
-            opacity: 0.5;
+            opacity: 0.2;
             color: coral;
         }
     </style>
+   
 </head>
 <body >
 
@@ -724,13 +732,19 @@
       <div class="modal  fade " id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
-            <div class="modal-header box-login-profile">
-              <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
-              <div class="box-code-referral">
-                <p>Your Customer Code for Referral :</p>
-                <input type="text" disabled  id="refer-profile" class="ref-profile">
-                
-              </div>
+            <div class="modal-header box-login-product">
+                    <p> Hi !
+                        <input type="text" disabled  id="refer-profile" class="nama_user_profile">
+                    </p>             
+                <!-- <p> Hi,Welcome!</p> -->
+                <div class="box-code-referral">
+                    <p>Your Customer Code for Referral :</p>
+                    <input type="text" disabled  id="refer-profile" class="ref-profile">
+                </div>
+                <div class="box-download_product">
+                    <i class="fas fa-arrow-circle-down icon-download" onclick="download_product()"></i>
+                    <p>Download Sample excel for product management</p>
+                </div>
             </div>
             <div class="modal-body box-login-body">
                 <div class="commision-form">     
@@ -981,7 +995,7 @@
                 
             </div>
             <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
-                <img src="../WEB/img/logo.png" alt="" class="icon-logo" onclick="back_to_home()" >
+                <img src="../WEB/img/logo.png" alt="" class="icon-logo w3-animate-fading" onclick="back_to_home()"  >
             </div>
             
             <div class="main-header-search">
@@ -989,7 +1003,7 @@
                     <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name" id="search_item" >
                     <i class="fas fa-search icon-search" onclick="search_item()"></i>
                 </div>
-                <div class="box-render-search card box-search-menu" style="display: none;">
+                <div class="box-render-search card box-search-menu force-close-all-command" style="display: none;">
                     <div class="card-body ">
                         <ul class="render-li-search">
             
@@ -998,20 +1012,20 @@
                 </div>
             </div>
             <div class="header-option">
-                <div class="option-1" onclick="cek_harga_requested(this)">
-                    <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt">
+                <div class="option-1 " onclick="cek_harga_requested(this)">
+                    <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
                     <p>Cek Harga</p>
                 </div>
-                <div class="option-2" onclick="pengiriman_requested(this)">
+                <div class="option-2 " onclick="pengiriman_requested(this)">
                     <img src="../WEB/img/truck.png" alt="error" class="icon-opt">
                     <p>Pengiriman</p>
                 </div>  
-                <div class="option-3" onclick="cart_requested(this)">
+                <div class="option-3 " onclick="cart_requested(this)">
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
                     <p>Keranjang</p>
                     <div class="cart-counter">2</div>
                 </div>
-                <div class="option-4" data-bs-toggle="#loginModal" >
+                <div class="option-4 " data-bs-toggle="#loginModal" >
                     <img src="../WEB/img/login.png" alt="error" class="icon-opt">
                     <p>Log in</p>
                 </div>
@@ -1071,9 +1085,9 @@
                 <div class="ads-2">
                     <div id="slider">
                         <figure>
-                              <img src="./img/promo3.png">
-                              <img src="./img/promo5.png">
-                              <img src="./img/promo1.png">
+                              <img src="./img/promo3.png" class="ads_main">
+                              <img src="./img/promo5.png" class="ads_main">
+                              <img src="./img/promo1.png" class="ads_main">
                         </figure>
                     </div>
                 </div>
@@ -1174,7 +1188,7 @@
                 
             </div>
     
-            <div class="small-ads">
+            <div class="small-ads" >
                 <div class="sm-ads-name">
                     <img src="../WEB/img/new.png" alt="error" class="icon-ads">
                     <p>New</p>
@@ -1184,15 +1198,17 @@
                 </div>
             </div>
             <!-- RENDER  NEW ITEM -->
-            <div class="box-card">
-                <div class="box-back" id="new" onclick="backItem('new')">
-                    <i class="fas fa-chevron-left icon-prev icon-back" ></i>
-                </div>
-                <div class="box-render-new">
-                   
-                </div>
-                <div class="box-next" id="new" onclick="nextItem('new')" >
-                    <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+            <div >
+                <div class="box-card" >
+                    <div class="box-back" id="new" onclick="backItem('new')">
+                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
+                    </div>
+                    <div class="box-render-new" >
+                       
+                    </div>
+                    <div class="box-next" id="new" onclick="nextItem('new')" >
+                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+                    </div>
                 </div>
             </div>
          
@@ -1271,6 +1287,9 @@
 
     </div>
 </body>
+<script> 
+AOS.init();
+</script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 </html>

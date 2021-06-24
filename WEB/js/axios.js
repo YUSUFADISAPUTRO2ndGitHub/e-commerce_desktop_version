@@ -51,6 +51,7 @@ $( document ).ready(function() {
     }else if(item_category != undefined){
         console.log('masuk ke line 21 axios js')
         // get_product_detail(item_category)
+        
         render_get_product_detail(item_category)
     }else if (group_buy != undefined){
         console.log('masuk ke line 44 axios js')
@@ -286,75 +287,136 @@ const get_product_detail=(product_id)=>{
 
 const renderItemBasedOnSubCategory=(subCategory)=>{
     console.log('masuk ke line 174 render item based on sub cat')
-   axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
-    .then((res)=>{
-        $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
-        console.log(res.data)
-        res.data.map((val,index)=>{
-            console.log('masuk ke line 47')
-            console.log(val)
-            var hargaAwal = parseInt(val.Sell_Price)
-            var discount = parseInt(val.Sell_Price * 0.1)
-            var hargaTotal = hargaAwal + discount
-            $('.box-list-kategori').append(
-              `
-                <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
-                    <img src="${val.Picture_1}" alt="" class="img-all-card">   
-                    <div class="card-all-item-list">
-                        <p class="limited-text-short">${val.Name}</p>
-                        <div class="split-all-item">
-                            <div class="item-all-price">
-                                <p>RP. ${hargaTotal}</p>
-                                 <p>Rp. ${hargaAwal}</p>
+
+
+    let timerInterval
+    Swal.fire({
+    title: 'Please Wait!',
+    // html: 'I will close in <b></b> milliseconds.',
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+        const content = Swal.getHtmlContainer()
+        if (content) {
+            const b = content.querySelector('b')
+            if (b) {
+            b.textContent = Swal.getTimerLeft()
+            }
+        }
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+    }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+        axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
+        .then((res)=>{
+            $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
+            console.log(res.data)
+            res.data.map((val,index)=>{
+                console.log('masuk ke line 47')
+                console.log(val)
+                var hargaAwal = parseInt(val.Sell_Price)
+                var discount = parseInt(val.Sell_Price * 0.1)
+                var hargaTotal = hargaAwal + discount
+                $('.box-list-kategori').append(
+                `
+                    <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
+                        <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                        <div class="card-all-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-all-item">
+                                <div class="item-all-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `
-            )
-        }) 
-        $('.modals-lk').addClass('melihat') // ini bisa hampir
-        $('.modals-lk').css('display','block')
-        console.log('finish render item based on sub cat')
-        
-    }).catch((err)=>{
-        console.log(err)
+                    `
+                )
+            }) 
+            $('.modals-lk').addClass('melihat') // ini bisa hampir
+            $('.modals-lk').css('display','block')
+            console.log('finish render item based on sub cat')
+            
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     })
+   
 }
 
 const renderItemBasedOnCategory=(Category)=>{
     // var myFrame = $(".modals-item").contents().find('.box-list-kategori');
-    
-    
-    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
-    .then((res)=>{
-        console.log(res.data)
-         res.data.map((val,index)=>{
-            console.log(val)
-            console.log('render jalan 189s')
-            $('.box-list-kategori').append(
-                `
-                <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
-                    <div class="box-img-lk">
-                        <img src="${val.Picture_1}" alt="">
-                    </div>
-                    <p>${val.Subcategory}</p>
-                </div>
-                `
-                )
-            })
-        //     myFrame.html(test);
-            $('.modals-lk').addClass('melihat') // ini bisa hampir
-            // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
-            $('.modals-lk').css('display','block')  
-        }).catch((err)=>{
-            console.log(err)
+    let timerInterval
+        Swal.fire({
+        title: 'Uploading Data',
+        // html: 'I will close in <b></b> milliseconds.',
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+            const content = Swal.getHtmlContainer()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+            axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
+            .then((res)=>{
+                console.log(res.data)
+                 res.data.map((val,index)=>{
+                    console.log(val)
+                    console.log('render jalan 189s')
+                    $('.box-list-kategori').append(
+                        `
+                        <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
+                            <div class="box-img-lk">
+                                <img src="${val.Picture_1}" alt="">
+                            </div>
+                            <p>${val.Subcategory}</p>
+                        </div>
+                        `
+                        )
+                    })
+                //     myFrame.html(test);
+                    $('.modals-lk').addClass('melihat') // ini bisa hampir
+                    // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
+                    $('.modals-lk').css('display','block')  
+                }).catch((err)=>{
+                    console.log(err)
+                })
+        }
         })
+    
+   
 }
 
 
 function close_all_open_window(){
     $(".force-close-all-command").css("display", "none");
+    $('.option-1').removeClass("background_grey");
+    $('.option-2').removeClass("background_grey");
+    $('.option-3').removeClass("background_grey");
+    $('.option-4').removeClass("background_grey");
     
 }
 
@@ -499,6 +561,8 @@ const render_group_buy=(product_id)=>{
  const render_get_product_detail=(product_id)=>{
     console.log(product_id, ' ini product id')
     // $('.modals-lk').css('display','none')
+
+    
 
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{

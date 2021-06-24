@@ -2,7 +2,10 @@ $(function(){
     
     // $('#datepicker').datepicker();
     // $('.carousel').carousel()
-
+    
+      
+        
+      
    $('.cust-1').on('click',function(){
        console.log('testing jalan')
     //    $('.box-information').css('display','block')
@@ -100,6 +103,8 @@ $(function(){
    })
 
         $('.input-name').on('keyup',function () {
+            $('.close-button').css('display','block')
+            
             console.log('hi');
             var value = $(this).val()
             console.log(value)
@@ -129,9 +134,11 @@ $(function(){
                 })
 
             }else {
+                close_all_open_window()
                  $('.box-render-search').css('display','none')
                 $('.input-name').css('border-bottom-left-radius','10px')
                 $('.input-name').css('border-bottom-right-radius','10px')
+
             }
 
         }); 
