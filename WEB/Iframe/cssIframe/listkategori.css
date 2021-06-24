@@ -1,6 +1,6 @@
 .box-list-kategori{
     /* width:100%; */
-    height:auto;
+    height:500px;
     /* background-color: red; */
     display: flex;
     flex-direction: row;
