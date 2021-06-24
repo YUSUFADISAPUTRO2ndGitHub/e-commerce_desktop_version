@@ -428,7 +428,7 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
         }
         truncateCart();
         await setTimeout(() => { clearStorage(); }, 2000);
-        await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+        await setTimeout(() => {window.location.href = "./cart.html";}, 3000);
     });
 }
 
@@ -460,7 +460,7 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
         }
         truncateCart();
         await setTimeout(() => { clearStorage(); }, 2000);
-        await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+        await setTimeout(() => {window.location.href = "./cart.html";}, 3000);
     });
 }
 
