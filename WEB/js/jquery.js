@@ -796,10 +796,11 @@ const check_status_item=()=>{
     .then((res)=>{
         console.log(res.data)
         console.log(res.data.Creator)
+        var Customer_Code = res.data.Customer_Code
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=Gilang`)
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
             console.log(res.data)
             res.data.map((val,index)=>{
@@ -901,9 +902,16 @@ $(function() {
     var nama = $("#"+product_id+"-name").val()
     var harga = $("#"+product_id+"-harga").val()
     var qty = $("#"+product_id+"-qty").val()
+    var token = localStorage.getItem('token')
 
-    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}`)
+    console.log(nama)
+    console.log(harga)
+    console.log(qty)
+    console.log(token)
+
+    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
+        console.log(res.data)
         if(res.data){
             swal.fire("Berhasil Mengubah Data", "", "success");
         }else {
@@ -935,8 +943,9 @@ const save_edit_harga=(product_id)=>{
     var nama = $("#"+product_id+"-name").val()
     var harga = $("#"+product_id+"-harga").val()
     var qty = $("#"+product_id+"-qty").val()
+    var token = localStorage.getItem('token')
 
-    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}`)
+    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
         if(res.data){
             swal.fire("Berhasil Mengubah Data", "", "success");
@@ -968,6 +977,7 @@ const edit_product_name=(product_id)=>{
 
 const save_edit_name=(product_id)=>{
     // alert($("#"+product_id+"-name").val())
+    
     $("#"+product_id+"-name").prop('disabled',true) 
     $("#"+product_id+"-box_edit_name").css('display','block') // icon 
     $("#"+product_id+"-save_name").css('display','none') // icon
@@ -976,9 +986,16 @@ const save_edit_name=(product_id)=>{
     var nama = $("#"+product_id+"-name").val()
     var harga = $("#"+product_id+"-harga").val()
     var qty = $("#"+product_id+"-qty").val()
+    var token = localStorage.getItem('token')
 
-    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}`)
+    console.log(nama)
+    console.log(harga)
+    console.log(qty)
+    console.log(token)
+
+    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
+        console.log(res.data)
         if(res.data){
             swal.fire("Berhasil Mengubah Data", "", "success");
         }else {

@@ -2752,7 +2752,7 @@ th     { background:#217283; }
 .prod_sell{
     /* background-color: red; */
     border:none;
-    width:auto;
+    width:100px;
     color:#217283;
 }
 .prod_sell::placeholder{
@@ -2764,7 +2764,7 @@ th     { background:#217283; }
 .prod_qty{
     background-color: transparent;
     border:none;
-    width:auto;
+    width:100px;
     color:#217283;
 }
 
