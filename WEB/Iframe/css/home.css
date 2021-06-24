@@ -547,8 +547,12 @@ input::-webkit-input-placeholder {
 .icon-cust:hover{
     cursor: pointer;
 }
+.icon-up{
+    font-size: 20px;
+    color:#217283;
+}
 .icon-down{
-    font-size: 40px;
+    font-size: 20px;
     color:#217384;
 }
 .cust-1 p {

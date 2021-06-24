@@ -686,11 +686,11 @@ input::-webkit-input-placeholder {
     height:200px;
     /* border:1px solid black; */
 }
-.img-card:hover{
+/* .img-card:hover{
     width:200px;
     height:150px;   
     transition:0.5s ease-in-out;
-}
+} */
 .img-produk{
     width:100px;
     height:75px;

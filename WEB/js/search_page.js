@@ -28,6 +28,82 @@ $( document ).ready(function() {
 
 });
 
+const sort_by_higher=()=>{
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const search = urlParams.get('search');
+    const subcategory = urlParams.get('category')
+    const searching = urlParams.get('searching')
+    render_sort_price(searching,'asc')
+    console.log(searching,'line 33')
+}
+const sort_by_lower=()=>{
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const search = urlParams.get('search');
+    const subcategory = urlParams.get('category')
+    const searching = urlParams.get('searching')
+    render_sort_price(searching,'desc')
+    console.log(searching,'line 33')
+}
+
+
+const render_sort_price=(product_name,condition)=>{
+    console.log(product_name)
+    var data = product_name
+    if(data){
+        $('.sp_name').val(data)
+    }else {
+        $('.sp_name').val('All')
+    }
+    
+
+    axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
+    .then((res)=>{
+        // console.log(res.data)
+        if(condition == 'asc'){
+            res.data.sort((a,b) => (b.Sell_Price > a.Sell_Price) ? 1 : -1)
+
+        }else {
+            res.data.sort((a,b) => (a.Sell_Price > b.Sell_Price) ? 1 : -1)
+        }
+        console.log(res.data)
+        $('.new-box-card').empty()
+        res.data.map((val,index)=>{
+            var hargaAwal = parseInt(val.Sell_Price)
+            var discount = parseInt(val.Sell_Price * 0.1)
+            var hargaTotal = hargaAwal + discount
+            $('.new-box-card').append(`
+            <div class="card-item card_sp hvr-float-shadow">
+                    <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                <div class="card-item-list">
+                    <p class="limited-text-short">${val.Name}</p>
+                    <div class="split-item">
+                        <div class="item-price">
+                            <p>RP. ${hargaTotal}</p>
+                            <p>Rp. ${hargaAwal}</p>
+                        </div>
+                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                            <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+    // axios.post(``)
+
+   
+}
+
+// batas
 function show_subcategory(choosen_parent_category){
     $('.close-button').css('display','block')
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)

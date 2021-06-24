@@ -218,9 +218,9 @@
     /* background: red; */
 }
 
-.icon-up {
+.icon-up:hover {
     cursor: pointer;
 }
-.icon-down{
+.icon-down:hover{
     cursor: pointer;
 }
