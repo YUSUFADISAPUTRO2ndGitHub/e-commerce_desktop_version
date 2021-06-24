@@ -106,6 +106,12 @@ $(document).on('click',".btn-login",function(){
     console.log(email)
     console.log(password)
     
+    axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+    .then((res)=>{
+        console.log(res.data,'password encrypt')
+    }).catch((err)=>{
+        console.log(err)
+    })
         
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}`,{
                 params:{
@@ -146,12 +152,14 @@ $(document).on('click',".save-user",function(){
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         console.log(res.data)
+
+        var dataPassword = $('#password_user').val()
+
         var data = {
             customer_data : {
                Customer_Code : localStorage.getItem("token"),
                First_Name : $("#nama_depan_user").val(),
                Last_Name : $("#nama_belakang_user").val(),
-               User_Password :$('#password_user').val(),
                Birthday : $("#tahun_lahir_user").val() + "/" + $("#bulan_lahir_user").val() + "/" + $("#tanggal_lahir_user").val(),
                Created_Date : "CURRENT_TIMESTAMP()",
                Last_Login : "CURRENT_TIMESTAMP()",
@@ -179,7 +187,6 @@ $(document).on('click',".save-user",function(){
             "Customer_Code": data.customer_data.Customer_Code,
             "First_Name": data.customer_data.First_Name,
             "Last_Name": data.customer_data.Last_Name,
-            "User_Password": data.customer_data.User_Password,
             "Birthday": data.customer_data.Birthday,
             "Created_Date": data.customer_data.Created_Date,
             "Last_Login": data.customer_data.Last_Login,
@@ -290,41 +297,43 @@ function loadingMessage(){
 
 // REGISTER DATA SUPPLIER
 $(document).on('click',"#simpan_supplier",function(){
-
+alert('button save jalan')
 axios.post(`http://customers.sold.co.id/get-customer-code`)
 .then((res)=>{
-    localStorage.setItem('token',res.data)
-    var data = {
-        customer_data : {
-            Customer_Code : localStorage.getItem("token"),
-            First_Name : $("#nama_depan_supp").val(),
-            Last_Name : $("#nama_belakang_supp").val(),
-            User_Password : $('#password_supp').val(),
-            Created_Date : "CURRENT_TIMESTAMP()",
-            Last_Login : "CURRENT_TIMESTAMP()",
-            Email : $("#email_supp").val(),
-            Contact_Number_1 : $("#telp_gudang_supp").val(),
-            Contact_Number_2 : $("#telp_gudang2_supp").val(),
-            Address_1 : (typeof $("#alamat_lengkap_1_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_1_supp").val(),
-            Address_2 : (typeof $("#alamat_lengkap_2_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_2_supp").val(),
-            Address_3 : (typeof $("#alamat_lengkap_3_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_3_supp").val(),
-            Address_4 : (typeof $("#alamat_lengkap_4_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_4_supp").val(),
-            Address_5 : (typeof $("#alamat_lengkap_5_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_5_supp").val(),
-            Status : "pending",
-            User_Type : "Supplier",
-            account_number: $("#no_rek_perusahaan_supp").val(),
-            npwp: $("#npwp_supp").val(),
-            ktp: (typeof $("#no_ktp_supp").val() === 'undefined') ? "NULL" : $("#no_ktp_supp").val(),
-            nik: $("#nik_supp").val(),
-            Nama_Perusahaan: $("#nama_perusahaan_supp").val(),
-        }
-    };
-    
-    
-    var password = $('password_supp').val()
+    localStorage.setItem('token',res.data)    
+    var password = $('#password_supp').val()
+    console.log(password,  ' ini password register suplier')
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
+        console.log(res.data)
         var newPassword = res.data
+        console.log(newPassword)
+        console.log(data)
+        var data = {
+            customer_data : {
+                Customer_Code : localStorage.getItem("token"),
+                First_Name : $("#nama_depan_supp").val(),
+                Last_Name : $("#nama_belakang_supp").val(),
+                User_Password : newPassword,
+                Created_Date : "CURRENT_TIMESTAMP()",
+                Last_Login : "CURRENT_TIMESTAMP()",
+                Email : $("#email_supp").val(),
+                Contact_Number_1 : $("#telp_gudang_supp").val(),
+                Contact_Number_2 : $("#telp_gudang2_supp").val(),
+                Address_1 : (typeof $("#alamat_lengkap_1_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_1_supp").val(),
+                Address_2 : (typeof $("#alamat_lengkap_2_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_2_supp").val(),
+                Address_3 : (typeof $("#alamat_lengkap_3_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_3_supp").val(),
+                Address_4 : (typeof $("#alamat_lengkap_4_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_4_supp").val(),
+                Address_5 : (typeof $("#alamat_lengkap_5_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_5_supp").val(),
+                Status : "pending",
+                User_Type : "Supplier",
+                account_number: $("#no_rek_perusahaan_supp").val(),
+                npwp: $("#npwp_supp").val(),
+                ktp: (typeof $("#no_ktp_supp").val() === 'undefined') ? "NULL" : $("#no_ktp_supp").val(),
+                nik: $("#nik_supp").val(),
+                Nama_Perusahaan: $("#nama_perusahaan_supp").val(),
+            }
+        };
         axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
             headers:{
                 "Content-Type":'application/json'
@@ -333,7 +342,7 @@ axios.post(`http://customers.sold.co.id/get-customer-code`)
                 "Customer_Code": data.customer_data.Customer_Code,
                 "First_Name": data.customer_data.First_Name,
                 "Last_Name": data.customer_data.Last_Name,
-                "User_Password": newPassword,
+                "User_Password": data.customer_data.User_Password,
                 "Created_Date": data.customer_data.Created_Date,
                 "Last_Login": data.customer_data.Last_Login,
                 "Email": data.customer_data.Email,

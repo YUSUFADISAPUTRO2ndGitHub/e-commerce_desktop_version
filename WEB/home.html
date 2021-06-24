@@ -19,7 +19,7 @@
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap2/bootstrap-switch.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>     -->
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
@@ -342,7 +342,7 @@
                  
                     
                     <div class="box-new-tambah-alamat">
-                        <div class="tambah-alamat" onclick="addAddressSupp()">
+                        <div class="tambah-alamat" onclick="addAddressSupp()" style="display: none;">
                             <p>Tambah Alamat (+)</p>
                         </div>       
                         <div class="box-kumpulkan" id="simpan_supplier" >
@@ -522,7 +522,7 @@
                             <div class="box-name">
                                 <p>Password</p>
                             </div>
-                            <input type="text" class="name-form" placeholder="Password" id="password_user">
+                            <input type="text" class="name-form" placeholder="Password" id="password_user" disabled>
                         </div>
                         <div class="login-name">
                             <div class="box-name">
@@ -751,45 +751,7 @@
                                     </tr>
                                   </thead>
                                   <tbody class="tbody_detail_product">
-                                     <tr>
-                                         <td>
-                                            <div class="box-switch">
-                                                <input type="checkbox" checked data-toggle="toggle" id="flexSwitchCheckDefault" onchange="get_status(this)">
-                                            </div> 
-                                         </td>
-                                         <td>
-                                            <div class="br-option">
-                                                <div class="br-option-input">
-                                                    <input type="text" class="form_product">
-                                                    <i class="fas fa-edit icon-edit"></i>
-                                                </div>
-                                            </div>
-                                         </td>
-                                         <td>
-                                            <div class="br-option">
-                                                <div class="br-option-input">
-                                                    <input type="text" class="form_product">
-                                                    <i class="fas fa-edit icon-edit"></i>
-                                                </div>             
-                                            </div>
-                                         </td>
-                                         <td>
-                                            <div class="br-option">
-                                                <div class="br-option-input">
-                                                    <input type="text" class="form_product">
-                                                    <i class="fas fa-edit icon-edit"></i>
-                                                </div>
-                                            </div>
-                                         </td>
-                                         <td>
-                                            <div class="br-option">
-                                                <div class="br-option-input">
-                                                    <input type="text" class="form_product">
-                                                    <i class="fas fa-edit icon-edit"></i>
-                                                </div>
-                                            </div>
-                                         </td>
-                                     </tr>     
+                                    
                                
                                   </tbody>
                                 </table>

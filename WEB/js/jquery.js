@@ -794,6 +794,7 @@ const to_detail_product=(id)=>{
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
     .then((res)=>{
         console.log(res.data)
+       
         
             $('.tbody_detail_product').append(`
                 <tr>
@@ -831,10 +832,78 @@ const check_status_item=()=>{
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
+
+
+       
         axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
             console.log(res.data)
             res.data.map((val,index)=>{
+                console.log(val.GroupBuy_Purchase)
+                console.log(val.GroupBuy_Purchase === 'true')
+                if(val.GroupBuy_Purchase === 'true'){
+                    $('.tbody_detail_product').append(`
+                         <tr>
+                             <td>
+                                 <div class="box-switch">
+                                     <input type="checkbox" checked data-toggle="toggle" id="flexSwitchCheckDefault" onchange="get_status(this)">
+                                 </div> 
+                             </td>
+                             <td>
+                                 <div class="br-option">
+                                     <div class="br-option-input">
+                                         <input type="text" class="form_product" disabled>
+                                         <i class="fas fa-edit icon-edit"></i>
+                                     </div>
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="br-option">
+                                     <div class="br-option-input">
+                                         <input type="text" class="form_product" disabled>
+                                         <i class="fas fa-edit icon-edit"></i>
+                                     </div>             
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="br-option">
+                                     <div class="br-option-input">
+                                         <input type="text" class="form_product" id="${val.Product_Code}-discount">
+                                         <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                             <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                             
+                                         </div>
+                                         <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_discount">
+                                             <i class="fas fa-check-square icon-save-prod" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                             
+                                         </div>   
+                                     </div>
+                                 </div>
+                             </td>
+                             <td>
+                                 <div class="br-option">
+                                     <div class="br-option-input">
+                                         <input type="text" class="form_product">
+                                         <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                             <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                             
+                                         </div>  
+                                         <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                             <i class="fas fa-check-square icon-save-prod" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                             
+                                         </div>            
+                                     </div>
+                                 </div>
+                             </td>
+                         </tr>     
+                         `) 
+                }
+
+
+
+
+                // BATAS TABLE ATAS
+
                 $('.tbody_product').append(`
                 <tr>
                     <td >

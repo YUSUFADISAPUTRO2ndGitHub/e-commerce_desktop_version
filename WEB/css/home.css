@@ -2075,7 +2075,7 @@ overflow-y:hidden;
 .render-li-search{
     margin: 10px;
     position: relative;
-    left:-20px;
+    left:10px;
 }
 .render-li-search li {
     margin:3px;
@@ -2514,7 +2514,7 @@ ul {
     background-color: transparent;
     border:none;
     min-width:30px;
-    width:50px;
+    width:auto;
 }
 
 /* hover card */
@@ -2622,12 +2622,12 @@ ul {
 
   /* USER NAME */
 
-  .sp_name {
+  /* .sp_name {
     background-color: transparent;
     border:none;
     min-width:30px;
     width:50px;
-}
+} */
 
 .user_name{
     background-color: transparent;
