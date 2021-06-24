@@ -787,6 +787,37 @@ $('.id-address-gb').on('click',function(){
 
 
 
+const to_detail_product=(id)=>{
+    console.log(id)
+    $('#detailProductModal').modal('show')
+
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
+    .then((res)=>{
+        console.log(res.data)
+        
+            $('.tbody_detail_product').append(`
+                <tr>
+                    <td>${res.data.Product_Code} </td>
+                    <td>${res.data.Name} </td>
+                    <td>${res.data.Sell_Price} </td>
+                    <td>${res.data.Stock_Quantity}</td>
+                    <td>${res.data.Category} </td>
+                    <td>${res.data.Subcategory} </td>
+                    <td>${res.data.Specification} </td>
+                    <td>
+                        <p class="limited-text">${res.data.Description} </p>
+                    </td>
+                </tr>
+
+            `)
+        
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+
+
 const check_status_item=()=>{
     // alert('function check status jalan')
     $('#productModal').modal('show')
@@ -806,7 +837,9 @@ const check_status_item=()=>{
             res.data.map((val,index)=>{
                 $('.tbody_product').append(`
                 <tr>
-                    <td>${val.Product_Code}</td>
+                    <td >
+                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                    </td>
                     <td>
                         <div class="box-prod-name hvr-grow">
                             <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
@@ -860,11 +893,6 @@ const check_status_item=()=>{
     })
 }
 
-const toDetailProduct=(id)=>{
-    // alert('jalan id jquery js', id)
-    $('#productModal').show('hide')
-    $('#detailProductModal').modal('show')
-}
 
 
 
@@ -878,9 +906,39 @@ $(function() {
     var a = $( "#datepicker" ).datepicker("getDate");
     console.log(a,' ini a')
     
-    
-    
+    var b = $('.form-check-input').val()
+    console.log(b)
+//    $('.form-check-input').bootstrapSwitch({
+//        onSwitchChange:function(e,state){
+//            alert(state)
+//        }
+//    })
+
+//    $("#boot_switch").bootstrapSwitch({
+//     onSwitchChange: function(e,state) {
+//     //   alert(e.target.value);
+//       alert(state)
+//     }
+//   });
+
+  $("#flexSwitchCheckDefault").bootstrapSwitch({
+      onSwitchChange: function(e,state){
+          alert(state)
+      }
+  })
+
  });
+
+ const get_status=(item_status)=>{
+    // alert(item_status)
+    var result;
+    if($(item_status).is(':checked')){
+        result = true
+    }else {
+        result = false
+    }
+    alert(result)
+ }
 
 //  QTY
  const edit_product_qty=(product_id)=>{

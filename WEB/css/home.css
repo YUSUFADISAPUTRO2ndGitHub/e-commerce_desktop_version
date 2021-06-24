@@ -2670,6 +2670,36 @@ table {
   /* tr:nth-child(even) {
     background-color: #217283;
   } */
+  .tableFixHead_groupbuy{
+    overflow: auto;
+    /* height:250px; */
+    height:100px;
+    width:100%;
+    background-color: #217283;
+    }
+.tableFixHead_groupbuy thead th { 
+    position: sticky; top: 0; z-index: 1; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { 
+    background:#217283;
+    color:white;
+}
+
+/* Borders (if you need them) */
+.tableFixHead_groupbuy,
+.tableFixHead_groupbuy td {
+  /* border:2px solid #217283; */
+  color:white;
+}
+
+
+/* BATAS */
+
+
+
 
  
 
@@ -2696,7 +2726,7 @@ th     {
 /* Borders (if you need them) */
 .tableFixHead,
 .tableFixHead td {
-  border:2px solid #217283;
+  /* border:2px solid #217283; */
   color:white;
 }
 
@@ -2720,7 +2750,7 @@ th     { background:#217283; }
 /* Borders (if you need them) */
 .tableFixHead_product,
 .tableFixHead_product td {
-  border:2px solid #217283;
+  /* border:2px solid #217283; */
   color:#217283;
 }
 
@@ -2809,4 +2839,47 @@ th     { background:#217283; }
     display: flex;
     flex-direction: column;
 
+}
+
+.p_code:hover{
+    cursor: pointer;
+}
+.ads_samping{
+    width:100%;
+    height:100%;
+}
+
+
+.bootstrap-switch .bootstrap-switch-handle-off{
+padding-top :0px;
+padding-bottom:0px;
+padding-right:0px;
+padding-left:0px;
+}
+.bootstrap-switch{
+    border :none !important;
+    /* padding:0px !important; */
+    /* padding-top:0px  !important;
+    padding-left:0px  !important;
+    padding-right:0px  !important;
+    padding-bottom:0px  !important; */
+
+}
+.bootstrap-switch-handle-off{
+    /* padding-top:0px  !important;
+    padding-left:0px  !important;
+    padding-right:0px  !important;
+    padding-bottom:0px  !important; */
+    padding:none !important;
+}
+
+.box-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    /* background-color: red; */
+    position: relative;
+    top:-10px;
+    left:-10px;
 }

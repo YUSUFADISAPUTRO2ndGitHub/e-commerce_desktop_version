@@ -122,6 +122,8 @@ const commision_check=()=>{
                     
                 </tr>
               `)
+
+              
             //   $('.comm-order-num').append(`
             //   <div class="comm-1-list">
             //       <p class="limited-text">${val.Order_Number}</p>
@@ -388,10 +390,6 @@ function horizontalNavigationAll(position, event) {
 
 
 
-const to_detail_product=(id)=>{
-    console.log(id)
-    $('#detailProductModal').modal('show')
-}
 
 const date_commision=()=>{
    $('.tbody_commision').empty()

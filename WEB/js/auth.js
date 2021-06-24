@@ -141,6 +141,11 @@ $(document).on('click',".btn-login",function(){
 
 $(document).on('click',".save-user",function(){
   
+    var token = localStorage.getItem('token')
+    
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
         var data = {
             customer_data : {
                Customer_Code : localStorage.getItem("token"),
@@ -159,7 +164,7 @@ $(document).on('click',".save-user",function(){
                Address_4 : $("#alamat_lengkap4_user").val(),
                Address_5 : $("#alamat_lengkap5_user").val(),
                Status : "pending",
-               User_Type : "Customer",
+               User_Type : res.data.User_Type,
                account_number: $("#rekening_user").val(),
                referral_customer_code: $("#referral-profile").val(),
                ktp:$('#no_ktp_user').val()
@@ -207,6 +212,13 @@ $(document).on('click',".save-user",function(){
     }).catch((err)=>{
         console.log(err)
     })
+
+    }).catch((err)=>{
+
+    })
+
+
+
 
 })
 
