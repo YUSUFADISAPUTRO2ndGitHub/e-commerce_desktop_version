@@ -851,7 +851,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this)">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -906,7 +906,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this)">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this,'${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -961,7 +961,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this)">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -1018,7 +1018,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this)">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -1073,7 +1073,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this)">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -1128,7 +1128,7 @@ const check_status_item=()=>{
                         <tr class="tr_detail_prod">
                             <td>
                                 <div class="box-switch">
-                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this)">
+                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
                                 </div> 
                             </td>
                             <td>
@@ -1269,7 +1269,8 @@ $(function() {
 
  });
 
-//  const get_status=(item_status)=>{
+
+
 //     // alert(item_status)
 //     var result;
 //     if($(item_status).is(':checked')){
@@ -1293,15 +1294,55 @@ const edit_product_quantity=(product_id)=>{
     $("#"+product_id+"-box_edit_quantity").css('display','none') // icon 
     $("#"+product_id+"-save_quantity").css('display','block') // icon
 }
-var result;
-const get_status=(item_status)=>{
+const get_status=(product_id)=>{
     // alert(item_status)
-    if($(item_status).is(':checked')){
-        result = true
-    }else {
-        result = false
-    }
-    alert(result)
+    
+    var Product_Code = $("#"+product_id+"-pCode").val()
+    var Name = $("#"+product_id+"-pName").val()
+    var qty = $("#"+product_id+"-quantity").val()
+    var price = $("#"+product_id+"-discount").val()
+    var token = localStorage.getItem('token')
+    var result;
+
+
+    // if($(item_status).is(':checked')){
+        //     result = true
+        // }else {
+            //     result = false
+            // }
+            console.log($('#'+product_id+"-status").val())
+            if($('#'+product_id+"-status").is(':checked')){
+                result = true
+            }else {
+                result = false
+            }
+            
+            axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
+            .then((res)=>{
+                if(res.data){
+                    swal.fire("Berhasil Mengubah Data", "", "success");
+                }else {
+                    swal.fire("Gagal Mengubah Data", "", "error");
+                    
+                    
+            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            .then((res)=>{
+                console.log(res.data.GroupBuy_SellPrice)
+                // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                if(res.data.GroupBuy_Purchase == 'true'){
+                    $('#'+product_id+"-status").prop('checked',true)
+                }else {
+                    $('#'+product_id+"-status").prop('checked',false)
+                    
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+
+    }).catch((err)=>{
+
+    })
  }
 
 const save_edit_quantity=(product_id)=>{
@@ -1368,6 +1409,7 @@ const save_edit_discount=(product_id)=>{
     }else {
         status = false
     }
+
     var Product_Code = $("#"+product_id+"-pCode").val()
     var Name = $("#"+product_id+"-pName").val()
     var qty = $("#"+product_id+"-quantity").val()
