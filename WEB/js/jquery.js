@@ -846,7 +846,7 @@ const check_status_item=()=>{
                
                 
                 if(val.GroupBuy_Purchase === 'true'){
-                    if(val.GroupBuy_SellPrice === 'NULL'){
+                    if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
                         $('.tbody_detail_product').append(`
                              <tr class="tr_detail_prod">
                                  <td>
@@ -887,7 +887,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                                  <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                                  
@@ -982,7 +982,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                                  <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                                  
@@ -1424,17 +1424,30 @@ const save_edit_discount=(product_id)=>{
     console.log(qty)
     console.log(token)
 
-    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
-    .then((res)=>{
-        console.log(res.data)
-        if(res.data){
-            swal.fire("Berhasil Mengubah Data", "", "success");
-        }else {
+    if(qty < 10){
+        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+        .then((res)=>{
+            console.log(res.data.GroupBuy_SellPrice)
+            $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
             swal.fire("Gagal Mengubah Data", "", "error");
-        }
-    }).catch((err)=>{
-        console.log(err)
-    })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }else {
+
+        axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
+        .then((res)=>{
+            console.log(res.data)
+            if(res.data){
+                swal.fire("Berhasil Mengubah Data", "", "success");
+            }else {
+                swal.fire("Gagal Mengubah Data", "", "error");
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
  }
 
 
@@ -1459,17 +1472,35 @@ const save_edit_harga=(product_id)=>{
     var harga = $("#"+product_id+"-harga").val()
     var qty = $("#"+product_id+"-qty").val()
     var token = localStorage.getItem('token')
+    console.log(nama, ' ini nama')
+    console.log(harga, ' ini harga')
+    console.log(qty, ' ini qty')
+    console.log(token, ' ini token')
 
-    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
-    .then((res)=>{
-        if(res.data){
-            swal.fire("Berhasil Mengubah Data", "", "success");
-        }else {
-            swal.fire("Gagal Mengubah Data", "", "error");
-        }
-    }).catch((err)=>{
-        console.log(err)
-    })
+    if(harga < 500){
+        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            .then((res)=>{
+                console.log(res.data.GroupBuy_SellPrice)
+                $("#"+product_id+"-harga").val(res.data.Sell_Price)
+                swal.fire("Gagal Mengubah Data", "", "error");
+            }).catch((err)=>{
+                console.log(err)
+            })
+    }else {
+        axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
+        .then((res)=>{
+            if(res.data){
+                swal.fire("Berhasil Mengubah Data", "", "success");
+            }else {
+                
+                swal.fire("Gagal Mengubah Data", "", "error");
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    }
+
 }
 
 
@@ -1508,16 +1539,29 @@ const save_edit_name=(product_id)=>{
     console.log(qty)
     console.log(token)
 
-    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
-    .then((res)=>{
-        console.log(res.data)
-        if(res.data){
-            swal.fire("Berhasil Mengubah Data", "", "success");
-        }else {
+    if(nama.length <5){
+        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+        .then((res)=>{
+            console.log(res.data.GroupBuy_SellPrice)
+            $("#"+product_id+"-name").val(res.data.Name)
             swal.fire("Gagal Mengubah Data", "", "error");
-        }
-    }).catch((err)=>{
-        console.log(err)
-    })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }else {
+        axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
+        .then((res)=>{
+            console.log(res.data)
+            if(res.data){
+                swal.fire("Berhasil Mengubah Data", "", "success");
+            }else {
+                swal.fire("Gagal Mengubah Data", "", "error");
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    }
+
 }
 
