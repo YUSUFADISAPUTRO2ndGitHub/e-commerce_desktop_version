@@ -1577,6 +1577,8 @@ input:focus{
     width:900px; 
     display:none;
     transition: 2s ease-out;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px #217283;
     /* padding-left:100px; */
 
 }
