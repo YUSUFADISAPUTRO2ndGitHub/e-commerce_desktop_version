@@ -682,29 +682,54 @@ input::-webkit-input-placeholder {
     height:200px;
     /* border:1px solid black; */
 }
-.img-produk{
+.img-card:hover{
     width:200px;
-    height:150px;
+    height:150px;   
+    transition:0.5s ease-in-out;
+}
+.img-produk{
+    width:100px;
+    height:75px;
     margin-bottom:10px;
     /* background-color: red; */
 }
 .img-produk-lengkap{
-    width:150px;
-    height:150px;
+    width:100px;
+    height:75px;
     margin-bottom:10px;
     /* background-color: red; */
+}
+.img-produk:hover{
+    width:200px;
+    height:150px;   
+    transition:0.5s ease-in-out;
+}
+.img-produk-lengkap:hover{
+    width:150px;
+    height:100px;   
+    transition:0.5s ease-in-out;
 }
 .img-pembayaran{
-    width:200px;
-    height:200px;
+    width:100px;
+    height:100px;
     margin-bottom:10px;
     /* background-color: red; */
 }
+.img-pembayaran:hover{
+    width:200px;
+    height:150px;   
+    transition:0.5s ease-in-out;
+}
 .img-delivery{
-    width:250px;
-    height:200px;
+    width:150px;
+    height:100px;
     margin-bottom:10px;
     /* background-color: red; */
+}
+.img-delivery:hover{
+    width:200px;
+    height:150px;   
+    transition:0.5s ease-in-out;
 }
 .split-item{
     width:100%;
@@ -2672,10 +2697,12 @@ table {
   } */
   .tableFixHead_groupbuy{
     overflow: auto;
+    overflow-y: scroll;
     /* height:250px; */
     height:100px;
     width:100%;
     background-color: #217283;
+    /* scrollbar-color: initial; */
     }
 .tableFixHead_groupbuy thead th { 
     position: sticky; top: 0; z-index: 1; }
@@ -2695,6 +2722,14 @@ th     {
   color:white;
 }
 
+/* .tbody_detail_product {
+    scrollbar-color: initial;
+
+    height: 150px;
+    width: 200px;
+    overflow-y: scroll;
+    background-color: lightgreen;
+  } */
 
 /* BATAS */
 
@@ -2819,6 +2854,18 @@ th     { background:#217283; }
     margin-left:5px;
     margin-bottom:5px;
 }
+
+.icon-save-discount{
+    width:20px;
+    height:20px;
+    font-size: 20px;
+    color:white;
+    position: relative;
+    left:5px;
+    top:5px;
+    margin-left:5px;
+    margin-bottom:5px;
+}
 .save-prod {
     font-size: 1em;
     position: relative;
@@ -2887,4 +2934,38 @@ padding-left:0px;
 .detail_prod_input{
     position: relative;
     top:5px;
+    color:white;
+    background-color: transparent;
+    /* width:100px; */
+}
+
+.tbody_detail_product{
+    overflow: auto;
+    overflow-x: scroll;
+}
+/* .tr_detail_prod{
+    border-bottom:1px solid white;
+} */
+
+.total_row_groupbuy{
+    position: absolute;
+    /* background-color: red; */
+    height:20px;
+    width:120px;
+    top:95px;
+    right:70px;
+    border-radius:10px;
+}
+.total_row_groupbuy input {
+    font-size: 12px;
+    color:#217283;
+
+}
+.input_total_row_gb{
+    border:none;
+    background-color: white;
+    width:100%;
+    border-radius:10px;
+    text-align: center;
+
 }
