@@ -843,37 +843,37 @@ const check_status_item=()=>{
                 console.log(val.GroupBuy_Purchase === 'true')
                 if(val.GroupBuy_Purchase === 'true'){
                     $('.tbody_detail_product').append(`
-                         <tr>
+                         <tr class="tr_detail_prod">
                              <td>
                                  <div class="box-switch">
-                                     <input type="checkbox" checked data-toggle="toggle" id="flexSwitchCheckDefault" onchange="get_status(this)">
+                                     <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="flexSwitchCheckDefault" onchange="get_status(this)">
                                  </div> 
                              </td>
                              <td>
                                  <div class="br-option">
                                      <div class="br-option-input">
-                                         <input type="text" class="form_product" disabled>
-                                         <i class="fas fa-edit icon-edit"></i>
+                                         <input type="text" class="form_product detail_prod_input" disabled>
+                                         
                                      </div>
                                  </div>
                              </td>
                              <td>
                                  <div class="br-option">
                                      <div class="br-option-input">
-                                         <input type="text" class="form_product" disabled>
-                                         <i class="fas fa-edit icon-edit"></i>
+                                         <input type="text" class="form_product detail_prod_input" disabled>
+                                         
                                      </div>             
                                  </div>
                              </td>
                              <td>
                                  <div class="br-option">
                                      <div class="br-option-input">
-                                         <input type="text" class="form_product" id="${val.Product_Code}-discount">
+                                         <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount">
                                          <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                              <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
                                              
                                          </div>
-                                         <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_discount">
+                                         <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
                                              <i class="fas fa-check-square icon-save-prod" onclick="save_edit_discount('${val.Product_Code}')"></i>
                                              
                                          </div>   
