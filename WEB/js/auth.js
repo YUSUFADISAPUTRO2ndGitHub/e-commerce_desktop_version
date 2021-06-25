@@ -153,7 +153,7 @@ $(document).on('click',".save-user",function(){
     .then((res)=>{
         console.log(res.data)
 
-        var dataPassword = $('#password_user').val()
+        // var dataPassword = $('#password_user').val()
 
         var data = {
             customer_data : {

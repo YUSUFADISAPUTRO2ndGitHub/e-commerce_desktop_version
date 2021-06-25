@@ -186,14 +186,14 @@ const commision_check=()=>{
                         <td>
                             <div class="wrapper">
                                 <div class="marquee">
-                                    <p > ${val.Order_Number}</p> 
+                                    <p class="on_commision"> ${val.Order_Number}</p> 
                                 </div>
                             </div>   
                         </td>
-                        <td>${val.Total_Quantity}</td>
-                        <td>${val.Total_Price}</td>
-                        <td>3%</td>
-                        <td>${untung}</td>
+                        <td class="tq_commision">${val.Total_Quantity}</td>
+                        <td class="tp_commision">${val.Total_Price}</td>
+                        <td class="percent_commision">3%</td>
+                        <td class="untung_commision">${untung}</td>
                         
                     </tr>
                   `)
@@ -234,6 +234,24 @@ var data = [
     
 
  function download_csv() {
+    // var order_number = 
+    
+    var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
+	var fname = "IJGResults";
+
+	var csvContent = "data:text/csv;charset=utf-8,";
+	$("#pressme").click(function(){
+		test_array.forEach(function(infoArray, index){
+			dataString = infoArray.join(",");
+			csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
+		});
+
+		var encodedUri = encodeURI(csvContent);
+		window.open(encodedUri);
+	});
+
+
+    // testing
      var csv = 'Name,Title\n';
      data.forEach(function(row) {
              csv += row.join(',');

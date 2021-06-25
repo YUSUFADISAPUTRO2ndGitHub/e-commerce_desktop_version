@@ -45,6 +45,8 @@ $(function(){
                     $('.btn-status-barang').css('display','none')
                 }else {
                     $('.btn-status-barang').css('display','block')
+                    $('.sup_delete').css('display','none')
+                    $('.box-kumpulkan-profile').css('top','0px')
                 }
     
                 var tahun = data_customer.Birthday.slice(0,4)
