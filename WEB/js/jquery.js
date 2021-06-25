@@ -159,6 +159,13 @@ function replace_value_to(x){
     $('.input-name').css('border-bottom-left-radius','10px')
     $('.input-name').css('border-bottom-right-radius','10px')
 
+
+    var item_search = $('#search_item').val()
+    var product_name = $('#search_item').attr('id')
+    $('.active_search').css('top','575px')
+    $('.main-body').css('display','none')
+    $('.modals-search-result').css('display','block')
+    $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
 }   
 
 $('.icon-buy').on('click',function(){
