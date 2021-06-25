@@ -29,7 +29,7 @@ function generateRowsDelivery(i, datas){
     if(datas.Status.toUpperCase() != 'cancelled'.toUpperCase()){
         $("#" + i).append("<td><div class=\"cancel-body-table\" onclick=\"cancelOrderRequest(\'" + datas.Order_Number + "\')\">Cancel</div></td>");
     }else{
-        $("#" + i).append("<td><div class=\"cancel-body-table\">You've cancelled this order</div></td>");
+        $("#" + i).append("<td><div class=\"cancel-body-table\">Cancelled</div></td>");
     }
 }
 
