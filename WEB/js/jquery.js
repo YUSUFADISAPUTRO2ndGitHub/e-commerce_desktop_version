@@ -43,6 +43,8 @@ $(function(){
                 console.log(data_customer.Customer_Code)
                 if(data_customer.User_Type === 'Customer'){
                     $('.btn-status-barang').css('display','none')
+                    $('.sup_delete').css('display','flex')
+                    // $('.sup_delete').css('left','20px')
                 }else {
                     $('.btn-status-barang').css('display','block')
                     $('.sup_delete').css('display','none')

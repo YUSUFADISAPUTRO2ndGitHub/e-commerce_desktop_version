@@ -268,13 +268,13 @@
                                 <p>Alamat Email PIC</p>
                             </div>
                             <input type="text" class="name-form" placeholder="Alamat Email PIC" type="email" id="email_supp"
-                            pattern=".+@globex.com" size="30" required>
+                            pattern=".+@globex.com" size="30" required onchange="supp_email_check()">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>No Telp utama Gudang</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="no Telp utama Gudang" id="telp_gudang_supp"> 
+                            <input type="number" class="name-form" placeholder="no Telp utama Gudang" maxlength="20" id="telp_gudang_supp"> 
                         </div>
                     </div>    
                     <div class="reg-form-1">
@@ -282,13 +282,13 @@
                             <div class="box-name">
                                 <p>Password</p>
                             </div>
-                            <input type="password" class="name-form" placeholder="Password" id="password_supp">
+                            <input type="password" class="name-form" placeholder="Password" id="password_supp" onchange="supp_password_check()">
                         </div>
                         <div class="login-name">
                             <div class="box-name">
                                 <p>No Telp Kedua Gudang</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="No Telp Kedua Gudang" id="telp_gudang2_supp">
+                            <input type="number" class="name-form" placeholder="No Telp Kedua Gudang" maxlength="20" id="telp_gudang2_supp">
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -384,13 +384,13 @@
                                     <p>Alamat Email</p>
                                 </div>
                                 <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email_reg"
-                                pattern=".+@globex.com" size="30" required>
+                                pattern=".+@globex.com" size="30" required onchange="register_email_check()">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Tahun Lahir</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_reg"> 
+                                <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_reg" onchange="tahun_lahir_check()"> 
                             </div>
                         </div>    
                         <div class="reg-form-1">
@@ -398,13 +398,17 @@
                                 <div class="box-name">
                                     <p>Password</p>
                                 </div>
-                                <input type="password" class="name-form" placeholder="Password" id="password_reg">
+                                <!-- <div class="box_password_reg"> -->
+                                    <input type="password" class="name-form" placeholder="Password" id="password_reg" onchange="password_check()">
+                                    <!-- <i class="fas fa-eye eye-open" ></i>
+                                    <i class="fas fa-eye-slash eye-close"></i> -->
+                                <!-- </div> -->
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Bulan Lahir</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_reg">
+                                <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_reg" onchange="bulan_lahir_check()">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -412,13 +416,13 @@
                                 <div class="box-name">
                                     <p>Nama Depan</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Nama Depan" id="nama_depan_reg">
+                                <input type="text" class="name-form" placeholder="Nama Depan" id="nama_depan_reg" onchange="nama_depan_check()">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>Tanggal Lahir</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_reg">
+                                <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_reg" onchange="tanggal_lahir_check()">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -426,13 +430,13 @@
                                 <div class="box-name">
                                     <p>Nama Belakang</p>
                                 </div>
-                                <input type="text" class="name-form" placeholder="Nama Belakang" id="nama_belakang_reg">
+                                <input type="text" class="name-form" placeholder="Nama Belakang" id="nama_belakang_reg" onchange="nama_belakang_check()">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No telp utama</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No telp utama" id="no_telp_reg"> 
+                                <input type="number" class="name-form" placeholder="No telp utama" id="no_telp_reg" onchange="no_telp_check()"> 
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -440,13 +444,13 @@
                                 <div class="box-name">
                                     <p>No KTP</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8" id="no_ktp_reg">
+                                <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8" id="no_ktp_reg" onchange="ktp_check()">
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No telp kedua</p>
                                 </div>
-                                <input type="number" class="name-form" placeholder="No telp kedua" id="no_telp_2_reg">
+                                <input type="number" class="name-form" placeholder="No telp kedua" id="no_telp_2_reg" onchange="no_telp_check2()">
                             </div>
                         </div>  
                         <div class="reg-form-1">
@@ -455,14 +459,14 @@
                                     <div class="box-name">
                                         <p>Alamat Lengkap</p>
                                     </div>
-                                    <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap_1">
+                                    <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="50" id="alamat_lengkap_1">
                                 </div>       
                             </div>
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No Rekening</p>
                                 </div>
-                                <input type="type" class="name-form" placeholder="No Rekening" id="no_rekening_reg" minlength="4" maxlength="15">
+                                <input type="type" class="name-form" placeholder="No Rekening" id="no_rekening_reg" minlength="4" maxlength="20">
                             </div>
                         </div>  
                         
@@ -715,8 +719,8 @@
                                     <th>Commision Amt</th>
                                 </tr>
                               </thead>
-                              <tbody class="tbody_commision">
-                             
+                              <tbody class="tbody_commision">                    
+                                 <!-- RENDER TABLE COMMISION -->
                               
                               </tbody>
                             </table>

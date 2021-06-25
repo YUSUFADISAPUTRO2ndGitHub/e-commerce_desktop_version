@@ -102,6 +102,7 @@ const commision_check=()=>{
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     var percent;
+    var total_percent;
     newdate = year + "-" + month + "-" + day;
     var thismonth = year + "-" + month + "-" + "1"
 
@@ -137,8 +138,10 @@ const commision_check=()=>{
         console.log(res.data.extra_column_3)
         if(res.data.extra_column_3 === '3%'){
             percent = 0.03
+            total_percent = '3%'
         }else if ( res.data.extra_column_3 === '7.5%'){
             percent = 0.075
+            total_percent = '7.5%'
         }
 
          // CUSTOMER TOTAL COMMISION THIS MONTH
@@ -192,7 +195,7 @@ const commision_check=()=>{
                         </td>
                         <td class="tq_commision">${val.Total_Quantity}</td>
                         <td class="tp_commision">${val.Total_Price}</td>
-                        <td class="percent_commision">3%</td>
+                        <td class="percent_commision">${total_percent}</td>
                         <td class="untung_commision">${untung}</td>
                         
                     </tr>
@@ -234,36 +237,66 @@ var data = [
     
 
  function download_csv() {
-    // var order_number = 
+    var order_number = $('.on_commision').text()
+    var total_quantity = $('.tq_commision').text()
+    var total_price = $('.tp_commision').text()
+    var percent = $('.percent_commision').text()
+    var untung = $('.untung_commision').text()
+
+    console.log(order_number)
+    console.log(total_quantity)
+    console.log(total_price)
+    console.log(percent)
+    console.log(untung)
+
+    var testing_array = []
+    var push_to_arr = [
+        order_number,
+        total_quantity,
+        total_price,
+        percent,
+        untung
+    ]
+    var push_to_arr2 = {
+        "Order_Number": order_number,
+        "Total_Quantity": total_quantity,
+        "Total_Price" : total_price,
+        "Percent" : percent,
+        "Keuntungan" : untung
+    }
+    testing_array.push(push_to_arr)
+
+
+
     
-    var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
-	var fname = "IJGResults";
+    // var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
+	// var fname = "IJGResults";
 
 	var csvContent = "data:text/csv;charset=utf-8,";
-	$("#pressme").click(function(){
-		test_array.forEach(function(infoArray, index){
+	// $("#pressme").click(function(){
+		testing_array.forEach(function(infoArray, index){
 			dataString = infoArray.join(",");
 			csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
 		});
 
 		var encodedUri = encodeURI(csvContent);
 		window.open(encodedUri);
-	});
+	// });
 
 
     // testing
-     var csv = 'Name,Title\n';
-     data.forEach(function(row) {
-             csv += row.join(',');
-             csv += "\n";
-     });
+    //  var csv = 'Name,Title\n';
+    //  data.forEach(function(row) {
+    //          csv += row.join(',');
+    //          csv += "\n";
+    //  });
   
-     console.log(csv);
-     var hiddenElement = document.createElement('a');
-     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-     hiddenElement.target = '_blank';
-     hiddenElement.download = 'people.csv';
-     hiddenElement.click();
+    //  console.log(csv);
+    //  var hiddenElement = document.createElement('a');
+    //  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    //  hiddenElement.target = '_blank';
+    //  hiddenElement.download = 'people.csv';
+    //  hiddenElement.click();
  }
 
 //  SCROLL KATEGORI
@@ -272,23 +305,30 @@ var data = [
  var element = document.getElementsByClassName("main-structure")
     document.addEventListener("scroll", e => {
       let scrolled = document.scrollingElement.scrollTop
-    //   console.log(scrolled)
+      console.log(scrolled)
+    //   console.log('309')
 			// console.log(isHome)
 			if(isHome){
-				if (scrolled > 1000) {
-                    element[0].classList.remove("scroll")
+				if (scrolled > 50) {
+                    // element[0].classList.remove("scroll")
 					setIsScroll = true
                     $('.list-group').css('display','none')
                     $('.modals-lk').css('display','none')
                     // console.log('masuk line 94')
 				} else {
                     // console.log('masuk line 98')
-					element[0].classList.add("scroll")
+					// element[0].classList.add("scroll")
 					setIsScroll = false
                     $('.list-group').css('display','block')
 				}
 			}
     })
+
+    // $($('.main-structure')).scroll(function (event) {
+    //     var scroll = $('.main-structure').scrollTop();
+    //     console.log(scroll)
+    //     // Do something
+    // });
     
 // SCROLLING ITEM
 
@@ -400,6 +440,7 @@ const date_commision=()=>{
     var tanggal = $('.input-date').val()
     var token = localStorage.getItem('token')
     var percent;
+    var total_percent;
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
 
@@ -408,8 +449,10 @@ const date_commision=()=>{
         console.log(res.data.extra_column_3)
         if(res.data.extra_column_3 === '3%'){
             percent = 0.03
+            total_percent = '3%'
         }else if ( res.data.extra_column_3 === '7.5%'){
             percent = 0.075
+            total_percent = '7.5%'
         }
 
         axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggal}`)
@@ -425,12 +468,12 @@ const date_commision=()=>{
             var untung = percent * val.Total_Price
             $('.tbody_commision').append(`
             <tr>
-                <td> <p  class="limited-text"> ${val.Order_Number}</p>
+                <td> <p  class="limited-text on_commision"> ${val.Order_Number}</p>
                 </td>
-                <td>${val.Total_Quantity}</td>
-                <td>${val.Total_Price}</td>
-                <td>3%</td>
-                <td>${untung}</td>
+                <td class="tq_commision">${val.Total_Quantity}</td>
+                <td class="tp_commision">${val.Total_Price}</td>
+                <td class="percent_commision">${total_percent}</td>
+                <td class="untung_commision">${untung}</td>
                 
             </tr>
           `)  
@@ -474,3 +517,152 @@ const date_commision=()=>{
     
 
 }
+
+
+// REGISTER CROSSCHECK DATA
+
+const register_email_check=()=>{
+    var email = $('#email_reg').val()
+
+        console.log(email)   
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        var valid_email = re.test(email)
+        if(valid_email){
+            console.log('email bner')
+        }else {
+            Swal.fire('Wrong Email', 'Sorry', 'error')
+            $('#email_reg').val('')
+        }
+        console.log(valid_email)
+    
+}
+
+const supp_email_check=()=>{
+    var email = $('#email_supp').val()
+
+        console.log(email)   
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        var valid_email = re.test(email)
+        if(valid_email){
+            console.log('email bner')
+        }else {
+            Swal.fire('Wrong Email', 'Sorry', 'error')
+            $('#email_supp').val('')
+        }
+        console.log(valid_email)
+}
+
+const tahun_lahir_check=()=>{
+    var d = new Date();
+    var year = d.getFullYear();
+    console.log(year)
+    var tahun = $('#tahun_lahir_reg').val()
+    if(tahun > year  || tahun < 1900){
+        Swal.fire('Wrong year', 'Sorry', 'error')
+        $('#tahun_lahir_reg').val('')
+    } else {
+        console.log(' year aman')
+    }
+}
+
+const password_check=()=>{
+    var password = $('#password_reg').val()
+    if(password.length < 5){
+        Swal.fire('Wrong Password', 'Sorry', 'error')
+        $('#password_reg').val('')
+    }else {
+        console.log('password aman')
+    }
+}
+const supp_password_check=()=>{
+    var password = $('#password_supp').val()
+    if(password.length < 5){
+        Swal.fire('Wrong Password', 'Sorry', 'error')
+        $('#password_supp').val('')
+    }else {
+        console.log('password aman')
+    }
+}
+
+const bulan_lahir_check=()=>{
+    var bulan =parseInt($('#bulan_lahir_reg').val())
+    console.log(bulan)
+    console.log(typeof bulan)
+    if(bulan>10 && bulan <= 12){// buat bulan 11 - 12
+        // alert('masuk bulan 11/ 12')
+    }else if (bulan >10){
+        Swal.fire('Wrong Month', 'Sorry', 'error')
+        $('#bulan_lahir_reg').val('')
+
+    }else if (bulan>0 && bulan <10){  
+        var new_bulan = "0"+bulan
+        $('#bulan_lahir_reg').val(new_bulan)
+        console.log(new_bulan)        
+    }
+}
+
+const nama_depan_check=()=>{
+    var nama_depan = $('#nama_depan_reg').val()
+    if(nama_depan.length < 3){
+        Swal.fire('Minimum 4 Character', 'Sorry', 'error')
+        $('#nama_depan_reg').val('')
+    }else {
+        console.log('nama depan aman')
+    }
+}
+
+const tanggal_lahir_check=()=>{
+    var tanggal_lahir = $('#tanggal_lahir_reg').val()
+    if(tanggal_lahir < 0 || tanggal_lahir > 31){
+        Swal.fire('Wrong Date', 'Sorry', 'error')
+        $('#tanggal_lahir_reg').val('')
+    }else {
+        console.log('tahun aman')
+    }
+}
+
+const nama_belakang_check=()=>{
+    var nama_belakang = $('#nama_belakang_reg').val()
+    if(nama_belakang.length < 3){
+        Swal.fire('Minimum 4 Character', 'Sorry', 'error')
+        $('#nama_belakang_reg').val('')
+    }else {
+        console.log('nama depan aman')
+    }
+}
+
+const no_telp_check=()=>{
+    var no_telp = $('#no_telp_reg').val()
+    if(no_telp.length <9){
+        Swal.fire('Minimum 10 Character', 'Sorry', 'error')
+        $('#nama_telp_reg').val('')
+    }else {
+        console.log('notelp aman')
+    }
+}
+const no_telp_check2=()=>{
+    var no_telp = $('#no_telp_2_reg').val()
+    if(no_telp.length <9){
+        Swal.fire('Minimum 10 Character', 'Sorry', 'error')
+        $('#nama_telp_2_reg').val('')
+    }else {
+        console.log('notelp aman')
+    }
+}
+
+const ktp_check=()=>{
+    var ktp = $('#no_ktp_reg').val()
+    if(ktp.length == 16){
+        console.log('aman')
+    }else {
+        Swal.fire('KTP 16 Digit', 'Sorry', 'error')
+        $('#no_ktp_reg').val('')
+    }
+}
+
+// $('.eye-open').on('click',function(){
+//     alert('jalan 659')
+//     $('#password_reg').attr('type','text')
+// })
