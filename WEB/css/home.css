@@ -1049,7 +1049,7 @@ cursor: pointer;
     
 }
 .box-code-referral p {
-    width:250px !important;
+    width:260px !important;
     /* height:30px; */
     font-size: 15px;
     
@@ -1616,14 +1616,14 @@ input:focus{
     top:100px;
     /* left:327px; */
     left:22.8%;
-    height:500px; 
+    height:480px; 
     width:900px; 
     display:none;
     transition: 2s ease-out;
     border-radius: 10px;
     box-shadow: 5px 5px 20px #217283;
     /* padding-left:100px; */
-
+    background-color: transparent;
 }
 
 .modals-search-result{
@@ -2770,6 +2770,7 @@ th     {
     height:250px;
     width:100%;
     background-color: #217283;
+    border-radius:10px;
     }
 .tableFixHead thead th { 
     position: sticky; top: 0; z-index: 1; }
@@ -3066,13 +3067,6 @@ padding-left:0px;
     opacity: 0;
 }
 
-@-webkit-keyframes fadein {
-  100% { opacity: 1; }
-}
-
-@keyframes fadein {
-  100% { opacity: 1; }
-}
 
 .modals-check-harga {
     -webkit-animation: fadein 1s linear forwards;
@@ -3085,6 +3079,11 @@ padding-left:0px;
     opacity: 0;
 }
 .iframe{
+    -webkit-animation: fadein 1s linear forwards;
+    animation: fadein 1s linear forwards;
+    opacity: 0;
+}
+.modals-lk {
     -webkit-animation: fadein 1s linear forwards;
     animation: fadein 1s linear forwards;
     opacity: 0;

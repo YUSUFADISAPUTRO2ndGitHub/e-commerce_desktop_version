@@ -64,8 +64,13 @@ function cek_harga_requested(x){
     $('.close').css('display','none')
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
+        
     }else{
         $(x).addClass("background_grey");
+    }
+    if($(x).hasClass('close-button')){
+        alert('masuk ke line 72')
+        $('.close-button').css('display','none')
     }
     $(".modals-check-harga").toggle();
     
