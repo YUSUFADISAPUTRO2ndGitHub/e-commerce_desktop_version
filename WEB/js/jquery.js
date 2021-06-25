@@ -119,12 +119,26 @@ $(function(){
                     $('.input-name').css('border-bottom-left-radius','0px')
                     $('.input-name').css('border-bottom-right-radius','0px')
                     $('.render-li-search').empty()
-                    res.data.map((val,index)=>{
-                        $('.render-li-search').append(`
-                            <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
-                        `)
+                    if(res.data[0] === false){
+                        res.data.map((val,index)=>{
+                            console.log(val)
+                            console.log(val === undefined)
+                            $('.render-li-search').append(`
+                                <li  id="${val.Name}">${value} Tidak Ditemukan</li>
+                            `)
+    
+                        })
+                    }else {
+                        res.data.map((val,index)=>{
+                            console.log(val)
+                            console.log(val === undefined)
+                            $('.render-li-search').append(`
+                                <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
+                            `)
+    
+                        })
 
-                    })
+                    }
                  
                     $('.closeByLogin').css('display','none')
                     $('.option-1').removeClass("background_grey")

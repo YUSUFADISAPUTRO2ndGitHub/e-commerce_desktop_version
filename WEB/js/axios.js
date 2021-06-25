@@ -19,10 +19,10 @@ $( document ).ready(function() {
     })
 
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-    console.log(dataParse)
-    $('.cart-counter').text(dataParse.length)
-    var test =$('.cart-counter').val()
-    console.log(test)
+    // console.log(dataParse)
+    // $('.cart-counter').text(dataParse.length)
+    // var test =$('.cart-counter').val()
+    // console.log(test)
 
     
 
@@ -221,7 +221,7 @@ $('.testing-2').on('click',function(){
 
 const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
-    // alert(category)
+    // alert('findsubcategory jalan')
     $('.close-button').css('display','block')
     console.log(sub)
     $('.closeByLogin').css('display','none')
@@ -357,6 +357,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
 
 const renderItemBasedOnCategory=(Category)=>{
     // var myFrame = $(".modals-item").contents().find('.box-list-kategori');
+    // alert('render item based on category jalan 360')
     let timerInterval
         Swal.fire({
         title: 'Uploading Data',
@@ -403,6 +404,7 @@ const renderItemBasedOnCategory=(Category)=>{
                     $('.modals-lk').addClass('melihat') // ini bisa hampir
                     // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
                     $('.modals-lk').css('display','block')  
+                    // alert('render item based on category jalan 407')
                 }).catch((err)=>{
                     console.log(err)
                 })
@@ -423,7 +425,7 @@ function close_all_open_window(){
 }
 
 function back_to_home(){
-    $(".force-close-all-command").css("display", "none");
+    $(".force-close-all-command-2").css("display", "none");
     $('.main-body').css('display','block')
     $('.active_search').css('top','0px')
 }
