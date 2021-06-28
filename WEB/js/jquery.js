@@ -107,6 +107,716 @@ $(function(){
         
    })
 
+  
+   $('.input-product').on('keyup',function(){
+        var item_search = $(this).val()
+        console.log(item_search)
+        var token = localStorage.getItem('token')
+        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            var Customer_Code = res.data.Customer_Code
+            var all_data
+            axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+            .then((res)=>{
+                all_data = res.data
+                console.log(res.data)
+                var data_array = res.data
+                var data_cari = data_array.filter((val)=>{
+                    return val.Product_Code.includes(item_search)
+                })
+                $('.tbody_detail_product').empty()
+                $('.input_total_row_gb').val('TOTAL ROW = ' + data_cari.length)
+                if(data_cari){
+                    data_cari.map((val,index)=>{
+                        if(val.GroupBuy_Purchase === 'true'){
+                            if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this,'${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else {
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }
+                        }else {
+                            if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else {
+                                $('.tbody_detail_product').append(`
+                                <tr class="tr_detail_prod">
+                                    <td>
+                                        <div class="box-switch">
+                                            <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                
+                                            </div>             
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                    <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                    
+                                                </div>
+                                                <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                    <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                    
+                                                </div>   
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                    <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                    
+                                                </div>  
+                                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                    <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                    
+                                                </div>            
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>     
+                                `) 
+                               
+                            }
+                        }
+                    })
+                }else {
+                    $('.input_total_row_gb').val('TOTAL ROW = ' + all_data.length)
+                    all_data.map((val,index)=>{
+                        if(val.GroupBuy_Purchase === 'true'){
+                            if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this,'${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else {
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }
+                        }else {
+                            if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                                $('.tbody_detail_product').append(`
+                                     <tr class="tr_detail_prod">
+                                         <td>
+                                             <div class="box-switch">
+                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                             </div> 
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                     
+                                                 </div>             
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                         <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>
+                                                     <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>   
+                                                 </div>
+                                             </div>
+                                         </td>
+                                         <td>
+                                             <div class="br-option">
+                                                 <div class="br-option-input">
+                                                     <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                                     <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                         <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>  
+                                                     <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                         <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                         
+                                                     </div>            
+                                                 </div>
+                                             </div>
+                                         </td>
+                                     </tr>     
+                                     `) 
+                            }else {
+                                $('.tbody_detail_product').append(`
+                                <tr class="tr_detail_prod">
+                                    <td>
+                                        <div class="box-switch">
+                                            <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                        </div> 
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                
+                                            </div>             
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                    <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                    
+                                                </div>
+                                                <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                    <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                    
+                                                </div>   
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="br-option">
+                                            <div class="br-option-input">
+                                                <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                    <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                    
+                                                </div>  
+                                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                    <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                    
+                                                </div>            
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>     
+                                `) 
+                               
+                            }
+                        }
+                    })
+                }
+
+                console.log(data_cari)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }).catch((err)=>{
+
+        })
+   })
+
+
         $('.input-name').on('keyup',function () {
             $('.close-button').css('display','block')
             
@@ -905,7 +1615,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                                  <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                                  
@@ -920,7 +1630,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                                  <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                                  
@@ -960,7 +1670,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                                  <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                                  
@@ -975,7 +1685,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                                  <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                                  
@@ -1015,7 +1725,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                                  <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                                  
@@ -1030,7 +1740,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                                  <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                                  
@@ -1072,7 +1782,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                                  <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                                  
@@ -1087,7 +1797,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                                  <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                                  
@@ -1127,7 +1837,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                                  <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                                  
@@ -1142,7 +1852,7 @@ const check_status_item=()=>{
                                  <td>
                                      <div class="br-option">
                                          <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
                                              <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                                  <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                                  
@@ -1182,7 +1892,7 @@ const check_status_item=()=>{
                             <td>
                                 <div class="br-option">
                                     <div class="br-option-input">
-                                        <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
                                         <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
                                             <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
                                             
@@ -1197,7 +1907,7 @@ const check_status_item=()=>{
                             <td>
                                 <div class="br-option">
                                     <div class="br-option-input">
-                                        <input type="text" class="form_product detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
                                         <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
                                             <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
                                             
