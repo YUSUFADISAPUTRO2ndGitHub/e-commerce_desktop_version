@@ -679,3 +679,14 @@ const ktp_check=()=>{
 //     alert('jalan 659')
 //     $('#password_reg').attr('type','text')
 // })
+
+const find_product=()=>{
+    // alert('functionnnn jalan')
+   $('#input_product').modal('show')
+      
+   
+}
+
+// $('#search_prod').on('click',function(){
+//     alert('function jalan')
+// })

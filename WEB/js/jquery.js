@@ -2369,4 +2369,3 @@ console.log('functuin jalan')
           }
       })
 }
-

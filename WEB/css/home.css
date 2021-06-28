@@ -431,7 +431,9 @@ input::-webkit-input-placeholder {
 }
 .box-whatsapp p{
     color:white;
-    font-size: 20px;
+    font-size: 16px;
+    position: relative;
+    top:5px;
 }
 
 .box-vantsing{
@@ -499,7 +501,7 @@ input::-webkit-input-placeholder {
 }
 
 .icon-wa{
-    font-size:40px;
+    font-size:35px;
     color:#57ed6a;
     /* height:100px; */
     /* width:100px; */
@@ -3216,6 +3218,8 @@ padding-left:0px;
 .icon-livechat{
     width:100%;
     height:auto;
+    position: relative;
+    top:5px;
     /* background-color: red; */
 }
 .box-wa-icon{
@@ -3225,14 +3229,16 @@ padding-left:0px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position:relative;
+    top:5px;
 }
 
 .livechat_icon{
     /* font-size: 30px; */
     /* background-color: red; */
     color: #36ced5;
-    width:40px;
-    height:40px;
+    width:35px;
+    height:35px;
 }
 
 
@@ -3321,10 +3327,56 @@ input::-webkit-input-placeholder {
     transition: 0.2s ease-in;
     position: relative;
     /* left:30px; */
-    padding-left:10px;
+    /* padding-left:10px; */
     color:#217283;
 }
 .input-product:focus{
     outline:0;
     /* color:#217283; */
+}
+
+
+.icon-search-prod{
+    font-size: 20px;
+    color:white;
+    position: relative;
+    left:-10px;
+    /* left:-35px; */
+}
+.icon-searchprod:hover{
+    cursor: pointer;;
+}
+
+.box-search-prod{
+    display: flex;
+    flex-direction: row;
+    height:60px;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_input_product{
+    /* width:200px; */
+    /* height:200px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box-content-product{
+    width:350px !important;
+    height:150px;
+    position: relative;
+    top:400px;
+
+}
+.prod_code{
+    width:150px;
+    height:30px;
+    border-radius:10px;
+    outline: 0;
+}
+.header-prod{
+    background-color: #217283;
+    height:50px;
 }
