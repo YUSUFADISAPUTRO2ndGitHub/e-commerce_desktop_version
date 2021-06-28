@@ -1639,3 +1639,23 @@ const save_edit_name=(product_id)=>{
 
 }
 
+const check_number_wa=()=>{
+console.log('functuin jalan')
+    Swal.fire({
+        title: 'Whatsapp Number  <br> +62812 7777 8888',
+        text: "Ingin Menghubungi Customer Service?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+          console.log(result)
+          if(result.dismiss==='cancel'){
+        }else {
+            
+            window.open("https://wa.me/6281277778888","_blank")
+          }
+      })
+}
+

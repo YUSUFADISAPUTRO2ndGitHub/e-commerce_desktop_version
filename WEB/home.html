@@ -1123,10 +1123,13 @@
                                     <div class="box-whatsapp">
                                         <p>Customer Service</p>
                                         <div class="box-cs">
-                                            <a href="https://wa.me/6281277778888" target="_blank" style="text-decoration: none;"className="ml-3">
-                                                <i class="fab fa-whatsapp icon-wa"></i>
-                                                <p>0812 7777 8888</p>
-                                            </a>
+                                            <div class="box-wa-icon">
+                                                <i class="fab fa-whatsapp icon-wa hvr-grow" onclick="check_number_wa()"></i>
+                                                
+                                            </div>
+                                            <div class="icon-livechat">
+                                                <i class="fas fa-headset livechat_icon hvr-grow"></i>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="box-vantsing">
@@ -1145,11 +1148,11 @@
                                     </div>
                                     <div class="dirjen-alamat">
                                         <p>Telepon :</p>
-                                        <p> +62-21-3858171,+62-21-3451692</p>
+                                        <p> +62-21-3858171, <br>+62-21-3451692</p>
                                     </div>
                                     <div class="dirjen-alamat">
                                         <p>Faksimili :</p>
-                                        <p> +62-21-3858205,+62-21-3842531</p>
+                                        <p> +62-21-3858205, <br>+62-21-3842531</p>
                                     </div>
                                     <div class="dirjen-alamat">
                                         <p>Email :</p>
@@ -1177,7 +1180,7 @@
             <!-- RENDER PROMO ITEM -->
             <div class="box-card">
                 <div class="promo_card">
-                    <img src="../WEB/img/new_ads.png" alt="" class="ads_samping">
+                    <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
 
                 </div>
                 <div class="ins_card">
