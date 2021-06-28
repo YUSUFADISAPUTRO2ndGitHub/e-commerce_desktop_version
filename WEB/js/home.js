@@ -230,7 +230,7 @@ const commision_check=()=>{
                         <td>
                             <div class="wrapper">
                                 <div class="marquee">
-                                    <p class="on_commision"> ${val.Order_Number}</p> 
+                                    <p class="on_commision">${val.Order_Number}</p> 
                                 </div>
                             </div>   
                         </td>
@@ -296,6 +296,7 @@ var data = [
                 untung
             ])
         });
+        console.log(ary)
         var csvContent = "data:text/csv;charset=utf-8,";
 	// $("#pressme").click(function(){
 		ary.forEach(function(infoArray, index){
