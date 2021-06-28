@@ -180,10 +180,22 @@ const commision_check=()=>{
             console.log(res.data[0].Total_Price)
             console.log(percent)
             console.log(thismonth)
-            var total_commision = res.data[0].Total_Price * percent
+            // if(res.data.length === 1){
+            //     var total_commision = res.data[0].Total_Price * percent
+            //     $('.commision_this_month').val(total_commision)
+
+            // }else {
+
+            // }
+            var total_commision=0
+            res.data.map((val,index)=>{
+                var tot_price = parseInt(val.Total_Price)
+                console.log(parseInt(val.Total_Price) * percent)
+                total_commision +=tot_price * percent
+            })
+                $('.commision_this_month').val(total_commision)
             console.log(total_commision)
             // Total_Price
-            $('.commision_this_month').val(total_commision)
         }).catch((err)=>{
             console.log(err)
         })
@@ -266,66 +278,37 @@ var data = [
     
 
  function download_csv() {
-    var order_number = $('.on_commision').text()
-    var total_quantity = $('.tq_commision').text()
-    var total_price = $('.tp_commision').text()
-    var percent = $('.percent_commision').text()
-    var untung = $('.untung_commision').text()
+    var ary = [];
+    $(function () {
+        $('.tbody_commision tr').each(function (a, b) {
 
-    console.log(order_number)
-    console.log(total_quantity)
-    console.log(total_price)
-    console.log(percent)
-    console.log(untung)
-
-    var testing_array = []
-    var push_to_arr = [
-        order_number,
-        total_quantity,
-        total_price,
-        percent,
-        untung
-    ]
-    var push_to_arr2 = {
-        "Order_Number": order_number,
-        "Total_Quantity": total_quantity,
-        "Total_Price" : total_price,
-        "Percent" : percent,
-        "Keuntungan" : untung
-    }
-    testing_array.push(push_to_arr)
-
-
-
-    
-    // var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
-	// var fname = "IJGResults";
-
-	var csvContent = "data:text/csv;charset=utf-8,";
+            var order_number = $('.on_commision',b).text()
+            var total_quantity = $('.tq_commision',b).text()
+            var total_price = $('.tp_commision',b).text()
+            var percent = $('.percent_commision',b).text()
+            var untung = $('.untung_commision',b).text()
+            // ary.push({ Name: name, Value: value });
+            ary.push([
+                order_number,
+                total_quantity,
+                total_price,
+                percent,
+                untung
+            ])
+        });
+        var csvContent = "data:text/csv;charset=utf-8,";
 	// $("#pressme").click(function(){
-		testing_array.forEach(function(infoArray, index){
+		ary.forEach(function(infoArray, index){
 			dataString = infoArray.join(",");
 			csvContent += index < infoArray.length ? dataString+ "\n" : dataString;
 		});
 
 		var encodedUri = encodeURI(csvContent);
 		window.open(encodedUri);
-	// });
-
-
-    // testing
-    //  var csv = 'Name,Title\n';
-    //  data.forEach(function(row) {
-    //          csv += row.join(',');
-    //          csv += "\n";
-    //  });
+        // alert(JSON.stringify( ary));
+    });
+    
   
-    //  console.log(csv);
-    //  var hiddenElement = document.createElement('a');
-    //  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    //  hiddenElement.target = '_blank';
-    //  hiddenElement.download = 'people.csv';
-    //  hiddenElement.click();
  }
 
 //  SCROLL KATEGORI

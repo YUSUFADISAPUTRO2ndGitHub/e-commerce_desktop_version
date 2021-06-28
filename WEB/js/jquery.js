@@ -44,6 +44,7 @@ $(function(){
                 if(data_customer.User_Type === 'Customer'){
                     $('.btn-status-barang').css('display','none')
                     $('.sup_delete').css('display','flex')
+                    $('.box-kumpulkan-profile').css('top','70px')
                     // $('.sup_delete').css('left','20px')
                 }else {
                     $('.btn-status-barang').css('display','block')
