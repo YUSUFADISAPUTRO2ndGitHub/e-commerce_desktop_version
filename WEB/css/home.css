@@ -3221,3 +3221,52 @@ padding-left:0px;
     font-size: 30px;
     color: #36ced5
 }
+
+
+.modals-live-chat {
+    position: absolute;
+    z-index:20;
+    top:72px;
+    /* left:105px; */
+    /* right:172px; */
+    height:90vh;
+    width:100%;
+    /* background-color: red; */
+    display:none;
+    transition: 2s ease-out;
+    z-index:101;
+    -webkit-animation: fadein 1.5s linear forwards;
+    animation: fadein 1.5s linear forwards;
+    opacity: 0;
+}
+
+.box-icon-lc{
+    position: relative;
+    top:70px;
+    z-index: 102;
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+   
+    /* background-color: red; */
+}
+.box-icon-lc p {
+    color: #217283;
+    font-size: 1em;
+}
+
+@-webkit-keyframes fadein {
+    100% { opacity: 1; }
+  }
+  
+  @keyframes fadein {
+    100% { opacity: 1; }
+  }
+  
+.icon_close_lc{
+    font-size: 35px;
+    color:#217283;
+}
+.icon_close_lc:hover{
+    cursor: pointer;
+}

@@ -35,6 +35,35 @@ function cart_requested(x){
       $('.input-name').val(null)
 }
 
+function live_chat(){
+    $('.close-button').css('display','block')
+    // $('.modals-live-chat').toggle()
+    $('.modals-live-chat').css('display','block')
+    $('.box-product').css('display','none')
+    $('.category-menu').css('display','none')
+    $('.box-icon-lc').css('display','flex')
+    var token = localStorage.getItem('token')
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        if(res.data){
+            $(".modals-live-chat").attr("src", `http://147.139.168.202:3045/?user_name=${res.data.First_Name}`);
+        }else {
+            $(".modals-live-chat").attr("src", `http://147.139.168.202:3045`);
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+function close_live_chat(){
+    $('.modals-live-chat').css('display','none')
+    $('.box-icon-lc').css('display','none')
+    $('.box-product').css('display','block')
+    $('.category-menu').css('display','block')
+
+}
+
+
 function pengiriman_requested(x){
     $('.close-button').css('display','block')
     $('.close').css('display','none')
