@@ -58,8 +58,8 @@ function live_chat(){
 function close_live_chat(){
     $('.modals-live-chat').css('display','none')
     $('.box-icon-lc').css('display','none')
-    $('.box-product').css('display','block')
-    $('.category-menu').css('display','block')
+    $('.box-product').css('display','flex')
+    $('.category-menu').css('display','flex')
 
 }
 
@@ -313,29 +313,27 @@ var data = [
  }
 
 //  SCROLL KATEGORI
- var isHome = true
- var setIsScroll = false
- var element = document.getElementsByClassName("main-structure")
-    document.addEventListener("scroll", e => {
-      let scrolled = document.scrollingElement.scrollTop
-      console.log(scrolled)
-    //   console.log('309')
-			// console.log(isHome)
-			if(isHome){
-				if (scrolled > 50) {
-                    // element[0].classList.remove("scroll")
-					setIsScroll = true
-                    $('.list-group').css('display','none')
-                    $('.modals-lk').css('display','none')
-                    // console.log('masuk line 94')
-				} else {
-                    // console.log('masuk line 98')
-					// element[0].classList.add("scroll")
-					setIsScroll = false
-                    $('.list-group').css('display','block')
-				}
-			}
-    })
+//  var isHome = true
+//  var setIsScroll = false
+//  var element = document.getElementsByClassName("main-structure")
+//     document.addEventListener("scroll", e => {
+//       let scrolled = document.scrollingElement.scrollTop
+//       console.log(scrolled)
+
+// 			if(isHome){
+// 				if (scrolled > 50) {
+// 					setIsScroll = true
+//                     $('.list-group').css('display','none')
+//                     $('.modals-lk').css('display','none')
+// 				} else {
+
+// 					setIsScroll = false
+//                     $('.list-group').css('display','block')
+// 				}
+// 			}
+//     })
+
+
 
     // $($('.main-structure')).scroll(function (event) {
     //     var scroll = $('.main-structure').scrollTop();
@@ -686,6 +684,8 @@ const find_product=()=>{
       
    
 }
+
+
 
 // $('#search_prod').on('click',function(){
 //     alert('function jalan')

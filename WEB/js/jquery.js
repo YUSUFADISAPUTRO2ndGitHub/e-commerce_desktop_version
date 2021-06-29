@@ -3,7 +3,9 @@ $(function(){
     // $('#datepicker').datepicker();
     // $('.carousel').carousel()
     
-      
+      $('.input-group').on('click',function(){
+          $('.list-group').toggle(1000)
+      })
         
       
    $('.cust-1').on('click',function(){
@@ -107,6 +109,140 @@ $(function(){
         
    })
 
+
+   $('.prod_code_tab').on('keyup',function(){
+    var item = $(this).val()
+    console.log(item)
+    var token= localStorage.getItem('token')
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        var Customer_Code = res.data.Customer_Code
+        var all_data;
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        .then((res)=>{
+            all_data = res.data
+
+            var data_array = res.data
+            var data_cari  = data_array.filter((val)=>{
+                return val.Product_Code.includes(item)
+            })
+            $('.tbody_product').empty()
+            if(item){
+                data_cari.map((val,index)=>{
+                    $('.tbody_product').append(`
+                        <tr>
+                            <td >
+                                <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                            </td>
+                            <td>
+                                <div class="box-prod-name hvr-grow">
+                                    <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                                    <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                        <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                        <p class="save-prod"> EDIT</p>
+                                    </div>    
+                                    <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                        <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                        <p class="save-prod"> SAVE</p >
+                                    </div>      
+                                </div>
+                            </td>
+                            <td>
+                                <div class="box-prod-name hvr-grow">
+                                    <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                                    <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                        <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                        <p class="save-prod"> EDIT</p>
+                                    </div>   
+                                    <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                        <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                        <p class="save-prod"> SAVE</p >
+                                    </div>   
+                                
+                                </div>
+                            </td>
+                            <td>
+                                <div class="box-prod-name hvr-grow">
+                                    <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                                    <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                        <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                        <p class="save-prod"> EDIT</p>
+                                    </div>   
+                                    <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                        <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                        <p class="save-prod"> SAVE</p >
+                                    </div>   
+                                    
+                                </div>
+                            </td>
+                            <td>${val.Last_Updated}</td>
+                        </tr>
+                    `)
+                })
+            }else {
+                all_data.map((val,index)=>{
+                    $('.tbody_product').append(`
+                    <tr>
+                        <td >
+                            <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>    
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>      
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>   
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>   
+                               
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>   
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>   
+                                
+                            </div>
+                        </td>
+                        <td>${val.Last_Updated}</td>
+                    </tr>
+                    `)
+                })
+            }
+
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+})
   
    $('.input-product').on('keyup',function(){
         var item_search = $(this).val()
