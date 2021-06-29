@@ -1189,14 +1189,26 @@
                                     <div class="box-whatsapp">
                                         <p>Customer Service</p>
                                         <div class="box-cs">
-                                            <div class="box-wa-icon">
-                                                <i class="fab fa-whatsapp icon-wa hvr-grow" onclick="check_number_wa()"></i>
-                                                
+                                            <div class="card whatsapp-border" style="width: auto;">
+                                                <div class="card-body whatsapp-body">
+                                                    <!-- <img src="./whatsapp.png" class="card-img-top"> -->
+                                                    <i class="fas fa-phone-alt"></i>
+                                                </div>
                                             </div>
-                                            <div class="icon-livechat">
+                                            <div class="card headset-border-2" style="width: auto;">
+                                                <div class="card-body whatsapp-body">
+                                                    <i class="fas fa-headset"></i>
+                                                    <!-- <img src="./whatsapp.png" class="card-img-top"> -->
+                                                    <!-- <i class="fas fa-phone-alt"></i> -->
+                                                    <!-- <img src="./img/icon_live_chat.png" alt="" class="livechat_icon hvr-grow" onclick="live_chat()"> -->
+                                                </div>
+                                            </div>
+
+                                         
+                                            <!-- <div class="icon-livechat">
                                                 <img src="./img/icon_live_chat.png" alt="" class="livechat_icon hvr-grow" onclick="live_chat()">
-                                                <!-- <i class="fas fa-headset " onclick="live_chat()"></i> -->
-                                            </div>
+                                                
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="box-vantsing">
@@ -1366,6 +1378,22 @@
     </div>
 </body>
 
+<script>
+    $( ".whatsapp-border" ).mouseout(function() {
+        $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.2");
+    });
+    $( ".whatsapp-border" ).mouseover(function() {
+        // alert('mouse over')
+        $( ".fa-phone-alt" ).css("color", "#217283");
+    });
+    $( ".headset-border-2" ).mouseout(function() {
+        $( ".fa-headset" ).css("color", "rgba(0, 0, 0, 0.2");
+    });
+    $( ".headset-border-2" ).mouseover(function() {
+        // alert('mouse over')
+        $( ".fa-headset" ).css("color", "#217283");
+    });
+</script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 </html>

@@ -2738,3 +2738,17 @@ const save_product_name=()=>{
 
 
 }
+
+
+$( ".whatsapp-border" ).on('mouseenter',function(){
+    $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.2");
+
+})
+$( ".whatsapp-border" ).on('mouseleave',function(){
+    $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.5");
+
+})
+// $( ".whatsapp-border" ).mouseout(function() {
+// });
+// $( ".whatsapp-border" ).mouseover(function() {
+// });
