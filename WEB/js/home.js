@@ -690,3 +690,35 @@ const find_product=()=>{
 // $('#search_prod').on('click',function(){
 //     alert('function jalan')
 // })
+
+// SEND OTP
+
+const send_otp=()=>{
+    // alert('kirim otw')
+    var token = localStorage.getItem('token')
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{  
+        console.log(res.data)
+        axios.post(`http://customers.sold.co.id/get-otp?Email=darmawanbayu1@gmail.com`)
+        .then((res)=>{
+            if(res.data){
+                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+            }else {
+                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+            }
+            console.log(res.data, 'berhasil kirim kayanya')
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+// const save_product_name=()=>{
+//     alert('simpan jalan')
+//     var otp = $('#id_otp').val()
+//     var pass = $('#id_pass').val()
+//     console.log(otp,pass)
+// }
+

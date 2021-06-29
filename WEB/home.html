@@ -762,7 +762,7 @@
                            <div class="box-right-bottom">
                             <div class="total_row_groupbuy">
                                 <div class="search_products">
-                                    <input type="text" placeholder="Ketik Kode Produk" class="input-product" id="search_item" " >
+                                    <input type="text" placeholder="Ketik Kode Produk" class="input-product" id="search_item">
                                    
                                 </div>
                                 <input type="text" disabled  class="input_total_row_gb" value="">
@@ -998,7 +998,7 @@
     </div>
     <!---item detail HUTANG MODALS -->
 
-    <!--item detail MODALS -->
+    <!--searching input MODALS -->
     <div class="modal  fade " id="input_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  ">
             <div class="modal-content box-content-product">
@@ -1014,7 +1014,43 @@
         
         </div>
     </div>
-    <!---item detail HUTANG MODALS -->
+    <!---searching input HUTANG MODALS -->
+
+       <!--OTP MODALS MODALS -->
+       <div class="modal  fade " id="get_otp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  ">
+            <div class="modal-content box-otp-product">
+                <div class="modal-header header-prod">
+
+                </div>
+                
+                <div class="modal-body  box_input_product">
+                    <div class="form_product_otp">
+                        <p>Masukan OTP</p>
+                        <div class="form_product_otp_ins">
+                            <input type="text" placeholder="Kode OTP" class="input-otp" id="id_otp">
+                            
+                            <div class="otp_send" onclick="send_otp()">
+                                <p>Kirim OTP</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_product_otp">
+                        <p>Masukan password</p>
+                        <div class="form_product_otp_ins">
+                            <input type="password" placeholder="Password" class="input-otp" id="id_pass">
+                            
+                            <div class="otp_send" id="s_product_name" onclick="save_product_name()">
+                                <p>Save</p>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <!---OTP MODALS HUTANG MODALS -->
 
 
    

@@ -490,8 +490,5 @@ $(document).on('change','.qty_groupbuy',function(){
     
 })
 
-// SEND OTP
 
-const send_otp=()=>{
 
-}
