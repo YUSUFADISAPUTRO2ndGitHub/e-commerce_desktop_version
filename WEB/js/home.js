@@ -727,3 +727,14 @@ function close_information_login(){
     $('.box_information_login').css('display','none')
 
 }
+
+
+const to_term_condition=()=>{
+// alert('item jalan')
+    $('#term_condition_modals').modal('show')
+}
+
+const  about_us=()=>{
+    // alert('function jalan')
+     $('#about_us').modal('show')
+}

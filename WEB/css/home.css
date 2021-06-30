@@ -1109,10 +1109,10 @@ body {
     width: 100%;
     height: 650px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     /* align-items: center; */
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     /* background-color: blue; */
 }
@@ -1154,6 +1154,7 @@ body {
     justify-content: center;
     line-height: 0.5;
     align-items: center;
+    margin-bottom:10px;
 }
 
 .login-name-2 {
@@ -1193,6 +1194,27 @@ body {
     top: 15px;
     /* left:25px; */
     /* background-color: red; */
+}
+.box-name-address {
+    width: auto;
+    height: auto;
+    position: relative;
+    top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    /* left:25px; */
+    /* background-color: red; */
+}
+.icon_plus_address{
+    color:gray;
+    font-size: 25px;
+    margin-left:5px;
+    position: relative;
+    left:15px;
+    transition: 1s;
 }
 .box-name-alamat {
     width: 90%;
@@ -1278,10 +1300,12 @@ body {
 /* REGISTER FORM MODALS */
 
 .register-form {
-    width: 70%;
-    height: 500px;
+    width: 80%;
+    height: auto;
     display: flex;
     flex-direction: column;
+    position: relative;
+    top:-15px;
     /* background-color: red; */
 }
 .reg-form-1 {
@@ -1295,7 +1319,7 @@ body {
 .new-reg-form {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-end;
     justify-content: flex-end;
     /* background-color: blue; */
@@ -1341,12 +1365,17 @@ body {
 .alamat-supplier::placeholder {
     color: #217283;
 }
-
+.modal-body {
+    padding:0 !important;
+}
 .form-reg-nama {
     width: 250px;
     height: 50px;
     background-color: #C4C4C4;
     border-width: 0;
+    position: relative;
+    
+    left:3px;
     /* border-radius:5px; */
 
 }
@@ -1354,6 +1383,21 @@ body {
 .form-reg-nama::placeholder {
     color: #217283;
 }
+.form-reg-nama-1 {
+    width: 250px;
+    height: 50px;
+    background-color: #C4C4C4;
+    border-width: 0;
+    position: relative;
+    left:18px;
+    /* border-radius:5px; */
+
+}
+
+.form-reg-nama-1::placeholder {
+    color: #217283;
+}
+
 
 .box-tambah-alamat {
     display: flex;
@@ -1439,7 +1483,8 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    left: 35px;
+    /* left: 35px; */
+    /* top:40px; */
     /* background-color: red; */
 }
 .box-new-tambah-alamat {
@@ -3657,4 +3702,132 @@ img{
 .img-promo2 {
     width:500px;
     height:500px;
+}
+
+.box_agreement{
+    width:100%;
+    height:100px;
+    /* background-color: red; */
+    position: relative;
+    top:60px;
+    display: flex;
+    flex-direction: row;
+}
+.agreement-left{
+    width:60%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.agreement-right{
+    width:40%;
+    height:100%;
+    
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+.agreement_alert{
+    width:95%;
+    height:90%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    border-radius:10px;
+    /* box-shadow: rgba(158, 102, 102, 0.3) 0 10px 50px; */
+    /* box-shadow:rgba(33, 64, 70, 0.4) 0 10px 50px; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* border:1px solid gray; */
+}
+.agreement_alert_left{
+    width:50%;
+    height:100%;
+    display: flex;
+    flex-direction: row;
+    /* background-color: pink; */
+}
+.agreement_box_icon{
+    width:20%;
+    height:100%;
+    background-color: #cbe1f3;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+    /* border-right:2px solid gray; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-exclamation-triangle{
+    font-size: 25px;
+    color:#217283;
+}
+.agreement_isi{
+    /* background-color: red; */
+    height:auto;
+    width:100%;
+    padding-left:5px;
+    padding-right:5px;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.agreement_isi p {
+    font-size: 0.9em;
+    position: relative;
+    top:5px;
+}
+.agreement_alert_right{
+    width:50%;
+    height:100%;
+    /* background-color: yellow; */
+}
+.agreement_alert_right p {
+    font-size: 0.9em;
+    position: relative;
+    top:5px;
+}
+
+.box_view_term{
+    height:35px;
+    width:70%;
+    border-radius:25px;
+    /* border:1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a9efd;
+}
+.box_view_term p {
+    font-size: 0.9em;
+    position: relative;
+    top:5px;
+    color:white;
+}
+
+.box-about-us {
+    width: 750px !important;
+    height: 100%;
+    position: relative;
+    top: 100px;
+    left:-20%;
+    overflow: scroll;
+
+}
+
+.bg_about{
+    /* background-image: url('../img/about.png'); */
+    /* background-size: cover; */
+    height:auto;
+    width:auto;
+}
+.img-about{
+    width:100%;
+    height:100%;
 }

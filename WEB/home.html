@@ -363,9 +363,43 @@
                             <input type="text" class="name-form" placeholder="Nama Perusahaan" id="nama_perusahaan_supp">
                         </div>
                     </div>   
+
+                    <div class="box_agreement">
+                        <div class="agreement-left">
+                            <div class="agreement_alert">
+                                <div class="agreement_alert_left">
+                                    <div class="agreement_box_icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="agreement_isi">
+                                        <p>By Signing-up you are agreeing with our service policy. <br>
+                                            term and condition.
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="agreement_alert_right">
+                                    <p>Dengan mendaftar, Anda setuju dengan kebijakan syarat dan ketentuan layanan
+                                        kami.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="agreement-right">
+                            <div class="box_view_term" onclick="to_term_condition()">
+                                <p>View Term and Condition</p>
+
+                            </div>
+                            <div class="box-kumpulkan" id="simpan_supplier" >
+                                <div class="btn-kumpulkan" >
+                                    <p>Simpan</p>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
                  
                     
-                    <div class="box-new-tambah-alamat">
+                    <!-- <div class="box-new-tambah-alamat">
                         <div class="tambah-alamat" onclick="addAddressSupp()" style="display: none;">
                             <p>Tambah Alamat (+)</p>
                         </div>       
@@ -375,7 +409,7 @@
                             </div>
                         </div>            
 
-                    </div> 
+                    </div>  -->
                 </div>  
             </div>
           </div>
@@ -469,11 +503,15 @@
                         </div>  
                         <div class="reg-form-1">
                             <div class="box-tambah-alamat">
-                                <div class="login-name">
+                                <div class="login-name">    
                                     <div class="box-name">
                                         <p>Alamat Lengkap</p>
                                     </div>
-                                    <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="50" id="alamat_lengkap_1">
+                                    <div class="box-name-address">
+                                        <input type="text" class="form-reg-nama-1" placeholder="Alamat Lengkap" minlength="4" maxlength="50" id="alamat_lengkap_1">
+                                        <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i>
+
+                                    </div>
                                 </div>       
                             </div>
                             <div class="login-name">
@@ -485,19 +523,64 @@
                         </div>  
                         
                         <div class="new-reg-form">
+                            <!-- <div class="tambah-alamat" onclick="addAddress()" >
+                                <p>Tambah Alamat (+)</p>
+                            </div>     -->
                             <select class="form-select option-referral ref-cod" aria-label="Default select example">
                                 <option selected>Select Referral Code</option>
                                 
                             </select>
-                            <!-- <div class="login-name-3">
-                                <div class="box-name">
-                                    <p>Customer referral Code</p>
-                                </div>
-                                <input type="type" class="name-form" placeholder="Custome Referral Code" id="signup_referral">
-                            </div> -->
-                        
+                            
                         </div> 
-                        <div class="box-new-tambah-alamat">
+                        <div class="box_agreement">
+                            <div class="agreement-left">
+                                <div class="agreement_alert">
+                                    <div class="agreement_alert_left">
+                                        <div class="agreement_box_icon">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="agreement_isi">
+                                            <p>By Signing-up you are agreeing with our service policy. <br>
+                                                term and condition.
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="agreement_alert_right">
+                                        <p>Dengan mendaftar, Anda setuju dengan kebijakan syarat dan ketentuan layanan
+                                            kami.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="agreement-right">
+                                <div class="box_view_term" onclick="to_term_condition()">
+                                    <p>View Term and Condition</p>
+
+                                </div>
+                                <div class="box-kumpulkan btn-register" id="simpan_reg" >
+                                    <div class="btn-kumpulkan" >
+                                        <p>Simpan</p>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                      
+                         <!-- <div class="box_information_login">
+                                    <div class="judul_info">
+                                        <div class="judul_info_2">
+                                            <i class="fas fa-info-circle"></i>
+                                            <p>PANDUAN PENGGUNA</p>
+                                        </div>
+                                        <i class="far fa-times-circle icon_close_info" onclick="close_information_login()"></i>
+                                    </div>
+                                    <div class="isi_info">
+                                        <p>Klik  <span class="disini_info_supplier"> di sini</span> untuk melihat bagaimana menjadi pemasok,  atau   </p>
+                                            
+                                        <p> klik <span class="disini_info_customer"> di sini</span> untuk melihat bagaimana Anda bisa mendapatkan keuntungan dari mendaftar ke sold.co.id</p>
+                                    </div>
+                                </div> -->
+                        <!-- <div class="box-new-tambah-alamat">
                             <div class="tambah-alamat" onclick="addAddress()" style="display: none;">
                                 <p>Tambah Alamat (+)</p>
                             </div>       
@@ -507,7 +590,7 @@
                                 </div>
                             </div>            
 
-                        </div> 
+                        </div>  -->
                     </div>  
                 </div>
               </div>
@@ -1068,6 +1151,42 @@
     </div>
     <!---OTP MODALS HUTANG MODALS -->
 
+     <!--Term And Condition MODALS -->
+     <div class="modal  fade " id="term_condition_modals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  ">
+            <div class="modal-content box-otp-product">
+                <div class="modal-header header-prod">
+
+                </div>
+                
+                <div class="modal-body  box_input_product">
+                    <p>ASELOLE JOSS</p>     
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <!--Term And Condition  MODALS -->
+
+     <!--Term And Condition MODALS -->
+     <div class="modal  fade " id="about_us" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  ">
+            <div class="modal-content box-about-us">
+                <div class="bg_about">
+                    <img src="./img/about.png" alt="" class="img-about">
+                </div>
+                <!-- <div class="modal-header header-prod">
+
+                </div>
+                 -->
+                <!-- <div class="modal-body  box_input_product">
+                </div> -->
+            </div>
+        
+        </div>
+    </div>
+    <!--Term And Condition  MODALS -->
+
 
    
         
@@ -1350,7 +1469,7 @@
          <div class="box-product active_search">
             <div class="product-item">
                 <div class="box-img-bp hvr-float-shadow">
-                    <img src="../web/img/produk.png" alt="" class="img-produk">
+                    <img src="../web/img/produk.png" alt="" class="img-produk" onclick="about_us()">
                 </div>
                 <div class="box-name-product">
                     <p>Produk Lengkap</p>
@@ -1359,7 +1478,7 @@
             </div>
             <div class="product-item">
                 <div class="box-img-bp hvr-float-shadow">
-                    <img src="../web/img/time.png" alt="" class="img-produk-lengkap ">
+                    <img src="../web/img/time.png" alt="" class="img-produk-lengkap" onclick="about_us()">
                 </div>
                 <div class="box-name-product2">
                     <p>Hemat Uang + Waktu</p>
@@ -1371,7 +1490,7 @@
             </div>
             <div class="product-item">
                 <div class="box-img-bp hvr-float-shadow">
-                    <img src="../web/img/metode-pembayaran.png" alt="" class="img-pembayaran ">
+                    <img src="../web/img/metode-pembayaran.png" alt="" class="img-pembayaran" onclick="about_us()">
                 </div>
                 <div class="box-name-product3">
                     <p>Metode Pembayaran</p>
@@ -1382,7 +1501,7 @@
             </div>
             <div class="product-item">
                 <div class="box-img-bp hvr-float-shadow">
-                    <img src="../web/img/delivery.png" alt="" class="img-delivery ">
+                    <img src="../web/img/delivery.png" alt="" class="img-delivery" onclick="about_us()">
                 </div>
                 <div class="box-name-product4">
                     <p>Pengiriman Cepat</p>
@@ -1414,6 +1533,14 @@
         $(this).css("color", "rgba(0, 0, 0, 0.2");
     });
     $( ".icon_close_info" ).mouseover(function() {
+        // alert('mouse over')
+        $(this).css('cursor','pointer')
+        $(this).css("color", "#217283");
+    });
+    $( ".icon_plus_address" ).mouseout(function() {
+        $(this).css("color", "rgba(0, 0, 0, 0.2");
+    });
+    $( ".icon_plus_address" ).mouseover(function() {
         // alert('mouse over')
         $(this).css('cursor','pointer')
         $(this).css("color", "#217283");
