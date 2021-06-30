@@ -172,7 +172,23 @@
                             <p>Lupa Password</p>
                         </div>
                     </div>
-                </div>     
+                </div>  
+                
+                <div class="box_information_login">
+                    <div class="judul_info">
+                        <div class="judul_info_2">
+                            <i class="fas fa-info-circle"></i>
+                            <p>PANDUAN PENGGUNA</p>
+                        </div>
+                        <i class="far fa-times-circle icon_close_info" onclick="close_information_login()"></i>
+                    </div>
+                    <div class="isi_info">
+                        <p>Klik  <span class="disini_info_supplier"> di sini</span> untuk melihat bagaimana menjadi pemasok,  atau   </p>
+                            
+                        <p> klik <span class="disini_info_customer"> di sini</span> untuk melihat bagaimana Anda bisa mendapatkan keuntungan dari mendaftar ke sold.co.id</p>
+                    </div>
+
+                </div>
             </div>
           </div>
         </div>
@@ -1054,7 +1070,7 @@
 
 
    
-       
+        
 
 
     <div class="main-structure">
@@ -1125,6 +1141,7 @@
             </div>
             <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
             <iframe class="force-close-all-command-2 modals-search-result" src="./Iframe/searchingPage.html"></iframe>
+            <iframe class="force-close-all-command modals-information-login" src=""></iframe>
             
             <!-- <iframe class="modals-cart" src=""></iframe> Header Cart  -->
 
@@ -1392,6 +1409,14 @@
     $( ".headset-border-2" ).mouseover(function() {
         // alert('mouse over')
         $( ".fa-headset" ).css("color", "#217283");
+    });
+    $( ".icon_close_info" ).mouseout(function() {
+        $(this).css("color", "rgba(0, 0, 0, 0.2");
+    });
+    $( ".icon_close_info" ).mouseover(function() {
+        // alert('mouse over')
+        $(this).css('cursor','pointer')
+        $(this).css("color", "#217283");
     });
 </script>
 

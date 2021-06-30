@@ -84,6 +84,7 @@ $(function(){
             }else {
                 
                 $('#loginModal').modal('show')
+                $('.box_information_login').css('display','flex')
             }
         }).catch((err)=>{
             console.log(err)
@@ -1010,6 +1011,20 @@ $(function(){
 
 
 
+        $('.disini_info_supplier').on('click',function(){
+            // alert('supp jalan')
+            $('.close-button').css('display','block')
+            $('#loginModal').modal('hide')
+            $('.modals-information-login').css('display','flex')
+            $(".modals-information-login").attr('src',`./Iframe/supplier-information.html`)
+        })
+        $('.disini_info_customer').on('click',function(){
+            // alert('cust jalan')
+            $('.close-button').css('display','block')
+            $('#loginModal').modal('hide')
+            $('.modals-information-login').css('display','flex')
+            $(".modals-information-login").attr('src',`./Iframe/cust-information.html`)
+        })
    
 })
 
@@ -2740,14 +2755,8 @@ const save_product_name=()=>{
 }
 
 
-$( ".whatsapp-border" ).on('mouseenter',function(){
-    $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.2");
 
-})
-$( ".whatsapp-border" ).on('mouseleave',function(){
-    $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.5");
 
-})
 // $( ".whatsapp-border" ).mouseout(function() {
 // });
 // $( ".whatsapp-border" ).mouseover(function() {

@@ -722,3 +722,8 @@ const send_otp=()=>{
 //     console.log(otp,pass)
 // }
 
+function close_information_login(){
+    // alert('function jalan')
+    $('.box_information_login').css('display','none')
+
+}
