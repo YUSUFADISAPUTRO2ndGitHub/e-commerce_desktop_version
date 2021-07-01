@@ -134,8 +134,7 @@ $(document).on('click',".btn-login-product",function(){
     var email = $('#email_login_prod').val()
     var password = $('#password_login_prod').val() 
     var otp = $('#otp_login_prod').val()
-    console.log(email)
-    console.log(password)
+    
     
     // var item = document.getElementById('box-option-login')
     var item = $('.box-option-login').attr('id')
@@ -148,7 +147,11 @@ $(document).on('click',".btn-login-product",function(){
             console.log(res.data,'password encrypt')
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
+                console.log(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`)
                 console.log(res.data ,' berhasil login 201')
+                console.log(otp,'ini OTP 151')
+                console.log(email)
+                console.log(password)
                 if(res.data){
                     swal.fire("Login Berhasil", "", "success");
                     localStorage.setItem('token',res.data)
@@ -174,6 +177,7 @@ $(document).on('click',".btn-login-product",function(){
             console.log(res.data,'password encrypt')
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
+                console.log(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`)
                 console.log(res.data ,' berhasil login 201')
                 if(res.data){
                     swal.fire("Login Berhasil", "", "success");

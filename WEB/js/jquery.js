@@ -2193,6 +2193,85 @@ const check_status_item=()=>{
     })
 }
 
+const re_render_item_product=()=>{
+    console.log('berhasil re render product item')
+    
+    var token = localStorage.getItem('token')
+    $('.tbody_product').empty()
+    var creator;
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        console.log(res.data.Creator)
+        var Customer_Code = res.data.Customer_Code
+        creator = res.data.Creator
+
+        // FIND DATA BY CREATOR
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+
+
+                $('.tbody_product').append(`
+                <tr>
+                    <td >
+                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>    
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>      
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                           
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                            
+                        </div>
+                    </td>
+                    <td>${val.Last_Updated}</td>
+                </tr>
+                `)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+    
+}
+
 
 
 
@@ -2458,6 +2537,7 @@ const save_product_name=()=>{
                                     console.log(res.data.GroupBuy_SellPrice)
                                     $("#"+product_id+"-name").val(res.data.Name)
                                     swal.fire("Gagal Mengubah Data", "", "error");
+                                    re_render_item_product()
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
@@ -2469,16 +2549,18 @@ const save_product_name=()=>{
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_name')
-                                         $('#id_otp').empty()
-                                         $('#id_pass').empty()
+                                         $('#id_otp').val('')
+                                         $('#id_pass').val('')
+                                         re_render_item_product()
                                     }else {
                                         swal.fire("Gagal Mengubah Data", "", "error");
+                                        re_render_item_product()
                                     }
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
                             }
-                            Swal.fire('Simpan Berhasil', '', 'success')
+                            // Swal.fire('Simpan Berhasil', '', 'success')
                             $('#get_otp').modal('hide')
                         }else {
                             Swal.fire('Simpan Gagal', '', 'error')
@@ -2526,24 +2608,27 @@ const save_product_name=()=>{
                             console.log(qty, ' ini qty')
                             console.log(token, ' ini token')
                     
-                            if(harga < 500){
+                            if(harga <500){
                                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                     .then((res)=>{
                                         console.log(res.data.GroupBuy_SellPrice)
                                         $("#"+product_id+"-harga").val(res.data.Sell_Price)
                                         swal.fire("Gagal Mengubah Data", "", "error");
+                                        re_render_item_product()
                                     }).catch((err)=>{
                                         console.log(err)
                                     })
                             }else {
                                 axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
+                                    console.log(res.data,'2969')
                                     if(res.data){
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_sell_price')
+                                        re_render_item_product()
                                     }else {
-                                        
+                                        re_render_item_product()
                                         swal.fire("Gagal Mengubah Data", "", "error");
                                     }
                                 }).catch((err)=>{
@@ -2570,21 +2655,15 @@ const save_product_name=()=>{
         }).catch((err)=>{
 
         })
-
-
-   
-
     }else if ( jenis_edit === 'product_quantity'){
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
-            email = res.data.Email
-            
+            email = res.data.Email     
             var new_pass
             axios.post(`http://customers.sold.co.id/password-generator?Password=${pass}`)
             .then((res)=>{
                 if(res.data){
-                    new_pass = res.data
-                    
+                    new_pass = res.data            
                     axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         if(res.data){
@@ -2609,6 +2688,7 @@ const save_product_name=()=>{
                                     console.log(res.data.GroupBuy_SellPrice)
                                     $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
                                     swal.fire("Gagal Mengubah Data", "", "error");
+                                    re_render_item_product()
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
@@ -2621,14 +2701,16 @@ const save_product_name=()=>{
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_quantity')
+                                        re_render_item_product()
                                     }else {
                                         swal.fire("Gagal Mengubah Data", "", "error");
+                                        re_render_item_product()
                                     }
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
                             }
-                            Swal.fire('Simpan Berhasil', '', 'success')
+                            // Swal.fire('Simpan Berhasil', '', 'success')
                             $('#get_otp').modal('hide')
                         }else {
                             Swal.fire('Simpan Gagal', '', 'error')
