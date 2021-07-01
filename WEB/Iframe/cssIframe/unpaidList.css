@@ -4,8 +4,8 @@ body{
 }
 
 .box-unpaid{
-    width:550px;
-    height:450px;
+    width:auto;
+    height:auto;
     background-color: #217283;
     border-radius:10px;
     display: flex;

@@ -34,6 +34,7 @@ $( document ).ready(function() {
     const item_category = urlParams.get('product_id');
     const group_buy = urlParams.get('groupbuy_id')
     const list_hutang = urlParams.get('list_hutang')
+
     // console.log(group_buy, 'group_buy')
     console.log(queryString,' queryString')
     console.log(urlParams,' urlParams')
@@ -60,7 +61,8 @@ $( document ).ready(function() {
         // alert(group_buy)
         render_group_buy(group_buy)
     }else if (list_hutang !=undefined){
-        render_daftar_hutang()
+        // render_daftar_hutang()
+        newRender_list_hutang()
     }
     else {
         console.log('error masuk ke else 33')
@@ -734,4 +736,33 @@ function addAddressSupp(){
    }else {
     idAddressSupp--
    }
+}
+
+const newRender_list_hutang=(customer_code)=>{
+    const token = localStorage.getItem('token')
+    
+    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        res.data.map((val,index)=>{
+            console.log(val)
+            $('.ul_list_hutang').append(`
+            <tr>
+                <td >
+                    <p class="limited-text-short" onclick="item_detail_for_hutang('${val.Order_Number}')">${val.Order_Number} </p> 
+                </td>
+                <td >${val.Total_Price}</td>
+                <td >${val.Payment_Method}</td>
+                <td>${val.Shipping_Address}</td>
+                <td >${val.Status}</td>
+                
+            </tr>
+            `)
+      
+        })
+        
+       
+    }).catch((err)=>{
+        console.log(err)
+    })
 }

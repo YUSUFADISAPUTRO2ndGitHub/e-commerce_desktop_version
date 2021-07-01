@@ -46,6 +46,7 @@ body {
     height: 80px;
     margin-top: 25px;
     /* background: red; */
+    
     border-top: 1px solid #D4DEE8;
     border-left: 1px solid #D4DEE8;
     border-right: 1px solid #D4DEE8;
@@ -1067,8 +1068,9 @@ body {
 
 .box_daftar_hutang {
     max-width: 1000px !important;
-    width: 900px;
-    height: 600px;
+    /* width: 1000px !important; */
+    height: 500px;
+    overflow:hidden;
 }
 
 .box-login-header {
@@ -4048,3 +4050,152 @@ img{
     position: relative;
     top:-10px;
 }
+
+
+
+.tableFixHead_hutang {
+    margin-top: 20px;
+    overflow: auto;
+    /* height:250px; */
+    height: 350px;
+    width: 100%;
+    border-radius: 10px;
+    padding-left:10px;
+    padding-right:10px;
+    /* background-color: #217283; */
+}
+.tableFixHead_hutang thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tableFixHead_hutang::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+    position: relative;
+    left: 10px;
+}
+.tableFixHead_hutang::-webkit-scrollbar-thumb {
+    background-color: #217283;
+    border-radius: 5px;
+    height: 100px;
+    position: relative;
+    left: 10px;
+
+}
+
+.tableFixHead_hutang,
+.tableFixHead_hutang td {
+    /* border:2px solid #217283; */
+    color: #217283;
+}
+
+
+
+
+.tableFixHead_detail_hutang  {
+    margin-top: 20px;
+    overflow: auto;
+    /* height:250px; */
+    height: 350px;
+    width: 100%;
+    border-radius: 10px;
+    padding-left:10px;
+    padding-right:10px;
+    /* background-color: #217283; */
+}
+.tableFixHead_detail_hutang  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tableFixHead_detail_hutang ::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+    position: relative;
+    left: 10px;
+}
+.tableFixHead_detail_hutang ::-webkit-scrollbar-thumb {
+    background-color: #217283;
+    border-radius: 5px;
+    height: 100px;
+    position: relative;
+    left: 10px;
+
+}
+
+.tableFixHead_detail_hutang ,
+.tableFixHead_detail_hutang  td {
+    /* border:2px solid #217283; */
+    color: #217283;
+}
+
+
+.modals-hutang-home {
+    position: absolute;
+    z-index: 20;
+    top: 72px;
+    /* left:105px; */
+    /* right:172px; */
+    /* height:90vh; */
+    height: 61vh;
+    width: 54%;
+    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    left:23%;
+    border-radius:10px;
+    /* width:100%; */
+    /* background-color: red; */
+    /* display: none; */
+    transition: 2s ease-out;
+    z-index: 101;
+    -webkit-animation: fadein 1.5s linear forwards;
+    animation: fadein 1.5s linear forwards;
+    opacity: 0;
+}
+
+
+/* batas */
+
+.tableFixHead_ul_hutang  {
+    margin-top: 20px;
+    overflow: auto;
+    /* height:250px; */
+    height: 350px;
+    width: 100%;
+    border-radius: 10px;
+    padding-left:10px;
+    padding-right:10px;
+    /* background-color: #217283; */
+}
+.tableFixHead_ul_hutang  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.tableFixHead_ul_hutang ::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+    position: relative;
+    left: 10px;
+}
+.tableFixHead_ul_hutang ::-webkit-scrollbar-thumb {
+    background-color: #217283;
+    border-radius: 5px;
+    height: 100px;
+    position: relative;
+    left: 10px;
+
+}
+
+.tableFixHead_ul_hutang ,
+.tableFixHead_ul_hutang  td {
+    /* border:2px solid #217283; */
+    color: white;
+}
+
+

@@ -95,30 +95,40 @@ function pengiriman_requested(x){
 }
 
 function cek_daftar_hutang(x){
-    $('.close-button').css('display','block')
-    $('.close').css('display','none') 
-    if($(x).hasClass("background_grey")){
-        $(x).removeClass("background_grey");
-        
-    }else{
-        $(x).addClass("background_grey");
-    }
-    if($(x).hasClass('close-button')){
-        // alert('masuk ke line 72')
-        $('.close-button').css('display','none')
-    }
+    // alert('function jalan')
+    var token = localStorage.getItem('token')
+    var data_customer;
+  
 
 
-    // ngilangin block abu abu pas di klik
-    $('.option-2').removeClass('background_grey')
-    $('.option-3').removeClass('background_grey')
-    $('.option-1').removeClass('background_grey')
 
-    // SEARCH ITEM BACK TO NORMAL
-    $('.box-render-search').css('display','none')
-    $('.input-name').css('border-bottom-left-radius','10px')
-    $('.input-name').css('border-bottom-right-radius','10px')
-    $('.input-name').val(null)
+        $('.close-button').css('display','block')
+        $('.close').css('display','none') 
+        if($(x).hasClass("background_grey")){
+            $(x).removeClass("background_grey");
+            
+        }else{
+            $(x).addClass("background_grey");
+        }
+        if($(x).hasClass('close-button')){
+            // alert('masuk ke line 72')
+            $('.close-button').css('display','none')
+        }
+        $(".modals-hutang-home").toggle();
+        $(".modals-hutang-home").attr("src", `./Iframe/unpaidList.html?list_hutang=${token}`);
+    
+    
+        // ngilangin block abu abu pas di klik
+        $('.option-2').removeClass('background_grey')
+        $('.option-3').removeClass('background_grey')
+        $('.option-1').removeClass('background_grey')
+    
+        // SEARCH ITEM BACK TO NORMAL
+        $('.box-render-search').css('display','none')
+        $('.input-name').css('border-bottom-left-radius','10px')
+        $('.input-name').css('border-bottom-right-radius','10px')
+        $('.input-name').val(null)
+  
 }
 
 
@@ -524,32 +534,7 @@ const date_commision=()=>{
                 
             </tr>
           `)  
-            // $('.comm-order-num').append(`
-            // <div class="comm-1-list">
-            //     <p class="limited-text">${val.Order_Number}</p>
-            // </div>
-            // `)
 
-            // $('.comm-qty').append(`
-            // <div class="comm-1-list">
-            //     <p>${val.Total_Quantity}</p>
-            // </div>
-            // `)
-            // $('.comm-total-price').append(`
-            // <div class="comm-1-list">
-            //     <p>${val.Total_Price}</p>
-            // </div>
-            // `)
-            // $('.comm-percent').append(`
-            // <div class="comm-1-list">
-            //     <p>3%</p>
-            // </div>
-            // `)
-            // $('.comm-total-untung').append(`
-            // <div class="comm-1-list">
-            //     <p>${untung}</p>
-            // </div>
-            // `) 
         })
     }).catch((err)=>{
         console.log(err)

@@ -1741,13 +1741,11 @@ $('.id-address-gb').on('click',function(){
 const to_detail_product=(id)=>{
     console.log(id)
     $('#detailProductModal').modal('show')
-
+    $('.modals_detail_product').empty()
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
     .then((res)=>{
         console.log(res.data)
-       
-        
-            $('.tbody_detail_product').append(`
+            $('.modals_detail_product').append(`
                 <tr>
                     <td>${res.data.Product_Code} </td>
                     <td>${res.data.Name} </td>

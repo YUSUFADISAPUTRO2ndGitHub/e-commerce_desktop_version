@@ -969,7 +969,7 @@
                                 <th>Description</th>
                             </tr>
                           </thead>
-                          <tbody class="tbody_detail_product">
+                          <tbody class="modals_detail_product">
                              
                          
                           
@@ -983,56 +983,7 @@
     </div>
     <!--DETAIL PRODUCT MODALS -->
 
-    <!--DAFTAR HUTANG MODALS -->
-        <div class="modal  fade " id="daftarHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog box_daftar_hutang ">
-            <div class="modal-content ">
-                <div class="modal-header box-login-profile">
-                    <p>Hi <input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
-                    <div class="box-code-referral">
-                        <p>Your Customer Code for Referral :</p>
-                        <input type="text" disabled  id="refer-profile" class="ref-profile">
-                    </div>
-                </div>
-                <div class="modal-body box-login-body">
-                    <div class="commision-form">     
-                        <div class="detail_form_top">
-                            <p>List Unpaid</p>      
-                        </div>  
-                        <div class="detail-form-bot">
-                            <div class="item_detail_bot id_unpaid" onclick="item_detail_for_hutang(1)">
-                                <div class="comm-1-header">
-                                    <p>ID</p>
-                                </div>
-                                
-                            </div>
-                            <div class="item_detail_bot qty_unpaid"">
-                                <div class="comm-1-header">
-                                    <p>Quantity</p>
-                                </div>
-                                
-                            </div>  
-                            <div class="item_detail_bot order_unpaid"">
-                                <div class="comm-1-header">
-                                    <p>Order Number</p>
-                                </div>
-                                
-                            </div>  
-                            <div class="item_detail_bot harga_unpaid"">
-                                <div class="comm-1-header">
-                                    <p>Total Harga</p>
-                                </div>
-                                
-                            </div> 
-                                        
-                        </div>         
-                    </div>  
-                </div>
-            </div>
-        
-        </div>
-        </div>
-    <!---DAFTAR HUTANG MODALS -->
+  
 
       <!--item detail MODALS -->
       <div class="modal  fade " id="detailHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1286,7 +1237,7 @@
             </div>
             <div class="header-option">
                 <div class="option-0" onclick="cek_daftar_hutang(this)">
-                    <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
+                    <img src="../WEB/img/unpaid_list.png" alt="error" class="icon-opt ">
                     <p>Unpaid List</p>
                 </div>
                 <div class="option-1 " onclick="cek_harga_requested(this)">
@@ -1326,6 +1277,7 @@
             <iframe class="force-close-all-command modals-check-harga closeByLogin" src=""></iframe> <!-- Modals Check Harga  -->
             <iframe class="force-close-all-command modals-delivery-list close" src=""></iframe> <!-- Modals Delivery  -->
             <iframe class="force-close-all-command modals-live-chat close" src=""></iframe> <!-- Live Chat  -->
+            <iframe class="force-close-all-command modals-hutang-home close" src=""></iframe> <!-- Live Chat  -->
             <!-- <iframe  src="../WEB/Iframe/rating-stars/index.html?product_code=6900005030114"></iframe> Modals Delivery  -->
 
 

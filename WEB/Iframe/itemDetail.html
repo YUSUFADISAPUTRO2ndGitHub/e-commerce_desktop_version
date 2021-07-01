@@ -41,34 +41,26 @@
                     <div class="commision-form comm-form-id">     
                         <div class="detail_form_top">
                             <p>List Unpaid</p>      
+                        </div> 
+                        <div class="tableFixHead_hutang">
+                            <table >
+                              <thead>
+                                <tr>                           
+                                    <th>Quantity</th>
+                                    <th>Order Number</th>
+                                    <th>Payment</th>
+                                    <th>Total Harga</th>
+                                    <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody class="ID_list_hutang">
+                                 
+                             
+                              
+                              </tbody>
+                            </table>
                         </div>  
-                        <div class="detail-form-bot detail_ID">
-                            <!-- <div class="item_detail_bot id_unpaid" onclick="item_detail_for_hutang(1)">
-                                <div class="comm-1-header">
-                                    <p>ID</p>
-                                </div>
-                                
-                            </div> -->
-                            <div class="item_detail_bot qty_unpaid"">
-                                <div class="comm-1-header">
-                                    <p>Quantity</p>
-                                </div>
-                                
-                            </div>  
-                            <div class="item_detail_bot order_unpaid"">
-                                <div class="comm-1-header">
-                                    <p>Order Number</p>
-                                </div>
-                                
-                            </div>  
-                            <div class="item_detail_bot harga_unpaid"">
-                                <div class="comm-1-header">
-                                    <p>Total Harga</p>
-                                </div>
-                                
-                            </div> 
-                                        
-                        </div>         
+                            
                     </div>  
                 </div>
             </div>
@@ -77,7 +69,7 @@
         </div>
     <!---DAFTAR HUTANG MODALS -->
          <!--item detail MODALS -->
-      <div class="modal  fade  detail_hutang_ID" id="detailHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal  fade  detail_hutang_ID" id="ID_detail_hutang_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box_daftar_hutang ">
             <div class="modal-content ">
                 <div class="modal-header box-login-profile">
@@ -92,16 +84,36 @@
                         <div class="detail_form_top">
                             <p>List Unpaid</p>      
                         </div>  
-                        <div class="detail_hutang_form detail_ID">
+
+                        <div class="tableFixHead_detail_hutang">
+                            <table >
+                              <thead>
+                                <tr>                           
+                                    <th>Order Number</th>
+                                    <th>Total Price</th>
+                                    <th>Payment Method</th>
+                                    <th>Shipping Fee</th>
+                                    <th>Shipping Address</th>
+                                    <th>Virtual Number</th>
+                                </tr>
+                              </thead>
+                              <tbody class="modals_item_detail_product">
+                                 
+                             
+                              
+                              </tbody>
+                            </table>
+                        </div>  
+                        <!-- <div class="detail_hutang_form detail_ID">
                             
                            
-                            <!-- <div class="item_detail_bot id_detail_hutang">
+                            <div class="item_detail_bot id_detail_hutang">
                                 <div class="comm-1-header">
                                     <p>ID</p>
                                 </div>
                                
-                            </div> -->
-                            <div class="item_detail_bot id_detailorder_hutang"">
+                            </div> 
+                             <div class="item_detail_bot id_detailorder_hutang"">
                                 <div class="comm-1-header">
                                     <p>Order Number</p>
                                 </div>
@@ -138,7 +150,7 @@
                             
                             </div>
                                        
-                        </div>         
+                        </div>          -->
                     </div>  
                 </div>
             </div>

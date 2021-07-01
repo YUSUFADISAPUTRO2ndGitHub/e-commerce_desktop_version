@@ -587,27 +587,20 @@ const render_daftar_hutang=()=>{
     .then((res)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
-            // $('.id_unpaid').append(`
-            //     <div class="comm-1-list">
-            //         <p>${val.sys_id}</p>
-            //     </div>
-            // `)
-            $('.qty_unpaid').append(`
-                <div class="comm-1-list">
-                    <p>${val.Total_Quantity}</p>
-                </div>
+            console.log(val)
+            $('.ID_list_hutang').append(`
+            <tr>
+                <td>${val.Total_Quantity}</td>
+                <td >
+                    <p class="limited-text-short" onclick="item_detail_for_hutang('${val.Order_Number}')">${val.Order_Number} </p> 
+                </td>
+                <td >${val.Payment_Method}</td>
+                <td >${val.Total_Price}</td>
+                <td >${val.Status}</td>
+                
+            </tr>
             `)
-
-            $('.order_unpaid').append(`
-                <div class="comm-1-list " onclick="item_detail_for_hutang('${val.Order_Number}')">
-                    <p class="limited-text">${val.Order_Number}</p>
-                </div>
-            `)
-            $('.harga_unpaid').append(`
-                <div class="comm-1-list">
-                    <p>RP.${numeral(val.Total_Price).format('0,0')}
-                </div>
-            `)
+      
         })
         
        
@@ -623,7 +616,7 @@ const item_detail_for_hutang=(order_number)=>{
     
     
     // $('#daftarHutangModal').modal('hide')
-    $('#detailHutangModal').modal('show')
+    $('#ID_detail_hutang_modal').modal('show')
     axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${order_number}`)
     .then((res)=>{
         $('.ref_code_detail_hutang').val(res.data.Customer_Code)
@@ -635,36 +628,19 @@ const item_detail_for_hutang=(order_number)=>{
             //         <p>${val.sys_id}</p>
             //     </div>
             // `)
-            $('.id_detailorder_hutang').append(`
-            <div class="comm-1-list">
-                <p class="limited-text">${val.Order_Number}</p>
-            </div>
+            $('.modals_item_detail_product').append(`
+            <tr>
+                <td><p class="limited-text">${val.Order_Number}</p></td>
+                <td >
+                    <p>RP.${val.Total_Price}
+                </td>
+                <td ><p>${val.Payment_Method}</p></td>
+                <td ><p>${val.Shipping_Fee}</p></td>
+                <td ><p style="word-break: break-all">${val.VA_Number}</p></td>
+                
+            </tr>
             `)
-            $('.id_detailtotal_hutang').append(`
-            <div class="comm-1-list">
-                <p>RP.${numeral(val.Total_Price).format('0,0')}
-            </div>
-            `)
-            $('.id_detailpayment_hutang').append(`
-            <div class="comm-1-list">
-                <p>${val.Payment_Method}</p>
-            </div>
-            `)
-            $('.id_detailshipping_hutang').append(`
-            <div class="comm-1-list">
-                <p>${val.Shipping_Fee}</p>
-            </div>
-            `)
-            $('.id_detailaddress_hutang').append(`
-            <div class="comm-1-list">
-                <p>${val.Shipping_Address}</p>
-            </div>
-            `)
-            $('.id_detailvirtual_hutang').append(`
-            <div class="comm-1-list">
-                <p style="word-break: break-all">${val.VA_Number}</p>
-            </div>
-            `)
+            
         })
 
     }).catch((err)=>{
