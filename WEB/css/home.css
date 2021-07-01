@@ -235,6 +235,23 @@ body {
     justify-content: center;
     align-items: center;
 }
+.option-0 {
+    width: 20%;
+    height: 100px;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 10px;
+    z-index: 100;
+}
+.option-0 p {
+    color: #535353;
+    font-size: 12px;
+}
 .option-1 {
     width: 20%;
     height: 100px;
@@ -1139,6 +1156,39 @@ body {
     left: 25px;
 }
 
+.login-otp p {
+    display: flex;
+    position: relative;
+    /* left:-75px; */
+}
+
+.login-otp {
+    width: 50%;
+    height: 70px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    line-height: 0.5;
+    align-items: center;
+    margin-bottom:10px;
+    margin-right:5px;
+}
+.login-otp-2 {
+    width: 100%;
+    height: 70px;
+    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 0.5;
+    /* align-items: center; */
+    margin-bottom:10px;
+    margin-right:5px;
+}
+
+
+
 .login-name p {
     display: flex;
     position: relative;
@@ -1155,7 +1205,21 @@ body {
     line-height: 0.5;
     align-items: center;
     margin-bottom:10px;
+    /* margin-right:5px; */
 }
+.login-name-product {
+    width: 50%;
+    height: 70px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    line-height: 0.5;
+    align-items: center;
+    margin-bottom:10px;
+    /* margin-right:5px; */
+}
+
 
 .login-name-2 {
     width: 100%;
@@ -1192,6 +1256,17 @@ body {
     height: 40px;
     position: relative;
     top: 15px;
+    /* left:25px; */
+    /* background-color: red; */
+}
+.box-name-login-prod {
+    width: auto;
+    height: 40px;
+    position: relative;
+    top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* left:25px; */
     /* background-color: red; */
 }
@@ -1239,6 +1314,15 @@ body {
     top: 10px;
 
 }
+.otp-form {
+    width: 250px;
+    height: 30px;
+    background-color: #C4C4C4;
+    border-width: 0;
+}
+.otp-form::placeholder {
+    color: #217283;
+}
 
 .name-form {
     width: 250px;
@@ -1250,6 +1334,18 @@ body {
     color: #217283;
 }
 
+
+.name-form-product {
+    width: 150px;
+    height: 30px;
+    background-color: #C4C4C4;
+    border-width: 0;
+}
+.name-form-product::placeholder {
+    color: #217283;
+}
+
+
 .forgot-form {
     width: 100%;
     height: 30px;
@@ -1259,7 +1355,7 @@ body {
 
 .box-option-login {
     position: relative;
-    top: 30px;
+    top: 20px;
     /* background-color: green; */
     width: 100%;
     display: flex;
@@ -1711,12 +1807,17 @@ input:focus {
     width: 1000px;
     display: none;
 }
+.modals-success {
+    width:700px;
+    height:700px;
+    z-index:100;
+}
 
 .modals-product-detail-position-home {
     position: fixed;
-    top: 10%;
+    top: 12%;
     left: 50%;
-    margin-left: -25%;
+    margin-left: -27%;
 }
 
 /* MODALS Product Detail BY SUB CATEGORY */
@@ -3069,7 +3170,7 @@ th {
     /* background-color: red; */
     height: 50px;
     width: auto;
-    top: 95px;
+    top: 70px;
     right: 70px;
     border-radius: 10px;
     display: flex;
@@ -3323,7 +3424,7 @@ th {
 
 .icon_close_lc {
     font-size: 35px;
-    color: #217283;
+    color: #eb4d4b;
 }
 .icon_close_lc:hover {
     cursor: pointer;
@@ -3486,6 +3587,48 @@ input::-webkit-input-placeholder {
     top: 5px;
     font-size: 1em;
 }
+
+.otp_send_login {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #eb4d4b;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left:6%;
+    top:12%;
+    /* margin-left: 10px; */
+}
+.otp_send_login p {
+    position: relative;
+    top: 5px;
+    font-size: 1em;
+}
+
+.otp_send_login_prod {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #eb4d4b;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left:15%;
+    top:12%;
+    /* margin-left: 10px; */
+}
+.otp_send_login_prod p {
+    position: relative;
+    top: 5px;
+    font-size: 1em;
+}
+
+
 
 .input-otp {
     text-align: center;
@@ -3699,9 +3842,18 @@ img{
     align-items: center;
     
 }
+.success_payment_modals{
+    height:100%;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* box-shadow: 3px black; */
+    
+}
 .img-promo2 {
-    width:500px;
-    height:500px;
+    width:100%;
+    height:100%;
 }
 
 .box_agreement{
@@ -3830,4 +3982,62 @@ img{
 .img-about{
     width:100%;
     height:100%;
+}
+
+.box-delete-success {
+    position: relative;
+    top: 95%;
+    right:30%;
+    z-index: 102;
+    display: none;
+    flex-direction: column;
+
+    /* background-color: red; */
+}
+.box-icon-success p {
+    color: #217283;
+    font-size: 1em;
+}
+
+
+.login-form-atas{
+    width:100%;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    /* margin:5px; */
+    /* background-color: red; */
+}
+.login-form-bawah{
+    width:100%;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin:5px; */
+    /* background-color: blue; */
+    position: relative;
+    top:-10px;
+}
+
+.login-form-atas{
+    width:100%;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    /* margin:5px; */
+    /* background-color: red; */
+}
+.login-form-bawah{
+    width:100%;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin:5px; */
+    /* background-color: blue; */
+    position: relative;
+    top:-10px;
 }

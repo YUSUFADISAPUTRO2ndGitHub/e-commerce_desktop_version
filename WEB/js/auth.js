@@ -103,42 +103,103 @@ $(document).on('click',"#simpan_reg",function(){
 $(document).on('click',".btn-login",function(){
     var email = $('#email_login').val()
     var password = $('#password_login').val() 
+    var otp = $('#otp_login').val()
     console.log(email)
     console.log(password)
     
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
         console.log(res.data,'password encrypt')
+        axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+        ).then((res)=>{
+            console.log(res.data ,' berhasil login 201')
+            if(res.data){
+                swal.fire("Login Berhasil", "", "success");
+                localStorage.setItem('token',res.data)
+                $('#loginModal').modal('hide')
+            }else {
+                swal.fire("Login Gagal", "", "info");
+                console.log('gagal login')
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
     }).catch((err)=>{
         console.log(err)
     })
-        
-            axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}`,{
-                params:{
-                    Email:email,
-                    Password:password
-                }
-            }).then((res)=>{
+
+})
+
+$(document).on('click',".btn-login-product",function(){
+    var email = $('#email_login_prod').val()
+    var password = $('#password_login_prod').val() 
+    var otp = $('#otp_login_prod').val()
+    console.log(email)
+    console.log(password)
+    
+    // var item = document.getElementById('box-option-login')
+    var item = $('.box-option-login').attr('id')
+    console.log(item)
+    
+    
+    if(item === 'product'){
+        axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+        .then((res)=>{
+            console.log(res.data,'password encrypt')
+            axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+            ).then((res)=>{
                 console.log(res.data ,' berhasil login 201')
                 if(res.data){
                     swal.fire("Login Berhasil", "", "success");
                     localStorage.setItem('token',res.data)
                     $('#loginModal').modal('hide')
+                    $('#login_product').modal('hide')
+                    $('.box-option-login').removeClass('product')
+                    check_status_item()
                 }else {
                     swal.fire("Login Gagal", "", "info");
                     console.log('gagal login')
+                    $('.box-option-login').removeClass('product')
                 }
             }).catch((err)=>{
                 console.log(err)
             })
+        }).catch((err)=>{
+            console.log(err)
+        })
 
-        
+    }else if (item === 'commision'){
+        axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+        .then((res)=>{
+            console.log(res.data,'password encrypt')
+            axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+            ).then((res)=>{
+                console.log(res.data ,' berhasil login 201')
+                if(res.data){
+                    swal.fire("Login Berhasil", "", "success");
+                    localStorage.setItem('token',res.data)
+                    $('#loginModal').modal('hide')
+                    $('#login_product').modal('hide')
+                    $('.box-option-login').removeClass('commision')
+                    commision_check()
+                }else {
+                    swal.fire("Login Gagal", "", "info");
+                    console.log('gagal login')
+                    $('.box-option-login').removeClass('commision')
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     
 
-  
-
-
 })
+
+
+
 
 
 

@@ -143,18 +143,34 @@
             </div>
             <div class="modal-body box-login-body">
                 <div class="login-form">
-                    <div class="login-name">
-                        <div class="box-name" >
-                            <p>Alamat Email</p>
+                    <div class="login-form-atas">
+                        <div class="login-name">
+                            <div class="box-name" >
+                                <p>Alamat Email</p>
+                            </div>
+                            <input type="text" class="name-form" placeholder="Alamat Email" id="email_login">
                         </div>
-                        <input type="text" class="name-form" placeholder="Alamat Email" id="email_login">
-                    </div>
-                    <div class="login-pass">
-                        <div class="box-name">
-                            <p>Password</p>
+                        <div class="login-pass">
+                            <div class="box-name">
+                                <p>Password</p>
+                            </div>
+                            <input type="password" class="name-form" placeholder="Password" id="password_login">     
                         </div>
-                        <input type="password" class="name-form" placeholder="Password" id="password_login">     
                     </div>
+                    <div class="login-form-bawah">   
+                        <div class="login-otp">
+                            <div class="box-name" >
+                                <p>OTP</p>
+                            </div>
+                            <input type="text" class="otp-form" placeholder="OTP" id="otp_login">
+                        </div>
+                        <div class="otp_send_login" onclick="send_otp_login()">
+                            <p>Kirim OTP</p>
+                        </div>
+                        
+                    </div>
+
+                    
                     <div class="box-option-login" >
                         <div class="login-option btn-login">
                             <p>Login</p>
@@ -730,7 +746,7 @@
                         <!-- <div class="btn-kumpulkan">
                             <p>Tambah Alamat (+)</p>
                         </div> -->
-                        <div class="btn-status-barang box-status-barang" onclick="check_status_item()">
+                        <div class="btn-status-barang box-status-barang" onclick="login_for_product()">
                             <p>Lihat Status Barang Anda</p>
                         </div>
                     </div> 
@@ -738,7 +754,7 @@
                         <div class="btn-kumpulkan save-user">
                             <p>Simpan Data </p>
                         </div>
-                        <div class="btn-komisi" onclick="commision_check()" data-bs-toggle="modal" data-bs-target="#commisionModal">
+                        <div class="btn-komisi"  data-bs-toggle="modal" onclick="login_for_commision()">
                             <p>Lihat Komisi Anda</p>
                         </div>
                     </div>            
@@ -861,7 +877,7 @@
                            <div class="box-right-bottom">
                             <div class="total_row_groupbuy">
                                 <div class="search_products">
-                                    <input type="text" placeholder="Ketik Kode Produk" class="input-product" id="search_item">
+                                    <input type="text" placeholder="Ketik Kode Produk" class="input-product" id="search_item_product">
                                    
                                 </div>
                                 <input type="text" disabled  class="input_total_row_gb" value="">
@@ -1188,6 +1204,60 @@
     <!--Term And Condition  MODALS -->
 
 
+       <!--OTP LOGIN PRODUCT -->
+       <div class="modal  fade " id="login_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  ">
+            <div class="modal-content box-otp-product">
+                <div class="modal-header header-prod">
+
+                </div>
+
+                <div class="login-form-2">
+                    <div class="login-form-atas">
+                        <div class="login-name-product">
+                            <div class="box-name-login-prod" >
+                                <p>Alamat Email</p>
+                            </div>
+                            <input type="text" class="name-form-product" placeholder="Alamat Email" id="email_login_prod">
+                        </div>
+                        <div class="login-name-product">
+                            <div class="box-name-login-prod">
+                                <p>Password</p>
+                            </div>
+                            <input type="password" class="name-form-product" placeholder="Password" id="password_login_prod">     
+                        </div>
+                    </div>
+                    <div class="login-form-bawah">   
+                        <div class="login-otp">
+                            <div class="box-name-login-prod" >
+                                <p>OTP</p>
+                            </div>
+                            <input type="text" class="name-form-product" placeholder="OTP" id="otp_login_prod">
+                        </div>
+                        <div class="otp_send_login_prod" onclick="send_otp_login_prod()">
+                            <p>Kirim OTP</p>
+                        </div>
+                        
+                    </div>
+
+                    
+                    <div class="box-option-login" >
+                        <div class="login-option btn-login-product">
+                            <p>Login</p>
+                        </div>
+ 
+                    </div>
+                </div>  
+                
+  
+            </div>
+        
+        </div>
+    </div>
+    <!---OTP LOGIN PRODUCT -->
+
+
+
    
         
 
@@ -1215,6 +1285,10 @@
                 </div>
             </div>
             <div class="header-option">
+                <div class="option-0" onclick="cek_daftar_hutang(this)">
+                    <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
+                    <p>Unpaid List</p>
+                </div>
                 <div class="option-1 " onclick="cek_harga_requested(this)">
                     <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
                     <p>Cek Harga</p>
@@ -1232,10 +1306,13 @@
                     <img src="../WEB/img/login.png" alt="error" class="icon-opt">
                     <p>Log in</p>
                 </div>
-                <div class="box-icon-lc">
-                    
+                <div class="box-icon-lc">     
                     <i class="far fa-times-circle icon_close_lc" onclick="close_live_chat()"></i>
-                    <p>Close</p>
+                    <!-- <p>Close</p> -->
+                </div>
+                <div class="box-delete-success">     
+                    <i class="far fa-times-circle icon_close_lc" onclick="close_success()"></i>
+                    <!-- <p>Close</p> -->
                 </div>
             </div>
             
@@ -1253,12 +1330,15 @@
 
 
             
-            <div>
+            <div class="box_iframe_groupbuy">
                 <iframe class="force-close-all-command modals-product-detail modals-product-detail-position-home" src="">
                 </iframe> <!-- Modals product detail  -->
                 <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
             </div>
-            <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
+            
+                <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
+
+            
             <iframe class="force-close-all-command-2 modals-search-result" src="./Iframe/searchingPage.html"></iframe>
             <iframe class="force-close-all-command modals-information-login" src=""></iframe>
             

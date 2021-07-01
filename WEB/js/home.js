@@ -26,6 +26,7 @@ function cart_requested(x){
     $('.modals-check-harga').css("display",'none')
     $('.option-1').removeClass('background_grey')
     $('.option-2').removeClass('background_grey')
+    $('.option-0').removeClass('background_grey')
     $(".iframe").attr("src", "./cart.html");
 
       // SEARCH ITEM BACK TO NORMAL
@@ -63,6 +64,11 @@ function close_live_chat(){
 
 }
 
+function close_success(){
+    $('.modals-product-detail').css('display','none')
+    $('.box-delete-success').css('display','none')
+}
+
 
 function pengiriman_requested(x){
     $('.close-button').css('display','block')
@@ -78,6 +84,7 @@ function pengiriman_requested(x){
     $(".iframe").css('display','none')
     $('.option-1').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
+    $('.option-0').removeClass('background_grey')
 
       // SEARCH ITEM BACK TO NORMAL
       $('.box-render-search').css('display','none')
@@ -85,6 +92,33 @@ function pengiriman_requested(x){
       $('.input-name').css('border-bottom-right-radius','10px')
       $('.input-name').val(null)
     
+}
+
+function cek_daftar_hutang(x){
+    $('.close-button').css('display','block')
+    $('.close').css('display','none') 
+    if($(x).hasClass("background_grey")){
+        $(x).removeClass("background_grey");
+        
+    }else{
+        $(x).addClass("background_grey");
+    }
+    if($(x).hasClass('close-button')){
+        // alert('masuk ke line 72')
+        $('.close-button').css('display','none')
+    }
+
+
+    // ngilangin block abu abu pas di klik
+    $('.option-2').removeClass('background_grey')
+    $('.option-3').removeClass('background_grey')
+    $('.option-1').removeClass('background_grey')
+
+    // SEARCH ITEM BACK TO NORMAL
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
+    $('.input-name').val(null)
 }
 
 
@@ -98,7 +132,7 @@ function cek_harga_requested(x){
         $(x).addClass("background_grey");
     }
     if($(x).hasClass('close-button')){
-        alert('masuk ke line 72')
+        // alert('masuk ke line 72')
         $('.close-button').css('display','none')
     }
     $(".modals-check-harga").toggle();
@@ -109,6 +143,7 @@ function cek_harga_requested(x){
     $('.iframe').css('display','none')
     $('.option-2').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
+    $('.option-0').removeClass('background_grey')
 
     // SEARCH ITEM BACK TO NORMAL
     $('.box-render-search').css('display','none')
@@ -124,6 +159,7 @@ $('#datepicker').on('click',function(){
 
 const commision_check=()=>{
     $('#profileModal').modal('hide')
+    $('#commisionModal').modal('show')
     var token = localStorage.getItem('token')
     
     var dateObj = new Date();
@@ -685,7 +721,17 @@ const find_product=()=>{
    
 }
 
+const login_for_product=()=>{
+    $('#login_product').modal('show')
+    // $('.box-option-login').addClass('product')
+    $('.box-option-login').attr('id','product')
+    
+}
 
+const login_for_commision=()=>{
+    $('#login_product').modal('show')
+    $('.box-option-login').attr('id','commision')
+}
 
 // $('#search_prod').on('click',function(){
 //     alert('function jalan')
@@ -715,6 +761,44 @@ const send_otp=()=>{
     })
 }
 
+const send_otp_login=()=>{
+    var email = $('#email_login').val()
+    if(email){
+        axios.post(`http://customers.sold.co.id/get-otp?Email=darmawanbayu1@gmail.com`)
+        .then((res)=>{
+            if(res.data){
+                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+            }else {
+                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    }else {
+        Swal.fire('Silahkan Masukan Email', 'Good-Bye', 'error')
+    }
+}
+
+const send_otp_login_prod=()=>{
+    var email = $('#email_login_prod').val()
+    console.log(email)
+    if(email){
+        axios.post(`http://customers.sold.co.id/get-otp?Email=darmawanbayu1@gmail.com`)
+        .then((res)=>{
+            if(res.data){
+                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+            }else {
+                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+    }else {
+        Swal.fire('Silahkan Masukan Email', 'Good-Bye', 'error')
+    }
+}
 // const save_product_name=()=>{
 //     alert('simpan jalan')
 //     var otp = $('#id_otp').val()
@@ -737,4 +821,7 @@ const to_term_condition=()=>{
 const  about_us=()=>{
     // alert('function jalan')
      $('#about_us').modal('show')
+}
+const refresh=()=>{
+    window.location.reload()
 }

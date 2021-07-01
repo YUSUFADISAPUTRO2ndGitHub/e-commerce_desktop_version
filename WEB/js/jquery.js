@@ -1039,6 +1039,7 @@ function replace_value_to(x){
 
 
     var item_search = $('#search_item').val()
+    console.log(item_search)
     var product_name = $('#search_item').attr('id')
     $('.active_search').css('top','575px')
     $('.main-body').css('display','none')
@@ -1099,6 +1100,7 @@ function groupbuy(product_id){
     var token = localStorage.getItem('token')
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
+        // location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
         if(res.data){
             
             $('.modals-product-detail').empty()
@@ -1145,12 +1147,13 @@ function payment_groupbuy_home(product_id){
     var data_customer;
     var items = []
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
-    if(total_qty_from_user>0) {
+    if(total_qty_from_user>0) { 
         axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
         .then((res)=>{
             total_item_kebeli = res.data
             console.log(res.data)
-            if(res.data === null) {
+            if(res.data.Total_Quantity === null) { // hasil null berarti belum ada customer lain yang beli
+                console.log('masuk ke if null 1154')
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                 .then((res)=>{
                     console.log(res.data)
@@ -1167,13 +1170,13 @@ function payment_groupbuy_home(product_id){
                             Payment_Method : $('#payment_gb').val(),
                             Shipping_Fee: $('#pengiriman-fee').val(),
                             alamatLain : $('#alamat_lain').val(),
-                            Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                            Primary_Recipient_Name:res.data.First_Name + " " + res.data.Last_Name
                         }         
                         items.push( {
                                 Customer_Code: token,
                                 Product_Code: product_id,
                                 Product_Name: detail_product.Name,
-                                Quantity_Requested: $('.qty_groupbuy').val(),
+                                Quantity_Requested: $('.qty_groupbuy_home').val(),
                                 Price_Based_On_Total_Quantity: total_price
         
                         }) 
@@ -1181,6 +1184,7 @@ function payment_groupbuy_home(product_id){
                             "Sales_Order_Data": customerDetails,
                             "Sales_Order_Detail_data": items
                         }
+                        console.log(data)
 
                         axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                             headers:{
@@ -1191,12 +1195,21 @@ function payment_groupbuy_home(product_id){
                                 "Sales_Order_Detail_data": items
                             })
                         }).then((res)=>{
+                            if(res.data){
+                                swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                $('.modals-product-detail').css('display','none')
+                                $('.box-delete-success').css('display','block')
+                                // tambahin gambar yg dari mas fauzi
+                                console.log('berhasil pembelian line 1198')
+                                location.replace(`../Iframe/success.html`)
+                            }else {
+                                swal.fire("Pembelian Gagal", "", "error");
+                            }
                             console.log(res.data)
                         }).catch((err)=>{
                             console.log(err)
                         })
-                        swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                        $('.modals-product-detail').css('display','none')
+                        
 
                     }).catch((err)=>{
                         console.log(err)
@@ -1204,8 +1217,8 @@ function payment_groupbuy_home(product_id){
                 }).catch((err)=>{
                     console.log(err)
                 })
-            }else {
-                
+            }else { // hasil else dari if null berarti ada cust yg udh beli. sisa productnya
+                console.log('masuk ke else null 1209')
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                 .then((response)=>{
                     console.log(response.data)
@@ -1213,6 +1226,7 @@ function payment_groupbuy_home(product_id){
                     var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
                     console.log(item_tersedia)
                     if(total_qty_from_user > item_tersedia){
+                        console.log('masuk ke if item tersedia 1217')
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
@@ -1268,7 +1282,14 @@ function payment_groupbuy_home(product_id){
                                         })
                                     }).then((res)=>{
                                         console.log(res.data)
-                                        // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                        if(res.data){
+                                            swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                            // tambahin gambar yg dari mas fauzi
+                                            console.log('berhasil pembelian line 1286')
+                                            location.replace(`../Iframe/success.html`)
+                                        }else {
+                                            swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
+                                        }
                                         // $('.modals-product-detail').css('display','none')
                                     }).catch((err)=>{
                                         console.log(err)
@@ -1280,7 +1301,7 @@ function payment_groupbuy_home(product_id){
                               console.log(err)
                           })
                     }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
-                        
+                        console.log('masuk ke else 1285')
                         axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                         .then((res)=>{
                             detail_product = res.data
@@ -1329,7 +1350,15 @@ function payment_groupbuy_home(product_id){
                                         swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
                                         // close_all_open_window()
                                         $('.modals-product-detail').css('display','none')
-                                        window.location.reload()
+                                        $('.box_iframe_groupbuy').css('display','none')
+                                        
+                                        
+                                        $('.box_iframe_groupbuy').remove()
+                                        // tambahin gambar yg dari mas fauzi
+                                        console.log('berhasil pembelian line 1356')
+                                        location.replace(`../Iframe/success.html`)
+
+                                        
                                     }else {
                                         swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
                                         $('.modals-product-detail').css('display','none')
@@ -1337,7 +1366,7 @@ function payment_groupbuy_home(product_id){
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
-                        
+                                // refresh()
 
                             }).catch((err)=>{
                                 console.log(err)
@@ -1422,12 +1451,23 @@ function payment_groupbuy(product_id){
                                 })
                             }).then((res)=>{
                                 console.log(res.data)
+                                if(res.data){
+                                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                    $('.groupbuy_sp').css('display','none')
+                                    $('.success_payment_sp').css('display','flex')
+                                    $('.success_payment_sp').append(`
+                                        <img src="../img/pembelian_berhasil.png" alt="" class="img-promo2"> 
+                                    `)
+                                    // $('.modals-product-detail').attr('src','../Iframe/success.html')
+                                }else {
+                                    swal.fire("Penambahan Gagal,", "", "error");
+                                    $('.groupbuy_sp').css('display','none')
+                                }
                             }).catch((err)=>{
                                 console.log(err)
                             })
                     
-                            swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                            $('.groupbuy_sp').css('display','none')
+                       
                 
                     }).catch((err)=>{
                         console.log(err)
@@ -1467,8 +1507,6 @@ function payment_groupbuy(product_id){
                                   var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
                                   console.log(harga_pembelian)
 
-
-
                                       customerDetails  ={
                                           Customer_Code:token,
                                           Total_Price: harga_pembelian,
@@ -1507,6 +1545,16 @@ function payment_groupbuy(product_id){
                                               "Sales_Order_Detail_data": items
                                           })
                                       }).then((res)=>{
+                                          if(res.data){
+                                            $('.success_payment_sp').css('display','flex')
+                                            $('.success_payment_sp').append(`
+                                                <img src="../img/pembelian_berhasil.png" alt="" class="img-promo2"> 
+                                            `)
+                                            $('.groupbuy_sp').css('display','none')
+                                          }else {
+                                            swal.fire("Penambahan Gagal,", "", "error");
+                                            $('.groupbuy_sp').css('display','none')
+                                          }
                                           console.log(res.data)
                                       }).catch((err)=>{
                                           console.log(err)
@@ -1564,11 +1612,20 @@ function payment_groupbuy(product_id){
                                         })
                                     }).then((res)=>{
                                         console.log(res.data)
+                                        if(res.data){
+                                            // $('.modals-product-detail').attr('src','../Iframe/success.html')
+                                            $('.groupbuy_sp').css('display','none')
+                                            $('.success_payment_sp').css('display','flex')
+                                            $('.success_payment_sp').append(`
+                                                <img src="../img/pembelian_berhasil.png" alt="" class="img-promo2"> 
+                                            `)
+                                          }else {
+                                            swal.fire("Penambahan Gagal,", "", "error");
+                                            $('.groupbuy_sp').css('display','none')
+                                          }
                                     }).catch((err)=>{
                                         console.log(err)
-                                    })
-                            
-                                    
+                                    })                      
                             }).catch((err)=>{
                                 console.log(err)
                             })
@@ -1576,8 +1633,8 @@ function payment_groupbuy(product_id){
                             console.log(err)
                         })
                     }
-                    swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                    $('.groupbuy_sp').css('display','none')
+                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                    // $('.groupbuy_sp').css('display','none')
                 }).catch((err)=>{
 
                 })
@@ -1726,9 +1783,6 @@ const check_status_item=()=>{
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
-
-
-       
         axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
             console.log(res.data)
@@ -2318,10 +2372,10 @@ const edit_product_name=(product_id)=>{
     console.log(product_id)
     $("#"+product_id+"-name").prop('disabled',false) 
     $("#"+product_id+"-name").css('background-color','#ddd')
-
-
     $("#"+product_id+"-box_edit_name").css('display','none') // icon 
     $("#"+product_id+"-save_name").css('display','block') // icon
+
+    // $('.icon-edit-prod').prop('disabled',true)
   
 
 }
@@ -2408,13 +2462,15 @@ const save_product_name=()=>{
                                     console.log(err)
                                 })
                             }else {
-                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
+                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
                                     console.log(res.data)
                                     if(res.data){
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_name')
+                                         $('#id_otp').empty()
+                                         $('#id_pass').empty()
                                     }else {
                                         swal.fire("Gagal Mengubah Data", "", "error");
                                     }
@@ -2480,7 +2536,7 @@ const save_product_name=()=>{
                                         console.log(err)
                                     })
                             }else {
-                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
+                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
                                     if(res.data){
                                         swal.fire("Berhasil Mengubah Data", "", "success");
@@ -2557,7 +2613,8 @@ const save_product_name=()=>{
                                     console.log(err)
                                 })
                             }else {
-                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}`)
+                                
+                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
                                     console.log(res.data)
                                     if(res.data){
@@ -2603,10 +2660,7 @@ const save_product_name=()=>{
                     axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         if(res.data){
-                        $("#"+product_id+"-discount").prop('disabled',true) 
-                        $("#"+product_id+"-box_edit_discount").css('display','block') // icon 
-                        $("#"+product_id+"-save_discount").css('display','none') // icon
-                        $("#"+product_id+"-discount").css('background-color','transparent')
+                   
 
                         var status = $("#"+product_id+"-status").val()
                         if(status == 'on'){
@@ -2626,15 +2680,23 @@ const save_product_name=()=>{
                         console.log(qty, ' ini qty')
                         console.log(Product_Code, ' ini product Code')
                         console.log(token,' cc')
-                        axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
+                        console.log(email,'email groupbuy')
+                        console.log(pass,'pass groupbuy')
+                        console.log(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                        axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                         .then((res)=>{
                             console.log(res.data,'berhasil update product discount')
                             if(res.data){
-                                swal.fire("Berhasil Mengubah Data", "", "success");
+                                $('#get_otp').modal('hide')
+                                $("#"+product_id+"-discount").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_discount").css('display','block') // icon 
+                                $("#"+product_id+"-save_discount").css('display','none') // icon
+                                $("#"+product_id+"-discount").css('background-color','transparent')
                                 $('#s_product_name').removeClass(product_id)
                                 $('#s_product_name').removeClass('product_discount')
+                                swal.fire("Berhasil Mengubah Data", "", "success");
                                 // Swal.fire('Simpan Berhasil', '', 'success')
-                                $('#get_otp').modal('hide')
+                                
                             }else {
                                 swal.fire("Gagal Mengubah Data", "", "error")    
                                 axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
@@ -2700,7 +2762,7 @@ const save_product_name=()=>{
                         console.log(price, ' ini price')
                         console.log(qty, ' ini qty')
                         console.log(Product_Code, ' ini product Code')
-                        axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
+                        axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                         .then((res)=>{
                             console.log(res.data, ' berhasil update discount price')
                             if(res.data){

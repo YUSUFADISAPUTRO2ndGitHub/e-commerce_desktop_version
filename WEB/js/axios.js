@@ -91,6 +91,7 @@ axios.post('http://products.sold.co.id/get-product-details')
 getAllData()
 
 const get_product_detail_from_main_page=(product_id)=>{
+    $('.box-delete-success').css('display','block')
     $('.modals-product-detail').css('display','block')
     $('.close-button').css('display','block')
     $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}`)
@@ -421,6 +422,7 @@ function close_all_open_window(){
     $('.option-2').removeClass("background_grey");
     $('.option-3').removeClass("background_grey");
     $('.option-4').removeClass("background_grey");
+    $('.box-delete-success').css('display','none')
     
 }
 
