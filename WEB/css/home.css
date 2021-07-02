@@ -4147,6 +4147,7 @@ img{
     overflow-x: hidden;
     left:23%;
     border-radius:10px;
+    display:none;
     /* width:100%; */
     /* background-color: red; */
     /* display: none; */

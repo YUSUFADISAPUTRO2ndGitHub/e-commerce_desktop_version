@@ -475,12 +475,7 @@ const render_group_buy=(product_id)=>{
                         <div class="box-name" >
                             <p>BIAYA PENGIRIMAN</p>
                         </div>
-                        <select class="form-select option-pengiriman-gb" aria-label="Default select example">
-                            <option selected>Pengiriman Fee</option>            
-                            <option  id="pengiriman-fee">JNE</option>   
-                            <option id="pengiriman-fee">TIKI</option>   
-                            <option id="pengiriman-fee">OK KIRIM</option>   
-                        </select>
+                        <input type="number" class="name-form"  id="total_biaya_pengiriman_gb">
                     </div>
                 </div>  
             </div>

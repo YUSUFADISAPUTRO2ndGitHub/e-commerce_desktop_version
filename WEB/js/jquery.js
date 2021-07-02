@@ -1147,6 +1147,15 @@ function payment_groupbuy_home(product_id){
     var data_customer;
     var items = []
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
+    // BATAS TESTING
+
+
+
+
+
+
+
+    // BATAS TESTING 
     if(total_qty_from_user>0) { 
         axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
         .then((res)=>{
@@ -1715,6 +1724,7 @@ function addToCart(product_id){
 
 
 function addressMethod(item){
+    console.log(item)
     console.log(item.value)
     if(item.value === 'Alamat Terdaftar'){
         
@@ -1727,8 +1737,55 @@ function addressMethod(item){
     }
 }
 
+setInterval(() => {
+    resultAddress()
+},5000)
+
 
 function resultAddress(item){
+
+    var pilihan_alamat=$('.option-address-gb option:selected').val()
+    console.log(pilihan_alamat,' ini  pilihan jenis alamat')
+    if(pilihan_alamat === 'Alamat Terdaftar'){
+        var payment_choosing = $('.option-payment-gb option:selected').val()
+        console.log(payment_choosing,' payment choosing 1750')
+        var alamat = $('.option-alamat-gb option:selected').val()
+        console.log(alamat,' ini alamat yg dipake')
+        var check_alamat = alamat.toUpperCase().includes('JAKARTA'.toUpperCase())
+        if(alamat.toUpperCase().includes('JAKARTA'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('10.000')
+        }else if (alamat.toUpperCase().includes('TANGERANG'.toUpperCase()) || alamat.toUpperCase().includes('banten'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('15.000')
+        }
+        else if (alamat.toUpperCase().includes('depok'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('20.000')
+        }
+        else if (alamat.toUpperCase().includes('bogor'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('25.000')
+        }
+        else {
+            $('#total_biaya_pengiriman_gb').val('50.000')
+        }
+    }else if (pilihan_alamat === 'Alamat Baru'){
+        var alamat_baru = $('#alamat_lain').val()
+        if(alamat_baru.toUpperCase().includes('JAKARTA'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('10.000')
+        }else if (alamat_baru.toUpperCase().includes('TANGERANG'.toUpperCase()) || alamat_baru.toUpperCase().includes('banten'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('15.000')
+        }
+        else if (alamat_baru.toUpperCase().includes('depok'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('20.000')
+        }
+        else if (alamat_baru.toUpperCase().includes('bogor'.toUpperCase())){
+            $('#total_biaya_pengiriman_gb').val('25.000')
+        }
+        else {
+            $('#total_biaya_pengiriman_gb').val('50.000')
+        }
+
+        console.log(alamat_baru, 'ini alamat baru')
+    }
+
 
 }
 $('.id-address-gb').on('click',function(){
