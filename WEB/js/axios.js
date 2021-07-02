@@ -514,9 +514,9 @@ const render_group_buy=(product_id)=>{
                 option_payment.map((val,index)=>{
                     console.log(val.Payment_Method_Desc)
                     console.log(val.Payment_Method_Desc === 'BCA VA TRANSFER')
-                    if(val.Payment_Method_Desc === 'BCA VA TRANSFER'){
+                    if(val.Payment_Method_Name === 'transfer'){
                         $('.option-payment-gb').append(`
-                            <option id="payment_gb" value="${val.Payment_Method_Desc}">${val.Payment_Method_Desc}</option> 
+                            <option id="payment_gb" value="${val.Payment_Method_Name}">${val.Payment_Method_Name}</option> 
                         `)
                     }
                 })

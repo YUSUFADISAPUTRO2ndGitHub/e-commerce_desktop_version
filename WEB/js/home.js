@@ -730,7 +730,7 @@ const send_otp=()=>{
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{  
         console.log(res.data)
-        axios.post(`http://customers.sold.co.id/get-otp?Email=darmawanbayu1@gmail.com`)
+        axios.post(`http://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
         .then((res)=>{
             if(res.data){
                 Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
@@ -749,7 +749,7 @@ const send_otp=()=>{
 const send_otp_login=()=>{
     var email = $('#email_login').val()
     if(email){
-        axios.post(`http://customers.sold.co.id/get-otp?Email=darmawanbayu1@gmail.com`)
+        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
                 Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
@@ -769,7 +769,7 @@ const send_otp_login_prod=()=>{
     var email = $('#email_login_prod').val()
     console.log(email)
     if(email){
-        axios.post(`http://customers.sold.co.id/get-otp?Email=darmawanbayu1@gmail.com`)
+        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
                 Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
