@@ -412,12 +412,7 @@ function groupbuy_sp_form(product_id){
                          <div class="box-name" >
                              <p>BIAYA PENGIRIMAN</p>
                          </div>
-                        <select class="form-select option-pengiriman-gb" aria-label="Default select example">
-                            <option selected>Pengiriman Fee</option>            
-                            <option  id="pengiriman-fee">JNE</option>   
-                            <option id="pengiriman-fee">TIKI</option>   
-                            <option id="pengiriman-fee">OK KIRIM</option>   
-                        </select>
+                         <input type="number" class="name-form"  id="total_biaya_pengiriman_gb">
                      </div>
                  </div>  
              </div>
@@ -451,9 +446,9 @@ function groupbuy_sp_form(product_id){
                 option_payment.map((val,index)=>{
                     console.log(val.Payment_Method_Desc)
                     console.log(val.Payment_Method_Desc === 'BCA VA TRANSFER')
-                    if(val.Payment_Method_Desc === 'BCA VA TRANSFER'){
+                    if(val.Payment_Method_Name === 'transfer'){
                         $('.option-payment-gb').append(`
-                            <option id="payment_gb" value="${val.Payment_Method_Desc}">${val.Payment_Method_Desc}</option> 
+                            <option id="payment_gb" value="${val.Payment_Method_Name}">${val.Payment_Method_Name}</option> 
                         `)
                     }
                 })

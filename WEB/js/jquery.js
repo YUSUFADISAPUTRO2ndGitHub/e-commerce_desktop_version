@@ -271,7 +271,7 @@ $(function(){
                                      <tr class="tr_detail_prod">
                                          <td>
                                              <div class="box-switch">
-                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                              </div> 
                                          </td>
                                          <td>
@@ -326,7 +326,7 @@ $(function(){
                                      <tr class="tr_detail_prod">
                                          <td>
                                              <div class="box-switch">
-                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this,'${val.Product_Code}')">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                              </div> 
                                          </td>
                                          <td>
@@ -381,7 +381,7 @@ $(function(){
                                      <tr class="tr_detail_prod">
                                          <td>
                                              <div class="box-switch">
-                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                              </div> 
                                          </td>
                                          <td>
@@ -438,7 +438,7 @@ $(function(){
                                      <tr class="tr_detail_prod">
                                          <td>
                                              <div class="box-switch">
-                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                              </div> 
                                          </td>
                                          <td>
@@ -493,7 +493,7 @@ $(function(){
                                      <tr class="tr_detail_prod">
                                          <td>
                                              <div class="box-switch">
-                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                                 <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                              </div> 
                                          </td>
                                          <td>
@@ -548,7 +548,7 @@ $(function(){
                                 <tr class="tr_detail_prod">
                                     <td>
                                         <div class="box-switch">
-                                            <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                            <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                         </div> 
                                     </td>
                                     <td>
@@ -611,7 +611,7 @@ $(function(){
                                      <tr class="tr_detail_prod">
                                          <td>
                                              <div class="box-switch">
-                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                                 <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                              </div> 
                                          </td>
                                          <td>
@@ -2545,6 +2545,12 @@ console.log('functuin jalan')
 }
 
 
+const change_status_otp=(token)=>{
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(token)
+    $('#s_product_name').addClass('status_gb')
+}
+
 const save_product_name=()=>{
     // alert('simpan jalan')
     var otp = $('#id_otp').val()
@@ -2944,6 +2950,8 @@ const save_product_name=()=>{
         }).catch((err)=>{
             console.log(err)
         })
+    }else if (jenis_edit === 'status_gb'){
+        alert('masuk ke sini 2954 jquery')
     }
     else {
         console.log('masuk ke else 2570 jquery')
