@@ -576,7 +576,7 @@ const render_searching_page=(product_name)=>{
 
 
 
-const render_daftar_hutang=()=>{
+const render_daftar_hutang=()=>{ // render utang untuk di card
     const token = localStorage.getItem('token')
     
     axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
@@ -585,16 +585,15 @@ const render_daftar_hutang=()=>{
         res.data.map((val,index)=>{
             console.log(val)
             $('.ID_list_hutang').append(`
-            <tr>
-                <td>${val.Total_Quantity}</td>
-                <td >
-                    <p class="limited-text-short" onclick="item_detail_for_hutang('${val.Order_Number}')">${val.Order_Number} </p> 
-                </td>
-                <td >${val.Payment_Method}</td>
-                <td >${val.Total_Price}</td>
-                <td >${val.Status}</td>
-                
-            </tr>
+                <tr>
+                    <td>${val.Total_Quantity}</td>
+                    <td>
+                        <p class="limited-text-short" onclick="item_detail_for_hutang('${val.Order_Number}')">${val.Order_Number} </p> 
+                    </td>
+                    <td >${val.Payment_Method}</td>
+                    <td >${val.Total_Price}</td>
+                    <td >${val.Status}</td>
+                </tr>
             `)
       
         })
@@ -607,10 +606,49 @@ const render_daftar_hutang=()=>{
 }
 
 
+const detail_hutang_home=(order_number)=>{ // detail utang di home header
+    // alert('function jalan')
+    // $('.tableFixHead_ul_hutang').css('display','none')
+    $('.tableFixHead_ul_detail_hutang').css('display','block')
+    // $('#daftarHutangModal').modal('hide')
+    // $('#ID_detail_hutang_modal').modal('show')
+    console.log(order_number)
+    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${order_number}`)
+    .then((res)=>{
+        console.log(res.data)
+        $('.ref_code_detail_hutang').val(res.data.Customer_Code)
+        $('.customer_name_hutang').val(res.data.Primary_Recipient_Name)
 
-const item_detail_for_hutang=(order_number)=>{
+        res.data.map((val,index)=>{
+            console.log(val)
+            // $('.id_detail_hutang').append(`
+            //     <div class="comm-1-list">
+            //         <p>${val.sys_id}</p>
+            //     </div>
+            // `)
+            $('.ul_detail_list_hutang').append(`
+            <tr>
+                <td><p class="limited-text-short">${val.Order_Number}</p></td>
+                <td><p>RP.${val.Total_Price}</td>
+                <td ><p>${val.Payment_Method}</p></td>
+                <td ><p>${val.Shipping_Fee}</p></td>
+                <td ><p>${val.Shipping_Address}</p></td>
+                <td ><p style="word-break: break-all">${val.VA_Number}</p></td>  
+
+            </tr>
+            `)
+            
+        })
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+
+const item_detail_for_hutang=(order_number)=>{ // detail utang dari card
     
-    
+    // alert('function jalan')
     // $('#daftarHutangModal').modal('hide')
     $('#ID_detail_hutang_modal').modal('show')
     axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${order_number}`)

@@ -34,6 +34,7 @@ $( document ).ready(function() {
     const item_category = urlParams.get('product_id');
     const group_buy = urlParams.get('groupbuy_id')
     const list_hutang = urlParams.get('list_hutang')
+    const detail_list_hutang = urlParams.get('detail_list_hutang')
 
     // console.log(group_buy, 'group_buy')
     console.log(queryString,' queryString')
@@ -63,6 +64,8 @@ $( document ).ready(function() {
     }else if (list_hutang !=undefined){
         // render_daftar_hutang()
         newRender_list_hutang()
+    }else if (detail_list_hutang != undefined){
+        detail_hutang_home(detail_list_hutang)
     }
     else {
         console.log('error masuk ke else 33')
@@ -736,23 +739,22 @@ function addAddressSupp(){
 
 const newRender_list_hutang=(customer_code)=>{
     const token = localStorage.getItem('token')
-    
+    $('.ul_list_hutang').empty()
     axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
     .then((res)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
             console.log(val)
             $('.ul_list_hutang').append(`
-            <tr>
-                <td >
-                    <p class="limited-text-short" onclick="item_detail_for_hutang('${val.Order_Number}')">${val.Order_Number} </p> 
-                </td>
-                <td >${val.Total_Price}</td>
-                <td >${val.Payment_Method}</td>
-                <td>${val.Shipping_Address}</td>
-                <td >${val.Status}</td>
-                
-            </tr>
+                <tr>
+                    <td>
+                        <p class="limited-text-short" onclick="open_detail_hutang_home('${val.Order_Number}')">${val.Order_Number} </p> 
+                    </td>
+                    <td >${val.Total_Price}</td>
+                    <td >${val.Payment_Method}</td>
+                    <td>${val.Shipping_Address}</td>
+                    <td >${val.Status}</td>           
+                </tr>
             `)
       
         })
@@ -761,4 +763,10 @@ const newRender_list_hutang=(customer_code)=>{
     }).catch((err)=>{
         console.log(err)
     })
+}
+
+
+const open_detail_hutang_home=(order_number)=>{
+    // var token = localStorage.getItem('token')
+    location.replace(`./detailUnpaidList.html?detail_list_hutang=${order_number}`)
 }
