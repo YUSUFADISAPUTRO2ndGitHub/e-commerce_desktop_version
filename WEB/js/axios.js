@@ -228,6 +228,7 @@ const findSubCategory=(sub)=>{
     $('.close-button').css('display','block')
     console.log(sub)
     $('.closeByLogin').css('display','none')
+    $('.option-0').removeClass("background_grey")
     $('.option-1').removeClass("background_grey")
     $('.option-2').removeClass("background_grey")
     $('.option-3').removeClass("background_grey")
@@ -420,6 +421,7 @@ const renderItemBasedOnCategory=(Category)=>{
 
 function close_all_open_window(){
     $(".force-close-all-command").css("display", "none");
+    $('.option-0').removeClass("background_grey");
     $('.option-1').removeClass("background_grey");
     $('.option-2').removeClass("background_grey");
     $('.option-3').removeClass("background_grey");

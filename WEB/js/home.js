@@ -96,39 +96,47 @@ function pengiriman_requested(x){
 
 function cek_daftar_hutang(x){
     // alert('function jalan')
+    // console.log(x)
     var token = localStorage.getItem('token')
-    var data_customer;
-  
+    // var data_customer;
+    $('.close-button').css('display','block')
+    $('.close').css('display','none') 
+    if($(x).hasClass("background_grey")){
+        $(x).removeClass("background_grey");
+        $('.modals-hutang-home').css('display','none')
+    }else{
+        $(x).addClass("background_grey");
+        $('.modals-hutang-home').css('display','block')
+    }
+    if($(x).hasClass('close-button')){
+        // alert('masuk ke line 72')
+        $('.close-button').css('display','none')
+    }
+   
+    
+        
+        
+    
+    console.log($('.modals-hutang-home').css('display'))
+    // $(".modals-hutang-home").toggle();
+    $(".modals-hutang-home").attr("src", `./Iframe/unpaidList.html?list_hutang=${token}`);
 
 
+    // ngilangin block abu abu pas di klik
+    $('.option-2').removeClass('background_grey')
+    $('.option-3').removeClass('background_grey')
+    $('.option-1').removeClass('background_grey')
 
-        $('.close-button').css('display','block')
-        $('.close').css('display','none') 
-        if($(x).hasClass("background_grey")){
-            $(x).removeClass("background_grey");
-            
-        }else{
-            $(x).addClass("background_grey");
-        }
-        if($(x).hasClass('close-button')){
-            // alert('masuk ke line 72')
-            $('.close-button').css('display','none')
-        }
-        $(".modals-hutang-home").toggle();
-        $(".modals-hutang-home").attr("src", `./Iframe/unpaidList.html?list_hutang=${token}`);
-    
-    
-        // ngilangin block abu abu pas di klik
-        $('.option-2').removeClass('background_grey')
-        $('.option-3').removeClass('background_grey')
-        $('.option-1').removeClass('background_grey')
-    
-        // SEARCH ITEM BACK TO NORMAL
-        $('.box-render-search').css('display','none')
-        $('.input-name').css('border-bottom-left-radius','10px')
-        $('.input-name').css('border-bottom-right-radius','10px')
-        $('.input-name').val(null)
-  
+    // SEARCH ITEM BACK TO NORMAL
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
+    $('.input-name').val(null)
+
+    // untuk close iframe sebelahnya
+    $('.modals-pengiriman').css("display",'none')
+    $('.modals-check-harga').css("display",'none')
+    $(".iframe").css('display','none')
 }
 
 

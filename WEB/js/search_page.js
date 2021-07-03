@@ -370,7 +370,8 @@ function groupbuy_sp_form(product_id){
     var token = localStorage.getItem('token')
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
-        // if(res.data){
+        console.log(res.data)
+        if(res.data){
 
     $('.groupbuy_sp').empty()
     $('.item_detail_sp').css('display','none')
@@ -477,29 +478,29 @@ function groupbuy_sp_form(product_id){
             }).catch((err)=>{
                 console.log(err)
             })
-    console.log(product_id)           
+            console.log(product_id)           
             
-        // }else {
-        //     Swal.fire({
-        //         title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
-        //         showDenyButton: true,
-        //         showCancelButton: false,
-        //         confirmButtonText: `Lihat Daftar Tagihan`,
-        //         denyButtonText: `Cancel`,
-        //     }).then((result) => {
-        //         /* Read more about isConfirmed, isDenied below */
-        //         if (result.isConfirmed) {
-        //             $(".force-close-all-command").css("display", "none");
-        //             $('#daftarHutangModal').modal('show')
+        }else {
+            Swal.fire({
+                title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: `Lihat Daftar Tagihan`,
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $(".force-close-all-command").css("display", "none");
+                    $('#daftarHutangModal').modal('show')
                     
-        //             render_daftar_hutang()
-        //         } else if (result.isDenied) {
-        //             Swal.fire('Cancel berhasil', '', 'success')
-        //             $(".force-close-all-command").css("display", "none");
-        //         }
+                    render_daftar_hutang()
+                } else if (result.isDenied) {
+                    Swal.fire('Cancel berhasil', '', 'success')
+                    $(".force-close-all-command").css("display", "none");
+                }
                 
-        //       })
-        // }
+              })
+        }
     }).catch((err)=>{
         console.log(err)
     })

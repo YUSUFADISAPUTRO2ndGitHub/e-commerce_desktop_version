@@ -91,6 +91,7 @@ $(function(){
         })
 
         $('.closeByLogin').css('display','none')
+        $('.option-0').removeClass("background_grey")
         $('.option-1').removeClass("background_grey")
         $('.option-2').removeClass("background_grey")
         $('.option-3').removeClass("background_grey")
@@ -104,6 +105,7 @@ $(function(){
 
    $('.category-name').on('click',function(){
         $('.closeByLogin').css('display','none')
+        $('.option-0').removeClass("background_grey")
         $('.option-1').removeClass("background_grey")
         $('.option-2').removeClass("background_grey")
         $('.option-3').removeClass("background_grey")
@@ -991,6 +993,7 @@ $(function(){
                     }
                  
                     $('.closeByLogin').css('display','none')
+                    $('.option-0').removeClass("background_grey")
                     $('.option-1').removeClass("background_grey")
                     $('.option-2').removeClass("background_grey")
                     $('.option-3').removeClass("background_grey")
@@ -1025,6 +1028,25 @@ $(function(){
             $('.modals-information-login').css('display','flex')
             $(".modals-information-login").attr('src',`./Iframe/cust-information.html`)
         })
+
+  
+        
+
+            // $(".box-name-product2").mouseover( function() {
+            //     alert('jalan')
+            //     $(".box-img-bp").stop().transition({ opacity: '1'}, 500);
+                
+            //  }); 
+
+            
+            // $(".box-name-product2").mouseout( function(){
+            //     alert('jalan')
+            // $(".box-img-bp").stop().transition({ opacity: '0'}, 500);
+        
+            // });
+            
+       
+            
    
 })
 
@@ -1098,8 +1120,11 @@ function check_qty(val){
 function groupbuy(product_id){
     
     var token = localStorage.getItem('token')
+    console.log(product_id)
+    console.log(token)
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
+        console.log(res.data)
         // location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
         if(res.data){
             
@@ -1745,12 +1770,12 @@ setInterval(() => {
 function resultAddress(item){
 
     var pilihan_alamat=$('.option-address-gb option:selected').val()
-    console.log(pilihan_alamat,' ini  pilihan jenis alamat')
+    // console.log(pilihan_alamat,' ini  pilihan jenis alamat')
     if(pilihan_alamat === 'Alamat Terdaftar'){
         var payment_choosing = $('.option-payment-gb option:selected').val()
-        console.log(payment_choosing,' payment choosing 1750')
+        // console.log(payment_choosing,' payment choosing 1750')
         var alamat = $('.option-alamat-gb option:selected').val()
-        console.log(alamat,' ini alamat yg dipake')
+        // console.log(alamat,' ini alamat yg dipake')
         var check_alamat = alamat.toUpperCase().includes('JAKARTA'.toUpperCase())
         if(alamat.toUpperCase().includes('JAKARTA'.toUpperCase())){
             $('#total_biaya_pengiriman_gb').val('10.000')
@@ -1783,7 +1808,7 @@ function resultAddress(item){
             $('#total_biaya_pengiriman_gb').val('50.000')
         }
 
-        console.log(alamat_baru, 'ini alamat baru')
+        // console.log(alamat_baru, 'ini alamat baru')
     }
 
 
@@ -1854,7 +1879,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -1909,7 +1934,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status(this,'${val.Product_Code}')">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -1964,7 +1989,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -2021,7 +2046,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -2076,7 +2101,7 @@ const check_status_item=()=>{
                              <tr class="tr_detail_prod">
                                  <td>
                                      <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                      </div> 
                                  </td>
                                  <td>
@@ -2131,7 +2156,7 @@ const check_status_item=()=>{
                         <tr class="tr_detail_prod">
                             <td>
                                 <div class="box-switch">
-                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onchange="get_status('${val.Product_Code}')">
+                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
                                 </div> 
                             </td>
                             <td>
@@ -2376,22 +2401,53 @@ const edit_product_quantity=(product_id)=>{
     $("#"+product_id+"-box_edit_quantity").css('display','none') // icon 
     $("#"+product_id+"-save_quantity").css('display','block') // icon
 }
-const get_status=(product_id)=>{
+const get_status=(product_id,pass)=>{
     // alert(item_status)
-    
+    var password = pass
     var Product_Code = $("#"+product_id+"-pCode").val()
     var Name = $("#"+product_id+"-pName").val()
     var qty = $("#"+product_id+"-quantity").val()
     var price = $("#"+product_id+"-discount").val()
     var token = localStorage.getItem('token')
+    var email;
     var result;
 
-
-    // if($(item_status).is(':checked')){
-        //     result = true
-        // }else {
-            //     result = false
-            // }
+            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then((res)=>{
+                email = res.data.Email
+                axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
+                .then((res)=>{
+                    console.log(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
+                    console.log(res.data)
+                    if(res.data){
+                        swal.fire("Berhasil Mengubah Data", "", "success");
+                        $('#get_otp').modal('hide')
+                    }else {
+                        swal.fire("Gagal Mengubah Data", "", "error");
+                        $('#get_otp').modal('hide')
+                        
+                    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                    .then((res)=>{
+                        console.log(res.data)
+                        console.log(res.data.GroupBuy_SellPrice)
+                        // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                        if(res.data.GroupBuy_Purchase == 'true'){
+                            $('#'+product_id+"-status").prop('checked',true)
+                        }else {
+                            $('#'+product_id+"-status").prop('checked',false)
+                            
+                        }
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }
+    
+                }).catch((err)=>{
+    
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
             console.log($('#'+product_id+"-status").val())
             if($('#'+product_id+"-status").is(':checked')){
                 result = true
@@ -2399,32 +2455,6 @@ const get_status=(product_id)=>{
                 result = false
             }
             
-            axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
-            .then((res)=>{
-                if(res.data){
-                    swal.fire("Berhasil Mengubah Data", "", "success");
-                }else {
-                    swal.fire("Gagal Mengubah Data", "", "error");
-                    
-                    
-            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-            .then((res)=>{
-                console.log(res.data.GroupBuy_SellPrice)
-                // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
-                if(res.data.GroupBuy_Purchase == 'true'){
-                    $('#'+product_id+"-status").prop('checked',true)
-                }else {
-                    $('#'+product_id+"-status").prop('checked',false)
-                    
-                }
-            }).catch((err)=>{
-                console.log(err)
-            })
-        }
-
-    }).catch((err)=>{
-
-    })
  }
 
 const save_edit_quantity=(product_id)=>{
@@ -2871,6 +2901,7 @@ const save_product_name=()=>{
             console.log(err)
         })
     }else if (jenis_edit === 'groupbuy_qty'){
+        console.log('function groupbuy qty jalan')
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             email = res.data.Email
@@ -2951,7 +2982,9 @@ const save_product_name=()=>{
             console.log(err)
         })
     }else if (jenis_edit === 'status_gb'){
-        alert('masuk ke sini 2954 jquery')
+        get_status(product_id,pass)
+        $('#s_product_name').removeClass(product_id)
+        $('#s_product_name').removeClass('status_gb')
     }
     else {
         console.log('masuk ke else 2570 jquery')
@@ -2960,6 +2993,44 @@ const save_product_name=()=>{
 
 
 }
+
+
+
+const about_dirjen=()=>{
+    Swal.fire({
+        title: `   
+         <div class="box-dirjen-2">
+            <p>DIREKTORAT JENDERAL PERLINDUNGAN KONSUMEN DAN TERTIB NIAGA  <br> KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA</p>
+            <div class="dirjen-alamat">
+                <p>Alamat : </p>
+                <p>Gedung 1 Lantai 3 <br> Jalan M.I.Riwdwan Rais No.5 <br> Jakpus 10110</p>
+            </div>
+            <div class="dirjen-alamat">
+                <p>Telepon :</p>
+                <p> +62-21-3858171, <br>+62-21-3451692</p>
+            </div>
+            <div class="dirjen-alamat">
+                <p>Faksimili :</p>
+                <p> +62-21-3858205, <br>+62-21-3842531</p>
+            </div>
+            <div class="dirjen-alamat">
+                <p>Email :</p>
+                <a href="mailto:contact.us@kemendag.go.id" target="_blank">contact.us@kemendag.go.id</a>
+                <!-- <p>contact.us@kemendag.go.id</p> -->
+            </div>
+        
+        </div>
+        `,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+}
+
+// FOOTER BOX
 
 
 

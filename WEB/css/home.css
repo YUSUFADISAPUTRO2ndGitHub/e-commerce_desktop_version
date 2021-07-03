@@ -13,7 +13,7 @@ body {
     width: 100%;
     /* height:100px; */
     /* background-color: red; */
-    height: 10vh;
+    height: 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,7 +22,7 @@ body {
 
 .main-body {
     width: 100%;
-    height: 70vh;
+    height: 70%;
     overflow: scroll;
 }
 
@@ -540,7 +540,62 @@ body {
     }
 }
 
+.swal2-title{
+    font-size: 13px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.swal2-header{
+    display: table !important;
+    /* justify-content: center !important; */
+    /* align-items: center !important; */
+    margin:auto !important;
+    width:200px !important;
+}
+.box-dirjen-2 {
+    width: 55%;
+    height: 300px;
+    padding-left: 10px;
+    /* border-left:1px solid black; */
+    /* line-height:0.5; */
+    /* background-color: blue; */
+}
+.box-dirjen-2 p:nth-child(1) {
+    font-size: 8px;
+    font-weight: 600;
+}
 
+.img-dirjen {
+    width: 100%;
+    height: 100px;
+}
+.dirjen-alamat {
+    width: 100%;
+    /* height:50px; */
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+
+}
+.dirjen-alamat p:nth-child(2) {
+    position: relative;
+    top: -3px;
+}
+.dirjen-alamat p {
+    font-size: 11px;
+    color: gray;
+}
+.dirjen-alamat a {
+    font-size: 11px;
+    color:gray;
+    position: relative;
+    top:-3px;
+    left:5px;
+}
+
+
+/* batas dirjen */
 .box-dirjen {
     width: 55%;
     height: 100%;
@@ -739,49 +794,49 @@ body {
     transition:0.5s ease-in-out;
 } */
 .img-produk {
-    width: 100px;
-    height: 75px;
+    width: 200px;
+    height: 150px;
     margin-bottom: 10px;
     /* background-color: red; */
 }
 .img-produk-lengkap {
-    width: 100px;
-    height: 75px;
+    width: 200px;
+    height: 150px;
     margin-bottom: 10px;
     /* background-color: red; */
 }
-.img-produk:hover {
+/* .img-produk:hover {
     width: 200px;
     height: 150px;
     transition: 0.5s ease-in-out;
-}
-.img-produk-lengkap:hover {
+} */
+/* .img-produk-lengkap:hover {
     width: 150px;
     height: 100px;
     transition: 0.5s ease-in-out;
-}
+} */
 .img-pembayaran {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 150px;
     margin-bottom: 10px;
     /* background-color: red; */
 }
-.img-pembayaran:hover {
+/* .img-pembayaran:hover {
     width: 200px;
     height: 150px;
     transition: 0.5s ease-in-out;
-}
+} */
 .img-delivery {
-    width: 150px;
-    height: 100px;
+    width: 200px;
+    height: 150px;
     margin-bottom: 10px;
     /* background-color: red; */
 }
-.img-delivery:hover {
+/* .img-delivery:hover {
     width: 200px;
     height: 150px;
     transition: 0.5s ease-in-out;
-}
+} */
 .split-item {
     width: 100%;
     height: 100%;
@@ -939,40 +994,44 @@ body {
 .box-product {
     width: 100%;
     /* height:450px; */
-    height: 30vh;
+    /* height: 200px; */
+    height:3%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     /* padding:50px; */
+    /* overflow:hidden; */
     border-top: 3px solid gray;
-    margin-top: 12px;
-    padding-left: 100px;
+    margin-top: 5px;
+    /* padding-left: 100px; */
     padding-right: 100px;
     /* background-color: red; */
 }
 .box-img-bp {
     /* background-color: blue; */
     position: relative;
-    top: -40px;
+    /* top: -40px; */
     height: 200px;
     width: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 1s;
+    /* opacity: 1; */
 }
 .product-item:nth-child(1) {
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
 }
 .product-item:nth-child(2) {
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
     position: relative;
-    top: -20px;
+    /* top: -20px; */
 }
 .product-item:nth-child(3) {
-    border-right: 1px solid black;
+    /* border-right: 1px solid rgb(202, 173, 173); */
     position: relative;
-    top: -20px;
+    /* top: -20px; */
 }
 .product-item {
     /* background-color:red; */
@@ -988,12 +1047,112 @@ body {
     align-items: center;
     /* align-items: center; */
 }
+.product-socmed {
+    /* background-color:red; */
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* padding-right:50px; */
+    /* padding-left:50px; */
+    width: 20%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    padding-left:5px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* align-items: center; */
+}
+.box_for_socmed-1{
+    width:50px;
+    height:50px;
+    border-radius: 5px;
+    border:1px solid gray;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-logo{
+    width:40px;
+    height:40px;
+    background-color: red;
+}
+.box_for_socmed-1:hover{
+    transition: 1s;
+    width:150px;
+    height:50px;
+    border-radius:10px;
+}
+.box_for_socmed-1:hover #soc_wa {
+    transition: 1s;
+display: flex;
+}
+#soc_wa{
+    display: none;
+    transition: 1s;
+}
+
+
+
+.box_for_socmed-2{
+    width:50px;
+    height:50px;
+    border-radius: 5px;
+    border:1px solid gray;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-logo{
+    width:40px;
+    height:40px;
+    background-color: red;
+}
+.box_for_socmed-2:hover{
+    transition: 1s;
+    width:150px;
+    height:50px;
+    border-radius:10px;
+}
+.box_for_socmed-2:hover #soc_linked {
+    transition: 1s;
+display: flex;
+}
+#soc_linked{
+    display: none;
+    transition: 1s;
+}
+
+
+
+.box_for_socmed-3{
+    width:50px;
+    height:50px;
+    border-radius: 5px;
+    border:1px solid gray;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box_for_socmed-4{
+    width:50px;
+    height:50px;
+    border-radius: 5px;
+    border:1px solid gray;
+    margin-bottom:5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .box-name-product {
     width: 100%;
     height: auto;
     /* background-color: pink; */
     position: relative;
-    top: -20px;
+    /* top: -20px; */
     left: 25%;
 }
 .box-name-product2 {
@@ -1008,7 +1167,7 @@ body {
     height: auto;
     /* background-color: pink; */
     position: relative;
-    bottom: 12px;
+    /* bottom: 12px; */
     left: 20%;
 }
 .box-name-product4 {
@@ -1016,7 +1175,7 @@ body {
     height: auto;
     /* background-color: pink; */
     position: relative;
-    bottom: 42px;
+    /* bottom: 42px; */
     left: 20%;
 }
 .box-name-product p:nth-child(1) {
@@ -3265,8 +3424,8 @@ th {
     /* width:200px;
     height: 200px; */
     /* background: red; */
-    -webkit-animation: fadein 2s linear forwards;
-    animation: fadein 2s linear forwards;
+    -webkit-animation: fadein 1s linear forwards;
+    animation: fadein 1s linear forwards;
     opacity: 0;
 }
 
@@ -3276,6 +3435,11 @@ th {
     opacity: 0;
 }
 .modals-pengiriman {
+    -webkit-animation: fadein 1s linear forwards;
+    animation: fadein 1s linear forwards;
+    opacity: 0;
+}
+.modals-hutang-home {
     -webkit-animation: fadein 1s linear forwards;
     animation: fadein 1s linear forwards;
     opacity: 0;
@@ -4135,27 +4299,19 @@ img{
 
 .modals-hutang-home {
     position: absolute;
-    z-index: 20;
-    top: 72px;
-    /* left:105px; */
-    /* right:172px; */
-    /* height:90vh; */
+    top: 72px; 
+    border-radius:10px;
+    left:23%;
     height: 61vh;
     width: 54%;
-    overflow: hidden;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    left:23%;
-    border-radius:10px;
     display:none;
-    /* width:100%; */
-    /* background-color: red; */
-    /* display: none; */
-    transition: 2s ease-out;
+    transition: 1s; 
     z-index: 101;
-    -webkit-animation: fadein 1.5s linear forwards;
-    animation: fadein 1.5s linear forwards;
-    opacity: 0;
+    box-shadow: 5px 5px 20px #217283;
+
+    /* -webkit-animation: fadein 1.5s linear forwards; */
+    /* animation: fadein 1.5s linear forwards; */
+    
 }
 
 
@@ -4199,4 +4355,11 @@ img{
     color: white;
 }
 
+.copyright-box{
+    height:50px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
