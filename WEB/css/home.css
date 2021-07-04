@@ -541,7 +541,7 @@ body {
 }
 
 .swal2-title{
-    font-size: 13px !important;
+    /* font-size: 13px !important; */
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -794,14 +794,14 @@ body {
     transition:0.5s ease-in-out;
 } */
 .img-produk {
-    width: 200px;
-    height: 150px;
+    width: 175px;
+    height: 125px;
     margin-bottom: 10px;
     /* background-color: red; */
 }
 .img-produk-lengkap {
-    width: 200px;
-    height: 150px;
+    width: 150px;
+    height: 100px;
     margin-bottom: 10px;
     /* background-color: red; */
 }
@@ -1106,11 +1106,16 @@ body {
     width:50px;
     height:50px;
     border-radius: 5px;
-    border:1px solid gray;
+    /* border:1px solid gray; */
     margin-bottom:5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #f09433; 
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
 }
 .img-logo{
     width:40px;
@@ -1125,16 +1130,22 @@ body {
     width:150px;
     height:50px;
     border-radius:10px;
+    cursor: pointer;
 }
-.box_for_socmed-2:hover #soc_whatsapp {
+.box_for_socmed-2:hover #soc_instagram {
     transition: 1s;
-display: flex;
+    display: flex;
 }
-#soc_whatsapp{
+#soc_instagram{
     display: none;
     transition: 1s;
     position: relative;
     top:8px;
+    color:white;
+}
+.fa-instagram{
+    font-size: 25px;
+    color: white;
 }
 
 
@@ -1192,12 +1203,44 @@ display: flex;
     width:50px;
     height:50px;
     border-radius: 5px;
-    border:1px solid gray;
+    /* border:1px solid gray; */
     margin-bottom:5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #FF0000;
 }
+.box_for_socmed-4:hover{
+    transition: 1s;
+    width:150px;
+    height:50px;
+    border-radius:10px;
+    cursor: pointer;
+ 
+}
+.box_for_socmed-4:hover #soc_youtube {
+    transition: 1s;
+display: flex;
+
+}
+#soc_youtube{
+    display: none;
+    transition: 1s;
+    color:white;
+    position: relative;
+    top:8px;
+}
+
+.fa-youtube{
+    font-size: 25px;
+    color: white;
+}
+
+
+
+
+
+
 .box-name-product {
     width: 100%;
     height: auto;
@@ -1916,6 +1959,7 @@ input:focus {
 .list-group li:hover {
     cursor: pointer;
 }
+
 
 /* modals cart */
 .modals-cart {
@@ -4209,9 +4253,11 @@ img{
 }
 
 .box-delete-success {
-    position: relative;
-    top: 95%;
-    right:30%;
+    position: fixed;
+    /* top: 95%; */
+    
+    top:15%;
+    right:10%;
     z-index: 102;
     display: none;
     flex-direction: column;
