@@ -674,6 +674,13 @@ const render_group_buy=(product_id)=>{
                             <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
+                        <div class="box_share_product">
+                            <p>Share This Product</p>
+                            <div class="box_ins_share"> 
+                                <input type="text" value="ini link nya" disabled class="share_link_input">
+                                <input type="text" value="ini link nya" disabled class="share_link_input">
+                            </div>
+                        </div>
                         <div class="item-4">
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
                         </div>
