@@ -2,6 +2,9 @@ $(function(){
     
     // $('#datepicker').datepicker();
     // $('.carousel').carousel()
+
+
+    
     
       $('.input-group').on('click',function(){
           $('.list-group').toggle(1000)
@@ -2552,6 +2555,8 @@ const save_edit_name=(product_id)=>{
     $('#get_otp').modal('show')
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_name')
+    $('#id_otp').val('')
+    $('#id_pass').val('')
 
 }
 
@@ -3031,6 +3036,22 @@ const about_dirjen=()=>{
       })
 }
 
+
+
+// CARD FLIP DETAIL PAYMENT
+
+// var card = document.querySelector('.card_flip_payment');
+// card.addEventListener( 'click', function() {
+//   card.classList.toggle('is-flipped');
+// });
+
+$('.card_flip_payment').on('mouseover',function(){
+    alert('jalan')
+    $('.card_flip_payment').toggleClass('is-flipped')
+})
+
+
+// CARD FLIP
 // FOOTER BOX
 
 
