@@ -183,7 +183,7 @@ const renderItemAll=()=>{
     
 
     allData.map((val,index)=>{
-        console.log(allData)
+        // console.log(allData)
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
@@ -586,6 +586,13 @@ const render_group_buy=(product_id)=>{
     console.log(product_id, ' ini product id')
     // $('.modals-lk').css('display','none')
 
+    // const queryString = window.location.href
+    const querystring = $(location).attr('href');
+    console.log(querystring,' querystring 590')
+    // const link_item = new URLSearchParams(queryString)
+ 
+    // const product_link = urlParams.get('product_id')
+    // console.log(product_link)
     
 
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
@@ -677,8 +684,8 @@ const render_group_buy=(product_id)=>{
                         <div class="box_share_product">
                             <p>Share This Product</p>
                             <div class="box_ins_share"> 
-                                <input type="text" value="ini link nya" disabled class="share_link_input">
-                                <input type="text" value="ini link nya" disabled class="share_link_input">
+                                <input type="text" value="${querystring}" disabled class="share_link_input" id="id_link">
+                                <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
                             </div>
                         </div>
                         <div class="item-4">

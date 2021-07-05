@@ -1,8 +1,11 @@
 
 $(document).ready(function(){
     const queryString = window.location.search;
+    console.log(queryString,' ini queryString')
     const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams,'ini urlparams 6')
     const product = urlParams.get('productid');
+    console.log(product, ' ini product link')
     const productName = urlParams.get('productName');
     console.log(productName);
     fillingInInformations(product);

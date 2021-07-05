@@ -4625,4 +4625,21 @@ img{
       height:50px;
       display: flex;
       flex-direction: column;
+      line-height: 0.3;
+  }
+  .box_ins_share{
+      display: flex;
+      flex-direction: row;
+      height:auto;
+      width:30%;
+      justify-content: space-between;
+  }
+  .share_link_input{
+      border:none;   
+  }
+  .share_link_input:hover{
+      cursor: pointer;
+  }
+  .fa-copy{
+      font-size: 20px;
   }

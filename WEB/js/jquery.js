@@ -12,6 +12,7 @@ $(function(){
       })
         
       
+      
    $('.cust-1').on('click',function(){
        console.log('testing jalan')
     //    $('.box-information').css('display','block')
@@ -3054,7 +3055,23 @@ $('.card_flip_payment').on('mouseover',function(){
 // CARD FLIP
 // FOOTER BOX
 
+// function copyToClipboard(element) {
+//     var $temp = $("<input>");
+//     $("body").append($temp);
+//     $temp.val($(element).text()).select();
+//     document.execCommand("copy");
+//     $temp.remove();
+//   }
+const copy_link_share=()=>{
+    alert('function jalan')
+    
+       var Copied = $('#id_link').val()
+       console.log(Copied,'ini copied')
+       
+       Copied.execCommand("Copy");
 
+    
+}
 
 
 // $( ".whatsapp-border" ).mouseout(function() {
