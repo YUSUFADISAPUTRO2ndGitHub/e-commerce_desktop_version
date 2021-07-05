@@ -12,7 +12,64 @@ body {
 .main-about{
     width:100%;
     height:30px;
-    background-color: red;
+    background-color: #217283;
+    display:flex;
+    justify-content: space-between;
+    padding-left:20px;
+    padding-right:20px;
+}
+.ma_left{
+    display: flex;
+    flex-direction: row;
+    width:35%;
+    display: flex;
+    align-items: center;
+    /* background-color: blue; */
+}
+.ma_right{
+    display: flex;
+    flex-direction: row;
+    width:35%;
+    display: flex;
+    align-items: center;
+    /* background-color: green; */
+}
+.ins_ma_left_1{
+    width:100%;
+    height:80%;
+    /* background-color: red; */
+    /* border:1px solid black; */
+    border-right:1px solid gray;
+    border-left:1px solid gray;
+    margin-left:3px;
+    margin-right:3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ins_ma_left_1:hover{
+    cursor: pointer;
+}
+.p_about_ins{
+    font-size: 1em;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 !important;
+}
+.ins_ma_right_1{
+    width:100%;
+    height:80%;
+    /* background-color: red; */
+    /* border:1px solid black; */
+    border-right:1px solid gray;
+    border-left:1px solid gray;
+    margin-left:3px;
+    margin-right:3px;
+}
+.ins_ma_right_1:hover{
+    cursor: pointer;
 }
 .main-header {
     width: 100%;
