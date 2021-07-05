@@ -1080,6 +1080,10 @@ body {
     align-items: center;
     background-color: #4267B2;;
 }
+.box_for_socmed-1 a {
+    display: flex;
+    flex-direction: row;
+}
 .img-logo{
     width:40px;
     height:40px;
@@ -1122,6 +1126,10 @@ body {
     background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+}
+.box_for_socmed-2 a {
+    display: flex;
+    flex-direction: row;
 }
 .img-logo{
     width:40px;
@@ -1166,6 +1174,10 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #00ACEE;
+}
+.box_for_socmed-3 a {
+    display: flex;
+    flex-direction: row;
 }
 .img-logo{
     width:40px;
@@ -1215,6 +1227,10 @@ display: flex;
     justify-content: center;
     align-items: center;
     background-color: #FF0000;
+}
+.box_for_socmed-4 a {
+    display: flex;
+    flex-direction: row;
 }
 .box_for_socmed-4:hover{
     transition: 1s;
