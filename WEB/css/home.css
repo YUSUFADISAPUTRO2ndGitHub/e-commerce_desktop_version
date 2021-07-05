@@ -657,6 +657,7 @@ body {
     left:5px;
 }
 
+
 .vst_dirjen{
     width:50%;
     height:30px;
@@ -674,6 +675,8 @@ body {
     align-items: center;
     font-size: 1em;
     color:white;
+    position: relative;
+    top:5px;
 }
 .vst_dirjen_2{
     width:50%;
