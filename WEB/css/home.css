@@ -2098,7 +2098,7 @@ input:focus {
 /* modals pengiriman */
 .modals-pengiriman {
     position: absolute;
-    top: 13.2%;
+    top: 17%;
     border-radius: 10px;
     right: 11.5%;
     height: 380px;
@@ -2118,7 +2118,7 @@ input:focus {
 .modals-check-harga {
     position: absolute;
     z-index: 20;
-    top:13.2%;
+    top:17%;
     border-radius: 10px;
     /* left:105px; */
     /* right:242px; */
@@ -4516,7 +4516,7 @@ img{
 
 .modals-hutang-home {
     position: absolute;
-    top: 13%; 
+    top: 17%; 
     border-radius:10px;
     left:23.2%;
     height: 61vh;
