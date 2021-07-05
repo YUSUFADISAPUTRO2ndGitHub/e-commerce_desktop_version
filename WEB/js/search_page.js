@@ -139,16 +139,21 @@ function show_subcategory(choosen_parent_category){
             $('.box-list-kategori').toggle()
             $('.box-list-kategori').empty()
             res.data.map((val,index)=>{
-                $('.box-list-kategori').append(
-                  `
-                    <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
-                        <img src="${val.Picture_1}" alt="" class="img-all-card">   
-                        <div class="card-all-item-list">
-                            <p class="limited-text-short">${val.Subcategory}</p>
+                if(val == false){
+                    console.log('show subcategory gak ke render karna data false')
+                }else {
+                    $('.box-list-kategori').append(
+                      `
+                        <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
+                            <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                            <div class="card-all-item-list">
+                                <p class="limited-text-short">${val.Subcategory}</p>
+                            </div>
                         </div>
-                    </div>
-                    `
-                )
+                        `
+                    )
+
+                }
             }) 
             
         }).catch((err)=>{
@@ -199,25 +204,30 @@ function show_jenisproduct(jenis_product){
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
-                $('.render-item-sub').append(
-                  `
-                    <div class="card-item card_sp hvr-float-shadow">
-                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                        <div class="card-item-list">
-                            <p class="limited-text-short">${val.Name}</p>
-                            <div class="split-item">
-                                <div class="item-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
-                                </div>
-                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                    <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                if(val == false){
+                    console.log('data tidak ke render karna false')
+                }else {
+                    $('.render-item-sub').append(
+                      `
+                        <div class="card-item card_sp hvr-float-shadow">
+                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                            <div class="card-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-item">
+                                    <div class="item-price">
+                                        <p>RP. ${hargaTotal}</p>
+                                        <p>Rp. ${hargaAwal}</p>
+                                    </div>
+                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    `
-                )
+                        `
+                    )
+
+                }
             }) 
             // $('.modals-lk').addClass('melihat') // ini bisa hampir
             
@@ -545,23 +555,28 @@ const render_searching_page=(product_name)=>{
             var hargaAwal = parseInt(val.Sell_Price)
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
-            $('.new-box-card').append(`
-            <div class="card-item card_sp hvr-float-shadow">
-                    <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                <div class="card-item-list">
-                    <p class="limited-text-short">${val.Name}</p>
-                    <div class="split-item">
-                        <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
-                        </div>
-                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                            <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+            if(val == false){
+                console.log('gak ke render, karna data false')
+            }else {
+                $('.new-box-card').append(`
+                <div class="card-item card_sp hvr-float-shadow">
+                        <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                    <div class="card-item-list">
+                        <p class="limited-text-short">${val.Name}</p>
+                        <div class="split-item">
+                            <div class="item-price">
+                                <p>RP. ${hargaTotal}</p>
+                                <p>Rp. ${hargaAwal}</p>
+                            </div>
+                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            `)
+                `)
+
+            }
         })
     }).catch((err)=>{
         console.log(err)
@@ -613,7 +628,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     // $('#daftarHutangModal').modal('hide')
     // $('#ID_detail_hutang_modal').modal('show')
     console.log(order_number)
-    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${order_number}`)
+    axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
         console.log(res.data)
         $('.ref_code_detail_hutang').val(res.data.Customer_Code)
@@ -621,15 +636,14 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
 
         res.data.map((val,index)=>{
             console.log(val)
-            // $('.id_detail_hutang').append(`
-            //     <div class="comm-1-list">
-            //         <p>${val.sys_id}</p>
-            //     </div>
-            // `)
+            var hargaSatuan = parseInt(val.Price_Based_On_Total_Quantity)/parseInt(val.Quantity_Requested)
+
             $('.ul_detail_list_hutang').append(`
             <tr>
+                <td><p class="limited-text-short">${val.Product_Name}</p></td>
                 <td><p class="limited-text-short">${val.Order_Number}</p></td>
                 <td><p>RP.${val.Total_Price}</td>
+                <td><p>RP.${hargaSatuan}</td>
                 <td ><p>${val.Payment_Method}</p></td>
                 <td ><p>${val.Shipping_Fee}</p></td>
                 <td ><p>${val.Shipping_Address}</p></td>
@@ -651,27 +665,23 @@ const item_detail_for_hutang=(order_number)=>{ // detail utang dari card
     // alert('function jalan')
     // $('#daftarHutangModal').modal('hide')
     $('#ID_detail_hutang_modal').modal('show')
-    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${order_number}`)
+    axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
         $('.ref_code_detail_hutang').val(res.data.Customer_Code)
         $('.customer_name_hutang').val(res.data.Primary_Recipient_Name)
 
         res.data.map((val,index)=>{
-            // $('.id_detail_hutang').append(`
-            //     <div class="comm-1-list">
-            //         <p>${val.sys_id}</p>
-            //     </div>
-            // `)
+            var hargaSatuan = parseInt(val.Price_Based_On_Total_Quantity)/parseInt(val.Quantity_Requested)
             $('.modals_item_detail_product').append(`
             <tr>
-                <td><p class="limited-text">${val.Order_Number}</p></td>
-                <td >
-                    <p>RP.${val.Total_Price}
-                </td>
+                <td><p class="limited-text-short">${val.Product_Name}</p></td>
+                <td><p class="limited-text-short">${val.Order_Number}</p></td>
+                <td><p>RP.${val.Total_Price}</td>
+                <td><p>RP.${hargaSatuan}</td>
                 <td ><p>${val.Payment_Method}</p></td>
                 <td ><p>${val.Shipping_Fee}</p></td>
-                <td ><p style="word-break: break-all">${val.VA_Number}</p></td>
-                
+                <td ><p>${val.Shipping_Address}</p></td>
+                <td ><p style="word-break: break-all">${val.VA_Number}</p></td>  
             </tr>
             `)
             

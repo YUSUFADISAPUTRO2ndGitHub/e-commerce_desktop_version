@@ -114,25 +114,30 @@ const renderItemPromo=()=>{
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
         // console.log(hargaTotal)
-        $('.box-render-promo').append(
-        ` 
-            <div class="card-item hvr-float-shadow">
-                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                <div class="card-item-list">
-                    <p>${val.Name}</p>
-                    <div class="split-item">
-                        <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
-                        </div>
-                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                            <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+        if(val == false){
+            console.log(' gak render karna false')
+        }else {
+            $('.box-render-promo').append(
+            ` 
+                <div class="card-item hvr-float-shadow">
+                    <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                    <div class="card-item-list">
+                        <p class="limited-text-short">${val.Name}</p>
+                        <div class="split-item">
+                            <div class="item-price">
+                                <p>RP. ${hargaTotal}</p>
+                                <p>Rp. ${hargaAwal}</p>
+                            </div>
+                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            `
-        )
+                `
+            )
+
+        }
     })
 }
 
@@ -147,12 +152,17 @@ const renderItemNew=()=>{
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
     //  console.log(hargaTotal)
+
+    if(val == false){
+        console.log('gak ke render karna false')
+    }else {
+
         $('.box-render-new').append(
         ` 
           <div class="card-item card_sp hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
-                    <p>${val.Name}</p>
+                    <p class="limited-text-short">${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
                             <p>RP. ${hargaTotal}</p>
@@ -166,22 +176,28 @@ const renderItemNew=()=>{
             </div>
             `
         )
+    }
     })
 }
 const renderItemAll=()=>{
     
 
     allData.map((val,index)=>{
+        console.log(allData)
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
     //  console.log(hargaTotal)
+    if(val == false){
+        console.log('gak ke render karna false')
+    }else {
+
         $('.box-render-all').append(
         ` 
             <div class="card-item hvr-float-shadow">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
-                    <p>${val.Name}</p>
+                    <p class="limited-text-short">${val.Name}</p>
                     <div class="split-item">
                         <div class="item-price">
                             <p>RP. ${hargaTotal}</p>
@@ -195,6 +211,7 @@ const renderItemAll=()=>{
             </div>
             `
         )
+    }
     })
 }
 
