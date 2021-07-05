@@ -3052,29 +3052,17 @@ $('.card_flip_payment').on('mouseover',function(){
 })
 
 
-// CARD FLIP
-// FOOTER BOX
 
-// function copyToClipboard(element) {
-//     var $temp = $("<input>");
-//     $("body").append($temp);
-//     $temp.val($(element).text()).select();
-//     document.execCommand("copy");
-//     $temp.remove();
-//   }
 const copy_link_share=()=>{
-    alert('function jalan')
-    
-       var Copied = $('#id_link').val()
-       console.log(Copied,'ini copied')
-       
-       Copied.execCommand("Copy");
-
+    // alert('function jalan')
+    var copyText = document.getElementById("copyClipboard");
+    if(copyText){
+        console.log(copyText)
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("Copy");
+        Swal.fire('Copy berhasil', '', 'success')
+    }
     
 }
 
-
-// $( ".whatsapp-border" ).mouseout(function() {
-// });
-// $( ".whatsapp-border" ).mouseover(function() {
-// });

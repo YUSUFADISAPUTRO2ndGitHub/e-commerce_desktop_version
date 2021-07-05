@@ -684,8 +684,10 @@ const render_group_buy=(product_id)=>{
                         <div class="box_share_product">
                             <p>Share This Product</p>
                             <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" disabled class="share_link_input" id="id_link">
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+
+
                             </div>
                         </div>
                         <div class="item-4">
