@@ -227,7 +227,7 @@ const renderCategory=()=>{
             var sub = val.Category.toUpperCase()
             $('.list-group').append(
                 ` 
-                <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')">${sub}</li>
+                <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')" id="id_sub-${sub}">${sub}</li>
                 `
                 )
         })
@@ -246,6 +246,10 @@ const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
     // alert('findsubcategory jalan')
     $('.close-button').css('display','block')
+    // $('')
+    $('.list-group-item').removeClass('active-cl')
+    $(`#id_sub-${sub}`).addClass('active-cl')
+
     console.log(sub)
     $('.closeByLogin').css('display','none')
     $('.option-0').removeClass("background_grey")
@@ -263,6 +267,7 @@ const findSubCategory=(sub)=>{
     $('.input-name').css('border-bottom-right-radius','10px')
     $('.input-name').val(null)
     
+   
     
     // renderItemBasedOnCategory(sub)
 }

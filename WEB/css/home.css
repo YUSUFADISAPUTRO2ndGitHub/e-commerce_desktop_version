@@ -673,7 +673,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1em;
+    font-size: 1em !important;
     color:white;
     position: relative;
     top:5px;
@@ -2078,6 +2078,13 @@ input:focus {
 .list-group li:hover {
     cursor: pointer;
 }
+li.active{
+    background-color: #217384; 
+}
+.active-cl {
+    background-color: #217384 !important;
+    color:white !important;
+}
 
 
 /* modals cart */
@@ -2825,10 +2832,21 @@ ul {
     text-align: left;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
 }
 .box-right-top p {
     font-size: 18px;
     color: white;
+}
+.fa-question-circle {
+    font-size: 30px;
+    position: relative;
+    top:-20px;
+    left:15%;
+    color:white;
+}
+.fa-question-circle:hover{
+    cursor: pointer;
 }
 .box-right-bottom {
     /* background-color: blue; */
@@ -3768,7 +3786,7 @@ th {
 .modals-live-chat {
     position: absolute;
     z-index: 20;
-    top: 72px;
+    top: 17.5%;
     /* left:105px; */
     /* right:172px; */
     /* height:90vh; */
@@ -3813,6 +3831,7 @@ th {
     position: relative;
     font-size: 35px;
     color: #eb4d4b;
+    right:100%;
 }
 .icon_close_lc:hover {
     cursor: pointer;
@@ -4768,4 +4787,16 @@ img{
   }
   .fa-copy{
       font-size: 20px;
+  }
+  .toast_prod_information{
+      /* background-color: red; */
+      width:50%;
+      display: none;
+      position: relative;
+      left:50%;
+      z-index: 1161;
+      
+
+      /* top:50%; */
+      /* bottom:-10%; */
   }

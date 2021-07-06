@@ -3,7 +3,15 @@ $(function(){
     // $('#datepicker').datepicker();
     // $('.carousel').carousel()
 
-
+    setInterval(() => {
+        var productModal = $('#productModal').css('display') == 'none' 
+        if(productModal == true){
+            console.log('masuk ke if')
+            $('.toast_prod_information').css('display','none')
+        }else {
+            console.log('masuk ke else')
+        }
+    },1000)
     
     
       $('.input-group').on('click',function(){
@@ -11,7 +19,8 @@ $(function(){
         // $('.list-group').show(1000)
       })
         
-      
+    
+    
       
    $('.cust-1').on('click',function(){
        console.log('testing jalan')
