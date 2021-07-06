@@ -419,16 +419,20 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
     });
     console.log(customer_information);
     console.log(item_bought);
-    createNewSalesOrder(item_bought, customer_information).done(async function (response) {
-        if(response.status == true){
-            swal.fire("Order sudah dikirimkan", "","success");
-        }else{
-            console.log(response);
-            swal.fire("Order gagal dikirimkan", "","warning");
+    getCustomersWithCustomerNo(customer_information.Customer_Code).done(function (response) {
+        if(response != false){
+            createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
+                if(response.status == true){
+                    swal.fire("Order sudah dikirimkan", "","success");
+                }else{
+                    console.log(response);
+                    swal.fire("Order gagal dikirimkan", "","warning");
+                }
+                truncateCart();
+                await setTimeout(() => { clearStorage(); }, 2000);
+                await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+            });
         }
-        truncateCart();
-        await setTimeout(() => { clearStorage(); }, 2000);
-        await setTimeout(() => {window.location.href = "../cart.html";}, 3000);
     });
 }
 
@@ -452,15 +456,20 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
     });
     console.log(customer_information);
     console.log(item_bought);
-    createNewSalesOrder(item_bought, customer_information).done(async function (response) {
-        if(response.status == true){
-            swal.fire("Order sudah dikirimkan", "","success");
-        }else{
-            swal.fire("Order gagal dikirimkan", "","warning");
+    getCustomersWithCustomerNo(customer_information.Customer_Code).done(function (response) {
+        if(response != false){
+            createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
+                if(response.status == true){
+                    swal.fire("Order sudah dikirimkan", "","success");
+                }else{
+                    console.log(response);
+                    swal.fire("Order gagal dikirimkan", "","warning");
+                }
+                truncateCart();
+                await setTimeout(() => { clearStorage(); }, 2000);
+                await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+            });
         }
-        truncateCart();
-        await setTimeout(() => { clearStorage(); }, 2000);
-        await setTimeout(() => {window.location.href = "../cart.html";}, 3000);
     });
 }
 
@@ -484,14 +493,20 @@ async function sendFinalToAccurate(request){
     });
     console.log(customer_information);
     console.log(item_bought);
-    createNewSalesOrder(item_bought, customer_information).done(async function (response) {
-        if(response.status == true){
-            swal.fire("Order sudah dikirimkan", "","success");
-        }else{
-            swal.fire("Order gagal dikirimkan", "","warning");
+    getCustomersWithCustomerNo(customer_information.Customer_Code).done(function (response) {
+        if(response != false){
+            createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
+                if(response.status == true){
+                    swal.fire("Order sudah dikirimkan", "","success");
+                }else{
+                    console.log(response);
+                    swal.fire("Order gagal dikirimkan", "","warning");
+                }
+                truncateCart();
+                await setTimeout(() => { clearStorage(); }, 2000);
+                await setTimeout(() => {window.location.href = "./home.html";}, 3000);
+            });
         }
-        truncateCart();
-        await setTimeout(() => { clearStorage(); }, 2000);
     });
 }
 
