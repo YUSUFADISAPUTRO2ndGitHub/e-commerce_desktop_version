@@ -3779,7 +3779,7 @@ th {
 .modals-live-chat {
     position: absolute;
     z-index: 20;
-    top: 72px;
+    top: 17.5%;
     /* left:105px; */
     /* right:172px; */
     /* height:90vh; */
@@ -3824,6 +3824,7 @@ th {
     position: relative;
     font-size: 35px;
     color: #eb4d4b;
+    right:100%;
 }
 .icon_close_lc:hover {
     cursor: pointer;
