@@ -158,6 +158,7 @@ $(document).on('click',".btn-login-product",function(){
                     $('#loginModal').modal('hide')
                     $('#login_product').modal('hide')
                     $('.box-option-login').removeClass('product')
+                    $('.toast_prod_information').css('display','block')
                     check_status_item()
                 }else {
                     swal.fire("Login Gagal", "", "info");

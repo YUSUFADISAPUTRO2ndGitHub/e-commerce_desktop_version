@@ -2825,10 +2825,21 @@ ul {
     text-align: left;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
 }
 .box-right-top p {
     font-size: 18px;
     color: white;
+}
+.fa-question-circle {
+    font-size: 30px;
+    position: relative;
+    top:-20px;
+    left:15%;
+    color:white;
+}
+.fa-question-circle:hover{
+    cursor: pointer;
 }
 .box-right-bottom {
     /* background-color: blue; */
@@ -4768,4 +4779,16 @@ img{
   }
   .fa-copy{
       font-size: 20px;
+  }
+  .toast_prod_information{
+      /* background-color: red; */
+      width:50%;
+      display: none;
+      position: relative;
+      left:50%;
+      z-index: 1161;
+      
+
+      /* top:50%; */
+      /* bottom:-10%; */
   }

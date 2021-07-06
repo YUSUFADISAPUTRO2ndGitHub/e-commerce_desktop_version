@@ -27,6 +27,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
     <script src="https://kit.fontawesome.com/cec71f624e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="./js/sweetalert.js"></script>
     <script type="text/javascript" src="./css/slick/slick.min.js"></script>
@@ -874,6 +875,7 @@
                         <div class="product_right_modals">
                            <div class="box-right-top">
                             <p>If you need to add or remove item from below please submit the form directly to our procurement team.</p>
+                            <i class="far fa-question-circle" id="liveToastBtn"></i>
                            </div>
                            <div class="box-right-bottom">
                             <div class="total_row_groupbuy">
@@ -1210,6 +1212,7 @@
 
 
 
+
    
         
 
@@ -1333,11 +1336,12 @@
             
             <iframe class="force-close-all-command-2 modals-search-result" src="./Iframe/searchingPage.html"></iframe>
             <iframe class="force-close-all-command modals-information-login" src=""></iframe>
-            
             <!-- <iframe class="modals-cart" src=""></iframe> Header Cart  -->
 
-        </div>
+           
 
+        </div>
+            
         <div class="main-body">
             <div class="card category-menu">
                 <div class="card-body">
@@ -1465,10 +1469,26 @@
                 </div>
             </div>
             <!-- RENDER PROMO ITEM -->
+             <!-- TOAST product information -->
+             <div class="toast_prod_information">
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </symbol>
+                </svg>
+
+                <div class="alert alert-warning alert-dismissible fade show notif-style" role="alert">
+                    <strong>
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>    
+                    </strong> Untuk melakukan modifikasi lebih lanjut seperti gambar untuk produk Anda dan lain-lain. Silahkan hubungi Tim Pembelian kami melalui nomor layanan pelanggan kami di 0853-1580-1777. Verifikasi lebih lanjut mungkin diperlukan, harap bersabar, ini dilakukan untuk memastikan perlindungan akun Anda.
+                    <button type="button" class="btn-close"  aria-label="Close" onclick="close_toast()"></button>
+                </div>
+
+            </div>
+            <!-- TOAST product information -->
             <div class="box-card">
                 <div class="promo_card">
                     <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
-
                 </div>
                 <div class="ins_card">
                     <div class="box-back" id="promo" onclick="backItem('promo')">
