@@ -61,11 +61,31 @@ $(function(){
                     $('.btn-status-barang').css('display','none')
                     $('.sup_delete').css('display','flex')
                     $('.box-kumpulkan-profile').css('top','70px')
+
+                    $('#prof_perusahaan_nama').css('display','none')
+                    $('#prof_npwp').css('display','none')
+                    $('#prof_nik').css('display','none')
+                    
+                    $('#prof_thn').css('display','flex')
+                    $('#prof_bln').css('display','flex')
+                    $('#prof_tgl').css('display','flex')
+                    $('#id_ref_code').css('visibility','show')
+
                     // $('.sup_delete').css('left','20px')
                 }else {
                     $('.btn-status-barang').css('display','block')
                     $('.sup_delete').css('display','none')
                     $('.box-kumpulkan-profile').css('top','0px')
+                    $('#id_ref_code').css('visibility','hidden')
+
+                    $('#prof_perusahaan_nama').css('display','flex')
+                    $('#prof_npwp').css('display','flex')
+                    $('#prof_nik').css('display','flex')
+                    
+                    $('#prof_thn').css('display','none')
+                    $('#prof_bln').css('display','none')
+                    $('#prof_tgl').css('display','none')
+                    
                 }
     
                 var tahun = data_customer.Birthday.slice(0,4)
@@ -88,10 +108,16 @@ $(function(){
                 $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
                 $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
                 $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
-                $('#rekening_user').val(`${data_customer.extra_column_1}`)
+                $('#rekening_user').val(`${data_customer.bank_account_number}`)
                 $('#referral-profile').val(`${data_customer.extra_column_2}`)
                 $('#no_ktp_user').val(`${data_customer.ktp}`)
                 $('.ref-profile').val(token)
+                $('#npwp_supp_prof').val(data_customer.npwp)
+                console.log(data_customer.extra_column_2)
+                console.log($('#ref_code_from').val(data_customer.extra_column_2))
+                $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
+                $('#nik_supp_profile').val(data_customer.extra_column_5)
+                $('#ref_code_from').val(data_customer.extra_column_2)
                 var a = $('#refer-profile').val()
                 console.log(a)
                 $('#profileModal').modal('show')

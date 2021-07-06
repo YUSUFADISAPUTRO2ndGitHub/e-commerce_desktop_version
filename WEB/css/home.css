@@ -1583,7 +1583,7 @@ display: flex;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    line-height: 0.5;
+    line-height: 1;
     align-items: center;
     margin-bottom:10px;
     /* margin-right:5px; */
@@ -1636,7 +1636,7 @@ display: flex;
     width: 250px;
     height: 40px;
     position: relative;
-    top: 15px;
+    top: 10px;
     /* left:25px; */
     /* background-color: red; */
 }
@@ -1704,6 +1704,17 @@ display: flex;
 .otp-form::placeholder {
     color: #217283;
 }
+
+.ref-form {
+    width: 250px;
+    height: 30px;
+    background-color: #C4C4C4;
+    border-width: 0;
+}
+.ref-form::placeholder {
+    color: #217283;
+}
+
 
 .name-form {
     width: 250px;
@@ -1875,13 +1886,37 @@ display: flex;
     color: #217283;
 }
 
+.box-tambah-alamat2 {
+    display: flex;
+    /* justify-content: flex-end; */
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* background-color: red; */
+    height: 150px;
+    width: 50%;
+    overflow-x: auto;
+    left: -2px;
+
+    position: relative;
+    /* left:25px; */
+}
+.box-tambah-alamat2::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+}
+.box-tambah-alamat2::-webkit-scrollbar-thumb {
+    background-color: #217283;
+    border-radius: 10px;
+}
+
 
 .box-tambah-alamat {
     display: flex;
     /* justify-content: flex-end; */
     flex-direction: column;
     /* justify-content: center; */
-    /* align-items: center; */
+    align-items: center;
     /* background-color: red; */
     height: 150px;
     width: 100%;
@@ -2728,7 +2763,7 @@ ul {
 }
 
 .option-referral {
-    width: 41% !important;
+    width: 5% !important;
     position: relative;
     top: 45% !important;
     right: 2.9% !important;

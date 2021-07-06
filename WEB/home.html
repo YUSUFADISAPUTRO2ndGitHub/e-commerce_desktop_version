@@ -534,6 +534,7 @@
                                     </div>
                                 </div>       
                             </div>
+                            
                             <div class="login-name">
                                 <div class="box-name">
                                     <p>No Rekening</p>
@@ -547,9 +548,22 @@
                                 <p>Tambah Alamat (+)</p>
                             </div>     -->
                             <select class="form-select option-referral ref-cod" aria-label="Default select example">
-                                <option selected>Select Referral Code</option>
-                                
+                                <option selected></option>             
                             </select>
+                            <input type="text" class="ref-form" placeholder="Referral Code" id="inp_ref_code"  maxlength="20">
+                            
+                            <!-- <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                  </div>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                            </div> -->
                             
                         </div> 
                         <div class="box_agreement">
@@ -641,11 +655,17 @@
                             <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email_user"
                             pattern=".+@globex.com" size="30" required>
                         </div>
-                        <div class="login-name">
+                        <div class="login-name" style="display: none;" id="prof_thn">
                             <div class="box-name">
                                 <p>Tahun Lahir</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_user">
+                            <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_user" >
+                        </div>
+                        <div class="login-name"  id="prof_nik">
+                            <div class="box-name">
+                                <p>NIK</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="NIK" id="nik_supp_profile" disabled>
                         </div>
                     </div>    
                     <div class="reg-form-1">
@@ -661,11 +681,17 @@
                             </div>
                             <input type="text" class="name-form" placeholder="Nama Depan" id="nama_depan_user">
                         </div>
-                        <div class="login-name">
+                        <div class="login-name" style="display: none;" id="prof_bln">
                             <div class="box-name">
                                 <p>Bulan Lahir</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_user">
+                            <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_user" >
+                        </div>
+                        <div class="login-name"  id="prof_perusahaan_nama">
+                            <div class="box-name">
+                                <p>Nama Perusahaan</p>
+                            </div>
+                            <input type="text" class="name-form" placeholder="Nama Perusahaan" id="nama_perusahaan_profile" disabled>
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -675,11 +701,17 @@
                             </div>
                             <input type="text" class="name-form" placeholder="Nama Belakang" id="nama_belakang_user">
                         </div>
-                        <div class="login-name">
+                        <div class="login-name" style="display: none;" id="prof_tgl">
                             <div class="box-name">
                                 <p>Tanggal Lahir</p>
                             </div>
-                            <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_user">
+                            <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_user" >
+                        </div>
+                        <div class="login-name" id="prof_npwp">
+                            <div class="box-name">
+                                <p>NPWP</p>
+                            </div>
+                            <input type="number" class="name-form" placeholder="NPWP" id="npwp_supp_prof" disabled>
                         </div>
                     </div>  
                     <div class="reg-form-1">
@@ -742,6 +774,12 @@
                                 </div>
                                 <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
                             </div>  
+                        </div>
+                        <div class="login-name" id="id_ref_code">
+                            <div class="box-name">
+                                <p>Referral code yang kamu masukan sewaktu mendaftar</p>
+                            </div>
+                            <input type="text" class="name-form" disabled id="ref_code_from">
                         </div>
                         
                     </div>  
