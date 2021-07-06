@@ -373,7 +373,7 @@ function checkingout(){
     console.log("token " + token);
     if(checkboxCounter > 0 && (token != "" || token == null)){
         swal.fire("Final Step","","success");
-        window.location.href = "./checkout.html";
+        window.location.href = "./Iframe/checkout.html";
     }else{
         swal.fire("Something is missing","You may not have selected item(s) from your cart or login","warning");
         if(token == ""){
