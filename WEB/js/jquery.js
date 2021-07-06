@@ -19,7 +19,8 @@ $(function(){
         // $('.list-group').show(1000)
       })
         
-      
+    
+    
       
    $('.cust-1').on('click',function(){
        console.log('testing jalan')
