@@ -1710,6 +1710,9 @@ display: flex;
     height: 30px;
     background-color: #C4C4C4;
     border-width: 0;
+    position: relative;
+    top:12px;
+    right:6.1%;
 }
 .ref-form::placeholder {
     color: #217283;
@@ -2766,7 +2769,7 @@ ul {
     width: 5% !important;
     position: relative;
     top: 45% !important;
-    right: 2.9% !important;
+    right: 6.4% !important;
 }
 
 .icon-logout {

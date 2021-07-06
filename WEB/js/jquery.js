@@ -6,10 +6,10 @@ $(function(){
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
         if(productModal == true){
-            console.log('masuk ke if')
+            // console.log('masuk ke if')
             $('.toast_prod_information').css('display','none')
         }else {
-            console.log('masuk ke else')
+            // console.log('masuk ke else')
         }
     },1000)
     

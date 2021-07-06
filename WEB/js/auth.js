@@ -1,15 +1,27 @@
+
+
+
+ setInterval(() => {
+    var referral_code = $('.ref-cod option:selected').val()
+    $('#inp_ref_code').val(referral_code)
+},1000)
 $(document).on('click',"#simpan_reg",function(){
 
     var password_awal = $('#password_reg').val()
     var referral_code = $('.ref-cod option:selected').val()
     console.log(referral_code)
+    // $('#inp_ref_code').val(referral_code)
+    
     
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
     .then((res)=>{
         var final_pass = res.data
         console.log(final_pass)
-      
-        axios.post(`http://customers.sold.co.id/get-customer-code`)
+        var ref_val = $('#inp_ref_code').val()
+        if(ref_val.length >3){
+            console.log(ref_val)
+            console.log('aman ')
+            axios.post(`http://customers.sold.co.id/get-customer-code`)
         .then((res)=>{
             localStorage.setItem('token',res.data)
             var data = {
@@ -32,7 +44,7 @@ $(document).on('click',"#simpan_reg",function(){
                     Status : "pending",
                     User_Type : "Customer",
                     account_number: $("#no_rekening_reg").val(),
-                    referral_customer_code: $('.ref-cod option:selected').val(),
+                    referral_customer_code: $('#inp_ref_code').val(),
                     ktp:$("#no_ktp_reg").val()
                 }
             }
@@ -85,6 +97,11 @@ $(document).on('click',"#simpan_reg",function(){
         }).catch((err)=>{
             console.log(err)
         })
+        }else {
+            swal.fire("Referral Code Harus Di isi", "", "error");
+        }
+      
+        
     }).catch((err)=>{
         console.log(err)
     })
