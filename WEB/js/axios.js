@@ -638,6 +638,13 @@ const render_group_buy=(product_id)=>{
                             <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
+                        <div class="box_share_product">
+                            <p>Share This Product</p>
+                            <div class="box_ins_share"> 
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+                            </div>
+                        </div>
                             <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
                                 <li>
                                     <p>Add to Cart</p>
@@ -691,8 +698,6 @@ const render_group_buy=(product_id)=>{
                             <div class="box_ins_share"> 
                                 <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
-
-
                             </div>
                         </div>
                         <div class="item-4">

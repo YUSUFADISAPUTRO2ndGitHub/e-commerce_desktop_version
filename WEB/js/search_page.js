@@ -261,6 +261,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
         console.log(item.GroupBuy_SellPrice === "NULL", ' ini 116')
         console.log(typeof 'bayu' )
         console.log( item.GroupBuy_SellPrice )
+        const querystring = $(location).attr('href');
         if(item.GroupBuy_SellPrice === "NULL"){
             $('.item_detail_sp').append(
                 `
@@ -289,6 +290,13 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         <div class="item-2">
                             <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
+                        </div>
+                        <div class="box_share_product">
+                            <p>Share This Product</p>
+                            <div class="box_ins_share"> 
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+                            </div>
                         </div>
                             <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
                                 <li>
@@ -339,6 +347,13 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         </div>
                         <div class="item-1">
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
+                        </div>
+                        <div class="box_share_product">
+                            <p>Share This Product</p>
+                            <div class="box_ins_share"> 
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+                            </div>
                         </div>
                         <div class="box-detail-option">
                             <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
