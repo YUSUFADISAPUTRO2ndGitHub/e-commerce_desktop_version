@@ -8,6 +8,12 @@
 
 console.log('home js aktif')
 
+
+const on_select_ref=()=>{
+    var value = $('.ref-cod').val()
+    $('#inp_ref_code').val(value)
+    console.log(value)
+}
 function forgot_modal_request(){
     $('#loginModal').modal('hide')
 }
