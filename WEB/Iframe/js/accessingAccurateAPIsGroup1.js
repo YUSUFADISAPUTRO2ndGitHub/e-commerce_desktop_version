@@ -245,6 +245,16 @@ function createNewSalesOrder(items, customerDetails, Email, otp, User_Password){
     return $.ajax(settings);
 }
 
+function get_otp_api(Email){
+    var settings = {
+        "url": `http://customers.sold.co.id/get-otp?Email=${Email}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+
 function createNewSalesOrderWithGroupBuy(items, customerDetails){
     var settings = {
         "url": "http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
