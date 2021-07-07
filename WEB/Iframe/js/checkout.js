@@ -23,6 +23,18 @@ $(document).ready(async function(){
     listPaymentMethods();
 });
 
+function get_otp_for_checkout(){
+    getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
+        if(response.Email.length > 0){
+            get_otp_api(response.Email).done(function (response) {
+                Swal.fire("OTP terkirim ke email", `${response.Email}`, "success");
+            });
+        }else{
+            Swal.fire("Please give me your email", `${response.Email}`, "warning");
+        }
+    });
+}
+
 function loadingMessage(timer){
     let timerInterval
     Swal.fire({
