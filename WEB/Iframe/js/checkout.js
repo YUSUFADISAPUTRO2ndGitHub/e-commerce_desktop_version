@@ -269,8 +269,9 @@ function personalDetailsWithCurrentAddress(){
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request);}, 2000);
             setTimeout(function(){ clearStorage(); }, 3000);
         }else{
+            
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(request);}, 2000);
-            setTimeout(function(){ clearStorage(); }, 3000);
+            // setTimeout(function(){ clearStorage(); }, 4000);
         }
     });
 }
@@ -388,12 +389,41 @@ function personalDetailsWithNewAddress(address){
             setTimeout(() => { clearStorage(); }, 3000);
         }else{
             setTimeout(() => {sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(request);}, 2000);
-            setTimeout(() => { clearStorage(); }, 3000);
+            // setTimeout(() => { clearStorage(); }, 3000);
         }
     });
 }
 
 function truncateCart(){
+    // testing dari bayu
+
+
+    // var itemsInCart = JSON.parse(localStorage.getItem("itemsInCart"));
+    // var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+
+    // if(itemsInCart.length>0 && itemsToCheckout.length>0){ // kalo dua duanya ada akan ngapus itemscart jd 0
+    //     var i = 0;
+    //     for(i; i < itemsInCart.length; i++){
+    //         var x = 0;
+    //         for(x; x < itemsToCheckout.length; x++){
+    //             if(itemsToCheckout[x].productNo == itemsInCart[i].productNo){
+    //                 itemsInCart.splice(i, 1);
+    //                 var productToBeAddedStringify = JSON.stringify(itemsInCart);
+    //                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
+    //                 // break;
+    //             }
+    //         }
+    //     }
+    // }else { // salah satunya kosong berarti cart ke apus semua
+    //     var requestArrayForItemsInCart = []
+    //     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsInCart);
+    //     localStorage.setItem('itemsInCart',productToBeAddedStringify)
+    // }
+
+    // batas testing dari bayu
+
+    //  mas yusuf
+    
     var itemsInCart = JSON.parse(localStorage.getItem("itemsInCart"));
     var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
     var i = 0;
@@ -408,6 +438,8 @@ function truncateCart(){
             }
         }
     }
+    // mas yusuf
+    
 }
 
 function redirectToCart(){
@@ -473,11 +505,13 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
             createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
                 if(response.status == true){
                     swal.fire("Order sudah dikirimkan", "","success");
+                    // truncateCart()
                 }else{
                     console.log(response);
                     swal.fire("Order gagal dikirimkan", "","warning");
                 }
-                truncateCart();
+                truncateCart(); // bayu comment, gue test console.log gak jalan, di pindah ke dalem true  : bayu
+                
                 await setTimeout(() => { clearStorage(); }, 2000);
                 await setTimeout(() => {window.location.href = "../cart.html";}, 3000);
             });

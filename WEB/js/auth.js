@@ -1,10 +1,10 @@
 
 
 
- setInterval(() => {
-    var referral_code = $('.ref-cod option:selected').val()
-    $('#inp_ref_code').val(referral_code)
-},1000)
+//  setInterval(() => {
+//     var referral_code = $('.ref-cod option:selected').val()
+//     $('#inp_ref_code').val(referral_code)
+// },1000)
 
 
 $(document).on('click',"#simpan_reg",function(){

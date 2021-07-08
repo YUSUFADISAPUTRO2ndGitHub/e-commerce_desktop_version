@@ -335,6 +335,12 @@ function clearStorage(){
     var requestArrayForItemsToCheckout = [];
     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
     localStorage.setItem("finalStep", productToBeAddedStringify);
+
+    // tambahan bayu
+
+    // var requestArrayForItemsInCart = []
+    // var productToBeAddedStringify = JSON.stringify(requestArrayForItemsInCart);
+    // localStorage.setItem('itemsInCart',productToBeAddedStringify)
 }
 
 function personalDetailsWithNewAddress(address){
@@ -382,10 +388,14 @@ function personalDetailsWithNewAddress(address){
 }
 
 function truncateCart(){
+    
     var itemsInCart = JSON.parse(localStorage.getItem("itemsInCart"));
+    
     var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+    
     var i = 0;
     for(i; i < itemsInCart.length; i++){
+       
         var x = 0;
         for(x; x < itemsToCheckout.length; x++){
             if(itemsToCheckout[x].productNo == itemsInCart[i].productNo){
@@ -393,6 +403,7 @@ function truncateCart(){
                 var productToBeAddedStringify = JSON.stringify(itemsInCart);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
                 // break;
+               
             }
         }
     }
