@@ -3101,3 +3101,100 @@ const copy_link_share=()=>{
     
 }
 
+
+function toDataURL(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+      }
+  
+      var gambar_active = 3
+      setInterval(()=>{
+          if(gambar_active == 1){
+          console.log(gambar_active, ' ini gambar active')
+           toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
+          // console.log('RESULT:', dataUrl)
+              await $('#scream').attr('src',dataUrl)
+              var example = document.getElementById('example');
+              var context = example.getContext('2d');
+              var img = document.getElementById("scream");
+              context.drawImage(img, 0, 0, 500, 500);
+              
+              // var c = example.getContext('2d');
+              var p =  context.getImageData(10, 10, 1, 1).data; 
+              console.log(p)
+              var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+              // alert(hex)
+  
+  
+               await $('.ads-3').css('background-color',hex)
+               await $('.ads-1').css('background-color',hex)
+              // $('#status').html(cord + "<br>" + hex);
+              gambar_active = 2
+          })
+   
+      }
+      else if (gambar_active == 2){
+          console.log(gambar_active, ' ini gambar active')
+           toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
+          // console.log('RESULT:', dataUrl)
+              await $('#scream').attr('src',dataUrl)
+              var example = document.getElementById('example');
+              var context = example.getContext('2d');
+              var img = document.getElementById("scream");
+              context.drawImage(img, 0, 0, 500, 500);
+              
+              // var c = example.getContext('2d');
+              var p =  context.getImageData(10, 10, 1, 1).data; 
+              console.log(p)
+              var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+              // alert(hex,'GA2')
+  
+  
+              await $('.ads-3').css('background-color',hex)
+              await  $('.ads-1').css('background-color',hex)
+              // $('#status').html(cord + "<br>" + hex);
+              gambar_active = 3
+          })
+      }else {
+          console.log(gambar_active, ' ini gambar active')
+          // console.log(gambar_active, ' ini gambar active')
+           toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
+          // console.log('RESULT:', dataUrl)
+              await  $('#scream').attr('src',dataUrl)
+              var example = document.getElementById('example');
+              var context = example.getContext('2d');
+              var img = document.getElementById("scream");
+              context.drawImage(img, 0, 0, 500, 500);
+              
+              // var c = example.getContext('2d');
+              var p =  context.getImageData(10, 10, 1, 1).data; 
+              console.log(p)
+              var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+              // alert(hex,'GA2')
+  
+  
+               await $('.ads-3').css('background-color',hex)
+             await  $('.ads-1').css('background-color',hex)
+              // $('#status').html(cord + "<br>" + hex);
+              gambar_active = 1
+          })
+      }
+      },3000)
+  
+     
+   
+      function rgbToHex(r, g, b) {
+          if (r > 255 || g > 255 || b > 255)
+              throw "Invalid color component";
+          return ((r << 16) | (g << 8) | b).toString(16);
+      }
+      
