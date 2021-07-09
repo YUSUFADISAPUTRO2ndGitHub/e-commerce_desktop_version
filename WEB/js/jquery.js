@@ -2505,7 +2505,7 @@ const save_edit_quantity=(product_id)=>{
 
 
 
-
+    clearTokenForm()
 }
 
 
@@ -2524,7 +2524,7 @@ const save_edit_discount=(product_id)=>{
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_discount')
 
-   
+    clearTokenForm()
 
 }
 
@@ -2545,6 +2545,8 @@ const save_edit_discount=(product_id)=>{
     $('#get_otp').modal('show')
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_quantity')
+
+    clearTokenForm()
  }
 
 
@@ -2565,6 +2567,8 @@ const save_edit_harga=(product_id)=>{
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_sell_price')
 
+    clearTokenForm()
+
 }
 
 
@@ -2584,6 +2588,11 @@ const edit_product_name=(product_id)=>{
 
 }
 
+const clearTokenForm=()=>{
+    $('#id_otp').val('')
+    $('#id_pass').val('')
+}
+
 
 const save_edit_name=(product_id)=>{
     // alert($("#"+product_id+"-name").val())
@@ -2591,9 +2600,9 @@ const save_edit_name=(product_id)=>{
     $('#get_otp').modal('show')
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_name')
-    $('#id_otp').val('')
-    $('#id_pass').val('')
+ 
 
+    clearTokenForm()
 }
 
 const check_number_wa=()=>{
@@ -2621,6 +2630,8 @@ const change_status_otp=(token)=>{
     $('#get_otp').modal('show')
     $('#s_product_name').addClass(token)
     $('#s_product_name').addClass('status_gb')
+
+    clearTokenForm()
 }
 
 const save_product_name=()=>{
