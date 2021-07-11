@@ -1,13 +1,18 @@
 body {
     margin: 0;
     padding: 0;
+
 }
+
+
 .main-structure {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+
 }
+
 
 .main-about{
     width:100%;
@@ -87,6 +92,8 @@ body {
     height: 70%;
     overflow: scroll;
 }
+
+
 
 .header-cat {
     width: 30%;
@@ -2068,7 +2075,7 @@ display: flex;
 }
 .box-kumpulkan-profile {
     margin-top: 20px;
-    padding-left: 45px;
+    padding-left: 65px;
     padding-right: 15px;
     width: 100%;
     height: 35px;
@@ -2201,7 +2208,8 @@ input:focus {
 .modals-lk {
     position: absolute;
     z-index: 20;
-    top: 100px;
+    /* top: 100px; */
+    top:18%;
     /* left:327px; */
     left: 22.8%;
     height: 480px;
@@ -3012,10 +3020,12 @@ ul {
 }
 #slider{
     height:400px;
+    display: none;;
 }
 .figure{
     height:300px;
     margin: 0 !important;
+    /* display:none !important; */
 }
 
 /* DETAIL PRODUCT MODALS */
@@ -3554,6 +3564,9 @@ th {
     width: 100%;
     height: 100%;
 }
+.ads_samping:hover{
+    cursor: pointer;
+}
 
 .bootstrap-switch .bootstrap-switch-handle-off {
     padding: 0;
@@ -3777,10 +3790,11 @@ th {
     left: -40px; */
 
 
-    width: 722px;
-    height: 100%;
+    width: 725px;
+    height: 300.5px;
     position: relative;
     top:-305px;
+    left:-1px;
 }
 
 .box_password_reg {
@@ -4618,7 +4632,7 @@ img{
     border-radius: 10px;
     padding-left:10px;
     padding-right:10px;
-    /* background-color: #217283; */
+    background-color: white;
 }
 .tableFixHead_ul_hutang  thead th {
     position: sticky;
@@ -4633,7 +4647,7 @@ img{
     left: 10px;
 }
 .tableFixHead_ul_hutang ::-webkit-scrollbar-thumb {
-    background-color: #217283;
+    background-color: red;
     border-radius: 5px;
     height: 100px;
     position: relative;
@@ -4644,8 +4658,11 @@ img{
 .tableFixHead_ul_hutang ,
 .tableFixHead_ul_hutang  td {
     /* border:2px solid #217283; */
-    color: white;
+    color: #217283;
 }
+
+
+
 
 /* batas */
 
@@ -4687,7 +4704,8 @@ img{
 .tableFixHead_ul_detail_hutang ,
 .tableFixHead_ul_detail_hutang  td {
     /* border:2px solid #217283; */
-    color: white;
+    /* color: white; */
+    color:#217283;
 }
 
 /* batas */
@@ -4857,3 +4875,36 @@ img{
       /* top:50%; */
       /* bottom:-10%; */
   }
+
+#scream {
+    transition: 1s;
+}
+
+
+
+/* SKELETON LOADING */
+
+.animated-background {
+    will-change: transform;
+    animation: placeHolderShimmer 1s linear infinite forwards;
+    -webkit-backface-visibility: hidden;
+    background: #e6e6e6;
+    background: linear-gradient(90deg, #eee 8%, #ddd 18%, #eee 33%);
+    background-size: 800px 104px;
+    height: 100%;
+    position: relative;
+    /* z-index:1000; */
+  
+  }
+  @keyframes placeHolderShimmer {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        background-position: -468px 0
+    }
+    to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        background-position: 468px 0
+    }
+  }  

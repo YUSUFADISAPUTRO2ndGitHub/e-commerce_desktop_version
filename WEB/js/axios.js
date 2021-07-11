@@ -119,7 +119,7 @@ const renderItemPromo=()=>{
         }else {
             $('.box-render-promo').append(
             ` 
-                <div class="card-item hvr-float-shadow">
+                <div class="card-item hvr-float-shadow ">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>

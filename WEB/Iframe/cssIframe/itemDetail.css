@@ -9,6 +9,7 @@
     /* align-items: center; */
     flex-direction: row;
     overflow:hidden;
+    padding:5px;
     /* border:1px solid black; */
 }
 .box-item-img{
@@ -38,6 +39,7 @@
     /* width:500px; */
     width:70%;
     height:100%;
+    padding-left:5px;
     /* background-color: red; */
     display: flex;
     align-items: center;
@@ -102,7 +104,7 @@
 .item-1 {
     /* background-color: red; */
     position: relative;
-    top:20px;
+    top:15px;
 }
 .item-1 p{
     color:#217384;
@@ -205,11 +207,21 @@
     background-color: #217384;
     width:80%;
     height:200px;
-    overflow: scroll;
+    overflow: auto;
+    overflow-y:scroll;
     position: relative;
     top:-70px;
 
 }
+
+ .deskripsi_gb::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+}
+.deskripsi_gb::-webkit-scrollbar-thumb {
+    background-color: #37CED5;
+    border-radius: 10px;
+} 
 .deskripsi_gb p{
     color: white !important;
     font-size: 18px;

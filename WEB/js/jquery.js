@@ -2505,7 +2505,7 @@ const save_edit_quantity=(product_id)=>{
 
 
 
-    clearTokenForm()
+    clearOTPform()
 }
 
 
@@ -2524,7 +2524,7 @@ const save_edit_discount=(product_id)=>{
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_discount')
 
-    clearTokenForm()
+    clearOTPform()
 
 }
 
@@ -2546,7 +2546,7 @@ const save_edit_discount=(product_id)=>{
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_quantity')
 
-    clearTokenForm()
+    clearOTPform()
  }
 
 
@@ -2567,7 +2567,7 @@ const save_edit_harga=(product_id)=>{
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_sell_price')
 
-    clearTokenForm()
+    clearOTPform()
 
 }
 
@@ -2588,7 +2588,7 @@ const edit_product_name=(product_id)=>{
 
 }
 
-const clearTokenForm=()=>{
+const clearOTPform=()=>{
     $('#id_otp').val('')
     $('#id_pass').val('')
 }
@@ -2602,7 +2602,7 @@ const save_edit_name=(product_id)=>{
     $('#s_product_name').addClass('product_name')
  
 
-    clearTokenForm()
+    clearOTPform()
 }
 
 const check_number_wa=()=>{
@@ -2631,7 +2631,7 @@ const change_status_otp=(token)=>{
     $('#s_product_name').addClass(token)
     $('#s_product_name').addClass('status_gb')
 
-    clearTokenForm()
+    clearOTPform()
 }
 
 const save_product_name=()=>{
@@ -3209,3 +3209,13 @@ function toDataURL(url, callback) {
           return ((r << 16) | (g << 8) | b).toString(16);
       }
       
+
+    var timeout = setTimeout(function(){
+        yourFunction()
+    },2000);
+    const yourFunction=()=>{
+        $('.ads-1').removeClass('animated-background')
+        $('.ads-2').removeClass('animated-background')
+        $('.ads-3').removeClass('animated-background')
+        $('#slider').css('display','block')
+    }
