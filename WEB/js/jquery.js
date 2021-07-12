@@ -13,21 +13,22 @@ $(function(){
         }
     },1000)
 
-    setInterval(()=>{
-        var test = $('.box-render-promo-animated').is(':visible')
-        var test2 = $('.box-render-promo-animated').val()
-        console.log(test2)
-        if($('.box-render-promo-animated').css('display') == 'flex'){
-            $('.box-render-promo-animated').css('display','none')
-            $('.box-render-promo').css('display','flex')
-            $('.box-render-new').css('display','flex')
-            $('.box-render-all').css('display','flex')
-        }else {
-            console.log('masuk ke else')
-        }
-    },5000)
+
+    // INTERVAL UNTU CHECKING ANIMATED
+    // setInterval(()=>{
     
+    //     if($('.box-render-promo-animated').css('display') == 'flex'){
+    //         $('.box-render-promo-animated').css('display','none')
+    //         $('.box-render-promo').css('display','flex')
+    //         $('.box-render-new').css('display','flex')
+    //         $('.box-render-all').css('display','flex')
+    //     }else {
+          
+    //     }
+    // },5000)
     
+
+  
       $('.input-group').on('click',function(){
           $('.list-group').toggle(1000)
         // $('.list-group').show(1000)
@@ -3126,6 +3127,15 @@ const copy_link_share=()=>{
     
 }
 
+const nonActiveSkeleton=()=>{
+    // alert('jalan')
+    $('.box-render-promo-animated').css('display','none')
+    $('.box-render-promo').css('display','flex')
+    $('.box-render-new').css('display','flex')
+    $('.box-render-all').css('display','flex')
+}
+
+
 
 function toDataURL(url, callback) {
     var xhr = new XMLHttpRequest();
@@ -3164,6 +3174,7 @@ function toDataURL(url, callback) {
                await $('.ads-1').css('background-color',hex)
               // $('#status').html(cord + "<br>" + hex);
               gambar_active = 2
+              
           })
    
       }
@@ -3188,6 +3199,7 @@ function toDataURL(url, callback) {
               await  $('.ads-1').css('background-color',hex)
               // $('#status').html(cord + "<br>" + hex);
               gambar_active = 3
+              
           })
       }else {
           console.log(gambar_active, ' ini gambar active')
@@ -3211,6 +3223,7 @@ function toDataURL(url, callback) {
              await  $('.ads-1').css('background-color',hex)
               // $('#status').html(cord + "<br>" + hex);
               gambar_active = 1
+              
           })
       }
       },3000)
@@ -3233,3 +3246,200 @@ function toDataURL(url, callback) {
         $('.ads-3').removeClass('animated-background')
         $('#slider').css('display','block')
     }
+
+
+
+//     if((customer_data.Customer_Code != undefined || customer_data.Customer_Code.length != 0)
+// && (customer_data.First_Name != undefined || customer_data.First_Name.length >= 3)
+// && (customer_data.Last_Name != undefined || customer_data.Last_Name.length >= 3)
+// && (customer_data.User_Password != undefined || customer_data.User_Password.length >= 10)
+// && (customer_data.Email != undefined || customer_data.Email.length != 0)
+// && (customer_data.Contact_Number_1 != undefined || customer_data.Contact_Number_1.length != 0)
+// && (customer_data.account_number != undefined || customer_data.account_number.length != 0)
+// && (customer_data.referral_customer_code != undefined || customer_data.referral_customer_code.length != 0)
+// // && (customer_data.ktp != undefined || customer_data.ktp.length != 0)
+// && (
+// customer_data.Email.toLowerCase().includes('@gmail.com') 
+// || customer_data.Email.toLowerCase().includes('@outlook.com') 
+// || customer_data.Email.toLowerCase().includes('@hotmail.com') 
+// || customer_data.Email.toLowerCase().includes('@yahoo.com') 
+// || customer_data.Email.toLowerCase().includes('@yahoo.co.id') 
+// || customer_data.Email.toLowerCase().includes('@aol.com')
+// )
+// ){
+
+// }
+const check_input_form_supp=()=>{
+    // var customer_code = localStorage.getItem('token')
+    var first_name = $("#nama_depan_supp").val()
+    var last_name = $("#nama_belakang_supp").val()
+    var password= $('#password_supp').val()
+    var email = $('#email_supp').val()
+    var number_1 = $('#telp_gudang_supp').val()
+    var account_number = $('#no_rek_perusahaan_supp').val()
+    // var referral_code = $('#inp_ref_code').val()
+    
+    // var isCustomer_code = false
+    var isFirst_Name = false
+    var isLast_Name=false
+    var isPassword = false
+    var isEmail = false
+    var isNumber_1 = false
+    var isAccount_number = false
+    // var isReferral_code = false
+    
+    
+
+    
+    // if( customer_code.length !=0){
+    //     isCustomer_code = true
+    // }else {
+    //     isCustomer_code = false
+    //     swal.fire("Error Customer Code", "", "error");
+    // }
+    
+    if(first_name != undefined && first_name.length >=3 ){
+        isFirst_Name = true
+    }else {
+        isFirst_Name = false
+        swal.fire("Nama Minimal 3 Huruf", "", "error");
+    }
+    
+    if(last_name != undefined && last_name.length >=3 ){
+        isLast_Name = true
+    }else {
+        isLast_Name = false
+        swal.fire("Nama Minimal 3 Huruf", "", "error");
+    }
+    
+    if(password != undefined && password.length >=4 ){
+        isPassword = true
+    }else {
+        isPassword = false
+        swal.fire("Password Salah", "", "error");
+    }
+    
+    if(email != undefined && email.length !=0 ){
+        isEmail = true
+    }else {
+        isEmail = false
+        swal.fire("Email Salah", "", "error");
+    }
+    
+    
+    if(number_1 != undefined && number_1.length  !=0 ){
+        isNumber_1 = true
+    }else {
+        isNumber_1 = false
+        swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+    }
+    
+    if(account_number != undefined && account_number.length  !=0 ){
+        isAccount_number = true
+    }else {
+        isAccount_number = false
+        swal.fire("Nomor Rekening Harus Di Isi", "", "error");
+    }
+    
+
+    
+    
+    if(isFirst_Name == true 
+        && isLast_Name == true && isPassword == true && isEmail == true && isNumber_1 == true
+        && isAccount_number == true ){
+            // alert('bisa register')
+            return true 
+        }else {
+            // alert('ada data yg kosong')
+            return false
+        }
+    
+    }
+
+
+
+
+const check_input_form=()=>{
+// var customer_code = localStorage.getItem('token')
+var first_name = $("#nama_depan_reg").val()
+var last_name = $("#nama_belakang_reg").val()
+var password= $('#password_reg').val()
+var email = $('#email_reg').val()
+var number_1 = $('#no_telp_reg').val()
+var account_number = $('#no_rekening_reg').val()
+var referral_code = $('#inp_ref_code').val()
+
+// var isCustomer_code = false
+var isFirst_Name = false
+var isLast_Name=false
+var isPassword = false
+var isEmail = false
+var isNumber_1 = false
+var isAccount_number = false
+var isReferral_code = false
+
+
+
+if(first_name != undefined && first_name.length >=3 ){
+    isFirst_Name = true
+}else {
+    isFirst_Name = false
+    swal.fire("Nama Minimal 3 Huruf", "", "error");
+}
+
+if(last_name != undefined && last_name.length >=3 ){
+    isLast_Name = true
+}else {
+    isLast_Name = false
+    swal.fire("Nama Minimal 3 Huruf", "", "error");
+}
+
+if(password != undefined && password.length >=4 ){
+    isPassword = true
+}else {
+    isPassword = false
+    swal.fire("Password Salah", "", "error");
+}
+
+if(email != undefined && email.length !=0 ){
+    isEmail = true
+}else {
+    isEmail = false
+    swal.fire("Email Salah", "", "error");
+}
+
+
+if(number_1 != undefined && number_1.length  !=0 ){
+    isNumber_1 = true
+}else {
+    isNumber_1 = false
+    swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+}
+
+if(account_number != undefined && account_number.length  !=0 ){
+    isAccount_number = true
+}else {
+    isAccount_number = false
+    swal.fire("Nomor Rekening Harus Di Isi", "", "error");
+}
+
+if(referral_code != undefined && referral_code.length  !=0 ){
+    isReferral_code = true
+}else {
+    isReferral_code = false
+    swal.fire("Referral Code Harus Di Isi", "", "error");
+}
+
+
+
+if( isFirst_Name == true 
+    && isLast_Name == true && isPassword == true && isEmail == true && isNumber_1 == true
+    && isAccount_number == true && isReferral_code == true){
+        // alert('bisa register')
+        return true 
+    }else {
+        // alert('ada data yg kosong')
+        return false
+    }
+
+}

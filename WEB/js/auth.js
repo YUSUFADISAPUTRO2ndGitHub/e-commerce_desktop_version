@@ -7,106 +7,120 @@
 // },1000)
 
 
+
+
+
+
 $(document).on('click',"#simpan_reg",function(){
 
-    var password_awal = $('#password_reg').val()
-    var referral_code = $('.ref-cod option:selected').val()
-    console.log(referral_code)
-    // $('#inp_ref_code').val(referral_code)
-    
-    
-    axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
-    .then((res)=>{
-        var final_pass = res.data
-        console.log(final_pass)
-        var ref_val = $('#inp_ref_code').val()
-        if(ref_val.length >3){
-            console.log(ref_val)
-            console.log('aman ')
-            axios.post(`http://customers.sold.co.id/get-customer-code`)
+    check_input_form()
+
+    var result_check_input_form = check_input_form()
+
+    if(result_check_input_form){
+        var password_awal = $('#password_reg').val()
+        var referral_code = $('.ref-cod option:selected').val()
+        console.log(referral_code)
+        // $('#inp_ref_code').val(referral_code)
+        
+        
+        axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
         .then((res)=>{
-            localStorage.setItem('token',res.data)
-            var data = {
-                 customer_data : {
-                    Customer_Code : localStorage.getItem("token"),
-                    First_Name : $("#nama_depan_reg").val(),
-                    Last_Name : $("#nama_belakang_reg").val(),
-                    User_Password :final_pass,
-                    Birthday : $("#tahun_lahir_reg").val() + "/" + $("#bulan_lahir_reg").val() + "/" + $("#tanggal_lahir_reg").val(),
-                    Created_Date : "CURRENT_TIMESTAMP()",
-                    Last_Login : "CURRENT_TIMESTAMP()",
-                    Email : $('#email_reg').val(),
-                    Contact_Number_1 : $("#no_telp_reg").val(),
-                    Contact_Number_2 : $("#no_telp_2_reg").val(),
-                    Address_1 : $("#alamat_lengkap_1").val(),
-                    Address_2 : $("#alamat_lengkap_2").val(),
-                    Address_3 : $("#alamat_lengkap_3").val(),
-                    Address_4 : $("#alamat_lengkap_4").val(),
-                    Address_5 : $("#alamat_lengkap_5").val(),
-                    Status : "pending",
-                    User_Type : "Customer",
-                    account_number: $("#no_rekening_reg").val(),
-                    referral_customer_code: $('#inp_ref_code').val(),
-                    ktp:$("#no_ktp_reg").val()
+            var final_pass = res.data
+            console.log(final_pass)
+            var ref_val = $('#inp_ref_code').val()
+            if(ref_val.length >3){
+                console.log(ref_val)
+                console.log('aman ')
+                axios.post(`http://customers.sold.co.id/get-customer-code`)
+            .then((res)=>{
+                localStorage.setItem('token',res.data)
+                var data = {
+                     customer_data : {
+                        Customer_Code : localStorage.getItem("token"),
+                        First_Name : $("#nama_depan_reg").val(),
+                        Last_Name : $("#nama_belakang_reg").val(),
+                        User_Password :final_pass,
+                        Birthday : $("#tahun_lahir_reg").val() + "/" + $("#bulan_lahir_reg").val() + "/" + $("#tanggal_lahir_reg").val(),
+                        Created_Date : "CURRENT_TIMESTAMP()",
+                        Last_Login : "CURRENT_TIMESTAMP()",
+                        Email : $('#email_reg').val(),
+                        Contact_Number_1 : $("#no_telp_reg").val(),
+                        Contact_Number_2 : $("#no_telp_2_reg").val(),
+                        Address_1 : $("#alamat_lengkap_1").val(),
+                        Address_2 : $("#alamat_lengkap_2").val(),
+                        Address_3 : $("#alamat_lengkap_3").val(),
+                        Address_4 : $("#alamat_lengkap_4").val(),
+                        Address_5 : $("#alamat_lengkap_5").val(),
+                        Status : "pending",
+                        User_Type : "Customer",
+                        account_number: $("#no_rekening_reg").val(),
+                        referral_customer_code: $('#inp_ref_code').val(),
+                        ktp:$("#no_ktp_reg").val()
+                    }
                 }
-            }
-            console.log(data,' line 36 data')
-        axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
-            headers:{
-                "Content-Type":'application/json'
-            },
-            "data":JSON.stringify({
-                "Customer_Code": data.customer_data.Customer_Code,
-                "First_Name": data.customer_data.First_Name,
-                "Last_Name": data.customer_data.Last_Name,
-                "User_Password": data.customer_data.User_Password,
-                "Birthday": data.customer_data.Birthday,
-                "Created_Date": data.customer_data.Created_Date,
-                "Last_Login": data.customer_data.Last_Login,
-                "Email": data.customer_data.Email,
-                "Contact_Number_1": data.customer_data.Contact_Number_1,
-                "Contact_Number_2": data.customer_data.Contact_Number_2,
-                "Address_1": data.customer_data.Address_1,
-                "Address_2": data.customer_data.Address_2,
-                "Address_3": data.customer_data.Address_3,
-                "Address_4": data.customer_data.Address_4,
-                "Address_5": data.customer_data.Address_5,
-                "Status": data.customer_data.Status,
-                "User_Type": data.customer_data.User_Type,
-                "ktp":data.customer_data.ktp
-            })
-        }).then((res)=>{
-            console.log(res.data)
-            
-            if(res.data === true){
+                console.log(data,' line 36 data')
+            axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
+                headers:{
+                    "Content-Type":'application/json'
+                },
+                "data":JSON.stringify({
+                    "Customer_Code": data.customer_data.Customer_Code,
+                    "First_Name": data.customer_data.First_Name,
+                    "Last_Name": data.customer_data.Last_Name,
+                    "User_Password": data.customer_data.User_Password,
+                    "Birthday": data.customer_data.Birthday,
+                    "Created_Date": data.customer_data.Created_Date,
+                    "Last_Login": data.customer_data.Last_Login,
+                    "Email": data.customer_data.Email,
+                    "Contact_Number_1": data.customer_data.Contact_Number_1,
+                    "Contact_Number_2": data.customer_data.Contact_Number_2,
+                    "Address_1": data.customer_data.Address_1,
+                    "Address_2": data.customer_data.Address_2,
+                    "Address_3": data.customer_data.Address_3,
+                    "Address_4": data.customer_data.Address_4,
+                    "Address_5": data.customer_data.Address_5,
+                    "Status": data.customer_data.Status,
+                    "User_Type": data.customer_data.User_Type,
+                    "ktp":data.customer_data.ktp
+                })
+            }).then((res)=>{
+                console.log(res.data)
                 
-                swal.fire("Register Berhasil", "", "success");
-                $('#registerModal').modal('hide')
+                if(res.data === true){
+                    
+                    swal.fire("Register Berhasil", "", "success");
+                    $('#registerModal').modal('hide')
+                }else {
+                    $('#registerModal').modal('hide')
+                    // swal.fire("Register Gagal", "", "info");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Register gagal!',
+                        // footer: '<a href="">Why do I have this issue?</a>'
+                      })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+    
+            }).catch((err)=>{
+                console.log(err)
+            })
             }else {
-                $('#registerModal').modal('hide')
-                // swal.fire("Register Gagal", "", "info");
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Register gagal!',
-                    // footer: '<a href="">Why do I have this issue?</a>'
-                  })
+                swal.fire("Referral Code Harus Di isi", "", "error");
             }
+          
+            
         }).catch((err)=>{
             console.log(err)
         })
 
-        }).catch((err)=>{
-            console.log(err)
-        })
-        }else {
-            swal.fire("Referral Code Harus Di isi", "", "error");
-        }
-      
-        
-    }).catch((err)=>{
-        console.log(err)
-    })
+    }else {
+        alert('ada data yang salah')
+    }
+
 
 
     
@@ -382,91 +396,104 @@ function loadingMessage(){
 
 // REGISTER DATA SUPPLIER
 $(document).on('click',"#simpan_supplier",function(){
-alert('button save jalan')
-axios.post(`http://customers.sold.co.id/get-customer-code`)
-.then((res)=>{
-    localStorage.setItem('token',res.data)    
-    var password = $('#password_supp').val()
-    console.log(password,  ' ini password register suplier')
-    axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
-    .then((res)=>{
-        console.log(res.data)
-        var newPassword = res.data
-        console.log(newPassword)
-        console.log(data)
-        var data = {
-            customer_data : {
-                Customer_Code : localStorage.getItem("token"),
-                First_Name : $("#nama_depan_supp").val(),
-                Last_Name : $("#nama_belakang_supp").val(),
-                User_Password : newPassword,
-                Created_Date : "CURRENT_TIMESTAMP()",
-                Last_Login : "CURRENT_TIMESTAMP()",
-                Email : $("#email_supp").val(),
-                Contact_Number_1 : $("#telp_gudang_supp").val(),
-                Contact_Number_2 : $("#telp_gudang2_supp").val(),
-                Address_1 : (typeof $("#alamat_lengkap_1_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_1_supp").val(),
-                Address_2 : (typeof $("#alamat_lengkap_2_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_2_supp").val(),
-                Address_3 : (typeof $("#alamat_lengkap_3_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_3_supp").val(),
-                Address_4 : (typeof $("#alamat_lengkap_4_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_4_supp").val(),
-                Address_5 : (typeof $("#alamat_lengkap_5_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_5_supp").val(),
-                Status : "pending",
-                User_Type : "Supplier",
-                account_number: $("#no_rek_perusahaan_supp").val(),
-                npwp: $("#npwp_supp").val(),
-                ktp: (typeof $("#no_ktp_supp").val() === 'undefined') ? "NULL" : $("#no_ktp_supp").val(),
-                nik: $("#nik_supp").val(),
-                Nama_Perusahaan: $("#nama_perusahaan_supp").val(),
-            }
-        };
-        axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
-            headers:{
-                "Content-Type":'application/json'
-            },
-            "data":JSON.stringify({
-                "Customer_Code": data.customer_data.Customer_Code,
-                "First_Name": data.customer_data.First_Name,
-                "Last_Name": data.customer_data.Last_Name,
-                "User_Password": data.customer_data.User_Password,
-                "Created_Date": data.customer_data.Created_Date,
-                "Last_Login": data.customer_data.Last_Login,
-                "Email": data.customer_data.Email,
-                "Contact_Number_1": data.customer_data.Contact_Number_1,
-                "Contact_Number_2": data.customer_data.Contact_Number_2,
-                "Address_1" : data.customer_data.Address_1,
-                "Address_2" : data.customer_data.Address_2,
-                "Address_3" : data.customer_data.Address_3,
-                "Address_4" : data.customer_data.Address_4,
-                "Address_5" : data.customer_data.Address_5,
-                "Status": data.customer_data.Status,
-                "User_Type": data.customer_data.User_Type,
-                "account_number": data.customer_data.account_number,
-                "Npwp":data.customer_data.Npwp,
-                "ktp":data.customer_data.ktp,
-                "nik":data.customer_data.nik,
-                "Company":data.customer_data.Company
-            })
-        })
+
+
+
+    check_input_form_supp()
+
+    var result_check_input_form_supp = check_input_form_supp()
+
+    if(result_check_input_form_supp){
+        
+        axios.post(`http://customers.sold.co.id/get-customer-code`)
         .then((res)=>{
-            if(res.data){
-                
-                swal.fire("Register Supplier Berhasil", "", "success");
-                $('#supplierModal').modal('hide')
-                $('#loginModal').modal('hide')
-            }else{
-                swal.fire("Register Supplier Gagal", "", "alert");
-            }
-            
+            localStorage.setItem('token',res.data)    
+            var password = $('#password_supp').val()
+            console.log(password,  ' ini password register suplier')
+            axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+            .then((res)=>{
+                console.log(res.data)
+                var newPassword = res.data
+                console.log(newPassword)
+                console.log(data)
+                var data = {
+                    customer_data : {
+                        Customer_Code : localStorage.getItem("token"),
+                        First_Name : $("#nama_depan_supp").val(),
+                        Last_Name : $("#nama_belakang_supp").val(),
+                        User_Password : newPassword,
+                        Created_Date : "CURRENT_TIMESTAMP()",
+                        Last_Login : "CURRENT_TIMESTAMP()",
+                        Email : $("#email_supp").val(),
+                        Contact_Number_1 : $("#telp_gudang_supp").val(),
+                        Contact_Number_2 : $("#telp_gudang2_supp").val(),
+                        Address_1 : (typeof $("#alamat_lengkap_1_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_1_supp").val(),
+                        Address_2 : (typeof $("#alamat_lengkap_2_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_2_supp").val(),
+                        Address_3 : (typeof $("#alamat_lengkap_3_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_3_supp").val(),
+                        Address_4 : (typeof $("#alamat_lengkap_4_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_4_supp").val(),
+                        Address_5 : (typeof $("#alamat_lengkap_5_supp").val() === 'undefined') ? "NULL" : $("#alamat_lengkap_5_supp").val(),
+                        Status : "pending",
+                        User_Type : "Supplier",
+                        account_number: $("#no_rek_perusahaan_supp").val(),
+                        npwp: $("#npwp_supp").val(),
+                        ktp: (typeof $("#no_ktp_supp").val() === 'undefined') ? "NULL" : $("#no_ktp_supp").val(),
+                        nik: $("#nik_supp").val(),
+                        Nama_Perusahaan: $("#nama_perusahaan_supp").val(),
+                    }
+                };
+                axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
+                    headers:{
+                        "Content-Type":'application/json'
+                    },
+                    "data":JSON.stringify({
+                        "Customer_Code": data.customer_data.Customer_Code,
+                        "First_Name": data.customer_data.First_Name,
+                        "Last_Name": data.customer_data.Last_Name,
+                        "User_Password": data.customer_data.User_Password,
+                        "Created_Date": data.customer_data.Created_Date,
+                        "Last_Login": data.customer_data.Last_Login,
+                        "Email": data.customer_data.Email,
+                        "Contact_Number_1": data.customer_data.Contact_Number_1,
+                        "Contact_Number_2": data.customer_data.Contact_Number_2,
+                        "Address_1" : data.customer_data.Address_1,
+                        "Address_2" : data.customer_data.Address_2,
+                        "Address_3" : data.customer_data.Address_3,
+                        "Address_4" : data.customer_data.Address_4,
+                        "Address_5" : data.customer_data.Address_5,
+                        "Status": data.customer_data.Status,
+                        "User_Type": data.customer_data.User_Type,
+                        "account_number": data.customer_data.account_number,
+                        "Npwp":data.customer_data.Npwp,
+                        "ktp":data.customer_data.ktp,
+                        "nik":data.customer_data.nik,
+                        "Company":data.customer_data.Company
+                    })
+                })
+                .then((res)=>{
+                    if(res.data){
+                        
+                        swal.fire("Register Supplier Berhasil", "", "success");
+                        $('#supplierModal').modal('hide')
+                        $('#loginModal').modal('hide')
+                    }else{
+                        swal.fire("Register Supplier Gagal", "", "alert");
+                    }
+                    
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+        
         }).catch((err)=>{
-            console.log(err)
-        })
-    }).catch((err)=>{
         console.log(err)
-    })
+        })
 
-}).catch((err)=>{
-
-})
+    }else {
+        console.log('ada data yg salah supplier line 494. auth js')
+    }
+    
 
 
 })
