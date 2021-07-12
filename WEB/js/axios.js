@@ -83,6 +83,9 @@ axios.post('http://products.sold.co.id/get-product-details')
 .then((res)=>{
     allData = res.data
     // console.log(res.data)
+
+   
+
     renderItemPromo()
     renderItemNew()
     renderItemAll()
@@ -107,7 +110,9 @@ const get_product_detail_from_main_page=(product_id)=>{
 
 // RENDER DATA HOME
 const renderItemPromo=()=>{
-
+// alert('jalan render promo')
+    $('.box-render-promo-animated').css('display','none')
+    $('.box-render-promo').css('display','flex')
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -117,6 +122,7 @@ const renderItemPromo=()=>{
         if(val == false){
             console.log(' gak render karna false')
         }else {
+       
             $('.box-render-promo').append(
             ` 
                 <div class="card-item hvr-float-shadow ">
@@ -145,7 +151,8 @@ const renderItemPromo=()=>{
 
 const renderItemNew=()=>{
     
-    
+    $('.box-render-promo-animated').css('display','none')
+    $('.box-render-new').css('display','flex')
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -181,6 +188,8 @@ const renderItemNew=()=>{
 }
 const renderItemAll=()=>{
     
+    $('.box-render-promo-animated').css('display','none')
+    $('.box-render-all').css('display','flex')
 
     allData.map((val,index)=>{
         // console.log(allData)

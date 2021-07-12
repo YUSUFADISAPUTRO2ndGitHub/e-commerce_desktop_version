@@ -276,7 +276,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         </div>
                     </div>
                     
-                    <div class="rating-bottom">
+                    <div class="rating-bottom-sp">
                         <div class="star-box">
                             <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>
@@ -329,7 +329,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         </div>
                     </div>
                     
-                    <div class="rating-bottom">
+                    <div class="rating-bottom-sp">
                         <div class="star-box">
                             <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                         </div>

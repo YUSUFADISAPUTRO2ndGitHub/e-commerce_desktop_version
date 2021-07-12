@@ -2507,8 +2507,7 @@ input:focus {
 /* date picker */
 
 /* render item */
-
-.box-render-promo {
+.box-render-promo-animated {
     width: 100%;
     height: 100%;
     /* background-color: red; */
@@ -2529,11 +2528,24 @@ input:focus {
     /* Optional: just make scrollbar invisible */
 }
 
+.box-render-promo {
+    width: 100%;
+    height: 100%;
+    
+    display: none;
+    
+    flex-direction: row;
+    overflow: scroll;
+    overflow-y: hidden;
+
+
+}
+
 .box-render-new {
     width: 100%;
     height: 100%;
     /* background-color: red; */
-    display: flex;
+    display: none;
     flex-direction: row;
     overflow: scroll;
     overflow-y: hidden;
@@ -2544,7 +2556,7 @@ input:focus {
     width: 100%;
     height: 100%;
     /* background-color: red; */
-    display: flex;
+    display: none;
     flex-direction: row;
     overflow: scroll;
     overflow-y: hidden;
@@ -4908,3 +4920,69 @@ img{
         background-position: 468px 0
     }
   }  
+
+
+  .img-animated{
+    height: 192px;
+    width:100%;
+    /* position: relative; */
+    /* top:20px; */
+    /* border:2px solid white; */
+  }
+  .p-animated{
+    height:20px;
+    width:220px;
+    position: relative;
+    top:20px;
+  }
+  .p-animated-2{
+    height:20px;
+    width:150px;
+    position: relative;
+    top:15px;
+  }
+  .p-animated-3{
+    height:20px;
+    width:150px;
+    position: relative;
+    top:10px;
+  }
+  .p-animated-4{
+    height:45px;
+    width:70px;
+    position: relative;
+    /* top:-15px; */
+    left:50%;
+  }
+
+  .card-item-list-animated {
+    padding-top: 5px;
+    /* padding-left: 20px; */
+    display: flex;
+    width: 100%;
+    height: 100%;;
+    /* background-color: white; */
+    flex-direction: column;
+}
+
+
+.card-item-animated {
+
+    width: 250px;
+    height: 100%;
+    min-width: 250px;
+    min-height: 280px;
+    background: white;
+    border: 1px solid #D4DEE8;
+    padding: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 5px;
+    position: relative;
+    /* top:100px; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* position: relative; */
+    /* left:-30px; */
+  }

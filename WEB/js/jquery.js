@@ -12,6 +12,20 @@ $(function(){
             // console.log('masuk ke else')
         }
     },1000)
+
+    setInterval(()=>{
+        var test = $('.box-render-promo-animated').is(':visible')
+        var test2 = $('.box-render-promo-animated').val()
+        console.log(test2)
+        if($('.box-render-promo-animated').css('display') == 'flex'){
+            $('.box-render-promo-animated').css('display','none')
+            $('.box-render-promo').css('display','flex')
+            $('.box-render-new').css('display','flex')
+            $('.box-render-all').css('display','flex')
+        }else {
+            console.log('masuk ke else')
+        }
+    },5000)
     
     
       $('.input-group').on('click',function(){
