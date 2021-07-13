@@ -425,7 +425,7 @@ body {
     width: 25%;
     height: 100%;
     background: #f8ef1b;
-    transition: 1s;
+    transition: 2s;
 }
 .ads-2 {
     width: 50%;
@@ -440,7 +440,7 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    transition: 1s;
+    transition: 2s;
 
 }
 
@@ -4688,7 +4688,7 @@ img{
     height: 130px;
     width: 100%;
     border-radius: 10px;
-    padding-left:10px;
+    /* padding-left:10px; */
     padding-right:10px;
     display:none;
     position: relative;

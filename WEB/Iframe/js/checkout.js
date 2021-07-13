@@ -267,7 +267,7 @@ function personalDetailsWithCurrentAddress(){
         var paymentMethodChosen = $("#payment-selection").children("option:selected").val();
         if(paymentMethodChosen == "BCA VA TRANSFER" ){
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request);}, 2000);
-            setTimeout(function(){ clearStorage(); }, 3000);
+            // setTimeout(function(){ clearStorage(); }, 3000);
         }else{
             
             setTimeout(function(){sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(request);}, 2000);

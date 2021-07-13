@@ -7,7 +7,7 @@ setInterval(() => {
     // console.log(dataParse)
     // console.log(dataParse.length)
     $('.cart-counter').text(dataParse.length)
-}, 1000);
+}, 1000);   
 var allData = []
 
 
