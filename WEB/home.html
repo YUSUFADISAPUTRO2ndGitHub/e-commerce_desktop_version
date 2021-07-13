@@ -40,6 +40,9 @@
     <script type="text/javascript" src="./js/search_page.js"></script>
     <script type="text/javascript" src="./js/redirect_page_to_mobile_version.js"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>  -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     
     <title>SOLD</title>
     <style>
@@ -1824,6 +1827,7 @@
 </body>
 
 <script>
+    AOS.init();
     $( ".whatsapp-border" ).mouseout(function() {
         $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.2");
     });

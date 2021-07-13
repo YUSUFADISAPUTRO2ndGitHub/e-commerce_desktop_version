@@ -580,7 +580,7 @@ const render_searching_page=(product_name)=>{
                 console.log('gak ke render, karna data false')
             }else {
                 $('.new-box-card').append(`
-                <div class="card-item card_sp hvr-float-shadow">
+                <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
                         <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>

@@ -125,7 +125,7 @@ const renderItemPromo=()=>{
        
             $('.box-render-promo').append(
             ` 
-                <div class="card-item hvr-float-shadow ">
+                <div class="card-item hvr-float-shadow" data-aos="zoom-in">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>
@@ -166,7 +166,7 @@ const renderItemNew=()=>{
 
         $('.box-render-new').append(
         ` 
-          <div class="card-item card_sp hvr-float-shadow">
+          <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p class="limited-text-short">${val.Name}</p>
@@ -203,7 +203,7 @@ const renderItemAll=()=>{
 
         $('.box-render-all').append(
         ` 
-            <div class="card-item hvr-float-shadow">
+            <div class="card-item hvr-float-shadow" data-aos="zoom-in">
                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p class="limited-text-short">${val.Name}</p>
