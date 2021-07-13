@@ -288,7 +288,10 @@ const get_product_detail_from_searching_page=(product_id)=>{
                             <p>${item.Name}</p>
                         </div>
                         <div class="item-2">
-                            <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
+                            <div class="item-4-sp"> 
+                                <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
+                                <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
+                            </div>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
                         <div class="box_share_product">
@@ -342,7 +345,10 @@ const get_product_detail_from_searching_page=(product_id)=>{
                             <p>${item.Name}</p>
                         </div>
                         <div class="item-2">
-                            <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
+                            <div class="item-4-sp"> 
+                                <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
+                                <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
+                            </div>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
                         <div class="item-1">

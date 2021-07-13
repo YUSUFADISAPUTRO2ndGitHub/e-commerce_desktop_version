@@ -111,8 +111,8 @@ const get_product_detail_from_main_page=(product_id)=>{
 // RENDER DATA HOME
 const renderItemPromo=()=>{
 // alert('jalan render promo')
-    $('.box-render-promo-animated').css('display','none')
-    $('.box-render-promo').css('display','flex')
+    // $('.box-render-promo-animated').css('display','none')
+    // $('.box-render-promo').css('display','flex')
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -151,8 +151,8 @@ const renderItemPromo=()=>{
 
 const renderItemNew=()=>{
     
-    $('.box-render-promo-animated').css('display','none')
-    $('.box-render-new').css('display','flex')
+    // $('.box-render-promo-animated').css('display','none')
+    // $('.box-render-new').css('display','flex')
 
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
@@ -188,8 +188,8 @@ const renderItemNew=()=>{
 }
 const renderItemAll=()=>{
     
-    $('.box-render-promo-animated').css('display','none')
-    $('.box-render-all').css('display','flex')
+    // $('.box-render-promo-animated').css('display','none')
+    // $('.box-render-all').css('display','flex')
 
     allData.map((val,index)=>{
         // console.log(allData)
@@ -616,7 +616,7 @@ const render_group_buy=(product_id)=>{
         var hargaAwal = parseInt(item.Sell_Price)
         var discount = parseInt(item.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
-        console.log(res.data,' 473 axios')
+        console.log(res.data,' 619 axios')
         $('.box-item-detail').empty();
         if(item.GroupBuy_SellPrice == "NULL"){
             $('.box-item-detail').append(
@@ -644,7 +644,10 @@ const render_group_buy=(product_id)=>{
                             <p>${item.Name}</p>
                         </div>
                         <div class="item-2">
-                            <p>Harga Termasuk PPN: Rp.${hargaTotal}</p>
+                            <div class="item-4"> 
+                                <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
+                                <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
+                            </div>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
                         <div class="box_share_product">
@@ -652,6 +655,7 @@ const render_group_buy=(product_id)=>{
                             <div class="box_ins_share"> 
                                 <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+                                
                             </div>
                         </div>
                             <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
@@ -699,7 +703,10 @@ const render_group_buy=(product_id)=>{
                             <p>${item.Name}</p>
                         </div>
                         <div class="item-2">
-                            <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>
+                            <div class="item-4"> 
+                                <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
+                                <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
+                            </div>
                             <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
                         </div>
                         <div class="box_share_product">
@@ -711,6 +718,7 @@ const render_group_buy=(product_id)=>{
                         </div>
                         <div class="item-4">
                             <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
+                            
                         </div>
                         <div class="box-detail-option">
                             <ul class="box-add" onclick="addToCart('${item.Product_Code}')">

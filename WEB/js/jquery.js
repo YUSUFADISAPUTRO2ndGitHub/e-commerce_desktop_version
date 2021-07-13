@@ -3245,6 +3245,10 @@ function toDataURL(url, callback) {
         $('.ads-2').removeClass('animated-background')
         $('.ads-3').removeClass('animated-background')
         $('#slider').css('display','block')
+        // $('.box-render-promo-animated').css('display','none')
+        // $('.box-render-promo').css('display','flex')
+        // $('.box-render-new').css('display','flex')
+        // $('.box-render-all').css('display','flex')
     }
 
 
