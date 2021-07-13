@@ -3287,17 +3287,7 @@ const check_input_form_supp=()=>{
     var isNumber_1 = false
     var isAccount_number = false
     // var isReferral_code = false
-    
-    
 
-    
-    // if( customer_code.length !=0){
-    //     isCustomer_code = true
-    // }else {
-    //     isCustomer_code = false
-    //     swal.fire("Error Customer Code", "", "error");
-    // }
-    
     if(first_name != undefined && first_name.length >=3 ){
         isFirst_Name = true
     }else {
