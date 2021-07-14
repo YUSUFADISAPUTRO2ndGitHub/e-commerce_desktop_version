@@ -21,7 +21,17 @@ $(document).ready(async function(){
     });
     loadCheckoutFinalConfirmationTable("COD");
     listPaymentMethods();
+    renderListDeliveryFee();
 });
+
+
+function renderListDeliveryFee(){
+    $('#sub-delivery-option').append(`
+        <option>TIKI</option>
+        <option>Lion Parcel</option>
+        <option>Dayat Parcel</option>
+    `)
+}
 
 function get_otp_for_checkout(){
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
