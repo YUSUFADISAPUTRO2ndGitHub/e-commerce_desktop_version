@@ -162,7 +162,7 @@
                 <div class="alert alert-primary" role="alert">
                     PILIH DELIVERY FEE
                 </div>
-                <select class="form-control" id="sub-delivery-option">
+                <select class="form-control sub-del-opt" id="sub-delivery-option" onchange="onSelectDeliveryFee()">
                 </select>
             </div>
 
@@ -198,6 +198,25 @@
                     <th>PRODUCT NAME</th>
                     <th>QUANTITY</th>
                     <th>TOTAL PRICE</th>
+                </tr>
+            </table>
+            <table class="final_checkout_delivery_fee">
+                <tr>
+                    <th>SHIPPING NAME</th>       
+                    <th>TOTAL FEE</th>
+                </tr>
+                <tr id="final_checkout_delivery_row">
+
+                </tr>
+            </table>
+            <table class="final_checkout_total_price">
+                <tr>
+                    <th>TOTAL OVERALL PRICE</th>   
+                        
+                    
+                </tr>
+                <tr id="final_checkout_total_price_row">
+
                 </tr>
             </table>
         </div>

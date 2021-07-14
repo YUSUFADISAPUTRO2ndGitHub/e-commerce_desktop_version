@@ -6,13 +6,13 @@
 //          $("#loginModal").modal("hide");
 // })
 
-console.log('home js aktif')
+
 
 
 const on_select_ref=()=>{
     var value = $('.ref-cod').val()
     $('#inp_ref_code').val(value)
-    console.log(value)
+    // console.log(value)
 }
 function forgot_modal_request(){
     $('#loginModal').modal('hide')
@@ -21,7 +21,7 @@ function cart_requested(x){
     $('.close-button').css('display','block')
     
     $('.close').css('display','none')
-    console.log(x)
+    // console.log(x)
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
     }else{

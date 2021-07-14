@@ -19,18 +19,22 @@ $(document).ready(async function(){
         }
         var name = response.First_Name + " " + response.Last_Name;
     });
+    renderListDeliveryFee();
     loadCheckoutFinalConfirmationTable("COD");
     listPaymentMethods();
-    renderListDeliveryFee();
 });
 
 
 function renderListDeliveryFee(){
+ 
+
     $('#sub-delivery-option').append(`
-        <option>TIKI</option>
-        <option>Lion Parcel</option>
-        <option>Dayat Parcel</option>
+        <option value="TIKI">TIKI</option>
+        <option value="Lion Parel">Lion Parcel</option>
+        <option value="Dayat Parcel">Dayat Parcel</option>
     `)
+  
+
 }
 
 function get_otp_for_checkout(){
@@ -86,6 +90,23 @@ function loadCheckoutFinalConfirmationTable(condition){
     const urlParams = new URLSearchParams(queryString);
     const check_store_price = urlParams.get('check_store_price');
     if(JSON.parse(check_store_price)){
+
+         
+        var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+        var i = 0;
+        var harga_shipping = 20000
+        var total_price_with_shipping=harga_shipping
+        var Shipping_option = $('.sub-del-opt option:selected').val()
+        console.log(itemsToCheckout)
+        itemsToCheckout.map((val,id)=>{
+            console.log(parseInt(val.priceAgreed))
+            // parseFloat('100,000.00'.replace(/,/g, ''))
+            var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
+            total_price_with_shipping +=price
+            console.log(total_price_with_shipping, ' ini total price')
+        })
+        
+
         var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
         var i = 0;
         for(i; i < itemsToCheckout.length; i++){
@@ -107,25 +128,83 @@ function loadCheckoutFinalConfirmationTable(condition){
                 }
             });
         }
+        var Shipping_option = $('.sub-del-opt option:selected').val()
+        console.log(Shipping_option)
+        var Shipping_selection = $("#sub-delivery-option").children("option:selected").val();
+        console.log(Shipping_selection)
+        $('#final_checkout_delivery_row').append(`
+            <td> ${Shipping_option} </td>
+            <td> 20.000 </td>
+        `)
+        $('#final_checkout_total_price_row').append(`
+            <td>${total_price_with_shipping} </td>
+        `)
+
     }else if(condition == "COD"){
+       
         var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
         var i = 0;
+        var harga_shipping = 20000
+        var total_price_with_shipping=harga_shipping
+        var Shipping_option = $('.sub-del-opt option:selected').val()
+        console.log(itemsToCheckout)
+        itemsToCheckout.map((val,id)=>{
+            console.log(parseInt(val.priceAgreed))
+            // parseFloat('100,000.00'.replace(/,/g, ''))
+            var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
+            total_price_with_shipping +=price
+            console.log(total_price_with_shipping, ' ini total price')
+        })
+        
+        
+        console.log(Shipping_option)
         for(i; i < itemsToCheckout.length; i++){
             getProductsWithProductNo("", "", itemsToCheckout[i].productNo).done(function (response) {
+                console.log(response,' ini response')
+                console.log(parseInt(response.Sell_Price))
+                total_price_with_shipping += parseInt(response.Sell_Price)
                 var i = 0;
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
                 for(i; i < itemsToCheckout.length; i++){
-                    console.log(response);
+                    
                     if(itemsToCheckout[i].productNo == response.Product_Code){
                         $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
                         $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
                         $("#final_checkout_row_" + i).append("<td id=\"final_checkout_quantity_" + itemsToCheckout[i].productNo + "\">" + itemsToCheckout[i].quantity + "</td>");
                         $("#final_checkout_row_" + i).append("<td id=\"final_checkout_price_" + response.Sell_Price * itemsToCheckout[i].quantity + "\">" + itemsToCheckout[i].priceAgreed + "</td>");
+                   
                     }
                 }
+                
             });
         }
+        $('#final_checkout_delivery_row').append(`
+        <td> ${Shipping_option} </td>
+        <td> ${harga_shipping} </td>
+        `)
+        console.log(total_price_with_shipping,' 149')
+        $('#final_checkout_total_price_row').append(`
+            <td>${total_price_with_shipping} </td>
+        `)
+
+      
+       
     }else{
+      
+        var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+        var i = 0;
+        var harga_shipping = 20000
+        var total_price_with_shipping=harga_shipping
+        var Shipping_option = $('.sub-del-opt option:selected').val()
+        console.log(itemsToCheckout)
+        itemsToCheckout.map((val,id)=>{
+            console.log(parseInt(val.priceAgreed))
+            // parseFloat('100,000.00'.replace(/,/g, ''))
+            var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
+            total_price_with_shipping +=price
+            console.log(total_price_with_shipping, ' ini total price')
+        })
+        
         var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
         var i = 0;
         for(i; i < itemsToCheckout.length; i++){
@@ -143,6 +222,16 @@ function loadCheckoutFinalConfirmationTable(condition){
                 }
             });
         }
+        $('#final_checkout_delivery_row').append(`
+        <td> ${Shipping_option} </td>
+        <td> ${harga_shipping} </td>
+        `)
+        console.log(total_price_with_shipping,' 149')
+        $('#final_checkout_total_price_row').append(`
+            <td>${total_price_with_shipping} </td>
+        `)
+
+      
     }
 }
 
@@ -166,6 +255,35 @@ function addressOptionSelected(x){
         $("#address-selection-sub-saved-address").css("display", "block");
         $("#new-address-section").css("display", "none");
     }
+}
+
+const onSelectDeliveryFee=()=>{
+    $('#final_checkout_delivery_row').empty()
+    $('#final_checkout_total_price_row').empty()
+    var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+    var harga_shipping_awal = 20000
+    var total_price_with_shipping = harga_shipping_awal
+
+    itemsToCheckout.map((val,id)=>{
+        console.log(parseInt(val.priceAgreed))
+        // parseFloat('100,000.00'.replace(/,/g, ''))
+        var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
+        total_price_with_shipping +=price
+        console.log(total_price_with_shipping, ' ini total price')
+    })
+        var item = $('.sub-del-opt option:selected').val()
+        console.log(item)
+        $('#final_checkout_delivery_row').append(`
+            <td> ${item} </td>
+            <td> ${harga_shipping_awal} </td>
+        `)
+
+        $('#final_checkout_total_price_row').append(`
+            <td> ${total_price_with_shipping} </td>
+            
+        `)
+
+    // console.log(total_price_with_shipping,' 149')
 }
 
 async function requestToFinish(){

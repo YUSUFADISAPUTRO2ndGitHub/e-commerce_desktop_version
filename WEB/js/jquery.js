@@ -3154,7 +3154,7 @@ function toDataURL(url, callback) {
       var gambar_active = 3
       setInterval(()=>{
           if(gambar_active == 1){
-          console.log(gambar_active, ' ini gambar active')
+        //   console.log(gambar_active, ' ini gambar active')
            toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
           // console.log('RESULT:', dataUrl)
               await $('#scream').attr('src',dataUrl)
@@ -3165,7 +3165,7 @@ function toDataURL(url, callback) {
               
               // var c = example.getContext('2d');
               var p =  context.getImageData(10, 10, 1, 1).data; 
-              console.log(p)
+            //   console.log(p)
               var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
               // alert(hex)
   
@@ -3179,7 +3179,7 @@ function toDataURL(url, callback) {
    
       }
       else if (gambar_active == 2){
-          console.log(gambar_active, ' ini gambar active')
+        //   console.log(gambar_active, ' ini gambar active')
            toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
           // console.log('RESULT:', dataUrl)
               await $('#scream').attr('src',dataUrl)
@@ -3190,7 +3190,7 @@ function toDataURL(url, callback) {
               
               // var c = example.getContext('2d');
               var p =  context.getImageData(10, 10, 1, 1).data; 
-              console.log(p)
+            //   console.log(p)
               var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
               // alert(hex,'GA2')
   
@@ -3202,7 +3202,7 @@ function toDataURL(url, callback) {
               
           })
       }else {
-          console.log(gambar_active, ' ini gambar active')
+        //   console.log(gambar_active, ' ini gambar active')
           // console.log(gambar_active, ' ini gambar active')
            toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
           // console.log('RESULT:', dataUrl)
@@ -3214,7 +3214,7 @@ function toDataURL(url, callback) {
               
               // var c = example.getContext('2d');
               var p =  context.getImageData(10, 10, 1, 1).data; 
-              console.log(p)
+            //   console.log(p)
               var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
               // alert(hex,'GA2')
   
