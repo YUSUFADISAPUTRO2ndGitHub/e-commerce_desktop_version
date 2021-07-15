@@ -55,6 +55,7 @@ $(function(){
        console.log('jalan box information')
    })
    
+   
 
 //    OPEN MODALS PROFILE
    $('.option-4').on('click',function(){

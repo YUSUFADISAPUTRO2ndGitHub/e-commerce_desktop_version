@@ -864,7 +864,7 @@ const render_item_all_category=()=>{
             console.log(res.data)
             res.data.map((val,index)=>{
                 $('.top-all-category').append(`
-                    <div class="card card-small-category" onclick="getAllItem_fromAllCat('${val.Subcategory}')">
+                    <div class="card card-small-category " onclick="getAllItem_fromAllCat('${val.Subcategory}')">
                         <img src="${val.Picture_1}" class="card-img-top">
                         <h3 class="card-title">${val.Subcategory}</h3>
                     </div>
