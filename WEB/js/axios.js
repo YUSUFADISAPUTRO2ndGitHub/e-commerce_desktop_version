@@ -114,7 +114,12 @@ const renderItemPromo=()=>{
 // alert('jalan render promo')
     // $('.box-render-promo-animated').css('display','none')
     // $('.box-render-promo').css('display','flex')
-
+// alert('render itempromo jalan')
+    $('.box-render-promo').append(`
+        <div class="promo_card">
+            <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
+        </div>
+    `)
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
@@ -126,7 +131,7 @@ const renderItemPromo=()=>{
        
             $('.box-render-promo').append(
             ` 
-                <div class="card-item hvr-float-shadow" data-aos="zoom-in">
+                <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>
@@ -664,7 +669,7 @@ const render_group_buy=(product_id)=>{
                         <div class="box_share_product">
                             <p>Share This Product</p>
                             <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
                                 
                             </div>
@@ -723,7 +728,7 @@ const render_group_buy=(product_id)=>{
                         <div class="box_share_product">
                             <p>Share This Product</p>
                             <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
                             </div>
                         </div>

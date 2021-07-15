@@ -1512,13 +1512,7 @@
             </div>
             <!-- TOAST product information -->
             <div class="box-card">
-                <div class="promo_card">
-                    <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
-                </div>
                 <div class="ins_card">
-                    <div class="box-back" id="promo" onclick="backItem('promo')">
-                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
-                    </div>
                     <!-- ANIMATED SKELETON -->
                     <div class="box-render-promo-animated">
                         <div class="card-item-animated">       
@@ -1561,14 +1555,18 @@
                         
                     </div>
                     <!-- ANIMATED SKELETON -->
-
-                    <div class="box-render-promo">
-                        
-                    </div>
-                    <div class="box-next next-promo" id="promo" onclick="nextItem('promo')">
-                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+                    <div class="box-render-promo">             
                     </div>
                 </div>        
+            </div>
+
+            <div class="box_for_button">
+                <div class="box-back" id="promo" onclick="backItem('promo')">
+                    <i class="fas fa-chevron-left icon-prev icon-back" ></i>
+                </div>
+                <div class="box-next next-promo" id="promo" onclick="nextItem('promo')">
+                    <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+                </div>
             </div>
             <!-- RENDER PROMO ITEM END -->
 
@@ -1592,7 +1590,7 @@
             <!-- RENDER  NEW ITEM -->
             <div >
                 <div class="box-card" >
-                    <div class="box-back" id="new" onclick="backItem('new')">
+                    <div class="box-back-detail" id="new" onclick="backItem('new')">
                         <i class="fas fa-chevron-left icon-prev icon-back" ></i>
                     </div>
                       <!-- ANIMATED SKELETON -->
@@ -1648,7 +1646,7 @@
                     <div class="box-render-new" >
                        
                     </div>
-                    <div class="box-next" id="new" onclick="nextItem('new')" >
+                    <div class="box-next-detail" id="new" onclick="nextItem('new')" >
                         <i class="fas fa-chevron-right icon-prev icon-next" ></i>
                     </div>
                 </div>
@@ -1669,7 +1667,7 @@
     
             <!-- RENDER  ALL ITEM -->
             <div class="box-card">
-                <div class="box-back" id="all" onclick="backItem('all')">
+                <div class="box-back-detail" id="all" onclick="backItem('all')">
                     <i class="fas fa-chevron-left icon-prev icon-back" ></i>
                 </div>
                   <!-- ANIMATED SKELETON -->
@@ -1725,7 +1723,7 @@
                 <div class="box-render-all">
                    
                 </div>
-                <div class="box-next" id="all" onclick="nextItem('all')">
+                <div class="box-next-detail" id="all" onclick="nextItem('all')">
                     <i class="fas fa-chevron-right icon-prev icon-next" ></i>
                 </div>
             </div>   

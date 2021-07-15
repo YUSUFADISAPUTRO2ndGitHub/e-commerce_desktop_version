@@ -297,7 +297,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         <div class="box_share_product">
                             <p>Share This Product</p>
                             <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
                             </div>
                         </div>
@@ -357,7 +357,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
                         <div class="box_share_product">
                             <p>Share This Product</p>
                             <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard">
+                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
                                 <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
                             </div>
                         </div>

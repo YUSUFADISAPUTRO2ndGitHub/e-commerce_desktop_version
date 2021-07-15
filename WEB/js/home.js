@@ -414,9 +414,11 @@ const nextItem=(id)=>{
     // var jenis = $('.next-promo').attr("id")
     
     if(id === 'promo'){
-        scrollNextPromo += 350
+        scrollNextPromo += 255
          horizontalNavigationPromo(scrollNextPromo, event);
-         console.log(id)
+        //  $('.promo_card').css('display','none')
+        $('.promo_card').hide(1000)
+        console.log(id)
      }else if (id === 'new'){
         scrollNextNew += 350
         horizontalNavigationNew(scrollNextNew, event);
@@ -440,7 +442,9 @@ const backItem=(id)=>{
     }
     if(id === 'promo'){
 
-        scrollNextPromo -= 350
+        scrollNextPromo -= 255
+        // $('.promo_card').css('display','block')
+        $('.promo_card').show(1000)
         horizontalNavigationPromo(scrollNextPromo, event);
         console.log(id, ' ini id back')
     }else if (id === 'new'){
@@ -471,7 +475,7 @@ const backItem=(id)=>{
     }
     if(jenis === 'promo'){
 
-        scrollNextPromo -= 350
+        scrollNextPromo -= 255
         horizontalNavigationPromo(scrollNextPromo, event);
         console.log(jenis, ' ini jenis back')
     }else if (jenis === 'new'){
