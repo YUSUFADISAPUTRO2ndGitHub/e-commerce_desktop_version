@@ -90,6 +90,7 @@ axios.post('http://products.sold.co.id/get-product-details')
     renderItemNew()
     renderItemAll()
     renderCategory()
+    render_item_all_category()
     // renderSubCategory('ADHESIVE')
     // renderItemBasedOnSubCategory('SEALANT')
 }).catch((err)=>{
@@ -136,6 +137,7 @@ const renderItemPromo=()=>{
                             </div>
                             <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                 <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                <img src="./img/best_seller.png" alt="" class="img-badge-best">
                             </div>
                         </div>
                     </div>
@@ -250,6 +252,15 @@ const renderCategory=()=>{
 $('.testing-2').on('click',function(){
     console.log('get item jalan 161')
 })
+
+
+const getAllItem_fromAllCat=(item)=>{
+    console.log(item)
+    $(this).scrollTop('.modals-lk')
+    $('.close-button').css('display','block')
+    $('.modals-lk').css('display','block')
+    $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
+}
 
 const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
@@ -829,4 +840,61 @@ const newRender_list_hutang=(customer_code)=>{
 const open_detail_hutang_home=(order_number)=>{
     // var token = localStorage.getItem('token')
     location.replace(`./detailUnpaidList.html?detail_list_hutang=${order_number}`)
+}
+
+const render_item_all_category=()=>{
+    // http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}
+
+    var data_atas = [
+        'ADHESIVE',
+        'APD',
+        'HARDWARE',
+       
+    ]
+    var data_bawah = [
+        'SANITARY',
+        'INTERIOR'
+    ]
+    
+    for(var i=0; i<data_atas.length; i++){
+        console.log(data_atas[i])
+        
+        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+                $('.top-all-category').append(`
+                    <div class="card card-small-category" onclick="getAllItem_fromAllCat('${val.Subcategory}')">
+                        <img src="${val.Picture_1}" class="card-img-top">
+                        <h3 class="card-title">${val.Subcategory}</h3>
+                    </div>
+                `)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+        
+    }
+
+        
+    for(var i=0; i<data_bawah.length; i++){
+        console.log(data_atas[i])
+        
+        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_bawah[i]}`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+                console.log(val)
+                $('.bot-all-category').append(`
+                    <div class="card card-small-category" onclick="getAllItem('${val.Subcategory}')">
+                        <img src="${val.Picture_1}" class="card-img-top">
+                        <h3 class="card-title">${val.Subcategory}</h3>
+                    </div>
+                `)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+        
+    }
 }
