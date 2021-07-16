@@ -434,7 +434,7 @@ body {
 }
 
 .ads-3 {
-    width: 25%;
+    width: 28%;
     height: 100%;
     background: #f8ef1b;
     display: flex;
@@ -3855,8 +3855,9 @@ th {
 #example {
     /* width:700px; */
     width:100%;
-    height:100%;
+    height:300px;
     opacity: 0;
+    background-color: transparent;
   }
 .ads_main {
     /* width: 100%;
@@ -3870,8 +3871,9 @@ th {
     height: 300.5px;
     position: relative;
     top:-305px;
+    /* top:-304px; */
     /* left:0.45px; */
-    /* left:-1px; */
+    left:-1px;
 }
 
 .box_password_reg {
