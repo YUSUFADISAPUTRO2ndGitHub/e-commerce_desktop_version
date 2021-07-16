@@ -13,6 +13,17 @@ $(function(){
         }
     },1000)
 
+    // $('[data-toggle="popover"]').popover({
+    //     container:'body'
+    // })
+    $('#cek_harga_req').on('mouseenter',function(){
+        // alert('jaalan')
+        
+        // $('#cek_harga_req').popover('show')
+        $('#cek_harga_req').popover();
+    })
+    $('[data-toggle="tooltip"]').tooltip()
+
 
     // INTERVAL UNTU CHECKING ANIMATED
     // setInterval(()=>{

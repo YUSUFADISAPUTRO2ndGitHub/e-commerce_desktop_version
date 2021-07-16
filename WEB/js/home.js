@@ -150,6 +150,8 @@ function cek_daftar_hutang(x){
 
 
 function cek_harga_requested(x){
+
+
     $('.close-button').css('display','block')
     $('.close').css('display','none')
     if($(x).hasClass("background_grey")){
@@ -406,9 +408,15 @@ var data = [
     
 // SCROLLING ITEM
 
+
+
+
+
  var scrollNextPromo = 0   
  var scrollNextNew = 0   
- var scrollNextAll = 0   
+ var scrollNextAll = 0 
+ var scrollNextTop = 0
+ var scrollNextBot = 0  
  
 const nextItem=(id)=>{
     console.log(id)
@@ -423,9 +431,15 @@ const nextItem=(id)=>{
      }else if (id === 'new'){
         scrollNextNew += 350
         horizontalNavigationNew(scrollNextNew, event);
-     }else {
+     }else if (id === 'all'){
         scrollNextAll += 350
         horizontalNavigationAll(scrollNextAll, event);
+     }else if (id === 'next_top'){
+        scrollNextTop += 350
+        horizontalNavigationTop(scrollNextTop, event);
+     }else if (id === 'next_bot'){
+        scrollNextBot += 350
+        horizontalNavigationBot(scrollNextBot, event);
      }
  
 }
@@ -440,7 +454,13 @@ const backItem=(id)=>{
         scrollNextAll = 0
     }else if ( scrollNextNew < 0 ){
         scrollNextNew = 0
+    }else if (scrollNextTop < 0 ){
+        scrollNextTop = 0
+    }else if (scrollNextBot < 0 ){
+        scrollNextBot = 0
     }
+
+
     if(id === 'promo'){
 
         scrollNextPromo -= 255
@@ -454,41 +474,48 @@ const backItem=(id)=>{
     }else  if(id === 'all'){
         scrollNextAll -= 350
        horizontalNavigationAll(scrollNextAll, event);
+    }else if (id == 'back_top' ){
+        console.log(scrollNextTop)
+        scrollNextTop -= 350
+        horizontalNavigationTop(scrollNextTop, event);
+    }else if (id == 'back_bot'){
+        scrollNextBot -= 350
+        horizontalNavigationBot(scrollNextBot, event);
     }
 
  
 }
 
 
- $('.box-back').on('click',function(event){
+//  $('.box-back').on('click',function(event){
     
     
     
-    var jenis = $(this).attr("id")
+//     var jenis = $(this).attr("id")
   
 
-    if(scrollNextPromo <0){
-        scrollNextPromo = 0
-    }else if (scrollNextAll <0){
-        scrollNextAll = 0
-    }else if ( scrollNextNew < 0 ){
-        scrollNextNew = 0
-    }
-    if(jenis === 'promo'){
+//     if(scrollNextPromo <0){
+//         scrollNextPromo = 0
+//     }else if (scrollNextAll <0){
+//         scrollNextAll = 0
+//     }else if ( scrollNextNew < 0 ){
+//         scrollNextNew = 0
+//     }
+//     if(jenis === 'promo'){
 
-        scrollNextPromo -= 255
-        horizontalNavigationPromo(scrollNextPromo, event);
-        console.log(jenis, ' ini jenis back')
-    }else if (jenis === 'new'){
-        scrollNextNew -= 350
-       horizontalNavigationNew(scrollNextNew, event);
-    }else  if(jenis === 'all'){
-        scrollNextAll -= 350
-       horizontalNavigationAll(scrollNextAll, event);
-    }
+//         scrollNextPromo -= 255
+//         horizontalNavigationPromo(scrollNextPromo, event);
+//         console.log(jenis, ' ini jenis back')
+//     }else if (jenis === 'new'){
+//         scrollNextNew -= 350
+//        horizontalNavigationNew(scrollNextNew, event);
+//     }else  if(jenis === 'all'){
+//         scrollNextAll -= 350
+//        horizontalNavigationAll(scrollNextAll, event);
+//     }
 
-//    horizontalNavigationPromo(scrollNext, event);
-})
+// //    horizontalNavigationPromo(scrollNext, event);
+// })
 
  function horizontalNavigationPromo(position, event) {
      console.log('jalan')
@@ -503,6 +530,18 @@ function horizontalNavigationNew(position, event) {
 function horizontalNavigationAll(position, event) {
     console.log('jalan')
    $('.box-render-all').animate({scrollLeft: position}, 350);
+   event.preventDefault();
+}
+
+function horizontalNavigationTop(position, event) {
+    console.log('jalan')
+   $('.top-all-category').animate({scrollLeft: position}, 350);
+   event.preventDefault();
+}
+
+function horizontalNavigationBot(position, event) {
+    console.log('jalan')
+   $('.bot-all-category').animate({scrollLeft: position}, 350);
    event.preventDefault();
 }
 

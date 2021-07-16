@@ -1311,7 +1311,12 @@
                     <img src="../WEB/img/unpaid_list.png" alt="error" class="icon-opt ">
                     <p>Unpaid List</p>
                 </div>
-                <div class="option-1 " onclick="cek_harga_requested(this)">
+                
+    
+                <div class="option-1 " onclick="cek_harga_requested(this)"
+                data-toggle="tooltip" data-placement="bottom" title="fungsi ini hanya untuk membantu Anda, jika Anda berbelanja langsung di toko kami"
+                id="cek_harga_req"
+                >
                     <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
                     <p>Cek Harga</p>
                 </div>
@@ -1588,19 +1593,19 @@
                 </div>
 
                 <div class="box_for_button_top_all">
-                    <div class="box-back-top-all" id="promo" onclick="backItem('promo')">
+                    <div class="box-back-top-all" id="promo" onclick="backItem('back_top')">
                         <i class="fas fa-chevron-left icon-prev icon-back" ></i>
                     </div>
-                    <div class="box-next-top-all next-promo" id="promo" onclick="nextItem('promo')">
+                    <div class="box-next-top-all next-promo" id="promo" onclick="nextItem('next_top')">
                         <i class="fas fa-chevron-right icon-prev icon-next" ></i>
                     </div>
                 </div>
 
                 <div class="box_for_button_bot_all">
-                    <div class="box-back-bot-all" id="promo" onclick="backItem('promo')">
+                    <div class="box-back-bot-all" id="promo" onclick="backItem('back_bot')">
                         <i class="fas fa-chevron-left icon-prev icon-back" ></i>
                     </div>
-                    <div class="box-next-bot-all next-promo" id="promo" onclick="nextItem('promo')">
+                    <div class="box-next-bot-all next-promo" id="promo" onclick="nextItem('next_bot')">
                         <i class="fas fa-chevron-right icon-prev icon-next" ></i>
                     </div>
                 </div>
