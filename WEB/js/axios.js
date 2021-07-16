@@ -6,7 +6,13 @@ setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     // console.log(dataParse)
     // console.log(dataParse.length)
-    $('.cart-counter').text(dataParse.length)
+    if(dataParse != null || dataParse != undefined ){
+        $('.cart-counter').css('display','block')
+        $('.cart-counter').text(dataParse.length)
+    }else {
+        // $('.cart-counter').text('0')
+        $('.cart-counter').css('display','none')
+    }
 }, 1000);   
 var allData = []
 

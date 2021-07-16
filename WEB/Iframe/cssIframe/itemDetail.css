@@ -5,17 +5,18 @@
     background-color: #ECF1F5;
     /* background-color: red; */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     /* align-items: center; */
     flex-direction: row;
     overflow:hidden;
     padding:5px;
+    z-index:101;
     /* border:1px solid black; */
 }
 .box-item-img{
     display: flex;
     flex-direction: column;
-    width:30%;
+    width:40%;
     height:100%;
     /* backdrop-filter: red; */
 }
@@ -37,7 +38,7 @@
 
 .item-detail{
     /* width:500px; */
-    width:70%;
+    width:65%;
     height:100%;
     padding-left:5px;
     /* background-color: red; */
@@ -47,11 +48,11 @@
     top:20px;
     /* overflow:hidden; */
 }
-.img-icon{
+/* .img-icon{
     width:50px;
     height:70px;
     margin-right:5px;
-}
+} */
 .box-back-id{
     width:30px;
     height:30px;
@@ -136,7 +137,7 @@
     font-size: 16px !important;
 }
 .item-4 {
-    width:70%;
+    width:80%;
     /* background-color: red; */
     display: flex;
     flex-direction: row ;
@@ -238,8 +239,8 @@
     background-color: #217384;
     width:80%;
     height:200px;
-    overflow: auto;
-    overflow-y:scroll;
+    overflow: scroll;
+    /* overflow-y:scroll; */
     position: relative;
     top:-70px;
 
@@ -273,6 +274,15 @@
     top:-40px;
 
 }
+.deskripsi::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+}
+.deskripsi::-webkit-scrollbar-thumb {
+    background-color: #37CED5;
+    border-radius: 10px;
+} 
+
 .deskripsi p{
     color: white !important;
     font-size: 18px;
@@ -289,6 +299,14 @@
     top:-40px;
 
 }
+.deskripsi-sp::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+}
+.deskripsi-sp::-webkit-scrollbar-thumb {
+    background-color: #37CED5;
+    border-radius: 10px;
+} 
 .deskripsi-sp p{
     color: white !important;
     font-size: 18px;
