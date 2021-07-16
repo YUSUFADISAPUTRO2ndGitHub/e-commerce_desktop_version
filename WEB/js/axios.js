@@ -97,6 +97,7 @@ axios.post('http://products.sold.co.id/get-product-details')
     renderItemAll()
     renderCategory()
     render_item_all_category()
+    renderOptionSearch()
     // renderSubCategory('ADHESIVE')
     // renderItemBasedOnSubCategory('SEALANT')
 }).catch((err)=>{
@@ -104,6 +105,23 @@ axios.post('http://products.sold.co.id/get-product-details')
 })
 }
 getAllData()
+
+const renderOptionSearch=()=>{
+    var data =[
+        'Sealant',
+        'Glue',
+        'Helm',
+        'Sarung Tangan',
+        'Pintu'
+    ]
+
+    data.map((val,index)=>{
+        $('.header-search-option').append(`
+        <p onclick="getAllItem_fromAllCat('${val}')">${val}</p>
+        `)
+        console.log(val)
+    })
+}
 
 const get_product_detail_from_main_page=(product_id)=>{
     $('.box-delete-success').css('display','block')
@@ -131,13 +149,140 @@ const renderItemPromo=()=>{
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
         // console.log(hargaTotal)
+
         if(val == false){
             console.log(' gak render karna false')
         }else {
        
-            $('.box-render-promo').append(
+            if(val.GroupBuy_Purchase == 'true'){
+                $('.box-render-promo').append(
+                    ` 
+                        <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            <div class="card-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-item">
+                                    <div class="item-price">
+                                        <p>RP. ${hargaTotal}</p>
+                                        <p>Rp. ${hargaAwal}</p>
+                                    </div>
+                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                        <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    )
+            }else if (val.Categorize_NEW == 'true'){
+                $('.box-render-promo').append(
+                    ` 
+                        <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            <div class="card-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-item">
+                                    <div class="item-price">
+                                        <p>RP. ${hargaTotal}</p>
+                                        <p>Rp. ${hargaAwal}</p>
+                                    </div>
+                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                        <img src="./img/badge_new.png" alt="" class="img-badge-best">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    )
+            }else {
+                $('.box-render-promo').append(
+                ` 
+                    <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="./img/best_seller.png" alt="" class="img-badge-best">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+            }
+
+        }
+    })
+}
+const renderItemNew=()=>{
+    
+    // $('.box-render-promo-animated').css('display','none')
+    // $('.box-render-new').css('display','flex')
+
+    allData.map((val,index)=>{
+        var hargaAwal = parseInt(val.Sell_Price)
+        var discount = parseInt(val.Sell_Price * 0.1)
+        var hargaTotal = hargaAwal + discount
+    //  console.log(hargaTotal)
+
+    if(val == false){
+        console.log('gak ke render karna false')
+    }else {
+
+        if(val.GroupBuy_Purchase == 'true'){
+            $('.box-render-new').append(
+                ` 
+                    <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+        }else if (val.Categorize_NEW == 'true'){
+            $('.box-render-new').append(
+                ` 
+                    <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="./img/badge_new.png" alt="" class="img-badge-best">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+        }else {
+            $('.box-render-new').append(
             ` 
-                <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+                <div class="card-item hvr-float-shadow " data-aos="zoom-in">
                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>
@@ -155,47 +300,8 @@ const renderItemPromo=()=>{
                 </div>
                 `
             )
-
         }
-    })
-}
 
-
-
-const renderItemNew=()=>{
-    
-    // $('.box-render-promo-animated').css('display','none')
-    // $('.box-render-new').css('display','flex')
-
-    allData.map((val,index)=>{
-        var hargaAwal = parseInt(val.Sell_Price)
-        var discount = parseInt(val.Sell_Price * 0.1)
-        var hargaTotal = hargaAwal + discount
-    //  console.log(hargaTotal)
-
-    if(val == false){
-        console.log('gak ke render karna false')
-    }else {
-
-        $('.box-render-new').append(
-        ` 
-          <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                <div class="card-item-list">
-                    <p class="limited-text-short">${val.Name}</p>
-                    <div class="split-item">
-                        <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
-                        </div>
-                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                            <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
-        )
     }
     })
 }
@@ -214,25 +320,71 @@ const renderItemAll=()=>{
         console.log('gak ke render karna false')
     }else {
 
-        $('.box-render-all').append(
-        ` 
-            <div class="card-item hvr-float-shadow" data-aos="zoom-in">
-                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                <div class="card-item-list">
-                    <p class="limited-text-short">${val.Name}</p>
-                    <div class="split-item">
-                        <div class="item-price">
-                            <p>RP. ${hargaTotal}</p>
-                            <p>Rp. ${hargaAwal}</p>
+        if(val.GroupBuy_Purchase == 'true'){
+            $('.box-render-all').append(
+                ` 
+                    <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
+                                </div>
+                            </div>
                         </div>
-                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                            <img src="./img/cart.png" alt="" class="icon-buy">
+                    </div>
+                    `
+                )
+        }else if (val.Categorize_NEW == 'true'){
+            $('.box-render-all').append(
+                ` 
+                    <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="./img/badge_new.png" alt="" class="img-badge-best">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+        }else {
+            $('.box-render-all').append(
+            ` 
+                <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                    <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                    <div class="card-item-list">
+                        <p class="limited-text-short">${val.Name}</p>
+                        <div class="split-item">
+                            <div class="item-price">
+                                <p>RP. ${hargaTotal}</p>
+                                <p>Rp. ${hargaAwal}</p>
+                            </div>
+                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                <img src="./img/best_seller.png" alt="" class="img-badge-best">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            `
-        )
+                `
+            )
+        }
+
     }
     })
 }

@@ -1292,6 +1292,11 @@
                     <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name" id="search_item" >
                     <i class="fas fa-search icon-search" onclick="search_item()"></i>
                 </div>
+                <div class="header-search-option">
+
+                </div>
+
+                <!-- box for searching item -->
                 <div class="box-render-search card box-search-menu force-close-all-command" style="display: none;">
                     <div class="card-body ">
                         <ul class="render-li-search">
@@ -1299,6 +1304,7 @@
                         </ul>
                     </div>
                 </div>
+                <!-- box for searching item -->
             </div>
             <div class="header-option">
                 <div class="option-0" onclick="cek_daftar_hutang(this)">
@@ -1436,9 +1442,14 @@
                                                 </div>
                                             </div>
                                             <div class="card headset-border-2" style="width: auto;">
-                                                <div class="card-body whatsapp-body" onclick="live_chat()">
+                                                <!-- <div class="card-body whatsapp-body" onclick="live_chat()">
                                                     <i class="fas fa-headset" ></i>
-                                                </div>
+                                                </div> -->
+                                                <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" style="text-decoration: none;" target="_blank">
+                                                    <div class="card-body whatsapp-body">
+                                                        <i class="fas fa-headset" ></i>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -1574,6 +1585,24 @@
                 <div class="top-all-category">   
                 </div>
                 <div class="bot-all-category">
+                </div>
+
+                <div class="box_for_button_top_all">
+                    <div class="box-back-top-all" id="promo" onclick="backItem('promo')">
+                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
+                    </div>
+                    <div class="box-next-top-all next-promo" id="promo" onclick="nextItem('promo')">
+                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+                    </div>
+                </div>
+
+                <div class="box_for_button_bot_all">
+                    <div class="box-back-bot-all" id="promo" onclick="backItem('promo')">
+                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
+                    </div>
+                    <div class="box-next-bot-all next-promo" id="promo" onclick="nextItem('promo')">
+                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
+                    </div>
                 </div>
             </div>
 

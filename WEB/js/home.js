@@ -60,6 +60,7 @@ function live_chat(){
         }else {
             $(".modals-live-chat").attr("src", `http://147.139.168.202:3045`);
         }
+        // $('.modals-live-chat').attr('src','https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8')
     }).catch((err)=>{
         console.log(err)
     })
