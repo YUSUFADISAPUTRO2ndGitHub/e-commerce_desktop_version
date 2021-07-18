@@ -151,8 +151,13 @@ const renderItemPromo=()=>{
         var hargaTotal = hargaAwal + discount
         // console.log(hargaTotal)
 
-        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
-        val.Sell_Price == undefined 
+        var a = 'ASDASDASDASD'
+        var b = parseInt(a)
+        var c = isNaN(b)
+        console.log(c, 'ini C isnan')
+
+        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+        val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
         ){
             console.log(' gak render karna false')
         }else {
@@ -236,8 +241,8 @@ const renderItemNew=()=>{
         var hargaTotal = hargaAwal + discount
     //  console.log(hargaTotal)
 
-    if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
-    val.Sell_Price == undefined 
+    if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+    val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
     ){
         console.log('gak ke render karna false')
     }else {
@@ -321,8 +326,8 @@ const renderItemAll=()=>{
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
     //  console.log(hargaTotal)
-    if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
-    val.Sell_Price == undefined 
+    if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+    val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
     ){
         console.log('gak ke render karna false')
     }else {

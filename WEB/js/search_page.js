@@ -139,8 +139,8 @@ function show_subcategory(choosen_parent_category){
             $('.box-list-kategori').toggle()
             $('.box-list-kategori').empty()
             res.data.map((val,index)=>{
-                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
-                val.Sell_Price == undefined 
+                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+                val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                 ){
                     console.log('show subcategory gak ke render karna data false')
                 }else {
@@ -206,8 +206,8 @@ function show_jenisproduct(jenis_product){
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
-                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
-                val.Sell_Price == undefined 
+                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+                val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                 ){
                     console.log('data tidak ke render karna false')
                 }else {
@@ -580,8 +580,8 @@ const render_searching_page=(product_name)=>{
             var hargaAwal = parseInt(val.Sell_Price)
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
-            if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
-            val.Sell_Price == undefined 
+            if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+            val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
             ){
                 console.log('gak ke render, karna data false')
             }else {
