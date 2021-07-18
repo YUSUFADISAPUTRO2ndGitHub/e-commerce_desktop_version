@@ -139,7 +139,9 @@ function show_subcategory(choosen_parent_category){
             $('.box-list-kategori').toggle()
             $('.box-list-kategori').empty()
             res.data.map((val,index)=>{
-                if(val == false){
+                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
+                val.Sell_Price == undefined 
+                ){
                     console.log('show subcategory gak ke render karna data false')
                 }else {
                     $('.box-list-kategori').append(
@@ -204,7 +206,9 @@ function show_jenisproduct(jenis_product){
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
-                if(val == false){
+                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
+                val.Sell_Price == undefined 
+                ){
                     console.log('data tidak ke render karna false')
                 }else {
                     $('.render-item-sub').append(
@@ -576,7 +580,9 @@ const render_searching_page=(product_name)=>{
             var hargaAwal = parseInt(val.Sell_Price)
             var discount = parseInt(val.Sell_Price * 0.1)
             var hargaTotal = hargaAwal + discount
-            if(val == false){
+            if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
+            val.Sell_Price == undefined 
+            ){
                 console.log('gak ke render, karna data false')
             }else {
                 $('.new-box-card').append(`

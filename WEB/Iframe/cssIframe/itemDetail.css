@@ -16,7 +16,7 @@
 .box-item-img{
     display: flex;
     flex-direction: column;
-    width:40%;
+    width:35%;
     height:100%;
     /* backdrop-filter: red; */
 }
@@ -38,7 +38,8 @@
 
 .item-detail{
     /* width:500px; */
-    width:65%;
+    width:60%;
+    
     height:100%;
     padding-left:5px;
     /* background-color: red; */
@@ -165,7 +166,7 @@
 }
 .box-qty-detail{
     border-radius:5px;
-    width:130px;
+    width:150px;
     height:30px;
     background-color: #36ced5;
     display: flex;

@@ -145,12 +145,15 @@ const renderItemPromo=()=>{
         </div>
     `)
     allData.map((val,index)=>{
+        console.log(allData)
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
         // console.log(hargaTotal)
 
-        if(val == false){
+        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
+        val.Sell_Price == undefined 
+        ){
             console.log(' gak render karna false')
         }else {
        
@@ -233,7 +236,9 @@ const renderItemNew=()=>{
         var hargaTotal = hargaAwal + discount
     //  console.log(hargaTotal)
 
-    if(val == false){
+    if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
+    val.Sell_Price == undefined 
+    ){
         console.log('gak ke render karna false')
     }else {
 
@@ -316,7 +321,9 @@ const renderItemAll=()=>{
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
     //  console.log(hargaTotal)
-    if(val == false){
+    if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 0 ||
+    val.Sell_Price == undefined 
+    ){
         console.log('gak ke render karna false')
     }else {
 
