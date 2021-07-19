@@ -1230,6 +1230,9 @@ body {
     align-items: center;
     z-index: 30;
 }
+.box-next:hover{
+    cursor: pointer;
+}
 .box_for_button{
     width:100%;
     height:auto;
