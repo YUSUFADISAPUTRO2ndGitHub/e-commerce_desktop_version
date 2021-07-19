@@ -1439,7 +1439,6 @@
                                         <div class="box-cs">
                                             <div class="card whatsapp-border" style="width: auto;">
                                                 <div class="card-body whatsapp-body">
-                                                    <!-- <img src="./whatsapp.png" class="card-img-top"> -->
                                                     <a href="https://wa.me/6285315801777" target="_blank" style="text-decoration: none;">
                                                         <i class="fas fa-phone-alt">
                                                         </i>
@@ -1447,12 +1446,16 @@
                                                 </div>
                                             </div>
                                             <div class="card headset-border-2" style="width: auto;">
-                                                <!-- <div class="card-body whatsapp-body" onclick="live_chat()">
-                                                    <i class="fas fa-headset" ></i>
-                                                </div> -->
                                                 <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" style="text-decoration: none;" target="_blank">
                                                     <div class="card-body whatsapp-body">
                                                         <i class="fas fa-headset" ></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="card email-border" style="width: auto;">
+                                                <a href="mailto:customer.service.soldcoid@gmail.com" style="text-decoration: none;" target="_blank">
+                                                    <div class="card-body whatsapp-body">
+                                                        <i class="far fa-envelope"></i>
                                                     </div>
                                                 </a>
                                             </div>
@@ -1898,6 +1901,16 @@
         $(this).css('cursor','pointer')
         $(this).css("color", "#217283");
     });
+
+    $( ".email-border" ).mouseout(function() {
+        $( ".fa-envelope" ).css("color", "rgba(0, 0, 0, 0.2");
+    });
+    $( ".email-border" ).mouseover(function() {
+        // alert('mouse over')
+        $( ".fa-envelope" ).css("color", "#217283");
+    });
+
+
  
 </script>
 
