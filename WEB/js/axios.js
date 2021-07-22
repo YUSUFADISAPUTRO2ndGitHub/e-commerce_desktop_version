@@ -24,7 +24,7 @@ $( document ).ready(function() {
         
     })
 
-    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+    // var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     // console.log(dataParse)
     // $('.cart-counter').text(dataParse.length)
     // var test =$('.cart-counter').val()

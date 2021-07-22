@@ -19,6 +19,53 @@ function forgot_modal_request(){
     $('#loginModal').modal('hide')
 }
 function cart_requested(x){
+    var cartToJson = JSON.parse(localStorage.getItem('itemsInCart'))
+    var cartString = localStorage.getItem('itemsInCart')
+    var token = localStorage.getItem('token')
+    console.log('cart requester jalan')
+    if(cartToJson != undefined){ // kalau data cart ada isinya
+        if(cartToJson.length != 0){
+            console.log('cart requester jalan, masuk ke if')
+            axios.post(`http://customers.sold.co.id/save-user-shopping-cart?Customer_Code=${token}&cart=${cartString}`)
+            .then((res)=>{
+                console.log(res.data)
+                if(res.data){
+                    console.log('data ada, aman')
+                }else {
+                    console.log('customer code / cart bermasalah')
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }else {  // get cart
+            console.log('cart requester jalan',' masuk ke if else')
+            axios.post(`http://customers.sold.co.id/get-saved-user-shopping?Customer_Code=${token}`)
+            .then((res)=>{
+                console.log(res.data)
+                if(res.data != undefined){
+                    var data_stringify = JSON.stringify(res.data)
+                    localStorage.setItem("itemsInCart", data_stringify);
+                    console.log(localStorage.getItem('itemsInCart'))
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+    }else {
+        console.log('masuk lien 42')
+        var emptyArray = [];
+        var emptyArrayString = JSON.stringify(emptyArray);
+        localStorage.setItem("itemsInCart", emptyArrayString);
+    }
+
+    checkboxCounter = 0;
+    var requestArrayForItemsToCheckout = [];
+    var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+
+
+
     $('.close-button').css('display','block')
     
     $('.close').css('display','none')
