@@ -150,7 +150,8 @@ $(function(){
                 $('#profileModal').modal('show')
             }else {
                 
-                $('#loginModal').modal('show')
+                // $('#loginModal').modal('show') // login lama
+                $('#newloginModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
             }
         }).catch((err)=>{

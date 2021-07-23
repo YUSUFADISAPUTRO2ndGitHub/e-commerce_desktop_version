@@ -3,8 +3,10 @@
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="./js/app_version_checks.js"></script>
+
         <script src="./js/time.js"></script>
         <script src="./js/checkout.js"></script>
         <script src="./js/IndonesiaAddress.js"></script>
@@ -162,8 +164,42 @@
                 <div class="alert alert-primary" role="alert">
                     PILIH DELIVERY FEE
                 </div>
-                <select class="form-control sub-del-opt" id="sub-delivery-option" onchange="onSelectDeliveryFee()">
-                </select>
+                <div class="box-checkout-kurir">
+                    <select class="form-control sub-del-opt" id="sub-delivery-option" onchange="onSelectDeliveryFee()">
+                    </select>
+                    <select class="form-control  sp_provinsi_hover" id="inputGroupSelect01" onchange="provinceMethod(this)" >  
+                        <option  selected  class="id-kurir-gb"> Provinsi</option>  
+                        <option  value="DKI" class="id-province-gb">DKI</option> 
+                        <option  value="JAWA BARAT" class="id-province-gb">JAWA BARAT</option> 
+                        <option  value="JAWA TENGAH" class="id-province-gb">JAWA TENGAH</option>  
+                    </select>
+                    <select class="form-control sp_kota_hover" id="inputGroupSelect01" onchange="kotaMethod(this)" >  
+                        <option selected  class="id-kurir-gb"> Kota</option>      
+                        <option  value="JAKARTA" class="id-kota-gb">JAKARTA</option> 
+                        <option  value="BANDUNG" class="id-kota-gb">BANDUNG</option> 
+                        <option  value="YOGYAKARTA" class="id-kota-gb">YOGYAKARTA</option>  
+                    </select>
+                    <select class="form-control sp_kecamatan_hover" id="inputGroupSelect01" onchange="kecamatanMethod(this)" >  
+                        <option selected  class="id-kurir-gb">Kecamatan</option>      
+                        <option  value="KELAPA DUA" class="id-kecamatan-gb">KELAPA DUA</option> 
+                        <option  value="kelapa tiga" class="id-kecamatan-gb">kelapa tiga</option> 
+                        <option  value="kelapa doang" class="id-kecamatan-gb">kelapa doang</option>  
+                    </select>
+                    <select class="form-control sp_kelurahan_hover" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="id-kurir-gb">Kelurahan</option>      
+                        <option  value="KEBON JERUK" class="id-kelurahan-gb">KEBON JERUK</option> 
+                        <option  value="kelapa tiga" class="id-kelurahan-gb">kelapa tiga</option> 
+                        <option  value="kelapa doang" class="id-kelurahan-gb">kelapa doang</option>  
+                    </select>
+                    <input type="number" class="form-control sp_kodepos_hover" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethod(this)" >  
+                    <select class="form-control sp_kelurahan_hover" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="id-kurir-gb">Waktu Pengiriman</option>      
+                        <option  value="KEBON JERUK" class="id-kelurahan-gb">KEBON JERUK</option> 
+                        <option  value="kelapa tiga" class="id-kelurahan-gb">kelapa tiga</option> 
+                        <option  value="kelapa doang" class="id-kelurahan-gb">kelapa doang</option>  
+                    </select>
+                    <input type="number" class="form-control sp_kodepos_hover" placeholder="ESTIMASI HARGA PENGIRIMAN" id="option-kodepos-gb" onchange="kodeposMethod(this)"  disabled>  
+                </div>
             </div>
 
             <div class="form-group" id="new-address-section">

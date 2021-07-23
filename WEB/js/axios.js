@@ -145,7 +145,7 @@ const renderItemPromo=()=>{
         </div>
     `)
     allData.map((val,index)=>{
-        console.log(allData)
+        // console.log(allData)
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
@@ -154,7 +154,7 @@ const renderItemPromo=()=>{
         var a = 'ASDASDASDASD'
         var b = parseInt(a)
         var c = isNaN(b)
-        console.log(c, 'ini C isnan')
+        // console.log(c, 'ini C isnan')
 
         if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
         val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
@@ -659,6 +659,21 @@ function back_to_home(){
 
 const render_group_buy=(product_id)=>{
 
+    var allKurir=[]
+    var allProvince=[]
+    var allKota =[]
+    var allKelurahan=[]
+    var allKecamatan=[]
+
+
+
+    var kurir=[]
+    var province = []
+    var kota = []
+    var kelurahan = []
+    var kecamatan = []
+   
+
 
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
@@ -702,33 +717,24 @@ const render_group_buy=(product_id)=>{
                                 <div class="input-group-prepend">
                                     <label class="input-group-text " for="inputGroupSelect01">Kurir</label>
                                 </div>
-                                <select class="custom-select sp_kurir_hover" id="inputGroupSelect01" onchange="kurirMethod(this)">  
-                                    <option selected  class="id-kurir-gb"> Kurir</option>  
-                                    <option  value="TIKI" class="id-kurir-gb">TIKI</option> 
-                                    <option  value="JNE" class="id-kurir-gb">JNE</option> 
-                                    <option  value="GOJEK" class="id-kurir-gb">GOJEK</option> 
+                                <select class="custom-select home_kurir_hover kurir-home-gb" id="inputGroupSelect01" onchange="kurirMethod(this)">  
+                                    <option selected  class="id-kurir-gb"> Kurir</option>           
                                 </select>
                             </div>
                             <div class="input-group mb-3 input-card-sp">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01">Provinsi</label>
                                 </div>
-                                <select class="custom-select sp_provinsi_hover" id="inputGroupSelect01" onchange="provinceMethod(this)" >  
+                                <select class="custom-select home_provinsi_hover province-home-gb" id="inputGroupSelect01"  onchange="provinceMethod(this)" >  
                                     <option  selected  class="id-kurir-gb"> Provinsi</option>  
-                                    <option  value="DKI" class="id-province-gb">DKI</option> 
-                                    <option  value="JAWA BARAT" class="id-province-gb">JAWA BARAT</option> 
-                                    <option  value="JAWA TENGAH" class="id-province-gb">JAWA TENGAH</option>  
                                 </select>
                             </div>
                             <div class="input-group mb-3 input-card-sp">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01">Kota</label>
                                 </div>
-                                <select class="custom-select sp_kota_hover" id="inputGroupSelect01" onchange="kotaMethod(this)" >  
+                                <select class="custom-select home_kota_hover province-home-gb" id="inputGroupSelect01"  onchange="kotaMethod(this)" >  
                                     <option selected  class="id-kurir-gb"> Kota</option>      
-                                    <option  value="JAKARTA" class="id-kota-gb">JAKARTA</option> 
-                                    <option  value="BANDUNG" class="id-kota-gb">BANDUNG</option> 
-                                    <option  value="YOGYAKARTA" class="id-kota-gb">YOGYAKARTA</option>  
                                 </select>
                             </div>
                         </div>
@@ -737,7 +743,7 @@ const render_group_buy=(product_id)=>{
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01">Kecamatan</label>
                                 </div>
-                                <select class="custom-select sp_kecamatan_hover" id="inputGroupSelect01" onchange="kecamatanMethod(this)" >  
+                                <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethod(this)" >  
                                     <option selected  class="id-kurir-gb">Kecamatan</option>      
                                     <option  value="KELAPA DUA" class="id-kecamatan-gb">KELAPA DUA</option> 
                                     <option  value="kelapa tiga" class="id-kecamatan-gb">kelapa tiga</option> 
@@ -748,16 +754,16 @@ const render_group_buy=(product_id)=>{
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01">Kelurahan</label>
                                 </div>
-                                <select class="custom-select sp_kelurahan_hover" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                                <select class="custom-select kelurahan_kelurahan_hover kelurahan-home-gb" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
                                     <option selected  class="id-kurir-gb">Kelurahan</option>      
                                     <option  value="KEBON JERUK" class="id-kelurahan-gb">KEBON JERUK</option> 
                                     <option  value="kelapa tiga" class="id-kelurahan-gb">kelapa tiga</option> 
                                     <option  value="kelapa doang" class="id-kelurahan-gb">kelapa doang</option>  
                                 </select>
                             </div>            
-                            <input type="number" class="kodepos-form sp_kodepos_hover" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethod(this)" >  
+                            <input type="number" class="kodepos-form home_kodepos_hover kodepos-home-gb" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethod(this)" >  
                             <div class="login-name box-pengiriman" >
-                                <div class="box-name-2" >
+                                <div class="box-name-3" >
                                     <p>BIAYA PENGIRIMAN</p>
                                 </div>
                                 <input type="number" class="price-form"  id="total_biaya_pengiriman_gb">
@@ -786,6 +792,72 @@ const render_group_buy=(product_id)=>{
                 </div>    
             </div>
              `)
+
+
+            //  RENDER KURIR DLL
+                get_all_couriers().done(function(response){
+                    console.log(response)
+                    kurir = response[0]
+                    allKurir = response
+                    get_all_province_from_courier(kurir.Courier,kurir.Courier_Code).done(function(response){
+                        province = response[0]
+                        allKurir = response
+                        console.log(province)
+                        get_all_city_from_courier(kurir.Courier,kurir.Courier_Code,province.Province).done(function(response){
+                            kota = response[0]
+                            allKota = response
+                            console.log(kota,' ini kota')
+                            get_all_district_from_courier(kurir.Courier,kurir.Courier_Code,kota.City).done(function(response){
+                                kelurahan = response[0]
+                                allKelurahan = response
+                                console.log(kelurahan,'ini kelurahaan')
+                                get_all_subdistrict_from_courier(kurir.Courier,kurir.Courier_Code,kelurahan.district).done(function(response){
+                                    kecamatan = response
+                                    allKecamatan = response
+                                    console.log(kecamatan,' ini kecamatan')
+
+                                    allKurir.map((val,index)=>{
+                                        console.log(val,'ini val kurir')
+                                        $('.kurir-home-gb').append(`
+                                            <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
+                                        `)
+                                    })
+                                    allProvince.map((val,index)=>{
+                                        console.log(val,'ini val province')
+                                        $('.province-home-gb').append(`
+                                            <option  value="${val.Province}" class="id-province-gb">${val.Province}</option> 
+                                        `)
+                                    })
+                                    allKota.map((val,index)=>{
+                                        console.log(val,'ini val kota')
+                                        $('.kota-home-gb').append(`
+                                            <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
+                                        `)    
+                                    })  
+                                    allKecamatan.map((val,index)=>{
+                                        console.log(val,'ini val kecamatan')
+                                        $('.kecamatan-home-gb').append(`
+                                            <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+                                        `)
+
+                                    })
+
+                                    allKelurahan.map((val,index)=>{
+                                        console.log(val,'ini val kelurahan')
+                                        $('.kelurahan-home-gb').append(`
+                                            <option  value="${val.Subdistrict}" class="id-kelurahan-gb">${val.Subdistrict}</option> 
+                                        `)
+                                    })
+
+
+                                })
+                            })
+                        })
+                    })
+                })
+
+
+            // BATAS RENDER KURIR DLL
             // alert(res.data)
             axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
             .then((res)=>{
@@ -1140,4 +1212,73 @@ const render_item_all_category=()=>{
         })
         
     }
+}
+
+
+function get_all_couriers(){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Get_All_Couriers=true`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_province_from_courier(Courier, Courier_Code){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Get_All_Province=true`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_city_from_courier(Courier, Courier_Code, Province){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_district_from_courier(Courier, Courier_Code, City){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&City=${City}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_shipping_cost_informations(Courier, Courier_Code, Province, City, District, Sub_District){
+    var settings = {
+        "url": `http://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+
+    console.log(settings.url);
+    
+    return $.ajax(settings);
+}
+function get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days, Courier_Price_Code){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}&delivery_time_in_days=${delivery_time_in_days}&Courier_Price_Code=${Courier_Price_Code}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+
+    console.log(settings.url);
+    
+    return $.ajax(settings);
 }
