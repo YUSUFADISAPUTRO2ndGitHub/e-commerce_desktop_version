@@ -1820,12 +1820,12 @@ function addressMethod(item){
     console.log(item.value)
     if(item.value === 'Alamat Terdaftar'){
         
-        $('.option-alamat-gb').css('display','block')
+        $('.option-alamat-gb').css('display','flex')
         $('.alamat-pengiriman').css('display','none')
     }else if (item.value === 'Alamat Baru'){
         
         $('.option-alamat-gb').css('display','none')
-        $('.alamat-pengiriman').css('display','block')
+        $('.alamat-pengiriman').css('display','flex')
     }
 }
 
