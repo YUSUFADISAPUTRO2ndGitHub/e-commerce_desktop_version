@@ -566,7 +566,7 @@ const backItem=(id)=>{
 
  function horizontalNavigationPromo(position, event) {
      console.log('jalan')
-    $('.box-render-promo').animate({scrollLeft: position}, 350);
+    $('.box-`render`-promo').animate({scrollLeft: position}, 350);
     event.preventDefault();
 }
 function horizontalNavigationNew(position, event) {

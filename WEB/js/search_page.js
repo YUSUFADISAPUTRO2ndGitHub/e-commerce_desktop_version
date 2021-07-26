@@ -484,8 +484,6 @@ function groupbuy_sp_form(product_id){
                                             <option  value="YOGYAKARTA" class="id-kota-gb">YOGYAKARTA</option>  
                                         </select>
                                     </div>
-                                </div>
-                                <div class="card-kurir-sp">              
                                     <div class="input-group mb-3 input-card-sp">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="inputGroupSelect01">Kecamatan</label>
@@ -497,6 +495,9 @@ function groupbuy_sp_form(product_id){
                                             <option  value="kelapa doang" class="id-kecamatan-gb">kelapa doang</option>  
                                         </select>
                                     </div>
+                                </div>
+                                <div class="card-kurir-sp">              
+                                   
                                     <div class="input-group mb-3 input-card-sp">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="inputGroupSelect01">Kelurahan</label>
@@ -508,7 +509,15 @@ function groupbuy_sp_form(product_id){
                                             <option  value="kelapa doang" class="id-kelurahan-gb">kelapa doang</option>  
                                         </select>
                                     </div>            
-                                    <input type="number" class="kodepos-form sp_kodepos_hover" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethod(this)" >  
+                                    <input type="number" class="kodepos-form sp_kodepos_hover" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethod(this)" > 
+                                    <div class="input-group mb-3 input-card-sp">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="inputGroupSelect01">Pengiriman</label>
+                                        </div>
+                                        <select class="custom-select kelurahan_kelurahan_hover kelurahan-home-gb" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                                            <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                                        </select>
+                                    </div>   
                                     <div class="login-name box-pengiriman" >
                                         <div class="box-name-2" >
                                             <p>BIAYA PENGIRIMAN</p>

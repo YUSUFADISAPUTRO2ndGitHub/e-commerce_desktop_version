@@ -202,7 +202,7 @@
 }
 .kodepos-form{
     margin-top:10px;
-    width:90%;
+    width:70%;
     height:30px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -218,6 +218,28 @@
     outline:0;
 }
 .kodepos-form::placeholder{
+    color:black;
+    font-size: 11px;
+    padding-left:15px;
+}
+.kodepos2-form{
+    margin-top:10px;
+    width:90%;
+    height:30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    outline:0;
+    border-width:0px;
+    border-radius:5px;
+    border:1px solid #ced4da;
+
+    
+}
+.kodepos2-form:focus{
+    outline:0;
+}
+.kodepos2-form::placeholder{
     color:black;
     font-size: 11px;
     padding-left:15px;
@@ -327,7 +349,7 @@ input:focus{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .btn-pesan{
@@ -341,6 +363,7 @@ input:focus{
     align-items: center;
     position: relative;
     top:20px;
+    left:25px;
 }
 .btn-pesan p {
     position: relative;
@@ -366,8 +389,10 @@ input:focus{
 .box-total-price p {
     font-size: 14px;
     color:#217384;
-    text-align: left;
-    width:60%;
+    text-align: center;
+    width:100%;
+    position: relative;
+    left:5px;
 }
 .box-total-price:hover{
     cursor: pointer;
@@ -447,5 +472,5 @@ input:focus{
 
 .box-pengiriman {
     position: relative;
-    top:20px;
+    top:30px;
 }
