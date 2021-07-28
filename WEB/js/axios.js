@@ -683,124 +683,387 @@ const render_group_buy=(product_id)=>{
         axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
         .then((res)=>{          
             option_payment = res.data
-             $('.box-groupbuy').append(`
-             <div class="group-left" >
-                <div class="groupbuy-form">
-                    <div class="box-card-kurir-sp-top"> 
-                        <div class="login-name">
-                            <div class="box-name-2">
-                                <p>Kuantitas Permintaan</p>
-                            </div>
-                            <input type="text" class="kodepos-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)">
-                        </div>
-                        <select class="form-select option-payment-gb" aria-label="Default select example">
-                        </select>
-                        <select class="form-select option-address-gb sp_address_hover" aria-label="Default select example" onchange="addressMethod(this)" >
-                            <option selected>Select Address Method</option>    
-                            <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
-                            <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
-                        </select>
+            //  $('.box-groupbuy').append(`
+            //  <div class="box-groupbuy">
+            //     <div class="groupbuy-form">
+            //         <div class="box-card-kurir-sp-top"> 
+            //             <div class="login-name">
+            //                 <div class="box-name-2">
+            //                     <p>Kuantitas Permintaan</p>
+            //                 </div>
+            //                 <input type="text" class="kodepos-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)">
+            //             </div>
+            //             <select class="form-select option-payment-gb" aria-label="Default select example">
+            //             </select>
+            //             <select class="form-select option-address-gb sp_address_hover" aria-label="Default select example" onchange="addressMethod(this)" >
+            //                 <option selected>Select Address Method</option>    
+            //                 <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
+            //                 <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
+            //             </select>
 
-                        <select class="form-select option-alamat-gb sp_alamat_hover" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
-                        </select>
+            //             <select class="form-select option-alamat-gb sp_alamat_hover" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
+            //             </select>
 
-                        <div class="login-name alamat-pengiriman" style="display:none">
-                            <div class="box-name" >
-                                <p>PENGIRIMAN KE ALAMAT</p>
-                            </div>
-                            <input type="text" class="kodepos-form sp_alamat_pengiriman_hover" placeholder="alamat Pengiriman" id="alamat_lain">
-                        </div>
-                    </div>
+            //             <div class="login-name alamat-pengiriman" style="display:none">
+            //                 <div class="box-name" >
+            //                     <p>PENGIRIMAN KE ALAMAT</p>
+            //                 </div>
+            //                 <input type="text" class="kodepos-form sp_alamat_pengiriman_hover" placeholder="alamat Pengiriman" id="alamat_lain">
+            //             </div>
+            //         </div>
 
-                    <div class="box-card-kurir-sp"> 
-                        <div class="card-kurir-sp">
-                            <div class="input-group mb-3 input-card-sp">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text " for="inputGroupSelect01">Kurir</label>
-                                </div>
-                                <select class="custom-select home_kurir_hover kurir-home-gb" id="inputGroupSelect01" onchange="kurirMethodHome('${product_id}')">  
+            //         <div class="box-card-kurir-sp"> 
+            //             <div class="card-kurir-sp">
+            //                 <div class="input-group mb-3 input-card-sp">
+            //                     <div class="input-group-prepend">
+            //                         <label class="input-group-text " for="inputGroupSelect01">Kurir</label>
+            //                     </div>
+            //                     <select class="custom-select home_kurir_hover kurir-home-gb" id="inputGroupSelect01" onchange="kurirMethodHome('${product_id}')">  
                                     
-                                </select>
-                            </div>
-                            <div class="input-group mb-3 input-card-sp">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Provinsi</label>
-                                </div>
-                                <select class="custom-select home_provinsi_hover province-home-gb" id="inputGroupSelect01"  onchange="provinceMethodHome('${product_id}')" >  
-                                    <option  selected  class="id-kurir-gb"> Provinsi</option>  
-                                </select>
-                            </div>
-                            <div class="input-group mb-3 input-card-sp">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Kota</label>
-                                </div>
-                                <select class="custom-select home_kota_hover kota-home-gb" id="inputGroupSelect01"  onchange="kotaMethodHome('${product_id}')" >  
-                                    <option selected  class="id-kurir-gb"> Kota</option>      
-                                </select>
-                            </div>
-                            <div class="input-group mb-3 input-card-sp">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Kelurahan</label>
-                                </div>
-                                <select class="custom-select kelurahan_kelurahan_hover kelurahan-home-gb" id="inputGroupSelect01" onchange="kelurahanMethodHome('${product_id}')" >  
-                                    <option selected  class="id-kurir-gb">Kelurahan</option>      
-                                </select>
-                            </div>   
-                            <div class="alert alert-danger" role="alert">
-                                Isi ulang semua field!
-                            </div>   
+            //                     </select>
+            //                 </div>
+            //                 <div class="input-group mb-3 input-card-sp">
+            //                     <div class="input-group-prepend">
+            //                         <label class="input-group-text" for="inputGroupSelect01">Provinsi</label>
+            //                     </div>
+            //                     <select class="custom-select home_provinsi_hover province-home-gb" id="inputGroupSelect01"  onchange="provinceMethodHome('${product_id}')" >  
+            //                         <option  selected  class="id-kurir-gb"> Provinsi</option>  
+            //                     </select>
+            //                 </div>
+            //                 <div class="input-group mb-3 input-card-sp">
+            //                     <div class="input-group-prepend">
+            //                         <label class="input-group-text" for="inputGroupSelect01">Kota</label>
+            //                     </div>
+            //                     <select class="custom-select home_kota_hover kota-home-gb" id="inputGroupSelect01"  onchange="kotaMethodHome('${product_id}')" >  
+            //                         <option selected  class="id-kurir-gb"> Kota</option>      
+            //                     </select>
+            //                 </div>
+            //                 <div class="input-group mb-3 input-card-sp">
+            //                     <div class="input-group-prepend">
+            //                         <label class="input-group-text" for="inputGroupSelect01">Kelurahan</label>
+            //                     </div>
+            //                     <select class="custom-select kelurahan_kelurahan_hover kelurahan-home-gb" id="inputGroupSelect01" onchange="kelurahanMethodHome('${product_id}')" >  
+            //                         <option selected  class="id-kurir-gb">Kelurahan</option>      
+            //                     </select>
+            //                 </div>   
+            //                 <div class="alert alert-danger" role="alert">
+            //                     Isi ulang semua field!
+            //                 </div>   
                             
-                        </div>
-                        <div class="card-kurir-sp">              
-                            <div class="input-group mb-3 input-card-sp">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Kecamatan</label>
-                                </div>
-                                <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethodHome('${product_id}')" >  
-                                    <option selected  class="id-kurir-gb">Kecamatan</option>      
-                                </select>
-                            </div>
+            //             </div>
+            //             <div class="card-kurir-sp">              
+            //                 <div class="input-group mb-3 input-card-sp">
+            //                     <div class="input-group-prepend">
+            //                         <label class="input-group-text" for="inputGroupSelect01">Kecamatan</label>
+            //                     </div>
+            //                     <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethodHome('${product_id}')" >  
+            //                         <option selected  class="id-kurir-gb">Kecamatan</option>      
+            //                     </select>
+            //                 </div>
                                   
-                            <input type="number" class="kodepos2-form home_kodepos_hover kodepos-home-gb" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethodHome('${product_id}')" >  
-                            <div class="input-group mb-3 input-card-sp">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Pengiriman</label>
+            //                 <input type="number" class="kodepos2-form home_kodepos_hover kodepos-home-gb" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethodHome('${product_id}')" >  
+            //                 <div class="input-group mb-3 input-card-sp">
+            //                     <div class="input-group-prepend">
+            //                         <label class="input-group-text" for="inputGroupSelect01">Pengiriman</label>
+            //                     </div>
+            //                     <select class="custom-select kelurahan_kelurahan_hover pengiriman-home-gb" id="inputGroupSelect01" onchange="pengirimanMethodHome('${product_id}')" >  
+            //                         <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+            //                     </select>
+            //                 </div>  
+            //                 <div class="login-name box-pengiriman" >
+            //                     <div class="box-name-3" >
+            //                         <p>BIAYA PENGIRIMAN</p>
+            //                     </div>
+            //                     <input type="text" class="price-form"  id="total_biaya_pengiriman_gb" disabled>
+            //                 </div>
+                            
+            //             </div>
+            //         </div>  
+            //     </div>  
+            // </div>
+            // <div class="group-right">
+            //     <div class="gr-2">
+            //         <div class="box-img-gr">
+            //             <img src="${item_product.Picture_1}" alt="" class="img-gr">
+            //         </div>
+            //     </div>
+            //     <div class="gr-1">
+            //         <div class="box-total-price">
+            //             <p>Price Based on Quantity</p>
+            //             <div class="total-price">
+            //                 <input type="text" disabled class="price-form total_price_iframe"  id="tp_iframe">    
+            //             </div>
+            //         </div>
+            //         <div class="btn-pesan" onclick="payment_groupbuy_home('${product_id}')">
+            //             <p>Pesan Sekarang!</p>
+            //             <img src="../img/home.png" alt="" class="icon-home">
+            //         </div>
+            //     </div>    
+            // </div>
+            //  `)
+
+             $('.box-groupbuy').append(`
+             
+             <div class="box-groupbuy">
+                <div class="group-left" >
+                    <div class="groupbuy-form">
+                        <div class="new-box-card-kurir-sp-top"> 
+                            <div class="new-box-name-2">
+                                <p>CART DETAIL</p>
+                            </div>
+                            
+                            <div class="new-login-name">
+                                <div class="new-qty_permintaan_box">
+                                    <div class="qty_jumlah">
+                                        Quantity
+                                    </div>
+                                    <input type="text" class="new-kodepos-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)">
+                                </div>    
+                            </div>
+                            
+                            <div class="box_transfer">
+                                <div class="box-name">
+                                    <p>Payment Method</p>
                                 </div>
-                                <select class="custom-select kelurahan_kelurahan_hover pengiriman-home-gb" id="inputGroupSelect01" onchange="pengirimanMethodHome('${product_id}')" >  
-                                    <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
-                                </select>
-                            </div>  
-                            <div class="login-name box-pengiriman" >
-                                <div class="box-name-3" >
+        
+                                <!-- <form method="post" >
+                                    <div class="radio-group">
+                                        <div class='radio' data-value="One"></div>1
+                                        <div class='radio' data-value="Two"></div>2
+                                        <div class='radio' data-value="Three"></div>3
+                                        <br/>
+                                        <input type="text" id="radio-value" name="radio-value" />
+                                    </div>
+                                    
+                                </form> -->
+                                <div class="box_for_transfer_card">  
+                                    <form method="post" class="radio-group form-radio-payment">
+                                        <div class="form-check form-check-inline " >
+                                            <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
+                                            <div class="transfer-card-1 radio_payment_method" data-value="BCA">
+                                                <img src="./img/bca_transfer_manual.png" alt="" class="bca_img">
+                                            </div>
+                                        </div>
+                                        <div class="form-check form-check-inline " >
+                                            <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option3" > -->
+                                            <div class="transfer-card-1  radio_payment_method" data-value="MANDIRI">
+                                                <img src="./img/bca_transfer_manual.png" alt="" class="bca_img">
+                                            </div>
+                                        </div>
+                                        <div class="form-check form-check-inline " >
+                                            <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" > -->
+                                            <div class="transfer-card-1 radio_payment_method" data-value="JENIUS">
+                                                <img src="./img/bca_transfer_manual.png" alt="" class="bca_img">
+                                            </div>
+                                        </div>
+        
+                                    </form>
+                                </div>       
+                            </div>
+                            
+        
+                            <div class="new-qty_permintaan_box">
+                                <div class="qty_jumlah">
+                                    Address Selection
+                                </div>
+                                <!-- <input type="text" class="kodepos-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)"> -->
+                                <!-- <select class="form-select option-address-gb sp_address_hover" aria-label="Default select example" onchange="addressMethod(this)" >
+                                    <option selected>Select Address Method</option>    
+                                    <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
+                                    <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
+                                </select> -->
+        
+                                <div class="box_address_selection">
+                                    <div class="box_for_address_card">
+                                        <div class="form-check form-check-inline">
+                                            <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
+                                            <div class="address-card-1">
+                                                <img src="./img/alamat_terdaftar.png" alt="" class="bca_img">
+                                            </div>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
+                                            <div class="address-card-1">
+                                                <img src="./img/alamat_lain.png" alt="" class="bca_img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-login-name new-alamat-pengiriman" >
+                                        <div class="box-name" >
+                                            <p>Input New Address</p>
+                                        </div>
+                                        <input type="text" class="new-kodepos-form sp_alamat_pengiriman_hover" placeholder="alamat Pengiriman" id="alamat_lain">
+                                    </div>
+                                    <select class="form-select option-alamat-gb sp_alamat_hover" aria-label="Default select example" onchange="resultAddress(this)" style="display:none">
+                                    </select>
+                                </div>
+                                
+                            </div>                        
+                            <div class="login-name alamat-pengiriman" style="display:none">
+                                <div class="box-name" >
+                                    <p>PENGIRIMAN KE ALAMAT</p>
+                                </div>
+                                <input type="text" class="kodepos-form sp_alamat_pengiriman_hover" placeholder="alamat Pengiriman" id="alamat_lain">
+                            </div>
+                        </div>
+            
+                        <div class="new-box-card-kurir-sp"> 
+                            <div class="new-card-kurir-sp">
+                                <div class="new-name-box-kurir">
+                                    <div class="box-name" >
+                                        <p>Delivery Method</p>
+                                    </div>        
+                                    <div class="new-box-kurir">
+                                        <div class="address-card-1">
+                                            <img src="./img/tiki_shipping_method.png" alt="" class="bca_img">
+                                        </div>
+                                        <div class="address-card-1">
+                                            <img src="./img/vantsing_shipping_method.png" alt="" class="bca_img">
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <!-- <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text " for="inputGroupSelect01">Kurir</label>
+                                    </div>
+                                    <select class="custom-select home_kurir_hover kurir-home-gb" id="inputGroupSelect01" onchange="kurirMethodHome('${product_id}')">  
+                                        
+                                    </select>
+                                </div> -->
+        
+        
+                                <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Provinsi</label>
+                                    </div>
+                                    <select class="custom-select home_provinsi_hover province-home-gb" id="inputGroupSelect01"  onchange="provinceMethodHome('${product_id}')" >  
+                                        <option  selected  class="id-kurir-gb"> Provinsi</option>  
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Kota</label>
+                                    </div>
+                                    <select class="custom-select home_kota_hover kota-home-gb" id="inputGroupSelect01"  onchange="kotaMethodHome('${product_id}')" >  
+                                        <option selected  class="id-kurir-gb"> Kota</option>      
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Kelurahan</label>
+                                    </div>
+                                    <select class="custom-select kelurahan_kelurahan_hover kelurahan-home-gb" id="inputGroupSelect01" onchange="kelurahanMethodHome('${product_id}')" >  
+                                        <option selected  class="id-kurir-gb">Kelurahan</option>      
+                                    </select>
+                                </div>   
+                                <div class="alert alert-danger" role="alert">
+                                    Isi ulang semua field!
+                                </div>   
+                                
+                            </div>
+                            <div class="new-card-kurir-sp-bot">              
+                                <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Kecamatan</label>
+                                    </div>
+                                    <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethodHome('${product_id}')" >  
+                                        <option selected  class="id-kurir-gb">Kecamatan</option>      
+                                    </select>
+                                </div>
+        
+                                <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Kode Pos</label>
+                                    </div>
+                                    <!-- <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethodHome('${product_id}')" >  
+                                        <option selected  class="id-kurir-gb">Kecamatan</option>      
+                                    </select> -->
+                                    <input type="number" class="new-kodepos2-form home_kodepos_hover kodepos-home-gb" placeholder="kode pos" id="option-kodepos-gb" onchange="kodeposMethodHome('${product_id}')" >  
+                                </div>
+                                    
+                                <div class="input-group mb-3 input-card-sp">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Pengiriman</label>
+                                    </div>
+                                    <select class="custom-select kelurahan_kelurahan_hover pengiriman-home-gb" id="inputGroupSelect01" onchange="pengirimanMethodHome('${product_id}')" >  
+                                        <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                                    </select>
+                                </div>  
+                                <!-- <div class="new-name-box-kurir">
+                                    <div class="box-name" >
+                                        <p>Shipping Time</p>
+                                    </div>        
+                                    <div class="new-box-kurir">
+                                        <div class="address-card-1">
+                
+                                        </div>
+                                        <div class="address-card-1">
+                
+                                        </div>
+                                    </div>
+                                </div> -->
+                                
+                                
+                            </div>
+                        </div>  
+        
+                        <div class="new-box-card-kurir-bot">
+                            <div class="new-login-name new-box-pengiriman" >
+                                <div class="box-name" >
                                     <p>BIAYA PENGIRIMAN</p>
                                 </div>
-                                <input type="text" class="price-form"  id="total_biaya_pengiriman_gb" disabled>
+                                <input type="text" class="new-price-form"  id="total_biaya_pengiriman_gb" disabled>
                             </div>
-                            
                         </div>
                     </div>  
-                </div>  
-            </div>
-            <div class="group-right">
-                <div class="gr-2">
-                    <div class="box-img-gr">
-                        <img src="${item_product.Picture_1}" alt="" class="img-gr">
-                    </div>
                 </div>
-                <div class="gr-1">
-                    <div class="box-total-price">
-                        <p>Price Based on Quantity</p>
-                        <div class="total-price">
-                            <input type="text" disabled class="price-form total_price_iframe"  id="tp_iframe">    
+                <div class="group-right">
+                    <div class="gr-2">
+                        <div class="box-img-gr">
+                            <img src="./img/about.png" alt="" class="img-gr">
                         </div>
                     </div>
-                    <div class="btn-pesan" onclick="payment_groupbuy_home('${product_id}')">
-                        <p>Pesan Sekarang!</p>
-                        <img src="../img/home.png" alt="" class="icon-home">
-                    </div>
-                </div>    
+                    <div class="new-gr-1">
+                        <div class="new-box-card-kurir-right">
+                            <div class="new-box-total-price">
+                                <p>ORDER SUMMARY</p>
+                                <div class="new-total-price">
+                                    <div class="box-tp">
+                                        Total Product
+                                    </div>
+                                    <div class="new-detail-product-summary">
+                                        <div class="ndps-left">
+                                            <div class="detail-ndps-left">
+                                                Sealant <br>
+                                                2 x Rp 20.000
+                                            </div>
+                                            <div class="detail-ndps-left">
+                                                Shipping Fee
+                                            </div>
+                                        </div>
+                                        <div class="ndps-right">
+                                            <div class="detail-ndps-right">
+                                                Rp.40.000
+                                            </div>
+                                            <div class="detail-ndps-right">
+                                                Rp.20.000
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-btn-pesan" onclick="payment_groupbuy_home('${product_id}')">
+                                        <p>Confirm Order!</p>
+                                        <!-- <img src="./img/accounts.png" alt="" class="icon-home"> -->
+                                    </div>
+                                    
+                                    <!-- <input type="text" disabled class="new-price-form total_price_iframe"  id="tp_iframe">     -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
             </div>
-             `)
+         `)
 
 
             //  RENDER KURIR DLL
