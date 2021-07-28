@@ -78,7 +78,7 @@ $( document ).ready(function() {
     }
 
 
-    
+
 });
 
 
@@ -947,7 +947,7 @@ const render_group_buy=(product_id)=>{
                                             //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
                                             // `)
                                             $('.radio-group-delivery').append(`
-                                            <div class="address-card-1 radio-delivery-card" id="id-kurir-gb " data-value="${val.Courier}">
+                                            <div class="address-card-1 radio-delivery-card" id="id-kurir-gb-${val.Courier}" data-value="${val.Courier}" onclick="choosing_shipping('id-kurir-gb-${val.Courier}', ${product_id})">
                                                 <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
                                             </div>
                                         `)
@@ -1107,7 +1107,7 @@ const render_group_buy=(product_id)=>{
 
 //  SHOW PRODUCT CODE
 
-const kurirMethodHome=(kurir)=>{
+const kurirMethodHome=(kurir,product_id)=>{
     console.log(kurir)
     $('.alert-danger').css('display','none')
     console.log('kurirmethodhome jalan')
@@ -1127,117 +1127,167 @@ const kurirMethodHome=(kurir)=>{
     var allKelurahan=[]
     var allKecamatan=[]
     var allPengiriman=[]
+    var allDistrict = []
+    var allSub_District = []
 
     var kurir=[]
     var province = []
     var kota = []
     var kelurahan = []
     var kecamatan = []
+    var sub_district = []
     $('.kurir-home-gb').empty()
     $('.province-home-gb').empty()
     $('.kota-home-gb').empty()
     $('.kecamatan-home-gb').empty()
     $('.kelurahan-home-gb').empty()
-    $('.pengiriman-home-gb').empty()
-    get_all_couriers().done(function(response){
-        var dataAllKurir = response
-        allKurir = response
-        console.log(dataAllKurir,' data all kurir')
-        
-        var kurir_kode =''
-        for(var i=0; i<dataAllKurir.length; i++){
-            if(dataAllKurir[i].Courier == new_kurir_pilihan){
-                kurir_kode = dataAllKurir[i].Courier_Code
+    // $('.pengiriman-home-gb').empty()
+
+    get_product_detail_func(product_id).done(function(response){
+        var item_product = response
+        get_all_couriers().done(function(response){
+            var dataAllKurir = response
+            allKurir = response
+            console.log(dataAllKurir,' data all kurir')
+            
+            var kurir_kode =''
+            for(var i=0; i<dataAllKurir.length; i++){
+                if(dataAllKurir[i].Courier == new_kurir_pilihan){
+                    kurir_kode = dataAllKurir[i].Courier_Code
+                }
             }
-        }
-        get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
-            province = response[0]
-            allProvince = response
-            console.log(province)
-            get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province.Province).done(function(response){
-                kota = response[0]
-                allKota = response
-                console.log(kota,' ini kota')
-                get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota.City).done(function(response){
-                    kelurahan = response[0]
-                    allKelurahan = response
-                    console.log(kelurahan,'ini kelurahaan')
-                    get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,'').done(function(response){
-                        kecamatan = response
-                        allKecamatan = response
-                        console.log(kecamatan,' ini kecamatan')
-                        get_shipping_cost_informations(new_kurir_pilihan,kurir_kode,province.Province,kota.City,'','').done(function(response){
-                            allPengiriman = response
-                            console.log(response,' ini shipping cost')
-                            // $('.kurir-home-gb').append(`
-                            //     <option   class="id-kurir-gb"> Kurir</option>
-                            // `)
-                            $('.province-home-gb').append(`
-                                <option  selected  class="id-kurir-gb"> Provinsi</option>  
-                            `)
-                            $('.kota-home-gb').append(`
-                                <option selected  class="id-kurir-gb"> Kota</option>      
-                            `)
-                            $('.kelurahan-home-gb').append(`
-                                <option selected  class="id-kurir-gb">Kelurahan</option>      
-                            `)
-                            $('.kecamatan-home-gb').append(`
-                                <option selected  class="id-kurir-gb">Kecamatan</option>      
-                            `)
-                            $('.pengiriman-home-gb').append(`
-                                <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
-                            `)
-
-
-                            allKurir.map((val,index)=>{
-                                console.log(val,'ini val kurir')
-                                $('.kurir-home-gb').append(`
-                                    <option  selected value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
-                                `)
-                            })
-                            allProvince.map((val,index)=>{
-                                console.log(val,'ini val province')
-                                $('.province-home-gb').append(`
-                                    <option  value="${val.Province}" class="id-province-gb">${val.Province}</option> 
-                                `)
-                            })
-                            allKota.map((val,index)=>{
-                                console.log(val,'ini val kota')
-                                $('.kota-home-gb').append(`
-                                    <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
-                                `)    
-                            })  
-                            allKecamatan.map((val,index)=>{
-                                console.log(val.Sub_District == '','ini val kecamatan')
-                                if(val.Sub_District == ''){
-                                    $('.kecamatan-home-gb').append(`
-                                        <option  value="${val.District}" class="id-kecamatan-gb">-</option> 
+            console.log(new_kurir_pilihan,' new kurir pilihan')
+            console.log(kurir_kode,' kurir_kode')
+            get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+                province = response[0]
+                allProvince = response
+                console.log(province)
+                get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province.Province).done(function(response){
+                    kota = response[0]
+                    allKota = response
+                    console.log(kota,' ini kota')
+                    get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota.City).done(function(response){
+                        kelurahan = response[0]
+                        district = response[0]
+                        allKelurahan = response
+                        allDistrict = response
+                        console.log(kelurahan,'ini kelurahaan')
+                        get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
+                            kecamatan = response
+                            allKecamatan = response
+                            allSub_District = response
+                            console.log(kecamatan,' ini kecamatan')
+                            console.log(kecamatan[0].Sub_District)
+    
+                            var Courier_Price_Code_orig = 'CGK01.00'
+                            var packing_type = ''
+                            var berat_product = parseInt(item_product.Weight_KG)
+                            console.log(item_product,'ini item product')
+                            console.log(berat_product,' ini berat product')
+                            if(berat_product == 0){
+                                berat_product = 0.1
+                            }
+                            var length = ''
+                            var  width = '' 
+                            var  height = ''
+                            var paket_value = '' 
+                            console.log(allSub_District[0].Courier_Price_Code,' price code dest')
+                            console.log( new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value))
+                            // get_shipping_cost_informations(kurir.Courier,kurir.Courier_Code,province.Province,kota.City,kelurahan.District,kecamatan[0].Sub_District).done(function(response){
+                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+    
+                                
+                                allPengiriman = response
+                                console.log(response,' ini shipping cost')
+                                // $('.radio-group-delivery').empty()
+                                $('.kurir-home-gb').empty()
+                                $('.province-home-gb').empty()
+                                $('.kota-home-gb').empty()
+                                $('.kelurahan-home-gb').empty()
+                                $('.kecamatan-home-gb').empty()
+                                $('.pengiriman-home-gb').empty()
+                                
+    
+                                // allKurir.map((val,index)=>{
+                                //     // console.log(val,'ini val kurir')
+                                //     // $('.kurir-home-gb').append(`
+                                //     //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
+                                //     // `)
+                                //     $('.radio-group-delivery').append(`
+                                //     <div class="address-card-1  id="id-kurir-gb" radio-delivery-card" data-value="${val.Courier}">
+                                //         <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
+                                //     </div>
+                                // `)
+                                // })
+                                allProvince.map((val,index)=>{
+                                    // console.log(val,'ini val province')
+                                    $('.province-home-gb').append(`
+                                        <option  value="${val.Province}" class="id-province-gb">${val.Province}</option> 
                                     `)
-                                }else {
-                                    $('.kecamatan-home-gb').append(`
-                                        <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+                                })
+                                allKota.map((val,index)=>{
+                                    // console.log(val,'ini val kota')
+                                    $('.kota-home-gb').append(`
+                                        <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
+                                    `)    
+                                })  
+                                allKecamatan.map((val,index)=>{
+    
+                                    if(val.Sub_District == ''){
+                                        $('.kecamatan-home-gb').append(`
+                                            <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
+                                        `)
+                                    }else {
+                                        $('.kecamatan-home-gb').append(`
+                                            <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
+                                        `)
+                                        $('.kodepos-home-gb').append(`
+                                            <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                        `)
+                                    }
+    
+                                })
+    
+                                allKelurahan.map((val,index)=>{
+    
+                                    if(val.District == ''){
+                                        $('.kelurahan-home-gb').append(`
+                                            <option  value="${val.District}" class="id-kelurahan-gb">-</option> 
+                                        `)
+                                    }else {
+                                        $('.kelurahan-home-gb').append(`
+                                            <option  value="${val.District}" class="id-kelurahan-gb">${val.District}</option> 
+                                        `)
+                                       
+                                    }
+                                })
+    
+                                allPengiriman.service.map((val,index)=>{
+                                    // console.log(val, ' ini all pengiriman')
+                                    // console.log(val.est_day)
+                                    // console.log(val.EST_DAY)
+                                    $('.pengiriman-home-gb').append(`
+                                        <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="id-pengiriman-gb">${val.EST_DAY} days-${val.DESCRIPTION} </option> 
                                     `)
-                                }
-
-                            })
-
-                            allKelurahan.map((val,index)=>{
-                                console.log(val,'ini val kelurahan')
-                                if(val.District == ''){
-                                    $('.kelurahan-home-gb').append(`
-                                        <option  value="${val.Subdistrict}" class="id-kelurahan-gb">-</option> 
+                                })
+                                allPengiriman.insurance.map((val,index)=>{
+                                    // console.log(val, ' ini all pengiriman')
+                                    // console.log(val.est_day)
+                                    // console.log(val.EST_DAY)
+                                    $('.asuransi-home-gb').append(`
+                                        <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="id-pengiriman-gb">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                     `)
-                                }else {
-                                    $('.kelurahan-home-gb').append(`
-                                        <option  value="${val.Subdistrict}" class="id-kelurahan-gb">${val.Subdistrict}</option> 
+                                })
+                                allPengiriman.packing.map((val,index)=>{
+                                    // console.log(val, ' ini all pengiriman')
+                                    // console.log(val.est_day)
+                                    // console.log(val.EST_DAY)
+                                    $('.packing-home-gb').append(`
+                                        <option  value="${val.PACKING_TYPE}" class="id-pengiriman-gb">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                     `)
-                                }
-                            })
-
-                            allPengiriman.map((val,index)=>{
-                                $('.pengiriman-home-gb').append(`
-                                    <option  value="${val.delivery_time_in_days}-${val.Courier_Price_Code}" class="id-pengiriman-gb">${val.delivery_time_in_days} days-${val.Courier_Price_Code} </option> 
-                                `)
+                                })
+    
+    
                             })
                         })
                     })
@@ -2534,3 +2584,58 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
     })
 }
+
+
+$(function(){
+    $('.radio-group .radio_payment_method').on('click',function(){
+        // alert('function jalan')
+        $(this).parent().find('.radio_payment_method').removeClass('selected');
+        $(this).parent().find('.radio_payment_method').removeClass('active_payment_method');
+        $('.radio_payment_method').removeClass('selected')
+        $('.radio_payment_method').removeClass('active_payment_method')
+        $(this).addClass('selected');
+        $(this).addClass('active_payment_method');
+
+        var val = $(this).attr('data-value');
+        var class_payment = $(this)
+        console.log(class_payment)
+ 
+    })
+    
+    $('.radio-group-address .radio_address_card').on('click',function(){
+        $(this).parent().find('.radio_address_card').removeClass('selected');
+        $(this).parent().find('.radio_address_card').removeClass('active_payment_method');
+        $('.radio_address_card').removeClass('selected')
+        $('.radio_address_card').removeClass('active_payment_method')
+        $(this).addClass('selected');
+        $(this).addClass('active_payment_method');
+
+        var val = $(this).attr('data-value');
+        result = val
+        var class_payment = $(this)
+        console.log(class_payment)
+        var testing_val = $('.active_payment_method').attr('data-value')
+        console.log(testing_val)
+
+    })
+  
+
+    $('.radio-group-delivery .radio-delivery-card').on('click',function(){
+        // alert('function jalan')
+        // alert('jalan')
+        $(this).parent().find('.radio-delivery-card').removeClass('selected');
+        $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
+        $('.radio-delivery-card').removeClass('selected')
+        $('.radio-delivery-card').removeClass('active_payment_method')
+        $(this).addClass('selected');
+        $(this).addClass('active_payment_method');
+    
+        var val = $(this).attr('data-value');
+        result = val
+        var class_payment = $(this)
+        console.log(class_payment)
+        var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+        // console.log(testing_val)
+        kurirMethodHome(new_kurir_pilihan)
+    })
+})

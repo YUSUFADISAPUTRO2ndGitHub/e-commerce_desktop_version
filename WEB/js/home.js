@@ -925,8 +925,8 @@ const close_toast=()=>{
 }
 
 
-const choosing_shipping=(kurir)=>{
-    alert('function jalan')
+const choosing_shipping=(kurir,product_id)=>{
+    // alert('function jalan')
         // $(this).parent().find('.radio-delivery-card').removeClass('selected');
         // $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
         // $(this).addClass('selected')
@@ -935,9 +935,20 @@ const choosing_shipping=(kurir)=>{
         $('.radio-delivery-card').removeClass('active_payment_method')
         // $('.radio-delivery-card').addClass('selected')
         // $('.radio-delivery-card').addClass('active_payment_method')
-        $(this).addClass('selected');
-        $(this).attr('id','testing_id_kurir')
-        $(this).addClass('active_payment_method');
+        var kurir_id = kurir
+        var id = $('.radio-delivery-card').attr('id')
+     
+    console.log(id == kurir_id, ' 941 sama gak neh alig')
+        if(id == kurir_id){
+            console.log('masuk ke if 943')
+            $(`#${kurir}`).addClass('selected')
+            $(`#${kurir}`).addClass('active_payment_method')
+        }
+        
+        
+        // $(this).addClass('selected');
+        // $(this).attr('id','testing_id_kurir')
+        // $(this).addClass('active_payment_method');
         console.log(this)
 
         var val = $(this).attr('data-value');
@@ -945,8 +956,8 @@ const choosing_shipping=(kurir)=>{
         var class_payment = $(this)
         console.log(class_payment)
         var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
-        // console.log(testing_val)
-        // kurirMethodHome(new_kurir_pilihan)
+        console.log(new_kurir_pilihan)
+        kurirMethodHome(new_kurir_pilihan,product_id)
 }  
 
 

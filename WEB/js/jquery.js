@@ -1,5 +1,20 @@
+
+
 $(function(){
+    $( "#datepicker" ).datepicker({
+        dateFormat:'yy-mm-dd'
+    });
+    var a = $( "#datepicker" ).datepicker("getDate");
+    console.log(a,' ini a')
     
+    var b = $('.form-check-input').val()
+    console.log(b)
+
+  $("#flexSwitchCheckDefault").bootstrapSwitch({
+      onSwitchChange: function(e,state){
+          alert(state)
+      }
+  })
 
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
@@ -2182,102 +2197,6 @@ function resultAddress(item){
 
 
 
-// CALENDAR COMMISION
-
-$(function() {
-    $( "#datepicker" ).datepicker({
-        dateFormat:'yy-mm-dd'
-    });
-    var a = $( "#datepicker" ).datepicker("getDate");
-    console.log(a,' ini a')
-    
-    var b = $('.form-check-input').val()
-    console.log(b)
-
-  $("#flexSwitchCheckDefault").bootstrapSwitch({
-      onSwitchChange: function(e,state){
-          alert(state)
-      }
-  })
-
- });
-
-
-
-const edit_product_quantity=(product_id)=>{
-    $("#"+product_id+"-quantity").prop('disabled',false) 
-    $("#"+product_id+"-quantity").css('background-color','#ddd')
-
-
-    $("#"+product_id+"-box_edit_quantity").css('display','none') // icon 
-    $("#"+product_id+"-save_quantity").css('display','block') // icon
-}
-const get_status=(product_id,pass)=>{
-    // alert(item_status)
-    var password = pass
-    var Product_Code = $("#"+product_id+"-pCode").val()
-    var Name = $("#"+product_id+"-pName").val()
-    var qty = $("#"+product_id+"-quantity").val()
-    var price = $("#"+product_id+"-discount").val()
-    var token = localStorage.getItem('token')
-    var email;
-    var result;
-
-            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-            .then((res)=>{
-                email = res.data.Email
-                axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
-                .then((res)=>{
-                    console.log(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
-                    console.log(res.data)
-                    if(res.data){
-                        swal.fire("Berhasil Mengubah Data", "", "success");
-                        $('#get_otp').modal('hide')
-                    }else {
-                        swal.fire("Gagal Mengubah Data", "", "error");
-                        $('#get_otp').modal('hide')
-                        
-                    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                    .then((res)=>{
-                        console.log(res.data)
-                        console.log(res.data.GroupBuy_SellPrice)
-                        // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
-                        if(res.data.GroupBuy_Purchase == 'true'){
-                            $('#'+product_id+"-status").prop('checked',true)
-                        }else {
-                            $('#'+product_id+"-status").prop('checked',false)
-                            
-                        }
-                    }).catch((err)=>{
-                        console.log(err)
-                    })
-                }
-    
-                }).catch((err)=>{
-    
-                })
-            }).catch((err)=>{
-                console.log(err)
-            })
-            console.log($('#'+product_id+"-status").val())
-            if($('#'+product_id+"-status").is(':checked')){
-                result = true
-            }else {
-                result = false
-            }
-            
- }
-
-const save_edit_quantity=(product_id)=>{
-
-    $('#get_otp').modal('show')
-    $('#s_product_name').addClass(product_id)
-    $('#s_product_name').addClass('groupbuy_qty')
-
-
-
-    clearOTPform()
-}
 
 
 // EDIT DISCOUNT
@@ -2856,13 +2775,6 @@ const about_dirjen=()=>{
 
 
 
-// CARD FLIP DETAIL PAYMENT
-
-// var card = document.querySelector('.card_flip_payment');
-// card.addEventListener( 'click', function() {
-//   card.classList.toggle('is-flipped');
-// });
-
 $('.card_flip_payment').on('mouseover',function(){
     alert('jalan')
     $('.card_flip_payment').toggleClass('is-flipped')
@@ -2905,107 +2817,107 @@ function toDataURL(url, callback) {
     xhr.open('GET', url);
     xhr.responseType = 'blob';
     xhr.send();
-      }
+}
   
-      var gambar_active = 3
-      setInterval(()=>{
-          if(gambar_active == 1){
-        //   console.log(gambar_active, ' ini gambar active')
-           toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
-          // console.log('RESULT:', dataUrl)
-              await $('#scream').attr('src',dataUrl)
-              var example = document.getElementById('example');
-              var context = example.getContext('2d');
-              var img = document.getElementById("scream");
-              context.drawImage(img, 0, 0, 500, 500);
-              
-              // var c = example.getContext('2d');
-              var p =  context.getImageData(10, 10, 1, 1).data; 
-            //   console.log(p)
-              var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-              // alert(hex)
-  
-  
-               await $('.ads-3').css('background-color',hex)
-               await $('.ads-1').css('background-color',hex)
-              // $('#status').html(cord + "<br>" + hex);
-              gambar_active = 2
-              
-          })
-   
-      }
-      else if (gambar_active == 2){
-        //   console.log(gambar_active, ' ini gambar active')
-           toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
-          // console.log('RESULT:', dataUrl)
-              await $('#scream').attr('src',dataUrl)
-              var example = document.getElementById('example');
-              var context = example.getContext('2d');
-              var img = document.getElementById("scream");
-              context.drawImage(img, 0, 0, 500, 500);
-              
-              // var c = example.getContext('2d');
-              var p =  context.getImageData(10, 10, 1, 1).data; 
-            //   console.log(p)
-              var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-              // alert(hex,'GA2')
-  
-  
-              await $('.ads-3').css('background-color',hex)
-              await  $('.ads-1').css('background-color',hex)
-              // $('#status').html(cord + "<br>" + hex);
-              gambar_active = 3
-              
-          })
-      }else {
-        //   console.log(gambar_active, ' ini gambar active')
-          // console.log(gambar_active, ' ini gambar active')
-           toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
-          // console.log('RESULT:', dataUrl)
-              await  $('#scream').attr('src',dataUrl)
-              var example = document.getElementById('example');
-              var context = example.getContext('2d');
-              var img = document.getElementById("scream");
-              context.drawImage(img, 0, 0, 500, 500);
-              
-              // var c = example.getContext('2d');
-              var p =  context.getImageData(10, 10, 1, 1).data; 
-            //   console.log(p)
-              var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-              // alert(hex,'GA2')
-  
-  
-               await $('.ads-3').css('background-color',hex)
-             await  $('.ads-1').css('background-color',hex)
-              // $('#status').html(cord + "<br>" + hex);
-              gambar_active = 1
-              
-          })
-      }
-      },3000)
-  
-     
-   
-      function rgbToHex(r, g, b) {
-          if (r > 255 || g > 255 || b > 255)
-              throw "Invalid color component";
-          return ((r << 16) | (g << 8) | b).toString(16);
-      }
+var gambar_active = 3
+setInterval(()=>{
+    if(gambar_active == 1){
+//   console.log(gambar_active, ' ini gambar active')
+    toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
+    // console.log('RESULT:', dataUrl)
+        await $('#scream').attr('src',dataUrl)
+        var example = document.getElementById('example');
+        var context = example.getContext('2d');
+        var img = document.getElementById("scream");
+        context.drawImage(img, 0, 0, 500, 500);
+        
+        // var c = example.getContext('2d');
+        var p =  context.getImageData(10, 10, 1, 1).data; 
+    //   console.log(p)
+        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+        // alert(hex)
+
+
+        await $('.ads-3').css('background-color',hex)
+        await $('.ads-1').css('background-color',hex)
+        // $('#status').html(cord + "<br>" + hex);
+        gambar_active = 2
+        
+    })
+
+}
+else if (gambar_active == 2){
+//   console.log(gambar_active, ' ini gambar active')
+    toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
+    // console.log('RESULT:', dataUrl)
+        await $('#scream').attr('src',dataUrl)
+        var example = document.getElementById('example');
+        var context = example.getContext('2d');
+        var img = document.getElementById("scream");
+        context.drawImage(img, 0, 0, 500, 500);
+        
+        // var c = example.getContext('2d');
+        var p =  context.getImageData(10, 10, 1, 1).data; 
+    //   console.log(p)
+        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+        // alert(hex,'GA2')
+
+
+        await $('.ads-3').css('background-color',hex)
+        await  $('.ads-1').css('background-color',hex)
+        // $('#status').html(cord + "<br>" + hex);
+        gambar_active = 3
+        
+    })
+}else {
+//   console.log(gambar_active, ' ini gambar active')
+    // console.log(gambar_active, ' ini gambar active')
+    toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
+    // console.log('RESULT:', dataUrl)
+        await  $('#scream').attr('src',dataUrl)
+        var example = document.getElementById('example');
+        var context = example.getContext('2d');
+        var img = document.getElementById("scream");
+        context.drawImage(img, 0, 0, 500, 500);
+        
+        // var c = example.getContext('2d');
+        var p =  context.getImageData(10, 10, 1, 1).data; 
+    //   console.log(p)
+        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+        // alert(hex,'GA2')
+
+
+        await $('.ads-3').css('background-color',hex)
+        await  $('.ads-1').css('background-color',hex)
+        // $('#status').html(cord + "<br>" + hex);
+        gambar_active = 1
+        
+    })
+}
+},3000)
+
+
+
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
       
 
-    var timeout = setTimeout(function(){
-        yourFunction()
-    },2000);
-    const yourFunction=()=>{
-        $('.ads-1').removeClass('animated-background')
-        $('.ads-2').removeClass('animated-background')
-        $('.ads-3').removeClass('animated-background')
-        $('#slider').css('display','block')
-        // $('.box-render-promo-animated').css('display','none')
-        // $('.box-render-promo').css('display','flex')
-        // $('.box-render-new').css('display','flex')
-        // $('.box-render-all').css('display','flex')
-    }
+var timeout = setTimeout(function(){
+    yourFunction()
+},2000);
+const yourFunction=()=>{
+    $('.ads-1').removeClass('animated-background')
+    $('.ads-2').removeClass('animated-background')
+    $('.ads-3').removeClass('animated-background')
+    $('#slider').css('display','block')
+    // $('.box-render-promo-animated').css('display','none')
+    // $('.box-render-promo').css('display','flex')
+    // $('.box-render-new').css('display','flex')
+    // $('.box-render-all').css('display','flex')
+}
 
 
 
@@ -3084,7 +2996,7 @@ const check_input_form_supp=()=>{
             return false
         }
     
-    }
+}
 
 
 
@@ -3708,3 +3620,78 @@ const re_render_item_product=()=>{
     
 }
 
+const edit_product_quantity=(product_id)=>{
+    $("#"+product_id+"-quantity").prop('disabled',false) 
+    $("#"+product_id+"-quantity").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_quantity").css('display','none') // icon 
+    $("#"+product_id+"-save_quantity").css('display','block') // icon
+}
+
+const get_status=(product_id,pass)=>{
+    // alert(item_status)
+    var password = pass
+    var Product_Code = $("#"+product_id+"-pCode").val()
+    var Name = $("#"+product_id+"-pName").val()
+    var qty = $("#"+product_id+"-quantity").val()
+    var price = $("#"+product_id+"-discount").val()
+    var token = localStorage.getItem('token')
+    var email;
+    var result;
+
+            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then((res)=>{
+                email = res.data.Email
+                axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
+                .then((res)=>{
+                    console.log(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
+                    console.log(res.data)
+                    if(res.data){
+                        swal.fire("Berhasil Mengubah Data", "", "success");
+                        $('#get_otp').modal('hide')
+                    }else {
+                        swal.fire("Gagal Mengubah Data", "", "error");
+                        $('#get_otp').modal('hide')
+                        
+                    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                    .then((res)=>{
+                        console.log(res.data)
+                        console.log(res.data.GroupBuy_SellPrice)
+                        // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                        if(res.data.GroupBuy_Purchase == 'true'){
+                            $('#'+product_id+"-status").prop('checked',true)
+                        }else {
+                            $('#'+product_id+"-status").prop('checked',false)
+                            
+                        }
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }
+    
+                }).catch((err)=>{
+    
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+            console.log($('#'+product_id+"-status").val())
+            if($('#'+product_id+"-status").is(':checked')){
+                result = true
+            }else {
+                result = false
+            }
+            
+ }
+
+const save_edit_quantity=(product_id)=>{
+
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(product_id)
+    $('#s_product_name').addClass('groupbuy_qty')
+
+
+
+    clearOTPform()
+}
