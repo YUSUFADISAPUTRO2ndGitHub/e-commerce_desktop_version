@@ -566,7 +566,7 @@ const backItem=(id)=>{
 
  function horizontalNavigationPromo(position, event) {
      console.log('jalan')
-    $('.box-`render`-promo').animate({scrollLeft: position}, 350);
+    $('.box-render-promo').animate({scrollLeft: position}, 350);
     event.preventDefault();
 }
 function horizontalNavigationNew(position, event) {
@@ -595,6 +595,8 @@ function horizontalNavigationBot(position, event) {
 
 
     
+
+
 
 
 
@@ -921,3 +923,31 @@ const refresh=()=>{
 const close_toast=()=>{
     $('.toast_prod_information').css('display','none')
 }
+
+
+const choosing_shipping=(kurir)=>{
+    alert('function jalan')
+        // $(this).parent().find('.radio-delivery-card').removeClass('selected');
+        // $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
+        // $(this).addClass('selected')
+        // $(this).addClass('selected')
+        $('.radio-delivery-card').removeClass('selected')
+        $('.radio-delivery-card').removeClass('active_payment_method')
+        // $('.radio-delivery-card').addClass('selected')
+        // $('.radio-delivery-card').addClass('active_payment_method')
+        $(this).addClass('selected');
+        $(this).attr('id','testing_id_kurir')
+        $(this).addClass('active_payment_method');
+        console.log(this)
+
+        var val = $(this).attr('data-value');
+        result = val
+        var class_payment = $(this)
+        console.log(class_payment)
+        var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+        // console.log(testing_val)
+        // kurirMethodHome(new_kurir_pilihan)
+}  
+
+
+

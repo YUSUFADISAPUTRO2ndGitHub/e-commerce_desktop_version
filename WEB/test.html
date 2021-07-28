@@ -23,8 +23,7 @@
                 <div class="new-box-card-kurir-sp-top"> 
                     <div class="new-box-name-2">
                         <p>CART DETAIL</p>
-                    </div>
-                    
+                    </div>               
                     <div class="new-login-name">
                         <div class="new-qty_permintaan_box">
                             <div class="qty_jumlah">
@@ -32,74 +31,42 @@
                             </div>
                             <input type="text" class="new-kodepos-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)">
                         </div>    
-                    </div>
-                    
+                    </div>  
                     <div class="box_transfer">
                         <div class="box-name">
                             <p>Payment Method</p>
                         </div>
-
-                        <!-- <form method="post" >
-                            <div class="radio-group">
-                                <div class='radio' data-value="One"></div>1
-                                <div class='radio' data-value="Two"></div>2
-                                <div class='radio' data-value="Three"></div>3
-                                <br/>
-                                <input type="text" id="radio-value" name="radio-value" />
-                            </div>
-                            
-                        </form> -->
                         <div class="box_for_transfer_card">  
                             <form method="post" class="radio-group form-radio-payment">
                                 <div class="form-check form-check-inline " >
                                     <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
                                     <div class="transfer-card-1 radio_payment_method" data-value="BCA">
-                                        <img src="./img/bca_transfer_manual.png" alt="" class="bca_img">
+                                        <img src="../WEB/img/bca_transfer_manual.png" alt="" class="bca_img">
                                     </div>
                                 </div>
-                                <div class="form-check form-check-inline " >
-                                    <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option3" > -->
-                                    <div class="transfer-card-1  radio_payment_method" data-value="MANDIRI">
-                                        <img src="./img/bca_transfer_manual.png" alt="" class="bca_img">
-                                    </div>
-                                </div>
-                                <div class="form-check form-check-inline " >
-                                    <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" > -->
-                                    <div class="transfer-card-1 radio_payment_method" data-value="JENIUS">
-                                        <img src="./img/bca_transfer_manual.png" alt="" class="bca_img">
-                                    </div>
-                                </div>
-
                             </form>
                         </div>       
                     </div>
-                    
-
                     <div class="new-qty_permintaan_box">
                         <div class="qty_jumlah">
                             Address Selection
                         </div>
-                        <!-- <input type="text" class="kodepos-form qty_groupbuy_home" placeholder="Kuantitas Permintaan" id="${product_id}" onchange="check_qty(this.value)"> -->
-                        <!-- <select class="form-select option-address-gb sp_address_hover" aria-label="Default select example" onchange="addressMethod(this)" >
-                            <option selected>Select Address Method</option>    
-                            <option value="Alamat Terdaftar" class="id-address-gb">Alamat Terdaftar</option>    
-                            <option value="Alamat Baru" class="id-address-gb">Alamat Baru</option>           
-                        </select> -->
-
                         <div class="box_address_selection">
                             <div class="box_for_address_card">
-                                <div class="form-check form-check-inline">
-                                    <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
-                                    <div class="address-card-1">
-                                        <img src="./img/alamat_terdaftar.png" alt="" class="bca_img">
+                                <form method="post" class="radio-group-address form-radio-payment">
+                                    <div class="form-check form-check-inline">
+                                        <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
+                                        <div class="address-card-1 radio_address_card" data-value="Alamat Terdaftar">
+                                            <img src="../WEB/img/alamat_terdaftar.png" alt="" class="bca_img">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
-                                    <div class="address-card-1">
-                                        <img src="./img/alamat_lain.png" alt="" class="bca_img">
+                                    <div class="form-check form-check-inline">
+                                        <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
+                                        <div class="address-card-1 radio_address_card" data-value="Alamat Lain">
+                                            <img src="../WEB/img/alamat_lain.png" alt="" class="bca_img">
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                             <div class="new-login-name new-alamat-pengiriman" >
                                 <div class="box-name" >
@@ -112,9 +79,6 @@
                         </div>
                         
                     </div>    
-                 
-                    
-                    
                     <div class="login-name alamat-pengiriman" style="display:none">
                         <div class="box-name" >
                             <p>PENGIRIMAN KE ALAMAT</p>
@@ -130,25 +94,16 @@
                                 <p>Delivery Method</p>
                             </div>        
                             <div class="new-box-kurir">
-                                <div class="address-card-1">
-                                    <img src="./img/tiki_shipping_method.png" alt="" class="bca_img">
-                                </div>
-                                <div class="address-card-1">
-                                    <img src="./img/vantsing_shipping_method.png" alt="" class="bca_img">
-                                </div>
+                                <form method="post" class="radio-group-delivery form-radio-payment">
+                                    <div class="address-card-1  radio-delivery-card" data-value="tiki">
+                                        <img src="./img/tiki_shipping_method.png" alt="" class="bca_img">
+                                    </div>
+                                    <div class="address-card-1 radio-delivery-card" data-value="vantsing">
+                                        <img src="./img/vantsing_shipping_method.png" alt="" class="bca_img">
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
-                        <!-- <div class="input-group mb-3 input-card-sp">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text " for="inputGroupSelect01">Kurir</label>
-                            </div>
-                            <select class="custom-select home_kurir_hover kurir-home-gb" id="inputGroupSelect01" onchange="kurirMethodHome('${product_id}')">  
-                                
-                            </select>
-                        </div> -->
-
-
                         <div class="input-group mb-3 input-card-sp">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Provinsi</label>
@@ -192,9 +147,6 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Kode Pos</label>
                             </div>
-                            <!-- <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethodHome('${product_id}')" >  
-                                <option selected  class="id-kurir-gb">Kecamatan</option>      
-                            </select> -->
                             <input type="number" class="new-kodepos2-form home_kodepos_hover kodepos-home-gb" placeholder="kode pos" id="option-kodepos-gb" onchange="kodeposMethodHome('${product_id}')" >  
                         </div>
                               
@@ -206,24 +158,8 @@
                                 <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
                             </select>
                         </div>  
-                        <!-- <div class="new-name-box-kurir">
-                            <div class="box-name" >
-                                <p>Shipping Time</p>
-                            </div>        
-                            <div class="new-box-kurir">
-                                <div class="address-card-1">
-        
-                                </div>
-                                <div class="address-card-1">
-        
-                                </div>
-                            </div>
-                        </div> -->
-                        
-                        
                     </div>
                 </div>  
-
                 <div class="new-box-card-kurir-bot">
                     <div class="new-login-name new-box-pengiriman" >
                         <div class="box-name" >
@@ -251,8 +187,8 @@
                             <div class="new-detail-product-summary">
                                <div class="ndps-left">
                                     <div class="detail-ndps-left">
-                                        Sealant <br>
-                                        2 x Rp 20.000
+                                        <p class="limited-text-short">Sealant sealant sealant sealant  <br> 2 x Rp 20.000 </p>
+                                        
                                     </div>
                                     <div class="detail-ndps-left">
                                        Shipping Fee

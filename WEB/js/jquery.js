@@ -1,7 +1,5 @@
 $(function(){
     
-    // $('#datepicker').datepicker();
-    // $('.carousel').carousel()
 
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
@@ -13,54 +11,73 @@ $(function(){
         }
     },1000)
 
-    // $('[data-toggle="popover"]').popover({
-    //     container:'body'
-    // })
     $('#cek_harga_req').on('mouseenter',function(){
-        // alert('jaalan')
-        
-        // $('#cek_harga_req').popover('show')
+
         $('#cek_harga_req').popover();
     })
+
     $('[data-toggle="tooltip"]').tooltip()
 
-
-    // INTERVAL UNTU CHECKING ANIMATED
-    // setInterval(()=>{
-    
-    //     if($('.box-render-promo-animated').css('display') == 'flex'){
-    //         $('.box-render-promo-animated').css('display','none')
-    //         $('.box-render-promo').css('display','flex')
-    //         $('.box-render-new').css('display','flex')
-    //         $('.box-render-all').css('display','flex')
-    //     }else {
-          
-    //     }
-    // },5000)
-    
-
   
-      $('.input-group').on('click',function(){
-          $('.list-group').toggle(1000)
-        // $('.list-group').show(1000)
-      })
+    $('.input-group').on('click',function(){
+        $('.list-group').toggle(1000)
+    // $('.list-group').show(1000)
+    })
         
-    
+       
 
     $('.radio-group .radio_payment_method').on('click',function(){
         // alert('function jalan')
-        $(this).parent().find('.radio').removeClass('selected');
-        $(this).parent().find('.radio').removeClass('active_payment_method');
+        $(this).parent().find('.radio_payment_method').removeClass('selected');
+        $(this).parent().find('.radio_payment_method').removeClass('active_payment_method');
+        $('.radio_payment_method').removeClass('selected')
+        $('.radio_payment_method').removeClass('active_payment_method')
         $(this).addClass('selected');
         $(this).addClass('active_payment_method');
 
         var val = $(this).attr('data-value');
         var class_payment = $(this)
         console.log(class_payment)
-        //alert(val);
-        // $(this).parent().find('input').val(val);
-        alert(val)
+ 
     })
+    
+    $('.radio-group-address .radio_address_card').on('click',function(){
+        $(this).parent().find('.radio_address_card').removeClass('selected');
+        $(this).parent().find('.radio_address_card').removeClass('active_payment_method');
+        $('.radio_address_card').removeClass('selected')
+        $('.radio_address_card').removeClass('active_payment_method')
+        $(this).addClass('selected');
+        $(this).addClass('active_payment_method');
+
+        var val = $(this).attr('data-value');
+        result = val
+        var class_payment = $(this)
+        console.log(class_payment)
+        var testing_val = $('.active_payment_method').attr('data-value')
+        console.log(testing_val)
+
+    })
+  
+
+    $('.radio-group-delivery .radio-delivery-card').on('click',function(){
+        // alert('function jalan')
+        // alert('jalan')
+        $(this).parent().find('.radio-delivery-card').removeClass('selected');
+        $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
+        $('.radio-delivery-card').removeClass('selected')
+        $('.radio-delivery-card').removeClass('active_payment_method')
+        $(this).addClass('selected');
+        $(this).addClass('active_payment_method');
+    
+        var val = $(this).attr('data-value');
+        result = val
+        var class_payment = $(this)
+        console.log(class_payment)
+        var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+        // console.log(testing_val)
+        kurirMethodHome(new_kurir_pilihan)
+    })
+
     
       
    $('.cust-1').on('click',function(){
@@ -81,11 +98,11 @@ $(function(){
        console.log('jalan box information')
    })
    
-   
+  
 
 //    OPEN MODALS PROFILE
    $('.option-4').on('click',function(){
-    
+
     
     var token = localStorage.getItem('token')
     console.log(token)
@@ -320,15 +337,15 @@ $(function(){
                 })
             }
 
+            }).catch((err)=>{
+                console.log(err)
+            })
+
         }).catch((err)=>{
             console.log(err)
         })
 
-    }).catch((err)=>{
-        console.log(err)
     })
-
-})
   
    $('.input-product').on('keyup',function(){
         var item_search = $(this).val()
@@ -1039,100 +1056,89 @@ $(function(){
    })
 
 
-        $('.input-name').on('keyup',function () {
-            $('.close-button').css('display','block')
-            
-            console.log('hi');
-            var value = $(this).val()
-            console.log(value)
-            if(value.length > 2){
-                axios.post(`http://products.sold.co.id/get-product-details?product_name=${value}`)
-                .then((res)=>{
-                    console.log(res.data)
-                    $('.box-render-search').css('display','block')
-                    $('.box-search-menu').css('display','block')
-                    $('.input-name').css('border-bottom-left-radius','0px')
-                    $('.input-name').css('border-bottom-right-radius','0px')
-                    $('.render-li-search').empty()
-                    if(res.data[0] === false){
-                        res.data.map((val,index)=>{
-                            console.log(val)
-                            console.log(val === undefined)
-                            $('.render-li-search').append(`
-                                <li  id="${val.Name}">${value} Tidak Ditemukan</li>
-                            `)
-    
-                        })
-                    }else {
-                        res.data.map((val,index)=>{
-                            console.log(val)
-                            console.log(val === undefined)
-                            $('.render-li-search').append(`
-                                <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
-                            `)
-    
-                        })
-
-                    }
-                 
-                    $('.closeByLogin').css('display','none')
-                    $('.option-0').removeClass("background_grey")
-                    $('.option-1').removeClass("background_grey")
-                    $('.option-2').removeClass("background_grey")
-                    $('.option-3').removeClass("background_grey")
-                    $('.box-information').hide(1000)
-                }).catch((err)=>{
-                    console.log(err)
-                })
-
-            }else {
-                close_all_open_window()
-                 $('.box-render-search').css('display','none')
-                $('.input-name').css('border-bottom-left-radius','10px')
-                $('.input-name').css('border-bottom-right-radius','10px')
-
-            }
-
-        }); 
-
-
-
-        $('.disini_info_supplier').on('click',function(){
-            // alert('supp jalan')
-            $('.close-button').css('display','block')
-            $('#loginModal').modal('hide')
-            $('.modals-information-login').css('display','flex')
-            $(".modals-information-login").attr('src',`./Iframe/supplier-information.html`)
-        })
-        $('.disini_info_customer').on('click',function(){
-            // alert('cust jalan')
-            $('.close-button').css('display','block')
-            $('#loginModal').modal('hide')
-            $('.modals-information-login').css('display','flex')
-            $(".modals-information-login").attr('src',`./Iframe/cust-information.html`)
-        })
-
-  
+    $('.input-name').on('keyup',function () {
+        $('.close-button').css('display','block')
         
+        console.log('hi');
+        var value = $(this).val()
+        console.log(value)
+        if(value.length > 2){
+            axios.post(`http://products.sold.co.id/get-product-details?product_name=${value}`)
+            .then((res)=>{
+                console.log(res.data)
+                $('.box-render-search').css('display','block')
+                $('.box-search-menu').css('display','block')
+                $('.input-name').css('border-bottom-left-radius','0px')
+                $('.input-name').css('border-bottom-right-radius','0px')
+                $('.render-li-search').empty()
+                if(res.data[0] === false){
+                    res.data.map((val,index)=>{
+                        console.log(val)
+                        console.log(val === undefined)
+                        $('.render-li-search').append(`
+                            <li  id="${val.Name}">${value} Tidak Ditemukan</li>
+                        `)
 
-            // $(".box-name-product2").mouseover( function() {
-            //     alert('jalan')
-            //     $(".box-img-bp").stop().transition({ opacity: '1'}, 500);
+                    })
+                }else {
+                    res.data.map((val,index)=>{
+                        console.log(val)
+                        console.log(val === undefined)
+                        $('.render-li-search').append(`
+                            <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
+                        `)
+
+                    })
+
+                }
                 
-            //  }); 
+                $('.closeByLogin').css('display','none')
+                $('.option-0').removeClass("background_grey")
+                $('.option-1').removeClass("background_grey")
+                $('.option-2').removeClass("background_grey")
+                $('.option-3').removeClass("background_grey")
+                $('.box-information').hide(1000)
+            }).catch((err)=>{
+                console.log(err)
+            })
 
-            
-            // $(".box-name-product2").mouseout( function(){
-            //     alert('jalan')
-            // $(".box-img-bp").stop().transition({ opacity: '0'}, 500);
-        
-            // });
-            
-       
-            
-   
+        }else {
+            close_all_open_window()
+                $('.box-render-search').css('display','none')
+            $('.input-name').css('border-bottom-left-radius','10px')
+            $('.input-name').css('border-bottom-right-radius','10px')
+
+        }
+
+    }); 
+
+
+
+    $('.disini_info_supplier').on('click',function(){
+        // alert('supp jalan')
+        $('.close-button').css('display','block')
+        $('#loginModal').modal('hide')
+        $('.modals-information-login').css('display','flex')
+        $(".modals-information-login").attr('src',`./Iframe/supplier-information.html`)
+    })
+    $('.disini_info_customer').on('click',function(){
+        // alert('cust jalan')
+        $('.close-button').css('display','block')
+        $('#loginModal').modal('hide')
+        $('.modals-information-login').css('display','flex')
+        $(".modals-information-login").attr('src',`./Iframe/cust-information.html`)
+        })   
 })
+// batas
 
+$('.icon-buy').on('click',function(){
+    var product_id = $(this).val()
+    console.log(product_id)
+})
+$('.id-address-gb').on('click',function(){
+    var data = $(this).val()
+    console.log(data)
+})
 
 
 function replace_value_to(x){
@@ -1152,10 +1158,7 @@ function replace_value_to(x){
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
 }   
 
-$('.icon-buy').on('click',function(){
-    var product_id = $(this).val()
-    console.log(product_id)
-})
+
 
 
 
@@ -1252,11 +1255,38 @@ function check_qty(val){
                     var berat_product = parseFloat(response.Weight_KG)
                     var total_berat_product = Math.ceil(berat_product * total_qty_from_user)
                     var total_fee =  total_berat_product * parseInt(all_biaya_pengiriman[0].Courier_Price_Per_Kg)
-                    
-                    $('#tp_iframe').empty()
-                    $('#tp_iframe').val(response.GroupBuy_SellPrice * total_qty_from_user)
+                    $('.ndps-left').empty()
+                    $('.ndps-right').empty()
+                    // $('#tp_iframe').empty()
+                    // $('#tp_iframe').val(response.GroupBuy_SellPrice * total_qty_from_user)
                     $('#total_biaya_pengiriman_gb').empty()
                     $('#total_biaya_pengiriman_gb').val(total_fee)
+                    var harga_total_product = response.GroupBuy_SellPrice * total_qty_from_user
+                    var harga_total_product_with_shipping = harga_total_product + total_fee
+                    $('.ndps-left').append(`
+                        <div class="detail-ndps-left">
+                            <p class="limited-text-short"> ${response.Name} <br>
+                                ${total_qty_from_user} x Rp ${response.GroupBuy_SellPrice}
+                            </p>
+                        </div>
+                        <div class="detail-ndps-left">
+                            Shipping Fee
+                        </div>
+                        <div class="detail-ndps-left">
+                            Total Amount
+                        </div>
+                    `)
+                    $('.ndps-right').append(`
+                        <div class="detail-ndps-right">
+                            Rp ${harga_total_product}
+                        </div>
+                        <div class="detail-ndps-right">
+                            Rp ${total_fee}
+                        </div>
+                        <div class="detail-ndps-right"id="tp_iframe">
+                            Rp ${harga_total_product_with_shipping}
+                        </div>
+                    `)
                 })
             })
         })
@@ -1286,9 +1316,39 @@ function check_qty(val){
             var total_harga = harga_satuan * total_qty_from_user
             if(total_qty_from_api > total_qty_from_user) {
                 // $('#tp_sp').val(total_harga)
-                $('#tp_iframe').val(total_harga)
+                // $('#tp_iframe').val(total_harga)
+                $('.ndps-left').empty()
+                $('.ndps-right').empty()
                 console.log('masuk ke if 190')
+                get_product_detail_func(product_id).done(function(response){
+                    $('.ndps-left').append(`
+                    <div class="detail-ndps-left">
+                        <p class="limited-text-short"> ${response.Name} <br>
+                            ${total_qty_from_user} x Rp ${response.GroupBuy_SellPrice}
+                        </p>
+                    </div>
+                    <div class="detail-ndps-left">
+                        Shipping Fee
+                    </div>
+                    <div class="detail-ndps-left">
+                        Total Amount
+                    </div>
+                    `)
+                    $('.ndps-right').append(`
+                        <div class="detail-ndps-right">
+                        Rp ${total_harga}
+                        </div>
+                        <div class="detail-ndps-right">
+                            
+                        </div>
+                        <div class="detail-ndps-right"id="tp_iframe">
+                            
+                        </div>
+                    `)
+                })
           }else {
+              $('.ndps-left').empty()
+              $('.ndps-right').empty()
             console.log('masuk ke else 192')
               Swal.fire({
                   icon: 'error',
@@ -1300,7 +1360,34 @@ function check_qty(val){
                 $('.qty_groupbuy_home').val(total_price)
                 // alert(total_qty_from_api)
                 // $('#tp_sp').val(total_harga)
-                $('#tp_iframe').val(total_price)
+                // $('#tp_iframe').val(total_price)
+                get_product_detail_func(product_id).done(function(response){
+                    $('.ndps-left').append(`
+                    <div class="detail-ndps-left">
+                        <p class="limited-text-short"> ${response.Name} <br>
+                           Rp ${total_qty_from_api} x Rp ${response.GroupBuy_SellPrice}
+                        </p>
+                       
+                        </div>
+                        <div class="detail-ndps-left">
+                            Shipping Fee
+                        </div>
+                        <div class="detail-ndps-left">
+                            Total Amount
+                        </div>
+                    `)
+                    $('.ndps-right').append(`
+                        <div class="detail-ndps-right">
+                            ${total_price}
+                        </div>
+                        <div class="detail-ndps-right">
+                            
+                        </div>
+                        <div class="detail-ndps-right"id="tp_iframe">
+                            
+                        </div>
+                    `)
+                })
           }
     
         }).catch((err)=>{
@@ -2026,14 +2113,14 @@ function addToCart(product_id){
 function addressMethod(item){
     console.log(item)
     console.log(item.value)
-    if(item.value === 'Alamat Terdaftar'){
+    if(item === 'Alamat Terdaftar'){
         
         $('.option-alamat-gb').css('display','flex')
-        $('.alamat-pengiriman').css('display','none')
-    }else if (item.value === 'Alamat Baru'){
+        $('.new-alamat-pengiriman').css('display','none')
+    }else if (item === 'Alamat Baru'){
         
         $('.option-alamat-gb').css('display','none')
-        $('.alamat-pengiriman').css('display','flex')
+        $('.new-alamat-pengiriman').css('display','flex')
     }
 }
 
@@ -2088,544 +2175,8 @@ function resultAddress(item){
 
 
 }
-$('.id-address-gb').on('click',function(){
-    var data = $(this).val()
-    console.log(data)
-})
 
 
-
-const to_detail_product=(id)=>{
-    console.log(id)
-    $('#detailProductModal').modal('show')
-    $('.modals_detail_product').empty()
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
-    .then((res)=>{
-        console.log(res.data)
-            $('.modals_detail_product').append(`
-                <tr>
-                    <td>${res.data.Product_Code} </td>
-                    <td>${res.data.Name} </td>
-                    <td>${res.data.Sell_Price} </td>
-                    <td>${res.data.Stock_Quantity}</td>
-                    <td>${res.data.Category} </td>
-                    <td>${res.data.Subcategory} </td>
-                    <td>${res.data.Specification} </td>
-                    <td>
-                        <p class="limited-text">${res.data.Description} </p>
-                    </td>
-                </tr>
-
-            `)
-        
-    }).catch((err)=>{
-        console.log(err)
-    })
-}
-
-
-
-const check_status_item=()=>{
-    // alert('function check status jalan')
-    $('#productModal').modal('show')
-    var token = localStorage.getItem('token')
-    var creator;
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    .then((res)=>{
-        console.log(res.data)
-        console.log(res.data.Creator)
-        var Customer_Code = res.data.Customer_Code
-        creator = res.data.Creator
-
-        // FIND DATA BY CREATOR
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
-        .then((res)=>{
-            console.log(res.data)
-            res.data.map((val,index)=>{
-                console.log(val.GroupBuy_Purchase)
-                console.log(val.GroupBuy_Purchase === 'true')
-                $('.input_total_row_gb').val('TOTAL ROW = ' + res.data.length)
-                
-               
-                
-                if(val.GroupBuy_Purchase === 'true'){
-                    if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
-                                         </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
-                                         </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else {
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
-                                         </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }
-                }else {
-                    if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
-                                         </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
-                                         </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else {
-                        $('.tbody_detail_product').append(`
-                        <tr class="tr_detail_prod">
-                            <td>
-                                <div class="box-switch">
-                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                </div> 
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                        
-                                    </div>             
-                                </div>
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
-                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                            <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                            
-                                        </div>
-                                        <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                            
-                                        </div>   
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                            <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                            
-                                        </div>  
-                                        <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                            
-                                        </div>            
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>     
-                        `) 
-                       
-                    }
-                }
-
-
-
-
-                // BATAS TABLE ATAS
-
-                $('.tbody_product').append(`
-                <tr>
-                    <td >
-                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>    
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>      
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                           
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                            
-                        </div>
-                    </td>
-                    <td>${val.Last_Updated}</td>
-                </tr>
-                `)
-            })
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }).catch((err)=>{
-        console.log(err)
-    })
-}
-
-const re_render_item_product=()=>{
-    console.log('berhasil re render product item')
-    
-    var token = localStorage.getItem('token')
-    $('.tbody_product').empty()
-    var creator;
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    .then((res)=>{
-        console.log(res.data)
-        console.log(res.data.Creator)
-        var Customer_Code = res.data.Customer_Code
-        creator = res.data.Creator
-
-        // FIND DATA BY CREATOR
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
-        .then((res)=>{
-            console.log(res.data)
-            res.data.map((val,index)=>{
-
-
-                $('.tbody_product').append(`
-                <tr>
-                    <td >
-                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>    
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>      
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                           
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                            
-                        </div>
-                    </td>
-                    <td>${val.Last_Updated}</td>
-                </tr>
-                `)
-            })
-        }).catch((err)=>{
-            console.log(err)
-        })
-    }).catch((err)=>{
-        console.log(err)
-    })
-    
-}
 
 
 
@@ -2652,21 +2203,6 @@ $(function() {
  });
 
 
-
-//     // alert(item_status)
-//     var result;
-//     if($(item_status).is(':checked')){
-//         result = true
-//     }else {
-//         result = false
-//     }
-//     alert(result)
-//  }
-
-// TABLE ATAS PRODUCT
-
-
-// EDIT product quantity groupby
 
 const edit_product_quantity=(product_id)=>{
     $("#"+product_id+"-quantity").prop('disabled',false) 
@@ -3473,26 +3009,6 @@ function toDataURL(url, callback) {
 
 
 
-//     if((customer_data.Customer_Code != undefined || customer_data.Customer_Code.length != 0)
-// && (customer_data.First_Name != undefined || customer_data.First_Name.length >= 3)
-// && (customer_data.Last_Name != undefined || customer_data.Last_Name.length >= 3)
-// && (customer_data.User_Password != undefined || customer_data.User_Password.length >= 10)
-// && (customer_data.Email != undefined || customer_data.Email.length != 0)
-// && (customer_data.Contact_Number_1 != undefined || customer_data.Contact_Number_1.length != 0)
-// && (customer_data.account_number != undefined || customer_data.account_number.length != 0)
-// && (customer_data.referral_customer_code != undefined || customer_data.referral_customer_code.length != 0)
-// // && (customer_data.ktp != undefined || customer_data.ktp.length != 0)
-// && (
-// customer_data.Email.toLowerCase().includes('@gmail.com') 
-// || customer_data.Email.toLowerCase().includes('@outlook.com') 
-// || customer_data.Email.toLowerCase().includes('@hotmail.com') 
-// || customer_data.Email.toLowerCase().includes('@yahoo.com') 
-// || customer_data.Email.toLowerCase().includes('@yahoo.co.id') 
-// || customer_data.Email.toLowerCase().includes('@aol.com')
-// )
-// ){
-
-// }
 const check_input_form_supp=()=>{
     // var customer_code = localStorage.getItem('token')
     var first_name = $("#nama_depan_supp").val()
@@ -3657,3 +3173,538 @@ if( isFirst_Name == true
     }
 
 }
+
+
+function to_detail_product(id){
+    console.log(id)
+    $('#detailProductModal').modal('show')
+    $('.modals_detail_product').empty()
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
+    .then((res)=>{
+        console.log(res.data)
+            $('.modals_detail_product').append(`
+                <tr>
+                    <td>${res.data.Product_Code} </td>
+                    <td>${res.data.Name} </td>
+                    <td>${res.data.Sell_Price} </td>
+                    <td>${res.data.Stock_Quantity}</td>
+                    <td>${res.data.Category} </td>
+                    <td>${res.data.Subcategory} </td>
+                    <td>${res.data.Specification} </td>
+                    <td>
+                        <p class="limited-text">${res.data.Description} </p>
+                    </td>
+                </tr>
+
+            `)
+        
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+
+
+
+const check_status_item=()=>{
+    // alert('function check status jalan')
+    $('#productModal').modal('show')
+    var token = localStorage.getItem('token')
+    var creator;
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        console.log(res.data.Creator)
+        var Customer_Code = res.data.Customer_Code
+        creator = res.data.Creator
+
+        // FIND DATA BY CREATOR
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+                console.log(val.GroupBuy_Purchase)
+                console.log(val.GroupBuy_Purchase === 'true')
+                $('.input_total_row_gb').val('TOTAL ROW = ' + res.data.length)
+                
+               
+                
+                if(val.GroupBuy_Purchase === 'true'){
+                    if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else {
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }
+                }else {
+                    if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else {
+                        $('.tbody_detail_product').append(`
+                        <tr class="tr_detail_prod">
+                            <td>
+                                <div class="box-switch">
+                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                        
+                                    </div>             
+                                </div>
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                            <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                            
+                                        </div>
+                                        <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                            
+                                        </div>   
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                            <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                            
+                                        </div>  
+                                        <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                            
+                                        </div>            
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>     
+                        `) 
+                       
+                    }
+                }
+
+
+
+
+                // BATAS TABLE ATAS
+
+                $('.tbody_product').append(`
+                <tr>
+                    <td >
+                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>    
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>      
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                           
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                            
+                        </div>
+                    </td>
+                    <td>${val.Last_Updated}</td>
+                </tr>
+                `)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+const re_render_item_product=()=>{
+    console.log('berhasil re render product item')
+    
+    var token = localStorage.getItem('token')
+    $('.tbody_product').empty()
+    var creator;
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(res.data)
+        console.log(res.data.Creator)
+        var Customer_Code = res.data.Customer_Code
+        creator = res.data.Creator
+
+        // FIND DATA BY CREATOR
+        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+
+
+                $('.tbody_product').append(`
+                <tr>
+                    <td >
+                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>    
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>      
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                           
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                            
+                        </div>
+                    </td>
+                    <td>${val.Last_Updated}</td>
+                </tr>
+                `)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+    
+}
+

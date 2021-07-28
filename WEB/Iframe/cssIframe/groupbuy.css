@@ -6,6 +6,7 @@
     border-radius:5px;
     display: flex;
     flex-direction: row;
+    padding-bottom:10px;
   
 }
 
@@ -22,7 +23,8 @@
 
 .new-box-card-kurir-sp {
     width:100%;
-    height:100%;
+    height:600px;
+    min-height:600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -886,7 +888,13 @@ radio-group{
 
 
 .active_payment_method{
-    border:1px solid #217384;
+    border:2px solid #0089FF;
+    /* width:70px;
+    height:70px;
+    border-radius:5px; */
+}
+.active_payment_method:hover{
+    border:2px solid #0089FF;
     /* width:70px;
     height:70px;
     border-radius:5px; */
@@ -952,6 +960,12 @@ radio-group{
     /* background:red; */
     line-height:1;
 }
+.detail-ndps-left p {
+    color:black !important;
+    font-size:14px !important;
+    position: relative !important;
+    top:0px !important;
+}
 .detail-ndps-right{
     font-weight:600;
     height:40px;
@@ -967,7 +981,7 @@ radio-group{
     width:100%;
     height:40px;
     border-radius:5px;
-    background-color: #223e92;
+    background-color: #0089FF;
     display: flex;
     flex-direction: row;
     justify-content: center;
