@@ -899,6 +899,33 @@ radio-group{
     height:70px;
     border-radius:5px; */
 }
+
+.active_address_method{
+    border:2px solid #0089FF;
+    /* width:70px;
+    height:70px;
+    border-radius:5px; */
+}
+.active_address_method:hover{
+    border:2px solid #0089FF;
+    /* width:70px;
+    height:70px;
+    border-radius:5px; */
+}
+
+.active_delivery_method{
+    border:2px solid #0089FF;
+    /* width:70px;
+    height:70px;
+    border-radius:5px; */
+}
+.active_delivery_method:hover{
+    border:2px solid #0089FF;
+    /* width:70px;
+    height:70px;
+    border-radius:5px; */
+}
+
 .radio{
     display:inline-block;
     width:15px;

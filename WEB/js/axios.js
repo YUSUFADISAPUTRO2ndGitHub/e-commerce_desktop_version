@@ -725,13 +725,13 @@ const render_group_buy=(product_id)=>{
                                     <form method="post" class="radio-group-address form-radio-payment">
                                         <div class="form-check form-check-inline">
                                             <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
-                                            <div class="address-card-1 radio_address_card" data-value="Alamat Terdaftar" onclick="addressMethod('Alamat Terdaftar')">
+                                            <div class="address-card-1 radio_address_card" data-value="Alamat Terdaftar" id="id-address-gb-terdaftar" onclick="addressMethod('id-address-gb-terdaftar','Alamat Terdaftar')" >
                                                 <img src="../img/alamat_terdaftar.png" alt="" class="bca_img">
                                             </div>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
-                                            <div class="address-card-1 radio_address_card" data-value="Alamat Lain" onclick="addressMethod('Alamat Baru')">
+                                            <div class="address-card-1 radio_address_card" data-value="Alamat Lain" id="id-address-gb-baru" onclick="addressMethod('id-address-gb-baru','Alamat Baru')">
                                                 <img src="../img/alamat_lain.png" alt="" class="bca_img">
                                             </div>
                                         </div>
@@ -1000,7 +1000,7 @@ const render_group_buy=(product_id)=>{
                                             console.log(val.est_day)
                                             console.log(val.EST_DAY)
                                             $('.pengiriman-home-gb').append(`
-                                                <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                             `)
                                         })
                                         allPengiriman.insurance.map((val,index)=>{
@@ -1008,7 +1008,7 @@ const render_group_buy=(product_id)=>{
                                             // console.log(val.est_day)
                                             // console.log(val.EST_DAY)
                                             $('.asuransi-home-gb').append(`
-                                                <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                             `)
                                         })
                                         allPengiriman.packing.map((val,index)=>{
@@ -1037,15 +1037,15 @@ const render_group_buy=(product_id)=>{
                 console.log(res.data)
 
                 option_payment.map((val,index)=>{
-
+                    console.log(val,' ini val 1040')
                     if(val.Payment_Method_Name === 'transfer'){
                         // $('.option-payment-gb').append(`
                         //     <option id="payment_gb" value="${val.Payment_Method_Name}">${val.Payment_Method_Name}</option> 
                         // `)
                         $('.radio-group').append(
                             `
-                            <div class="form-check form-check-inline " >
-                                <div class="transfer-card-1 radio_payment_method" data-value="BCA">
+                            <div class="form-check form-check-inline "  >
+                                <div class="transfer-card-1 radio_payment_method" data-value="${val.Payment_Method_Name}" id="id-payment-gb-${val.Payment_Method_Name}" onclick="choosing_payment_method('id-payment-gb-${val.Payment_Method_Name}', ${product_id})">
                                     <img src="../img/bca_transfer_manual.png" alt="" class="bca_img">
                                 </div>
                             </div>
@@ -1112,7 +1112,7 @@ const kurirMethodHome=(kurir,product_id)=>{
     $('.alert-danger').css('display','none')
     console.log('kurirmethodhome jalan')
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
     var province_pilihan=$('.province-home-gb option:selected').val()
     var kota_pilihan=$('.kota-home-gb option:selected').val()
     var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
@@ -1162,6 +1162,7 @@ const kurirMethodHome=(kurir,product_id)=>{
                 province = response[0]
                 allProvince = response
                 console.log(province)
+                console.log(response)
                 get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province.Province).done(function(response){
                     kota = response[0]
                     allKota = response
@@ -1309,7 +1310,7 @@ const kurirMethodHome=(kurir,product_id)=>{
                                     // console.log(val.est_day)
                                     // console.log(val.EST_DAY)
                                     $('.pengiriman-home-gb').append(`
-                                        <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                     `)
                                 })
                                 allPengiriman.insurance.map((val,index)=>{
@@ -1317,7 +1318,7 @@ const kurirMethodHome=(kurir,product_id)=>{
                                     // console.log(val.est_day)
                                     // console.log(val.EST_DAY)
                                     $('.asuransi-home-gb').append(`
-                                        <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                     `)
                                 })
                                 allPengiriman.packing.map((val,index)=>{
@@ -1342,7 +1343,7 @@ const provinceMethodHome=(product_id)=>{
     console.log('kurirmethodhome jalan')
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
     var province_pilihan=$('.province-home-gb option:selected').val()
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
     var kota_pilihan=$('.kota-home-gb option:selected').val()
     var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
     var kelurahan_pilihan=$('.kelurahan-home-gb option:selected').val()
@@ -1544,7 +1545,7 @@ const provinceMethodHome=(product_id)=>{
                                     // console.log(val.est_day)
                                     // console.log(val.EST_DAY)
                                     $('.pengiriman-home-gb').append(`
-                                        <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                     `)
                                 })
                                 allPengiriman.insurance.map((val,index)=>{
@@ -1552,7 +1553,7 @@ const provinceMethodHome=(product_id)=>{
                                     // console.log(val.est_day)
                                     // console.log(val.EST_DAY)
                                     $('.asuransi-home-gb').append(`
-                                        <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                     `)
                                 })
                                 allPengiriman.packing.map((val,index)=>{
@@ -1597,7 +1598,7 @@ const kotaMethodHome=(product_id)=>{
     var kodepos_pilihan = $('.kodepos-home-gb').val()
     var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
 
   
     var allKurir=[]
@@ -1797,7 +1798,7 @@ const kotaMethodHome=(product_id)=>{
                                         // console.log(val.est_day)
                                         // console.log(val.EST_DAY)
                                         $('.pengiriman-home-gb').append(`
-                                            <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                         `)
                                     })
                                     allPengiriman.insurance.map((val,index)=>{
@@ -1805,7 +1806,7 @@ const kotaMethodHome=(product_id)=>{
                                         // console.log(val.est_day)
                                         // console.log(val.EST_DAY)
                                         $('.asuransi-home-gb').append(`
-                                            <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                         `)
                                     })
                                     allPengiriman.packing.map((val,index)=>{
@@ -1850,7 +1851,7 @@ const kelurahanMethodHome=(product_id)=>{
     var kodepos_pilihan = $('.kodepos-home-gb').val()
     var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
     
     console.log(kurir_pilihan,' ini kurir pilihan kelurahan method')
     console.log(province_pilihan,' ini province pilihan kelurahan method')
@@ -2068,7 +2069,7 @@ const kelurahanMethodHome=(product_id)=>{
                                         // console.log(val.est_day)
                                         // console.log(val.EST_DAY)
                                         $('.pengiriman-home-gb').append(`
-                                            <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                         `)
                                     })
                                     allPengiriman.insurance.map((val,index)=>{
@@ -2076,7 +2077,7 @@ const kelurahanMethodHome=(product_id)=>{
                                         // console.log(val.est_day)
                                         // console.log(val.EST_DAY)
                                         $('.asuransi-home-gb').append(`
-                                            <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                         `)
                                     })
                                     allPengiriman.packing.map((val,index)=>{
@@ -2124,7 +2125,7 @@ const kecamatanMethodHome=(product_id)=>{
     var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
     var all_biaya_pengiriman = []
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
 
     var split_pengiriman = pengiriman_pilihan.split('-')
     var days_pengiriman = split_pengiriman[0]
@@ -2226,7 +2227,7 @@ const pengirimanMethodHome=(product_id)=>{
     var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
     var all_biaya_pengiriman = []
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
 
     var split_pengiriman = pengiriman_pilihan.split('-')
     var days_pengiriman = split_pengiriman[0]
@@ -2343,7 +2344,7 @@ const asuransiMethodHome=(product_id)=>{
     var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
     var all_biaya_pengiriman = []
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
 
     var split_pengiriman = pengiriman_pilihan.split('-')
     var days_pengiriman = split_pengiriman[0]
@@ -2428,7 +2429,7 @@ const packingMethodHome=(product_id)=>{
     var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
     var all_biaya_pengiriman = []
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
 
     var split_pengiriman = pengiriman_pilihan.split('-')
     var days_pengiriman = split_pengiriman[0]
@@ -3061,7 +3062,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
                                 console.log(val.est_day)
                                 console.log(val.EST_DAY)
                                 $('.pengiriman-home-gb').append(`
-                                    <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                 `)
                             })
                             allPengiriman.insurance.map((val,index)=>{
@@ -3069,7 +3070,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
                                 // console.log(val.est_day)
                                 // console.log(val.EST_DAY)
                                 $('.asuransi-home-gb').append(`
-                                    <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                 `)
                             })
                             allPengiriman.packing.map((val,index)=>{
@@ -3088,151 +3089,109 @@ const render_all_kurir_before_choosing=(product_id)=>{
             })
         })
     })
-    // get_product_detail_func(product_id).done(function(response){
-    //     var item_product = response
-    //     get_all_couriers().done(function(response){
-    //         console.log(response)
-    //         kurir = response[0]
-    //         allKurir = response
-    //         get_all_province_from_courier(kurir.Courier,kurir.Courier_Code).done(function(response){
-    //             province = response[0]
-    //             allProvince = response
-    //             console.log(province)
-    //             get_all_city_from_courier(kurir.Courier,kurir.Courier_Code,province.Province).done(function(response){
-    //                 kota = response[0]
-    //                 allKota = response
-    //                 console.log(kota,' ini kota')
-    //                 get_all_district_from_courier(kurir.Courier,kurir.Courier_Code,kota.City).done(function(response){
-    //                     console.log(response)
-    //                     kelurahan = response[0]
-    //                     district = response[0]
-    //                     allKelurahan = response
-    //                     allDistrict = response
-    //                     console.log(kelurahan,'ini kelurahaan')
-    //                     get_all_subdistrict_from_courier(kurir.Courier,kurir.Courier_Code,district.District).done(function(response){
-    //                         kecamatan = response
-    //                         allKecamatan = response
-    //                         allSub_District = response
-    //                         console.log(kecamatan,' ini kecamatan')
-    //                         console.log(kecamatan[0].Sub_District)
     
-    //                         var Courier_Price_Code_orig = 'CGK01.00'
-    //                         var packing_type = ''
-    //                         var berat_product = parseInt(item_product.Weight_KG)
-    //                         console.log(item_product,'ini item product')
-    //                         console.log(berat_product,' ini berat product')
-    //                         if(berat_product == 0){
-    //                             berat_product = 0.1
-    //                         }
-    //                         var length = ''
-    //                         var  width = '' 
-    //                         var  height = ''
-    //                         var paket_value = '' 
-    //                         console.log(allSub_District[0].Courier_Price_Code,' price code dest')
-    //                         console.log( new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value))
-    //                         // get_shipping_cost_informations(kurir.Courier,kurir.Courier_Code,province.Province,kota.City,kelurahan.District,kecamatan[0].Sub_District).done(function(response){
-    //                             new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
-    
-                                
-    //                             allPengiriman = response
-    //                             console.log(response,' ini shipping cost')
-    //                             $('.radio-group-delivery').empty()
-    //                             $('.kurir-home-gb').empty()
-    //                             $('.province-home-gb').empty()
-    //                             $('.kota-home-gb').empty()
-    //                             $('.kelurahan-home-gb').empty()
-    //                             $('.kecamatan-home-gb').empty()
-    //                             $('.pengiriman-home-gb').empty()
-                                
-    
-    //                             allKurir.map((val,index)=>{
-    //                                 // console.log(val,'ini val kurir')
-    //                                 // $('.kurir-home-gb').append(`
-    //                                 //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
-    //                                 // `)
-    //                                 $('.radio-group-delivery').append(`
-    //                                 <div class="address-card-1 radio-delivery-card" id="id-kurir-gb-${val.Courier}" data-value="${val.Courier}" onclick="choosing_shipping('id-kurir-gb-${val.Courier}', ${product_id})">
-    //                                     <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
-    //                                 </div>
-    //                             `)
-    //                             })
-    //                             allProvince.map((val,index)=>{
-    //                                 // console.log(val,'ini val province')
-    //                                 $('.province-home-gb').append(`
-    //                                     <option  value="${val.Province}" class="id-province-gb">${val.Province}</option> 
-    //                                 `)
-    //                             })
-    //                             allKota.map((val,index)=>{
-    //                                 // console.log(val,'ini val kota')
-    //                                 $('.kota-home-gb').append(`
-    //                                     <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
-    //                                 `)    
-    //                             })  
-    //                             allKecamatan.map((val,index)=>{
-    
-    //                                 if(val.Sub_District == ''){
-    //                                     $('.kecamatan-home-gb').append(`
-    //                                         <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
-    //                                     `)
-    //                                 }else {
-    //                                     $('.kecamatan-home-gb').append(`
-    //                                         <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
-    //                                     `)
-    //                                     $('.kodepos-home-gb').append(`
-    //                                         <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
-    //                                     `)
-    //                                 }
-    
-    //                             })
-    
-    //                             allKelurahan.map((val,index)=>{
-    
-    //                                 if(val.District == ''){
-    //                                     $('.kelurahan-home-gb').append(`
-    //                                         <option  value="${val.District}" class="id-kelurahan-gb">-</option> 
-    //                                     `)
-    //                                 }else {
-    //                                     $('.kelurahan-home-gb').append(`
-    //                                         <option  value="${val.District}" class="id-kelurahan-gb">${val.District}</option> 
-    //                                     `)
-                                       
-    //                                 }
-    //                             })
-    
-    //                             allPengiriman.service.map((val,index)=>{
-    //                                 // console.log(val, ' ini all pengiriman')
-    //                                 // console.log(val.est_day)
-    //                                 // console.log(val.EST_DAY)
-    //                                 $('.pengiriman-home-gb').append(`
-    //                                     <option  value="${val.EST_DAY}-${val.DESCRIPTION}" class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-    //                                 `)
-    //                             })
-    //                             allPengiriman.insurance.map((val,index)=>{
-    //                                 // console.log(val, ' ini all pengiriman')
-    //                                 // console.log(val.est_day)
-    //                                 // console.log(val.EST_DAY)
-    //                                 $('.asuransi-home-gb').append(`
-    //                                     <option  value="${val.INSURANCE_TYPE}-${val.INSURANCE_NAME}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-    //                                 `)
-    //                             })
-    //                             allPengiriman.packing.map((val,index)=>{
-    //                                 // console.log(val, ' ini all pengiriman')
-    //                                 // console.log(val.est_day)
-    //                                 // console.log(val.EST_DAY)
-    //                                 $('.packing-home-gb').append(`
-    //                                     <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-    //                                 `)
-    //                             })
-    
-    
-    //                         })
-    //                     })
-    //                 })
-    //             })
-    //         })
-    //     })
-
-    // })
 }
+
+
+
+const check_user_for_login=()=>{
+    var token = localStorage.getItem('token')
+    console.log(token)
+ 
+    
+        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            // console.log(res.data,'line 33 option -4')
+            var data_customer = res.data
+            console.log(data_customer)
+            if(data_customer){
+                console.log(data_customer)
+                console.log(data_customer.Customer_Code)
+                if(data_customer.User_Type === 'Customer'){
+                    $('.btn-status-barang').css('display','none')
+                    $('.sup_delete').css('display','flex')
+                    $('.box-kumpulkan-profile').css('top','70px')
+
+                    $('#prof_perusahaan_nama').css('display','none')
+                    $('#prof_npwp').css('display','none')
+                    $('#prof_nik').css('display','none')
+                    
+                    $('#prof_thn').css('display','flex')
+                    $('#prof_bln').css('display','flex')
+                    $('#prof_tgl').css('display','flex')
+                    $('#id_ref_code').css('visibility','show')
+
+                    // $('.sup_delete').css('left','20px')
+                }else {
+                    $('.btn-status-barang').css('display','block')
+                    $('.sup_delete').css('display','none')
+                    $('.box-kumpulkan-profile').css('top','0px')
+                    $('#id_ref_code').css('visibility','hidden')
+
+                    $('#prof_perusahaan_nama').css('display','flex')
+                    $('#prof_npwp').css('display','flex')
+                    $('#prof_nik').css('display','flex')
+                    
+                    $('#prof_thn').css('display','none')
+                    $('#prof_bln').css('display','none')
+                    $('#prof_tgl').css('display','none')
+                    
+                }
+    
+                var tahun = data_customer.Birthday.slice(0,4)
+                var bulan = data_customer.Birthday.slice(5,7)
+                var hari = data_customer.Birthday.slice(8,10)
+                var newReferralCode = data_customer.Customer_Code
+                console.log(newReferralCode)
+                console.log(token)
+                $('#email_user').val(`${data_customer.Email}`)
+                $('.nama_user_profile').val(`${data_customer.First_Name}`)
+                $('#tahun_lahir_user').val(tahun)
+                $('#bulan_lahir_user').val(bulan)
+                $('#tanggal_lahir_user').val(hari)
+                $('#nama_depan_user').val(`${data_customer.First_Name}`)
+                $('#nama_belakang_user').val(`${data_customer.Last_Name}`)
+                $('#no_telp1_user').val(`${data_customer.Contact_Number_1}`)
+                $('#no_telp2_user').val(`${data_customer.Contact_Number_2}`)
+                $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
+                $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
+                $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
+                $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
+                $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
+                $('#rekening_user').val(`${data_customer.bank_account_number}`)
+                $('#referral-profile').val(`${data_customer.extra_column_2}`)
+                $('#no_ktp_user').val(`${data_customer.ktp}`)
+                $('.ref-profile').val(token)
+                $('#npwp_supp_prof').val(data_customer.npwp)
+                console.log(data_customer.extra_column_2)
+                console.log($('#ref_code_from').val(data_customer.extra_column_2))
+                $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
+                $('#nik_supp_profile').val(data_customer.extra_column_5)
+                $('#ref_code_from').val(data_customer.extra_column_2)
+                var a = $('#refer-profile').val()
+                console.log(a)
+                $('#profileModal').modal('show')
+            }else {
+                
+                $('#loginModal').modal('show') // login lama
+                // $('#newloginModal').modal('show') // login lama
+                $('.box_information_login').css('display','flex')
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+
+        $('.closeByLogin').css('display','none')
+        $('.option-0').removeClass("background_grey")
+        $('.option-1').removeClass("background_grey")
+        $('.option-2').removeClass("background_grey")
+        $('.option-3').removeClass("background_grey")
+          // SEARCH ITEM BACK TO NORMAL
+        $('.box-render-search').css('display','none')
+        $('.input-name').css('border-bottom-left-radius','10px')
+        $('.input-name').css('border-bottom-right-radius','10px')
+        // $('.option-4').removeClass("background_grey")
+        console.log('functioin selesai 74')
+   }
 
 

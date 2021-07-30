@@ -88,7 +88,7 @@ $(function(){
         result = val
         var class_payment = $(this)
         console.log(class_payment)
-        var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+        var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
         // console.log(testing_val)
         kurirMethodHome(new_kurir_pilihan)
     })
@@ -116,6 +116,8 @@ $(function(){
   
 
 //    OPEN MODALS PROFILE
+
+   
    $('.option-4').on('click',function(){
 
     
@@ -1187,7 +1189,7 @@ function check_qty(val){
     var kelurahan_pilihan=$('.kelurahan-home-gb option:selected').val()
     var pengiriman_pilihan=$('.pengiriman-home-gb option:selected').val()
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
-    var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
     var product_id = $('.qty_groupbuy_home').attr('id')
     console.log(product_id,' ini product id check qty')
     var split_pengiriman = pengiriman_pilihan.split('-')
@@ -1345,13 +1347,13 @@ function check_qty(val){
                             </div>
                          `)
                         $('.ndps-right').append(`
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
                                 Rp ${harga_total_product}
                             </div>
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
                                 Rp ${harga_shipping}
                             </div>
-                            <div class="detail-ndps-right"id="tp_iframe">
+                            <div class="detail-ndps-right harga_total_prod_with_shipping_qty"id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
                                 Rp ${harga_total_product_with_shipping}
                             </div>
                         `)
@@ -1383,18 +1385,19 @@ function check_qty(val){
                             </div>
                          `)
                         $('.ndps-right').append(`
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
                                 Rp ${harga_total_product}
                             </div>
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
                                 Rp ${harga_shipping}
                             </div>
                             <div class="detail-ndps-right">
                                 Rp ${harga_asuransi}
                             </div>
-                            <div class="detail-ndps-right"id="tp_iframe">
+                            <div class="detail-ndps-right harga_total_prod_with_shipping_qty"id="${harga_total_product_with_shipping}"  value="${harga_total_product_with_shipping}">
                                 Rp ${harga_total_product_with_shipping}
                             </div>
+                           
                         `)
                         }else if (isPengiriman_pilihan && isPacking_pilihan){
                             console.log(harga_shipping,' harga shipping')  
@@ -1424,18 +1427,19 @@ function check_qty(val){
                             </div>
                          `)
                         $('.ndps-right').append(`
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_total_product_qty harga_total_product"  id="${harga_total_product}"value="${harga_total_product}">
                                 Rp ${harga_total_product}
                             </div>
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
                                 Rp ${harga_shipping}
                             </div>
                             <div class="detail-ndps-right">
                                 Rp ${harga_packing}
                             </div>
-                            <div class="detail-ndps-right"id="tp_iframe">
+                            <div class="detail-ndps-right harga_total_prod_with_shipping_qty" id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
                                 Rp ${harga_total_product_with_shipping}
                             </div>
+                          
                         `)
                         }else if(isPengiriman_pilihan){
 
@@ -1463,13 +1467,13 @@ function check_qty(val){
                             </div>
                          `)
                         $('.ndps-right').append(`
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
                                 Rp ${harga_total_product}
                             </div>
-                            <div class="detail-ndps-right">
+                            <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
                                 Rp ${harga_shipping}
                             </div>
-                            <div class="detail-ndps-right"id="tp_iframe">
+                            <div class="detail-ndps-right harga_total_prod_with_shipping_qty" id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
                                 Rp ${harga_total_product_with_shipping}
                             </div>
                         `)
@@ -1653,546 +1657,190 @@ function payment_groupbuy_home(product_id){
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
     // BATAS TESTING
 
-    var kurir_pilihan=$('.kurir-home-gb option:selected').val()
+    
     var province_pilihan=$('.province-home-gb option:selected').val()
     var kota_pilihan=$('.kota-home-gb option:selected').val()
     var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
     var kelurahan_pilihan=$('.kelurahan-home-gb option:selected').val()
     var kodepos_pilihan = $('.kodepos-home-gb').val()
-    
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
+    var payment_method_pilihan = $('.radio_payment_method').attr('data-value')
     var total_Quantity = parseInt($('.qty_groupbuy_home').val())+1
-    
-    var biaya_pengiriman = parseInt($('#total_biaya_pengiriman_gb').val())
-    var final_result_price = biaya_pengiriman + parseInt(total_price)
-    console.log(final_result_price)
-   
-    
-    console.log(kurir_pilihan,' ini kurir pilihan')
-    console.log(province_pilihan,' ini province pilihan')
-    console.log(kota_pilihan,' ini kota pilihan')
-    console.log(kecamatan_pilihan,' ini kecamatan pilihan')
-    console.log(kelurahan_pilihan,' ini kelurahan pilihan')
-    console.log(kodepos_pilihan,' ini kodepos pilihan')
+    var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()    
+    var asuransi_pilihan = $('.asuransi-home-gb option:selected').val()
+    var packing_pilihan = $('.packing-home-gb option:selected').val()
+    var harga_shipping = parseInt($('.pengiriman-home-gb option:selected').attr('class'))
+    var harga_asuransi = parseInt($('.asuransi-home-gb option:selected').attr('class'))
+    var harga_packing = parseInt($('.packing-home-gb option:selected').attr('class'))
+    var total_harga_shipping_with_product = $('.harga_total_prod_with_shipping_qty').attr('id')
+    var harga_shipping_qty = $('.harga_shipping_qty').attr('id')
+    var harga_total_product = $('.harga_total_product_qty').attr('id')
+    var biaya_pengiriman = parseInt(harga_shipping_qty)
 
-    if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
-        console.log('masuk ke if kecamatan pilihan')
-         kecamatan_pilihan = ''
-         isKecamatan_pilihan = true
-     }   
-     if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
-         console.log('masuk ke if kelurahan pilihan')
-         kelurahan_pilihan = ''
-         isKelurahan_pilihan = true
-     }
+    var isKurir_pilihan = false
+    var isProvince_pilihan = false
+    var isKota_pilihan = false
+    var isKecamatan_pilihan = false
+    var isKelurahan_pilihan = false
+    var isQty_pilihan = false
+    var isAlamat_pilihan = false
+    var isPacking_pilihan = false
+    var isPaymentMethod_pilihan = false
+    var isPengiriman_pilihan = false
+    if(harga_packing == undefined || harga_packing == null || harga_packing == 'NULL' || harga_packing == 'undefined' || isNaN(harga_packing)){
+        harga_packing = 0
+    }
 
+    
 
     var alamat_input = $('#alamat_gb').val()
     var alamat_lain_input = $('#alamat_lain').val()
     console.log(alamat_input)
     console.log(alamat_lain_input)
-    if(alamat_lain_input.length>0){
-        var final_address_new = alamat_lain_input + kodepos_pilihan + kelurahan_pilihan + kecamatan_pilihan + kota_pilihan + province_pilihan
-        console.log(final_address_new)
-    }else {      
-        var final_address = alamat_input + ' ' + kodepos_pilihan + ' ' + kelurahan_pilihan + ' ' + kecamatan_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan
-        console.log(final_address)
+    if(packing_pilihan == 'Packing'){
+        packing_pilihan = ''
     }
-    // get_all_couriers().done(function(response){
-    //     var dataAllKurir = response
-    //     allKurir = response
-    //     console.log(dataAllKurir,' data all kurir')
-        
-    //     var kurir_kode =''
-    //     for(var i=0; i<dataAllKurir.length; i++){
-    //         if(dataAllKurir[i].Courier == kurir_pilihan){
-    //             kurir_kode = dataAllKurir[i].Courier_Code
-    //         }
-    //     }
-    //     if(total_qty_from_user>0) { 
-    //         axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
-    //         .then((res)=>{
-    //             total_item_kebeli = res.data
-    //             console.log(res.data)
-    //             if(res.data.Total_Quantity === null) { // hasil null berarti belum ada customer lain yang beli
-    //                 console.log('masuk ke if null 1154')
-    //                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    //                 .then((res)=>{
-    //                     console.log(res.data)
-    //                     detail_product = res.data
-    //                     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    //                     .then((res)=>{
-    //                         console.log(res.data)
-                            
-    //                         customerDetails  ={
-    //                             Customer_Code:token,
-    //                             Total_Price: final_result_price,
-    //                             Total_Quantity : total_Quantity,
-    //                             Unit:"pcs",
-    //                             Shipping_Address: $('#alamat_gb').val(),
-    //                             Payment_Method : $('#payment_gb').val(),
-    //                             Shipping_Fee: $('#total_biaya_pengiriman_gb').val(),
-    //                             alamatLain : $('#alamat_lain').val(),
-    //                             Primary_Recipient_Name:res.data.First_Name + " " + res.data.Last_Name
-    //                         }         
-    //                         items.push( {
-    //                                 Customer_Code: token,
-    //                                 Product_Code: product_id,
-    //                                 Product_Name: detail_product.Name,
-    //                                 Quantity_Requested: $('.qty_groupbuy_home').val(),
-    //                                 Price_Based_On_Total_Quantity: $('#tp_iframe').val()
-            
-    //                         }) 
-    //                         items.push( {
-    //                             Customer_Code: token,
-    //                             Product_Code: kurir_kode,
-    //                             Product_Name: kurir_pilihan,
-    //                             Quantity_Requested: '1',
-    //                             Price_Based_On_Total_Quantity: $('#total_biaya_pengiriman_gb').val()
-        
-    //                         })  
-    //                         var data = {
-    //                             "Sales_Order_Data": customerDetails,
-    //                             "Sales_Order_Detail_data": items
-    //                         }
-    //                         console.log(data)
-    
-    //                         axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-    //                             headers:{
-    //                                 "Content-Type":'application/json'
-    //                             },
-    //                             "data":JSON.stringify({
-    //                                 "Sales_Order_data":customerDetails,
-    //                                 "Sales_Order_Detail_data": items
-    //                             })
-    //                         }).then((res)=>{
-    //                             if(res.data.status){
-    //                                 swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-    //                                 $('.modals-product-detail').css('display','none')
-    //                                 $('.box-delete-success').css('display','block')
-    //                                 // tambahin gambar yg dari mas fauzi
-    //                                 console.log('berhasil pembelian line 1198')
-    //                                 location.replace(`../Iframe/success.html`)
-    //                             }else {
-    //                                 swal.fire("Pembelian Gagal", "", "error");
-    //                             }
-    //                             console.log(res.data)
-    //                         }).catch((err)=>{
-    //                             console.log(err)
-    //                         })
-                            
-    
-    //                     }).catch((err)=>{
-    //                         console.log(err)
-    //                     })
-    //                 }).catch((err)=>{
-    //                     console.log(err)
-    //                 })
-    //             }else { // hasil else dari if null berarti ada cust yg udh beli. sisa productnya
-    //                 console.log('masuk ke else null 1473')
-    //                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    //                 .then((response)=>{
-    //                     console.log(response.data)
-    //                     console.log(total_item_kebeli)
-    //                     var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
-    //                     console.log(item_tersedia)
-    //                     if(total_qty_from_user > item_tersedia){
-    //                         console.log('masuk ke if item tersedia 1217')
-    //                         Swal.fire({
-    //                             icon: 'error',
-    //                             title: 'Oops...',
-    //                             text: `Hanya Bisa Membeli ${item_tersedia}`,
-    //                             // footer: '<a href="">Why do I have this issue?</a>'
-    //                           })
-    
-    //                           axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    //                           .then((res)=>{
-    //                               console.log(res.data)
-    //                               detail_product = res.data
-    //                               axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    //                               .then((res)=>{
-    //                                   console.log(res.data)
-    //                                   data_customer = res.data
-    //                                   var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
-    //                                   console.log(harga_pembelian)
-                                      
-    //                                   customerDetails  ={
-    //                                     Customer_Code:token,
-    //                                     Total_Price: final_result_price,
-    //                                     Total_Quantity : item_tersedia +1,
-    //                                     Unit:"pcs",
-    //                                     Shipping_Address: $('#alamat_gb').val(),
-    //                                     Payment_Method : $('#payment_gb').val(),
-    //                                     Shipping_Fee: $('#total_biaya_pengiriman_gb').val(),
-    //                                     alamatLain : $('#alamat_lain').val(),
-    //                                     Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
-    //                                 }         
-    //                                 items.push( {
-    //                                         Customer_Code: token,
-    //                                         Product_Code: product_id,
-    //                                         Product_Name: detail_product.Name,
-    //                                         Quantity_Requested: item_tersedia,
-    //                                         Price_Based_On_Total_Quantity: $('#tp_iframe').val()
-                    
-    //                                 }) 
-    //                                 items.push( {
-    //                                     Customer_Code: token,
-    //                                     Product_Code: kurir_kode,
-    //                                     Product_Name: kurir_pilihan,
-    //                                     Quantity_Requested: '1',
-    //                                     Price_Based_On_Total_Quantity: $('#total_biaya_pengiriman_gb').val()
+
+
+    var total_harga_shipping_with_insurance_packing = harga_shipping + harga_asuransi + harga_packing
+    console.log(total_harga_shipping_with_insurance_packing)
+
+    var product_name_shipping = pengiriman_pilihan + asuransi_pilihan + packing_pilihan
+    console.log(product_name_shipping,' 1683')
+    if(alamat_lain_input.length>0){
+       isAlamat_pilihan = true
+        var final_address_new = alamt_lain_input + kecamatan_pilihan + kelurahan_pilihan + kota_pilihan + province_pilihan + kodepos_pilihan
+        console.log(final_address_new)
+    }else if (alamat_input.length > 0) {      
+        isAlamat_pilihan = true
+        var final_address = alamat_input + ' ' + kecamatan_pilihan + ' ' + kelurahan_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan
+        console.log(final_address)
+    }else {
+        isAlamat_pilihan = false
+    }
+
+    if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0){
+        isKurir_pilihan = false
+    }else {
+        isKurir_pilihan = true
+    }
+
+    if(pengiriman_pilihan == undefined || pengiriman_pilihan == 'undefined' || pengiriman_pilihan == null || pengiriman_pilihan.length == 0){
+        isPengiriman_pilihan = false
+    }else {
+        isPengiriman_pilihan = true
+    }
+
+    if(payment_method_pilihan == undefined || payment_method_pilihan == 'undefined' || payment_method_pilihan == null || payment_method_pilihan.length == 0){
+        isPaymentMethod_pilihan = false
+    }else {
+        isPaymentMethod_pilihan = true
+    }
+
+    if(packing_pilihan == undefined || packing_pilihan == null || packing_pilihan == 'NULL' || packing_pilihan == 'undefined'){
+        packing_pilihan = ''
+        isPacking_pilihan = false
+    }else {
+        isPacking_pilihan = true
+    }
+
+    if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
+        console.log('masuk ke if kecamatan pilihan')
+         kecamatan_pilihan = ''
+         isKecamatan_pilihan = false
+     }else {
+        isKecamatan_pilihan = true
+     }
+     if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
+         console.log('masuk ke if kelurahan pilihan')
+         kelurahan_pilihan = ''
+         isKelurahan_pilihan = false
+     }else {
+        isKelurahan_pilihan = true
+     }
+
+     var totalQtyIsANumber = isNaN(total_qty_from_user)
+     console.log(totalQtyIsANumber)
+     if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0 || total_qty_from_user == NaN || totalQtyIsANumber){
+         isQty_pilihan = false
+     }else {
+         isQty_pilihan = true
+     }
+     console.log(total_qty_from_user)
+     console.log(isQty_pilihan)
+ 
+     if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0){
+         isProvince_pilihan = false
+     }else {
+         isProvince_pilihan = true
+     }
+     if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0){
+         isKota_pilihan = false
+     }else {
+         isKota_pilihan = true
+     }
+
+     if(isPaymentMethod_pilihan && isProvince_pilihan && isKota_pilihan && isKecamatan_pilihan && isKelurahan_pilihan && isQty_pilihan &&
+        isPengiriman_pilihan){
+            get_all_couriers().done(function(response){
+                var dataAllKurir = response
+                allKurir = response
+                console.log(dataAllKurir,' data all kurir')
                 
-    //                                 })  
-    //                                 var data = {
-    //                                     "Sales_Order_Data": customerDetails,
-    //                                     "Sales_Order_Detail_data": items
-    //                                 }     
-                                    
-    //                                 console.log(data)
-    //                                       console.log(customerDetails,' ini customer detail')
-    //                                       console.log(items, ' ini items')
-    //                                     axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-    //                                         headers:{
-    //                                             "Content-Type":'application/json'
-    //                                         },
-    //                                         "data":JSON.stringify({
-    //                                             "Sales_Order_data":customerDetails,
-    //                                             "Sales_Order_Detail_data": items
-    //                                         })
-    //                                     }).then((res)=>{
-    //                                         console.log(res.data)
-    //                                         if(res.data){
-    //                                             swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-    //                                             // tambahin gambar yg dari mas fauzi
-    //                                             console.log('berhasil pembelian line 1286')
-    //                                             location.replace(`../Iframe/success.html`)
-    //                                         }else {
-    //                                             swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
-    //                                         }
-    //                                         // $('.modals-product-detail').css('display','none')
-    //                                     }).catch((err)=>{
-    //                                         console.log(err)
-    //                                     })         
-    //                               }).catch((err)=>{
-    //                                   console.log(err)
-    //                               })
-    //                           }).catch((err)=>{
-    //                               console.log(err)
-    //                           })
-    //                     }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
-    //                         console.log('masuk ke else 1285')
-    //                         axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    //                         .then((res)=>{
-    //                             detail_product = res.data
-    //                             axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    //                             .then((res)=>{
-    //                                 data_customer =res.data
-    //                                 console.log(data_customer)
-    //                                 customerDetails  ={
-    //                                     Customer_Code:token,
-    //                                     Total_Price: final_result_price,
-    //                                     Total_Quantity : total_Quantity,
-    //                                     Unit:"pcs",
-    //                                     Shipping_Address: $('#alamat_gb').val(),
-    //                                     Payment_Method : $('#payment_gb').val(),
-    //                                     Shipping_Fee: $('#total_biaya_pengiriman_gb').val(),
-    //                                     alamatLain : $('#alamat_lain').val(),
-    //                                     Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
-    //                                 }         
-    //                                 items.push( {
-    //                                         Customer_Code: token,
-    //                                         Product_Code: product_id,
-    //                                         Product_Name: detail_product.Name,
-    //                                         Quantity_Requested: $('.qty_groupbuy_home').val(),
-    //                                         Price_Based_On_Total_Quantity: $('#tp_iframe').val()
-                    
-    //                                 }) 
-    //                                 items.push( { // data kurir
-    //                                     Customer_Code: token,
-    //                                     Product_Code: kurir_kode,
-    //                                     Product_Name: kurir_pilihan,
-    //                                     Quantity_Requested: '1',
-    //                                     Price_Based_On_Total_Quantity: $('#total_biaya_pengiriman_gb').val()
-                
-    //                                 })  
-    //                                 var data = {
-    //                                     "Sales_Order_Data": customerDetails,
-    //                                     "Sales_Order_Detail_data": items
-    //                                 }    
-    //                                 console.log(data)
-    //                                 console.log(customerDetails,' ini customer detail')
-    //                                 console.log(items, ' ini items')
-    
-    //                                 axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-    //                                     headers:{
-    //                                         "Content-Type":'application/json'
-    //                                     },
-    //                                     "data":JSON.stringify({
-    //                                         "Sales_Order_data":customerDetails,
-    //                                         "Sales_Order_Detail_data": items
-    //                                     })
-    //                                 }).then((res)=>{
-    //                                     if(res.data.status){
-    //                                         console.log(res.data)
-    //                                         swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-    //                                         // close_all_open_window()
-    //                                         $('.modals-product-detail').css('display','none')
-    //                                         $('.box_iframe_groupbuy').css('display','none')
-                                            
-                                            
-    //                                         $('.box_iframe_groupbuy').remove()
-    //                                         // tambahin gambar yg dari mas fauzi
-    //                                         console.log('berhasil pembelian line 1356')
-    //                                         location.replace(`../Iframe/success.html`)
-    
-                                            
-    //                                     }else {
-    //                                         swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
-    //                                         $('.modals-product-detail').css('display','none')
-    //                                     }
-    //                                 }).catch((err)=>{
-    //                                     console.log(err)
-    //                                 })
-    //                                 // refresh()
-    
-    //                             }).catch((err)=>{
-    //                                 console.log(err)
-    //                             })
-    //                         }).catch((err)=>{
-    //                             console.log(err)
-    //                         })
-    //                     }
-    //                 }).catch((err)=>{
-    //                     console.log(err)
-    //                 })
-    //             }
-    //         }).catch((err)=>{
-    //             console.log(err)
-    //         })
-    //     }else {
-    //         console.log('masuk ke else 434')
-    //     }
-    // })
-
-
-
-    // BATAS TESTING 
-}
-
-function payment_groupbuy(product_id){
-    var token = localStorage.getItem('token')
-    var total_price = $('#tp_sp').val()
-    console.log(total_price)
-
-    var detail_product; 
-    var data_customer;
-    var items =[]
-    var total_qty_from_user = parseInt($('.qty_groupbuy').val())
-    var total_item_kebeli;
-    if(total_qty_from_user>0){
-        axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
-        .then((res)=>{
-            total_item_kebeli = res.data
-            console.log(res.data)
-            if(res.data === null){
-                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                .then((res)=>{
-                    console.log(res.data)
-                    detail_product = res.data
-                    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                var kurir_kode =''
+                for(var i=0; i<dataAllKurir.length; i++){
+                    if(dataAllKurir[i].Courier == new_kurir_pilihan){
+                        kurir_kode = dataAllKurir[i].Courier_Code
+                    }
+                }
+                if(total_qty_from_user>0) { 
+                    axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
                     .then((res)=>{
-                        data_customer = res.data
-                        console.log(data_customer)
-                        
-                            customerDetails  ={
-                                Customer_Code:token,
-                                Total_Price: total_price,
-                                Total_Quantity : $('.qty_groupbuy').val(),
-                                Unit:"pcs",
-                                Shipping_Address: $('#alamat_gb').val(),
-                                Payment_Method : $('#payment_gb').val(),
-                                Shipping_Fee: $('#pengiriman-fee').val(),
-                                alamatLain : $('#alamat_lain').val(),
-                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
-                            }         
-                            items.push( {
-                                    Customer_Code: token,
-                                    Product_Code: product_id,
-                                    Product_Name: detail_product.Name,
-                                    Quantity_Requested: $('.qty_groupbuy').val(),
-                                    Price_Based_On_Total_Quantity: total_price
-            
-                            }) 
-                            var data = {
-                                "Sales_Order_Data": customerDetails,
-                                "Sales_Order_Detail_data": items
-                            }
-                
-                          
-                            console.log(data)
-                            console.log(customerDetails,' ini customer detail')
-                            console.log(items, ' ini items')
-            
-                            axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-                                headers:{
-                                    "Content-Type":'application/json'
-                                },
-                                "data":JSON.stringify({
-                                    "Sales_Order_data":customerDetails,
-                                    "Sales_Order_Detail_data": items
-                                })
-                            }).then((res)=>{
-                                console.log(res.data)
-                                if(res.data){
-                                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                                    $('.groupbuy_sp').css('display','none')
-                                    $('.success_payment_sp').css('display','flex')
-                                    $('.success_payment_sp').append(`
-                                        <img src="../img/pembelian_berhasil.png" alt="" class="img-promo2"> 
-                                    `)
-                                    // $('.modals-product-detail').attr('src','../Iframe/success.html')
-                                }else {
-                                    swal.fire("Penambahan Gagal,", "", "error");
-                                    $('.groupbuy_sp').css('display','none')
-                                }
-                            }).catch((err)=>{
-                                console.log(err)
-                            })
-                    
-                       
-                
-                    }).catch((err)=>{
-                        console.log(err)
-                    })
-                }).catch((err)=>{
-                    console.log(err)
-                })
-
-            }else {
-                // hasil dari res.data.Total_Quantity di kurang sama qty yang di beli dari customer
-                // = res.data.Total_Quantity-
-                // yang bisa di beli => data_product_GroupBuy_SellQuantity - res.data.total_quantity
-                console.log(res.data)
-                
-                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                .then((response)=>{ // res.data == detail product
-                    
-                    console.log(response.data)
-                    console.log(total_item_kebeli)
-                    var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
-                    console.log(item_tersedia)
-                    if(total_qty_from_user > item_tersedia){
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: `Hanya Bisa Membeli ${item_tersedia}`,
-                            // footer: '<a href="">Why do I have this issue?</a>'
-                          })
-                          axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                          .then((res)=>{
-                              console.log(res.data)
-                              detail_product = res.data
-                              axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-                              .then((res)=>{
-                                  console.log(res.data)
-                                  data_customer = res.data
-                                  var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
-                                  console.log(harga_pembelian)
-
-                                      customerDetails  ={
-                                          Customer_Code:token,
-                                          Total_Price: harga_pembelian,
-                                          Total_Quantity : item_tersedia,
-                                          Unit:"pcs",
-                                          Shipping_Address: $('#alamat_gb').val(),
-                                          Payment_Method : $('#payment_gb').val(),
-                                          Shipping_Fee: $('#pengiriman-fee').val(),
-                                          alamatLain : $('#alamat_lain').val(),
-                                          Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
-                                      }         
-                                      items.push( {
-                                              Customer_Code: token,
-                                              Product_Code: product_id,
-                                              Product_Name: detail_product.Name,
-                                              Quantity_Requested: item_tersedia,
-                                              Price_Based_On_Total_Quantity: harga_pembelian
-                      
-                                      }) 
-                                      var data = {
-                                          "Sales_Order_Data": customerDetails,
-                                          "Sales_Order_Detail_data": items
-                                      }
-                          
-                                    
-                                      console.log(data)
-                                      console.log(customerDetails,' ini customer detail')
-                                      console.log(items, ' ini items')
-                      
-                                      axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-                                          headers:{
-                                              "Content-Type":'application/json'
-                                          },
-                                          "data":JSON.stringify({
-                                              "Sales_Order_data":customerDetails,
-                                              "Sales_Order_Detail_data": items
-                                          })
-                                      }).then((res)=>{
-                                          if(res.data){
-                                            $('.success_payment_sp').css('display','flex')
-                                            $('.success_payment_sp').append(`
-                                                <img src="../img/pembelian_berhasil.png" alt="" class="img-promo2"> 
-                                            `)
-                                            $('.groupbuy_sp').css('display','none')
-                                          }else {
-                                            swal.fire("Penambahan Gagal,", "", "error");
-                                            $('.groupbuy_sp').css('display','none')
-                                          }
-                                          console.log(res.data)
-                                      }).catch((err)=>{
-                                          console.log(err)
-                                      })
-                          
-                              }).catch((err)=>{
-                                  console.log(err)
-                              })
-                          }).catch((err)=>{
-                              console.log(err)
-                          })
-                    }else { // pembelian jika total qty dari user tidak melebihi item yang tersedia
-                        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                        .then((res)=>{
-                            console.log(res.data)
-                            detail_product = res.data
-                            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                        total_item_kebeli = res.data
+                        console.log(res.data)
+                        if(res.data.Total_Quantity === null) { // hasil null berarti belum ada customer lain yang beli
+                            console.log('masuk ke if null 1154')
+                            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                             .then((res)=>{
-                                data_customer = res.data
-                                console.log(data_customer) 
+                                console.log(res.data)
+                                detail_product = res.data
+                                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                .then((res)=>{
+                                    console.log(res.data)
+                                    
                                     customerDetails  ={
                                         Customer_Code:token,
-                                        Total_Price: total_price,
-                                        Total_Quantity : $('.qty_groupbuy').val(),
+                                        Total_Price: total_harga_shipping_with_product,
+                                        Total_Quantity : total_Quantity,
                                         Unit:"pcs",
-                                        Shipping_Address: $('#alamat_gb').val(),
-                                        Payment_Method : $('#payment_gb').val(),
-                                        Shipping_Fee: $('#pengiriman-fee').val(),
-                                        alamatLain : $('#alamat_lain').val(),
-                                        Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                        Shipping_Address: final_address,
+                                        Payment_Method : payment_method_pilihan,
+                                        Shipping_Fee: harga_shipping_qty,
+                                        Primary_Recipient_Name:res.data.First_Name + " " + res.data.Last_Name,
+                                        Shipping_Contact_Number:res.data.Contact_Number_1
                                     }         
                                     items.push( {
                                             Customer_Code: token,
                                             Product_Code: product_id,
                                             Product_Name: detail_product.Name,
-                                            Quantity_Requested: $('.qty_groupbuy').val(),
-                                            Price_Based_On_Total_Quantity: total_price
+                                            Quantity_Requested: $('.qty_groupbuy_home').val(),
+                                            Price_Based_On_Total_Quantity: harga_total_product
                     
                                     }) 
+                                    items.push( {
+                                        Customer_Code: token,
+                                        Product_Code: kurir_kode,
+                                        Product_Name: product_name_shipping,
+                                        Quantity_Requested: '1',
+                                        Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
+                
+                                    })  
                                     var data = {
                                         "Sales_Order_Data": customerDetails,
                                         "Sales_Order_Detail_data": items
-                                    }     
+                                    }
                                     console.log(data)
-                                    console.log(customerDetails,' ini customer detail')
-                                    console.log(items, ' ini items')
-                    
+            
                                     axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                         headers:{
                                             "Content-Type":'application/json'
@@ -2202,53 +1850,237 @@ function payment_groupbuy(product_id){
                                             "Sales_Order_Detail_data": items
                                         })
                                     }).then((res)=>{
+                                        if(res.data.status){
+                                            swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                            $('.modals-product-detail').css('display','none')
+                                            $('.box-delete-success').css('display','block')
+                                            // tambahin gambar yg dari mas fauzi
+                                            console.log('berhasil pembelian line 1198')
+                                            location.replace(`../Iframe/success.html`)
+                                        }else {
+                                            swal.fire("Pembelian Gagal", "", "error");
+                                        }
                                         console.log(res.data)
-                                        if(res.data){
-                                            // $('.modals-product-detail').attr('src','../Iframe/success.html')
-                                            $('.groupbuy_sp').css('display','none')
-                                            $('.success_payment_sp').css('display','flex')
-                                            $('.success_payment_sp').append(`
-                                                <img src="../img/pembelian_berhasil.png" alt="" class="img-promo2"> 
-                                            `)
-                                          }else {
-                                            swal.fire("Penambahan Gagal,", "", "error");
-                                            $('.groupbuy_sp').css('display','none')
-                                          }
                                     }).catch((err)=>{
                                         console.log(err)
-                                    })                      
+                                    })
+                                    
+            
+                                }).catch((err)=>{
+                                    console.log(err)
+                                })
                             }).catch((err)=>{
                                 console.log(err)
                             })
-                        }).catch((err)=>{
-                            console.log(err)
-                        })
-                    }
-                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                    // $('.groupbuy_sp').css('display','none')
-                }).catch((err)=>{
-
-                })
-                // console.log(item_tersedia)
-
-
-            }
-        }).catch((err)=>{
-            console.log(err)
-        })
-
+                        }else { // hasil else dari if null berarti ada cust yg udh beli. sisa productnya
+                            console.log('masuk ke else null 1473')
+                            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                            .then((response)=>{
+                                console.log(response.data)
+                                console.log(total_item_kebeli)
+                                var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
+                                console.log(item_tersedia)
+                                if(total_qty_from_user > item_tersedia){
+                                    console.log('masuk ke if item tersedia 1217')
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: `Hanya Bisa Membeli ${item_tersedia}`,
+                                        // footer: '<a href="">Why do I have this issue?</a>'
+                                      })
+            
+                                      axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                      .then((res)=>{
+                                          console.log(res.data)
+                                          detail_product = res.data
+                                          axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                          .then((res)=>{
+                                              console.log(res.data)
+                                              data_customer = res.data
+                                              var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
+                                              console.log(harga_pembelian)
+                                              
+                                              customerDetails  ={
+                                                Customer_Code:token,
+                                                Total_Price: total_harga_shipping_with_product,
+                                                Total_Quantity : item_tersedia +1,
+                                                Unit:"pcs",
+                                                Shipping_Address: final_address,
+                                                Payment_Method : payment_method_pilihan,
+                                                Shipping_Fee: harga_shipping_qty,
+                                                Shipping_Contact_Number:res.data.Contact_Number_1,
+                                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                            }         
+                                            items.push( {
+                                                    Customer_Code: token,
+                                                    Product_Code: product_id,
+                                                    Product_Name: detail_product.Name,
+                                                    Quantity_Requested: item_tersedia,
+                                                    Price_Based_On_Total_Quantity: harga_total_product
+                            
+                                            }) 
+                                            items.push( {
+                                                Customer_Code: token,
+                                                Product_Code: kurir_kode,
+                                                Product_Name: product_name_shipping,
+                                                Quantity_Requested: '1',
+                                                Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
+                        
+                                            })  
+                                            var data = {
+                                                "Sales_Order_Data": customerDetails,
+                                                "Sales_Order_Detail_data": items
+                                            }     
+                                            
+                                            console.log(data)
+                                                  console.log(customerDetails,' ini customer detail')
+                                                  console.log(items, ' ini items')
+                                                axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                    headers:{
+                                                        "Content-Type":'application/json'
+                                                    },
+                                                    "data":JSON.stringify({
+                                                        "Sales_Order_data":customerDetails,
+                                                        "Sales_Order_Detail_data": items
+                                                    })
+                                                }).then((res)=>{
+                                                    console.log(res.data)
+                                                    if(res.data){
+                                                        swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                        // tambahin gambar yg dari mas fauzi
+                                                        console.log('berhasil pembelian line 1286')
+                                                        location.replace(`../Iframe/success.html`)
+                                                    }else {
+                                                        swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
+                                                    }
+                                                    // $('.modals-product-detail').css('display','none')
+                                                }).catch((err)=>{
+                                                    console.log(err)
+                                                })         
+                                          }).catch((err)=>{
+                                              console.log(err)
+                                          })
+                                      }).catch((err)=>{
+                                          console.log(err)
+                                      })
+                                }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
+                                    console.log('masuk ke else 1285')
+                                    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    .then((res)=>{
+                                        detail_product = res.data
+                                        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                        .then((res)=>{
+                                            data_customer =res.data
+                                            console.log(data_customer)
+                                            customerDetails  ={
+                                                Customer_Code:token,
+                                                Total_Price: total_harga_shipping_with_product,
+                                                Total_Quantity : total_Quantity,
+                                                Unit:"pcs",
+                                                Shipping_Address: final_address,
+                                                Payment_Method : payment_method_pilihan,
+                                                Shipping_Fee: harga_shipping_qty,
+                                                Shipping_Contact_Number:res.data.Contact_Number_1,
+                                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                            }         
+                                            items.push( {
+                                                    Customer_Code: token,
+                                                    Product_Code: product_id,
+                                                    Product_Name: product_name_shipping,
+                                                    Quantity_Requested: $('.qty_groupbuy_home').val(),
+                                                    Price_Based_On_Total_Quantity: harga_total_product
+                            
+                                            }) 
+                                            items.push( { // data kurir
+                                                Customer_Code: token,
+                                                Product_Code: kurir_kode,
+                                                Product_Name: product_name_shipping,
+                                                Quantity_Requested: '1',
+                                                Price_Based_On_Total_Quantity:total_harga_shipping_with_insurance_packing
+                        
+                                            })  
+                                            var data = {
+                                                "Sales_Order_Data": customerDetails,
+                                                "Sales_Order_Detail_data": items
+                                            }    
+                                            console.log(data)
+                                            console.log(customerDetails,' ini customer detail')
+                                            console.log(items, ' ini items')
+            
+                                            axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                headers:{
+                                                    "Content-Type":'application/json'
+                                                },
+                                                "data":JSON.stringify({
+                                                    "Sales_Order_data":customerDetails,
+                                                    "Sales_Order_Detail_data": items
+                                                })
+                                            }).then((res)=>{
+                                                if(res.data.status){
+                                                    console.log(res.data)
+                                                    swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                    // close_all_open_window()
+                                                    $('.modals-product-detail').css('display','none')
+                                                    $('.box_iframe_groupbuy').css('display','none')
+                                                    
+                                                    
+                                                    $('.box_iframe_groupbuy').remove()
+                                                    // tambahin gambar yg dari mas fauzi
+                                                    console.log('berhasil pembelian line 1356')
+                                                    location.replace(`../Iframe/success.html`)
+            
+                                                    
+                                                }else {
+                                                    swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                                                    $('.modals-product-detail').css('display','none')
+                                                }
+                                            }).catch((err)=>{
+                                                console.log(err)
+                                            })
+                                            // refresh()
+            
+                                        }).catch((err)=>{
+                                            console.log(err)
+                                        })
+                                    }).catch((err)=>{
+                                        console.log(err)
+                                    })
+                                }
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                        }
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }else {
+                    console.log('masuk ke else 434')
+                }
+            })
+    }else { // ada yang belum di isi
+        swal.fire("Ada field yang belum di isi", "", "error");
+        console.log(isKurir_pilihan, ' kurir pilihan')
+        console.log(isKota_pilihan,' kota pilihan ')
+        console.log(isProvince_pilihan, ' province pilihan')
+        console.log(isKelurahan_pilihan, ' kelurahan pilihan')
+        console.log(isKecamatan_pilihan, ' kecamatan pilihan')
+        console.log(isQty_pilihan, ' qty pilihan')
+        console.log(isPaymentMethod_pilihan, ' payment method pilihan')
+        console.log(isPengiriman_pilihan, ' pengiriman pilihan')
     }
 
-
-
-    // BATAS
     
-    console.log(detail_product.Name)
+
+
+
+//     // BATAS TESTING 
+
+    
     
    
 
 
-    console.log(data)
+    
 }
 
 
@@ -2305,9 +2137,27 @@ function addToCart(product_id){
 }
 
 
-function addressMethod(item){
+function addressMethod(address,item){
     console.log(item)
-    console.log(item.value)
+    // console.log(item.value)
+    $('.radio_address_card').removeClass('selected')
+    $('.radio_address_card').removeClass('active_address_method')
+
+    var address_id = address
+    var id = $('.radio_address_card').attr('id')
+    console.log(address_id,' ini address id')
+    console.log(id,' ini id')
+
+    $(`#${address}`).addClass('selected')
+    $(`#${address}`).addClass('active_address_method')
+    // if(address_id == id ){
+    //     console.log('masuk ke if 2319')
+    //     $(`#${address}`).addClass('selected')
+    //     $(`#${address}`).addClass('active_payment_method')
+    // }else {
+    //     console.log('masuk ke else')
+    // }
+
     if(item === 'Alamat Terdaftar'){
         
         $('.option-alamat-gb').css('display','flex')

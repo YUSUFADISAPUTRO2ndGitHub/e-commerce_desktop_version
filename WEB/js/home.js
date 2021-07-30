@@ -925,6 +925,23 @@ const close_toast=()=>{
 }
 
 
+const choosing_payment_method=(payment,product_id)=>{
+    $('.radio_payment_method').removeClass('selected')
+    $('.radio_payment_method').removeClass('active_payment_method')
+
+    var payment_id = payment
+    var id  = $('.radio_payment_method').attr('id')
+    console.log(id,' ini id choosing payment')
+    console.log(payment_id ,' ini payment id')
+    if(payment_id == id ){
+        console.log('masuk ke if')
+        $(`#${payment}`).addClass('selected')
+        $(`#${payment}`).addClass('active_payment_method')
+    }else {
+        console.log('masuk ke else')
+    }
+}
+
 const choosing_shipping=(kurir,product_id)=>{
     // alert('function jalan')
         // $(this).parent().find('.radio-delivery-card').removeClass('selected');
@@ -932,17 +949,18 @@ const choosing_shipping=(kurir,product_id)=>{
         // $(this).addClass('selected')
         // $(this).addClass('selected')
         $('.radio-delivery-card').removeClass('selected')
-        $('.radio-delivery-card').removeClass('active_payment_method')
-        // $('.radio-delivery-card').addClass('selected')
-        // $('.radio-delivery-card').addClass('active_payment_method')
+        $('.radio-delivery-card').removeClass('active_delivery_method')
+        
+        
         var kurir_id = kurir
         var id = $('.radio-delivery-card').attr('id')
+        
      
     console.log(id == kurir_id, ' 941 sama gak neh alig')
         if(id == kurir_id){
             console.log('masuk ke if 943')
             $(`#${kurir}`).addClass('selected')
-            $(`#${kurir}`).addClass('active_payment_method')
+            $(`#${kurir}`).addClass('active_delivery_method')
         }
         
         
@@ -955,7 +973,7 @@ const choosing_shipping=(kurir,product_id)=>{
         result = val
         var class_payment = $(this)
         console.log(class_payment)
-        var new_kurir_pilihan = $('.active_payment_method').attr('data-value')
+        var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
         console.log(new_kurir_pilihan)
         kurirMethodHome(new_kurir_pilihan,product_id)
 }  
