@@ -9,6 +9,7 @@
 
         <script src="./js/time.js"></script>
         <script src="./js/checkout.js"></script>
+        <script src="../js/axios.js"></script>
         <script src="./js/IndonesiaAddress.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="./js/inputChecker.js"></script>
@@ -158,6 +159,14 @@
                 <select class="form-control" id="sub-saved-address">
                 </select>
             </div>
+            <div class="form-group" id="new-address-section">
+                <br>
+                <div class="alert alert-primary" role="alert">
+                    Street (Alamat lengkap pengiriman)
+                </div>
+                <!-- <label>Street (Alamat lengkap pengiriman)</label> -->
+                <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
+            </div>
 
             <div class="form-group" id="delivery-option">
                 <br>
@@ -167,64 +176,62 @@
                 <div class="box-checkout-kurir">
                     <select class="form-control sub-del-opt" id="sub-delivery-option" onchange="onSelectDeliveryFee()">
                     </select>
-                    <select class="form-control  sp_provinsi_hover" id="inputGroupSelect01" onchange="provinceMethod(this)" >  
-                        <option  selected  class="id-kurir-gb"> Provinsi</option>  
-                        <option  value="DKI" class="id-province-gb">DKI</option> 
-                        <option  value="JAWA BARAT" class="id-province-gb">JAWA BARAT</option> 
-                        <option  value="JAWA TENGAH" class="id-province-gb">JAWA TENGAH</option>  
+                    <select class="form-control  sp_provinsi_hover cart-provinsi" id="inputGroupSelect01" onchange="provinceMethod(this)" >  
+                        <option  selected  class="co-provinsi"> Provinsi</option>  
+                        <option  value="DKI" class="co-provinsi">DKI</option> 
+                        <option  value="JAWA BARAT" class="co-provinsi">JAWA BARAT</option> 
+                        <option  value="JAWA TENGAH" class="co-provinsi">JAWA TENGAH</option>  
                     </select>
-                    <select class="form-control sp_kota_hover" id="inputGroupSelect01" onchange="kotaMethod(this)" >  
-                        <option selected  class="id-kurir-gb"> Kota</option>      
-                        <option  value="JAKARTA" class="id-kota-gb">JAKARTA</option> 
-                        <option  value="BANDUNG" class="id-kota-gb">BANDUNG</option> 
-                        <option  value="YOGYAKARTA" class="id-kota-gb">YOGYAKARTA</option>  
+                    <select class="form-control sp_kota_hover cart-kurir" id="inputGroupSelect01" onchange="kotaMethod(this)" >  
+                        <option selected  class="co-kota"> Kota</option>      
+                        <option  value="JAKARTA" class="co-kota">JAKARTA</option> 
+                        <option  value="BANDUNG" class="co-kota">BANDUNG</option> 
+                        <option  value="YOGYAKARTA" class="co-kota">YOGYAKARTA</option>  
                     </select>
-                    <select class="form-control sp_kecamatan_hover" id="inputGroupSelect01" onchange="kecamatanMethod(this)" >  
-                        <option selected  class="id-kurir-gb">Kecamatan</option>      
-                        <option  value="KELAPA DUA" class="id-kecamatan-gb">KELAPA DUA</option> 
-                        <option  value="kelapa tiga" class="id-kecamatan-gb">kelapa tiga</option> 
-                        <option  value="kelapa doang" class="id-kecamatan-gb">kelapa doang</option>  
+                    <select class="form-control sp_kecamatan_hover cart-kecamatan" id="inputGroupSelect01" onchange="kecamatanMethod(this)" >  
+                        <option selected  class="co-kecamatan">Kecamatan</option>      
+                        <option  value="KELAPA DUA" class="co-kecamatan">KELAPA DUA</option> 
+                        <option  value="kelapa tiga" class="co-kecamatan">kelapa tiga</option> 
+                        <option  value="kelapa doang" class="co-kecamatan">kelapa doang</option>  
                     </select>
-                    <select class="form-control sp_kelurahan_hover" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
-                        <option selected  class="id-kurir-gb">Kelurahan</option>      
-                        <option  value="KEBON JERUK" class="id-kelurahan-gb">KEBON JERUK</option> 
-                        <option  value="kelapa tiga" class="id-kelurahan-gb">kelapa tiga</option> 
-                        <option  value="kelapa doang" class="id-kelurahan-gb">kelapa doang</option>  
+                    <select class="form-control sp_kelurahan_hover cart-kelurahan" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="co-kelurahan">Kelurahan</option>      
+                        <option  value="KEBON JERUK" class="co-kelurahan">KEBON JERUK</option> 
+                        <option  value="kelapa tiga" class="co-kelurahan">kelapa tiga</option> 
+                        <option  value="kelapa doang" class="co-kelurahan">kelapa doang</option>  
                     </select>
-                    <input type="number" class="form-control sp_kodepos_hover" placeholder="KODE POS" id="option-kodepos-gb" onchange="kodeposMethod(this)" >  
-                    <select class="form-control sp_kelurahan_hover" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
-                        <option selected  class="id-kurir-gb">Waktu Pengiriman</option>      
-                        <option  value="KEBON JERUK" class="id-kelurahan-gb">KEBON JERUK</option> 
-                        <option  value="kelapa tiga" class="id-kelurahan-gb">kelapa tiga</option> 
-                        <option  value="kelapa doang" class="id-kelurahan-gb">kelapa doang</option>  
+                    <select class="form-control sp_kodepos_hover cart-kodepos" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="co-kodepos">kodepos</option>      
+                        <option  value="KEBON JERUK" class="co-kodepos">11550</option> 
+                        <option  value="kelapa tiga" class="co-kodepos">11555</option> 
+                        <option  value="kelapa doang" class="co-kodepos">115500</option>  
                     </select>
-                    <input type="number" class="form-control sp_kodepos_hover" placeholder="ESTIMASI HARGA PENGIRIMAN" id="option-kodepos-gb" onchange="kodeposMethod(this)"  disabled>  
+                    
+                    <select class="form-control sp_kelurahan_hover cart-pengiriman" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
+                        <option  value="KEBON JERUK" class="co-pengiriman">KEBON JERUK</option> 
+                        <option  value="kelapa tiga" class="co-pengiriman">kelapa tiga</option> 
+                        <option  value="kelapa doang" class="co-pengiriman">kelapa doang</option>  
+                    </select>
+
+                    <select class="form-control sp_kelurahan_hover cart-asuransi" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="co-asuransi">Insurance</option>      
+                        <option  value="KEBON JERUK" class="co-asuransi">Paket Hemat Ayam 2</option> 
+                        <option  value="kelapa tiga" class="co-asuransi">Paket Hemat Ayam 3</option> 
+                        <option  value="kelapa doang" class="co-asuransi">Paket Hemat Ayam 4</option>  
+                    </select>
+                    <select class="form-control sp_kelurahan_hover cart-packing" id="inputGroupSelect01" onchange="kelurahanMethod(this)" >  
+                        <option selected  class="co-packing">Packing</option>      
+                        <option  value="KEBON JERUK" class="co-packing">Packing Kayu</option> 
+                        <option  value="kelapa tiga" class="co-packing">Packing Kayu 2</option> 
+                        <option  value="kelapa doang" class="co-packing">Packing Kayu 3</option>  
+                    </select>
+
+                    <input type="number" class="form-control sp_kodepos_hover cart-total-pengiriman" placeholder="ESTIMASI HARGA PENGIRIMAN" id="option-kodepos-gb" onchange="kodeposMethod(this)"  disabled>  
                 </div>
             </div>
 
-            <div class="form-group" id="new-address-section">
-
-                <!-- <div>
-                    <label>Province</label>
-                    <select class="form-control option-province" onchange="provinceSelected(this)">
-                    </select>
-                    <div class="city-selection">
-                        <label>City</label>
-                        <select class="form-control" id="option-city" onchange="citySelected(this)">
-                        </select>
-                    </div>
-                    <div class="district-selection">
-                        <label>District</label>
-                        <select class="form-control" id="option-district">
-                        </select>
-                    </div>
-                </div> -->
-
-                <!-- <label>Zip Code (Kode Pos)</label>
-                <input id="zipcode" type="text" class="form-control" placeholder="Type your zip code / kode pos here..." onchange="checkingSpecialCharacter(this)" required> -->
-                <label>Street (Alamat lengkap pengiriman)</label>
-                <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
-            </div>
+           
             <br>
             <div class="alert alert-primary" role="alert">
                 BARANG-BARANG UNTUK DI BELI SEKARANG

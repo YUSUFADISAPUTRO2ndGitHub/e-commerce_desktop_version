@@ -141,7 +141,7 @@ function loadCheckoutFinalConfirmationTable(condition){
         `)
 
     }else if(condition == "COD"){
-       
+        render_select_option_kurir()
         var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
         var i = 0;
         var harga_shipping = 20000
@@ -258,6 +258,14 @@ function addressOptionSelected(x){
 }
 
 const onSelectDeliveryFee=()=>{
+  
+
+
+
+
+
+
+    // BATAS AKHIR 
     $('#final_checkout_delivery_row').empty()
     $('#final_checkout_total_price_row').empty()
     var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
@@ -283,7 +291,7 @@ const onSelectDeliveryFee=()=>{
             
         `)
 
-    // console.log(total_price_with_shipping,' 149')
+    console.log(total_price_with_shipping,' 149')
 }
 
 async function requestToFinish(){
@@ -731,4 +739,44 @@ async function reorderJSON(customerDetails, productArr){
 
 function saveExpressOrderId(orderid){
     localStorage.setItem("ExpressOrderId", orderid);
+}
+
+
+
+
+
+const render_select_option_kurir=()=>{
+    var allKurir = []
+    var allProvince = []
+    var allkota =[]
+    var allDistrict =[]
+    var allSub_District = []
+    var allPengiriman =[]
+
+    var kurir=[]
+    var province =[]
+    var kota =[]
+    var district =[]
+    var sub_district=[]
+    var item_product =''
+
+    
+    get_all_couriers().done(function(response){
+        var alamat_customer = 'jalan Tumaritis nomor 131 - 11550 - kelapa dua - kebon jeruk - jakarta barat - dki jakarta'
+        var split_alamat = alamat_customer.split('-')
+        var jalan_customer = split_alamat[0]
+        var kodepos_customer = split_alamat[1]
+        var sub_district_customer = split_alamat[2]
+        var district_customer = split_alamat[3]
+        var kota_customer = split_alamat[4]
+        var province_customer = split_alamat[5]
+       
+        kurir = response[0]
+        allKurir = response
+        console.log(response)
+        get_all_province_from_courier(kurir.Courier, kurir.Courier_Code).done(function(response){
+            province = response[0]
+            allProvince = response
+        })
+    })
 }
