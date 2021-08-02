@@ -777,6 +777,22 @@ const render_select_option_kurir=()=>{
         get_all_province_from_courier(kurir.Courier, kurir.Courier_Code).done(function(response){
             province = response[0]
             allProvince = response
+            get_all_city_from_courier(kurir.Courier, kurir.Courier_Code,province.Province).done(function(response){
+                allKota = response
+                kota = response[0]
+                get_all_district_from_courier(kurir.Courier, kurir.Courier_Code, kota.City).done(function(response){
+                    allDistrict = response
+                    district = response[0]
+                    console.log(district)
+                    console.log(kota)
+                    get_all_subdistrict_from_courier(kurir.Courier, kurir.Courier_Code, district.District,).done(function(response){
+                        allSub_District = response
+                        sub_district = response[0]
+                        console.log(response)
+                        
+                    })
+                })  
+            })
         })
     })
 }
