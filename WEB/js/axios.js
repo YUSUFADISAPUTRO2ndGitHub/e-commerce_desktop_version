@@ -2755,11 +2755,11 @@ const render_item_all_category=()=>{
     ]
     
     for(var i=0; i<data_atas.length; i++){
-        console.log(data_atas[i])
+        // console.log(data_atas[i])
         
         axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
         .then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             res.data.map((val,index)=>{
                 $('.top-all-category').append(`
                     <div class="card card-small-category " onclick="getAllItem_fromAllCat('${val.Subcategory}')">
@@ -2776,13 +2776,13 @@ const render_item_all_category=()=>{
 
         
     for(var i=0; i<data_bawah.length; i++){
-        console.log(data_atas[i])
+        // console.log(data_atas[i])
         
         axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_bawah[i]}`)
         .then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             res.data.map((val,index)=>{
-                console.log(val)
+                // console.log(val)
                 $('.bot-all-category').append(`
                     <div class="card card-small-category" onclick="getAllItem('${val.Subcategory}')">
                         <img src="${val.Picture_1}" class="card-img-top">
