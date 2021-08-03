@@ -1697,6 +1697,9 @@ function payment_groupbuy_home(product_id){
     var alamat_lain_input = $('#alamat_lain').val()
     console.log(alamat_input)
     console.log(alamat_lain_input)
+    if(asuransi_pilihan == 'Asuransi' ){
+        asuransi_pilihan = ''
+    }
     if(packing_pilihan == 'Packing'){
         packing_pilihan = ''
     }

@@ -1376,7 +1376,7 @@ const provinceMethodHome=(product_id)=>{
     var isQty_pilihan = false
 
     if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
-        isnew_kurir_pilihan = false
+        isKurir_pilihan = false
     }else {
         isKurir_pilihan = true
     }
@@ -2805,7 +2805,7 @@ function get_product_detail_func(product_id){
         "method": "POST",
         "timeout": 0,
     };
-    
+    console.log(settings.url)
     return $.ajax(settings);
 }
 
