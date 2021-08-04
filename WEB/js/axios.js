@@ -122,7 +122,7 @@ const renderOptionSearch=()=>{
         $('.header-search-option').append(`
         <p onclick="getAllItem_fromAllCat('${val}')">${val}</p>
         `)
-        console.log(val)
+        // console.log(val)
     })
 }
 
@@ -131,8 +131,8 @@ const get_product_detail_from_main_page=(product_id)=>{
     $('.modals-product-detail').css('display','block')
     $('.close-button').css('display','block')
     $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}`)
-    console.log( $('.modals-product-detail').attr('src'))
-    console.log(product_id, 'product_id 206')
+    // console.log( $('.modals-product-detail').attr('src'))
+    // console.log(product_id, 'product_id 206')
     render_get_product_detail(product_id)
 }
 
@@ -158,14 +158,19 @@ const renderItemPromo=()=>{
         var b = parseInt(a)
         var c = isNaN(b)
         // console.log(c, 'ini C isnan')
-
-        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
-        val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+        // console.log(allData)
+        // console.log(val)
+        // console.log(val == false, ' val == false', val.Sell_Price == 'NULL', ' val.Sell_Price == NULL', val.Sell_Price == 0 , 'val.Sell_Price == 0', val.Sell_Price < 1, 'val.Sell_Price < 1', val.Sell_Price == undefined, 'val.Sell_Price == undefined',val.Sell_Price == null,'val.Sell_Price == null', val.Sell_Price < 1,'val.Sell_Price < 1')
+        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
         ){
-            console.log(' gak render karna false')
+          
         }else {
-       
-            if(val.GroupBuy_Purchase == 'true'){
+            // console.log('berhasil render')
+          
+            if(val.GroupBuy_Purchase == 'true' || val.GroupBuy_Purchase == true || val.GroupBuy_Purchase == 'yes'){
+                console.log(val)
+                console.log(val.GroupBuy_Purchase)
+                // console.log('render 169 jalan')
                 $('.box-render-promo').append(
                     ` 
                         <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
@@ -186,49 +191,50 @@ const renderItemPromo=()=>{
                         </div>
                         `
                     )
-            }else if (val.Categorize_NEW == 'true'){
-                $('.box-render-promo').append(
-                    ` 
-                        <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
-                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                            <div class="card-item-list">
-                                <p class="limited-text-short">${val.Name}</p>
-                                <div class="split-item">
-                                    <div class="item-price">
-                                        <p>RP. ${hargaTotal}</p>
-                                        <p>Rp. ${hargaAwal}</p>
-                                    </div>
-                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                        <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                        <img src="./img/badge_new.png" alt="" class="img-badge-best">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        `
-                    )
-            }else {
-                $('.box-render-promo').append(
-                ` 
-                    <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
-                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                        <div class="card-item-list">
-                            <p class="limited-text-short">${val.Name}</p>
-                            <div class="split-item">
-                                <div class="item-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
-                                </div>
-                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                    <img src="./img/best_seller.png" alt="" class="img-badge-best">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    `
-                )
-            }
+                }
+            // }else if (val.Categorize_NEW == 'true'){
+            //     $('.box-render-promo').append(
+            //         ` 
+            //             <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+            //                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+            //                 <div class="card-item-list">
+            //                     <p class="limited-text-short">${val.Name}</p>
+            //                     <div class="split-item">
+            //                         <div class="item-price">
+            //                             <p>RP. ${hargaTotal}</p>
+            //                             <p>Rp. ${hargaAwal}</p>
+            //                         </div>
+            //                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+            //                             <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+            //                             <img src="./img/badge_new.png" alt="" class="img-badge-best">
+            //                         </div>
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //             `
+            //         )
+            // }else {
+            //     $('.box-render-promo').append(
+            //     ` 
+            //         <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+            //             <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+            //             <div class="card-item-list">
+            //                 <p class="limited-text-short">${val.Name}</p>
+            //                 <div class="split-item">
+            //                     <div class="item-price">
+            //                         <p>RP. ${hargaTotal}</p>
+            //                         <p>Rp. ${hargaAwal}</p>
+            //                     </div>
+            //                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+            //                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+            //                         <img src="./img/best_seller.png" alt="" class="img-badge-best">
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //         </div>
+            //         `
+            //     )
+            // }
 
         }
     })
@@ -251,26 +257,27 @@ const renderItemNew=()=>{
     }else {
 
         if(val.GroupBuy_Purchase == 'true'){
-            $('.box-render-new').append(
-                ` 
-                    <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                        <div class="card-item-list">
-                            <p class="limited-text-short">${val.Name}</p>
-                            <div class="split-item">
-                                <div class="item-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
-                                </div>
-                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                    <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    `
-                )
+            
+            // $('.box-render-new').append(
+            //     ` 
+            //         <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+            //             <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+            //             <div class="card-item-list">
+            //                 <p class="limited-text-short">${val.Name}</p>
+            //                 <div class="split-item">
+            //                     <div class="item-price">
+            //                         <p>RP. ${hargaTotal}</p>
+            //                         <p>Rp. ${hargaAwal}</p>
+            //                     </div>
+            //                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+            //                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+            //                         <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //         </div>
+            //         `
+            //     )
         }else if (val.Categorize_NEW == 'true'){
             $('.box-render-new').append(
                 ` 
@@ -293,26 +300,26 @@ const renderItemNew=()=>{
                     `
                 )
         }else {
-            $('.box-render-new').append(
-            ` 
-                <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                    <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-                    <div class="card-item-list">
-                        <p class="limited-text-short">${val.Name}</p>
-                        <div class="split-item">
-                            <div class="item-price">
-                                <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
-                            </div>
-                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                <img src="./img/best_seller.png" alt="" class="img-badge-best">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `
-            )
+            // $('.box-render-new').append(
+            // ` 
+            //     <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+            //         <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+            //         <div class="card-item-list">
+            //             <p class="limited-text-short">${val.Name}</p>
+            //             <div class="split-item">
+            //                 <div class="item-price">
+            //                     <p>RP. ${hargaTotal}</p>
+            //                     <p>Rp. ${hargaAwal}</p>
+            //                 </div>
+            //                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+            //                     <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+            //                     <img src="./img/best_seller.png" alt="" class="img-badge-best">
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     </div>
+            //     `
+            // )
         }
 
     }
@@ -414,7 +421,7 @@ const renderCategory=()=>{
         // console.log(res.data)
         res.data.map((val,index)=>{
             var sub = val.Category.toUpperCase()
-            $('.list-group').append(
+            $('.lg_home').append(
                 ` 
                 <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')" id="id_sub-${sub}">${sub}</li>
                 `
@@ -2526,7 +2533,8 @@ const packingMethodHome=(product_id)=>{
         var hargaTotal = hargaAwal + discount
         console.log(res.data,' 619 axios')
         $('.box-item-detail').empty();
-        if(item.GroupBuy_SellPrice == "NULL"){
+        console.log(item.GroupBuy_SellPrice, ' 2530')
+        if(item.GroupBuy_Purchase == "false"){
             $('.box-item-detail').append(
                 `
                 <div class="box-item-img">

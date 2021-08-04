@@ -855,8 +855,34 @@ const send_otp=()=>{
     })
 }
 
+
+const send_otp_for_logout=()=>{
+    // alert('kirim otw')
+    var token = localStorage.getItem('token')
+    var email = $('#email_forgot').val()
+    console.log(email)
+    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{  
+        console.log(res.data)
+        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+        .then((res)=>{
+            if(res.data){
+                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+            }else {
+                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+            }
+            console.log(res.data, 'berhasil kirim kayanya')
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
 const send_otp_login=()=>{
     var email = $('#email_login').val()
+    console.log(email)
     if(email){
         axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{

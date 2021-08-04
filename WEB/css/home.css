@@ -1683,6 +1683,7 @@ display: flex;
     width: 100%;
     height: 650px;
     display: flex;
+    padding:0 !important;
     /* justify-content: center; */
     /* align-items: center; */
     flex-direction: column;
@@ -2032,9 +2033,9 @@ display: flex;
 .alamat-supplier::placeholder {
     color: #217283;
 }
-.modal-body {
+/* .modal-body {
     padding:0 !important;
-}
+} */
 .form-reg-nama {
     width: 250px;
     height: 50px;
@@ -5328,9 +5329,9 @@ img{
     width:50px !important;
 }
 
-.form-control {
+/* .form-control {
     margin:5px !important;
-}
+} */
 
 .box-checkout-kurir{
     width:100%;
@@ -5384,4 +5385,24 @@ img{
 .danger-error{
     display: none;
 
+}
+
+.final_checkout_insurance_fee{
+    display: none;
+    border-radius:0px !important;
+    width:100%;
+}
+.final_checkout_insurance_fee tr{
+    width:100%;
+}
+.final_checkout_insurance_fee tr th {
+    width:50%;
+}
+.final_checkout_packing_fee{
+    display:none;
+    border-radius:0px !important;
+}
+
+.login-btn:hover {
+    cursor: not-allowed
 }

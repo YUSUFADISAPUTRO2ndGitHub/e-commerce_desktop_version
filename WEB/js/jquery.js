@@ -1,6 +1,6 @@
 
-
 $(function(){
+
     $( "#datepicker" ).datepicker({
         dateFormat:'yy-mm-dd'
     });
@@ -9,12 +9,16 @@ $(function(){
     
     var b = $('.form-check-input').val()
     console.log(b)
+})
 
-  $("#flexSwitchCheckDefault").bootstrapSwitch({
-      onSwitchChange: function(e,state){
-          alert(state)
-      }
-  })
+
+$(function(){
+
+//   $("#flexSwitchCheckDefault").bootstrapSwitch({
+//       onSwitchChange: function(e,state){
+//           alert(state)
+//       }
+//   })
 
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
@@ -1716,7 +1720,7 @@ function payment_groupbuy_home(product_id){
         console.log(final_address_new)
     }else if (alamat_input.length > 0) {      
         isAlamat_pilihan = true
-        var final_address = alamat_input + ' ' + kecamatan_pilihan + ' ' + kelurahan_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan
+        var final_address = alamat_input + ' ' + kecamatan_pilihan + ' ' + kelurahan_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan + ' ' + kodepos_pilihan
         console.log(final_address)
     }else {
         isAlamat_pilihan = false

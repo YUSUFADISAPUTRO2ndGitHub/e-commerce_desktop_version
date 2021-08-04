@@ -576,7 +576,7 @@ function personalDetailsWithCurrentAddress(){
     var asuransi_pilihan = $('.cart-asuransi option:selected').val()
     var packing_pilihan = $('.cart-packing option:selected').val()
     var alamat_terdaftar = $("#sub-saved-address").children("option:selected").val()
-    var alamat_final = alamat_terdaftar + ' ' + kodepos_pilihan + ' ' + district_pilihan + ' ' + sub_district_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan + ' '
+    var alamat_final = alamat_terdaftar + ' '  + sub_district_pilihan + ' ' + district_pilihan +  ' ' + kota_pilihan + ' ' + province_pilihan + ' ' + kodepos_pilihan 
     console.log(kurir_pilihan,' kurir pilihan')
     console.log(province_pilihan,' kurir province_pilihan')
     console.log(kota_pilihan,' kurir kota_pilihan')
@@ -1065,6 +1065,7 @@ async function reorderJSON(customerDetails, productArr){
                     Shipping_Fee: total_harga_shipping_with_insurance_packing,
                     Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
                 });
+                console.log(customer_information, ' customer information')
             }
         });
     });
@@ -2562,8 +2563,10 @@ const asuransiCheckout=()=>{
                                 if(asuransi_pilihan == 'asuransi' || asuransi_pilihan == 'ASURANSI' || asuransi_pilihan == undefined || asuransi_pilihan == null || asuransi_pilihan == '0'){
                                     $('#final_checkout_insurance_row').empty()
                                     console.log(asuransi_pilihan,'2561')
+                                    $('.final_checkout_insurance_fee').css('display','none')
                                 }else {
                                         console.log(asuransi_pilihan,'2561')
+                                    $('.final_checkout_insurance_fee').css('display','block')
                                     $('#final_checkout_insurance_row').empty()
                                     $('#final_checkout_insurance_row').append(`
                                         <td> ${asuransi_pilihan} </td>
@@ -2754,21 +2757,33 @@ const packingCheckout=()=>{
                                 $('#final_checkout_delivery_row').empty()
                                 $('#final_checkout_total_price_row').empty()
 
-                                $('#final_checkout_packing_row').empty()
+                                
 
                                 $('#final_checkout_delivery_row').append(`
                                     <td> ${new_kurir_pilihan} </td>
                                     <td> ${harga_shipping} </td>
                                 `)
-                                
-                                $('#final_checkout_packing_row').append(`
-                                    <td> ${packing_pilihan} </td>
-                                    <td> ${harga_packing} </td>
-                                `)
-
+  
                                 $('#final_checkout_total_price_row').append(`
                                     <td>${harga_barang_with_shipping} </td>
                                 `)
+
+
+
+                                if(packing_pilihan == 'packing' || packing_pilihan == 'Packing' || packing_pilihan == undefined || packing_pilihan == null || packing_pilihan == '0'){
+                                    $('#final_checkout_packing_row').empty()
+                                    console.log(packing_pilihan,'2561')
+                                    $('.final_checkout_packing_fee').css('display','none')
+                                }else {
+                                        console.log(packing_pilihan,'2561')
+                                    $('.final_checkout_packing_fee').css('display','block')
+                                    $('#final_checkout_packing_row').empty()
+                                    $('#final_checkout_packing_row').append(`
+                                        <td> ${packing_pilihan} </td>
+                                        <td> ${harga_packing} </td>
+                                    `)
+
+                                }
                                 
                             })
                         })
