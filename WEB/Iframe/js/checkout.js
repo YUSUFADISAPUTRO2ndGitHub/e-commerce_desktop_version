@@ -180,8 +180,8 @@ function loadCheckoutFinalConfirmationTable(condition){
             });
         }
         $('#final_checkout_delivery_row').append(`
-        <td> ${Shipping_option} </td>
-        <td> ${harga_shipping} </td>
+            <td> ${Shipping_option} </td>
+            <td>  </td>
         `)
         console.log(total_price_with_shipping,' 149')
         $('#final_checkout_total_price_row').append(`
@@ -2189,6 +2189,20 @@ const pengirimanCheckout=()=>{
     var sub_district_pilihan = $('.cart-kelurahan option:selected').val()
     var pengiriman_pilihan = $('.cart-pengiriman option:selected').val()
 
+    var harga_shipping = parseInt($('.cart-pengiriman option:selected').attr('class'))
+    var array_cart = localStorage.getItem('itemsToCheckout')
+    var json_array_cart = JSON.parse(array_cart)
+ 
+    
+    var harga_barang = 0
+    for(var i=0; i<json_array_cart.length; i++){
+        var harga_per_item = parseInt(removeComma(json_array_cart[i].priceAgreed))
+        console.log(harga_per_item,' harga per item')
+        console.log(json_array_cart[i])
+        harga_barang += json_array_cart[i].quantity * harga_per_item
+    }
+    var harga_barang_with_shipping =  harga_barang + harga_shipping
+
     var allKota =[]
     var allDistrict = []
     var allSub_District =[]
@@ -2199,6 +2213,7 @@ const pengirimanCheckout=()=>{
     var kota =[]
     var district = []
     var sub_district = []
+    
     
     var isKurir_pilihan = false
     var isProvince_pilihan = false
@@ -2333,6 +2348,18 @@ const pengirimanCheckout=()=>{
                                         <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                     `)
                                 })
+
+                                $('#final_checkout_delivery_row').empty()
+                                $('#final_checkout_total_price_row').empty()
+
+                                $('#final_checkout_delivery_row').append(`
+                                    <td> ${new_kurir_pilihan} </td>
+                                    <td> ${harga_shipping} </td>
+                                `)
+                                
+                                $('#final_checkout_total_price_row').append(`
+                                    <td>${harga_barang_with_shipping} </td>
+                                `)
                             })
                         })
                     })
@@ -2357,6 +2384,25 @@ const asuransiCheckout=()=>{
     var sub_district_pilihan = $('.cart-kelurahan option:selected').val()
     var pengiriman_pilihan = $('.cart-pengiriman option:selected').val()
     var asuransi_pilihan = $('.cart-asuransi option:selected').val()
+
+    var harga_shipping = parseInt($('.cart-pengiriman option:selected').attr('class'))
+    var harga_asuransi = parseInt($('.cart-asuransi option:selected').attr('class'))
+    var array_cart = localStorage.getItem('itemsToCheckout')
+    var json_array_cart = JSON.parse(array_cart)
+    console.log(harga_asuransi,'2392')
+    
+    if(asuransi_pilihan == '0'){
+        harga_asuransi = 0
+    }
+    
+    var harga_barang = 0
+    for(var i=0; i<json_array_cart.length; i++){
+        var harga_per_item = parseInt(removeComma(json_array_cart[i].priceAgreed))
+        console.log(harga_per_item,' harga per item')
+        console.log(json_array_cart[i])
+        harga_barang += json_array_cart[i].quantity * harga_per_item
+    }
+    var harga_barang_with_shipping =  harga_barang + harga_shipping + harga_asuransi
 
     var allKota =[]
     var allDistrict = []
@@ -2499,6 +2545,35 @@ const asuransiCheckout=()=>{
                                         <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                     `)
                                 })
+
+                                $('#final_checkout_delivery_row').empty()
+                                $('#final_checkout_total_price_row').empty()
+
+                                
+                                
+                                $('#final_checkout_delivery_row').append(`
+                                    <td> ${new_kurir_pilihan} </td>
+                                    <td> ${harga_shipping} </td>
+                                `)
+                                $('#final_checkout_total_price_row').append(`
+                                    <td>${harga_barang_with_shipping} </td>
+                                `)
+
+                                if(asuransi_pilihan == 'asuransi' || asuransi_pilihan == 'ASURANSI' || asuransi_pilihan == undefined || asuransi_pilihan == null || asuransi_pilihan == '0'){
+                                    $('#final_checkout_insurance_row').empty()
+                                    console.log(asuransi_pilihan,'2561')
+                                }else {
+                                        console.log(asuransi_pilihan,'2561')
+                                    $('#final_checkout_insurance_row').empty()
+                                    $('#final_checkout_insurance_row').append(`
+                                        <td> ${asuransi_pilihan} </td>
+                                        <td> ${harga_asuransi} </td>
+                                    `)
+
+                                }
+                                
+                              
+
                             })
                         })
                     })
@@ -2524,6 +2599,29 @@ const packingCheckout=()=>{
     var pengiriman_pilihan = $('.cart-pengiriman option:selected').val()
     var asuransi_pilihan = $('.cart-asuransi option:selected').val()
     var packing_pilihan = $('.cart-packing option:selected').val()
+    var harga_packing = parseInt($('.cart-packing option:selected').attr('class'))
+
+    var harga_shipping = parseInt($('.cart-pengiriman option:selected').attr('class'))
+    var array_cart = localStorage.getItem('itemsToCheckout')
+    var json_array_cart = JSON.parse(array_cart)
+    
+    if(packing_pilihan == '0'){
+        harga_packing = 0
+    }
+
+    if(asuransi_pilihan == '0'){
+        harga_asuransi = 0
+    }
+    
+    var harga_barang = 0
+    for(var i=0; i<json_array_cart.length; i++){
+        var harga_per_item = parseInt(removeComma(json_array_cart[i].priceAgreed))
+        console.log(harga_per_item,' harga per item')
+        console.log(json_array_cart[i])
+        harga_barang += json_array_cart[i].quantity * harga_per_item
+    }
+    var harga_barang_with_shipping =  harga_barang + harga_shipping + harga_packing
+    
     var allKota =[]
     var allDistrict = []
     var allSub_District =[]
@@ -2653,6 +2751,24 @@ const packingCheckout=()=>{
                                 allPengiriman = response
                                 console.log(response, ' ini shipping cost')
                                 
+                                $('#final_checkout_delivery_row').empty()
+                                $('#final_checkout_total_price_row').empty()
+
+                                $('#final_checkout_packing_row').empty()
+
+                                $('#final_checkout_delivery_row').append(`
+                                    <td> ${new_kurir_pilihan} </td>
+                                    <td> ${harga_shipping} </td>
+                                `)
+                                
+                                $('#final_checkout_packing_row').append(`
+                                    <td> ${packing_pilihan} </td>
+                                    <td> ${harga_packing} </td>
+                                `)
+
+                                $('#final_checkout_total_price_row').append(`
+                                    <td>${harga_barang_with_shipping} </td>
+                                `)
                                 
                             })
                         })
