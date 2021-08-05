@@ -110,30 +110,41 @@ axios.post('http://products.sold.co.id/get-product-details')
 getAllData()
 
 const renderOptionSearch=()=>{
-    var data =[
-        'Sealant',
-        'Glue',
-        'Helm',
-        'Sarung Tangan',
-        'Pintu'
-    ]
 
-    data.map((val,index)=>{
-        $('.header-search-option').append(`
-        <p onclick="getAllItem_fromAllCat('${val}')">${val}</p>
-        `)
-        // console.log(val)
-    })
+    var token = localStorage.getItem('token')
+        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
+        .then((res)=>{
+            console.log(res.data)
+            res.data.map((val,index)=>{
+                // if(){
+                    if(index<5){
+                        $('.header-search-option').append(`
+                        <p onclick="getAllItem_fromAllCat('${val.Category}')">${val.Category}</p>
+                        `)
+                    }
+    
+                // }
+            })
+
+        }).catch((err)=>{
+            console.log(err)
+        })
+    
+    
+    
 }
 
 const get_product_detail_from_main_page=(product_id)=>{
-    $('.box-delete-success').css('display','block')
-    $('.modals-product-detail').css('display','block')
-    $('.close-button').css('display','block')
-    $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}`)
-    // console.log( $('.modals-product-detail').attr('src'))
-    // console.log(product_id, 'product_id 206')
-    render_get_product_detail(product_id)
+
+  
+    render_get_product_detail(product_id)  
+$('.box-delete-success').css('display','block')
+$('.modals-product-detail').css('display','block')
+$('.close-button').css('display','block')
+$('.box_iframe_groupbuy').css('display','block')
+$('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}`)
+// console.log( $('.modals-product-detail').attr('src'))
+// console.log(product_id, 'product_id 206')
 }
 
 // RENDER DATA HOME
@@ -444,7 +455,15 @@ const getAllItem_fromAllCat=(item)=>{
     $(this).scrollTop('.modals-lk')
     $('.close-button').css('display','block')
     $('.modals-lk').css('display','block')
-    $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
+    $('.modals-lk').attr('src',`./Iframe/listkategori.html?subcategory=${item}`)
+}
+const getAllItem=(item)=>{
+    console.log(item)
+    // console.log($('.modals-lk'))
+    console.log($('.modals-lk').attr('src'))
+    // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
+    location.replace(`./Iframe/listkategori.html?subcategory=${item}`)
+    
 }
 
 const findSubCategory=(sub)=>{
@@ -477,14 +496,7 @@ const findSubCategory=(sub)=>{
     // renderItemBasedOnCategory(sub)
 }
 
-const getAllItem=(item)=>{
-    console.log(item)
-    // console.log($('.modals-lk'))
-    console.log($('.modals-lk').attr('src'))
-    // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
-    location.replace(`../Iframe/listkategori.html?subcategory=${item}`)
-    
-}
+
 
 function sign_up_request(){
     
@@ -945,6 +957,33 @@ const render_group_buy=(product_id)=>{
                                         
                                         allPengiriman = response
                                         console.log(response,' ini shipping cost')
+                                        if(allPengiriman){
+                                            allPengiriman.service.map((val,index)=>{
+                                                console.log(val, 'ini all pengiriman')
+                                                console.log(val.est_day)
+                                                console.log(val.EST_DAY)
+                                                $('.pengiriman-home-gb').append(`
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                `)
+                                            })
+                                            allPengiriman.insurance.map((val,index)=>{
+                                                // console.log(val, ' ini all pengiriman')
+                                                // console.log(val.est_day)
+                                                // console.log(val.EST_DAY)
+                                                $('.asuransi-home-gb').append(`
+                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                `)
+                                            })
+                                            allPengiriman.packing.map((val,index)=>{
+                                                // console.log(val, ' ini all pengiriman')
+                                                // console.log(val.est_day)
+                                                // console.log(val.EST_DAY)
+                                                $('.packing-home-gb').append(`
+                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                `)
+                                            })
+    
+                                        }
                                         
                                         
 
@@ -1002,31 +1041,7 @@ const render_group_buy=(product_id)=>{
                                             }
                                         })
     
-                                        allPengiriman.service.map((val,index)=>{
-                                            console.log(val, 'ini all pengiriman')
-                                            console.log(val.est_day)
-                                            console.log(val.EST_DAY)
-                                            $('.pengiriman-home-gb').append(`
-                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                            `)
-                                        })
-                                        allPengiriman.insurance.map((val,index)=>{
-                                            // console.log(val, ' ini all pengiriman')
-                                            // console.log(val.est_day)
-                                            // console.log(val.EST_DAY)
-                                            $('.asuransi-home-gb').append(`
-                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                            `)
-                                        })
-                                        allPengiriman.packing.map((val,index)=>{
-                                            // console.log(val, ' ini all pengiriman')
-                                            // console.log(val.est_day)
-                                            // console.log(val.EST_DAY)
-                                            $('.packing-home-gb').append(`
-                                                <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                            `)
-                                        })
-
+                   
 
                                     })
                                 })
@@ -1091,6 +1106,14 @@ const render_group_buy=(product_id)=>{
                         }
                     }else {
                         swal.fire("Login Terlebih Dahulu", "", "error");
+                        var delayInMilliseconds = 1000; //1 second
+
+                        setTimeout(function() {
+                        //your code to be executed after 1 second
+                        $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+                        $('#loginModal',window.parent.document).modal('show')
+                        console.log($('#loginModal').modal('show'))
+                        }, delayInMilliseconds);
                     }
                  
                 }).catch((err)=>{
@@ -2512,158 +2535,179 @@ const packingMethodHome=(product_id)=>{
     }
 }
  const render_get_product_detail=(product_id)=>{
-    console.log(product_id, ' ini product id')
-    // $('.modals-lk').css('display','none')
-
-    // const queryString = window.location.href
+   
+        
     const querystring = $(location).attr('href');
-    console.log(querystring,' querystring 590')
-    // const link_item = new URLSearchParams(queryString)
- 
-    // const product_link = urlParams.get('product_id')
-    // console.log(product_link)
-    
-
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
-    
-        item = res.data
-        var hargaAwal = parseInt(item.Sell_Price)
-        var discount = parseInt(item.Sell_Price * 0.1)
-        var hargaTotal = hargaAwal + discount
-        console.log(res.data,' 619 axios')
-        $('.box-item-detail').empty();
-        console.log(item.GroupBuy_SellPrice, ' 2530')
-        if(item.GroupBuy_Purchase == "false"){
-            $('.box-item-detail').append(
-                `
-                <div class="box-item-img">
-                    <div class="item-img"> 
-                        <div class="box-back-detail">
-                            <i class="fas fa-chevron-left icon-prev-detail" ></i>
-                        </div>
-                        <img src="${item.Picture_1}" alt="" class="img-icon">
-                        <div class="box-next-detail">
-                            <i class="fas fa-chevron-right icon-prev-detail" ></i>
-                        </div>
-                    </div>
-                    
-                    <div class="rating-bottom">
-                        <div class="star-box">
-                         <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                        </div>          
-                    </div>
-                </div>
-                <div class="item-detail">
-                    <div class="detail-1">
-                        <div class="item-1">
-                            <p>${item.Name}</p>
-                        </div>
-                        <div class="item-2">
-                            <div class="item-4"> 
-                                <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
-                                <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
-                            </div>
-                            <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
-                        </div>
-                        <div class="box_share_product">
-                            <p>Share This Product</p>
-                            <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
-                                <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
-                                
-                            </div>
-                        </div>
-                            <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
-                                <li>
-                                    <p>Add to Cart</p>
-                                </li>
-                                <li>
-                                    <img src="../img/cart.png" alt="" class="img-cart">
-                                </li>
-                            </ul>
-                        <br>
-                        <br>
-                        <div class="deskripsi">
-                            <p>Deskripsi :</p>
-                            <p>${item.Description}</p>
-                        </div>      
-                </div>
-                `
-            )
-        }else{
 
-            console.log(`${item.GroupBuy_SellPrice}`, '531')
-            $('.box-item-detail').append(
-                `
-                <div class="box-item-img">
-                    <div class="item-img"> 
-                        <div class="box-back-detail">
-                            <i class="fas fa-chevron-left icon-prev-detail" ></i>
-                        </div>
-                        <img src="${item.Picture_1}" alt="" class="img-icon">
-                        <div class="box-next-detail">
-                            <i class="fas fa-chevron-right icon-prev-detail" ></i>
-                        </div>
-                    </div>
-                    
-                    <div class="rating-bottom">
-                        <div class="star-box">
-                            <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                        </div>
-                    </div>
-                </div>
-                <div class="item-detail">
-                    <div class="detail-1">
-                        <div class="item-1">
-                            <p>${item.Name}</p>
-                        </div>
-                        <div class="item-2">
-                            <div class="item-4"> 
-                                <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
-                                <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
-                            </div>
-                            <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
-                        </div>
-                        <div class="box_share_product">
-                            <p>Share This Product</p>
-                            <div class="box_ins_share"> 
-                                <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
-                                <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
-                            </div>
-                        </div>
-                        <div class="item-4">
-                            <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
-                            
-                        </div>
-                        <div class="box-detail-option">
-                            <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
-                                <li>
-                                    <p>Add to Cart</p>
-                                </li>
-                                <li>
-                                    <img src="../img/cart.png" alt="" class="img-cart">
-                                </li>
-                            </ul>
-                    
-                            <div class="box-discount" onclick="groupbuy('${item.Product_Code}')">
-                                <div class="add-discount">
-                                    <p>Beli dengan diskon GROUP BUY</p>
+        let timerInterval
+        Swal.fire({
+        title: 'Please Wait',
+        // html: 'I will close in <b></b> milliseconds.',
+        timer: 1000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+            const content = Swal.getHtmlContainer()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+        /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+            
+                item = res.data
+                var hargaAwal = parseInt(item.Sell_Price)
+                var discount = parseInt(item.Sell_Price * 0.1)
+                var hargaTotal = hargaAwal + discount
+                console.log(res.data,' 619 axios')
+                $('.box-item-detail').empty();
+                console.log(item.GroupBuy_SellPrice, ' 2530')
+                if(item.GroupBuy_Purchase == "false"){
+                    $('.box-item-detail').append(
+                        `
+                        <div class="box-item-img">
+                            <div class="item-img"> 
+                                <div class="box-back-detail">
+                                    <i class="fas fa-chevron-left icon-prev-detail" ></i>
+                                </div>
+                                <img src="${item.Picture_1}" alt="" class="img-icon">
+                                <div class="box-next-detail">
+                                    <i class="fas fa-chevron-right icon-prev-detail" ></i>
                                 </div>
                             </div>
-                    
+                            
+                            <div class="rating-bottom">
+                                <div class="star-box">
+                                 <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
+                                </div>          
+                            </div>
                         </div>
-
-                        <br>
-                        <div class="deskripsi_gb">
-                            <p>Deskripsi :</p>
-                            <p>${item.Description}</p>
+                        <div class="item-detail">
+                            <div class="detail-1">
+                                <div class="item-1">
+                                    <p>${item.Name}</p>
+                                </div>
+                                <div class="item-2">
+                                    <div class="item-4"> 
+                                        <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
+                                        <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
+                                    </div>
+                                    <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
+                                </div>
+                                <div class="box_share_product">
+                                    <p>Share This Product</p>
+                                    <div class="box_ins_share"> 
+                                        <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
+                                        <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+                                        
+                                    </div>
+                                </div>
+                                    <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
+                                        <li>
+                                            <p>Add to Cart</p>
+                                        </li>
+                                        <li>
+                                            <img src="../img/cart.png" alt="" class="img-cart">
+                                        </li>
+                                    </ul>
+                                <br>
+                                <br>
+                                <div class="deskripsi">
+                                    <p>Deskripsi :</p>
+                                    <p>${item.Description}</p>
+                                </div>      
                         </div>
-                    </div>
-                </div>
-                `
-            )
-        }
+                        `
+                    )
+                }else{
+        
+                    console.log(`${item.GroupBuy_SellPrice}`, '531')
+                    $('.box-item-detail').append(
+                        `
+                        <div class="box-item-img">
+                            <div class="item-img"> 
+                                <div class="box-back-detail">
+                                    <i class="fas fa-chevron-left icon-prev-detail" ></i>
+                                </div>
+                                <img src="${item.Picture_1}" alt="" class="img-icon">
+                                <div class="box-next-detail">
+                                    <i class="fas fa-chevron-right icon-prev-detail" ></i>
+                                </div>
+                            </div>
+                            
+                            <div class="rating-bottom">
+                                <div class="star-box">
+                                    <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-detail">
+                            <div class="detail-1">
+                                <div class="item-1">
+                                    <p>${item.Name}</p>
+                                </div>
+                                <div class="item-2">
+                                    <div class="item-4"> 
+                                        <p>Harga Termasuk PPN: <span id="span_harga"> Rp.${hargaTotal} </span> </p>  
+                                        <div class="box-qty-detail"> Kuantitas  : ${item.Stock_Quantity} </div>   
+                                    </div>
+                                    <p>Harga dengan pembayaran tempo : *hubungi customer service kami*</p>
+                                </div>
+                                <div class="box_share_product">
+                                    <p>Share This Product</p>
+                                    <div class="box_ins_share"> 
+                                        <input type="text" value="${querystring}" readonly class="share_link_input" id="copyClipboard" onclick="copy_link_share()">
+                                        <i class="far fa-copy btn_link_share" onclick="copy_link_share()" id="copy"></i>
+                                    </div>
+                                </div>
+                                <div class="item-4">
+                                    <p>Harga GROUP BUY DISKON: <span style="color:#37CED5"> Rp.${item.GroupBuy_SellPrice}</span> </p>
+                                    
+                                </div>
+                                <div class="box-detail-option">
+                                    <ul class="box-add" onclick="addToCart('${item.Product_Code}')">
+                                        <li>
+                                            <p>Add to Cart</p>
+                                        </li>
+                                        <li>
+                                            <img src="../img/cart.png" alt="" class="img-cart">
+                                        </li>
+                                    </ul>
+                            
+                                    <div class="box-discount" onclick="groupbuy('${item.Product_Code}')">
+                                        <div class="add-discount">
+                                            <p>Beli dengan diskon GROUP BUY</p>
+                                        </div>
+                                    </div>
+                            
+                                </div>
+        
+                                <br>
+                                <div class="deskripsi_gb">
+                                    <p>Deskripsi :</p>
+                                    <p>${item.Description}</p>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    )
+                }
+            
+            
+                }   
+         })
+    
         
     }).catch((err)=>{
         console.log(err)
@@ -2792,7 +2836,7 @@ const render_item_all_category=()=>{
             res.data.map((val,index)=>{
                 // console.log(val)
                 $('.bot-all-category').append(`
-                    <div class="card card-small-category" onclick="getAllItem('${val.Subcategory}')">
+                    <div class="card card-small-category" onclick="getAllItem_fromAllCat('${val.Subcategory}')">
                         <img src="${val.Picture_1}" class="card-img-top">
                         <h3 class="card-title">${val.Subcategory}</h3>
                     </div>

@@ -133,9 +133,11 @@ function loadCheckoutFinalConfirmationTable(condition){
         console.log(Shipping_option)
         var Shipping_selection = $("#sub-delivery-option").children("option:selected").val();
         console.log(Shipping_selection)
+        $("#final_checkout_delivery_row").empty()
+        $("#final_checkout_total_price_row").empty()
         $('#final_checkout_delivery_row').append(`
             <td> ${Shipping_option} </td>
-            <td> 20.000 </td>
+            <td></td>
         `)
         $('#final_checkout_total_price_row').append(`
             <td>${total_price_with_shipping} </td>
@@ -179,6 +181,8 @@ function loadCheckoutFinalConfirmationTable(condition){
                 
             });
         }
+        $("#final_checkout_delivery_row").empty()
+        $("#final_checkout_total_price_row").empty()
         $('#final_checkout_delivery_row').append(`
             <td> ${Shipping_option} </td>
             <td>  </td>
@@ -237,7 +241,9 @@ function loadCheckoutFinalConfirmationTable(condition){
 }
 
 function periodOptionSelected(x){
+    console.log('period option selected jalan')
     if($(x).children("option:selected").val().toUpperCase() == "TRANSFER"){
+        // alert('masuk ke if')
         swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");
         $("#normal-transfer-selected").css("display", "block");
         // loadCheckoutFinalConfirmationTable("PERIOD");

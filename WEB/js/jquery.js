@@ -204,6 +204,7 @@ $(function(){
             }else {
                 
                 $('#loginModal').modal('show') // login lama
+                console.log($('#loginModal').modal('show'))
                 // $('#newloginModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
             }

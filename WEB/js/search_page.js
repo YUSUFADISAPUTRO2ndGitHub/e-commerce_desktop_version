@@ -171,6 +171,7 @@ function show_jenisproduct(jenis_product){
     $('.box-list-kategori').css('display','none')
     $('.box-list-subcategory').css('display','block')
     $('.close-button').css('display','block')
+    $('.render-item-sub').empty()
 
     let timerInterval
     Swal.fire({
@@ -206,11 +207,12 @@ function show_jenisproduct(jenis_product){
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
-                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
-                val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                ){
+                // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
+                // val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                // ){
                     console.log('data tidak ke render karna false')
-                }else {
+                // }else {
+                    
                     $('.render-item-sub').append(
                       `
                         <div class="card-item card_sp hvr-float-shadow">
@@ -231,7 +233,7 @@ function show_jenisproduct(jenis_product){
                         `
                     )
 
-                }
+                // }
             }) 
             // $('.modals-lk').addClass('melihat') // ini bisa hampir
             
