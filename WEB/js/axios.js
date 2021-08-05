@@ -161,10 +161,10 @@ const renderItemPromo=()=>{
         // console.log(allData)
         // console.log(val)
         // console.log(val == false, ' val == false', val.Sell_Price == 'NULL', ' val.Sell_Price == NULL', val.Sell_Price == 0 , 'val.Sell_Price == 0', val.Sell_Price < 1, 'val.Sell_Price < 1', val.Sell_Price == undefined, 'val.Sell_Price == undefined',val.Sell_Price == null,'val.Sell_Price == null', val.Sell_Price < 1,'val.Sell_Price < 1')
-        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-        ){
+        // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+        // ){
           
-        }else {
+        // }else {
             // console.log('berhasil render')
           
             if(val.GroupBuy_Purchase == 'true' || val.GroupBuy_Purchase == true || val.GroupBuy_Purchase == 'yes'){
@@ -236,7 +236,7 @@ const renderItemPromo=()=>{
             //     )
             // }
 
-        }
+        // }
     })
 }
 const renderItemNew=()=>{
