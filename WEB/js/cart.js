@@ -391,40 +391,94 @@ function checkingout(x){
 }
 
 function checkingoutAll(){
-    var token = localStorage.getItem("token");
-    console.log("token " + token);
-    if((token != "" || token == null)){
-        var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-        if(cartToJson.length != 0){
-            var array = [];
-            var productToBeAddedStringify = JSON.stringify(array);
-            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            var i = 0;
-            for(i; i < cartToJson.length; i ++){
-                var productToBeAdded = {
-                    productNo: cartToJson[i].productNo,
-                    quantity: parseInt($("#quantity" + cartToJson[i].productNo).val()),
-                    GroupCode: "NO COUPON",
-                    priceAgreed: $("#" + cartToJson[i].productNo).val()
-                };
-                array.push(productToBeAdded);
-            
-                // saving to storage
-                var productToBeAddedStringify = JSON.stringify(array);
-                localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log(localStorage.getItem("itemsToCheckout"));
-            }
-            swal.fire("Final Step","","success");
-            window.location.href = "./checkout.html";
-        }else{
-            swal.fire("Something is missing","You do not have anything in Cart","warning");
+
+    async function looping_product(){
+        var isSuccess = true
+        var arr = localStorage.getItem('itemsInCart')
+        var arr_product = JSON.parse(arr)
+        console.log(arr_product)
+         for (var i=0; i<arr_product.length; i++){
+           isSuccess=  await check_qty(arr_product,i)
+
+
+           alert( await check_qty(arr_product,i))  
+           console.log( await check_qty(arr_product,i))
+    
         }
-    }else{
-        swal.fire("Something is missing","You have not logged-in","warning");
-        if(token == ""){
-            window.location.href = "./sign-in.html";
+        console.log(isSuccess,'584')
+        await success(isSuccess)
+        
+    }
+    async function check_qty(arr_product,i){
+       return new Promise(async(resolve,reject)=>{
+            var quantity_product = parseInt(arr_product[i].quantity)
+            await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
+            .then(async(res)=>{
+                var isSuccess = true
+                console.log(res.data)
+                var qty_sisa = res.data.Stock_Quantity
+                console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
+                console.log(quantity_product, 'ini product beli looping ke ' , i)
+                console.log(quantity_product > qty_sisa, qty_sisa == 'undefined' ,qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa))
+                if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa)){
+                    isSuccess = false
+                }
+                console.log(isSuccess,' 602')
+                resolve(isSuccess)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    }
+    
+    
+    async function success(isSuccess){
+        console.log(isSuccess,'599')
+        if(isSuccess){
+                var token = localStorage.getItem("token");
+                console.log("token " + token);
+                if((token != "" || token == null)){
+                    var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+                    if(cartToJson.length != 0){
+                        var array = [];
+                        var productToBeAddedStringify = JSON.stringify(array);
+                        localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+                        var i = 0;
+                        for(i; i < cartToJson.length; i ++){
+                            var productToBeAdded = {
+                                productNo: cartToJson[i].productNo,
+                                quantity: parseInt($("#quantity" + cartToJson[i].productNo).val()),
+                                GroupCode: "NO COUPON",
+                                priceAgreed: $("#" + cartToJson[i].productNo).val()
+                            };
+                            array.push(productToBeAdded);
+                        
+                            // saving to storage
+                            var productToBeAddedStringify = JSON.stringify(array);
+                            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+                            console.log(localStorage.getItem("itemsToCheckout"));
+                        }
+                        swal.fire("Final Step","","success");
+                        window.location.href = "./checkout.html";
+                    }else{
+                        swal.fire("Something is missing","You do not have anything in Cart","warning");
+                    }
+                }else{
+                    swal.fire("Something is missing","You have not logged-in","warning");
+                    if(token == ""){
+                        window.location.href = "./sign-in.html";
+                    }
+                }
+            
+        }else {
+            console.log(isSuccess, ' masuk ke else false, qty kurang/undefined dll')
+            Swal.fire("Quantity Kurang", "Error", "error");
         }
     }
+    looping_product()
+
+
+    
 }
 
 function checkingoutAllInStore(){

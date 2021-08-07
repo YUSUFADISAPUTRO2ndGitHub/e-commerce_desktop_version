@@ -101,7 +101,10 @@ function checkItemCode(x){
     }
 }
 
-function addToCart(){
+function addToCart(product_id){
+
+   
+    
     var product = $("#outputData").html();
     if(product == null || product == undefined || product == ""){
         product = $("#product_code_manual").val();
@@ -158,7 +161,9 @@ function addToCart(){
             });
     }
     Swal.fire("Item Added", "have fun shopping!", "success");
+    
 }
+
 
 function clearPopup(){
     $(".productPreview").css("display", "none");

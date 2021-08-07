@@ -78,3 +78,324 @@ color:#217283;
 .tr-item td:nth-child(3) p{
     font-size: 10px;;
 }
+
+
+
+.card-body-ul{
+    padding:5px;
+    width:750px !important;
+    height:600px;
+    border:1px solid black;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    border-radius:10px;
+    
+}
+
+.cb-left{
+    width:60%;
+    height:100%;
+    display: flex;
+    flex-direction:column;
+    overflow-x:auto;
+    border:1px solid black;
+    border-radius:5px;
+    align-items: center;
+    padding:5px;
+    
+}
+.cb-card-left{
+    width:100%;
+    height:200px;
+    border-radius:5px;
+    /* border:1px solid black; */
+    background-color: #f6f6f6;
+    display:flex;
+    flex-direction:column;
+    padding:5px;
+    overflow-x:auto;
+}
+.cb-header-left{
+    width:100%;
+    height:50px;
+    border-radius:5px;
+    /* border-bottom:1px solid lightgray; */
+    background-color: #f6f6f6;
+    display:flex;
+    flex-direction:row;
+}
+.header-left{
+    width:30%;
+    height:100%;
+    display: flex;
+    padding-left:15px;
+    /* justify-content:center; */
+    align-items: center;
+    font-size:16px;
+    font-weight: 400;
+}
+.card-desc{
+    width:30%;
+    height:100%;
+    display: flex;
+    padding-left:15px;
+    /* justify-content:center; */
+    align-items: center;
+    font-size:11px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+}
+.img-card-ul{
+    height:40px;
+    width:40px;
+    min-width: 40px;
+    margin-right:5px;
+}
+.img-item-ul{
+    width:100%;
+    height:100%;
+}
+.header-right{
+    width:70%;
+    height:100%;
+    display: flex;
+    /* justify-content:center; */
+    /* align-items: center; */
+    font-size:16px;
+    font-weight: 400;
+    /* background-color:red */
+}
+.hr-qty{
+    width: 100px;
+    min-width:100px;
+    /* background-color:red; */
+    height:100%;
+    display:flex;
+    /* justify-content:center; */
+    align-items: center;
+    /* background-color:red; */
+    margin-right:2px;
+    font-size:13px;
+    /* border:1px solid black; */
+}
+
+.top-list-ul{
+    height:200px;
+    min-height:200px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    /* background:red; */
+}
+.bot-list-ul{
+    height:80%;
+    width:100%;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    
+    /* background-color:blue */
+}
+.box-card-item-ul{
+    padding-top:5px;
+    width:100%;
+    height:100%;
+    /* background-color:red; */
+    display: flex;
+    flex-direction:column;
+    /* overflow-x: auto;/ */
+
+}
+.card-item-ul{
+    height:70px;
+    min-height:70px;
+    /* border:1px solid black; */
+    border-radius:5px;
+    width:100%;
+    display: flex;
+    flex-direction:row;
+}
+
+
+.cb-right{
+    width:39%;
+    height:100%;
+    display: flex;
+    flex-direction:column;
+    overflow-x:auto;
+    justify-content:space-around;
+    /* border:1px solid black; */
+    border-radius:5px;
+    padding:5px;
+}
+
+.card-ul-left{
+    margin:5px;
+    width:100%;
+    background-color:white;
+    height:500px;
+    min-height:500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* margin-top:10px; */
+    border-radius:10px;
+    padding-left:10px;
+    /* padding-right:15px; */
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+.card-ul-right{
+    width:100%;
+    background-color:white;
+    height:500px;
+    min-height:500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* margin-top:10px; */
+    border-radius:10px;
+    padding-left:10px;
+    /* padding-right:15px; */
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
+.card-address-detail{
+    width:100%;
+    height:150px;
+    /* border:1px solid black; */
+    border-radius:5px;
+    background-color: #f6f6f6;
+    margin-bottom:5px;
+    display: flex;
+    flex-direction:column
+}
+
+.card-address-ul{
+    width:100%;
+    height:120px;
+    /* border:1px solid black; */
+    border-radius:5px;
+    background-color: #f6f6f6;
+    margin-bottom:5px;
+}
+.card-address-total{
+    width:100%;
+    height:40px;
+    /* border:1px solid black; */
+    border-radius:5px;
+    background-color: #f6f6f6;
+    margin-bottom:5px;
+    display: flex;
+    align-items: center;
+}
+.confirmed{
+    width:100px;
+    height:25px;
+    border-radius:50px;
+    display:flex;
+    font-size:13px;
+    justify-content:center;
+    align-items: center;
+    background-color:#e3e5f7;
+    color:#3e52ff;
+    position: relative;
+    /* top:5px; */
+    
+}
+
+.card-summary{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.cs-left{
+    width:50%;
+    height:100%;
+    padding:5px;
+    /* border:1px solid black; */
+}
+.cs-right{
+    width:50%;
+    height:100%;
+    padding:5px;
+    /* border:1px solid black; */
+}
+.address-detail{
+    height:30px;
+    width:100%;
+    font-size:16px;
+    /* background-color:red; */
+    display: flex;
+    align-items: center;
+    padding-left:10px;
+    padding-top:5px;
+    padding-right:10px;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-bottom:5px;
+}
+.address-detail-2{
+    height:30px;
+    width:100%;
+    font-size:13px;
+    color:gray;
+    /* background-color:red; */
+    display: flex;
+    padding-left:25px;
+    align-items: center;
+    padding-left:5px;
+}
+.address-detail-3{
+    height:30px;
+    width:75%;
+    line-height:1;
+    font-size:12px;
+    color:black;
+    /* background-color:red; */
+    display: flex;
+    padding-left:25px;
+    align-items: center;
+    padding-left:5px;
+}
+
+.cs-left-item{
+    width:100%;
+    height:30px;
+    /* background:red; */
+    margin-bottom:3px;
+    min-height:30px;
+    overflow-x:auto;
+    font-size:13px;
+}
+.cs-right-item{
+    width:100%;
+    height:30px;
+    /* background:red; */
+    margin-bottom:3px;
+    min-height:30px;
+    overflow-x:auto;
+    text-align: right;
+    font-size:13px;
+    font-weight:600
+}
+.total-summary-left{
+    width:50%;
+    height:100%;
+    font-size:13px;
+}
+.total-summary-right{
+    width:50%;
+    height:100%;
+    font-size:13px;
+    text-align:right;
+    font-weight: 700;
+
+}

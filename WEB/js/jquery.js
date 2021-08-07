@@ -2093,50 +2093,69 @@ function payment_groupbuy_home(product_id){
 
 
 function addToCart(product_id){
-   
-    var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-    console.log(dataParse,' ini data parse')
 
-    if(dataParse){
-        console.log(dataParse)
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        console.log(res.data)
+        var quantity_product = parseInt(res.data.Stock_Quantity)
+        console.log(quantity_product)
 
-        var filterdatakosong = dataParse.filter((filtering)=>{
-            if(filtering.productNo === product_id){
-                return filtering
-            }
-        })
-        if(filterdatakosong.length){
-            console.log('masuk ke if 201')
-            
-            var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
-            dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
-            $('.cart-counter').text(dataParse.length)
-            swal.fire("Berhasil Menambahkan Quantity", "", "success");
+        if(quantity_product == 0 || quantity_product == '0' ||
+           quantity_product == undefined || quantity_product==null ||
+           isNaN(quantity_product) || quantity_product < 0
+        ){
+            Swal.fire("Stock Tidak Tersedia", "Error", "error");
         }else {
-            console.log('masuk ke else  205')
-            var data = {
-            "productNo":product_id,
-            "quantity":1
+            var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+            console.log(dataParse,' ini data parse')
+            if(dataParse){
+                console.log(dataParse)
+        
+                var filterdatakosong = dataParse.filter((filtering)=>{
+                    if(filtering.productNo === product_id){
+                        return filtering
+                    }
+                })
+                if(filterdatakosong.length){
+                    console.log('masuk ke if 201')
+                    
+                    var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
+                    dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
+                    $('.cart-counter').text(dataParse.length)
+                    swal.fire("Berhasil Menambahkan Quantity", "", "success");
+                }else {
+                    console.log('masuk ke else  205')
+                    var data = {
+                    "productNo":product_id,
+                    "quantity":1
+                    }
+                    dataParse.push(data)
+                    $('.cart-counter').text(dataParse.length)
+                    swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+                }
+        
+                var pushToStorage = JSON.stringify(dataParse)
+                localStorage.setItem('itemsInCart',pushToStorage)
+        
+            }else {
+                console.log('local storage kosong')
+                var cart = [
+                    {
+                    "productNo":product_id,
+                    "quantity":1
+                    }
+                ]
+                var pushToStorage2 = JSON.stringify(cart)
+                localStorage.setItem('itemsInCart',pushToStorage2)     
             }
-            dataParse.push(data)
-            $('.cart-counter').text(dataParse.length)
-            swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+        
+
         }
-
-        var pushToStorage = JSON.stringify(dataParse)
-        localStorage.setItem('itemsInCart',pushToStorage)
-
-    }else {
-        console.log('local storage kosong')
-        var cart = [
-            {
-            "productNo":product_id,
-            "quantity":1
-            }
-        ]
-        var pushToStorage2 = JSON.stringify(cart)
-        localStorage.setItem('itemsInCart',pushToStorage2)     
-    }
+    }).catch((err)=>{
+        console.log(err)
+    })
+    
+   
   
   
 

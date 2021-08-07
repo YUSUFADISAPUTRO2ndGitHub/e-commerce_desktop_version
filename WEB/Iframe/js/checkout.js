@@ -491,30 +491,199 @@ const onSelectDeliveryFee=()=>{
     console.log(total_price_with_shipping,' 149')
 }
 
+
+function checking_payment(){
+    var province_pilihan=$('.cart-provinsi option:selected').val()
+    var new_kurir_pilihan = $('#sub-delivery-option option:selected').val()
+    var kota_pilihan = $('.cart-kota option:selected').val()
+    var district_pilihan = $('.cart-kecamatan option:selected').val()
+    var sub_district_pilihan = $('.cart-kelurahan option:selected').val()
+    var pengiriman_pilihan = $('.cart-pengiriman option:selected').val()
+    var payment_pilihan = $('#payment-selection option:selected').val()
+
+    var isKurir_pilihan = false
+    var isProvince_pilihan = false
+    var isKota_pilihan = false
+    var isKecamatan_pilihan = false
+    var isKelurahan_pilihan = false
+    var isPengiriman_pilihan = false
+    var isPaymentMethod_pilihan = false
+
+    console.log(new_kurir_pilihan,'kurir pilihan')
+    console.log(province_pilihan,'province pilihan')
+    console.log(kota_pilihan,'kota pilihan')
+    console.log(district_pilihan,'kecamatan pilihan')
+    console.log(sub_district_pilihan,'kelurahan pilihan')
+    console.log(pengiriman_pilihan,'pengiriman pilihan')
+    console.log(payment_pilihan,'pengiriman pilihan')
+
+
+
+    
+
+    if(new_kurir_pilihan == 'kurir' || new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0){
+        isKurir_pilihan = false
+    }else {
+        isKurir_pilihan = true
+    }
+
+    if(pengiriman_pilihan =='Waktu Pengiriman' || pengiriman_pilihan == undefined || pengiriman_pilihan == 'undefined' || pengiriman_pilihan == null || pengiriman_pilihan.length == 0){
+        isPengiriman_pilihan = false
+    }else {
+        isPengiriman_pilihan = true
+    }
+
+    if(payment_pilihan == 'Metode Pembayaran' ||payment_pilihan == 'Metode Pembayaran' && payment_pilihan == undefined || payment_pilihan == 'undefined' || payment_pilihan == null || payment_pilihan.length == 0){
+        isPaymentMethod_pilihan = false
+    }else {
+        isPaymentMethod_pilihan = true
+    }
+
+    // if(packing_pilihan == undefined || packing_pilihan == null || packing_pilihan == 'NULL' || packing_pilihan == 'undefined'){
+    //     packing_pilihan = ''
+    //     isPacking_pilihan = false
+    // }else {
+    //     isPacking_pilihan = true
+    // }
+
+    if(district_pilihan == 'Kecamatan' || district_pilihan == 'kecamatan'  || district_pilihan == undefined || district_pilihan == null || district_pilihan == 'NULL' || district_pilihan == 'undefined'){
+        console.log('masuk ke if kecamatan pilihan')
+         district_pilihan = ''
+         isKecamatan_pilihan = false
+     }else {
+        isKecamatan_pilihan = true
+     }
+     if(sub_district_pilihan == 'Kelurahan' && sub_district_pilihan == 'kelurahan' && sub_district_pilihan == undefined || sub_district_pilihan == null || sub_district_pilihan == 'NULL' || sub_district_pilihan == 'undefined'){
+         console.log('masuk ke if kelurahan pilihan')
+         sub_district_pilihan = ''
+         isKelurahan_pilihan = false
+     }else {
+        isKelurahan_pilihan = true
+     }
+
+     if(province_pilihan == 'Provinsi'  || province_pilihan =='provinsi' || province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0){
+        isProvince_pilihan = false
+    }else {
+        isProvince_pilihan = true
+    }
+    if(kota_pilihan == 'Kota' || kota_pilihan == 'kota'  || kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0){
+        isKota_pilihan = false
+    }else {
+        isKota_pilihan = true
+    }
+    async function looping_product(){
+        var isSuccess = true
+        var arr = localStorage.getItem('itemsToCheckout')
+        var arr_product = JSON.parse(arr)
+        console.log(arr_product)
+         for (var i=0; i<arr_product.length; i++){
+           isSuccess=  await check_qty(arr_product,i)
+        }
+        console.log(isSuccess,'584')
+        await success(isSuccess)
+        
+    }
+    async function check_qty(arr_product,i){
+       return new Promise(async(resolve,reject)=>{
+            var quantity_product = parseInt(arr_product[i].quantity)
+            await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
+            .then(async(res)=>{
+                var isSuccess = true
+                console.log(res.data)
+                var qty_sisa = res.data.Stock_Quantity
+                console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
+                console.log(quantity_product, 'ini product beli looping ke ' , i)
+                console.log(quantity_product > qty_sisa, qty_sisa == 'undefined' ,qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa))
+                if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa)){
+                    isSuccess = false
+                }
+                console.log(isSuccess,' 602')
+                resolve(isSuccess)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    }
+    
+    
+    async function success(isSuccess){
+        console.log(isSuccess,'599')
+        if(isSuccess){
+            console.log('masuk ke if success')
+            if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan 
+                && isKecamatan_pilihan && isKelurahan_pilihan && isPengiriman_pilihan
+                && isPaymentMethod_pilihan){
+        
+                    $('#exampleModalLong').modal('show')
+                    console.log('masuk ke if 570')
+                    console.log(isKurir_pilihan,'kurir pilihan')
+                    console.log(isProvince_pilihan,'province pilihan')
+                    console.log(isKota_pilihan,'kota pilihan')
+                    console.log(isKelurahan_pilihan,'kelurahan pilihan')
+                    console.log(isKecamatan_pilihan,'kecamatan pilihan')
+                    console.log(isPengiriman_pilihan,'pengiriman pilihan')
+                    console.log(isPaymentMethod_pilihan,'pengiriman pilihan')
+                } else {
+                    swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                    console.log(isKurir_pilihan,'kurir pilihan')
+                    console.log(isProvince_pilihan,'province pilihan')
+                    console.log(isKota_pilihan,'kota pilihan')
+                    console.log(isKelurahan_pilihan,'kelurahan pilihan')
+                    console.log(isKecamatan_pilihan,'kecamatan pilihan')
+                    console.log(isPengiriman_pilihan,'pengiriman pilihan')
+                    console.log(isPaymentMethod_pilihan,'pengiriman pilihan')
+                
+                }
+        }else {
+            console.log(isSuccess, ' masuk ke else false, qty kurang/undefined dll')
+            Swal.fire("Quantity Kurang", "Error", "error");
+        }
+        return isSuccess
+    }
+    
+   
+
+    
+    looping_product()
+    
+
+}
+
+
 async function requestToFinish(){
     loadingMessage(10000);
-    var addressSelection = $("#address-selection").children("option:selected").val();
-    var address = "";
-    // var province = $(".option-province").children("option:selected").val();
-    // var city = $("#option-city").val();
-    // var zipcode = $("#zipcode").val();
-    var street = $("#street").val();
-    // address = province + ";" + city + ";" + zipcode + ";" + street;
-    address = street;
-    if(addressSelection == "TO SAVED ADDRESS"){
-        personalDetailsWithCurrentAddress();
-    }else{
-        console.log("address " + address);
-        // if(($(".option-province").children("option:selected").val() != "-- select your province here --") && 
-        // ($("#option-city").val().length != 0) &&
-        // ($("#zipcode").val().length > 0) &&
-        // ($("#street").val().length > 0)){
-        //     personalDetailsWithNewAddress(address);
-        // }else{
-        //     swal.fire("Please fill in the address properly", "", "warning");
-        // }
-        personalDetailsWithNewAddress(address);
-    }
+    
+
+ 
+            // batas
+       
+
+
+            var addressSelection = $("#address-selection").children("option:selected").val();
+            var address = "";
+            // var province = $(".option-province").children("option:selected").val();
+            // var city = $("#option-city").val();
+            // var zipcode = $("#zipcode").val();
+            var street = $("#street").val();
+            // address = province + ";" + city + ";" + zipcode + ";" + street;
+            address = street;
+            if(addressSelection == "TO SAVED ADDRESS"){
+                personalDetailsWithCurrentAddress();
+            }else{
+                console.log("address " + address);
+                // if(($(".option-province").children("option:selected").val() != "-- select your province here --") && 
+                // ($("#option-city").val().length != 0) &&
+                // ($("#zipcode").val().length > 0) &&
+                // ($("#street").val().length > 0)){
+                //     personalDetailsWithNewAddress(address);
+                // }else{
+                //     swal.fire("Please fill in the address properly", "", "warning");
+                // }
+                personalDetailsWithNewAddress(address);
+            }
+
+   
+
 }
 
 async function requestToFinishInStore(){
