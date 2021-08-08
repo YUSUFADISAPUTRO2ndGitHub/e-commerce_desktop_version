@@ -10,6 +10,9 @@ body{
     border-radius:10px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .unpaid-title{
@@ -86,7 +89,7 @@ color:#217283;
     width:750px !important;
     height:600px;
     /* border:1px solid black; */
-    display: flex;
+    display: none;
     flex-direction: column;
     background-color: white;
     justify-content: space-between;
@@ -170,8 +173,8 @@ color:#217283;
     /* background-color:red */
 }
 .hr-qty{
-    width: 100px;
-    min-width:100px;
+    width: 110px;
+    min-width:110px;
     /* background-color:red; */
     height:100%;
     display:flex;
@@ -312,6 +315,7 @@ color:#217283;
     height:25px;
     border-radius:50px;
     display:flex;
+    flex-direction: column;
     font-size:13px;
     justify-content:center;
     align-items: center;
@@ -320,6 +324,12 @@ color:#217283;
     position: relative;
     /* top:5px; */
     
+}
+
+.confirmed p {
+    font-size:13px;
+    position: relative;
+    top:20px;
 }
 
 .card-summary{
@@ -430,6 +440,12 @@ color:#217283;
     height:100%;
     border-radius:50%;
 }
+.easteregg{
+    /* visibility:hidden; */
+    opacity:0;
+    position: relative;
+    top:-20px;
+}
 
 .img-description-ul{
     width:50%;
@@ -449,7 +465,7 @@ color:#217283;
 }
 .desc-2-ul{
     width:100%;
-    height:30%;
+    height:35%;
     /* background-color:red; */
     margin:3px;
     display: flex;

@@ -737,35 +737,221 @@ const render_daftar_hutang=()=>{ // render utang untuk di card
 const detail_hutang_home=(order_number)=>{ // detail utang di home header
     // alert('function jalan')
     // $('.tableFixHead_ul_hutang').css('display','none')
-    $('.tableFixHead_ul_detail_hutang').css('display','block')
+    $('.card-body-ul').css('display','flex')
+    $('.box-card-item-ul').empty()
+    $('.card-address-profile').empty()
+    $('.cb-right').empty()
     // $('#daftarHutangModal').modal('hide')
     // $('#ID_detail_hutang_modal').modal('show')
     console.log(order_number)
     axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
         console.log(res.data)
-        $('.ref_code_detail_hutang').val(res.data.Customer_Code)
-        $('.customer_name_hutang').val(res.data.Primary_Recipient_Name)
+        var arrListHutang = res.data
+        var arrDataProduct = []
+        var kurir_name = ''
+        var shipping_price = 0
+        var product_price =0
+        var customer_address = ''
+        
+        
+        for(var i=0; i<6; i++){
+            console.log(i,' 753')
+        }
+        var total = arrListHutang.length
+        console.log(total)
 
-        res.data.map((val,index)=>{
-            console.log(val)
-            var hargaSatuan = parseInt(val.Price_Based_On_Total_Quantity)/parseInt(val.Quantity_Requested)
+        // render card item
+        arrListHutang.map((val,index)=>{
+            customer_address =  val.Shipping_Address
 
-            $('.ul_detail_list_hutang').append(`
-            <tr>
-                <td><p class="limited-text-short">${val.Product_Name}</p></td>
-                <td><p class="limited-text-short">${val.Order_Number}</p></td>
-                <td><p>RP.${val.Total_Price}</td>
-                <td><p>RP.${hargaSatuan}</td>
-                <td ><p>${val.Payment_Method}</p></td>
-                <td ><p>${val.Shipping_Fee}</p></td>
-                <td ><p>${val.Shipping_Address}</p></td>
-                <td ><p style="word-break: break-all">${val.VA_Number}</p></td>  
-
-            </tr>
-            `)
-            
+            if(index == 0 ){ // untuk buat kurir
+                shipping_price += val.Price_Based_On_Total_Quantity *1
+                // product_price += val.Price_Based_On_Total_Quantity *1
+                kurir_name = val.Product_Code
+                //render kurir
+                if(kurir_name == 'tiki'){
+                    
+                    $('.box-card-item-ul').append(`
+                    <div class="card-item-ul">
+                        <div class="card-desc">
+                            <div class="img-card-ul">
+                                <img src="../img/tiki_shipping_method.png" alt="" class="img-item-ul">
+                            </div>
+                            ${val.Product_Name}
+                        </div>
+                        <div class="header-right">
+                            <div class="hr-qty">
+                                ${val.Product_Code}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Payment_Method}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Quantity_Requested} Pcs
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Price_Based_On_Total_Quantity}
+                            </div>
+                            <div class="hr-qty">
+                                ${kurir_name}
+                            </div>     
+                        </div>
+                    </div>
+                    `)
+                }else { // kalau kurir selain tiki yang keluar pasti vantsing
+                    $('.box-card-item-ul').append(`
+                    <div class="card-item-ul">
+                        <div class="card-desc">
+                            <div class="img-card-ul">
+                                <img src="../img/vantsing_shipping_method.png" alt="" class="img-item-ul">
+                            </div>
+                            ${val.Product_Name}
+                        </div>
+                        <div class="header-right">
+                            <div class="hr-qty">
+                                ${val.Product_Code}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Payment_Method}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Quantity_Requested} Pcs
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Price_Based_On_Total_Quantity}
+                            </div>
+                            <div class="hr-qty">
+                                ${kurir_name}
+                            </div>     
+                        </div>
+                    </div>
+                `)
+                }           
+            }else {
+                product_price += val.Price_Based_On_Total_Quantity *1
+                axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
+                .then((res)=>{
+                    console.log(res.data, ' 780')
+                $('.box-card-item-ul').append(`
+                    <div class="card-item-ul">
+                        <div class="card-desc">
+                            <div class="img-card-ul">
+                                <img src="${res.data    .Picture_1}" alt="" class="img-item-ul">
+                            </div>
+                            ${val.Product_Name}
+                        </div>
+                        <div class="header-right">
+                            <div class="hr-qty">
+                                ${val.Product_Code}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Payment_Method}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Quantity_Requested} Pcs
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Price_Based_On_Total_Quantity}
+                            </div>
+                            <div class="hr-qty">
+                                ${kurir_name}
+                            </div>     
+                        </div>
+                    </div>
+                `)
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }
         })
+        var total_product_with_shipping = shipping_price + product_price
+        console.log(shipping_price,' shipping price')
+        console.log(product_price, ' total all price')
+        console.log(total_product_with_shipping)
+        $('.card-address-profile').append(`
+        <div class="img-profile-ul">
+            <img src="../img/liked.png" alt="error" class="img-prof">
+        </div>
+        <div class="img-description-ul">
+            <div class="desc-1-ul" >
+            ${arrListHutang[0].Primary_Recipient_Name}
+            
+            </div>
+            <div class="desc-2-ul">
+            ${arrListHutang[0].Shipping_Address}
+            </div>
+            <div class="desc-3-ul">
+            ${arrListHutang[0].Shipping_Contact_Number}
+            </div>
+        </div>
+        <div class="img-status-ul">
+            <div class="confirmed"  value="Gorilla Workout"  >
+                <p> ${arrListHutang[0].Creator} </p>
+               
+                <input type="text" value="Gorilla Workout" readonly class="easteregg" id="copyClipboardul" onclick="gorillaworkout('GorillaWorkout')" >
+            </div>
+        </div>
+        `)
+
+        $('.cb-right').append(`
+        <div class="card-address-detail">
+            <div class="address-detail">
+            Order Summary
+            <div class="confirmed">
+                Confirmed
+            </div>
+            </div>
+            <div class="card-summary">
+            <div class="cs-left">
+                <div class="cs-left-item">
+                All Product Price
+                </div>
+                <div class="cs-left-item">
+                Shipping Price
+                </div>
+                <div class="cs-left-item">
+                Shipping Method
+                </div>
+            
+            </div>
+            <div class="cs-right">
+                <div class="cs-right-item">
+                ${product_price}
+                </div>
+                <div class="cs-right-item">
+                ${shipping_price}
+                </div>
+                <div class="cs-right-item">
+                ${kurir_name}
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="card-address-total">
+            <div class="address-detail">
+                <div class="total-summary-left">
+                    Total
+                </div>
+                <div class="total-summary-right">
+                    ${total_product_with_shipping}
+                </div>   
+            </div>
+        </div>
+        
+        <div class="card-address-ul">
+            <div class="address-detail">
+            Order Details
+            </div>
+            <div class="address-detail-2">
+            Shipping Address
+            </div>
+            <div class="address-detail-3">
+                ${customer_address}
+            </div>  
+        </div>   
+        `)
+
 
     }).catch((err)=>{
         console.log(err)

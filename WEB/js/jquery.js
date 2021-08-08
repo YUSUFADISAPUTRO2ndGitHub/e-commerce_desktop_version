@@ -2852,6 +2852,25 @@ const copy_link_share=()=>{
     
 }
 
+const gorillaworkout=(name)=>{
+    console.log(name)
+    var copyText = document.getElementById("copyClipboardul");
+    // var copyText = 'Gorilla Workout'
+    console.log(copyText)
+    var text = $('.easteregg').val()
+    console.log(text)
+    if(copyText){
+        console.log(copyText)
+        copyText.select();
+        
+        // copyText.setSelectionRange(0, 99999);
+        document.execCommand("Copy");
+        // Swal.fire('Copy berhasil', '', 'success')
+    }
+
+}
+
+
 const nonActiveSkeleton=()=>{
     // alert('jalan')
     $('.box-render-promo-animated').css('display','none')
