@@ -974,35 +974,57 @@ const choosing_shipping=(kurir,product_id)=>{
         // $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
         // $(this).addClass('selected')
         // $(this).addClass('selected')
-        $('.radio-delivery-card').removeClass('selected')
-        $('.radio-delivery-card').removeClass('active_delivery_method')
-        
-        
-        var kurir_id = kurir
-        var id = $('.radio-delivery-card').attr('id')
-        
-     
-    console.log(id == kurir_id, ' 941 sama gak neh alig')
-        if(id == kurir_id){
-            console.log('masuk ke if 943')
-            $(`#${kurir}`).addClass('selected')
-            $(`#${kurir}`).addClass('active_delivery_method')
-        }
-        
-        
-        // $(this).addClass('selected');
-        // $(this).attr('id','testing_id_kurir')
-        // $(this).addClass('active_payment_method');
-        console.log(this)
+        axios.post(`http://products.sold.co.id/get-courier-data?Get_All_Couriers=true`)
+        .then((res)=>{
+            console.log(res.data)
+            var kurir_id = kurir
+            $('.radio-delivery-card').removeClass('selected')
+            $('.radio-delivery-card').removeClass('active_delivery_method')
+            for(var i = 0; i<res.data.length; i++){
+                var kurir_looping = `id-kurir-gb-${res.data[i].Courier}`
+                console.log(kurir_looping, ' kurir looping')
+                console.log(kurir_looping == kurir_id, ' persamaan', kurir_looping , kurir_id)
+                
+                if(kurir_looping = kurir_id){
+                    // alert('masuk ke if 987')
+                    $(`#${kurir_id}`).addClass('selected')
+                    $(`#${kurir_id}`).addClass('active_delivery_method')
+                    console.log($(`#${kurir_id}`))
+                    i=res.data.length
+                }
+            }
 
-        var val = $(this).attr('data-value');
-        result = val
-        var class_payment = $(this)
-        console.log(class_payment)
-        var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
-        console.log(new_kurir_pilihan)
-        kurirMethodHome(new_kurir_pilihan,product_id)
+            
+            
+        //     var id = $('.radio-delivery-card').attr('id')
+        //     console.log(id,' ini id 983')
+        //     console.log(kurir_id,' ini id 983')
+         
+        // console.log(id == kurir_id, ' 941 sama gak neh alig')
+        //     if(id == kurir_id){
+        //         console.log('masuk ke if 943')
+                
+        //     }
+            
+            
+            // $(this).addClass('selected');
+            // $(this).attr('id','testing_id_kurir')
+            // $(this).addClass('active_payment_method');
+            console.log(this)
+    
+            var val = $(this).attr('data-value');
+            result = val
+            var class_payment = $(this)
+            console.log(class_payment)
+            var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
+            console.log(new_kurir_pilihan)
+            kurirMethodHome(new_kurir_pilihan,product_id)
+        }).catch((err)=>{
+            console.log(err)
+        })
+
 }  
+
 
 
 

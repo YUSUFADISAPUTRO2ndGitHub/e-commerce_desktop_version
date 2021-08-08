@@ -80,7 +80,7 @@ $(function(){
 
     $('.radio-group-delivery .radio-delivery-card').on('click',function(){
         // alert('function jalan')
-        // alert('jalan')
+        alert('jalan')
         $(this).parent().find('.radio-delivery-card').removeClass('selected');
         $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
         $('.radio-delivery-card').removeClass('selected')
@@ -93,7 +93,7 @@ $(function(){
         var class_payment = $(this)
         console.log(class_payment)
         var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
-        // console.log(testing_val)
+        console.log(new_kurir_pilihan)
         kurirMethodHome(new_kurir_pilihan)
     })
 

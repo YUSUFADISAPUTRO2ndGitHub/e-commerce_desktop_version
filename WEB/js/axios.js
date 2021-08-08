@@ -914,6 +914,10 @@ const render_group_buy=(product_id)=>{
                 get_all_couriers().done(function(response){
                     console.log(response)
                     kurir = response[0]
+                    console.log(kurir)
+                    // if(kurir.Courier != 'tiki'){
+                    //     kurir.Courier = 'tiki'
+                    // }
                     allKurir = response
                     get_all_province_from_courier(kurir.Courier,kurir.Courier_Code).done(function(response){
                         province = response[0]
@@ -958,30 +962,37 @@ const render_group_buy=(product_id)=>{
                                         allPengiriman = response
                                         console.log(response,' ini shipping cost')
                                         if(allPengiriman){
-                                            allPengiriman.service.map((val,index)=>{
-                                                console.log(val, 'ini all pengiriman')
-                                                console.log(val.est_day)
-                                                console.log(val.EST_DAY)
-                                                $('.pengiriman-home-gb').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                                `)
-                                            })
-                                            allPengiriman.insurance.map((val,index)=>{
-                                                // console.log(val, ' ini all pengiriman')
-                                                // console.log(val.est_day)
-                                                // console.log(val.EST_DAY)
-                                                $('.asuransi-home-gb').append(`
-                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                                `)
-                                            })
-                                            allPengiriman.packing.map((val,index)=>{
-                                                // console.log(val, ' ini all pengiriman')
-                                                // console.log(val.est_day)
-                                                // console.log(val.EST_DAY)
-                                                $('.packing-home-gb').append(`
-                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                                `)
-                                            })
+
+                                            if(allPengiriman.service != undefined) {
+                                                allPengiriman.service.map((val,index)=>{
+                                                    console.log(val, 'ini all pengiriman')
+                                                    console.log(val.est_day)
+                                                    console.log(val.EST_DAY)
+                                                    $('.pengiriman-home-gb').append(`
+                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                    `)
+                                                })
+                                            }
+                                            if(allPengiriman.insurance !=undefined){
+                                                allPengiriman.insurance.map((val,index)=>{
+                                                    // console.log(val, ' ini all pengiriman')
+                                                    // console.log(val.est_day)
+                                                    // console.log(val.EST_DAY)
+                                                    $('.asuransi-home-gb').append(`
+                                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                    `)
+                                                })
+                                            }
+                                            if(allPengiriman.packing != undefined) {
+                                                allPengiriman.packing.map((val,index)=>{
+                                                    // console.log(val, ' ini all pengiriman')
+                                                    // console.log(val.est_day)
+                                                    // console.log(val.EST_DAY)
+                                                    $('.packing-home-gb').append(`
+                                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                    `)
+                                                })
+                                            }
     
                                         }
                                         
@@ -992,11 +1003,19 @@ const render_group_buy=(product_id)=>{
                                             // $('.kurir-home-gb').append(`
                                             //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
                                             // `)
-                                            $('.radio-group-delivery').append(`
-                                            <div class="address-card-1 radio-delivery-card" id="id-kurir-gb-${val.Courier}" data-value="${val.Courier}" onclick="choosing_shipping('id-kurir-gb-${val.Courier}', ${product_id})">
-                                                <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
-                                            </div>
-                                        `)
+                                            if(val.Courier == 'tiki'){
+                                                $('.radio-group-delivery').append(`
+                                                <div class="address-card-1 radio-delivery-card" id="id-kurir-gb-${val.Courier}" data-value="${val.Courier}" onclick="choosing_shipping('id-kurir-gb-${val.Courier}', ${product_id})">
+                                                    <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
+                                                </div>
+                                                 `)
+                                            }else {
+                                                $('.radio-group-delivery').append(`
+                                                <div class="address-card-1 radio-delivery-card" id="id-kurir-gb-${val.Courier}" data-value="${val.Courier}" onclick="choosing_shipping('id-kurir-gb-${val.Courier}', ${product_id})">
+                                                    <img src="../img/vantsing_shipping_method.png" alt="" class="bca_img">
+                                                </div>
+                                                 `)
+                                            }
                                         })
                                         allProvince.map((val,index)=>{
                                             // console.log(val,'ini val province')
@@ -1335,30 +1354,40 @@ const kurirMethodHome=(kurir,product_id)=>{
                                     }
                                 })
     
-                                allPengiriman.service.map((val,index)=>{
-                                    // console.log(val, ' ini all pengiriman')
-                                    // console.log(val.est_day)
-                                    // console.log(val.EST_DAY)
-                                    $('.pengiriman-home-gb').append(`
-                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                    `)
-                                })
-                                allPengiriman.insurance.map((val,index)=>{
-                                    // console.log(val, ' ini all pengiriman')
-                                    // console.log(val.est_day)
-                                    // console.log(val.EST_DAY)
-                                    $('.asuransi-home-gb').append(`
-                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                    `)
-                                })
-                                allPengiriman.packing.map((val,index)=>{
-                                    // console.log(val, ' ini all pengiriman')
-                                    // console.log(val.est_day)
-                                    // console.log(val.EST_DAY)
-                                    $('.packing-home-gb').append(`
-                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                    `)
-                                })
+                                if(allPengiriman){
+
+                                    if(allPengiriman.service != undefined) {
+                                        allPengiriman.service.map((val,index)=>{
+                                            console.log(val, 'ini all pengiriman')
+                                            console.log(val.est_day)
+                                            console.log(val.EST_DAY)
+                                            $('.pengiriman-home-gb').append(`
+                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                            `)
+                                        })
+                                    }
+                                    if(allPengiriman.insurance !=undefined){
+                                        allPengiriman.insurance.map((val,index)=>{
+                                            // console.log(val, ' ini all pengiriman')
+                                            // console.log(val.est_day)
+                                            // console.log(val.EST_DAY)
+                                            $('.asuransi-home-gb').append(`
+                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                            `)
+                                        })
+                                    }
+                                    if(allPengiriman.packing != undefined) {
+                                        allPengiriman.packing.map((val,index)=>{
+                                            // console.log(val, ' ini all pengiriman')
+                                            // console.log(val.est_day)
+                                            // console.log(val.EST_DAY)
+                                            $('.packing-home-gb').append(`
+                                                <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                            `)
+                                        })
+                                    }
+
+                                }
     
     
                             })
@@ -1570,30 +1599,40 @@ const provinceMethodHome=(product_id)=>{
                                     }
                                 })
     
-                                allPengiriman.service.map((val,index)=>{
-                                    // console.log(val, ' ini all pengiriman')
-                                    // console.log(val.est_day)
-                                    // console.log(val.EST_DAY)
-                                    $('.pengiriman-home-gb').append(`
-                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                    `)
-                                })
-                                allPengiriman.insurance.map((val,index)=>{
-                                    // console.log(val, ' ini all pengiriman')
-                                    // console.log(val.est_day)
-                                    // console.log(val.EST_DAY)
-                                    $('.asuransi-home-gb').append(`
-                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                    `)
-                                })
-                                allPengiriman.packing.map((val,index)=>{
-                                    // console.log(val, ' ini all pengiriman')
-                                    // console.log(val.est_day)
-                                    // console.log(val.EST_DAY)
-                                    $('.packing-home-gb').append(`
-                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                    `)
-                                })
+                                if(allPengiriman){
+
+                                    if(allPengiriman.service != undefined) {
+                                        allPengiriman.service.map((val,index)=>{
+                                            console.log(val, 'ini all pengiriman')
+                                            console.log(val.est_day)
+                                            console.log(val.EST_DAY)
+                                            $('.pengiriman-home-gb').append(`
+                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                            `)
+                                        })
+                                    }
+                                    if(allPengiriman.insurance !=undefined){
+                                        allPengiriman.insurance.map((val,index)=>{
+                                            // console.log(val, ' ini all pengiriman')
+                                            // console.log(val.est_day)
+                                            // console.log(val.EST_DAY)
+                                            $('.asuransi-home-gb').append(`
+                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                            `)
+                                        })
+                                    }
+                                    if(allPengiriman.packing != undefined) {
+                                        allPengiriman.packing.map((val,index)=>{
+                                            // console.log(val, ' ini all pengiriman')
+                                            // console.log(val.est_day)
+                                            // console.log(val.EST_DAY)
+                                            $('.packing-home-gb').append(`
+                                                <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                            `)
+                                        })
+                                    }
+
+                                }
     
     
                             })
@@ -1823,30 +1862,40 @@ const kotaMethodHome=(product_id)=>{
                                         }
                                     })
         
-                                    allPengiriman.service.map((val,index)=>{
-                                        // console.log(val, ' ini all pengiriman')
-                                        // console.log(val.est_day)
-                                        // console.log(val.EST_DAY)
-                                        $('.pengiriman-home-gb').append(`
-                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                        `)
-                                    })
-                                    allPengiriman.insurance.map((val,index)=>{
-                                        // console.log(val, ' ini all pengiriman')
-                                        // console.log(val.est_day)
-                                        // console.log(val.EST_DAY)
-                                        $('.asuransi-home-gb').append(`
-                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                        `)
-                                    })
-                                    allPengiriman.packing.map((val,index)=>{
-                                        // console.log(val, ' ini all pengiriman')
-                                        // console.log(val.est_day)
-                                        // console.log(val.EST_DAY)
-                                        $('.packing-home-gb').append(`
-                                            <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                        `)
-                                    })
+                                    if(allPengiriman){
+
+                                        if(allPengiriman.service != undefined) {
+                                            allPengiriman.service.map((val,index)=>{
+                                                console.log(val, 'ini all pengiriman')
+                                                console.log(val.est_day)
+                                                console.log(val.EST_DAY)
+                                                $('.pengiriman-home-gb').append(`
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.insurance !=undefined){
+                                            allPengiriman.insurance.map((val,index)=>{
+                                                // console.log(val, ' ini all pengiriman')
+                                                // console.log(val.est_day)
+                                                // console.log(val.EST_DAY)
+                                                $('.asuransi-home-gb').append(`
+                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.packing != undefined) {
+                                            allPengiriman.packing.map((val,index)=>{
+                                                // console.log(val, ' ini all pengiriman')
+                                                // console.log(val.est_day)
+                                                // console.log(val.EST_DAY)
+                                                $('.packing-home-gb').append(`
+                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                `)
+                                            })
+                                        }
+
+                                    }
         
         
                                 })
@@ -2094,30 +2143,40 @@ const kelurahanMethodHome=(product_id)=>{
                                     //     }
                                     // })
         
-                                    allPengiriman.service.map((val,index)=>{
-                                        // console.log(val, ' ini all pengiriman')
-                                        // console.log(val.est_day)
-                                        // console.log(val.EST_DAY)
-                                        $('.pengiriman-home-gb').append(`
-                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                        `)
-                                    })
-                                    allPengiriman.insurance.map((val,index)=>{
-                                        // console.log(val, ' ini all pengiriman')
-                                        // console.log(val.est_day)
-                                        // console.log(val.EST_DAY)
-                                        $('.asuransi-home-gb').append(`
-                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                        `)
-                                    })
-                                    allPengiriman.packing.map((val,index)=>{
-                                        // console.log(val, ' ini all pengiriman')
-                                        // console.log(val.est_day)
-                                        // console.log(val.EST_DAY)
-                                        $('.packing-home-gb').append(`
-                                            <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                        `)
-                                    })
+                                    if(allPengiriman){
+
+                                        if(allPengiriman.service != undefined) {
+                                            allPengiriman.service.map((val,index)=>{
+                                                console.log(val, 'ini all pengiriman')
+                                                console.log(val.est_day)
+                                                console.log(val.EST_DAY)
+                                                $('.pengiriman-home-gb').append(`
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.insurance !=undefined){
+                                            allPengiriman.insurance.map((val,index)=>{
+                                                // console.log(val, ' ini all pengiriman')
+                                                // console.log(val.est_day)
+                                                // console.log(val.EST_DAY)
+                                                $('.asuransi-home-gb').append(`
+                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.packing != undefined) {
+                                            allPengiriman.packing.map((val,index)=>{
+                                                // console.log(val, ' ini all pengiriman')
+                                                // console.log(val.est_day)
+                                                // console.log(val.EST_DAY)
+                                                $('.packing-home-gb').append(`
+                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                `)
+                                            })
+                                        }
+
+                                    }
         
         
                                 })
@@ -3056,7 +3115,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
                             
 
                             allKurir.map((val,index)=>{
-                                // console.log(val,'ini val kurir')
+                                console.log(val,'ini val kurir')
                                 // $('.kurir-home-gb').append(`
                                 //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
                                 // `)
@@ -3109,30 +3168,40 @@ const render_all_kurir_before_choosing=(product_id)=>{
                                 }
                             })
 
-                            allPengiriman.service.map((val,index)=>{
-                                console.log(val, 'ini all pengiriman')
-                                console.log(val.est_day)
-                                console.log(val.EST_DAY)
-                                $('.pengiriman-home-gb').append(`
-                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                `)
-                            })
-                            allPengiriman.insurance.map((val,index)=>{
-                                // console.log(val, ' ini all pengiriman')
-                                // console.log(val.est_day)
-                                // console.log(val.EST_DAY)
-                                $('.asuransi-home-gb').append(`
-                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                `)
-                            })
-                            allPengiriman.packing.map((val,index)=>{
-                                // console.log(val, ' ini all pengiriman')
-                                // console.log(val.est_day)
-                                // console.log(val.EST_DAY)
-                                $('.packing-home-gb').append(`
-                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                `)
-                            })
+                            if(allPengiriman){
+
+                                if(allPengiriman.service != undefined) {
+                                    allPengiriman.service.map((val,index)=>{
+                                        console.log(val, 'ini all pengiriman')
+                                        console.log(val.est_day)
+                                        console.log(val.EST_DAY)
+                                        $('.pengiriman-home-gb').append(`
+                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                        `)
+                                    })
+                                }
+                                if(allPengiriman.insurance !=undefined){
+                                    allPengiriman.insurance.map((val,index)=>{
+                                        // console.log(val, ' ini all pengiriman')
+                                        // console.log(val.est_day)
+                                        // console.log(val.EST_DAY)
+                                        $('.asuransi-home-gb').append(`
+                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                        `)
+                                    })
+                                }
+                                if(allPengiriman.packing != undefined) {
+                                    allPengiriman.packing.map((val,index)=>{
+                                        // console.log(val, ' ini all pengiriman')
+                                        // console.log(val.est_day)
+                                        // console.log(val.EST_DAY)
+                                        $('.packing-home-gb').append(`
+                                            <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                        `)
+                                    })
+                                }
+
+                            }
 
 
                         })
