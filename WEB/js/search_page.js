@@ -871,7 +871,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         console.log(total_product_with_shipping)
         $('.card-address-profile').append(`
         <div class="img-profile-ul">
-            <img src="../img/liked.png" alt="error" class="img-prof">
+            <img src="../img/accounts.png" alt="error" class="img-prof">
         </div>
         <div class="img-description-ul">
             <div class="desc-1-ul" >
