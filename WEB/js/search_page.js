@@ -955,52 +955,84 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
             `)
         }
         console.log(arrListHutang[0].Status,' 962')
-        if(arrListHutang[0].Status == 'cancelled'){
+        if(arrListHutang[0].Status == 'pending'){
             $('.progress-card-ul').empty() // order received
             $('.progress-card-ul').append(`
-            <div class="prog-1">
-                <div class="progress new-progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            <div class="box-card-progress">
+                <div class="prog-1">
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="img-prog-1">
+                    
+                    <img src="../img/checklist.png" alt="">
+                    </div>
+        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
                 </div>
-                <div class="img-prog-1">
-                
-                <img src="../img/checklist.png" alt="">
+                <div class="prog-1">
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="img-prog-2">
+                    
+                    <img src="../img/fast-delivery.png" alt="">
+                    </div>
+        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
                 </div>
-    
-                <div class="line-prog-1-right">
-    
+                <div class="prog-1">
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="img-prog-3">
+                    
+                    <img src="../img/truck.png" alt="">
+                    </div>
+        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
                 </div>
             </div>
-            <div class="prog-1">
-                <div class="line-prog-2-left">
-    
+            <div class="box-card-progress-2">
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-1">
+                        Order Received
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
                 </div>
-                <div class="img-prog-2">
-                
-                <img src="../img/fast-delivery.png" alt="">
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-2">
+                        Order Approved
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
                 </div>
-    
-                <div class="line-prog-2-right">
-    
-                </div>
-            </div>
-            <div class="prog-1">
-                <div class="line-prog-3-left">
-    
-                </div>
-                <div class="img-prog-3">
-                
-                <img src="../img/truck.png" alt="">
-                </div>
-    
-                <div class="line-prog-3-right">
-    
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-3"> 
+                        Order Delivered
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
                 </div>
             </div>
             `)
         }else if (arrListHutang[0].Status == 'approving'){
             $('.progress-card-ul').empty() // order approved
             $('.progress-card-ul').append(`
+            <div class="box-card-progress">
                 <div class="prog-1">
                     <div class="progress new-progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
@@ -1040,51 +1072,112 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                 </div>
+            </div>
+            <div class="box-card-progress-2">
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-1">
+                        Order Received
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-2">
+                        Order Approved
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-3"> 
+                        Order Delivered
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
+                </div>
+            </div>
             `)
             $('.line-prog-1-right').css('background-color','#57ed6a ')
             $('.line-prog-2-left').css('background-color','#57ed6a  ')
-        }else if (arrListHutang[0].Status == 'pending'){
+        }else if (arrListHutang[0].Status == 'cancelled'){
             $('.progress-card-ul').empty() // order approved
             $('.progress-card-ul').append(`
+            <div class="box-card-progress">
                 <div class="prog-1">
-                    <div class="line-prog-1-left">
-        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                     <div class="img-prog-1">
                     
                     <img src="../img/not_liked.png" alt="">
                     </div>
         
-                    <div class="line-prog-1-right">
-        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                 </div>
                 <div class="prog-1">
-                    <div class="line-prog-2-left">
-        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                     <div class="img-prog-2">
                     
                     <img src="../img/not_liked.png" alt="">
                     </div>
         
-                    <div class="line-prog-2-right">
-        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                 </div>
                 <div class="prog-1">
-                    <div class="line-prog-3-left">
-        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                     <div class="img-prog-3">
                     
                     <img src="../img/not_liked.png" alt="">
                     </div>
         
-                    <div class="line-prog-3-right">
-        
+                    <div class="progress new-progress">
+                        <div class="progress-bar  bg-pending" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                 </div>
+            </div>
+            <div class="box-card-progress-2">
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-1">
+                        Order Received
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-2">
+                        Order Approved
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="line-prog-1-left-2">
+                    </div>
+                    <div class="img-prog-3"> 
+                        Order Delivered
+                    </div>
+                    <div class="line-prog-1-left-2">
+                    </div>
+                </div>
+            </div>
             `)
     
         }

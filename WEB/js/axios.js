@@ -462,7 +462,7 @@ const getAllItem=(item)=>{
     // console.log($('.modals-lk'))
     console.log($('.modals-lk').attr('src'))
     // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
-    location.replace(`./Iframe/listkategori.html?subcategory=${item}`)
+    location.replace(`./listkategori.html?subcategory=${item}`)
     
 }
 

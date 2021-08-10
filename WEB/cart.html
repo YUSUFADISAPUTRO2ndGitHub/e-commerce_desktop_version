@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="./Iframe/cssIframe/unpaidList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
@@ -117,7 +118,7 @@
         <div class="title">CART/KERANJANG</div>
     </div>
 
-    <table class="table">
+    <!-- <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -128,16 +129,51 @@
         </thead>
         <tbody id="cart-list">
             
+                <div class="new-card-cart">
+                    <div class="cart-img">
+                        <img src="./img/liked.png" alt="">
+                    </div>
+                    <div class="cart-desc">
+                        <div class="cd-1">  
+                            <div class="form-check" id ="containerCheck">
+                                <input class="form-check-input" id="checklist" type="checkbox" value="productNo" onchange="selectedCart(this)">    
+                            </div>
+                            <p>Sealant Asam  Asam</p>
+                        </div>
+                        <div class="cd-2">
+                            Harga
+                            <input type="number" value="30000">
+                        </div>
+                        <div class="cd-3">
+                            <div class="cd-3-left">
+                                Kuantitas Permintaan
+                            <input type="number" value="30000">
+                            </div>
+                            <div class="cd-3-left">
+                                Stock Tersedia
+                            <input type="number" value="30000" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            
         </tbody>
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Total Price</th>
-                <th scope="col" id="total_selected_price">0</th>
-            </tr>
-        </thead>
-    </table>
+    </table> -->
+    
+    <div id="cart-list">
+        
+    </div>
+    
+
+    <div class="card_total_price_cart">
+        <div class="total_price_cart">
+            <p>Total Price:</p>
+            <p> 30.000</p>
+            
+        </div>
+
+    </div>
 
     <!-- <table>
         <thead>
