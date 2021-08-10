@@ -753,11 +753,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         var shipping_price = 0
         var product_price =0
         var customer_address = ''
-        
-        
-        for(var i=0; i<6; i++){
-            console.log(i,' 753')
-        }
+        console.log(arrListHutang)
         var total = arrListHutang.length
         console.log(total)
 
@@ -870,28 +866,28 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         console.log(product_price, ' total all price')
         console.log(total_product_with_shipping)
         $('.card-address-profile').append(`
-        <div class="img-profile-ul">
-            <img src="../img/accounts.png" alt="error" class="img-prof">
-        </div>
-        <div class="img-description-ul">
-            <div class="desc-1-ul" >
-            ${arrListHutang[0].Primary_Recipient_Name}
-            
+            <div class="img-profile-ul">
+                <img src="../img/accounts.png" alt="error" class="img-prof">
             </div>
-            <div class="desc-2-ul">
-            ${arrListHutang[0].Shipping_Address}
+            <div class="img-description-ul">
+                <div class="desc-1-ul" >
+                ${arrListHutang[0].Primary_Recipient_Name}
+                
+                </div>
+                <div class="desc-2-ul">
+                ${arrListHutang[0].Shipping_Address}
+                </div>
+                <div class="desc-3-ul">
+                ${arrListHutang[0].Shipping_Contact_Number}
+                </div>
             </div>
-            <div class="desc-3-ul">
-            ${arrListHutang[0].Shipping_Contact_Number}
+            <div class="img-status-ul">
+                <div class="confirmed"  value="Gorilla Workout"  >
+                    <p> ${arrListHutang[0].Creator} </p>
+                
+                    <input type="text" value="Gorilla Workout" readonly class="easteregg" id="copyClipboardul" onclick="gorillaworkout('GorillaWorkout')" >
+                </div>
             </div>
-        </div>
-        <div class="img-status-ul">
-            <div class="confirmed"  value="Gorilla Workout"  >
-                <p> ${arrListHutang[0].Creator} </p>
-               
-                <input type="text" value="Gorilla Workout" readonly class="easteregg" id="copyClipboardul" onclick="gorillaworkout('GorillaWorkout')" >
-            </div>
-        </div>
         `)
 
         $('.cb-right').append(`
@@ -951,11 +947,160 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
             </div>  
         </div>   
         `)
+       
+        if(arrListHutang[0].Payment_Method == 'transfer'){
+            $('accounts-ul').empty()
+            $('.accounts-ul').append(`
+                <img src="../img/card2.png" alt="" class="acc-ul">
+            `)
+        }
+        console.log(arrListHutang[0].Status,' 962')
+        if(arrListHutang[0].Status == 'cancelled'){
+            $('.progress-card-ul').empty() // order received
+            $('.progress-card-ul').append(`
+            <div class="prog-1">
+                <div class="progress new-progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div class="img-prog-1">
+                
+                <img src="../img/checklist.png" alt="">
+                </div>
+    
+                <div class="line-prog-1-right">
+    
+                </div>
+            </div>
+            <div class="prog-1">
+                <div class="line-prog-2-left">
+    
+                </div>
+                <div class="img-prog-2">
+                
+                <img src="../img/fast-delivery.png" alt="">
+                </div>
+    
+                <div class="line-prog-2-right">
+    
+                </div>
+            </div>
+            <div class="prog-1">
+                <div class="line-prog-3-left">
+    
+                </div>
+                <div class="img-prog-3">
+                
+                <img src="../img/truck.png" alt="">
+                </div>
+    
+                <div class="line-prog-3-right">
+    
+                </div>
+            </div>
+            `)
+        }else if (arrListHutang[0].Status == 'approving'){
+            $('.progress-card-ul').empty() // order approved
+            $('.progress-card-ul').append(`
+                <div class="prog-1">
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="img-prog-1">
+                    
+                    <img src="../img/checklist.png" alt="">
+                    </div>
+        
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="img-prog-2">
+                    
+                    <img src="../img/checklist.png" alt="">
+                    </div>
+        
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                    <div class="img-prog-3">
+                    
+                    <img src="../img/checklist.png" alt="">
+                    </div>
+        
+                    <div class="progress new-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
+                </div>
+            `)
+            $('.line-prog-1-right').css('background-color','#57ed6a ')
+            $('.line-prog-2-left').css('background-color','#57ed6a  ')
+        }else if (arrListHutang[0].Status == 'pending'){
+            $('.progress-card-ul').empty() // order approved
+            $('.progress-card-ul').append(`
+                <div class="prog-1">
+                    <div class="line-prog-1-left">
+        
+                    </div>
+                    <div class="img-prog-1">
+                    
+                    <img src="../img/not_liked.png" alt="">
+                    </div>
+        
+                    <div class="line-prog-1-right">
+        
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="line-prog-2-left">
+        
+                    </div>
+                    <div class="img-prog-2">
+                    
+                    <img src="../img/not_liked.png" alt="">
+                    </div>
+        
+                    <div class="line-prog-2-right">
+        
+                    </div>
+                </div>
+                <div class="prog-1">
+                    <div class="line-prog-3-left">
+        
+                    </div>
+                    <div class="img-prog-3">
+                    
+                    <img src="../img/not_liked.png" alt="">
+                    </div>
+        
+                    <div class="line-prog-3-right">
+        
+                    </div>
+                </div>
+            `)
+    
+        }
 
+        $('.unpaid-title').empty()
+        $('.unpaid-title').append(`
+            <p>Order # <br>
+            ${arrListHutang[0].Order_Number}</p>
+        `)
 
     }).catch((err)=>{
         console.log(err)
     })
+
+    
+
 }
 
 

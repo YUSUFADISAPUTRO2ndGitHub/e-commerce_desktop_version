@@ -80,7 +80,7 @@
             z-index: 100;
             /* right: 100px; */
             /* background-color: transparent; */
-            right:5.6%;
+            right:8.6%;
             top: 17%;
             width: 500px;
             height: 500px;
@@ -1335,21 +1335,23 @@
             <div class="header-option">
                 <div class="option-0" onclick="cek_daftar_hutang(this)">
                     <img src="../WEB/img/unpaid_list.png" alt="error" class="icon-opt ">
-                    <p>Unpaid List</p>
+                    <p>Order List</p>
                 </div>
                 
-    
+                <!-- ada bug
+                 data-toggle="tooltip" data-placement="bottom" title="fungsi ini hanya untuk membantu Anda, jika Anda berbelanja langsung di toko kami"
+                -->
                 <div class="option-1 " onclick="cek_harga_requested(this)"
-                data-toggle="tooltip" data-placement="bottom" title="fungsi ini hanya untuk membantu Anda, jika Anda berbelanja langsung di toko kami"
+               
                 id="cek_harga_req"
                 >
                     <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
                     <p>Cek Harga</p>
                 </div>
-                <div class="option-2 " onclick="pengiriman_requested(this)">
+                <!-- <div class="option-2 " onclick="pengiriman_requested(this)">
                     <img src="../WEB/img/truck.png" alt="error" class="icon-opt">
                     <p>Pengiriman</p>
-                </div>  
+                </div>   -->
                 <div class="option-3 " onclick="cart_requested(this)">
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
                     <p>Keranjang</p>

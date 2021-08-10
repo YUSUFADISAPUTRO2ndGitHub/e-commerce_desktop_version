@@ -2342,7 +2342,7 @@ input:focus {
     border-radius: 10px;
     /* left:105px; */
     /* right:242px; */
-    right: 17%;
+    right: 14.3%;
     height: 455px;
     width: 400px;
     /* background-color: red; */
@@ -4874,7 +4874,7 @@ img{
     position: absolute;
     top: 17%; 
     border-radius:10px;
-    left:23.2%;
+    left:26%;
     height: 61vh;
     width: 54%;
     display:none;
