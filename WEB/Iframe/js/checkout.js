@@ -152,11 +152,11 @@ function loadCheckoutFinalConfirmationTable(condition){
         var Shipping_option = $('#sub-delivery-option option:selected').val()
         console.log(itemsToCheckout)
         itemsToCheckout.map((val,id)=>{
-            console.log(parseInt(val.priceAgreed))
+            // console.log(parseInt(val.priceAgreed))
             // parseFloat('100,000.00'.replace(/,/g, ''))
             var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
             total_price_with_shipping +=price
-            console.log(total_price_with_shipping, ' ini total price')
+            // console.log(total_price_with_shipping, ' ini total price')
         })
         
         
@@ -624,7 +624,7 @@ function checking_payment(){
                     console.log(isPengiriman_pilihan,'pengiriman pilihan')
                     console.log(isPaymentMethod_pilihan,'pengiriman pilihan')
                 } else {
-                    swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                    swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
                     console.log(isKurir_pilihan,'kurir pilihan')
                     console.log(isProvince_pilihan,'province pilihan')
                     console.log(isKota_pilihan,'kota pilihan')
@@ -1289,11 +1289,11 @@ const render_select_option_kurir=()=>{
         // console.log(response)
         var array_cart =[]
         for(var i =0; i<parse_cart.length; i++){
-            console.log(parse_cart[i].productNo)
+            // console.log(parse_cart[i].productNo)
             getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
             // get_product_detail_func(parse_cart[i].productNo).done(function(response){
-            console.log(response)    
-            console.log(array_cart)
+            // console.log(response)    
+            // console.log(array_cart)
             array_cart.push(response)
             })
         }

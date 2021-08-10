@@ -51,29 +51,29 @@ function loadcart(productNo, quantity){
             // $("#productName" + productNo).append("<td class=\"product-price\" id=\"" + productNo + "fourth" + "\">");
             // $("#" + productNo + "fourth").append("<input class=\"fake-1\" id=\"" + productNo + "\" value=\"" + commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100) + "\" disabled></input>");
             $('#cart-list').append(`
-            <div class="new-card-cart">
-                <div class="cart-img">
+            <div class="new-card-cart" id="productName${productNo}">
+                <div class="cart-img" id="${productNo}second">
                     <img src="${response.Picture_1}" alt="">
                 </div>
-                <div class="cart-desc">
-                    <div class="cd-1">  
-                        <div class="form-check" id ="containerCheck">
-                            <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="productNo" onchange="selectedCart(this,${productNo})">    
+                <div class="cart-desc" >
+                    <div class="cd-1 product-checklist" id="${productNo}first">  
+                        <div class="form-check" id ="${productNo}containerCheck">
+                            <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="productNo" onchange="selectedCart(this,'${productNo}')">    
                         </div>
                         <p>${response.Name}</p>
                     </div>
-                    <div class="cd-2">
-                        Harga
-                        <input type="number" value="30000">
+                    <div class="cd-2 product-names" id="${productNo}third">
+                        <p>Harga </p>
+                        <input type="text" id="${productNo}" value="${commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100)}" disabled>
                     </div>
-                    <div class="cd-3">
+                    <div class="cd-3 product-prices" id="${productNo}fourth">
                         <div class="cd-3-left">
                             Kuantitas Permintaan
-                        <input type="number" value="30000">
+                            <input type="number" value="${quantity}" id="quantity${productNo}">
                         </div>
-                        <div class="cd-3-left">
+                        <div class="cd-3-right">
                             Stock Tersedia
-                        <input type="number" value="30000" disabled>
+                        <input type="number" value="${response.Stock_Quantity}" disabled>
                         </div>
                     </div>
                 </div>
@@ -417,15 +417,15 @@ function checkingoutAll(){
         var isSuccess = true
         var arr = localStorage.getItem('itemsInCart')
         var arr_product = JSON.parse(arr)
-        console.log(arr_product)
+        // console.log(arr_product)
          for (var i=0; i<arr_product.length; i++){
            isSuccess=  await check_qty(arr_product,i)     
-           console.log(isSuccess, '393 dalem looping')
+        //    console.log(isSuccess, '393 dalem looping')
            if(isSuccess == 'false' || isSuccess == false){
                i=arr_product.length
            } 
         }
-        console.log(isSuccess,'584')
+        // console.log(isSuccess,'584')
         await success(isSuccess)
         
     }
@@ -435,26 +435,26 @@ function checkingoutAll(){
             await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
-                console.log(res.data)
+                // console.log(res.data)
                 var qty_sisa = res.data.Stock_Quantity
-                console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
-                console.log(quantity_product, 'ini product beli looping ke ' , i)
-                console.log(res.data.Sell_Price,' ini harga jual')
-                console.log(typeof res.data.Sell_Price, ' tipe data', res.data.Sell_Price == 'null')
-                console.log(quantity_product > qty_sisa , qty_sisa == 'undefined' , qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa), res.data.Sell_Price == null , res.data.Sell_Price == 'null' , res.data.Sell_Price ==undefined)
+                // console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
+                // console.log(quantity_product, 'ini product beli looping ke ' , i)
+                // console.log(res.data.Sell_Price,' ini harga jual')
+                // console.log(typeof res.data.Sell_Price, ' tipe data', res.data.Sell_Price == 'null')
+                // console.log(quantity_product > qty_sisa , qty_sisa == 'undefined' , qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa), res.data.Sell_Price == null , res.data.Sell_Price == 'null' , res.data.Sell_Price ==undefined)
                 if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa
                     || res.data.Sell_Price == null || res.data.Sell_Price == 'null' || res.data.Sell_Price ==undefined
                     )){
                     isSuccess = false
-                    console.log('masuk ke dalam if 415,', isSuccess)
+                    // console.log('masuk ke dalam if 415,', isSuccess)
                 }
                 if(res.data.Sell_Price == 'null'){
                     isSuccess = false
-                    console.log(' masuk ke dalam if 423')
+                    // console.log(' masuk ke dalam if 423')
                 }
-                console.log(isSuccess,' 425')
+                // console.log(isSuccess,' 425')
                 resolve(isSuccess)
-                console.log(isSuccess,'427')
+                // console.log(isSuccess,'427')
             }).catch((err)=>{
                 console.log(err)
             })
@@ -463,18 +463,21 @@ function checkingoutAll(){
     
     
     async function success(isSuccess){
-        console.log(isSuccess,'599')
+        // console.log(isSuccess,'599')
         if(isSuccess){
                 var token = localStorage.getItem("token");
-                console.log("token " + token);
+                // console.log("token " + token);
                 if((token != "" || token == null)){
                     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+                    // console.log(cartToJson)
                     if(cartToJson.length != 0){
                         var array = [];
                         var productToBeAddedStringify = JSON.stringify(array);
                         localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                         var i = 0;
                         for(i; i < cartToJson.length; i ++){
+                            console.log(cartToJson[i])
+                            
                             var productToBeAdded = {
                                 productNo: cartToJson[i].productNo,
                                 quantity: parseInt($("#quantity" + cartToJson[i].productNo).val()),
@@ -485,8 +488,9 @@ function checkingoutAll(){
                         
                             // saving to storage
                             var productToBeAddedStringify = JSON.stringify(array);
+                            console.log(productToBeAddedStringify)
                             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                            console.log(localStorage.getItem("itemsToCheckout"));
+                            // console.log(localStorage.getItem("itemsToCheckout"));
                         }
                         swal.fire("Final Step","","success");
                         window.location.href = "/WEB/Iframe/checkout.html";
