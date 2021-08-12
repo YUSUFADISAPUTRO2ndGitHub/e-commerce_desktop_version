@@ -22,6 +22,37 @@ $(document).ready(async function(){
     // renderListDeliveryFee();
     loadCheckoutFinalConfirmationTable("COD");
     listPaymentMethods();
+
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const checkout = urlParams.get('checkout_array');
+    console.log(checkout)
+    var checkout_stringify = JSON.parse(checkout)
+    console.log(checkout_stringify)
+    if(checkout != undefined){
+        console.log('34 jalan')
+        renderCartCheckout(checkout_stringify)
+    }
+    
+    // var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
+    // if(cartToJson.length != 0 ){
+    //     var array = []
+    //     var i =0;
+    //     for( i; i<cartToJson.length; i++){
+    //         var productToBeAdded = {
+    //             productNo: cartToJson[i].productNo,
+    //             quantity: parseInt($("#quantity" + cartToJson[i].productNo).val()),
+    //             GroupCode: "NO COUPON",
+    //             priceAgreed: $("#" + cartToJson[i].productNo).val()
+    //         };
+    //         array.push(productToBeAdded);
+    //         console.log(productToBeAdded)
+    //         // saving to storage
+    //         // var productToBeAddedStringify = JSON.stringify(array);
+    //     }
+        
+    // }
 });
 
 
@@ -76,7 +107,7 @@ function loadingMessage(timer){
 
 function listPaymentMethods(){
     getPaymentMethods().done(function (response) {
-        console.log(response, 'line 79')
+        // console.log(response, 'line 79')
         var i = 0;
         for(i = 0; i < response.length; i++){
             $("#payment-selection").append("<option>" + response[i].Payment_Method_Name + "</option>");
@@ -98,13 +129,13 @@ function loadCheckoutFinalConfirmationTable(condition){
         var harga_shipping = 20000
         var total_price_with_shipping=harga_shipping
         var Shipping_option = $('#sub-delivery-option option:selected').val()
-        console.log(itemsToCheckout)
+        // console.log(itemsToCheckout)
         itemsToCheckout.map((val,id)=>{
-            console.log(parseInt(val.priceAgreed))
+            // console.log(parseInt(val.priceAgreed))
             // parseFloat('100,000.00'.replace(/,/g, ''))
             var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
             total_price_with_shipping +=price
-            console.log(total_price_with_shipping, ' ini total price')
+            // console.log(total_price_with_shipping, ' ini total price')
         })
         
 
@@ -115,7 +146,7 @@ function loadCheckoutFinalConfirmationTable(condition){
                 var i = 0;
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
                 for(i; i < itemsToCheckout.length; i++){
-                    console.log(response);
+                    // console.log(response);
                     if(itemsToCheckout[i].productNo == response.Product_Code){
                         $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
                         $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
@@ -130,9 +161,9 @@ function loadCheckoutFinalConfirmationTable(condition){
             });
         }
         var Shipping_option = $('#sub-delivery-option option:selected').val()
-        console.log(Shipping_option)
+        // console.log(Shipping_option)
         var Shipping_selection = $("#sub-delivery-option").children("option:selected").val();
-        console.log(Shipping_selection)
+        // console.log(Shipping_selection)
         $("#final_checkout_delivery_row").empty()
         $("#final_checkout_total_price_row").empty()
         $('#final_checkout_delivery_row').append(`
@@ -150,7 +181,7 @@ function loadCheckoutFinalConfirmationTable(condition){
         var harga_shipping = 20000
         var total_price_with_shipping=harga_shipping
         var Shipping_option = $('#sub-delivery-option option:selected').val()
-        console.log(itemsToCheckout)
+        // console.log(itemsToCheckout)
         itemsToCheckout.map((val,id)=>{
             // console.log(parseInt(val.priceAgreed))
             // parseFloat('100,000.00'.replace(/,/g, ''))
@@ -160,11 +191,11 @@ function loadCheckoutFinalConfirmationTable(condition){
         })
         
         
-        console.log(Shipping_option)
+        // console.log(Shipping_option)
         for(i; i < itemsToCheckout.length; i++){
             getProductsWithProductNo("", "", itemsToCheckout[i].productNo).done(function (response) {
-                console.log(response,' ini response')
-                console.log(parseInt(response.Sell_Price))
+                // console.log(response,' ini response')
+                // console.log(parseInt(response.Sell_Price))
                 total_price_with_shipping += parseInt(response.Sell_Price)
                 var i = 0;
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
@@ -187,7 +218,7 @@ function loadCheckoutFinalConfirmationTable(condition){
             <td> ${Shipping_option} </td>
             <td>  </td>
         `)
-        console.log(total_price_with_shipping,' 149')
+        // console.log(total_price_with_shipping,' 149')
         $('#final_checkout_total_price_row').append(`
             <td>${total_price_with_shipping} </td>
         `)
@@ -201,13 +232,13 @@ function loadCheckoutFinalConfirmationTable(condition){
         var harga_shipping = 20000
         var total_price_with_shipping=harga_shipping
         var Shipping_option = $('#sub-delivery-option option:selected').val()
-        console.log(itemsToCheckout)
+        // console.log(itemsToCheckout)
         itemsToCheckout.map((val,id)=>{
-            console.log(parseInt(val.priceAgreed))
+            // console.log(parseInt(val.priceAgreed))
             // parseFloat('100,000.00'.replace(/,/g, ''))
             var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
             total_price_with_shipping +=price
-            console.log(total_price_with_shipping, ' ini total price')
+            // console.log(total_price_with_shipping, ' ini total price')
         })
         
         var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
@@ -231,7 +262,7 @@ function loadCheckoutFinalConfirmationTable(condition){
         <td> ${Shipping_option} </td>
         <td> ${harga_shipping} </td>
         `)
-        console.log(total_price_with_shipping,' 149')
+        // console.log(total_price_with_shipping,' 149')
         $('#final_checkout_total_price_row').append(`
             <td>${total_price_with_shipping} </td>
         `)
@@ -241,7 +272,7 @@ function loadCheckoutFinalConfirmationTable(condition){
 }
 
 function periodOptionSelected(x){
-    console.log('period option selected jalan')
+    // console.log('period option selected jalan')
     if($(x).children("option:selected").val().toUpperCase() == "TRANSFER"){
         // alert('masuk ke if')
         swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");
@@ -509,13 +540,7 @@ function checking_payment(){
     var isPengiriman_pilihan = false
     var isPaymentMethod_pilihan = false
 
-    console.log(new_kurir_pilihan,'kurir pilihan')
-    console.log(province_pilihan,'province pilihan')
-    console.log(kota_pilihan,'kota pilihan')
-    console.log(district_pilihan,'kecamatan pilihan')
-    console.log(sub_district_pilihan,'kelurahan pilihan')
-    console.log(pengiriman_pilihan,'pengiriman pilihan')
-    console.log(payment_pilihan,'pengiriman pilihan')
+ 
 
 
 
@@ -547,14 +572,14 @@ function checking_payment(){
     // }
 
     if(district_pilihan == 'Kecamatan' || district_pilihan == 'kecamatan'  || district_pilihan == undefined || district_pilihan == null || district_pilihan == 'NULL' || district_pilihan == 'undefined'){
-        console.log('masuk ke if kecamatan pilihan')
+        // console.log('masuk ke if kecamatan pilihan')
          district_pilihan = ''
          isKecamatan_pilihan = false
      }else {
         isKecamatan_pilihan = true
      }
      if(sub_district_pilihan == 'Kelurahan' && sub_district_pilihan == 'kelurahan' && sub_district_pilihan == undefined || sub_district_pilihan == null || sub_district_pilihan == 'NULL' || sub_district_pilihan == 'undefined'){
-         console.log('masuk ke if kelurahan pilihan')
+        //  console.log('masuk ke if kelurahan pilihan')
          sub_district_pilihan = ''
          isKelurahan_pilihan = false
      }else {
@@ -575,11 +600,11 @@ function checking_payment(){
         var isSuccess = true
         var arr = localStorage.getItem('itemsToCheckout')
         var arr_product = JSON.parse(arr)
-        console.log(arr_product)
+        // console.log(arr_product)
          for (var i=0; i<arr_product.length; i++){
            isSuccess=  await check_qty(arr_product,i)
         }
-        console.log(isSuccess,'584')
+        // console.log(isSuccess,'584')
         await success(isSuccess)
         
     }
@@ -589,15 +614,15 @@ function checking_payment(){
             await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
-                console.log(res.data)
+                // console.log(res.data)
                 var qty_sisa = res.data.Stock_Quantity
-                console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
-                console.log(quantity_product, 'ini product beli looping ke ' , i)
-                console.log(quantity_product > qty_sisa, qty_sisa == 'undefined' ,qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa))
+                // console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
+                // console.log(quantity_product, 'ini product beli looping ke ' , i)
+                // console.log(quantity_product > qty_sisa, qty_sisa == 'undefined' ,qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa))
                 if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa)){
                     isSuccess = false
                 }
-                console.log(isSuccess,' 602')
+                // console.log(isSuccess,' 602')
                 resolve(isSuccess)
             }).catch((err)=>{
                 console.log(err)
@@ -607,32 +632,16 @@ function checking_payment(){
     
     
     async function success(isSuccess){
-        console.log(isSuccess,'599')
+        // console.log(isSuccess,'599')
         if(isSuccess){
-            console.log('masuk ke if success')
+            // console.log('masuk ke if success')
             if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan 
                 && isKecamatan_pilihan && isKelurahan_pilihan && isPengiriman_pilihan
                 && isPaymentMethod_pilihan){
         
                     $('#exampleModalLong').modal('show')
-                    console.log('masuk ke if 570')
-                    console.log(isKurir_pilihan,'kurir pilihan')
-                    console.log(isProvince_pilihan,'province pilihan')
-                    console.log(isKota_pilihan,'kota pilihan')
-                    console.log(isKelurahan_pilihan,'kelurahan pilihan')
-                    console.log(isKecamatan_pilihan,'kecamatan pilihan')
-                    console.log(isPengiriman_pilihan,'pengiriman pilihan')
-                    console.log(isPaymentMethod_pilihan,'pengiriman pilihan')
                 } else {
                     swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
-                    console.log(isKurir_pilihan,'kurir pilihan')
-                    console.log(isProvince_pilihan,'province pilihan')
-                    console.log(isKota_pilihan,'kota pilihan')
-                    console.log(isKelurahan_pilihan,'kelurahan pilihan')
-                    console.log(isKecamatan_pilihan,'kecamatan pilihan')
-                    console.log(isPengiriman_pilihan,'pengiriman pilihan')
-                    console.log(isPaymentMethod_pilihan,'pengiriman pilihan')
-                
                 }
         }else {
             console.log(isSuccess, ' masuk ke else false, qty kurang/undefined dll')
@@ -670,7 +679,7 @@ async function requestToFinish(){
             if(addressSelection == "TO SAVED ADDRESS"){
                 personalDetailsWithCurrentAddress();
             }else{
-                console.log("address " + address);
+                // console.log("address " + address);
                 // if(($(".option-province").children("option:selected").val() != "-- select your province here --") && 
                 // ($("#option-city").val().length != 0) &&
                 // ($("#zipcode").val().length > 0) &&
@@ -701,7 +710,7 @@ function personalDetailsWithStoreAddress(){
     var date = year + "-" + month + "-" + day;
     var paymentSelection = $("#payment-selection").children("option:selected").val();
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
-        console.log("selected to checkout in store");
+        // console.log("selected to checkout in store");
         request = {
             customerId: localStorage.getItem("token"),
             paymentMethod: paymentSelection,
@@ -716,7 +725,7 @@ function personalDetailsWithStoreAddress(){
             notes: "Pembelian Langsung di TOKO (SHINE)",
             orderDate: date
         };
-        console.log(request);
+        // console.log(request);
         $("#submitRequestFinalButton").toggle();
         $("#backtocartRequestFinalButton").toggle();
         sendRequestFinal(paymentSelection);
@@ -752,16 +761,6 @@ function personalDetailsWithCurrentAddress(){
     var packing_pilihan = $('.cart-packing option:selected').val()
     var alamat_terdaftar = $("#sub-saved-address").children("option:selected").val()
     var alamat_final = alamat_terdaftar + ' '  + sub_district_pilihan + ' ' + district_pilihan +  ' ' + kota_pilihan + ' ' + province_pilihan + ' ' + kodepos_pilihan 
-    console.log(kurir_pilihan,' kurir pilihan')
-    console.log(province_pilihan,' kurir province_pilihan')
-    console.log(kota_pilihan,' kurir kota_pilihan')
-    console.log(district_pilihan,' kurir district_pilihan')
-    console.log(sub_district_pilihan,' kurir sub_district_pilihan')
-    console.log(pengiriman_pilihan,' kurir pengiriman_pilihan')
-    console.log(kodepos_pilihan,' kurir kodepos_pilihan')
-    console.log(asuransi_pilihan,' kurir asuransi_pilihan')
-    console.log(packing_pilihan,' kurir packing_pilihan')
-    console.log(alamat_final,' ini alamat final')
 
 
     // if(paymentSelection == "PERIOD" ){
@@ -828,20 +827,13 @@ async function sendRequestFinal(paymentSelection){
         asuransi_pilihan = 'type 0 Tidak Berasuransi '
         
     }
-    
-    console.log(harga_shipping,' ini harga shipping')
-    console.log(harga_asuransi,' ini harga asuransi')
-    console.log(harga_packing,' ini harga packing')
-    console.log(asuransi_pilihan, ' ini asuransi pilihan')
-    
-    console.log(asuransi_pilihan  == 'Asuransi', asuransi_pilihan == null,  asuransi_pilihan == undefined,  asuransi_pilihan.length == 0,  isNaN(asuransi_pilihan))
+
+
     
     var total_harga_shipping_with_insurance_packing =  harga_shipping + harga_asuransi + harga_packing
     var final_total_harga_shipping_insurance = total_harga_shipping_with_insurance_packing.toString()
     var product_name_shipping = pengiriman_pilihan + asuransi_pilihan + packing_pilihan
-    console.log(product_name_shipping,' product name shipping')
-    console.log(total_harga_shipping_with_insurance_packing,' total harga shipping with insurance packing')
-    console.log(final_total_harga_shipping_insurance, ' to string')
+
     // console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
     get_all_couriers().done(function(response){
         var finalStep = JSON.parse(localStorage.getItem("finalStep"));
@@ -1016,6 +1008,42 @@ function personalDetailsWithNewAddress(address){
     });
 }
 
+
+
+function renderCartCheckout(product){
+    console.log(product)
+
+    product.map((val,index)=>{
+        console.log(val)
+        getProductsWithProductNo("","",val.productNo).done(function(response){
+            var berat_barang = parseFloat(response.Weight_KG)
+            // console.log(berat_barang)
+            var total_berat_barang = berat_barang  * val.quantity
+            if(product.length>4 ){
+                $('.card-checkout-cc').css('height','300px')
+            }
+            
+            $('.card-checkout-cc').append(`
+            <div class="card-item-checkout-cc">
+                <div class="img-item-checkout-cc">
+                    <img src="${response.Picture_1}" alt="">
+                </div>
+                <div class="desc-item-checkout-cc">
+                    <p>${response.Name}</p>
+                    <div class="desc-item-2-checkout-cc">
+                        <p>Quantity : ${val.quantity}</p>
+                        <p>Berat  : ${total_berat_barang}</p>
+                        <p>Harga : ${val.priceAgreed}</p>
+                    </div>
+                </div>
+            </div>
+            `)
+            console.log(response)
+            console.log($('.card-checkout-cc'))
+        })
+    })
+
+}
 function truncateCart(){
     // testing dari bayu
 

@@ -18,9 +18,13 @@ $(document).ready(async function(){
     console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
 });
 
+var harga_barang = 0
 function loadcart(productNo, quantity){
+    $('#cart-list').empty()
     getProductsWithProductNo("", "", productNo).done(function (response) {
         console.log(response);
+        var harga_satuan = parseInt(response.Sell_Price)
+        harga_barang += harga_satuan * quantity
         if(response == false){
             console.log("product no found ======= removed");
             var i = 0;
@@ -51,34 +55,44 @@ function loadcart(productNo, quantity){
             // $("#productName" + productNo).append("<td class=\"product-price\" id=\"" + productNo + "fourth" + "\">");
             // $("#" + productNo + "fourth").append("<input class=\"fake-1\" id=\"" + productNo + "\" value=\"" + commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100) + "\" disabled></input>");
             $('#cart-list').append(`
-            <div class="new-card-cart" id="productName${productNo}">
-                <div class="cart-img" id="${productNo}second">
-                    <img src="${response.Picture_1}" alt="">
-                </div>
-                <div class="cart-desc" >
-                    <div class="cd-1 product-checklist" id="${productNo}first">  
-                        <div class="form-check" id ="${productNo}containerCheck">
-                            <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="productNo" onchange="selectedCart(this,'${productNo}')">    
-                        </div>
-                        <p>${response.Name}</p>
+                <div class="new-card-cart productNameClass${productNo}" id="productName${productNo}">
+                    <div class="cart-img" id="${productNo}second">
+                        <img src="${response.Picture_1}" alt="">
                     </div>
-                    <div class="cd-2 product-names" id="${productNo}third">
-                        <p>Harga </p>
-                        <input type="text" id="${productNo}" value="${commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100)}" disabled>
-                    </div>
-                    <div class="cd-3 product-prices" id="${productNo}fourth">
-                        <div class="cd-3-left">
-                            Kuantitas Permintaan
-                            <input type="number" value="${quantity}" id="quantity${productNo}">
+                    <div class="cart-desc" >
+                        <div class="cd-1 product-checklist" id="${productNo}first">  
+                            <div class="form-check" id ="${productNo}containerCheck">
+                                <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="productNo" onchange="selectedCart(this,'${productNo}')">    
+                            </div>
+                            <p>${response.Name}</p>
+                            <div class="card-delete-cart">
+                                <i class="far fa-times-circle" onclick="eraseItem('${productNo}')"></i>
+                            </div>
                         </div>
-                        <div class="cd-3-right">
-                            Stock Tersedia
-                        <input type="number" value="${response.Stock_Quantity}" disabled>
+                        <div class="cd-2 product-names" id="${productNo}third">
+                            <p>Harga </p>
+                            <input type="text" id="${productNo}" value="${commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100)}" disabled>
+                        </div>
+                        <div class="cd-3 product-prices" id="${productNo}fourth">
+                            <div class="cd-3-left">
+                                Kuantitas Permintaan
+                                <input type="number" value="${quantity}" id="quantity${productNo}" onclick=zoomIn(this) onchange="quantityUpdatedDirectly(this,'${productNo}')">
+                            </div>
+                            <div class="cd-3-right">
+                                Stock Tersedia
+                            <input type="number" value="${response.Stock_Quantity}" disabled>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
+                </div> 
+            `)
+            $('#total_selected_price').empty()
+            $('#total_in_cart').empty()
+            // $('#total_selected_price').append(`
+            //     <p>${commafy(harga_barang)} </p>
+            // `)
+            $('#total_in_cart').append(`
+                <p>${commafy(harga_barang)} </p>
             `)
         }
     });
@@ -109,16 +123,20 @@ function eraseItem(id){
     for(i; i < cartToJson.length; i ++){
         if(cartToJson[i].productNo == id){
             cartToJson.splice(i, 1);
-
+            
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
             console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+            // loadcart(cartToJson[i].productNo,cartToJson[i].quantity)
             break;
         }
+        
     }
     removeItemsToCheckout(id);
     $("#productName" + id).empty();
+    $('.productNameClass' + id).remove()
+    window.location.href="./cart.html"
 }
 
 function commafy( num ) {
@@ -178,6 +196,7 @@ function quantityUpdatedDirectly(x, id){
             }
         }
         $("#productName" + id).empty();
+        $('.productNameClass' + id).remove()
     }
 }
 
@@ -400,7 +419,7 @@ function loadingMessage(interval){
 
 function checkingout(){
     var token = localStorage.getItem("token");
-    console.log("token " + token);
+    // console.log("token " + token);
     if(checkboxCounter > 0 && (token != "" || token == null)){
         swal.fire("Final Step","","success");
         window.location.href = "./Iframe/checkout.html";
@@ -476,7 +495,7 @@ function checkingoutAll(){
                         localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                         var i = 0;
                         for(i; i < cartToJson.length; i ++){
-                            console.log(cartToJson[i])
+                            // console.log(cartToJson[i])
                             
                             var productToBeAdded = {
                                 productNo: cartToJson[i].productNo,
@@ -492,8 +511,10 @@ function checkingoutAll(){
                             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                             // console.log(localStorage.getItem("itemsToCheckout"));
                         }
+
+                        
                         swal.fire("Final Step","","success");
-                        window.location.href = "/WEB/Iframe/checkout.html";
+                        window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
                     }else{
                         swal.fire("Something is missing","You do not have anything in Cart","warning");
                     }
@@ -512,6 +533,10 @@ function checkingoutAll(){
     looping_product()
   
 }
+
+
+
+
 
 function checkingoutAllInStore(){
     in_store_loading_checkout();

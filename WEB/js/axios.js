@@ -43,28 +43,28 @@ $( document ).ready(function() {
     const detail_list_hutang = urlParams.get('detail_list_hutang')
 
     // console.log(group_buy, 'group_buy')
-    console.log(queryString,' queryString')
-    console.log(urlParams,' urlParams')
-    console.log(category,' category')
-    console.log(item_category,' item Category')
+    // console.log(queryString,' queryString')
+    // console.log(urlParams,' urlParams')
+    // console.log(category,' category')
+    // console.log(item_category,' item Category')
     if(category != undefined){
         if(category.length > 0){
-            console.log(category.length, ' category length')
-            console.log('masuk ke category line 19')
+            // console.log(category.length, ' category length')
+            // console.log('masuk ke category line 19')
             renderItemBasedOnCategory(category);
         }
     }else if(subcategory != undefined){
         if(subcategory.length > 0){
-            console.log('masuk ke subcategory line 25')
+            // console.log('masuk ke subcategory line 25')
             renderItemBasedOnSubCategory(subcategory);
         }
     }else if(item_category != undefined){
-        console.log('masuk ke line 21 axios js')
+        // console.log('masuk ke line 21 axios js')
         // get_product_detail(item_category)
         
         render_get_product_detail(item_category)
     }else if (group_buy != undefined){
-        console.log('masuk ke line 44 axios js')
+        // console.log('masuk ke line 44 axios js')
         // alert(group_buy)
         render_group_buy(group_buy)
     }else if (list_hutang !=undefined){
@@ -73,9 +73,9 @@ $( document ).ready(function() {
     }else if (detail_list_hutang != undefined){
         detail_hutang_home(detail_list_hutang)
     }
-    else {
-        console.log('error')
-    }
+    // else {
+    //     console.log('error')
+    // }
 
 
 
@@ -179,8 +179,8 @@ const renderItemPromo=()=>{
             // console.log('berhasil render')
           
             if(val.GroupBuy_Purchase == 'true' || val.GroupBuy_Purchase == true || val.GroupBuy_Purchase == 'yes'){
-                console.log(val)
-                console.log(val.GroupBuy_Purchase)
+                // console.log(val)
+                // console.log(val.GroupBuy_Purchase)
                 // console.log('render 169 jalan')
                 $('.box-render-promo').append(
                     ` 
@@ -451,16 +451,16 @@ $('.testing-2').on('click',function(){
 
 
 const getAllItem_fromAllCat=(item)=>{
-    console.log(item)
+    // console.log(item)
     $(this).scrollTop('.modals-lk')
     $('.close-button').css('display','block')
     $('.modals-lk').css('display','block')
     $('.modals-lk').attr('src',`./Iframe/listkategori.html?subcategory=${item}`)
 }
 const getAllItem=(item)=>{
-    console.log(item)
+    // console.log(item)
     // console.log($('.modals-lk'))
-    console.log($('.modals-lk').attr('src'))
+    // console.log($('.modals-lk').attr('src'))
     // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
     location.replace(`./listkategori.html?subcategory=${item}`)
     
@@ -474,7 +474,7 @@ const findSubCategory=(sub)=>{
     $('.list-group-item').removeClass('active-cl')
     $(`#id_sub-${sub}`).addClass('active-cl')
 
-    console.log(sub)
+    // console.log(sub)
     $('.closeByLogin').css('display','none')
     $('.option-0').removeClass("background_grey")
     $('.option-1').removeClass("background_grey")
@@ -505,8 +505,8 @@ function sign_up_request(){
         axios.post(`http://customers.sold.co.id/get-available-referral-codes
         `).then((res)=>{
             res.data.map((val,index)=>{
-                console.log(val)
-                console.log(val.Customer_Code)
+                // console.log(val)
+                // console.log(val.Customer_Code)
                 $('.option-referral').append(`
                     <option value="${val.Customer_Code}" class="id-referral">${val.First_Name} ${val.Last_Name} - ${val.Nama_Perusahaan}</option>
                 `)
@@ -526,9 +526,9 @@ const get_product_detail=(product_id)=>{
     $('.box-list-kategori').css('display','none')
     $('.modals-product-detail').css('display','block')
     $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}`)
-    console.log( $('.modals-product-detail').attr('src'))
+    // console.log( $('.modals-product-detail').attr('src'))
     // $('.modals-lk').remove()
-    console.log(product_id, 'product_id 206')
+    // console.log(product_id, 'product_id 206')
     // render_get_product_detail(product_id)
     // location.assign(`../Iframe/itemDetail.html`)
 }
@@ -591,7 +591,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
             }) 
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             $('.modals-lk').css('display','block')
-            console.log('finish render item based on sub cat')
+            // console.log('finish render item based on sub cat')
             
         }).catch((err)=>{
             console.log(err)

@@ -14,7 +14,7 @@ $( document ).ready(function() {
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
     .then((res)=>{
         res.data.map((val,index)=>{
-            console.log(val.Category);
+            // console.log(val.Category);
             $('.category-list-sp').append(
                 `
                 <li class="list-group-item" onclick="show_subcategory('${val.Category}')">${val.Category.toUpperCase()}</li>
@@ -36,7 +36,7 @@ const sort_by_higher=()=>{
     const subcategory = urlParams.get('category')
     const searching = urlParams.get('searching')
     render_sort_price(searching,'asc')
-    console.log(searching,'line 33')
+    // console.log(searching,'line 33')
 }
 const sort_by_lower=()=>{
 
@@ -46,12 +46,12 @@ const sort_by_lower=()=>{
     const subcategory = urlParams.get('category')
     const searching = urlParams.get('searching')
     render_sort_price(searching,'desc')
-    console.log(searching,'line 33')
+    // console.log(searching,'line 33')
 }
 
 
 const render_sort_price=(product_name,condition)=>{
-    console.log(product_name)
+    // console.log(product_name)
     var data = product_name
     if(data){
         $('.sp_name').val(data)
@@ -69,7 +69,7 @@ const render_sort_price=(product_name,condition)=>{
         }else {
             res.data.sort((a,b) => (a.Sell_Price > b.Sell_Price) ? 1 : -1)
         }
-        console.log(res.data)
+        // console.log(res.data)
         $('.new-box-card').empty()
         res.data.map((val,index)=>{
             var hargaAwal = parseInt(val.Sell_Price)
@@ -134,7 +134,7 @@ function show_subcategory(choosen_parent_category){
         console.log('I was closed by the timer')
         axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
         .then((res)=>{
-            console.log(res);
+            // console.log(res);
             // $('.box-list-kategori').css("display", "block")
             $('.box-list-kategori').toggle()
             $('.box-list-kategori').empty()
@@ -200,10 +200,10 @@ function show_jenisproduct(jenis_product){
         console.log('I was closed by the timer')
         axios.post(`http://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
         .then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             res.data.map((val,index)=>{
-                console.log('masuk ke line 47')
-                console.log(val)
+                // console.log('masuk ke line 47')
+                // console.log(val)
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
@@ -408,7 +408,7 @@ function groupbuy_sp_form(product_id){
     var token = localStorage.getItem('token')
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
+        // console.log(res.data)
         if(res.data){
 
     $('.groupbuy_sp').empty()
@@ -743,19 +743,19 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     $('.cb-right').empty()
     // $('#daftarHutangModal').modal('hide')
     // $('#ID_detail_hutang_modal').modal('show')
-    console.log(order_number)
+    // console.log(order_number)
     axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        console.log(res.data)
+        // console.log(res.data)
         var arrListHutang = res.data
         var arrDataProduct = []
         var kurir_name = ''
         var shipping_price = 0
         var product_price =0
         var customer_address = ''
-        console.log(arrListHutang)
+        // console.log(arrListHutang)
         var total = arrListHutang.length
-        console.log(total)
+        // console.log(total)
 
         // render card item
         arrListHutang.map((val,index)=>{
@@ -828,7 +828,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
-                    console.log(res.data, ' 780')
+                    // console.log(res.data, ' 780')
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
@@ -862,9 +862,9 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
             }
         })
         var total_product_with_shipping = shipping_price + product_price
-        console.log(shipping_price,' shipping price')
-        console.log(product_price, ' total all price')
-        console.log(total_product_with_shipping)
+        // console.log(shipping_price,' shipping price')
+        // console.log(product_price, ' total all price')
+        // console.log(total_product_with_shipping)
         $('.card-address-profile').append(`
             <div class="img-profile-ul">
                 <img src="../img/accounts.png" alt="error" class="img-prof">
@@ -954,7 +954,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 <img src="../img/card2.png" alt="" class="acc-ul">
             `)
         }
-        console.log(arrListHutang[0].Status,' 962')
+        // console.log(arrListHutang[0].Status,' 962')
         if(arrListHutang[0].Status == 'pending'){
             $('.progress-card-ul').empty() // order received
             $('.progress-card-ul').append(`
