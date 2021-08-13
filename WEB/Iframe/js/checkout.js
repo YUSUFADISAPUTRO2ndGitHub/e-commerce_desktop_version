@@ -2621,17 +2621,57 @@ const pengirimanCheckout=()=>{
                                     })
                                 }
 
-                                $('#final_checkout_delivery_row').empty()
-                                $('#final_checkout_total_price_row').empty()
+                                // $('#final_checkout_delivery_row').empty()
+                                // $('#final_checkout_total_price_row').empty()
 
-                                $('#final_checkout_delivery_row').append(`
-                                    <td> ${new_kurir_pilihan} </td>
-                                    <td> ${harga_shipping} </td>
-                                `)
+                                // $('#final_checkout_delivery_row').append(`
+                                //     <td> ${new_kurir_pilihan} </td>
+                                //     <td> ${harga_shipping} </td>
+                                // `)
                                 
-                                $('#final_checkout_total_price_row').append(`
-                                    <td>${harga_barang_with_shipping} </td>
-                                `)
+                                // $('#final_checkout_total_price_row').append(`
+                                //     <td>${harga_barang_with_shipping} </td>
+                                // `)
+
+                                $('.new-card-kurir-cc').empty()
+
+                                if(new_kurir_pilihan == 'pengiriman' || new_kurir_pilihan == 'Pengiriman'){
+                                    $('.new-card-kurir-cc kurir-cc').remove()
+                                    $('.new-card-kurir-cc').css('display','none')
+                                }else {
+                                    $('.new-card-kurir-cc').css('display','flex')
+                                    if(kurir_kode == 'tiki'){
+                                        $('.new-card-kurir-cc').append(`
+                                            <div class="card-item-checkout-cc kurir-cc">
+                                                <div class="img-item-checkout-cc">
+                                                    <img src="../img/tiki_shipping_method.png" alt="">
+                                                </div>
+                                                <div class="desc-item-checkout-cc">
+                                                    <p>${new_kurir_pilihan}</p>
+                                                    <div class="desc-item-2-checkout-cc">
+                                                        
+                                                        <p>Harga : ${harga_shipping}</p>
+                                                    </div>
+                            
+                                                </div>
+                                            </div>       
+                                        `)
+                                    }else {
+                                        $('.new-card-kurir-cc').append(`
+                                            <div class="card-item-checkout-cc kurir-cc">
+                                                <div class="img-item-checkout-cc">
+                                                    <img src="../img/vantsing_shipping_method.png" alt="">
+                                                </div>
+                                                <div class="desc-item-checkout-cc">
+                                                    <p>${new_kurir_pilihan}</p>
+                                                    <div class="desc-item-2-checkout-cc">
+                                                        <p>Harga : ${harga_shipping}</p>
+                                                    </div>
+                                                </div>
+                                            </div>       
+                                        `)
+                                    }
+                                }       
                             })
                         })
                     })
@@ -2818,36 +2858,65 @@ const asuransiCheckout=()=>{
                                     `)
                                 })
 
-                                $('#final_checkout_delivery_row').empty()
-                                $('#final_checkout_total_price_row').empty()
-
-                                
-                                
-                                $('#final_checkout_delivery_row').append(`
-                                    <td> ${new_kurir_pilihan} </td>
-                                    <td> ${harga_shipping} </td>
-                                `)
-                                $('#final_checkout_total_price_row').append(`
-                                    <td>${harga_barang_with_shipping} </td>
-                                `)
+                                $('.new-card-kurir-cc').empty()
+                                if(kurir_kode == 'tiki'){
+                                    $('.new-card-kurir-cc').append(`
+                                        <div class="card-item-checkout-cc">
+                                            <div class="img-item-checkout-cc">
+                                                <img src="../img/tiki_shipping_method.png" alt="">
+                                            </div>
+                                            <div class="desc-item-checkout-cc">
+                                                <p>${new_kurir_pilihan}</p>
+                                                <div class="desc-item-2-checkout-cc">
+                                                    
+                                                    <p>Harga : ${harga_shipping}</p>
+                                                </div>
+                        
+                                            </div>
+                                        </div>       
+                                    `)
+                                }else {
+                                    $('.new-card-kurir-cc').append(`
+                                        <div class="card-item-checkout-cc">
+                                            <div class="img-item-checkout-cc">
+                                                <img src="../img/vantsing_shipping_method.png" alt="">
+                                            </div>
+                                            <div class="desc-item-checkout-cc">
+                                                <p>${new_kurir_pilihan}</p>
+                                                <div class="desc-item-2-checkout-cc">
+                                                    <p>Harga : ${harga_shipping}</p>
+                                                </div>
+                                            </div>
+                                        </div>       
+                                    `)
+                                }
 
                                 if(asuransi_pilihan == 'asuransi' || asuransi_pilihan == 'ASURANSI' || asuransi_pilihan == undefined || asuransi_pilihan == null || asuransi_pilihan == '0'){
-                                    $('#final_checkout_insurance_row').empty()
+                                    $('.new-card-kurir-cc insurance-cc').remove()
                                     console.log(asuransi_pilihan,'2561')
-                                    $('.final_checkout_insurance_fee').css('display','none')
                                 }else {
-                                        console.log(asuransi_pilihan,'2561')
-                                    $('.final_checkout_insurance_fee').css('display','block')
-                                    $('#final_checkout_insurance_row').empty()
-                                    $('#final_checkout_insurance_row').append(`
-                                        <td> ${asuransi_pilihan} </td>
-                                        <td> ${harga_asuransi} </td>
+                                    //     console.log(asuransi_pilihan,'2561')
+                                    // $('.final_checkout_insurance_fee').css('display','block')
+                                    // $('#final_checkout_insurance_row').empty()
+                                    // $('#final_checkout_insurance_row').append(`
+                                    //     <td> ${asuransi_pilihan} </td>
+                                    //     <td> ${harga_asuransi} </td>
+                                    // `)
+
+                                    $('.new-card-kurir-cc').append(`
+                                        <div class="card-item-checkout-cc insurance-cc">
+                                            <div class="img-item-checkout-cc">
+                                                <img src="../img/vantsing_shipping_method.png" alt="">
+                                            </div>
+                                            <div class="desc-item-checkout-cc">
+                                                <p>${asuransi_pilihan}</p>
+                                                <div class="desc-item-2-checkout-cc">
+                                                    <p>Harga : ${harga_asuransi}</p>
+                                                </div>
+                                            </div>
+                                        </div>  
                                     `)
-
                                 }
-                                
-                              
-
                             })
                         })
                     })
@@ -3025,35 +3094,43 @@ const packingCheckout=()=>{
                                 allPengiriman = response
                                 console.log(response, ' ini shipping cost')
                                 
-                                $('#final_checkout_delivery_row').empty()
-                                $('#final_checkout_total_price_row').empty()
+                                // $('#final_checkout_delivery_row').empty()
+                                // $('#final_checkout_total_price_row').empty()
 
                                 
 
-                                $('#final_checkout_delivery_row').append(`
-                                    <td> ${new_kurir_pilihan} </td>
-                                    <td> ${harga_shipping} </td>
-                                `)
+                                // $('#final_checkout_delivery_row').append(`
+                                //     <td> ${new_kurir_pilihan} </td>
+                                //     <td> ${harga_shipping} </td>
+                                // `)
   
-                                $('#final_checkout_total_price_row').append(`
-                                    <td>${harga_barang_with_shipping} </td>
-                                `)
+                                // $('#final_checkout_total_price_row').append(`
+                                //     <td>${harga_barang_with_shipping} </td>
+                                // `)
 
 
 
                                 if(packing_pilihan == 'packing' || packing_pilihan == 'Packing' || packing_pilihan == undefined || packing_pilihan == null || packing_pilihan == '0'){
-                                    $('#final_checkout_packing_row').empty()
+                                    $('.card-item-checkout-cc packing-cc').remove()
                                     console.log(packing_pilihan,'2561')
-                                    $('.final_checkout_packing_fee').css('display','none')
+                                    // $('.final_checkout_packing_fee').css('display','none')
                                 }else {
-                                        console.log(packing_pilihan,'2561')
-                                    $('.final_checkout_packing_fee').css('display','block')
-                                    $('#final_checkout_packing_row').empty()
-                                    $('#final_checkout_packing_row').append(`
-                                        <td> ${packing_pilihan} </td>
-                                        <td> ${harga_packing} </td>
+                 
+                                    $('.card-item-checkout-cc').append(`
+                                        <div class="card-item-checkout-cc packing-cc">
+                                            <div class="img-item-checkout-cc">
+                                                <img src="../img/tiki_shipping_method.png" alt="">
+                                            </div>
+                                            <div class="desc-item-checkout-cc">
+                                                <p>${packing_pilihan}</p>
+                                                <div class="desc-item-2-checkout-cc">
+                                                    
+                                                    <p>Harga : ${harga_packing}</p>
+                                                </div>
+                        
+                                            </div>
+                                        </div>
                                     `)
-
                                 }
                                 
                             })

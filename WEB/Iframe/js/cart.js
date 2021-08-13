@@ -13,10 +13,10 @@ $(document).ready(async function(){
 
     // bikinan mas yusuf => bayu yg  comment, gak ngerti gue kaya ada error. items to checkout jd kosong terus. 12 august 2021
     checkboxCounter = 0;
-    // var requestArrayForItemsToCheckout = [];
-    // var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
-    // localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-    // console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+    var requestArrayForItemsToCheckout = [];
+    var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
 });
 
 var harga_barang = 0

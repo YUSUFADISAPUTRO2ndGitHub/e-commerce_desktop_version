@@ -5488,11 +5488,12 @@ img{
     height:150px;
     border-radius:5px;
     border:1px solid #cfe2ff;
-    display:flex;
-    flex-direction:row;
+    display:none;
+    flex-direction:column;
     justify-content:center;
     align-items: center;
     box-shadow: 5px 5px 20px #cfe2ff;
+    padding:5px;
 }
 
 .card-kurir-cc-1{
