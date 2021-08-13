@@ -11,11 +11,12 @@ $(document).ready(async function(){
         await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
     }
 
+    // bikinan mas yusuf => bayu yg  comment, gak ngerti gue kaya ada error. items to checkout jd kosong terus. 12 august 2021
     checkboxCounter = 0;
-    var requestArrayForItemsToCheckout = [];
-    var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
-    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-    console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+    // var requestArrayForItemsToCheckout = [];
+    // var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
+    // localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    // console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
 });
 
 var harga_barang = 0
@@ -98,6 +99,22 @@ function loadcart(productNo, quantity){
     });
 }
 
+function selectAllCart(){
+    // checklist830100100002
+    // checklist830100100002
+    console.log($('#checklist830100100004'))
+    console.log($('#checklist830100100003'))
+    $('#checklist830100100004').prop('checked', true);
+    $('#checklist830100100003').prop('checked', true);
+
+    $('.ins_total_price_cart').empty()
+    $('.ins_total_price_cart').append(`
+        <p> Total Price Selected Cart : RP </p>
+        <p id="total_selected_price">bayu</p>
+    `)
+
+}
+
 function zoomIn(x){
     $(".fake").css("width", "100%");
     $(".glyphicon-chevron-right").css("display", "table");
@@ -128,7 +145,7 @@ function eraseItem(id){
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
             console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
-            // loadcart(cartToJson[i].productNo,cartToJson[i].quantity)
+            
             break;
         }
         
@@ -509,7 +526,7 @@ function checkingoutAll(){
                             var productToBeAddedStringify = JSON.stringify(array);
                             console.log(productToBeAddedStringify)
                             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                            // console.log(localStorage.getItem("itemsToCheckout"));
+                            console.log(localStorage.getItem("itemsToCheckout"));
                         }
 
                         

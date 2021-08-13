@@ -54,9 +54,12 @@
     }
     .card{
         width: 100%;
-        height: 20vh;
+        height: 15vh;
         border-radius: 0%;
         background-color: #217384;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .title{
@@ -112,12 +115,42 @@
         background-color: darkred;
         color: white;
     }
+
+    .card-allchecklist{
+        width:100%;
+        height:50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* border-radius:5px; */
+        /* border:1px solid black; */
+    }
+    .box-allchecklist {
+        width:90%;
+        height:40px;
+        border-radius:5px;
+        border:1px solid black;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
 </style>
 
 <body>
     
     <div class="card" style="width: 100%;">
         <div class="title">CART/KERANJANG</div>
+    </div>
+    <div class="card-allchecklist">
+        <div class="box-allchecklist">
+            Pilih Semua Barang
+
+            <div class="form-check" id ="allchecklist">
+                <input class="form-check-input" id="allchecklistinput" type="checkbox" value="productNo" onchange="selectAllCart()">    
+            </div>
+        </div>
+
     </div>
 
     <!-- <table class="table">
