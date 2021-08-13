@@ -129,7 +129,7 @@
 
             <div class="form-control" id="normal-transfer-selected">
                 <div class="card-body">
-                    <img class="independent-cart-icon" src="../img/card.png" class="category-icon" >
+                    <img class="independent-cart-icon" src="../img/card2.png" class="category-icon" >
                 </div>
                 <div class="alert alert-danger" role="alert">
                     <p class="card-text">Don't forget to take a screenshot of above information to make your payment</p>
@@ -233,6 +233,14 @@
 
             </div>
 
+            <div class="new-total-price-cc">
+                <div class="total_price_cc">
+                    <p>TOTAL PRICE:</p>
+                    <p>RP 50.000</p>
+                </div>
+
+            </div>
+
             <!-- <table class="final_checkout">
                 <tr>
                     <th>PRODUCT NAME</th>
@@ -277,15 +285,40 @@
 
                 </tr>
             </table> -->
+            <div class="new-card-button-cc">
+                <!-- <div class="card-button-submit-cc">
+                    <div class="button-back-cc-1 back-btn-cc-1" id="slide">
+                        KEMBALI
+                    </div>
+                    <div class="button-submit-cc-2 back-btn-cc-2">
+                        KEMBALI KE CART
+                    </div>
+                </div> -->
+                <div class="neomorpism-testing new-button-back" id="backtocartRequestFinalButton" onclick="redirectToCart()">
+                    KEMBALI
+                </div>
+                <div class="neomorpism-testing new-button-checkout" id="submitRequestFinalButton" data-toggle="modal"  onclick="checking_payment()">
+                    LANJUT PEMBELIAN
+                </div>
+                <!-- <div class="card-button-submit-cc">
+                    <div class="button-submit-cc-1" id="slide">
+                        PROCESS
+                    </div>
+                    <div class="button-submit-cc-2">
+                        LANJUT BELI
+                    </div>
+                </div>            -->
+            </div>
         </div>
     </div>
-    <div class="card ">
+    <!-- <div class="card ">
+
         <div class="card-body centerized">
             <button type="submit" class="btn btn-primary" id="submitRequestFinalButton" data-toggle="modal"  onclick="checking_payment()">Submit</button>
             <br>
             <button type="submit" class="btn btn-danger" id="backtocartRequestFinalButton" onclick="redirectToCart()">Kembali Ke Keranjang</button>
         </div>
-    </div>
+    </div> -->
     <!-- Modal -->
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -314,4 +347,27 @@
         </div>
     </div>
 </body>
+
+<script>
+
+
+
+$('.button-submit-cc-1').on('mouseenter',function(){
+    $( this).animate({ "opacity": "0" },1000);
+    // $( this).animate({ "display": "none" },100);
+})
+$('.button-submit-cc-1').on('mouseleave',function(){
+    $( this).animate({ "opacity": "100" },1000);
+})
+
+
+$('.back-btn-cc-1').on('mouseenter',function(){
+    $( this).animate({ "opacity": "0" },1000);
+    // $( this).animate({ "display": "none" },100);
+})
+$('.back-btn-cc-1').on('mouseleave',function(){
+    $( this).animate({ "opacity": "100" },1000);
+})
+
+</script>
 </html>
