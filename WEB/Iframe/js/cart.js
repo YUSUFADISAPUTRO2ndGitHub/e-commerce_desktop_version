@@ -223,14 +223,14 @@ function selectedCart(checkBox,number){
     if (checkBox.checked == true){
 
         addItemsToCheckout(number);
-
+        $(`#productName${number}`).css('border','3px solid #00a8ff')
 
         totalPrice = totalPrice + parseInt( removeComma($("#" + number).val()) );
         checkboxCounter++;
     } else {
 
         removeItemsToCheckout(number);
-
+        $(`#productName${number}`).css('border','none')
         totalPrice = totalPrice - parseInt( removeComma($("#" + number).val()) );
         checkboxCounter--;
     }
@@ -436,14 +436,23 @@ function loadingMessage(interval){
 
 function checkingout(){
     var token = localStorage.getItem("token");
-    // console.log("token " + token);
-    if(checkboxCounter > 0 && (token != "" || token == null)){
+    console.log("token " + token);
+    console.log(token !=undefined)
+    console.log(token != "")
+    console.log(token != null)
+    if(token == undefined){
+        localStorage.setItem("token","")
+        token = localStorage.getItem('token')
+    }
+    if(checkboxCounter > 0 && (token != "")){
         swal.fire("Final Step","","success");
         window.location.href = "./Iframe/checkout.html";
     }else{
-        swal.fire("Something is missing","You may not have selected item(s) from your cart or login","warning");
         if(token == ""){
-            window.location.href = "./sign-in.html";
+            swal.fire("Silahkan Login","","warning");
+            // window.location.href = "./sign-in.html";
+        }else {
+            swal.fire("Pilih barang di keranjang","","warning");
         }
     }
 }
@@ -456,8 +465,14 @@ function checkingoutAll(){
         // console.log(arr_product)
          for (var i=0; i<arr_product.length; i++){
            isSuccess=  await check_qty(arr_product,i)     
-        //    console.log(isSuccess, '393 dalem looping')
+           console.log(arr_product[i].productNo)
+           //    console.log(isSuccess, '393 dalem looping')
+           $(`#productName${arr_product[i].productNo}`).css('border','none')
            if(isSuccess == 'false' || isSuccess == false){
+               console.log(arr_product[i])
+               console.log(arr_product[i].productNo)
+               
+               $(`#productName${arr_product[i].productNo}`).css('border','3px solid red')
                i=arr_product.length
            } 
         }
@@ -482,6 +497,7 @@ function checkingoutAll(){
                     || res.data.Sell_Price == null || res.data.Sell_Price == 'null' || res.data.Sell_Price ==undefined
                     )){
                     isSuccess = false
+
                     // console.log('masuk ke dalam if 415,', isSuccess)
                 }
                 if(res.data.Sell_Price == 'null'){
@@ -536,9 +552,12 @@ function checkingoutAll(){
                         swal.fire("Something is missing","You do not have anything in Cart","warning");
                     }
                 }else{
-                    swal.fire("Something is missing","You have not logged-in","warning");
                     if(token == ""){
-                        window.location.href = "./sign-in.html";
+                        swal.fire("Silahkan Login","","warning");
+                        // $('#loginModal',window.parent.document).modal('show')
+                        // window.location.href = "./sign-in.html";
+                    }else {
+                        swal.fire("Pilih barang di keranjang","","warning");
                     }
                 }
             

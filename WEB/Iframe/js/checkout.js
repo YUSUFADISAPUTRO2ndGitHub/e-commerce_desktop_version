@@ -655,7 +655,8 @@ function checking_payment(){
                 && isKecamatan_pilihan && isKelurahan_pilihan && isPengiriman_pilihan
                 && isPaymentMethod_pilihan){
         
-                    $('#exampleModalLong').modal('show')
+                    // $('#exampleModalLong').modal('show')
+                    requestToFinish()
                 } else {
                     swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
                 }

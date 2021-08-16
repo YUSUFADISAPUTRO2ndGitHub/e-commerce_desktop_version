@@ -227,8 +227,8 @@ function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
     return $.ajax(settings);
 }
 function createNewSalesOrder(items, customerDetails, Email, otp, User_Password){
-    alert(User_Password);
-    alert(otp);
+    // alert(User_Password);
+    // alert(otp);
     var settings = {
         "url": "http://sales.sold.co.id/create-new-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code + `&User_Password=${User_Password}&otp=${otp}&Email=${Email}`,
         "method": "POST",

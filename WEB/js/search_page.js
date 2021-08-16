@@ -660,37 +660,108 @@ const render_searching_page=(product_name)=>{
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
         console.log(res.data)
+        var data_searching = res.data
 
-        res.data.map((val,index)=>{
-            var hargaAwal = parseInt(val.Sell_Price)
-            var discount = parseInt(val.Sell_Price * 0.1)
-            var hargaTotal = hargaAwal + discount
-            // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-            // ){
-            //     console.log(val.Sell_Price)
-            //     console.log('gak ke render, karna data false')
-            // }else {
-                console.log('ke render')
-                $('.new-box-card').append(`
-                <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                        <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                    <div class="card-item-list">
-                        <p class="limited-text-short">${val.Name}</p>
-                        <div class="split-item">
-                            <div class="item-price">
-                                <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
+
+        if(res.data.length <3){
+            axios.post(`http://products.sold.co.id/get-product-details?`)
+            .then((res)=>{
+                var data_all = res.data
+                data_searching.map((val,index)=>{
+                    var hargaAwal = parseInt(val.Sell_Price)
+                    var discount = parseInt(val.Sell_Price * 0.1)
+                    var hargaTotal = hargaAwal + discount
+                    // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                    // ){
+                    //     console.log(val.Sell_Price)
+                    //     console.log('gak ke render, karna data false')
+                    // }else {
+                        console.log('ke render')
+                        $('.new-box-card').append(`
+                        <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                                <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                            <div class="card-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-item">
+                                    <div class="item-price">
+                                        <p>RP. ${hargaTotal}</p>
+                                        <p>Rp. ${hargaAwal}</p>
+                                    </div>
+                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                        </div>
+                        `)
+        
+                    // }
+                })
+                data_all.map((val,index)=>{
+                    var hargaAwal = parseInt(val.Sell_Price)
+                    var discount = parseInt(val.Sell_Price * 0.1)
+                    var hargaTotal = hargaAwal + discount
+                    // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                    // ){
+                    //     console.log(val.Sell_Price)
+                    //     console.log('gak ke render, karna data false')
+                    // }else {
+                        console.log('ke render')
+                        $('.new-box-card').append(`
+                        <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                                <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                            <div class="card-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-item">
+                                    <div class="item-price">
+                                        <p>RP. ${hargaTotal}</p>
+                                        <p>Rp. ${hargaAwal}</p>
+                                    </div>
+                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `)
+        
+                    // }
+                })
+            })
+        }else {
+            data_searching.map((val,index)=>{
+                var hargaAwal = parseInt(val.Sell_Price)
+                var discount = parseInt(val.Sell_Price * 0.1)
+                var hargaTotal = hargaAwal + discount
+                // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                // ){
+                //     console.log(val.Sell_Price)
+                //     console.log('gak ke render, karna data false')
+                // }else {
+                    console.log('ke render')
+                    $('.new-box-card').append(`
+                    <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                            <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${hargaTotal}</p>
+                                    <p>Rp. ${hargaAwal}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `)
+                    `)
+    
+                // }
+            })
+        }
 
-            // }
-        })
+        
     }).catch((err)=>{
         console.log(err)
     })

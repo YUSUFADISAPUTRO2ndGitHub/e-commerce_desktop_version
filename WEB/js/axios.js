@@ -2604,7 +2604,7 @@ const packingMethodHome=(product_id)=>{
         Swal.fire({
         title: 'Please Wait',
         // html: 'I will close in <b></b> milliseconds.',
-        timer: 1000,
+        timer: 100000,
         timerProgressBar: true,
         didOpen: () => {
             Swal.showLoading()
@@ -2824,20 +2824,54 @@ const newRender_list_hutang=(customer_code)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
             console.log(val)
-            $('.ul_list_hutang').append(`
-                <tr>
-                    <td>
-                        <p class="limited-text-short" onclick="open_detail_hutang_home('${val.Order_Number}')">${val.Order_Number} </p> 
-                    </td>
-                    <td >${val.Total_Price}</td>
-                    <td >${val.Payment_Method}</td>
-                    <td>${val.Shipping_Address}</td>
-                    <td >${val.Status}</td>           
-                </tr>
+            // $('.ul_list_hutang').append(`
+            //     <tr>
+            //         <td>
+            //             <p class="limited-text-short" onclick="open_detail_hutang_home('${val.Order_Number}')">${val.Order_Number} </p> 
+            //         </td>
+            //         <td >${val.Total_Price}</td>
+            //         <td >${val.Payment_Method}</td>
+            //         <td>${val.Shipping_Address}</td>
+            //         <td >${val.Status}</td>           
+            //     </tr>
+            // `)
+
+            $('.new-box-card-item-ul').append(`
+                <div class="card-item-ul" onclick="open_detail_hutang_home('${val.Order_Number}')">
+                    <div class="new-card-desc">
+                        ${val.Order_Number}
+                    </div>
+                    <div class="header-right">
+                        <div class="new-hr-qty">
+                            ${commafy(val.Total_Price)}
+                        </div>
+                        <div class="new-hr-qty">
+                            ${val.Payment_Method}
+                        </div>
+                        <div class="new-hr-qty">
+                            ${val.Shipping_Address} Pcs
+                        </div>
+                        <div class="new-hr-qty">
+                            ${val.Status}
+                        </div>
+                           
+                    </div>
+                </div>
             `)
       
         })
         
+
+function commafy( num ) {
+    var str = num.toString().split('.');
+    if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    return str.join('.');
+}
        
     }).catch((err)=>{
         console.log(err)
