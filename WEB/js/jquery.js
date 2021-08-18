@@ -4,11 +4,13 @@ $(function(){
     $( "#datepicker" ).datepicker({
         dateFormat:'yy-mm-dd'
     });
-    var a = $( "#datepicker" ).datepicker("getDate");
-    console.log(a,' ini a')
+
+
+    // var a = $( "#datepicker" ).datepicker("getDate");
+    // console.log(a,' ini a')
     
-    var b = $('.form-check-input').val()
-    console.log(b)
+    // var b = $('.form-check-input').val()
+    // console.log(b)
 })
 
 
@@ -1245,14 +1247,7 @@ $(function(){
         render_searching_order(data,status)
    })
 
-   const date_ul=()=>{
-       
-       var data = $('#datepicker-ul').val()
-       var status = 'Date'
-       render_searching_order(data,status)
-       console.log(data)
-
-   }
+   
    function commafy( num ) {
     var str = num.toString().split('.');
     if (str[0].length >= 5) {

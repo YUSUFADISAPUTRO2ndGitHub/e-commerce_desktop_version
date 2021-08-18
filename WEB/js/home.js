@@ -1030,7 +1030,7 @@ const choosing_shipping=(kurir,product_id)=>{
 
 
 const filter_item_ul=(e)=> {
-    alert('jalan')
+    // alert('jalan')
     console.log(event.target.value)
     var item_searching = $('#item_ul_card').val()
     var status_searching = $('#searching_option_id_ul').val()
@@ -1038,3 +1038,45 @@ const filter_item_ul=(e)=> {
     console.log(status_searching)
 }
 
+const back_btn=()=>{
+    // alert('jalan')
+    var find_active = $('.item-left-img-box .img-big-active').attr('id')
+    console.log(find_active)
+    if(find_active == 'img-big-1'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        $('#img-big-3').removeClass('img-big')
+        $('#img-big-3').addClass('img-big-active')
+    }else if (find_active == 'img-big-2'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        $('#img-big-1').removeClass('img-big')
+        $('#img-big-1').addClass('img-big-active')
+    }else if (find_active == 'img-big-3'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        $('#img-big-2').removeClass('img-big')
+        $('#img-big-2').addClass('img-big-active')
+    }
+}
+const next_btn=()=>{
+    // alert('jalan')
+    var find_active = $('.item-left-img-box .img-big-active').attr('id')
+    console.log(find_active)
+    if(find_active == 'img-big-1'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        $('#img-big-2').removeClass('img-big')
+        $('#img-big-2').addClass('img-big-active')
+    }else if (find_active == 'img-big-2'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        $('#img-big-3').removeClass('img-big')
+        $('#img-big-3').addClass('img-big-active')
+    }else if (find_active == 'img-big-3'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        $('#img-big-1').removeClass('img-big')
+        $('#img-big-1').addClass('img-big-active')
+    }
+}
