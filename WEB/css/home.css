@@ -5684,3 +5684,28 @@ img{
 
 
 /* unpaidlist */
+
+
+.swal2-title, .swal2-timer-progress-bar{
+    display: none !important;
+}
+.swal2-loader{
+    border-width: 0 !important;
+    background-color: #217384;
+    border-style: none !important;
+    animation-name: loading-color;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+
+}
+.swal2-backdrop-show{
+    background-color: white !important;
+}
+
+
+@keyframes loading-color {
+  0%   {background-color: #217384;}
+  25%  {background-color: #4bace5;}
+  50%  {background-color: #37ced5;}
+  100% {background-color: #217384;}
+}

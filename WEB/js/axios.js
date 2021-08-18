@@ -2604,7 +2604,7 @@ const packingMethodHome=(product_id)=>{
         Swal.fire({
         title: 'Please Wait',
         // html: 'I will close in <b></b> milliseconds.',
-        timer: 100000,
+        timer: 5000,
         timerProgressBar: true,
         didOpen: () => {
             Swal.showLoading()
@@ -2824,6 +2824,8 @@ const newRender_list_hutang=(customer_code)=>{
         console.log(res.data)
         res.data.map((val,index)=>{
             console.log(val)
+            var tanggal = val.Start_Date.split('T')
+
             // $('.ul_list_hutang').append(`
             //     <tr>
             //         <td>
@@ -2837,27 +2839,45 @@ const newRender_list_hutang=(customer_code)=>{
             // `)
 
             $('.new-box-card-item-ul').append(`
-                <div class="card-item-ul" onclick="open_detail_hutang_home('${val.Order_Number}')">
-                    <div class="new-card-desc">
-                        ${val.Order_Number}
+            <div class="new-card-item-bd">
+                <div class="top-card-item-bd">
+                    <i class="fab fa-shopify"></i>
+                    <div class="date-card-item-bd">
+                        ${tanggal[0]}
                     </div>
-                    <div class="header-right">
-                        <div class="new-hr-qty">
-                            ${commafy(val.Total_Price)}
-                        </div>
-                        <div class="new-hr-qty">
-                            ${val.Payment_Method}
-                        </div>
-                        <div class="new-hr-qty">
-                            ${val.Shipping_Address} Pcs
-                        </div>
-                        <div class="new-hr-qty">
-                            ${val.Status}
-                        </div>
-                           
+                    <div class="status-card-item-bd">
+                        ${val.Status}
+                    </div>
+                    <div class="status-card-item-bd">
+                        ${val.Payment_Method}
+                    </div>
+                    <div class="order-card-item-bd">
+                        ${token}
+                    </div>     
+                </div>
+                <div class="card-detail-item-bd">
+                <img src="../img/vantsing_shipping_method.png" alt="">
+                <div class="order-card-item-2-bd"> 
+                    <p>${val.Order_Number}</p>
+                    <p>${val.Total_Quantity} barang</p>
+                </div>
+                <div class="price-card-item-bd">
+                    Total Belanja: <br>
+                    RP ${commafy(val.Total_Price)}
+                </div>
+                </div>
+                <div class="check-detail-card-item-bd">
+                    <div class="address-detail-card-item-bd">
+                    ${val.Shipping_Address}
+                    </div>
+                    <div class="btn-card-detail-item-bd hvr-grow" onclick="open_detail_hutang_home('${val.Order_Number}')">
+                        Lihat Detail Transaksi
                     </div>
                 </div>
+            </div>
+            
             `)
+
       
         })
         

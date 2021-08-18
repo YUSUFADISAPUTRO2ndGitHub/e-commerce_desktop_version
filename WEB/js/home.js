@@ -230,6 +230,7 @@ function cek_harga_requested(x){
 }
 
 $('#datepicker').on('click',function(){
+    alert('jalan')
     $(this).datepicker();
 })
 
@@ -1027,4 +1028,13 @@ const choosing_shipping=(kurir,product_id)=>{
 
 
 
+
+const filter_item_ul=(e)=> {
+    alert('jalan')
+    console.log(event.target.value)
+    var item_searching = $('#item_ul_card').val()
+    var status_searching = $('#searching_option_id_ul').val()
+    console.log(item_searching)
+    console.log(status_searching)
+}
 

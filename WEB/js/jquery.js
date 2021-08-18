@@ -1078,10 +1078,177 @@ $(function(){
    })
 
 
+   $('#item_ul_card').on('keyup',function(){
+        var data_searching = $(this).val()
+        var status_searching = $('#searching_option_id_ul').val()
+       
+       
+
+        if(status_searching == 'Payment Status'){
+          
+            render_searching_order(data_searching,status_searching)
+        }else if ( status_searching == 'Order Number'){
+           
+            render_searching_order(data_searching,status_searching)
+        }else if ( status_searching == 'Payment Method'){
+         
+            render_searching_order(data_searching,status_searching)
+        }else if ( status_searching == 'Address'){
+           
+            render_searching_order(data_searching,status_searching)
+        }else {
+            console.log('masuk ke else')
+        }
+
+
+   })
+
+   const render_searching_order=(data,status)=>{
+        const token = localStorage.getItem('token')
+
+        axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+        .then((res)=>{
+            var all_data = res.data
+            console.log(all_data)
+            if(data.length >2){
+              var filtering =   all_data.filter((val)=>{
+                    console.log(val)
+                    if(status == 'Order Number'){
+                        if(val.Order_Number.includes(data)){
+                            return val
+                        }
+                    }else if ( status == 'Payment Method'){
+                        if(val.Payment_Method.includes(data)){
+                            return val
+                        }
+                    }else if ( status == 'Payment Status'){
+                        if(val.Status.includes(data)){
+                            return val
+                        }
+                    }else if ( status == 'Address'){
+                        if(val.Shipping_Address.includes(data)){
+                            return val
+                        }
+                    }
+                })
+                console.log(filtering)
+                $('.new-box-card-item-ul').empty()
+                filtering.map((val,index)=>{
+                    var tanggal = val.Start_Date.split('T')
+                    $('.new-box-card-item-ul').append(`
+                        <div class="new-card-item-bd">
+                            <div class="top-card-item-bd">
+                                <i class="fab fa-shopify"></i>
+                                <div class="date-card-item-bd">
+                                    ${tanggal[0]}
+                                </div>
+                                <div class="status-card-item-bd">
+                                    ${val.Status}
+                                </div>
+                                <div class="status-card-item-bd">
+                                    ${val.Payment_Method}
+                                </div>
+                                <div class="order-card-item-bd">
+                                    ${token}
+                                </div>     
+                            </div>
+                            <div class="card-detail-item-bd">
+                                <img src="../img/vantsing_shipping_method.png" alt="">
+                                <div class="order-card-item-2-bd"> 
+                                    <p>${val.Order_Number}</p>
+                                    <p>${val.Total_Quantity} barang</p>
+                                </div>
+                                <div class="price-card-item-bd">
+                                    Total Belanja: <br>
+                                    RP ${commafy(val.Total_Price)}
+                                </div>
+                            </div>
+                            <div class="check-detail-card-item-bd">
+                                <div class="address-detail-card-item-bd">
+                                ${val.Shipping_Address}
+                                </div>
+                                <div class="btn-card-detail-item-bd hvr-grow" onclick="open_detail_hutang_home('${val.Order_Number}')">
+                                    Lihat Detail Transaksi
+                                </div>
+                            </div>
+                        </div>               
+                    `)
+                })
+            }else if (data.length <2 && data.length!=0){
+                alert('minimal 3 karakter')
+            }else if ( data.length == 0 || data.length <0){
+                // balikin ke data awal 
+                axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+                .then((res)=>{
+                    var filtering = res.data
+                    console.log(filtering)
+                    $('.new-box-card-item-ul').empty()
+                    filtering.map((val,index)=>{
+                        var tanggal = val.Start_Date.split('T')
+                        $('.new-box-card-item-ul').append(`
+                            <div class="new-card-item-bd">
+                                <div class="top-card-item-bd">
+                                    <i class="fab fa-shopify"></i>
+                                    <div class="date-card-item-bd">
+                                        ${tanggal[0]}
+                                    </div>
+                                    <div class="status-card-item-bd">
+                                        ${val.Status}
+                                    </div>
+                                    <div class="status-card-item-bd">
+                                        ${val.Payment_Method}
+                                    </div>
+                                    <div class="order-card-item-bd">
+                                        ${token}
+                                    </div>     
+                                </div>
+                                <div class="card-detail-item-bd">
+                                    <img src="../img/vantsing_shipping_method.png" alt="">
+                                    <div class="order-card-item-2-bd"> 
+                                        <p>${val.Order_Number}</p>
+                                        <p>${val.Total_Quantity} barang</p>
+                                    </div>
+                                    <div class="price-card-item-bd">
+                                        Total Belanja: <br>
+                                        RP ${commafy(val.Total_Price)}
+                                    </div>
+                                </div>
+                                <div class="check-detail-card-item-bd">
+                                    <div class="address-detail-card-item-bd">
+                                    ${val.Shipping_Address}
+                                    </div>
+                                    <div class="btn-card-detail-item-bd hvr-grow" onclick="open_detail_hutang_home('${val.Order_Number}')">
+                                        Lihat Detail Transaksi
+                                    </div>
+                                </div>
+                            </div>               
+                        `)
+                    })
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
+        
+   }
+   function commafy( num ) {
+    var str = num.toString().split('.');
+    if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    return str.join('.');
+}
+
+
     $('.input-name').on('keyup',function () {
         $('.close-button').css('display','block')
         
-        console.log('hi');
+        
         var value = $(this).val()
         console.log(value)
         if(value.length > 2){

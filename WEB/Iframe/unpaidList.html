@@ -36,25 +36,32 @@
           <div class="new-cb-card-left">
             <div class="new-cb-header-left">
                 <div class="searching-cb-header">
-                  <input type="text" placeholder="Searching">
+                  <input type="text" placeholder="Cari transaksimu di sini" id="item_ul_card" >
                   <div class="searching-icon-box-small">
                     <i class="fas fa-search"></i>
                   </div>
                 </div>
-                <div class="searching-cb-header">
-                  
-                </div>
-                <div class="searching-cb-header">
-
-                </div>
+                
+                <select class="form-select searching-cb-header-2" aria-label="Default select example" id="searching_option_id_ul">
+                  <option selected value="Order Number">Order Number</option>
+                  <option value="Payment Status">Payment Status</option>
+                  <option value="Payment Method">Payment Method</option>
+                  <option value="Address">Address</option>
+                </select>
+                
+                
+                  <input  id="datepicker-ul"   class="searching-cb-header-2" placeholder="Pilih Tanggal Transaksi"
+                  min="2021-05-01"
+                  onchange="date_commision()"
+                  type="date"
+                  /> 
+                
             </div>
 
             <div class="new-box-card-item-ul">
                 <!-- render card item -->       
                 
-                <div class="new-card-item-bd">
-
-                </div>
+               
             </div>
           </div>
         </div>
@@ -105,4 +112,5 @@
         
       </div>
 </body>
+
 </html>
