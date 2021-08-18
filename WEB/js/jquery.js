@@ -1110,7 +1110,7 @@ $(function(){
         .then((res)=>{
             var all_data = res.data
             console.log(all_data)
-            if(data.length >2){
+            if(data.length >1){
               var filtering =   all_data.filter((val)=>{
                     console.log(val)
                     if(status == 'Order Number'){
@@ -1122,11 +1122,17 @@ $(function(){
                             return val
                         }
                     }else if ( status == 'Payment Status'){
+                        console.log(data)
+                        console.log(val.Status.includes(data))
                         if(val.Status.includes(data)){
                             return val
                         }
                     }else if ( status == 'Address'){
                         if(val.Shipping_Address.includes(data)){
+                            return val
+                        }
+                    }else if ( status == 'Date'){
+                        if(val.Start_Date.includes(data)){
                             return val
                         }
                     }
@@ -1174,8 +1180,6 @@ $(function(){
                         </div>               
                     `)
                 })
-            }else if (data.length <2 && data.length!=0){
-                alert('minimal 3 karakter')
             }else if ( data.length == 0 || data.length <0){
                 // balikin ke data awal 
                 axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
@@ -1232,6 +1236,22 @@ $(function(){
             console.log(err)
         })
         
+   }
+
+   $('#datepicker-ul').on('change',function(){
+        var data = $(this).val()
+        var status = 'Date'
+        console.log(data)
+        render_searching_order(data,status)
+   })
+
+   const date_ul=()=>{
+       
+       var data = $('#datepicker-ul').val()
+       var status = 'Date'
+       render_searching_order(data,status)
+       console.log(data)
+
    }
    function commafy( num ) {
     var str = num.toString().split('.');
