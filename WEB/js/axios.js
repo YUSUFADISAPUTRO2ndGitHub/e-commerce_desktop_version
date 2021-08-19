@@ -2700,7 +2700,11 @@ function commafy( num ) {
                             <div class="box-description-right-id">
                                 <p>${item.Category}</p>
                                 <p>${item.Name}</p>
-                                <p>***** 4.3 (999 reviews)</p>
+                                <div class="rating-bottom-2">
+                                    <div class="star-box">
+                                        <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="box-price-right-id">
@@ -2944,7 +2948,7 @@ function commafy( num ) {
                             <div class="box-description-right-id">
                                 <p>${item.Category}</p>
                                 <p>${item.Name}</p>
-                                <div class="rating-bottom">
+                                <div class="rating-bottom-2">
                                     <div class="star-box">
                                         <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                                     </div>
