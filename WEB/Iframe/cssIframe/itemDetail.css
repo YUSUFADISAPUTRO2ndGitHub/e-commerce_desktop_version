@@ -454,6 +454,16 @@
     height:70px;
     border:5px solid lightgray;
     margin:5px;
+    transition:0.5s;
+}
+.option-left-1:hover {
+    border:5px solid #217384;
+    width:100px;
+    height:100px;
+}
+.option-left-1:hover img{
+    width:100%;
+    height:100%;
 }
 .box-button-next-back{
     height:50px;
@@ -673,9 +683,9 @@
 
 .img-big-active {
     display: flex;
-    -webkit-animation: fadeinout 4s linear infinite;
-    animation: fadeinout 4s linear infinite;
-    opacity: 0;
+    /* -webkit-animation: fadeinout 4s linear infinite; */
+    /* animation: fadeinout 4s linear infinite; */
+    /* opacity: 0; */
 
     
 }
