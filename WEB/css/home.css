@@ -2417,8 +2417,9 @@ input:focus {
 }
 
 .modals-product-detail-position-home {
-    position: fixed;
-    top: 12%;
+    /* position: fixed; */
+    position: absolute;
+    top: 25%;
     left: 50%;
     margin-left: -27%;
 }

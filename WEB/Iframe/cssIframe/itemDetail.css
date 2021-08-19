@@ -740,6 +740,15 @@
     }
 }
 
+#nav-home{
+    /* display: flex; */
+    /* flex-direction:column; */
+    overflow: auto;
+    overflow-x: scroll;
+    height:130px !important;
+    /* overflow:hidden; */
+    /* background-color:red; */
+}
 #nav-profile{
     /* display: flex; */
     /* flex-direction:column; */
