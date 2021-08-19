@@ -1,6 +1,6 @@
 function subMenuIconClicked(x) {
     x.classList.toggle("change");
-    console.log(document.getElementById("myDropdown").classList);
+    
     if (document.getElementById("myDropdown").classList.contains('show')) {
         document.getElementById("myDropdown").classList.remove('show');
     }else{
@@ -110,7 +110,7 @@ function cartIconClicked(x) {
         document.getElementById("icon-order-status").classList.remove("change-pintu-icon");
     }
     x.classList.toggle("change-cart-icon");
-    // console.log(document.getElementById("icon-login").classList.contains("change-login-icon"));
+    // 
 
     if(document.getElementById("mainMenuIframe").style.display == "none" 
     && document.getElementById("loginIframe").style.display == "none" 
@@ -142,7 +142,7 @@ function cartIconClicked(x) {
 }
 
 function categoryClicked(x) {
-    // console.log(document.getElementById("icon-login").classList.contains("change-login-icon"));
+    // 
     if (document.getElementById("icon-login").classList.contains("change-login-icon")) {
         document.getElementById("icon-login").classList.remove("change-login-icon");
     }

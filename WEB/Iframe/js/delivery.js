@@ -4,13 +4,13 @@ $(document).ready(function(){
 
 var counter = 0;
 function populateDeliveryTable(){
-    console.log(localStorage.getItem("token"));
+    
     getAllOrdersForThisCustomer(localStorage.getItem("token"), "").done(function (response) {
-        console.log(response);
+        
         if(response.length == 0){
             $(".loading-area").css("display", "none");
         }else{
-            console.log(response);
+            
             loadingMessage(response.length);
             var i = 0;
             $(".loading-area").css("display", "none");
@@ -39,7 +39,7 @@ function orderDetailRequest(orderNumber){
             if(response.length == 0){
                 $(".loading-area").css("display", "none");
             }else{
-                console.log(response);
+                
                 loadingMessage(response.length);
                 var i = 0;
                 for(i ; i < response.length; i++){
@@ -74,7 +74,7 @@ function loadingMessage(timer){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }

@@ -1,5 +1,5 @@
 $(document).ready(async function(){
-    console.log("localStorage.getItem(\"itemsInCart\") " + localStorage.getItem("itemsInCart"));
+    
     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
     var i = 0;
     if(cartToJson.length != 0){
@@ -15,19 +15,19 @@ $(document).ready(async function(){
     var requestArrayForItemsToCheckout = [];
     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-    console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+    
 });
 
 function loadcart(productNo, quantity){
     getProductsWithProductNo("", "", productNo).done(function (response) {
-        console.log(response);
+        
         if(response == false){
-            console.log("product no found ======= removed");
+            
             var i = 0;
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             for(i; i < cartToJson.length; i ++){
                 if(cartToJson[i].productNo == productNo){
-                    console.log("product no found ======= removed");
+                    
                     cartToJson.splice(i, 1);
                     localStorage.setItem("itemsInCart", JSON.stringify(cartToJson));
                 }
@@ -81,7 +81,7 @@ function eraseItem(id){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+            
             break;
         }
     }
@@ -126,7 +126,7 @@ function quantityUpdatedDirectly(x, id){
                     $("#quantity" + id).val(cartToJson[i].quantity);
 
                     $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                    console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                    
                     break;
                 }
             }
@@ -141,7 +141,7 @@ function quantityUpdatedDirectly(x, id){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -189,7 +189,7 @@ function removeItemsToCheckout(number){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            console.log("removeItemsToCheckout localStorage " + localStorage.getItem("itemsToCheckout"));
+            
             break;
         }
     }
@@ -211,11 +211,11 @@ function addItemsToCheckout(number){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsToCheckout"));
+            
         });
     }else {
         var cartToJson = JSON.parse(localStorage.getItem("itemsToCheckout"));
-        console.log("itemsToCheckout " + cartToJson);
+        
         var i = 0;
         var indicator = 0;
         for(i; i < cartToJson.length; i ++){
@@ -233,7 +233,7 @@ function addItemsToCheckout(number){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log("debug " + localStorage.getItem("itemsToCheckout"));
+                
                 break;
             }
         }
@@ -251,7 +251,7 @@ function addItemsToCheckout(number){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log(localStorage.getItem("itemsToCheckout"));
+                
             });
         }
     }
@@ -283,7 +283,7 @@ function addQuantity(id){
                 $("#quantity" + id).val(cartToJson[i].quantity);
 
                 $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -310,7 +310,7 @@ function reduceQuantity(id){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -333,7 +333,7 @@ function reduceQuantity(id){
                     localStorage.setItem("itemsInCart", productToBeAddedStringify);
                     $("#quantity" + id).val(cartToJson[i].quantity);
                     $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                    console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                    
                     break;
                 }
             }
@@ -361,13 +361,13 @@ function loadingMessage(interval){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
 
 function checkingout(x){
-    // console.log('cart jalan')
+    // 
     // if($(x).hasClass("background_grey")){
     //     $(x).removeClass("background_grey");
     // }else{
@@ -378,7 +378,7 @@ function checkingout(x){
 
 
     // var token = localStorage.getItem("token");
-    // console.log("token " + token);
+    // 
     // if(checkboxCounter > 0 && (token != "" || token == null)){
     //     swal.fire("Final Step","","success");
     //     window.location.href = "./checkout.html";
@@ -396,16 +396,16 @@ function checkingoutAll(){
         var isSuccess = true
         var arr = localStorage.getItem('itemsInCart')
         var arr_product = JSON.parse(arr)
-        console.log(arr_product)
+        
          for (var i=0; i<arr_product.length; i++){
            isSuccess=  await check_qty(arr_product,i)
 
 
            alert( await check_qty(arr_product,i))  
-           console.log( await check_qty(arr_product,i))
+           
     
         }
-        console.log(isSuccess,'584')
+        
         await success(isSuccess)
         
     }
@@ -415,28 +415,28 @@ function checkingoutAll(){
             await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
-                console.log(res.data)
+                
                 var qty_sisa = res.data.Stock_Quantity
-                console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
-                console.log(quantity_product, 'ini product beli looping ke ' , i)
-                console.log(quantity_product > qty_sisa, qty_sisa == 'undefined' ,qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa))
+                
+                
+                
                 if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa)){
                     isSuccess = false
                 }
-                console.log(isSuccess,' 602')
+                
                 resolve(isSuccess)
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     }
     
     
     async function success(isSuccess){
-        console.log(isSuccess,'599')
+        
         if(isSuccess){
                 var token = localStorage.getItem("token");
-                console.log("token " + token);
+                
                 if((token != "" || token == null)){
                     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
                     if(cartToJson.length != 0){
@@ -456,7 +456,7 @@ function checkingoutAll(){
                             // saving to storage
                             var productToBeAddedStringify = JSON.stringify(array);
                             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                            console.log(localStorage.getItem("itemsToCheckout"));
+                            
                         }
                         swal.fire("Final Step","","success");
                         window.location.href = "./checkout.html";
@@ -471,7 +471,7 @@ function checkingoutAll(){
                 }
             
         }else {
-            console.log(isSuccess, ' masuk ke else false, qty kurang/undefined dll')
+            
             Swal.fire("Quantity Kurang", "Error", "error");
         }
     }
@@ -485,7 +485,7 @@ function checkingoutAllInStore(){
     in_store_loading_checkout();
     setTimeout(() => {
         var token = localStorage.getItem("token");
-        console.log("token " + token);
+        
         if((token != "" || token == null)){
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             if(cartToJson.length != 0){
@@ -505,7 +505,7 @@ function checkingoutAllInStore(){
                     // saving to storage
                     var productToBeAddedStringify = JSON.stringify(array);
                     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                    console.log(localStorage.getItem("itemsToCheckout"));
+                    
                 }
                 swal.fire("Final Step","","success");
                 window.location.href = "./checkout-in-store.html?check_store_price=true";

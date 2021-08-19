@@ -6,7 +6,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
     $(".loading-area").css("display", "none");
     if(product_row % 2 != 0){
         var product_row = product_row - 1;
-        console.log("product_row inside -1 " + product_row);
+        
         // right
         $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
         $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
@@ -28,7 +28,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
             $("#badge-right" + product_row).append("<img src=\"../www/img/Additional_icons/new.png\" class=\"category-icon\" >");
         }
     }else{
-        console.log("product_row inside 2 " + product_row);
+        
         // left
         $("#product-highlights").append("<tr id=\"product-highlights"+ product_row +"\">");
         $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");
@@ -67,10 +67,10 @@ function commafy( num ) {
 function theCaller(type){
     loadingMessage(100);
     $("#product-highlights").empty();
-    console.log(type == "sale");
+    
     if(type == "sale"){
         getAllProductsInGroupBuy("", "").done(function (response) {
-            console.log(response);
+            
             if(response.length == 0){
                 loadingMessage(1);
             }
@@ -90,7 +90,7 @@ function theCaller(type){
         });
     }else if(type == "new"){
         getAllProductsInNew("", "").done(function (response) {
-            console.log(response);
+            
             if(response.length == 0){
                 loadingMessage(1);
             }
@@ -110,7 +110,7 @@ function theCaller(type){
         });
     }else{
         getAllProductsWithoutPagination("", "").done(function (response) {
-            console.log(response);
+            
             if(response.length == 0){
                 loadingMessage(1);
             }
@@ -178,7 +178,7 @@ function loadingMessage(timerMultiplier){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -191,7 +191,7 @@ function generateQRScanner(x){
 }
 
 function generatehomeleftOnly(product_row, leftdata, dataLength){
-    console.log(leftdata);
+    
     // left
     $("#product-highlights").append("<tr id=\"product-highlights"+ product_row +"\">");
     $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");
@@ -238,14 +238,14 @@ function addToCartDirectly(product){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsInCart"));
+            
 
             // add total item in cart
             localStorage.setItem("totalItemInCart", array.length);
         });
     }else{
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-        console.log(cartToJson);
+        
         var i = 0;
         var indicator = 0;
         for(i; i < cartToJson.length; i ++){
@@ -256,7 +256,7 @@ function addToCartDirectly(product){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("bug " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -270,7 +270,7 @@ function addToCartDirectly(product){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsInCart"));
+            
         }
         // add total item in cart
         localStorage.setItem("totalItemInCart", cartToJson.length);

@@ -1,6 +1,6 @@
 $(document).ready(async function(){
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(async function (response) {
-        console.log(response);
+        
         if(response != false){
             if(response.Address_1 != "NULL" || response.Address_1 != null){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_1 + "\">" + response.Address_1 + "</option>");
@@ -90,7 +90,7 @@ async function personalDetailsWithCurrentAddress(){
             notes: "e-commerce pembelian express purchase (group buy) request",
             orderDate: date
         };
-        console.log(request);
+        
         $("#submitRequestFinalButton").toggle();
         $("#backtocartRequestFinalButton").toggle();
         await sendRequestFinal();
@@ -148,13 +148,13 @@ async function sendFinalRequestToEnquiryAndEnquiryDetails(request){
         productArr[i].quantity = (productArr[i].quantity).toString();
         productArr[i].totalPrice = (productArr[i].totalPrice).toString();
     }
-    console.log("productArr " + JSON.stringify(productArr[0]));
-    console.log("orderArr " + JSON.stringify(orderArr[0]));
+    
+    
     await reorderJSON(orderArr[0], productArr).then(async value => {
         return await value;
     });
-    console.log(customer_information);
-    console.log(item_bought);
+    
+    
     createNewSalesOrderWithGroupBuy(item_bought, customer_information).done(async function (response) {
         if(response.status == true){
             Swal.fire("Tolong melakukan pembayar PALING LAMBAT 3 hari dari sekarang", "", "success");
@@ -238,7 +238,7 @@ async function sendRequestFinal(){
         }
         var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
         localStorage.setItem("finalStep", productToBeAddedStringify);
-        console.log(localStorage.getItem("finalStep"));
+        
     });
 }
 
@@ -275,7 +275,7 @@ function loadingMessage(timer){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }

@@ -5,9 +5,9 @@ $(document).ready(function(){
     var status = urlParams.get('status');
     const orderNumber = urlParams.get('orderNumber');
     status = JSON.parse(status);
-    console.log(orderNumber);
-    console.log(status);
-    console.log(status.Status);
+    
+    
+    
     if(!orderNumber.includes("SOVIG")){
         $(".order-details").css("display", "block");
         populateOrdersTable(status);
@@ -37,7 +37,7 @@ var vaNumber = "12943";
 
 function populateOrdersTable(datas){
     getAllOrdersForThisCustomer("", datas.Order_Number).done(function (response) {
-        console.log(response);
+        
         if(response.length > 0){
             if(response[0].Payment_Status != undefined){
                 if(response[0].Payment_Status.toUpperCase() == "PAYMENT"){

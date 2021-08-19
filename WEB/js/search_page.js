@@ -14,7 +14,7 @@ $( document ).ready(function() {
     axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
     .then((res)=>{
         res.data.map((val,index)=>{
-            // console.log(val.Category);
+            // 
             $('.category-list-sp').append(
                 `
                 <li class="list-group-item" onclick="show_subcategory('${val.Category}')">${val.Category.toUpperCase()}</li>
@@ -22,7 +22,7 @@ $( document ).ready(function() {
                 )
             })
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 
@@ -36,7 +36,7 @@ const sort_by_higher=()=>{
     const subcategory = urlParams.get('category')
     const searching = urlParams.get('searching')
     render_sort_price(searching,'asc')
-    // console.log(searching,'line 33')
+    // 
 }
 const sort_by_lower=()=>{
 
@@ -46,12 +46,12 @@ const sort_by_lower=()=>{
     const subcategory = urlParams.get('category')
     const searching = urlParams.get('searching')
     render_sort_price(searching,'desc')
-    // console.log(searching,'line 33')
+    // 
 }
 
 
 const render_sort_price=(product_name,condition)=>{
-    // console.log(product_name)
+    // 
     var data = product_name
     if(data){
         $('.sp_name').val(data)
@@ -62,14 +62,14 @@ const render_sort_price=(product_name,condition)=>{
 
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
-        // console.log(res.data)
+        // 
         if(condition == 'asc'){
             res.data.sort((a,b) => (b.Sell_Price > a.Sell_Price) ? 1 : -1)
 
         }else {
             res.data.sort((a,b) => (a.Sell_Price > b.Sell_Price) ? 1 : -1)
         }
-        // console.log(res.data)
+        // 
         $('.new-box-card').empty()
         res.data.map((val,index)=>{
             var hargaAwal = parseInt(val.Sell_Price)
@@ -94,7 +94,7 @@ const render_sort_price=(product_name,condition)=>{
             `)
         })
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 
@@ -131,10 +131,10 @@ function show_subcategory(choosen_parent_category){
     }).then((result) => {
     /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        
         axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
         .then((res)=>{
-            // console.log(res);
+            // 
             // $('.box-list-kategori').css("display", "block")
             $('.box-list-kategori').toggle()
             $('.box-list-kategori').empty()
@@ -142,7 +142,7 @@ function show_subcategory(choosen_parent_category){
                 // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
                 // val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                 // ){
-                //     console.log('show subcategory gak ke render karna data false')
+                //     
                 // }else {
                     $('.box-list-kategori').append(
                       `
@@ -159,7 +159,7 @@ function show_subcategory(choosen_parent_category){
             }) 
             
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }
     })
@@ -197,20 +197,20 @@ function show_jenisproduct(jenis_product){
     }).then((result) => {
     /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        
         axios.post(`http://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
         .then((res)=>{
-            // console.log(res.data)
+            // 
             res.data.map((val,index)=>{
-                // console.log('masuk ke line 47')
-                // console.log(val)
+                // 
+                // 
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
                 // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
                 // val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                 // ){
-                    console.log('data tidak ke render karna false')
+                    
                 // }else {
                     
                     $('.render-item-sub').append(
@@ -237,10 +237,10 @@ function show_jenisproduct(jenis_product){
             }) 
             // $('.modals-lk').addClass('melihat') // ini bisa hampir
             
-            console.log('finish render item based on sub cat')
+            
             
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }
     })
@@ -260,14 +260,14 @@ const get_product_detail_from_searching_page=(product_id)=>{
 
     // axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     // .then((res)=>{
-    //     console.log(res.data)
+    //     
     //     item = res.data
     //     var hargaAwal = parseInt(item.Sell_Price)
     //     var discount = parseInt(item.Sell_Price * 0.1)
     //     var hargaTotal = hargaAwal + discount
-    //     console.log(item.GroupBuy_Purchase  === "true", ' ini 116')
-    //     console.log(typeof 'bayu' )
-    //     console.log( item.GroupBuy_SellPrice )
+    //     
+    //     
+    //     
     //     const querystring = $(location).attr('href');
     //     if(item.GroupBuy_Purchase == 'false' || item.GroupBuy_Purchase == false){
     //         $('.item_detail_sp').append(
@@ -398,7 +398,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
     //     }
         
     // }).catch((err)=>{
-    //     console.log(err)
+    //     
     // })
 }
 
@@ -408,7 +408,7 @@ function groupbuy_sp_form(product_id){
     var token = localStorage.getItem('token')
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
-        // console.log(res.data)
+        // 
         if(res.data){
 
     $('.groupbuy_sp').empty()
@@ -424,7 +424,7 @@ function groupbuy_sp_form(product_id){
     //     var option_payment
     //         axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
     //         .then((res)=>{       
-    //             console.log(res.data)   
+    //             
     //             option_payment = res.data
     //              $('.groupbuy_sp').append(`
     //                 <div class="group-left" >
@@ -557,11 +557,11 @@ function groupbuy_sp_form(product_id){
     //             axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     //             .then((res)=>{
     //                 // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)      
-    //                 console.log(res.data)
+    //                 
     
     //                 option_payment.map((val,index)=>{
-    //                     console.log(val.Payment_Method_Desc)
-    //                     console.log(val.Payment_Method_Desc === 'BCA VA TRANSFER')
+    //                     
+    //                     
     //                     if(val.Payment_Method_Name === 'transfer'){
     //                         $('.option-payment-gb').append(`
     //                             <option id="payment_gb" value="${val.Payment_Method_Name}">${val.Payment_Method_Name}</option> 
@@ -569,7 +569,7 @@ function groupbuy_sp_form(product_id){
     //                     }
     //                 })
     //                 var token = localStorage.getItem('token')
-    //                 console.log(token,' ini token 427')
+    //                 
     //                 axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     //                 .then((res)=>{
     //                     $('.option-alamat-gb').append(`
@@ -583,20 +583,20 @@ function groupbuy_sp_form(product_id){
                         
                      
     //                 }).catch((err)=>{
-    //                     console.log(err)
+    //                     
     //                 })
                     
     //             }).catch((err)=>{
-    //                 console.log(err)
+    //                 
     //             })
             
     //             }).catch((err)=>{
-    //                 console.log(err)
+    //                 
     //             })
-    //             console.log(product_id)           
+    //             
         
     // }).catch((err)=>{
-    //     console.log(err)
+    //     
     // })
     
     
@@ -624,17 +624,16 @@ function groupbuy_sp_form(product_id){
             })
         }
     }).catch((err)=>{
-        console.log(err)
+        
     })
     
 }
 const search_item=()=>{
-    console.log('159 jalan search')
+    
 
     var item_search = $('#search_item').val()
     var product_name = $('#search_item').attr('id')
-    console.log(item_search)
-    console.log(product_name)
+    
     $('.active_search').css('top','575px')
     $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
@@ -647,9 +646,9 @@ const search_item=()=>{
 
 
 const render_searching_page=(product_name)=>{
-    console.log(product_name)
+    
     var data = product_name
-    console.log(data)
+    
     if(data){
         $('.sp_name').val(data)
     }else {
@@ -659,7 +658,7 @@ const render_searching_page=(product_name)=>{
 
     axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
-        console.log(res.data)
+    
         var data_searching = res.data
 
 
@@ -673,10 +672,9 @@ const render_searching_page=(product_name)=>{
                     var hargaTotal = hargaAwal + discount
                     // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                     // ){
-                    //     console.log(val.Sell_Price)
-                    //     console.log('gak ke render, karna data false')
+                    //    
                     // }else {
-                        console.log('ke render')
+                        // 
                         $('.new-box-card').append(`
                         <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
                                 <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
@@ -703,10 +701,10 @@ const render_searching_page=(product_name)=>{
                     var hargaTotal = hargaAwal + discount
                     // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                     // ){
-                    //     console.log(val.Sell_Price)
-                    //     console.log('gak ke render, karna data false')
+                    //     
+                    //     
                     // }else {
-                        console.log('ke render')
+                        // 
                         $('.new-box-card').append(`
                         <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
                                 <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
@@ -735,10 +733,10 @@ const render_searching_page=(product_name)=>{
                 var hargaTotal = hargaAwal + discount
                 // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
                 // ){
-                //     console.log(val.Sell_Price)
-                //     console.log('gak ke render, karna data false')
+                //     
+                //     
                 // }else {
-                    console.log('ke render')
+                    // 
                     $('.new-box-card').append(`
                     <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
                             <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
@@ -763,7 +761,7 @@ const render_searching_page=(product_name)=>{
 
         
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 
@@ -780,9 +778,9 @@ const render_daftar_hutang=()=>{ // render utang untuk di card
     
     axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
+        
         res.data.map((val,index)=>{
-            console.log(val)
+        
             $('.ID_list_hutang').append(`
                 <tr>
                     <td>${val.Total_Quantity}</td>
@@ -799,7 +797,7 @@ const render_daftar_hutang=()=>{ // render utang untuk di card
         
        
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 }
@@ -814,19 +812,19 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     $('.cb-right').empty()
     // $('#daftarHutangModal').modal('hide')
     // $('#ID_detail_hutang_modal').modal('show')
-    // console.log(order_number)
+    
     axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        // console.log(res.data)
+        // 
         var arrListHutang = res.data
         var arrDataProduct = []
         var kurir_name = ''
         var shipping_price = 0
         var product_price =0
         var customer_address = ''
-        // console.log(arrListHutang)
+        // 
         var total = arrListHutang.length
-        // console.log(total)
+        // 
 
         // render card item
         arrListHutang.map((val,index)=>{
@@ -899,7 +897,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
-                    // console.log(res.data, ' 780')
+                    // 
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
@@ -928,14 +926,14 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                     </div>
                 `)
                 }).catch((err)=>{
-                    console.log(err)
+                    
                 })
             }
         })
         var total_product_with_shipping = shipping_price + product_price
-        // console.log(shipping_price,' shipping price')
-        // console.log(product_price, ' total all price')
-        // console.log(total_product_with_shipping)
+        // 
+        // 
+        // 
         $('.card-address-profile').append(`
             <div class="img-profile-ul">
                 <img src="../img/accounts.png" alt="error" class="img-prof">
@@ -1025,7 +1023,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 <img src="../img/card2.png" alt="" class="acc-ul">
             `)
         }
-        // console.log(arrListHutang[0].Status,' 962')
+        // 
         if(arrListHutang[0].Status == 'pending'){
             $('.progress-card-ul').empty() // order received
             $('.progress-card-ul').append(`
@@ -1260,7 +1258,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         `)
 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
     
@@ -1296,7 +1294,7 @@ const item_detail_for_hutang=(order_number)=>{ // detail utang dari card
         })
 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 }

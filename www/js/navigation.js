@@ -1,7 +1,7 @@
 $(document).ready(function(){
     // $.get("http://147.139.168.202:8080/setTableStatus.jsp", function(data, status){
     //     datas = JSON.parse(data);
-    //     console.log(datas);
+    //     
     // });
 
     // index.html
@@ -41,7 +41,7 @@ $(document).ready(function(){
         $(".content_iframe_floating").css("display", "none");
         $(".navbar-bottom-icon").removeClass("active");
         $("#account-icon").toggleClass("active");
-        console.log(localStorage.getItem("token"));
+        
         if(localStorage.getItem("token") == "" || localStorage.getItem("token") === null){
             $(".content_iframe").attr("src","./sign-in.html");
         }else{

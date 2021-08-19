@@ -30,7 +30,7 @@ function removeSpace( words ) {
 }
 
 function generateUnpaidOrdersRow(i, datas){
-    console.log(datas);
+    
     $("#unpaid-orders").append("<tr id=\"" + datas.Order_Number + "\">");
     $("#" + datas.Order_Number ).append("<button onclick=\"checkOrderDetails(\'" + datas.Order_Number + "\')\">" + datas.Order_Number + "</button>");
     $("#" + datas.Order_Number ).append("<td class=\"total-price-per-order\" id=\"" + datas.Order_Number + "-details\">" + commafy( datas.Total_Price) + "</td>");

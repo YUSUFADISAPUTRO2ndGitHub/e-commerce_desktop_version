@@ -43,7 +43,7 @@ function loadingMessage(timer){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -71,7 +71,7 @@ function loadCheckoutFinalConfirmationTable(condition){
                 var i = 0;
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
                 for(i; i < itemsToCheckout.length; i++){
-                    console.log(response);
+                    
                     if(itemsToCheckout[i].productNo == response.Product_Code){
                         $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
                         $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
@@ -93,7 +93,7 @@ function loadCheckoutFinalConfirmationTable(condition){
                 var i = 0;
                 var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
                 for(i; i < itemsToCheckout.length; i++){
-                    console.log(response);
+                    
                     if(itemsToCheckout[i].productNo == response.Product_Code){
                         $(".final_checkout").append("<tr id=\"final_checkout_row_" + i + "\">");
                         $("#final_checkout_row_" + i).append("<td id=\"final_checkout_prod_name_" + response.Name + "\">" + response.Name + "</td>");
@@ -159,7 +159,7 @@ async function requestToFinish(){
     if(addressSelection == "TO SAVED ADDRESS"){
         personalDetailsWithCurrentAddress();
     }else{
-        console.log("address " + address);
+        
         // if(($(".option-province").children("option:selected").val() != "-- select your province here --") && 
         // ($("#option-city").val().length != 0) &&
         // ($("#zipcode").val().length > 0) &&
@@ -187,7 +187,7 @@ function personalDetailsWithStoreAddress(){
     var date = year + "-" + month + "-" + day;
     var paymentSelection = $("#payment-selection").children("option:selected").val();
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
-        console.log("selected to checkout in store");
+        
         request = {
             customerId: localStorage.getItem("token"),
             paymentMethod: paymentSelection,
@@ -202,7 +202,7 @@ function personalDetailsWithStoreAddress(){
             notes: "Pembelian Langsung di TOKO (SHINE)",
             orderDate: date
         };
-        console.log(request);
+        
         $("#submitRequestFinalButton").toggle();
         $("#backtocartRequestFinalButton").toggle();
         sendRequestFinal(paymentSelection);
@@ -247,7 +247,7 @@ function personalDetailsWithCurrentAddress(){
             notes: "e-commerce pembelian request",
             orderDate: date
         };
-        console.log(request);
+        
         $("#submitRequestFinalButton").toggle();
         $("#backtocartRequestFinalButton").toggle();
         sendRequestFinal(paymentSelection);
@@ -265,7 +265,7 @@ function personalDetailsWithCurrentAddress(){
 
 async function sendRequestFinal(paymentSelection){
     var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
-    console.log("itemsToCheckout " + localStorage.getItem("itemsToCheckout"));
+    
     var i = 0;
     for(i; i < itemsToCheckout.length; i ++){
         getProductsWithProductNo("", "", itemsToCheckout[i].productNo).done(function (response) {
@@ -428,13 +428,13 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
     await reorderJSON(orderArr[0], productArr).then(async value => {
         return await value;
     });
-    console.log(customer_information);
-    console.log(item_bought);
+    
+    
     createNewSalesOrder(item_bought, customer_information).done(async function (response) {
         if(response.status == true){
             swal.fire("Order sudah dikirimkan", "","success");
         }else{
-            console.log(response);
+            
             swal.fire("Order gagal dikirimkan", "","warning");
         }
         truncateCart();
@@ -461,8 +461,8 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
     await reorderJSON(orderArr[0], productArr).then(async value => {
         return await value;
     });
-    console.log(customer_information);
-    console.log(item_bought);
+    
+    
     createNewSalesOrder(item_bought, customer_information).done(async function (response) {
         if(response.status == true){
             swal.fire("Order sudah dikirimkan", "","success");
@@ -477,7 +477,7 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
 
 async function sendFinalToAccurate(request){
     loadingMessage(10000);
-    console.log("sendFinalToAccurate ======================================");
+    
     var orderArr = JSON.stringify([request]);
     orderArr = JSON.parse(orderArr);
     var productArr = JSON.parse(localStorage.getItem("finalStep"));
@@ -488,13 +488,13 @@ async function sendFinalToAccurate(request){
         totalQuantity = totalQuantity + (productArr[i].quantity * 1);
         productArr[i].totalPrice = (removeComma(productArr[i].totalPrice)).toString();
     }
-    console.log("productArr " + JSON.stringify(productArr));
-    console.log("orderArr " + JSON.stringify(orderArr));
+    
+    
     await reorderJSON(orderArr[0], productArr).then(async value => {
         return await value;
     });
-    console.log(customer_information);
-    console.log(item_bought);
+    
+    
     createNewSalesOrder(item_bought, customer_information).done(async function (response) {
         if(response.status == true){
             swal.fire("Order sudah dikirimkan", "","success");

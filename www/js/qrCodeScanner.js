@@ -25,7 +25,7 @@ qrcode.callback = res => {
         }
         if(product_code.length != 0 && (!isNaN(product_code))){
             getProductsWithProductNo("", "", product_code).done(function (response) {
-                console.log(response);
+                
                 if(response != false){
                     $(".productPreview").css("display", "block");
                     $(".productPreview").attr("src", "./product_details.html?productid="+product_code+"&productName="+product_code);
@@ -118,14 +118,14 @@ function addToCart(){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(array);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log(localStorage.getItem("itemsInCart"));
+                
     
                 // add total item in cart
                 localStorage.setItem("totalItemInCart", array.length);
             });
     }else{
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-        console.log(cartToJson);
+        
         var i = 0;
         var indicator = 0;
             getProductsWithProductNo(response.access_token, response.session_id, product).done(function (response) {
@@ -137,7 +137,7 @@ function addToCart(){
                         // saving to storage
                         var productToBeAddedStringify = JSON.stringify(cartToJson);
                         localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                        console.log("bug " + localStorage.getItem("itemsInCart"));
+                        
                         break;
                     }
                 }
@@ -151,7 +151,7 @@ function addToCart(){
                     // saving to storage
                     var productToBeAddedStringify = JSON.stringify(cartToJson);
                     localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                    console.log(localStorage.getItem("itemsInCart"));
+                    
                 }
                 // add total item in cart
                 localStorage.setItem("totalItemInCart", cartToJson.length);

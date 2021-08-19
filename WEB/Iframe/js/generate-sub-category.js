@@ -39,7 +39,7 @@ function loadingMessage(timerMultiplier){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -47,7 +47,7 @@ function loadingMessage(timerMultiplier){
 function generatehomeOneByOneSubCategorySelection(product_row, data, dataLength){
     if(product_row % 2 != 0){
         var product_row = product_row - 1;
-        console.log("product_row inside -1 " + product_row);
+        
         // right
         $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
         $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
@@ -56,7 +56,7 @@ function generatehomeOneByOneSubCategorySelection(product_row, data, dataLength)
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Name );
     }else{
-        console.log("product_row inside 2 " + product_row);
+        
         // left
         $("#small-category-list").append("<tr id=\"product-highlights"+ product_row +"\">");
         $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");

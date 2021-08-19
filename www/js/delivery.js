@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 var counter = 0;
 function populateDeliveryTable(){
-    console.log(localStorage.getItem("token"));
+    
     getAllOrdersForThisCustomer(localStorage.getItem("token"), "").done(function (response) {
         if(response.length == 0){
             $(".loading-area").css("display", "none");
@@ -67,7 +67,7 @@ function loadingMessage(timer){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }

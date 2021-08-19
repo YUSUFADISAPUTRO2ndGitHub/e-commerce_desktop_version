@@ -1,16 +1,16 @@
 
 $(function(){
 
-    $( "#datepicker" ).datepicker({
-        dateFormat:'yy-mm-dd'
-    });
+    // $( "#datepicker" ).datepicker({
+    //     dateFormat:'yy-mm-dd'
+    // });
 
 
     // var a = $( "#datepicker" ).datepicker("getDate");
-    // console.log(a,' ini a')
+    
     
     // var b = $('.form-check-input').val()
-    // console.log(b)
+    
 })
 
 
@@ -25,10 +25,10 @@ $(function(){
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
         if(productModal == true){
-            // console.log('masuk ke if')
+            
             $('.toast_prod_information').css('display','none')
         }else {
-            // console.log('masuk ke else')
+            
         }
     },1000)
 
@@ -44,6 +44,8 @@ $(function(){
         $('.list-group').toggle(1000)
     // $('.list-group').show(1000)
     })
+
+    $('#icon-plus')
         
        
 
@@ -58,7 +60,7 @@ $(function(){
 
         var val = $(this).attr('data-value');
         var class_payment = $(this)
-        console.log(class_payment)
+        
  
     })
     
@@ -73,9 +75,9 @@ $(function(){
         var val = $(this).attr('data-value');
         result = val
         var class_payment = $(this)
-        console.log(class_payment)
+        
         var testing_val = $('.active_payment_method').attr('data-value')
-        console.log(testing_val)
+        
 
     })
   
@@ -93,16 +95,16 @@ $(function(){
         var val = $(this).attr('data-value');
         result = val
         var class_payment = $(this)
-        console.log(class_payment)
+        
         var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
-        console.log(new_kurir_pilihan)
+        
         kurirMethodHome(new_kurir_pilihan)
     })
 
     
       
    $('.cust-1').on('click',function(){
-       console.log('testing jalan')
+       
     //    $('.box-information').css('display','block')
     $('.box-information').show(1000)
     // SEARCH ITEM BACK TO NORMAL
@@ -116,7 +118,7 @@ $(function(){
    $('.icon-close').on('click',function(){
     // $('.box-information').css('display','none')
        $('.box-information').hide(1000)
-       console.log('jalan box information')
+       
    })
    
   
@@ -128,17 +130,17 @@ $(function(){
 
     
     var token = localStorage.getItem('token')
-    console.log(token)
+    
  
     
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
-            // console.log(res.data,'line 33 option -4')
+            // 
             var data_customer = res.data
-            console.log(data_customer)
+            
             if(data_customer){
-                console.log(data_customer)
-                console.log(data_customer.Customer_Code)
+                
+                
                 if(data_customer.User_Type === 'Customer'){
                     $('.btn-status-barang').css('display','none')
                     $('.sup_delete').css('display','flex')
@@ -174,8 +176,8 @@ $(function(){
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)
                 var newReferralCode = data_customer.Customer_Code
-                console.log(newReferralCode)
-                console.log(token)
+                
+                
                 $('#email_user').val(`${data_customer.Email}`)
                 $('.nama_user_profile').val(`${data_customer.First_Name}`)
                 $('#tahun_lahir_user').val(tahun)
@@ -195,23 +197,23 @@ $(function(){
                 $('#no_ktp_user').val(`${data_customer.ktp}`)
                 $('.ref-profile').val(token)
                 $('#npwp_supp_prof').val(data_customer.npwp)
-                console.log(data_customer.extra_column_2)
-                console.log($('#ref_code_from').val(data_customer.extra_column_2))
+                
+                
                 $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
                 $('#nik_supp_profile').val(data_customer.extra_column_5)
                 $('#ref_code_from').val(data_customer.extra_column_2)
                 var a = $('#refer-profile').val()
-                console.log(a)
+                
                 $('#profileModal').modal('show')
             }else {
                 
                 $('#loginModal').modal('show') // login lama
-                console.log($('#loginModal').modal('show'))
+                
                 // $('#newloginModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
             }
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
         $('.closeByLogin').css('display','none')
@@ -224,7 +226,7 @@ $(function(){
         $('.input-name').css('border-bottom-left-radius','10px')
         $('.input-name').css('border-bottom-right-radius','10px')
         // $('.option-4').removeClass("background_grey")
-        console.log('functioin selesai 74')
+        
    })
 
    $('.category-name').on('click',function(){
@@ -239,11 +241,11 @@ $(function(){
 
    $('.prod_code_tab').on('keyup',function(){
     var item = $(this).val()
-    console.log(item)
+    
     var token= localStorage.getItem('token')
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
+        
         var Customer_Code = res.data.Customer_Code
         var all_data;
         axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
@@ -362,18 +364,18 @@ $(function(){
             }
 
             }).catch((err)=>{
-                console.log(err)
+                
             })
 
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
     })
   
    $('.input-product').on('keyup',function(){
         var item_search = $(this).val()
-        console.log(item_search)
+        
         var token = localStorage.getItem('token')
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
@@ -382,7 +384,7 @@ $(function(){
             axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
             .then((res)=>{
                 all_data = res.data
-                console.log(res.data)
+                
                 var data_array = res.data
                 var data_cari = data_array.filter((val)=>{
                     return val.Product_Code.includes(item_search)
@@ -1070,9 +1072,9 @@ $(function(){
                     })
                 }
 
-                console.log(data_cari)
+                
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
 
@@ -1099,7 +1101,7 @@ $(function(){
            
             render_searching_order(data_searching,status_searching)
         }else {
-            console.log('masuk ke else')
+            
         }
 
 
@@ -1111,10 +1113,10 @@ $(function(){
         axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
         .then((res)=>{
             var all_data = res.data
-            console.log(all_data)
+            
             if(data.length >1){
               var filtering =   all_data.filter((val)=>{
-                    console.log(val)
+                    
                     if(status == 'Order Number'){
                         if(val.Order_Number.includes(data)){
                             return val
@@ -1124,8 +1126,8 @@ $(function(){
                             return val
                         }
                     }else if ( status == 'Payment Status'){
-                        console.log(data)
-                        console.log(val.Status.includes(data))
+                        
+                        
                         if(val.Status.includes(data)){
                             return val
                         }
@@ -1139,7 +1141,7 @@ $(function(){
                         }
                     }
                 })
-                console.log(filtering)
+                
                 $('.new-box-card-item-ul').empty()
                 filtering.map((val,index)=>{
                     var tanggal = val.Start_Date.split('T')
@@ -1187,7 +1189,7 @@ $(function(){
                 axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
                 .then((res)=>{
                     var filtering = res.data
-                    console.log(filtering)
+                    
                     $('.new-box-card-item-ul').empty()
                     filtering.map((val,index)=>{
                         var tanggal = val.Start_Date.split('T')
@@ -1231,11 +1233,11 @@ $(function(){
                         `)
                     })
                 }).catch((err)=>{
-                    console.log(err)
+                    
                 })
             }
         }).catch((err)=>{
-            console.log(err)
+            
         })
         
    }
@@ -1243,7 +1245,7 @@ $(function(){
    $('#datepicker-ul').on('change',function(){
         var data = $(this).val()
         var status = 'Date'
-        console.log(data)
+        
         render_searching_order(data,status)
    })
 
@@ -1265,11 +1267,11 @@ $(function(){
         
         
         var value = $(this).val()
-        console.log(value)
+        
         if(value.length > 2){
             axios.post(`http://products.sold.co.id/get-product-details?product_name=${value}`)
             .then((res)=>{
-                console.log(res.data)
+                
                 $('.box-render-search').css('display','block')
                 $('.box-search-menu').css('display','block')
                 $('.input-name').css('border-bottom-left-radius','0px')
@@ -1277,8 +1279,8 @@ $(function(){
                 $('.render-li-search').empty()
                 if(res.data[0] === false){
                     res.data.map((val,index)=>{
-                        console.log(val)
-                        console.log(val === undefined)
+                        
+                        
                         $('.render-li-search').append(`
                             <li  id="${val.Name}">${value} Tidak Ditemukan</li>
                         `)
@@ -1286,8 +1288,8 @@ $(function(){
                     })
                 }else {
                     res.data.map((val,index)=>{
-                        console.log(val)
-                        console.log(val === undefined)
+                        
+                        
                         $('.render-li-search').append(`
                             <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
                         `)
@@ -1303,7 +1305,7 @@ $(function(){
                 $('.option-3').removeClass("background_grey")
                 $('.box-information').hide(1000)
             }).catch((err)=>{
-                console.log(err)
+                
             })
 
         }else {
@@ -1337,11 +1339,11 @@ $(function(){
 
 $('.icon-buy').on('click',function(){
     var product_id = $(this).val()
-    console.log(product_id)
+    
 })
 $('.id-address-gb').on('click',function(){
     var data = $(this).val()
-    console.log(data)
+    
 })
 
 
@@ -1354,7 +1356,7 @@ function replace_value_to(x){
 
 
     var item_search = $('#search_item').val()
-    console.log(item_search)
+    
     var product_name = $('#search_item').attr('id')
     $('.active_search').css('top','575px')
     $('.main-body').css('display','none')
@@ -1368,7 +1370,7 @@ function replace_value_to(x){
 
 function check_qty(val){
     // alert(val)
-    console.log(val)
+    
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
     var province_pilihan=$('.province-home-gb option:selected').val()
     var kota_pilihan=$('.kota-home-gb option:selected').val()
@@ -1378,12 +1380,12 @@ function check_qty(val){
     var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
     var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
     var product_id = $('.qty_groupbuy_home').attr('id')
-    console.log(product_id,' ini product id check qty')
+    
     var split_pengiriman = pengiriman_pilihan.split('-')
     var days_pengiriman = split_pengiriman[0]
     var kode_pengiriman = split_pengiriman[1]
-    console.log(days_pengiriman, ' ini total pengiriman days')
-    console.log(kode_pengiriman, ' ini kode pengiriman 1160')
+    
+    
 
     var isKurir_pilihan = false
     var isProvince_pilihan = false
@@ -1395,14 +1397,14 @@ function check_qty(val){
 
 
     if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
-        console.log('masuk ke if kecamatan pilihan')
+        
          kecamatan_pilihan = ''
          isKecamatan_pilihan = false
      }   else {
         isKecamatan_pilihan = true
      }
      if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
-         console.log('masuk ke if kelurahan pilihan')
+         
          kelurahan_pilihan = ''
          isKelurahan_pilihan = false
      }else {
@@ -1438,18 +1440,18 @@ function check_qty(val){
  
 
      if(isKurir_pilihan && isKota_pilihan  && isPengiriman_pilihan&& isProvince_pilihan && isKelurahan_pilihan && isKecamatan_pilihan && isQty_pilihan) {
-        console.log(isKurir_pilihan, ' kurir pilihan')
-        console.log(isKota_pilihan, ' kurir pilihan')
-        console.log(isProvince_pilihan, ' kurir pilihan')
-        console.log(isKelurahan_pilihan, ' kurir pilihan')
-        console.log(isKecamatan_pilihan, ' kurir pilihan')
-        console.log(isPengiriman_pilihan, ' kurir pilihan')
+        
+        
+        
+        
+        
+        
         // alert('masuk ke if check qty')
 
         // var total_qty_from_user = val
-        // console.log(total_qty_from_user)
+        // 
         var product_id = $('.qty_groupbuy_home').attr('id')
-        console.log(product_id)
+        
         var total_qty_from_api;
         var harga_satuan;
 
@@ -1463,9 +1465,9 @@ function check_qty(val){
                         kurir_kode = dataAllKurir[i].Courier_Code
                     }
                 }
-                console.log(new_kurir_pilihan,kurir_kode,kelurahan_pilihan)
+                
                 get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kelurahan_pilihan).done(function(response){
-                    console.log(response, '1278')
+                    
                     var allKecamatan = response
                   
                     var Courier_Price_Code_orig = 'CGK01.00'
@@ -1489,10 +1491,10 @@ function check_qty(val){
                         var harga_shipping = parseInt($('.pengiriman-home-gb option:selected').attr('class'))
                         var harga_asuransi = parseInt($('.asuransi-home-gb option:selected').attr('class'))
                         var harga_packing = parseInt($('.packing-home-gb option:selected').attr('class'))
-                        console.log(data_shipping_fee,' data shipping fee')
-                        console.log(asuransi_pilihan,' data asuransi pilihan fee')
-                        console.log(packing_pilihan,' data shipping fee')
-                        console.log(pengiriman_pilihan,'data pengiriman pilihan')
+                        
+                        
+                        
+                        
                         var isAsuransi_pilihan = false
                         var isPacking_pilihan = false
                         var isPengiriman_pilihan = false
@@ -1545,7 +1547,7 @@ function check_qty(val){
                             </div>
                         `)
                         }else if (isPengiriman_pilihan && isAsuransi_pilihan) {
-                            console.log(harga_shipping,' harga shipping')  
+                            
                             
                             var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
                             var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_asuransi
@@ -1587,7 +1589,7 @@ function check_qty(val){
                            
                         `)
                         }else if (isPengiriman_pilihan && isPacking_pilihan){
-                            console.log(harga_shipping,' harga shipping')  
+                            
                             
                             var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
                             var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_packing
@@ -1630,7 +1632,7 @@ function check_qty(val){
                         `)
                         }else if(isPengiriman_pilihan){
 
-                            console.log(harga_shipping,' harga shipping')  
+                            
                             
                             var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
                             var harga_total_product_with_shipping = harga_total_product + harga_shipping
@@ -1665,7 +1667,7 @@ function check_qty(val){
                             </div>
                         `)
                         }else {
-                            console.log('semua false is pengiriman, is asuransi is packing')
+                            
 
                         }
 
@@ -1681,22 +1683,22 @@ function check_qty(val){
        
     }else{
         // alert('masuk ke else check qty')
-        console.log(isKurir_pilihan, ' kurir pilihan')
-        console.log(isKota_pilihan, ' kurir pilihan')
-        console.log(isProvince_pilihan, ' kurir pilihan')
-        console.log(isKelurahan_pilihan, ' kurir pilihan')
-        console.log(isKecamatan_pilihan, ' kurir pilihan')
-        console.log(isPengiriman_pilihan, ' kurir pilihan')
+        
+        
+        
+        
+        
+        
 
         var total_qty_from_user = val
-        console.log(total_qty_from_user)
+        
         var product_id = $('.qty_groupbuy_home').attr('id')
-        console.log(product_id) 
+        
         var total_qty_from_api;
         var harga_satuan;
         axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
         .then((res)=>{
-            console.log(res.data)
+            
             total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
             harga_satuan = res.data.GroupBuy_SellPrice
             var total_harga = harga_satuan * total_qty_from_user
@@ -1705,7 +1707,7 @@ function check_qty(val){
                 // $('#tp_iframe').val(total_harga)
                 $('.ndps-left').empty()
                 $('.ndps-right').empty()
-                console.log('masuk ke if 190')
+                
                 get_product_detail_func(product_id).done(function(response){
                     $('.ndps-left').append(`
                     <div class="detail-ndps-left">
@@ -1735,7 +1737,7 @@ function check_qty(val){
           }else {
               $('.ndps-left').empty()
               $('.ndps-right').empty()
-            console.log('masuk ke else 192')
+            
               Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
@@ -1777,7 +1779,7 @@ function check_qty(val){
           }
     
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
      }
@@ -1790,11 +1792,11 @@ function check_qty(val){
 function groupbuy(product_id){
     
     var token = localStorage.getItem('token')
-    console.log(product_id)
-    console.log(token)
+    
+    
     axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
+        
         // location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
         if(res.data){
             
@@ -1827,10 +1829,10 @@ function groupbuy(product_id){
               })
         }
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
-    console.log(product_id)
+    
 }
 
 
@@ -1882,8 +1884,8 @@ function payment_groupbuy_home(product_id){
 
     var alamat_input = $('#alamat_gb').val()
     var alamat_lain_input = $('#alamat_lain').val()
-    console.log(alamat_input)
-    console.log(alamat_lain_input)
+    
+    
     if(asuransi_pilihan == 'Asuransi' ){
         asuransi_pilihan = ''
     }
@@ -1893,18 +1895,18 @@ function payment_groupbuy_home(product_id){
 
 
     var total_harga_shipping_with_insurance_packing = harga_shipping + harga_asuransi + harga_packing
-    console.log(total_harga_shipping_with_insurance_packing)
+    
 
     var product_name_shipping = pengiriman_pilihan + asuransi_pilihan + packing_pilihan
-    console.log(product_name_shipping,' 1683')
+    
     if(alamat_lain_input.length>0){
        isAlamat_pilihan = true
         var final_address_new = alamt_lain_input + kecamatan_pilihan + kelurahan_pilihan + kota_pilihan + province_pilihan + kodepos_pilihan
-        console.log(final_address_new)
+        
     }else if (alamat_input.length > 0) {      
         isAlamat_pilihan = true
         var final_address = alamat_input + ' ' + kecamatan_pilihan + ' ' + kelurahan_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan + ' ' + kodepos_pilihan
-        console.log(final_address)
+        
     }else {
         isAlamat_pilihan = false
     }
@@ -1935,14 +1937,14 @@ function payment_groupbuy_home(product_id){
     }
 
     if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
-        console.log('masuk ke if kecamatan pilihan')
+        
          kecamatan_pilihan = ''
          isKecamatan_pilihan = false
      }else {
         isKecamatan_pilihan = true
      }
      if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
-         console.log('masuk ke if kelurahan pilihan')
+         
          kelurahan_pilihan = ''
          isKelurahan_pilihan = false
      }else {
@@ -1950,14 +1952,14 @@ function payment_groupbuy_home(product_id){
      }
 
      var totalQtyIsANumber = isNaN(total_qty_from_user)
-     console.log(totalQtyIsANumber)
+     
      if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0 || total_qty_from_user == NaN || totalQtyIsANumber){
          isQty_pilihan = false
      }else {
          isQty_pilihan = true
      }
-     console.log(total_qty_from_user)
-     console.log(isQty_pilihan)
+     
+     
  
      if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0){
          isProvince_pilihan = false
@@ -1975,7 +1977,7 @@ function payment_groupbuy_home(product_id){
             get_all_couriers().done(function(response){
                 var dataAllKurir = response
                 allKurir = response
-                console.log(dataAllKurir,' data all kurir')
+                
                 
                 var kurir_kode =''
                 for(var i=0; i<dataAllKurir.length; i++){
@@ -1987,16 +1989,16 @@ function payment_groupbuy_home(product_id){
                     axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
                     .then((res)=>{
                         total_item_kebeli = res.data
-                        console.log(res.data)
+                        
                         if(res.data.Total_Quantity === null) { // hasil null berarti belum ada customer lain yang beli
-                            console.log('masuk ke if null 1154')
+                            
                             axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                             .then((res)=>{
-                                console.log(res.data)
+                                
                                 detail_product = res.data
                                 axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                 .then((res)=>{
-                                    console.log(res.data)
+                                    
                                     
                                     customerDetails  ={
                                         Customer_Code:token,
@@ -2029,7 +2031,7 @@ function payment_groupbuy_home(product_id){
                                         "Sales_Order_Data": customerDetails,
                                         "Sales_Order_Detail_data": items
                                     }
-                                    console.log(data)
+                                    
             
                                     axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                         headers:{
@@ -2045,33 +2047,33 @@ function payment_groupbuy_home(product_id){
                                             $('.modals-product-detail').css('display','none')
                                             $('.box-delete-success').css('display','block')
                                             // tambahin gambar yg dari mas fauzi
-                                            console.log('berhasil pembelian line 1198')
+                                            
                                             location.replace(`../Iframe/success.html`)
                                         }else {
                                             swal.fire("Pembelian Gagal", "", "error");
                                         }
-                                        console.log(res.data)
+                                        
                                     }).catch((err)=>{
-                                        console.log(err)
+                                        
                                     })
                                     
             
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }).catch((err)=>{
-                                console.log(err)
+                                
                             })
                         }else { // hasil else dari if null berarti ada cust yg udh beli. sisa productnya
-                            console.log('masuk ke else null 1473')
+                            
                             axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                             .then((response)=>{
-                                console.log(response.data)
-                                console.log(total_item_kebeli)
+                                
+                                
                                 var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
-                                console.log(item_tersedia)
+                                
                                 if(total_qty_from_user > item_tersedia){
-                                    console.log('masuk ke if item tersedia 1217')
+                                    
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Oops...',
@@ -2081,14 +2083,14 @@ function payment_groupbuy_home(product_id){
             
                                       axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                       .then((res)=>{
-                                          console.log(res.data)
+                                          
                                           detail_product = res.data
                                           axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                           .then((res)=>{
-                                              console.log(res.data)
+                                              
                                               data_customer = res.data
                                               var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
-                                              console.log(harga_pembelian)
+                                              
                                               
                                               customerDetails  ={
                                                 Customer_Code:token,
@@ -2122,9 +2124,9 @@ function payment_groupbuy_home(product_id){
                                                 "Sales_Order_Detail_data": items
                                             }     
                                             
-                                            console.log(data)
-                                                  console.log(customerDetails,' ini customer detail')
-                                                  console.log(items, ' ini items')
+                                            
+                                                  
+                                                  
                                                 axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                                     headers:{
                                                         "Content-Type":'application/json'
@@ -2134,34 +2136,34 @@ function payment_groupbuy_home(product_id){
                                                         "Sales_Order_Detail_data": items
                                                     })
                                                 }).then((res)=>{
-                                                    console.log(res.data)
+                                                    
                                                     if(res.data){
                                                         swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
                                                         // tambahin gambar yg dari mas fauzi
-                                                        console.log('berhasil pembelian line 1286')
+                                                        
                                                         location.replace(`../Iframe/success.html`)
                                                     }else {
                                                         swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
                                                     }
                                                     // $('.modals-product-detail').css('display','none')
                                                 }).catch((err)=>{
-                                                    console.log(err)
+                                                    
                                                 })         
                                           }).catch((err)=>{
-                                              console.log(err)
+                                              
                                           })
                                       }).catch((err)=>{
-                                          console.log(err)
+                                          
                                       })
                                 }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
-                                    console.log('masuk ke else 1285')
+                                    
                                     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                     .then((res)=>{
                                         detail_product = res.data
                                         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                         .then((res)=>{
                                             data_customer =res.data
-                                            console.log(data_customer)
+                                            
                                             customerDetails  ={
                                                 Customer_Code:token,
                                                 Total_Price: total_harga_shipping_with_product,
@@ -2193,9 +2195,9 @@ function payment_groupbuy_home(product_id){
                                                 "Sales_Order_Data": customerDetails,
                                                 "Sales_Order_Detail_data": items
                                             }    
-                                            console.log(data)
-                                            console.log(customerDetails,' ini customer detail')
-                                            console.log(items, ' ini items')
+                                            
+                                            
+                                            
             
                                             axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                                 headers:{
@@ -2207,7 +2209,7 @@ function payment_groupbuy_home(product_id){
                                                 })
                                             }).then((res)=>{
                                                 if(res.data.status){
-                                                    console.log(res.data)
+                                                    
                                                     swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
                                                     // close_all_open_window()
                                                     $('.modals-product-detail').css('display','none')
@@ -2216,7 +2218,7 @@ function payment_groupbuy_home(product_id){
                                                     
                                                     $('.box_iframe_groupbuy').remove()
                                                     // tambahin gambar yg dari mas fauzi
-                                                    console.log('berhasil pembelian line 1356')
+                                                    
                                                     location.replace(`../Iframe/success.html`)
             
                                                     
@@ -2225,38 +2227,38 @@ function payment_groupbuy_home(product_id){
                                                     $('.modals-product-detail').css('display','none')
                                                 }
                                             }).catch((err)=>{
-                                                console.log(err)
+                                                
                                             })
                                             // refresh()
             
                                         }).catch((err)=>{
-                                            console.log(err)
+                                            
                                         })
                                     }).catch((err)=>{
-                                        console.log(err)
+                                        
                                     })
                                 }
                             }).catch((err)=>{
-                                console.log(err)
+                                
                             })
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }else {
-                    console.log('masuk ke else 434')
+                    
                 }
             })
     }else { // ada yang belum di isi
         swal.fire("Ada field yang belum di isi", "", "error");
-        console.log(isKurir_pilihan, ' kurir pilihan')
-        console.log(isKota_pilihan,' kota pilihan ')
-        console.log(isProvince_pilihan, ' province pilihan')
-        console.log(isKelurahan_pilihan, ' kelurahan pilihan')
-        console.log(isKecamatan_pilihan, ' kecamatan pilihan')
-        console.log(isQty_pilihan, ' qty pilihan')
-        console.log(isPaymentMethod_pilihan, ' payment method pilihan')
-        console.log(isPengiriman_pilihan, ' pengiriman pilihan')
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     
@@ -2278,9 +2280,9 @@ function addToCart(product_id){
 
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
-        console.log(res.data)
+        
         var quantity_product = parseInt(res.data.Stock_Quantity)
-        console.log(quantity_product)
+        
 
         if(quantity_product == 0 || quantity_product == '0' ||
            quantity_product == undefined || quantity_product==null ||
@@ -2289,9 +2291,9 @@ function addToCart(product_id){
             Swal.fire("Stock Tidak Tersedia", "Error", "error");
         }else {
             var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-            console.log(dataParse,' ini data parse')
+            
             if(dataParse){
-                console.log(dataParse)
+                
         
                 var filterdatakosong = dataParse.filter((filtering)=>{
                     if(filtering.productNo === product_id){
@@ -2299,14 +2301,14 @@ function addToCart(product_id){
                     }
                 })
                 if(filterdatakosong.length){
-                    console.log('masuk ke if 201')
+                    
                     
                     var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
                     dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
                     $('.cart-counter').text(dataParse.length)
                     swal.fire("Berhasil Menambahkan Quantity", "", "success");
                 }else {
-                    console.log('masuk ke else  205')
+                    
                     var data = {
                     "productNo":product_id,
                     "quantity":1
@@ -2320,7 +2322,7 @@ function addToCart(product_id){
                 localStorage.setItem('itemsInCart',pushToStorage)
         
             }else {
-                console.log('local storage kosong')
+                
                 var cart = [
                     {
                     "productNo":product_id,
@@ -2334,7 +2336,7 @@ function addToCart(product_id){
 
         }
     }).catch((err)=>{
-        console.log(err)
+        
     })
     
    
@@ -2347,24 +2349,24 @@ function addToCart(product_id){
 
 
 function addressMethod(address,item){
-    console.log(item)
-    // console.log(item.value)
+    
+    // 
     $('.radio_address_card').removeClass('selected')
     $('.radio_address_card').removeClass('active_address_method')
 
     var address_id = address
     var id = $('.radio_address_card').attr('id')
-    console.log(address_id,' ini address id')
-    console.log(id,' ini id')
+    
+    
 
     $(`#${address}`).addClass('selected')
     $(`#${address}`).addClass('active_address_method')
     // if(address_id == id ){
-    //     console.log('masuk ke if 2319')
+    //     
     //     $(`#${address}`).addClass('selected')
     //     $(`#${address}`).addClass('active_payment_method')
     // }else {
-    //     console.log('masuk ke else')
+    //     
     // }
 
     if(item === 'Alamat Terdaftar'){
@@ -2386,12 +2388,12 @@ setInterval(() => {
 function resultAddress(item){
 
     var pilihan_alamat=$('.option-address-gb option:selected').val()
-    // console.log(pilihan_alamat,' ini  pilihan jenis alamat')
+    // 
     if(pilihan_alamat === 'Alamat Terdaftar'){
         var payment_choosing = $('.option-payment-gb option:selected').val()
-        // console.log(payment_choosing,' payment choosing 1750')
+        // 
         var alamat = $('.option-alamat-gb option:selected').val()
-        // console.log(alamat,' ini alamat yg dipake')
+        // 
         var check_alamat = alamat.toUpperCase().includes('JAKARTA'.toUpperCase())
         // if(alamat.toUpperCase().includes('JAKARTA'.toUpperCase())){
         //     $('#total_biaya_pengiriman_gb').val('10.000')
@@ -2424,7 +2426,7 @@ function resultAddress(item){
         //     $('#total_biaya_pengiriman_gb').val('50.000')
         // }
 
-        // console.log(alamat_baru, 'ini alamat baru')
+        // 
     }
 
 
@@ -2506,7 +2508,7 @@ const edit_product_name=(product_id)=>{
     // $("input").prop('disabled', true);
     // alert(product_id)
     // $(".prod_name").prop('disabled', false); 6900005030114
-    console.log(product_id)
+    
     $("#"+product_id+"-name").prop('disabled',false) 
     $("#"+product_id+"-name").css('background-color','#ddd')
     $("#"+product_id+"-box_edit_name").css('display','none') // icon 
@@ -2525,7 +2527,7 @@ const clearOTPform=()=>{
 
 const save_edit_name=(product_id)=>{
     // alert($("#"+product_id+"-name").val())
-    console.log('function jalan')
+    
     $('#get_otp').modal('show')
     $('#s_product_name').addClass(product_id)
     $('#s_product_name').addClass('product_name')
@@ -2535,7 +2537,7 @@ const save_edit_name=(product_id)=>{
 }
 
 const check_number_wa=()=>{
-console.log('functuin jalan')
+
     Swal.fire({
         title: 'Whatsapp Number  <br> +62812 7777 8888',
         text: "Ingin Menghubungi Customer Service?",
@@ -2545,7 +2547,7 @@ console.log('functuin jalan')
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes'
       }).then((result) => {
-          console.log(result)
+          
           if(result.dismiss==='cancel'){
         }else {
             
@@ -2573,10 +2575,10 @@ const save_product_name=()=>{
     var product_id = item[1]
     var jenis_edit = item[2]
     if(jenis_edit === 'product_name'){
-        console.log(otp,pass)
+        
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
-            console.log(res.data)
+            
             email = res.data.Email
             //encrypt pass
             var new_pass
@@ -2587,7 +2589,7 @@ const save_product_name=()=>{
 
                     axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
-                        console.log(res.data)
+                        
                         if(res.data){
                             $("#"+product_id+"-name").prop('disabled',true) 
                             $("#"+product_id+"-box_edit_name").css('display','block') // icon 
@@ -2599,25 +2601,25 @@ const save_product_name=()=>{
                             var qty = $("#"+product_id+"-qty").val()
                             var token = localStorage.getItem('token')
     
-                            console.log(nama)
-                            console.log(harga)
-                            console.log(qty)
-                            console.log(token)
+                            
+                            
+                            
+                            
     
                             if(nama.length <5){
                                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                 .then((res)=>{
-                                    console.log(res.data.GroupBuy_SellPrice)
+                                    
                                     $("#"+product_id+"-name").val(res.data.Name)
                                     swal.fire("Gagal Mengubah Data", "", "error");
                                     re_render_item_product()
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }else {
                                 axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
-                                    console.log(res.data)
+                                    
                                     if(res.data){
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
@@ -2630,7 +2632,7 @@ const save_product_name=()=>{
                                         re_render_item_product()
                                     }
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }
                             // Swal.fire('Simpan Berhasil', '', 'success')
@@ -2639,20 +2641,20 @@ const save_product_name=()=>{
                             Swal.fire('Simpan Gagal', '', 'error')
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }else {
-                    console.log('masuk ke else')
+                    
                     Swal.fire('Password Minimal 6 character', '', 'error')
                 }
-                console.log(res.data)
+                
         
                
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
     }else if (jenis_edit === 'product_sell_price'){
@@ -2676,25 +2678,25 @@ const save_product_name=()=>{
                             var harga = $("#"+product_id+"-harga").val()
                             var qty = $("#"+product_id+"-qty").val()
                             var token = localStorage.getItem('token')
-                            console.log(nama, ' ini nama')
-                            console.log(harga, ' ini harga')
-                            console.log(qty, ' ini qty')
-                            console.log(token, ' ini token')
+                            
+                            
+                            
+                            
                     
                             if(harga <500){
                                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                     .then((res)=>{
-                                        console.log(res.data.GroupBuy_SellPrice)
+                                        
                                         $("#"+product_id+"-harga").val(res.data.Sell_Price)
                                         swal.fire("Gagal Mengubah Data", "", "error");
                                         re_render_item_product()
                                     }).catch((err)=>{
-                                        console.log(err)
+                                        
                                     })
                             }else {
                                 axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
-                                    console.log(res.data,'2969')
+                                    
                                     if(res.data){
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
@@ -2705,7 +2707,7 @@ const save_product_name=()=>{
                                         swal.fire("Gagal Mengubah Data", "", "error");
                                     }
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                                 Swal.fire('Simpan Berhasil', '', 'success')
                                 $('#get_otp').modal('hide')
@@ -2714,16 +2716,16 @@ const save_product_name=()=>{
                             Swal.fire('Simpan Gagal', '', 'error')
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
 
                 }else {
-                    console.log('masuk ke else')
+                    
                     Swal.fire('Password Minimal 6 character', '', 'error')
                 }
 
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
 
@@ -2750,26 +2752,26 @@ const save_product_name=()=>{
                             var qty = $("#"+product_id+"-qty").val()
                             var token = localStorage.getItem('token')
         
-                            console.log(nama)
-                            console.log(harga)
-                            console.log(qty)
-                            console.log(token)
+                            
+                            
+                            
+                            
         
                             if(qty < 10){
                                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                 .then((res)=>{
-                                    console.log(res.data.GroupBuy_SellPrice)
+                                    
                                     $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
                                     swal.fire("Gagal Mengubah Data", "", "error");
                                     re_render_item_product()
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }else {
                                 
                                 axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
-                                    console.log(res.data)
+                                    
                                     if(res.data){
                                         swal.fire("Berhasil Mengubah Data", "", "success");
                                         $('#s_product_name').removeClass(product_id)
@@ -2780,7 +2782,7 @@ const save_product_name=()=>{
                                         re_render_item_product()
                                     }
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }
                             // Swal.fire('Simpan Berhasil', '', 'success')
@@ -2789,17 +2791,17 @@ const save_product_name=()=>{
                             Swal.fire('Simpan Gagal', '', 'error')
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }else {
-                    console.log('masuk ke else')
+                    
                     Swal.fire('Password Minimal 6 character', '', 'error')
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }else if (jenis_edit === 'product_discount'){
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
@@ -2830,17 +2832,17 @@ const save_product_name=()=>{
                         var price = $("#"+product_id+"-discount").val()
                         var token = localStorage.getItem('token')
 
-                        console.log(status, ' ini status')
-                        console.log(price, ' ini price')
-                        console.log(qty, ' ini qty')
-                        console.log(Product_Code, ' ini product Code')
-                        console.log(token,' cc')
-                        console.log(email,'email groupbuy')
-                        console.log(pass,'pass groupbuy')
-                        console.log(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                         .then((res)=>{
-                            console.log(res.data,'berhasil update product discount')
+                            
                             if(res.data){
                                 $('#get_otp').modal('hide')
                                 $("#"+product_id+"-discount").prop('disabled',true) 
@@ -2856,34 +2858,34 @@ const save_product_name=()=>{
                                 swal.fire("Gagal Mengubah Data", "", "error")    
                                 axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
                                 .then((res)=>{
-                                    console.log(res.data.GroupBuy_SellPrice)
+                                    
                                     $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }
                         }).catch((err)=>{
-                            console.log(err)
+                            
                         })
                         }else {
                             Swal.fire('Simpan Gagal', '', 'error')
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
 
                 }else {
-                    console.log('masuk ke else')
+                    
                     Swal.fire('Password Minimal 6 character', '', 'error')
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }else if (jenis_edit === 'groupbuy_qty'){
-        console.log('function groupbuy qty jalan')
+        
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             email = res.data.Email
@@ -2914,13 +2916,13 @@ const save_product_name=()=>{
                         var qty = $("#"+product_id+"-quantity").val()
                         var price = $("#"+product_id+"-discount").val()
                         var token = localStorage.getItem('token')
-                        console.log(status, ' ini status')
-                        console.log(price, ' ini price')
-                        console.log(qty, ' ini qty')
-                        console.log(Product_Code, ' ini product Code')
+                        
+                        
+                        
+                        
                         axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                         .then((res)=>{
-                            console.log(res.data, ' berhasil update discount price')
+                            
                             if(res.data){
                                 swal.fire("Berhasil Mengubah Data", "", "success");
                                 $('#s_product_name').removeClass(product_id)
@@ -2940,28 +2942,28 @@ const save_product_name=()=>{
                                 .then((res)=>{
                                     $("#"+product_id+"-quantity").val(res.data.GroupBuy_SellQuantity)
                                 }).catch((err)=>{
-                                    console.log(err)
+                                    
                                 })
                             }
                         }).catch((err)=>{
-                            console.log(err)
+                            
                         })
                         }else {
                             Swal.fire('Simpan Gagal', '', 'error')
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }else {
-                    console.log('masuk ke else')
+                    
                     Swal.fire('Password Minimal 6 character', '', 'error')
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
 
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }else if (jenis_edit === 'status_gb'){
         get_status(product_id,pass)
@@ -2969,7 +2971,7 @@ const save_product_name=()=>{
         $('#s_product_name').removeClass('status_gb')
     }
     else {
-        console.log('masuk ke else 2570 jquery')
+        
     }
     
 
@@ -3025,7 +3027,7 @@ const copy_link_share=()=>{
     // alert('function jalan')
     var copyText = document.getElementById("copyClipboard");
     if(copyText){
-        console.log(copyText)
+        
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("Copy");
@@ -3035,14 +3037,14 @@ const copy_link_share=()=>{
 }
 
 const gorillaworkout=(name)=>{
-    console.log(name)
+    
     var copyText = document.getElementById("copyClipboardul");
     // var copyText = 'Gorilla Workout'
-    console.log(copyText)
+    
     var text = $('.easteregg').val()
-    console.log(text)
+    
     if(copyText){
-        console.log(copyText)
+        
         copyText.select();
         
         // copyText.setSelectionRange(0, 99999);
@@ -3080,9 +3082,9 @@ function toDataURL(url, callback) {
 var gambar_active = 3
 setInterval(()=>{
     if(gambar_active == 1){
-//   console.log(gambar_active, ' ini gambar active')
+//   
     toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
-    // console.log('RESULT:', dataUrl)
+    // 
         await $('#scream').attr('src',dataUrl)
         var example = document.getElementById('example');
         var context = example.getContext('2d');
@@ -3091,7 +3093,7 @@ setInterval(()=>{
         
         // var c = example.getContext('2d');
         var p =  context.getImageData(10, 10, 1, 1).data; 
-    //   console.log(p)
+    //   
         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
         // alert(hex)
 
@@ -3105,9 +3107,9 @@ setInterval(()=>{
 
 }
 else if (gambar_active == 2){
-//   console.log(gambar_active, ' ini gambar active')
+//   
     toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
-    // console.log('RESULT:', dataUrl)
+    // 
         await $('#scream').attr('src',dataUrl)
         var example = document.getElementById('example');
         var context = example.getContext('2d');
@@ -3116,7 +3118,7 @@ else if (gambar_active == 2){
         
         // var c = example.getContext('2d');
         var p =  context.getImageData(10, 10, 1, 1).data; 
-    //   console.log(p)
+    //   
         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
         // alert(hex,'GA2')
 
@@ -3128,10 +3130,10 @@ else if (gambar_active == 2){
         
     })
 }else {
-//   console.log(gambar_active, ' ini gambar active')
-    // console.log(gambar_active, ' ini gambar active')
+//   
+    // 
     toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
-    // console.log('RESULT:', dataUrl)
+    // 
         await  $('#scream').attr('src',dataUrl)
         var example = document.getElementById('example');
         var context = example.getContext('2d');
@@ -3140,7 +3142,7 @@ else if (gambar_active == 2){
         
         // var c = example.getContext('2d');
         var p =  context.getImageData(10, 10, 1, 1).data; 
-    //   console.log(p)
+    //   
         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
         // alert(hex,'GA2')
 
@@ -3346,12 +3348,12 @@ if( isFirst_Name == true
 
 
 function to_detail_product(id){
-    console.log(id)
+    
     $('#detailProductModal').modal('show')
     $('.modals_detail_product').empty()
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
     .then((res)=>{
-        console.log(res.data)
+        
             $('.modals_detail_product').append(`
                 <tr>
                     <td>${res.data.Product_Code} </td>
@@ -3369,7 +3371,7 @@ function to_detail_product(id){
             `)
         
     }).catch((err)=>{
-        console.log(err)
+        
     })
 }
 
@@ -3383,18 +3385,18 @@ const check_status_item=()=>{
     var creator;
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
-        console.log(res.data.Creator)
+        
+        
         var Customer_Code = res.data.Customer_Code
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
         axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
-            console.log(res.data)
+            
             res.data.map((val,index)=>{
-                console.log(val.GroupBuy_Purchase)
-                console.log(val.GroupBuy_Purchase === 'true')
+                
+                
                 $('.input_total_row_gb').val('TOTAL ROW = ' + res.data.length)
                 
                
@@ -3792,30 +3794,30 @@ const check_status_item=()=>{
                 `)
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }).catch((err)=>{
-        console.log(err)
+        
     })
 }
 
 const re_render_item_product=()=>{
-    console.log('berhasil re render product item')
+    
     
     var token = localStorage.getItem('token')
     $('.tbody_product').empty()
     var creator;
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
-        console.log(res.data.Creator)
+        
+        
         var Customer_Code = res.data.Customer_Code
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
         axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
-            console.log(res.data)
+            
             res.data.map((val,index)=>{
 
 
@@ -3870,10 +3872,10 @@ const re_render_item_product=()=>{
                 `)
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }).catch((err)=>{
-        console.log(err)
+        
     })
     
 }
@@ -3903,8 +3905,8 @@ const get_status=(product_id,pass)=>{
                 email = res.data.Email
                 axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
                 .then((res)=>{
-                    console.log(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}`)
-                    console.log(res.data)
+                    
+                    
                     if(res.data){
                         swal.fire("Berhasil Mengubah Data", "", "success");
                         $('#get_otp').modal('hide')
@@ -3914,8 +3916,8 @@ const get_status=(product_id,pass)=>{
                         
                     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                     .then((res)=>{
-                        console.log(res.data)
-                        console.log(res.data.GroupBuy_SellPrice)
+                        
+                        
                         // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
                         if(res.data.GroupBuy_Purchase == 'true'){
                             $('#'+product_id+"-status").prop('checked',true)
@@ -3924,7 +3926,7 @@ const get_status=(product_id,pass)=>{
                             
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }
     
@@ -3932,9 +3934,9 @@ const get_status=(product_id,pass)=>{
     
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
-            console.log($('#'+product_id+"-status").val())
+            
             if($('#'+product_id+"-status").is(':checked')){
                 result = true
             }else {

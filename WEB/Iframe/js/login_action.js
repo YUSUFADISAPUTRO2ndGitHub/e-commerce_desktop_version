@@ -14,9 +14,9 @@ $(document).ready(function(){
             additionalAddresses(response);
         });
     }else{
-        console.log("sign-up");
+        
         getAvailableReferralCodes().done(function (response) {
-            console.log(response);
+            
             var i = 0;
             for(i; i < response.length; i ++){
                 $(".referral-code-list").append(`
@@ -28,7 +28,7 @@ $(document).ready(function(){
 });
 
 function replace_to_a_customer_code(Customer_Code){
-    console.log(Customer_Code);
+    
     $("#signup-referral").val(Customer_Code);
 }
 
@@ -74,7 +74,7 @@ function additionalAddresses(response){
 // function getProvincesOtherLocal(){
 //     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
 //         datas = JSON.parse(data);
-//         console.log("datas profile "+ data);
+//         
 //         var i =0;
 //         $("#option-province-local-other").append("<option>-- select your province here --</option>");
 //         for(i; i < datas.length; i ++){
@@ -113,9 +113,9 @@ function editProfile(){
                 User_Type: "Customer"
             }
         }
-        console.log(data);
+        
         updateCustomer(data).done(function (response) {
-            console.log(response);
+            
             if(response){
                 window.location.href = "./profile-account.html";
             }
@@ -125,7 +125,7 @@ function editProfile(){
 
 function logoutRequest(){
     localStorage.setItem("token", "");
-    console.log(localStorage.getItem("token"));
+    
 }
 
 function removeAddtionalAddresses(){
@@ -151,7 +151,7 @@ function signupRequest(){
     if(checkIfSignUpInputNull()){
         loadingMessage();
         createCustomerNo().done(function (response) {
-            console.log(response);
+            
             localStorage.setItem("token", response);
             var shippingAddressList = [];
             if(numberOfAddresses > -1){
@@ -188,9 +188,9 @@ function signupRequest(){
                             ktp: (typeof $("#signup-id-number").val() === 'undefined') ? "NULL" : $("#signup-id-number").val()
                         }
                     };
-                    console.log(data);
+                    
                     createNewCustomer("", "", data).done(function (response) {
-                        console.log(response);
+                        
                         if(response){
                             Swal.fire("SIGN-UP SUCCESS", "", "success");
                             window.location.href = "./profile-account.html";
@@ -213,7 +213,7 @@ function signupRequestSupplier(){
     if(checkIfSignUpSupplierInputNull()){
         loadingMessage();
         createCustomerNo().done(function (response) {
-            console.log(response);
+            
             localStorage.setItem("token", response);
             var shippingAddressList = [];
             if(numberOfAddresses > -1){
@@ -251,9 +251,9 @@ function signupRequestSupplier(){
                             Nama_Perusahaan: $("#signup-company-name").val(),
                         }
                     };
-                    console.log(data);
+                    
                     createNewCustomerSupplier("", "", data).done(function (response) {
-                        console.log(response);
+                        
                         if(response){
                             Swal.fire("SIGN-UP SUCCESS", "", "success");
                             window.location.href = "./profile-account.html";
@@ -291,10 +291,10 @@ function checkIfSignUpSupplierInputNull(){
             )
         && ($("#signup-telp").val().length > 0 && $("#signup-telp").val().length <= 15)
         ){
-            console.log("sign up debug 2");
+            
             return true;
         }else{
-            console.log("sign up debug 3");
+            
             return false;
         }
     }
@@ -329,10 +329,10 @@ function checkIfSignUpInputNull(){
         && ($("#signup-telp").val().length > 0 && $("#signup-telp").val().length <= 15)
         && ($("#signup-referral").val().length > 0)
         ){
-            console.log("sign up debug 2");
+            
             return true;
         }else{
-            console.log("sign up debug 3");
+            
             return false;
         }
     }
@@ -340,11 +340,11 @@ function checkIfSignUpInputNull(){
 
 function loginRequest(){
     if(checkIfInputNull()){
-        console.log($("#login-email").val());
-        console.log($("#login-password").val());
+        
+        
         loginRequestAPI($("#login-email").val(), $("#login-password").val()).done(function (response) {
             if(response != false){
-                console.log(response);
+                
                 localStorage.setItem("token", response);
                 window.location.href = "./profile-account.html";
             }else{
@@ -386,7 +386,7 @@ function loadingMessage(){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -400,9 +400,9 @@ function forgotpasswordrequest(){
     && $("#forgot-new-password").val().length != 0 ){
         // var Birthday = $("#forgot-db-year").val() + "/" + $("#forgot-db-month").val() + "/" + $("#forgot-db-day").val();
         getforgotpasswordrequest($("#forgot-email").val(), $("#forgot-ktp").val(), $("#forgot-telp").val(), $("#forgot-new-password").val()).done(function (response) {
-            console.log(response);
+            
             if(response != false){
-                console.log(response);
+                
                 if(response){
                     swal.fire("You are verfied", "Password Anda telah di ganti sesuai dengan yang Anda berikan", "success");
                     setTimeout(() => {

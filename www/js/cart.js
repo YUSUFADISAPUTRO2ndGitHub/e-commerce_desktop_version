@@ -1,5 +1,5 @@
 $(document).ready(async function(){
-    console.log("localStorage.getItem(\"itemsInCart\") " + localStorage.getItem("itemsInCart"));
+    
     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
     var i = 0;
     if(cartToJson.length != 0){
@@ -15,19 +15,19 @@ $(document).ready(async function(){
     var requestArrayForItemsToCheckout = [];
     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-    console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+    
 });
 
 function loadcart(productNo, quantity){
     getProductsWithProductNo("", "", productNo).done(function (response) {
-        console.log(response);
+        
         if(response == false){
-            console.log("product no found ======= removed");
+            
             var i = 0;
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             for(i; i < cartToJson.length; i ++){
                 if(cartToJson[i].productNo == productNo){
-                    console.log("product no found ======= removed");
+                    
                     cartToJson.splice(i, 1);
                     localStorage.setItem("itemsInCart", JSON.stringify(cartToJson));
                 }
@@ -81,7 +81,7 @@ function eraseItem(id){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+            
             break;
         }
     }
@@ -126,7 +126,7 @@ function quantityUpdatedDirectly(x, id){
                     $("#quantity" + id).val(cartToJson[i].quantity);
 
                     $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                    console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                    
                     break;
                 }
             }
@@ -141,7 +141,7 @@ function quantityUpdatedDirectly(x, id){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -189,7 +189,7 @@ function removeItemsToCheckout(number){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            console.log("removeItemsToCheckout localStorage " + localStorage.getItem("itemsToCheckout"));
+            
             break;
         }
     }
@@ -211,11 +211,11 @@ function addItemsToCheckout(number){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsToCheckout"));
+            
         });
     }else {
         var cartToJson = JSON.parse(localStorage.getItem("itemsToCheckout"));
-        console.log("itemsToCheckout " + cartToJson);
+        
         var i = 0;
         var indicator = 0;
         for(i; i < cartToJson.length; i ++){
@@ -233,7 +233,7 @@ function addItemsToCheckout(number){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log("debug " + localStorage.getItem("itemsToCheckout"));
+                
                 break;
             }
         }
@@ -251,7 +251,7 @@ function addItemsToCheckout(number){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log(localStorage.getItem("itemsToCheckout"));
+                
             });
         }
     }
@@ -283,7 +283,7 @@ function addQuantity(id){
                 $("#quantity" + id).val(cartToJson[i].quantity);
 
                 $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -310,7 +310,7 @@ function reduceQuantity(id){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -333,7 +333,7 @@ function reduceQuantity(id){
                     localStorage.setItem("itemsInCart", productToBeAddedStringify);
                     $("#quantity" + id).val(cartToJson[i].quantity);
                     $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                    console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                    
                     break;
                 }
             }
@@ -361,14 +361,14 @@ function loadingMessage(interval){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
 
 function checkingout(){
     var token = localStorage.getItem("token");
-    console.log("token " + token);
+    
     if(checkboxCounter > 0 && (token != "" || token == null)){
         swal.fire("Final Step","","success");
         window.location.href = "./checkout.html";
@@ -382,7 +382,7 @@ function checkingout(){
 
 function checkingoutAll(){
     var token = localStorage.getItem("token");
-    console.log("token " + token);
+    
     if((token != "" || token == null)){
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
         if(cartToJson.length != 0){
@@ -402,7 +402,7 @@ function checkingoutAll(){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(array);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log(localStorage.getItem("itemsToCheckout"));
+                
             }
             swal.fire("Final Step","","success");
             window.location.href = "./checkout.html";
@@ -421,7 +421,7 @@ function checkingoutAllInStore(){
     in_store_loading_checkout();
     setTimeout(() => {
         var token = localStorage.getItem("token");
-        console.log("token " + token);
+        
         if((token != "" || token == null)){
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             if(cartToJson.length != 0){
@@ -441,7 +441,7 @@ function checkingoutAllInStore(){
                     // saving to storage
                     var productToBeAddedStringify = JSON.stringify(array);
                     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                    console.log(localStorage.getItem("itemsToCheckout"));
+                    
                 }
                 swal.fire("Final Step","","success");
                 window.location.href = "./checkout-in-store.html?check_store_price=true";

@@ -3,7 +3,7 @@ $(document).ready(function(){
     var urlParams = new URLSearchParams(queryString);
     var search = urlParams.get('input');
 
-    console.log(search);
+    
     if(search != null){
         searchUp(search, "", "");
     }else{
@@ -31,14 +31,14 @@ function loadingMessage(interval){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
 
 function searchUp(keywords, conditionPrice, conditionAlphabet){
     getAllProductsWithoutPaginationWithFilter("", "", "", "", keywords).done(function (response) {
-        console.log(response);
+        
         if(response.length == 0){
             loadingMessage(1);
             searchUpBasedOnCategory(keywords);
@@ -101,7 +101,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
             $("#badge-right" + product_row).append("<img src=\"../img/Additional_icons/new.png\" class=\"category-icon\" >");
         }  
     }else{
-        console.log("product_row inside 2 " + product_row);
+        
         // left
         $("#product-highlights").append("<tr id=\"product-highlights"+ product_row +"\">");
         $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");

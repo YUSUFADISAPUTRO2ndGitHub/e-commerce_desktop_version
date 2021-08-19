@@ -20,18 +20,18 @@ $(document).on('click',"#simpan_reg",function(){
     if(result_check_input_form){
         var password_awal = $('#password_reg').val()
         var referral_code = $('.ref-cod option:selected').val()
-        console.log(referral_code)
+        
         // $('#inp_ref_code').val(referral_code)
         
         
         axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
         .then((res)=>{
             var final_pass = res.data
-            console.log(final_pass)
+            
             var ref_val = $('#inp_ref_code').val()
             if(ref_val.length >3){
-                console.log(ref_val)
-                console.log('aman ')
+                
+                
                 axios.post(`http://customers.sold.co.id/get-customer-code`)
             .then((res)=>{
                 localStorage.setItem('token',res.data)
@@ -59,7 +59,7 @@ $(document).on('click',"#simpan_reg",function(){
                         ktp:$("#no_ktp_reg").val()
                     }
                 }
-                console.log(data,' line 36 data')
+                
             axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
                 headers:{
                     "Content-Type":'application/json'
@@ -85,7 +85,7 @@ $(document).on('click',"#simpan_reg",function(){
                     "ktp":data.customer_data.ktp
                 })
             }).then((res)=>{
-                console.log(res.data)
+                
                 
                 if(res.data === true){
                     
@@ -102,11 +102,11 @@ $(document).on('click',"#simpan_reg",function(){
                       })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
     
             }).catch((err)=>{
-                console.log(err)
+                
             })
             }else {
                 swal.fire("Referral Code Harus Di isi", "", "error");
@@ -114,7 +114,7 @@ $(document).on('click',"#simpan_reg",function(){
           
             
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
     }else {
@@ -137,28 +137,28 @@ $(document).on('click',".btn-login",function(){
     var email = $('#email_login').val()
     var password = $('#password_login').val() 
     var otp = $('#otp_login').val()
-    console.log(email)
-    console.log(password)
+    
+    
     
     axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
-        console.log(res.data,'password encrypt')
+        
         axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
         ).then((res)=>{
-            console.log(res.data ,' berhasil login 201')
+            
             if(res.data){
                 swal.fire("Login Berhasil", "", "success");
                 localStorage.setItem('token',res.data)
                 $('#loginModal').modal('hide')
             }else {
                 swal.fire("Login Gagal", "", "info");
-                console.log('gagal login')
+                
             }
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 })
@@ -171,20 +171,20 @@ $(document).on('click',".btn-login-product",function(){
     
     // var item = document.getElementById('box-option-login')
     var item = $('.box-option-login').attr('id')
-    console.log(item)
+    
     
     
     if(item === 'product'){
         axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
         .then((res)=>{
-            console.log(res.data,'password encrypt')
+            
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
-                console.log(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`)
-                console.log(res.data ,' berhasil login 201')
-                console.log(otp,'ini OTP 151')
-                console.log(email)
-                console.log(password)
+                
+                
+                
+                
+                
                 if(res.data){
                     swal.fire("Login Berhasil", "", "success");
                     localStorage.setItem('token',res.data)
@@ -195,24 +195,24 @@ $(document).on('click',".btn-login-product",function(){
                     check_status_item()
                 }else {
                     swal.fire("Login Gagal", "", "info");
-                    console.log('gagal login')
+                    
                     $('.box-option-login').removeClass('product')
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
     }else if (item === 'commision'){
         axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
         .then((res)=>{
-            console.log(res.data,'password encrypt')
+            
             axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
-                console.log(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`)
-                console.log(res.data ,' berhasil login 201')
+                
+                
                 if(res.data){
                     swal.fire("Login Berhasil", "", "success");
                     localStorage.setItem('token',res.data)
@@ -222,14 +222,14 @@ $(document).on('click',".btn-login-product",function(){
                     commision_check()
                 }else {
                     swal.fire("Login Gagal", "", "info");
-                    console.log('gagal login')
+                    
                     $('.box-option-login').removeClass('commision')
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
     }
     
@@ -250,7 +250,7 @@ $(document).on('click',".save-user",function(){
     
     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
+        
 
         // var dataPassword = $('#password_user').val()
 
@@ -277,7 +277,7 @@ $(document).on('click',".save-user",function(){
                ktp:$('#no_ktp_user').val()
            }
        }
-       console.log(data)
+       
        axios.post(`http://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
         headers:{
             "Content-Type":'application/json'
@@ -314,9 +314,9 @@ $(document).on('click',".save-user",function(){
             $('#profileModal').modal('hide')
         }
         
-        console.log(res.data)
+        
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
     }).catch((err)=>{
@@ -360,10 +360,10 @@ function checkIfSignUpInputNull(){
             || $("#email_reg").val().includes("hotmail")
             || $("#email_reg").val().includes("yopmail"))
         && ($("#no_telp_reg").val().length > 0 && $("#no_telp_2_reg").val().length <= 15)){
-            console.log("sign up debug 2");
+            
             return true;
         }else{
-            console.log("sign up debug 3");
+            
             return false;
         }
     }
@@ -388,7 +388,7 @@ function loadingMessage(){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -409,13 +409,13 @@ $(document).on('click',"#simpan_supplier",function(){
         .then((res)=>{
             localStorage.setItem('token',res.data)    
             var password = $('#password_supp').val()
-            console.log(password,  ' ini password register suplier')
+            
             axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
             .then((res)=>{
-                console.log(res.data)
+                
                 var newPassword = res.data
-                console.log(newPassword)
-                console.log(data)
+                
+                
                 var data = {
                     customer_data : {
                         Customer_Code : localStorage.getItem("token"),
@@ -480,18 +480,18 @@ $(document).on('click',"#simpan_supplier",function(){
                     }
                     
                 }).catch((err)=>{
-                    console.log(err)
+                    
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
         
         }).catch((err)=>{
-        console.log(err)
+        
         })
 
     }else {
-        console.log('ada data yg salah supplier line 494. auth js')
+        
     }
     
 
@@ -540,13 +540,13 @@ var data = {
                     // footer: '<a href="">Why do I have this issue?</a>'
                   })
             }
-            console.log(res.data)
-            // console.log(newPassword)
+            
+            // 
         }).catch((err)=>{
-            console.log(err)
+            
         })
     
-    console.log(data)
+    
 
 
 })
@@ -554,10 +554,10 @@ var data = {
 $(document).on('change','#option-address-gb',function(){
     // $('.option-address-gb').on('change',function(){
         var value = $('#option-address-gb :selected').val();
-        console.log(value)
+        
     // })
     var test = $('#option-address-gb').val()
-    console.log(test)
+    
 
 })
 
@@ -577,7 +577,7 @@ $(document).on('change','.qty_groupbuy',function(){
         if(total_qty_from_api > total_qty_from_user) {
               $('#tp_sp').val(total_harga)
               $('#tp_iframe').val(total_harga)
-              console.log($('#tp_sp').val())
+              
         }else {
             Swal.fire({
                 icon: 'error',
@@ -594,7 +594,7 @@ $(document).on('change','.qty_groupbuy',function(){
 
 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 

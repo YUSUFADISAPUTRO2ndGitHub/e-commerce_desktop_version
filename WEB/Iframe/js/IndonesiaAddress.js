@@ -33,7 +33,7 @@ $(document).ready(function(){
 // function getCity(province){
 //     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=city&control=" + province, function(data, status){
 //         datas = JSON.parse(data);
-//         console.log(data);
+//         
 //         var i =0;
 //         $("#option-city").append("<option>-- select your city here --</option>");
 //         for(i; i < datas.length; i ++){
@@ -45,7 +45,7 @@ $(document).ready(function(){
 // function getDistrict(city){
 //     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=district&control=" + city, function(data, status){
 //         datas = JSON.parse(data);
-//         console.log(data);
+//         
 //         var i =0;
 //         $("#option-district").append("<option>-- select your district here --</option>");
 //         for(i; i < datas.length; i ++){

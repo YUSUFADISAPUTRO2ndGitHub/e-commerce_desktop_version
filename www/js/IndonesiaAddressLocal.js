@@ -93,7 +93,7 @@ function getStreetLocal(){
         $.get("http://147.139.168.202:8080/profile.jsp?token=" + localStorage.getItem("token"), function(data, status){
             datas = JSON.parse(data);
             var mainAddress = (datas.address).split(";");
-            // console.log("getStreetLocal " + mainAddress);
+            // 
             $("#profile-street-local").val(mainAddress[3]);
         });
 }

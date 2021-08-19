@@ -1,5 +1,5 @@
 $(document).ready(async function(){
-    console.log("localStorage.getItem(\"itemsInCart\") " + localStorage.getItem("itemsInCart"));
+    
     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
     var i = 0;
     if(cartToJson.length != 0){
@@ -16,23 +16,23 @@ $(document).ready(async function(){
     var requestArrayForItemsToCheckout = [];
     var productToBeAddedStringify = JSON.stringify(requestArrayForItemsToCheckout);
     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-    console.log("localStorage.getItem(\"itemsToCheckout\") " + localStorage.getItem("itemsToCheckout"));
+    
 });
 
 var harga_barang = 0
 function loadcart(productNo, quantity){
     $('#cart-list').empty()
     getProductsWithProductNo("", "", productNo).done(function (response) {
-        console.log(response);
+        
         var harga_satuan = parseInt(response.Sell_Price)
         harga_barang += harga_satuan * quantity
         if(response == false){
-            console.log("product no found ======= removed");
+            
             var i = 0;
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             for(i; i < cartToJson.length; i ++){
                 if(cartToJson[i].productNo == productNo){
-                    console.log("product no found ======= removed");
+                    
                     cartToJson.splice(i, 1);
                     localStorage.setItem("itemsInCart", JSON.stringify(cartToJson));
                 }
@@ -102,8 +102,8 @@ function loadcart(productNo, quantity){
 function selectAllCart(){
     // checklist830100100002
     // checklist830100100002
-    console.log($('#checklist830100100004'))
-    console.log($('#checklist830100100003'))
+    
+    
     $('#checklist830100100004').prop('checked', true);
     $('#checklist830100100003').prop('checked', true);
 
@@ -126,7 +126,7 @@ function zoomIn(x){
 }
 
 function eraseItem(id){
-    console.log(id);
+    
     var checkBox = document.getElementById("checklist" + id);
     if (checkBox.checked == true){
         checkBox.checked = false;
@@ -136,7 +136,7 @@ function eraseItem(id){
     }
     var i = 0;
     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-    console.log(cartToJson);
+    
     for(i; i < cartToJson.length; i ++){
         if(cartToJson[i].productNo == id){
             cartToJson.splice(i, 1);
@@ -144,7 +144,7 @@ function eraseItem(id){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+            
             
             break;
         }
@@ -193,7 +193,7 @@ function quantityUpdatedDirectly(x, id){
                     $("#quantity" + id).val(cartToJson[i].quantity);
 
                     $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                    console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                    
                     break;
                 }
             }
@@ -208,7 +208,7 @@ function quantityUpdatedDirectly(x, id){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -257,7 +257,7 @@ function removeItemsToCheckout(number){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            console.log("removeItemsToCheckout localStorage " + localStorage.getItem("itemsToCheckout"));
+            
             break;
         }
     }
@@ -279,11 +279,11 @@ function addItemsToCheckout(number){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsToCheckout"));
+            
         });
     }else {
         var cartToJson = JSON.parse(localStorage.getItem("itemsToCheckout"));
-        console.log("itemsToCheckout " + cartToJson);
+        
         var i = 0;
         var indicator = 0;
         for(i; i < cartToJson.length; i ++){
@@ -301,7 +301,7 @@ function addItemsToCheckout(number){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log("debug " + localStorage.getItem("itemsToCheckout"));
+                
                 break;
             }
         }
@@ -319,7 +319,7 @@ function addItemsToCheckout(number){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                console.log(localStorage.getItem("itemsToCheckout"));
+                
             });
         }
     }
@@ -351,7 +351,7 @@ function addQuantity(id){
                 $("#quantity" + id).val(cartToJson[i].quantity);
 
                 $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -378,7 +378,7 @@ function reduceQuantity(id){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("reduceQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -401,7 +401,7 @@ function reduceQuantity(id){
                     localStorage.setItem("itemsInCart", productToBeAddedStringify);
                     $("#quantity" + id).val(cartToJson[i].quantity);
                     $("#" + id).val( commafy( parseInt($("#quantity" + id).val()) * (response.Sell_Price*1) ) );
-                    console.log("addQuantity localStorage " + localStorage.getItem("itemsInCart"));
+                    
                     break;
                 }
             }
@@ -429,17 +429,17 @@ function loadingMessage(interval){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
 
 function checkingout(){
     var token = localStorage.getItem("token");
-    console.log("token " + token);
-    console.log(token !=undefined)
-    console.log(token != "")
-    console.log(token != null)
+    
+    
+    
+    
     if(token == undefined){
         localStorage.setItem("token","")
         token = localStorage.getItem('token')
@@ -462,21 +462,21 @@ function checkingoutAll(){
         var isSuccess = true
         var arr = localStorage.getItem('itemsInCart')
         var arr_product = JSON.parse(arr)
-        // console.log(arr_product)
+        // 
          for (var i=0; i<arr_product.length; i++){
            isSuccess=  await check_qty(arr_product,i)     
-           console.log(arr_product[i].productNo)
-           //    console.log(isSuccess, '393 dalem looping')
+           
+           //    
            $(`#productName${arr_product[i].productNo}`).css('border','none')
            if(isSuccess == 'false' || isSuccess == false){
-               console.log(arr_product[i])
-               console.log(arr_product[i].productNo)
+               
+               
                
                $(`#productName${arr_product[i].productNo}`).css('border','3px solid red')
                i=arr_product.length
            } 
         }
-        // console.log(isSuccess,'584')
+        // 
         await success(isSuccess)
         
     }
@@ -486,49 +486,49 @@ function checkingoutAll(){
             await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
-                // console.log(res.data)
+                // 
                 var qty_sisa = res.data.Stock_Quantity
-                // console.log(qty_sisa, 'iniqty sisa looping ke ' , i)
-                // console.log(quantity_product, 'ini product beli looping ke ' , i)
-                // console.log(res.data.Sell_Price,' ini harga jual')
-                // console.log(typeof res.data.Sell_Price, ' tipe data', res.data.Sell_Price == 'null')
-                // console.log(quantity_product > qty_sisa , qty_sisa == 'undefined' , qty_sisa == 'null' , qty_sisa == null , isNaN(qty_sisa), res.data.Sell_Price == null , res.data.Sell_Price == 'null' , res.data.Sell_Price ==undefined)
+                // 
+                // 
+                // 
+                // 
+                // 
                 if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa
                     || res.data.Sell_Price == null || res.data.Sell_Price == 'null' || res.data.Sell_Price ==undefined
                     )){
                     isSuccess = false
 
-                    // console.log('masuk ke dalam if 415,', isSuccess)
+                    // 
                 }
                 if(res.data.Sell_Price == 'null'){
                     isSuccess = false
-                    // console.log(' masuk ke dalam if 423')
+                    // 
                 }
-                // console.log(isSuccess,' 425')
+                // 
                 resolve(isSuccess)
-                // console.log(isSuccess,'427')
+                // 
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     }
     
     
     async function success(isSuccess){
-        // console.log(isSuccess,'599')
+        // 
         if(isSuccess){
                 var token = localStorage.getItem("token");
-                // console.log("token " + token);
+                // 
                 if((token != "" || token == null)){
                     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-                    // console.log(cartToJson)
+                    // 
                     if(cartToJson.length != 0){
                         var array = [];
                         var productToBeAddedStringify = JSON.stringify(array);
                         localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                         var i = 0;
                         for(i; i < cartToJson.length; i ++){
-                            // console.log(cartToJson[i])
+                            // 
                             
                             var productToBeAdded = {
                                 productNo: cartToJson[i].productNo,
@@ -540,9 +540,9 @@ function checkingoutAll(){
                         
                             // saving to storage
                             var productToBeAddedStringify = JSON.stringify(array);
-                            console.log(productToBeAddedStringify)
+                            
                             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                            console.log(localStorage.getItem("itemsToCheckout"));
+                            
                         }
 
                         
@@ -562,7 +562,7 @@ function checkingoutAll(){
                 }
             
         }else {
-            console.log(isSuccess, ' masuk ke else false, qty kurang/undefined dll')
+            
             Swal.fire("Quantity Kurang / Harga Salah", "Error", "error");
         }
     }
@@ -578,7 +578,7 @@ function checkingoutAllInStore(){
     in_store_loading_checkout();
     setTimeout(() => {
         var token = localStorage.getItem("token");
-        console.log("token " + token);
+        
         if((token != "" || token == null)){
             var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
             if(cartToJson.length != 0){
@@ -598,7 +598,7 @@ function checkingoutAllInStore(){
                     // saving to storage
                     var productToBeAddedStringify = JSON.stringify(array);
                     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                    console.log(localStorage.getItem("itemsToCheckout"));
+                    
                 }
                 swal.fire("Final Step","","success");
                 window.location.href = "./checkout-in-store.html?check_store_price=true";

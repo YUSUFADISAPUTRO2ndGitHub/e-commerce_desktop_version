@@ -58,7 +58,7 @@ function additionalAddresses(response){
 // function getProvincesOtherLocal(){
 //     $.get("http://147.139.168.202:8080/IndonesiaAddress.jsp?type=province", function(data, status){
 //         datas = JSON.parse(data);
-//         console.log("datas profile "+ data);
+//         
 //         var i =0;
 //         $("#option-province-local-other").append("<option>-- select your province here --</option>");
 //         for(i; i < datas.length; i ++){
@@ -111,7 +111,7 @@ function editProfile(){
 
 function logoutRequest(){
     localStorage.setItem("token", "");
-    console.log(localStorage.getItem("token"));
+    
 }
 
 function removeAddtionalAddresses(){
@@ -137,7 +137,7 @@ function signupRequest(){
     if(checkIfSignUpInputNull()){
         loadingMessage();
         createCustomerNo().done(function (response) {
-            console.log(response);
+            
             localStorage.setItem("token", response);
             var shippingAddressList = [];
             if(numberOfAddresses > -1){
@@ -172,7 +172,7 @@ function signupRequest(){
                         }
                     };
                     createNewCustomer("", "", data).done(function (response) {
-                        console.log(response);
+                        
                         if(response){
                             Swal.fire("SIGN-UP SUCCESS", "", "success");
                             window.location.href = "./profile-account.html";
@@ -218,10 +218,10 @@ function checkIfSignUpInputNull(){
             || $("#signup-email").val().includes("hotmail")
             || $("#signup-email").val().includes("yopmail"))
         && ($("#signup-telp").val().length > 0 && $("#signup-telp").val().length <= 15)){
-            console.log("sign up debug 2");
+            
             return true;
         }else{
-            console.log("sign up debug 3");
+            
             return false;
         }
     }
@@ -229,11 +229,11 @@ function checkIfSignUpInputNull(){
 
 function loginRequest(){
     if(checkIfInputNull()){
-        console.log($("#login-email").val());
-        console.log($("#login-password").val());
+        
+        
         loginRequestAPI($("#login-email").val(), $("#login-password").val()).done(function (response) {
             if(response != false){
-                console.log(response);
+                
                 localStorage.setItem("token", response);
                 window.location.href = "./profile-account.html";
             }else{
@@ -275,7 +275,7 @@ function loadingMessage(){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -289,9 +289,9 @@ function forgotpasswordrequest(){
     && $("#forgot-new-password").val().length != 0 ){
         var Birthday = $("#forgot-db-year").val() + "/" + $("#forgot-db-month").val() + "/" + $("#forgot-db-day").val();
         getforgotpasswordrequest($("#forgot-email").val(), Birthday, $("#forgot-telp").val(), $("#forgot-new-password").val()).done(function (response) {
-            console.log(response);
+            
             if(response != false){
-                console.log(response);
+                
                 if(response){
                     swal.fire("You are verfied", "Password Anda telah di ganti sesuai dengan yang Anda berikan", "success");
                     setTimeout(() => {

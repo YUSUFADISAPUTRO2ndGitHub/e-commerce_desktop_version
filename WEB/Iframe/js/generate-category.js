@@ -2,7 +2,7 @@ $(document).ready(function(){
     getAllCategories("", "").done(function (response) {
         var bigcatlist = 0;
         for(bigcatlist; bigcatlist < response.length; bigcatlist = bigcatlist + 1){
-            console.log(response[bigcatlist]);
+            
             generateBigCategoryList(bigcatlist, response[bigcatlist]);
         }
     });
@@ -37,7 +37,7 @@ function loadingMessage(timerMultiplier){
     }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
+            
         }
     })
 }
@@ -51,7 +51,7 @@ function generateSmallCatList(x){
     var categoryId = x.id.replace("big-category-list-tr", "");
     $(".loading-area").css("display", "table");
     getAllSubCategories(categoryId).done(function (response) {
-        console.log(response);
+        
         if(response.length == 0){
             generateSmallCatList(x);
             $(".loading-area").css("display", "table");
@@ -72,7 +72,7 @@ function generateSmallCatList(x){
 function generatehomeOneByOne(product_row, data, dataLength){
     if(product_row % 2 != 0){
         var product_row = product_row - 1;
-        console.log("product_row inside -1 " + product_row);
+        
         // right
         $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
         $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
@@ -81,7 +81,7 @@ function generatehomeOneByOne(product_row, data, dataLength){
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Subcategory );
     }else{
-        console.log("product_row inside 2 " + product_row);
+        
         // left
         $("#small-category-list").append("<tr id=\"product-highlights"+ product_row +"\">");
         $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");
@@ -103,7 +103,7 @@ function unhideProductSelection(x, Subcategory){
 function generatehomeOneByOneSubCategorySelection(product_row, data, dataLength){
     if(product_row % 2 != 0){
         var product_row = product_row - 1;
-        console.log("product_row inside -1 " + product_row);
+        
         // right
         $("#product-highlights" + product_row).append("<th id=\"right"+ product_row +"\">");
         $("#right" + product_row).append("<div class=\"notification product-card\" id=\"product-card-right"+ product_row +"\">");
@@ -112,7 +112,7 @@ function generatehomeOneByOneSubCategorySelection(product_row, data, dataLength)
         $("#card-right" + product_row).append("<div class=\"card-body small-padding\" id=\"card-body-right"+ product_row +"\">");
         $("#card-body-right" + product_row).append("<div class=\"card-title\">" + data.Subcategory );
     }else{
-        console.log("product_row inside 2 " + product_row);
+        
         // left
         $("#small-category-list").append("<tr id=\"product-highlights"+ product_row +"\">");
         $("#product-highlights" + product_row).append("<th id=\"left"+ product_row +"\">");

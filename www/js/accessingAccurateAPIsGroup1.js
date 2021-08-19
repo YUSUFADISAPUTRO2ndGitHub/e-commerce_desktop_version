@@ -256,7 +256,7 @@ function createNewSalesOrder(items, customerDetails){
           "Sales_Order_Detail_data": items
         }),
     };
-    console.log(settings);
+    
     return $.ajax(settings);
 }
 
@@ -273,7 +273,7 @@ function createNewSalesOrderWithGroupBuy(items, customerDetails){
           "Sales_Order_Detail_data": items
         }),
     };
-    console.log(settings);
+    
     return $.ajax(settings);
 }
 
@@ -287,8 +287,8 @@ function createNewTempSalesOrder(items, customerDetails){
         },
         "data": JSON.stringify(items),
       };
-    console.log(customerDetails.paymentTermName);
-    console.log(items);
+    
+    
     
     return $.ajax(settings);
 }

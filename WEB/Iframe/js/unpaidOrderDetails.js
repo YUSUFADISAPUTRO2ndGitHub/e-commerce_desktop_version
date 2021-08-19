@@ -16,7 +16,7 @@ function populateUnpaidOrdersTable(orderNumber){
         if(response.length > 0){
             var i = 0;
             for(i ; i < response.length; i++){
-                console.log(response[i]);
+                
                 generateUnpaidOrdersRow(i, response[i]);
             }
         }
@@ -35,7 +35,7 @@ function commafy( num ) {
 }
 
 function generateUnpaidOrdersRow(i, datas){
-    console.log(datas.Product_Name);
+    
     $("#unpaid-orders").append("<tr id=\"" + i + "\">");
     $("#" + i ).append("<th>" + datas.Product_Name + "</th>");
     $("#" + i ).append("<td id=\"" + i + "-details\">" + datas.Quantity_Requested + "</td>");

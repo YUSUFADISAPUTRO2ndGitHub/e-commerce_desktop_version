@@ -54,7 +54,7 @@
         const urlParams = new URLSearchParams(queryString);
         const product_code = urlParams.get('product_code');
         getProductsWithProductNo(product_code).done(function (response) {
-                console.log(response.product_rating);
+                
                 if(response.product_rating == 25){
                     $("#a-star-1").attr("src", "./star.png");
                     $("#a-star-2").attr("src", "./star.png");
@@ -83,7 +83,7 @@
         const urlParams = new URLSearchParams(queryString);
         const product_code = urlParams.get('product_code');
         getProductsWithProductNo(product_code).done(function (response) {
-                console.log(response.product_rating);
+                
                 if(response.product_rating == 25){
                     $("#a-star-1").attr("src", "./star.png");
                     $("#a-star-2").attr("src", "./star.png");
@@ -130,7 +130,7 @@
         return $.ajax(settings);
     }
     $( ".a-star" ).click(function() {
-        console.log(this.id)
+        
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const product_code = urlParams.get('product_code');

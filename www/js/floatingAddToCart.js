@@ -11,14 +11,14 @@ function addToCartDirectly(product){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsInCart"));
+            
 
             // add total item in cart
             localStorage.setItem("totalItemInCart", array.length);
         });
     }else{
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-        console.log(cartToJson);
+        
         var i = 0;
         var indicator = 0;
         for(i; i < cartToJson.length; i ++){
@@ -29,7 +29,7 @@ function addToCartDirectly(product){
                 // saving to storage
                 var productToBeAddedStringify = JSON.stringify(cartToJson);
                 localStorage.setItem("itemsInCart", productToBeAddedStringify);
-                console.log("bug " + localStorage.getItem("itemsInCart"));
+                
                 break;
             }
         }
@@ -43,7 +43,7 @@ function addToCartDirectly(product){
             // saving to storage
             var productToBeAddedStringify = JSON.stringify(cartToJson);
             localStorage.setItem("itemsInCart", productToBeAddedStringify);
-            console.log(localStorage.getItem("itemsInCart"));
+            
         }
         // add total item in cart
         localStorage.setItem("totalItemInCart", cartToJson.length);
