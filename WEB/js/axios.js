@@ -2621,8 +2621,19 @@ function commafy( num ) {
         let timerInterval
         Swal.fire({
         title: 'Please Wait',
-        // html: 'I will close in <b></b> milliseconds.',
-        timer: 2000,
+        html: ` 
+         <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLD 
+            </div>
+                
+            <div class="box2">
+            </div>
+        </div>
+        `,
+        timer: 3000,
         timerProgressBar: true,
         didOpen: () => {
             Swal.showLoading()
