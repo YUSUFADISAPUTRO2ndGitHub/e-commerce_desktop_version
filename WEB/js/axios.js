@@ -434,7 +434,7 @@ const renderCategory=()=>{
         res.data.map((val,index)=>{
             var sub = val.Category.toUpperCase()    
             var split = sub.split(' ').join('_')
-            console.log(split,'436')
+            // console.log(split,'436')
             $('.lg_home').append(
                 ` 
                 <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')" id="id_sub-${split}">${sub}</li>
@@ -546,7 +546,18 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
     let timerInterval
     Swal.fire({
     title: 'Please Wait!',
-    // html: 'I will close in <b></b> milliseconds.',
+    html: ` 
+    <div class="boxcon">
+       <div class="box1">
+       </div>
+       <div id="sold-id-loading">
+       SOLD 
+       </div>
+           
+       <div class="box2">
+       </div>
+   </div>
+   `,
     timer: 1000,
     timerProgressBar: true,
     didOpen: () => {
@@ -613,7 +624,18 @@ const renderItemBasedOnCategory=(Category)=>{
     let timerInterval
         Swal.fire({
         title: 'Uploading Data',
-        // html: 'I will close in <b></b> milliseconds.',
+        html: ` 
+        <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLD 
+            </div>
+                
+            <div class="box2">
+            </div>
+        </div>
+    `,
         timer: 1500,
         timerProgressBar: true,
         didOpen: () => {
@@ -2692,7 +2714,7 @@ function commafy( num ) {
                         </div>
                         <div class="new-item-right">    
                             <div class="box-back-right-id">
-                                <div class="btn-back-right-id">
+                                <div class="btn-back-right-id" onclick="close_product_detail()">
                                     <i class="fas fa-arrow-left"></i>
                                     Kembali
                                 </div>
@@ -2714,7 +2736,7 @@ function commafy( num ) {
                                 <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                     Tambah
                                 </div>
-                                <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
+                                <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
                                     Beli Sekarang
                                 </div>
                                
@@ -2940,7 +2962,7 @@ function commafy( num ) {
                         </div>
                         <div class="new-item-right">    
                             <div class="box-back-right-id">
-                                <div class="btn-back-right-id">
+                                <div class="btn-back-right-id" onclick="close_product_detail()">
                                     <i class="fas fa-arrow-left"></i>
                                     Kembali
                                 </div>
@@ -2962,7 +2984,7 @@ function commafy( num ) {
                                 <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                     Tambah
                                 </div>
-                                <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
+                                <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
                                     Beli Sekarang
                                 </div>
                                 <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">

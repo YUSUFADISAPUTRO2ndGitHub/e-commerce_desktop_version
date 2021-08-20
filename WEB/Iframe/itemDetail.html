@@ -115,7 +115,7 @@
 
 
   <div class="box-item-detail">
-    <div class="new-item-left">
+    <!-- <div class="new-item-left">
         <div class="item-left-img-box">
             <img src="../img/vantsing_shipping_method.png" alt="" class="img-big" id="img-big-1">
             <img src="../img/bca_transfer_manual.png" alt="" class="img-big" id="img-big-2">
@@ -352,7 +352,7 @@
                 </div>
               </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -437,6 +437,7 @@
 <script>
     $(function() {
 		$('.pop').on('click', function() {
+            alert('jalan')
 			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
 			$('#imagemodal').modal('show');   
 		});		

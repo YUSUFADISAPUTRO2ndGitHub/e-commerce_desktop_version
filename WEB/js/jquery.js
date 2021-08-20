@@ -2275,6 +2275,71 @@ function payment_groupbuy_home(product_id){
     
 }
 
+const close_product_detail=()=>{
+    // alert('jalan close')
+    // window.parent.document
+    $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+    console.log($('.box_iframe_groupbuy',window.parent.document))
+}
+
+const buyNow=(product_id)=>{
+    console.log(product_id)
+    addToCart(product_id)
+    close_product_detail()
+    var array = []
+    localStorage.setItem('itemsToCheckout',array)
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        if(res.data.Stock_Quantity > 1){
+            var productToBeAdded = {
+                productNo: product_id,
+                quantity: 1,
+                GroupCode: "NO COUPON",
+                priceAgreed: res.data.Sell_Price
+            }
+            array.push(productToBeAdded)
+            
+            var productToBeAddedStringify = JSON.stringify(array);
+            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    
+            console.log(productToBeAdded)
+    
+    
+        $('.close-button').css('display','block')
+        
+        $('.close').css('display','none')
+        
+        console.log($(".iframe",window.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`))
+        $(".iframe",window.parent.document).toggle();
+        // $('.iframe').css('display','block')
+        $('.modals-pengiriman',window.parent.document).css("display",'none')
+        $('.modals-check-harga',window.parent.document).css("display",'none')
+        $('.option-1',window.parent.document).removeClass('background_grey')
+        $('.option-2',window.parent.document).removeClass('background_grey')
+        $('.option-0',window.parent.document).removeClass('background_grey')
+        $(".iframe",window.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+    
+          // SEARCH ITEM BACK TO NORMAL
+          $('.box-render-search',window.parent.document).css('display','none')
+          $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
+          $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
+          $('.input-name',window.parent.document).val(null)
+        }else {
+            swal.fire("Barang Tidak Tersedia","","warning");
+        }
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+
+
+
+
+
+}
+
 
 function addToCart(product_id){
 

@@ -2385,7 +2385,7 @@ input:focus {
     /* left:327px; */
     left: 22.8%;
     height: 480px;
-    width: 900px;
+    width: 1000px;
     display: none;
     transition: 2s ease-out;
     border-radius: 10px;
@@ -2410,7 +2410,7 @@ input:focus {
 .modals-product-detail {
     border-radius: 5px;
     z-index: 101;
-    height: 550px;
+    height: 600px;
     width: 1000px;
     display: none;
 }
