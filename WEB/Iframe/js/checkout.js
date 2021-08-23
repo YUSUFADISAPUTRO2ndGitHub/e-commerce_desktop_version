@@ -83,8 +83,16 @@ function get_otp_for_checkout(){
 function loadingMessage(timer){
     let timerInterval
     Swal.fire({
-    title: 'Loading Your Request',
-    html: '',
+    // title: 'Loading Your Request',
+    html: `
+    <div class="container">
+        <div class="loader">
+            <div class="ball">
+                
+            </div>
+        </div>
+    </div>
+    `,
     timer: timer*1000,
     timerProgressBar: true,
     allowOutsideClick: false,
