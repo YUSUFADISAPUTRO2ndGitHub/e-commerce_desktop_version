@@ -1094,3 +1094,105 @@ const close_tab_answer=(result,index)=>{
     $(`#icon-minus-id-${index}`).css('display','none')
     $(`#icon-plus-id-${index}`).css('display','block')
 }
+
+// const onInputComment=(val)=>{
+//     console.log(val)
+//     alert('jalan    ')
+//     var comment = $('#input_comment_cust').val()
+//     console.log(comment)
+// }
+
+
+    $('.modals-product-detail').on('load',function(){
+        // write your code here
+        console.log('1108 jalan')
+        
+        
+    })
+    $('.input_comment_cust').on('keyup',function(){
+        var data_comment = $(this).val()
+        console.log(data_comment)
+        if(data_comment.length>0){
+            $('.btn-send-comment').removeAttr('disabled')
+            $('.btn-send-comment').addClass('active_send_comment')
+        }else {
+            $('.btn-send-comment').prop('disabled',true)
+            $('.btn-send-comment').removeClass('active_send_comment')
+        }
+    })
+    const send_comment_cust=(product_id)=>{
+        console.log(product_id,'1124')
+        var result_comment = $('.input_comment_cust').val()
+        var token = localStorage.getItem('token')
+        // {
+            // }
+            // var product_id = '84818039900005'
+            var data = {
+                User_Comments:
+                {
+                    Customer_Code:token,
+                    Comment:result_comment,
+                    Product_Code:product_id
+                }
+            }
+        if(result_comment.length>0){
+            // axios.post(`http://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
+            //     headers:{
+            //         "Content-Type":'application/json'
+            //     },
+            axios.post(` http://products.sold.co.id/send_user_comment`,data,{
+                headers:{
+                    "Content-Type":'application/json'
+                },
+                "data":JSON.stringify({
+                    "Customer_Code":data.User_Comments.Customer_Code,
+                    "Comments":data.User_Comments.Comment,
+                    "Product_Code":data.User_Comments.Product_Code
+                })
+            }).then((res)=>{
+                console.log(data)
+                console.log(res.data)
+                axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                .then((res)=>{
+                    var cust_comment = res.data
+                    console.log(cust_comment)
+                    var comment_parse = JSON.parse(cust_comment.User_Comments)
+                    comment_parse.map((val,index)=>{
+                        console.log(val)
+                        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                        .then((res)=>{
+                            console.log(res.data)
+                            $('#nav-profile').append(`
+                            <div class="user-card-id">
+                                <div class="user-card-top-id">
+                                    <img src="../img/accounts.png" alt="">
+                                    <div class="user-card-desc-top-id">
+                                        <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                        <p>*****</p>
+                                    </div>
+                                </div>
+                                <div class="user-card-bot-id">
+                                    <p>${val.Comment}</p>
+                                </div>
+                            </div>
+                            `)
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+
+                    })
+                    $('.input_comment_cust').val('')
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+    
+        }
+    }
+
+
+
+
+   

@@ -1036,7 +1036,7 @@ function personalDetailsWithNewAddress(address){
 
 
 function renderCartCheckout(product){
-    
+    console.log(product)
 
     product.map((val,index)=>{
         
@@ -1059,15 +1059,114 @@ function renderCartCheckout(product){
                     <div class="desc-item-2-checkout-cc">
                         <p>Quantity : ${val.quantity}</p>
                         <p>Berat  : ${fixed_total_berat_barang}</p>
-                        <p>Harga : ${val.priceAgreed}</p>
+                        <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+                    </div>
+                    <div class="for_input_coupon"> 
+                        <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                        <div class="card-coupon-used" id="delete-${val.productNo}" >
+
+                        <div>
                     </div>
                 </div>
             </div>
-            `)
-            
-            
+            `)   
         })
     })
+
+}
+
+const delete_coupon=(product_id)=>{
+    $(`#delete-${product_id}`).empty()
+    $(`.input_coupon_checkout_${product_id}`).css('visibility','visible')
+    var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        var data_product = res.data
+        for(var i =0; i<itemsToCheckout.length; i++){
+            if(product_id == itemsToCheckout[i].productNo){
+                var harga_awal = parseInt(data_product.Sell_Price)
+                var hitung = harga_awal * parseInt(itemsToCheckout[i].quantity)
+                console.log(hitung)
+                itemsToCheckout[i].priceAgreed = commafy(harga_awal * parseInt(itemsToCheckout[i].quantity))
+            }
+        }
+            $(`#id_harga_barang-${product_id}`).empty()
+            $(`#id_harga_barang-${product_id}`).append(`
+                harga: ${commafy(hitung)}
+            `)
+            $(`.input_coupon_checkout_${product_id}`).val('')
+            $(`.input_coupon_checkout_${product_id}`).attr('placeholder','Masukan Coupon')
+        var newItemsToCheckout = JSON.stringify(itemsToCheckout)
+        localStorage.setItem("itemsToCheckout",newItemsToCheckout)
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+}
+
+const onInputCoupon=(product_id)=>{
+    // alert(product_id)
+    
+    var product_change = product_id
+    var kupon = $(`.input_coupon_checkout_${product_id}`).val()
+    console.log($(`.input_coupon_checkout_${product_id}`).val())
+    console.log($('.input_coupon_checkout_3925900000002').val())
+    console.log(product_id)
+    var diskon = 0
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const checkout = urlParams.get('checkout_array');
+    console.log(kupon == 'bayu', kupon)
+    
+    var checkout_stringify = JSON.parse(checkout)
+    if(kupon == '10PERCENT'){
+        diskon = 0.1
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        console.log(itemsToCheckout)
+        for(var i =0; i<itemsToCheckout.length; i++){
+            console.log(itemsToCheckout[i])
+            if(itemsToCheckout[i].productNo == product_change){
+                console.log('index ke ' + i , product_id)
+                console.log(itemsToCheckout[i])
+                // var harga_barang = parseInt(removeComma(itemsToCheckout[i].priceAgreed))
+                var harga_barang = removeComma(itemsToCheckout[i].priceAgreed)
+                var new_harga_barang = parseInt(harga_barang)
+                var discount_barang = new_harga_barang * diskon
+                
+                var total_harga_barang = new_harga_barang - discount_barang
+                itemsToCheckout[i].priceAgreed = commafy(total_harga_barang)
+                $(`#delete-${product_id}`).append(`
+                    <p>Coupon : ${kupon}</p>
+                    <i class="fas fa-times delete-icon-kupon" onclick="delete_coupon('${product_id}')"></i>
+                `)
+                $(`#id_harga_barang-${product_id}`).empty()
+                $(`#id_harga_barang-${product_id}`).append(`
+                   harga: ${commafy(total_harga_barang)}
+                `)
+                $(`.input_coupon_checkout_${product_id}`).css('visibility','hidden')
+            }
+        }
+        console.log(itemsToCheckout)
+        var newItemsToCheckout = JSON.stringify(itemsToCheckout)
+        localStorage.setItem("itemsToCheckout",newItemsToCheckout)
+        
+
+
+        // console.log(checkout_stringify)
+        if(checkout != undefined){
+            // renderCartCheckout(checkout_stringify)
+            
+        }
+        
+        // $('.card-checkout-cc').empty()
+        // var itemsToCheckout_render = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        // renderCartCheckout(itemsToCheckout_render)
+    }else {
+        // swal.fire("Kode Coupon Salah", "","alert");
+        $('.card-checkout-cc').empty()
+        renderCartCheckout(checkout_stringify)
+        $(`.input_coupon_checkout_${product_id}`).css('border','1px solid red')
+    }
 
 }
 function truncateCart(){
@@ -3232,4 +3331,15 @@ const packingCheckout=()=>{
         
         
     }
+}
+
+function commafy( num ) {
+    var str = num.toString().split('.');
+    if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    return str.join('.');
 }
