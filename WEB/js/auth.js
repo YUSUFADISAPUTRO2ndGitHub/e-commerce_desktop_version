@@ -89,17 +89,36 @@ $(document).on('click',"#simpan_reg",function(){
                 
                 if(res.data === true){
                     
-                    swal.fire("Register Berhasil", "", "success");
+                    // swal.fire("Register Berhasil", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Regiter Berhasil
+                        `,
+                        timer:2000,
+                        
+                    })
                     $('#registerModal').modal('hide')
                 }else {
                     $('#registerModal').modal('hide')
                     // swal.fire("Register Gagal", "", "info");
+                    // Swal.fire({
+                    //     icon: 'error',
+                    //     title: 'Oops...',
+                    //     text: 'Register gagal!',
+                    //     // footer: '<a href="">Why do I have this issue?</a>'
+                    //   })
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Register gagal!',
-                        // footer: '<a href="">Why do I have this issue?</a>'
-                      })
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Register Gagal`,
+                        timer:2000,
+                        
+                    })
                 }
             }).catch((err)=>{
                 
@@ -109,7 +128,16 @@ $(document).on('click',"#simpan_reg",function(){
                 
             })
             }else {
-                swal.fire("Referral Code Harus Di isi", "", "error");
+                // swal.fire("Referral Code Harus Di isi", "", "error");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Referral Code Harus Di Isi`,
+                    timer:2000,
+                    
+                })
             }
           
             
@@ -147,12 +175,30 @@ $(document).on('click',".btn-login",function(){
         ).then((res)=>{
             
             if(res.data){
-                swal.fire("Login Berhasil", "", "success");
+                // swal.fire("Login Berhasil", "", "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Login Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
                 localStorage.setItem('token',res.data)
                 $('#loginModal').modal('hide')
             }else {
-                swal.fire("Login Gagal", "", "info");
-                
+                // swal.fire("Login Gagal", "", "info");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Login Gagal`,
+                    timer:2000,
+                    
+                })
             }
         }).catch((err)=>{
             
@@ -194,7 +240,16 @@ $(document).on('click',".btn-login-product",function(){
                     $('.toast_prod_information').css('display','block')
                     check_status_item()
                 }else {
-                    swal.fire("Login Gagal", "", "info");
+                    // swal.fire("Login Gagal", "", "info");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Login Gagal`,
+                        timer:2000,
+                        
+                    })
                     
                     $('.box-option-login').removeClass('product')
                 }
@@ -214,14 +269,33 @@ $(document).on('click',".btn-login-product",function(){
                 
                 
                 if(res.data){
-                    swal.fire("Login Berhasil", "", "success");
+                    // swal.fire("Login Berhasil", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Login Berhasil
+                        `,
+                        timer:2000,
+                        
+                    })
                     localStorage.setItem('token',res.data)
                     $('#loginModal').modal('hide')
                     $('#login_product').modal('hide')
                     $('.box-option-login').removeClass('commision')
                     commision_check()
                 }else {
-                    swal.fire("Login Gagal", "", "info");
+                    // swal.fire("Login Gagal", "", "info");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                       Login Gagal`,
+                        timer:2000,
+                        
+                    })
                     
                     $('.box-option-login').removeClass('commision')
                 }
@@ -304,13 +378,32 @@ $(document).on('click',".save-user",function(){
         })
     }).then((res)=>{
         if(res.data != false){
-            swal.fire("Simpan Data Berhasil", "", "success");
+            // swal.fire("Simpan Data Berhasil", "", "success");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--success">
+                    <div class="o-circle__sign"></div>  
+                </div>   
+                Simpan Data Berhasil
+                `,
+                timer:2000,
+                
+            })
             $('#profileModal').modal('hide')
             // localStorage.setItem('token',res.data)
             
 
         }else {
-            swal.fire("Simpan Data Gagal", "", "info");
+            // swal.fire("Simpan Data Gagal", "", "info");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Simpan Data Gagal`,
+                timer:2000,
+                
+            })
             $('#profileModal').modal('hide')
         }
         
@@ -371,8 +464,19 @@ function checkIfSignUpInputNull(){
 function loadingMessage(){
     let timerInterval
     Swal.fire({
-    title: 'Loading Your Request',
-    html: '',
+    // title: 'Loading Your Request',
+    html: `
+        <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLD 
+            </div>
+                
+            <div class="box2">
+            </div>
+        </div>
+    `,
     timer: 3000,
     timerProgressBar: true,
     allowOutsideClick: false,
@@ -472,11 +576,30 @@ $(document).on('click',"#simpan_supplier",function(){
                 .then((res)=>{
                     if(res.data){
                         
-                        swal.fire("Register Supplier Berhasil", "", "success");
+                        // swal.fire("Register Supplier Berhasil", "", "success");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                <div class="o-circle__sign"></div>  
+                            </div>   
+                            Register Supplier Berhasil
+                            `,
+                            timer:2000,
+                            
+                        })
                         $('#supplierModal').modal('hide')
                         $('#loginModal').modal('hide')
                     }else{
-                        swal.fire("Register Supplier Gagal", "", "alert");
+                        // swal.fire("Register Supplier Gagal", "", "alert");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Register Supplier Gagal`,
+                            timer:2000,
+                            
+                        })
                     }
                     
                 }).catch((err)=>{
@@ -531,14 +654,33 @@ var data = {
         .then((res)=>{
             if(res.data){
                 $('#forgotModal').modal('hide')
-                swal.fire("Ganti Password Berhasil", "", "success");
-            }else {
+                // swal.fire("Ganti Password Berhasil", "", "success");
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ganti Password gagal!',
-                    // footer: '<a href="">Why do I have this issue?</a>'
-                  })
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Ganti Password Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
+            }else {
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: 'Ganti Password gagal!',
+                //     // footer: '<a href="">Why do I have this issue?</a>'
+                //   })
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Ganti Password Gagal!`,
+                    timer:2000,
+                    
+                })
             }
             
             // 
@@ -579,12 +721,21 @@ $(document).on('change','.qty_groupbuy',function(){
               $('#tp_iframe').val(total_harga)
               
         }else {
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Oops...',
+            //     text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
+            //     // footer: '<a href="">Why do I have this issue?</a>'
+            //   })
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
-                // footer: '<a href="">Why do I have this issue?</a>'
-              })
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
+                timer:2000,
+                
+            })
               var total_price = harga_satuan * total_qty_from_api
               alert(total_qty_from_api)
               $('#tp_sp').val(total_price)

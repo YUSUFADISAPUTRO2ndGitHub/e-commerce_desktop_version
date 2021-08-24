@@ -1145,6 +1145,7 @@ const onInputCoupon=(product_id)=>{
                 `)
                 $(`.input_coupon_checkout_${product_id}`).css('visibility','hidden')
             }
+            $(`.input_coupon_checkout_${product_id}`).css('border','1px solid #217384')
         }
         console.log(itemsToCheckout)
         var newItemsToCheckout = JSON.stringify(itemsToCheckout)
@@ -1153,19 +1154,41 @@ const onInputCoupon=(product_id)=>{
 
 
         // console.log(checkout_stringify)
-        if(checkout != undefined){
-            // renderCartCheckout(checkout_stringify)
-            
-        }
+        
         
         // $('.card-checkout-cc').empty()
         // var itemsToCheckout_render = JSON.parse(localStorage.getItem('itemsToCheckout'))
         // renderCartCheckout(itemsToCheckout_render)
     }else {
         // swal.fire("Kode Coupon Salah", "","alert");
-        $('.card-checkout-cc').empty()
-        renderCartCheckout(checkout_stringify)
-        $(`.input_coupon_checkout_${product_id}`).css('border','1px solid red')
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        
+        for(var i =0 ; i<itemsToCheckout.length; i++){
+            if(itemsToCheckout[i].productNo == product_change){
+                var harga_barang = removeComma(itemsToCheckout[i].priceAgreed)
+                // itemsToCheckout[i].priceAgreed = commafy(total_harga_barang)
+                $(`#id_harga_barang-${product_id}`).empty()
+                $(`#id_harga_barang-${product_id}`).append(`
+                    harga: ${commafy(harga_barang)}
+                `)
+                // $(`.input_coupon_checkout_${product_id}`).css('border','1px solid red')
+                $(`.input_coupon_checkout_${product_id}`).addClass('bounce')
+                setTimeout(function() {
+                    //remove the class so animation can occur as many times as user triggers event, delay must be longer than the animation duration and any delay.
+                    // inputField.classList.remove("bounce");
+                    $(`.input_coupon_checkout_${product_id}`).removeClass('bounce')
+                    $(`.input_coupon_checkout_${product_id}`).val('')
+                  }, 1000); 
+            
+            } 
+        }
+        // console.log(itemsToCheckout)
+        // var newItemsToCheckout = JSON.stringify(itemsToCheckout)
+        // localStorage.setItem("itemsToCheckout",newItemsToCheckout)
+
+        // $('.card-checkout-cc').empty()
+        // renderCartCheckout(checkout_stringify)
+        // console.log( $(`.input_coupon_checkout_${product_id}`))
     }
 
 }

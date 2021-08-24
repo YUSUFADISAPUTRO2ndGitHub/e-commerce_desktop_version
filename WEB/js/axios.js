@@ -506,7 +506,9 @@ const findSubCategory=(sub)=>{
 
 function sign_up_request(){
     
-    $("#loginModal").modal("hide");
+    // $("#loginModal").modal("hide");
+    $("#newloginModal").modal("hide");
+    // $('#newloginModal').modal('hide')
     // $("#daftarHutangModal").modal('show')
         axios.post(`http://customers.sold.co.id/get-available-referral-codes
         `).then((res)=>{
@@ -3728,8 +3730,8 @@ const check_user_for_login=()=>{
                 $('#profileModal').modal('show')
             }else {
                 
-                $('#loginModal').modal('show') // login lama
-                // $('#newloginModal').modal('show') // login lama
+                // $('#loginModal').modal('show') // login lama
+                $('#newloginModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
             }
         }).catch((err)=>{

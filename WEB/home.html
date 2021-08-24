@@ -144,7 +144,8 @@
 
     
     <!-- LOGIN MODALS -->
-    <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <!-- <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-header">
@@ -188,7 +189,7 @@
                             <div class="login-option"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#registerModal">
                                 <p>Bergabung Sebagai Customer</p>
                             </div>
-                            <!-- data-bs-target="#supplierModal" buat login btn -->
+                            
                             <div class="login-option login-btn"     data-toggle="tooltip" data-placement="right" title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service" >
                                 <p>Bergabung Sebagai Supplier</p>
                             </div>
@@ -218,7 +219,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     <!-- LOGIN MODALS -->
 
 
@@ -228,13 +229,62 @@
         <div class="modal-content  modal-content-newlogin">
             <div class="modal-body box-newlogin-body">
                 <div class="newlogin-left">
+                    <div class="logo-sold-left">
+                        <img src="./img/logo.png" alt="">
+                        SOLD.CO.ID
+                    </div>
+                    <div class="desc-sold-left">
+                        <div class="ins-desc-sold-left">
+                            FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
+                        </div>
+                    </div>
                     
                 </div>
                 <div class="newlogin-mid">
                     
                 </div>
                 <div class="newlogin-right">
-                    
+                    <div class="login-right-box">
+                        <p>Login</p>
+                        <p>Login to your account</p>
+                    </div>
+                    <div class="box-right-for-input">
+                        <div class="input-right-box-1">
+                            Email
+                            <input type="text" placeholder="Masukan Email" class="new-input-login-1" id="email_login">
+                        </div>
+                        <div class="input-right-box-1">
+                            Password
+                            <input type="password" placeholder="Masukan Password" class="new-input-login-1" id="password_login">
+                        </div>
+                        <div class="input-right-box-1">
+                            OTP
+                            <div class="ins-right-box-1">
+                                <input type="text" placeholder="Masukan Password" class="new-input-login-1" id="otp_login">
+                                <div class="box-for-otp" onclick="send_otp_login()">GET OTP</div>
+                            </div>
+                        </div>
+                        <div class="input-right-box-2">
+                            <p>Lupa Password</p>
+                            <div class="box-for-login btn-login">LOGIN</div>
+                        </div>
+                        <div class="input-right-box-2">
+                            <p>Don't Have an account ?</p>
+                            
+                            <div class="ins-right-box-1">
+                                <div 
+                                class="box-for-customer" onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#newRegisterModal"
+                                >
+                                    Daftar Customer
+                                </div>
+                                <div 
+                                class="box-for-supplier" data-toggle="tooltip" data-placement="right" title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service"
+                                >
+                                    Daftar Supplier
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
             </div>
@@ -242,6 +292,56 @@
         </div>
     </div>
     <!-- NEW LOGIN MODALS -->
+
+    <!-- NEW REGISTER MODALS -->
+    <div class="modal fade " id="newRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box-login ">
+        <div class="modal-content  modal-content-newlogin">
+            <div class="modal-body box-newlogin-body">
+                <div class="newlogin-left">
+                    <div class="logo-sold-left">
+                        <img src="./img/logo.png" alt="">
+                        SOLD.CO.ID
+                    </div>
+                    <div class="desc-sold-left">
+                        <div class="ins-desc-sold-left">
+                            FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="newlogin-mid">
+                    
+                </div>
+                <div class="newlogin-right">
+                    <div class="login-right-box">
+                        <p>REGISTER</p>
+                        <p>Daftar Sebagai Customer</p>
+                    </div>
+                    <div class="box-right-for-input-2">
+                        <div class="new-reg-left-box">
+                            <div class="input-right-box-1">
+                                Email
+                                
+                                <div class="ins-right-box-1">
+                                    <input type="text" placeholder="Masukan Email" class="new-input-login-2" id="email_reg"
+                                    pattern=".+@globex.com" size="30" required onchange="register_email_check()">
+                                    <div class="box-for-otp" onclick="send_otp_register_for_email()">GET OTP</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                        <div class="new-reg-right-box">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW REGISTER MODALS -->
 
 
         <!-- FORGOT PASSWORD MODALS -->
@@ -1357,7 +1457,8 @@
                     <p>Keranjang</p>
                     <div class="cart-counter">2</div>
                 </div>
-                <div class="option-4 " data-bs-toggle="#loginModal"  onclick="check_user_for_login()">
+                <!-- data-bs-toggle="#loginModal"   -->
+                <div class="option-4 " data-bs-toggle="#newloginModal"  onclick="check_user_for_login()">
                     <img src="../WEB/img/login.png" alt="error" class="icon-opt">
                     <p>Log in</p>
                 </div>

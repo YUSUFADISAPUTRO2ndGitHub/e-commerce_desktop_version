@@ -843,9 +843,19 @@ const send_otp=()=>{
         axios.post(`http://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
         .then((res)=>{
             if(res.data){
-                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                Swal.fire({
+                    html:`OTP Berhasil Dikirim`,
+                    timer:1000,
+                    
+                })
             }else {
-                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                Swal.fire({
+                    html:`OTP Gagal Terkirim`,
+                    timer:1000,
+                    
+                })
             }
             
         }).catch((err)=>{
@@ -868,9 +878,19 @@ const send_otp_for_logout=()=>{
         axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
-                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                Swal.fire({
+                    html:`OTP Berhasil Dikirim`,
+                    timer:1000,
+                    
+                })
             }else {
-                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                Swal.fire({
+                    html:`OTP Gagal Terkirim`,
+                    timer:1000,
+                    
+                })
             }
             
         }).catch((err)=>{
@@ -883,6 +903,54 @@ const send_otp_for_logout=()=>{
 
 const send_otp_login=()=>{
     var email = $('#email_login').val()
+    console.log(email)
+    if(email){
+        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+        .then((res)=>{
+            if(res.data){
+                // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    OTP Berhasil Dikirim
+                    `,
+                    timer:2000,
+                    
+                })
+            }else {
+                // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Gagal Terkirim`,
+                    timer:2000,
+                    
+                })
+            }
+        }).catch((err)=>{
+            
+        })
+
+    }else {
+        // Swal.fire('Silahkan Masukan Email', 'Good-Bye', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div>   
+            Silahkan Masukan Email`,
+            timer:2000,
+            
+        })
+    }
+}
+
+const send_otp_login_prod=()=>{
+    var email = $('#email_login_prod').val()
     
     if(email){
         axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
@@ -901,9 +969,8 @@ const send_otp_login=()=>{
     }
 }
 
-const send_otp_login_prod=()=>{
-    var email = $('#email_login_prod').val()
-    
+const send_otp_register_for_email=()=>{
+    var email = $('#email_reg').val()
     if(email){
         axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
