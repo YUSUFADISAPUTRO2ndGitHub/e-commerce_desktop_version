@@ -385,8 +385,17 @@ var data = [
  const logoutProfile=()=>{
     localStorage.removeItem("token");
     $('#profileModal').modal('hide')
-    Swal.fire('You have logged out of your account', 'Good-Bye', 'success')
-
+    // Swal.fire('You have logged out of your account', 'Good-Bye', 'success')
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--success">
+            <div class="o-circle__sign"></div>  
+        </div>   
+        You have logged out of your account
+        `,
+        timer:2000,
+        
+    })
  }
     
 
@@ -673,7 +682,16 @@ const register_email_check=()=>{
         if(valid_email){
             
         }else {
-            Swal.fire('Wrong Email', 'Sorry', 'error')
+            // Swal.fire('Wrong Email', 'Sorry', 'error')
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Wrong Email`,
+                timer:2000,
+                
+            })
             $('#email_reg').val('')
         }
         
@@ -690,7 +708,16 @@ const supp_email_check=()=>{
         if(valid_email){
             
         }else {
-            Swal.fire('Wrong Email', 'Sorry', 'error')
+            // Swal.fire('Wrong Email', 'Sorry', 'error')
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Wrong Email`,
+                timer:2000,
+                
+            })
             $('#email_supp').val('')
         }
         
@@ -702,7 +729,16 @@ const tahun_lahir_check=()=>{
     
     var tahun = $('#tahun_lahir_reg').val()
     if(tahun > year  || tahun < 1900){
-        Swal.fire('Wrong year', 'Sorry', 'error')
+        // Swal.fire('Wrong year', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Wrong Year`,
+            timer:2000,
+            
+        })
         $('#tahun_lahir_reg').val('')
     } else {
         
@@ -712,7 +748,16 @@ const tahun_lahir_check=()=>{
 const password_check=()=>{
     var password = $('#password_reg').val()
     if(password.length < 5){
-        Swal.fire('Wrong Password', 'Sorry', 'error')
+        // Swal.fire('Wrong Password', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Wrong Password`,
+            timer:2000,
+            
+        })
         $('#password_reg').val('')
     }else {
         
@@ -721,7 +766,16 @@ const password_check=()=>{
 const supp_password_check=()=>{
     var password = $('#password_supp').val()
     if(password.length < 5){
-        Swal.fire('Wrong Password', 'Sorry', 'error')
+        // Swal.fire('Wrong Password', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Wrong Password`,
+            timer:2000,
+            
+        })
         $('#password_supp').val('')
     }else {
         
@@ -735,7 +789,16 @@ const bulan_lahir_check=()=>{
     if(bulan>10 && bulan <= 12){// buat bulan 11 - 12
         // alert('masuk bulan 11/ 12')
     }else if (bulan >10){
-        Swal.fire('Wrong Month', 'Sorry', 'error')
+        // Swal.fire('Wrong Month', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Wrong Month`,
+            timer:2000,
+            
+        })
         $('#bulan_lahir_reg').val('')
 
     }else if (bulan>0 && bulan <10){  
@@ -748,7 +811,16 @@ const bulan_lahir_check=()=>{
 const nama_depan_check=()=>{
     var nama_depan = $('#nama_depan_reg').val()
     if(nama_depan.length < 3){
-        Swal.fire('Minimum 4 Character', 'Sorry', 'error')
+        // Swal.fire('Minimum 4 Character', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Minimum 4 Character`,
+            timer:2000,
+            
+        })
         $('#nama_depan_reg').val('')
     }else {
         
@@ -758,7 +830,16 @@ const nama_depan_check=()=>{
 const tanggal_lahir_check=()=>{
     var tanggal_lahir = $('#tanggal_lahir_reg').val()
     if(tanggal_lahir < 0 || tanggal_lahir > 31){
-        Swal.fire('Wrong Date', 'Sorry', 'error')
+        // Swal.fire('Wrong Date', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Wrong Date`,
+            timer:2000,
+            
+        })
         $('#tanggal_lahir_reg').val('')
     }else {
         
@@ -768,7 +849,16 @@ const tanggal_lahir_check=()=>{
 const nama_belakang_check=()=>{
     var nama_belakang = $('#nama_belakang_reg').val()
     if(nama_belakang.length < 3){
-        Swal.fire('Minimum 4 Character', 'Sorry', 'error')
+        // Swal.fire('Minimum 4 Character', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Minimum 4 Character`,
+            timer:2000,
+            
+        })
         $('#nama_belakang_reg').val('')
     }else {
         
@@ -778,7 +868,16 @@ const nama_belakang_check=()=>{
 const no_telp_check=()=>{
     var no_telp = $('#no_telp_reg').val()
     if(no_telp.length <9){
-        Swal.fire('Minimum 10 Character', 'Sorry', 'error')
+        // Swal.fire('Minimum 10 Character', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Minimum 10 Character`,
+            timer:2000,
+            
+        })
         $('#nama_telp_reg').val('')
     }else {
         
@@ -787,7 +886,16 @@ const no_telp_check=()=>{
 const no_telp_check2=()=>{
     var no_telp = $('#no_telp_2_reg').val()
     if(no_telp.length <9){
-        Swal.fire('Minimum 10 Character', 'Sorry', 'error')
+        // Swal.fire('Minimum 10 Character', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Minimum 10 Character`,
+            timer:2000,
+            
+        })
         $('#nama_telp_2_reg').val('')
     }else {
         
@@ -799,7 +907,16 @@ const ktp_check=()=>{
     if(ktp.length == 16){
         
     }else {
-        Swal.fire('KTP 16 Digit', 'Sorry', 'error')
+        // Swal.fire('KTP 16 Digit', 'Sorry', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            KTP 16 Digit`,
+            timer:2000,
+            
+        })
         $('#no_ktp_reg').val('')
     }
 }
@@ -843,17 +960,25 @@ const send_otp=()=>{
         axios.post(`http://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
         .then((res)=>{
             if(res.data){
-                // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
                 Swal.fire({
-                    html:`OTP Berhasil Dikirim`,
-                    timer:1000,
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    OTP Berhasil Dikirim
+                    `,
+                    timer:2000,
                     
                 })
             }else {
                 // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
                 Swal.fire({
-                    html:`OTP Gagal Terkirim`,
-                    timer:1000,
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Gagal Terikirim`,
+                    timer:2000,
                     
                 })
             }
@@ -880,15 +1005,24 @@ const send_otp_for_logout=()=>{
             if(res.data){
                 // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
                 Swal.fire({
-                    html:`OTP Berhasil Dikirim`,
-                    timer:1000,
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    OTP Berhasil Dikirim
+                    `,
+                    timer:2000,
                     
                 })
             }else {
                 // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
                 Swal.fire({
-                    html:`OTP Gagal Terkirim`,
-                    timer:1000,
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Gagal Terkirim`,
+                    timer:2000,
                     
                 })
             }
@@ -956,16 +1090,41 @@ const send_otp_login_prod=()=>{
         axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
-                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    OTP Berhasil Dikirim
+                    `,
+                    timer:2000,
+                    
+                })
             }else {
-                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Gagal Terkirim`,
+                    timer:2000,
+                    
+                })
             }
         }).catch((err)=>{
             
         })
 
     }else {
-        Swal.fire('Silahkan Masukan Email', 'Good-Bye', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div>   
+            Silahkan Masukan Email`,
+            timer:2000,
+            
+        })
     }
 }
 
@@ -975,16 +1134,34 @@ const send_otp_register_for_email=()=>{
         axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
-                Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                $('#newOtpRegister').modal('show')
+                console.log($('#newOtpRegister').modal('show'))
+                // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
             }else {
-                Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Gagal Terkirim`,
+                    timer:2000,
+                    
+                })
             }
         }).catch((err)=>{
             
         })
 
     }else {
-        Swal.fire('Silahkan Masukan Email', 'Good-Bye', 'error')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div>   
+            Silahkan Masukan Email`,
+            timer:2000,
+            
+        })
     }
 }
 // const save_product_name=()=>{
@@ -1261,5 +1438,69 @@ const close_tab_answer=(result,index)=>{
 
 
 
+
+// OTP
+$(function() {
+    'use strict';
+  
+    var body = $('body');
+  
+    function goToNextInput(e) {
+      var key = e.which,
+        t = $(e.target),
+        sib = t.next('input');
+        console.log(key)
+      if (key != 9 && (key < 48 || key > 90) ) {
+        e.preventDefault();
+        return false;
+      }
+  
+      if (key === 9) {
+        return true;
+      }
+  
+      if (!sib || !sib.length) {
+        sib = body.find('input').eq(0);
+      }
+      sib.select().focus();
+    }
+  
+    function onKeyDown(e) {
+      var key = e.which;
+  
+      if (key === 9 || (key >= 48 && key <= 90)) {
+        return true;
+      }
+  
+      e.preventDefault();
+      return false;
+    }
+    
+    function onFocus(e) {
+      $(e.target).select();
+    }
+  
+    body.on('keyup', 'input', goToNextInput);
+    body.on('keydown', 'input', onKeyDown);
+    body.on('click', 'input', onFocus);
+  
+  })
+
+  $(function(){
+    $(".btn-embossed").on('click',function(){
+     
+     var data = $('.get_all_otp_register').serialize()
+    //  alert('1492 jalan')
+     console.log($('.get_all_otp_register').serialize())
+     var otp_1 = $('#otp_reg_1').val()
+     var otp_2 = $('#otp_reg_2').val()
+     var otp_3 = $('#otp_reg_3').val()
+     var otp_4 = $('#otp_reg_4').val()
+     var otp_5 = $('#otp_reg_5').val()
+     var otp_6 = $('#otp_reg_6').val()
+     var allOtp = otp_1 + otp_2 + otp_3 + otp_4 + otp_5 + otp_6
+     console.log(allOtp)
+    });
+   });
 
    

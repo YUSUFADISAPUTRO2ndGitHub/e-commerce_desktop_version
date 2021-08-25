@@ -22,6 +22,8 @@ $(function(){
 //       }
 //   })
 
+
+
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
         if(productModal == true){
