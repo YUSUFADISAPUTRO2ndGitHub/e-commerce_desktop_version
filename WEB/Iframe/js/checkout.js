@@ -72,10 +72,29 @@ function get_otp_for_checkout(){
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
         if(response.Email.length > 0){
             get_otp_api(response.Email).done(function (response) {
-                Swal.fire("OTP terkirim ke email", `${response.Email}`, "success");
+                // Swal.fire("OTP terkirim ke email", `${response.Email}`, "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    OTP Terkirim ke Email
+                    `,
+                    timer:2000,
+                    
+                })
             });
         }else{
-            Swal.fire("Please give me your email", `${response.Email}`, "warning");
+            // Swal.fire("Please give me your email", `${response.Email}`, "warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Please Give Me Your Email`,
+                timer:2000,
+                
+            })
         }
     });
 }
@@ -284,7 +303,16 @@ function periodOptionSelected(x){
     // 
     if($(x).children("option:selected").val().toUpperCase() == "TRANSFER"){
         // alert('masuk ke if')
-        swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");
+        // swal.fire("Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", "make sure you make the payment as soon as possible for your order to be processed","warning");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Compare to Virtual Account Transfer, Normal Transfer may take longer time to process", <br> "make sure you make the payment as soon as possible for your order to be processed`,
+            timer:2000,
+            
+        })
         $("#normal-transfer-selected").css("display", "block");
         // loadCheckoutFinalConfirmationTable("PERIOD");
         // $("#period-selection").css("display", "block");
@@ -666,11 +694,29 @@ function checking_payment(){
                     // $('#exampleModalLong').modal('show')
                     requestToFinish()
                 } else {
-                    swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
+                    // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Penambahan Data Gagal`,
+                        timer:2000,
+                        
+                    })
                 }
         }else {
             
-            Swal.fire("Quantity Kurang", "Error", "error");
+            // Swal.fire("Quantity Kurang", "Error", "error");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Quantity Kurang`,
+                timer:2000,
+                
+            })
         }
         return isSuccess
     }
@@ -1265,10 +1311,29 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
         if(response != false){
             createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
                 if(response.status == true){
-                    swal.fire("Order sudah dikirimkan", "","success");
+                    // swal.fire("Order sudah dikirimkan", "","success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Order Sudah Dikirimkan
+                        `,
+                        timer:2000,
+                        
+                    })
                 }else{
                     
-                    swal.fire("Order gagal dikirimkan", "","warning");
+                    // swal.fire("Order gagal dikirimkan", "","warning");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Order Gagal Dikirimkan`,
+                        timer:2000,
+                        
+                    })
                 }
                 truncateCart();
                 await setTimeout(() => { clearStorage(); }, 2000);
@@ -1304,10 +1369,29 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuyAndVA(re
         if(response != false){
             createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
                 if(response.status == true){
-                    swal.fire("Order sudah dikirimkan", "","success");
+                    // swal.fire("Order sudah dikirimkan", "","success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Order Sudah Dikirimkan
+                        `,
+                        timer:2000,
+                    })
+                        
                 }else{
                     
-                    swal.fire("Order gagal dikirimkan", "","warning");
+                    // swal.fire("Order gagal dikirimkan", "","warning");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Order Gagal Dikirimkan`,
+                        timer:2000,
+                        
+                    })
                 }
                 truncateCart(); // bayu comment, gue test 
                 
@@ -1342,10 +1426,29 @@ async function sendFinalToAccurate(request){
         if(response != false){
             createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
                 if(response.status == true){
-                    swal.fire("Order sudah dikirimkan", "","success");
+                    // swal.fire("Order sudah dikirimkan", "","success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Order Sudah Dikirimkan
+                        `,
+                        timer:2000,
+                        
+                    })
                 }else{
                     
-                    swal.fire("Order gagal dikirimkan", "","warning");
+                    // swal.fire("Order gagal dikirimkan", "","warning");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Order Gagal Dikirimkan`,
+                        timer:2000,
+                        
+                    })
                 }
                 truncateCart();
                 await setTimeout(() => { clearStorage(); }, 2000);
@@ -1394,7 +1497,16 @@ async function reorderJSON(customerDetails, productArr){
             total_price = total_price + parseFloat(productArr[i].totalPrice);
             total_quantity = total_quantity + parseFloat(productArr[i].quantity);
         }else{
-            swal.fire("Salah satu item kamu tidak mempunyai harga, pesanan untuk barang tersebut tidak bisa diproses (item : " + productArr[i].productCode + ")", "barang-barang lain tetap dapat diproses","warning");
+            // swal.fire("Salah satu item kamu tidak mempunyai harga, pesanan untuk barang tersebut tidak bisa diproses (item : " + productArr[i].productCode + ")", "barang-barang lain tetap dapat diproses","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Salah satu item kamu tidak mempunyai harga, pesanan untuk barang tersebut tidak bisa diproses (item : " + ${productArr[i].productCode}`,
+                timer:2000,
+                
+            })
         }
     }
     customer_information = {};

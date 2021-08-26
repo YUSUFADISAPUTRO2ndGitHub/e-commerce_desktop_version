@@ -449,10 +449,28 @@ function checkingout(){
         window.location.href = "./Iframe/checkout.html";
     }else{
         if(token == ""){
-            swal.fire("Silahkan Login","","warning");
+            // swal.fire("Silahkan Login","","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+                
+            })
             // window.location.href = "./sign-in.html";
         }else {
-            swal.fire("Pilih barang di keranjang","","warning");
+            // swal.fire("Pilih barang di keranjang","","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Pilih Barang di Keranjang`,
+                timer:2000,
+                
+            })
         }
     }
 }
@@ -546,24 +564,51 @@ function checkingoutAll(){
                         }
 
                         
-                        swal.fire("Final Step","","success");
+                        // swal.fire("Final Step","","success");
                         window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
                     }else{
                         swal.fire("Something is missing","You do not have anything in Cart","warning");
                     }
                 }else{
                     if(token == ""){
-                        swal.fire("Silahkan Login","","warning");
+                        // swal.fire("Silahkan Login","","warning");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Silahkan Login`,
+                            timer:2000,
+                            
+                        })
                         // $('#loginModal',window.parent.document).modal('show')
                         // window.location.href = "./sign-in.html";
                     }else {
-                        swal.fire("Pilih barang di keranjang","","warning");
+                        // swal.fire("Pilih barang di keranjang","","warning");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Pilih Barang di Keranjang`,
+                            timer:2000,
+                            
+                        })
                     }
                 }
             
         }else {
             
-            Swal.fire("Quantity Kurang / Harga Salah", "Error", "error");
+            // Swal.fire("Quantity Kurang / Harga Salah", "Error", "error");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Quantity Kurang / Harga Salah`,
+                timer:2000,
+                
+            })
         }
     }
     looping_product()
@@ -600,13 +645,31 @@ function checkingoutAllInStore(){
                     localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                     
                 }
-                swal.fire("Final Step","","success");
+                // swal.fire("Final Step","","success");
                 window.location.href = "./checkout-in-store.html?check_store_price=true";
             }else{
-                swal.fire("Something is missing","You do not have anything in Cart","warning");
+                // swal.fire("Something is missing","You do not have anything in Cart","warning");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Something is Missing, You do not have anything in Cart`,
+                    timer:2000,
+                    
+                })
             }
         }else{
-            swal.fire("Something is missing","You have not logged-in","warning");
+            // swal.fire("Something is missing","You have not logged-in","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                You have not logged-in`,
+                timer:2000,
+                
+            })
             if(token == ""){
                 window.location.href = "./sign-in.html";
             }

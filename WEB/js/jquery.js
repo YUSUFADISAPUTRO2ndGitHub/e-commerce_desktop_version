@@ -1325,14 +1325,14 @@ $(function(){
     $('.disini_info_supplier').on('click',function(){
         // alert('supp jalan')
         $('.close-button').css('display','block')
-        $('#loginModal').modal('hide')
+        $('#newloginModal').modal('hide')
         $('.modals-information-login').css('display','flex')
         $(".modals-information-login").attr('src',`./Iframe/supplier-information.html`)
     })
     $('.disini_info_customer').on('click',function(){
         // alert('cust jalan')
         $('.close-button').css('display','block')
-        $('#loginModal').modal('hide')
+        $('#newloginModal').modal('hide')
         $('.modals-information-login').css('display','flex')
         $(".modals-information-login").attr('src',`./Iframe/cust-information.html`)
         })   
@@ -1740,12 +1740,16 @@ function check_qty(val){
               $('.ndps-left').empty()
               $('.ndps-right').empty()
             
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: `Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
-                  // footer: '<a href="">Why do I have this issue?</a>'
-                })
+          
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
+                timer:2000,
+                
+            })
                 var total_price = harga_satuan * total_qty_from_api
                 $('.qty_groupbuy_home').val(total_price)
                 // alert(total_qty_from_api)
@@ -1824,7 +1828,17 @@ function groupbuy(product_id){
                   $('#daftarHutangModal').modal('show')
                   $('.modals-product-detail').css('display','none')
                 } else if (result.isDenied) {
-                    Swal.fire('Cancel berhasil', '', 'success')
+                    // Swal.fire('Cancel berhasil', '', 'success')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Cancel Berhasil
+                        `,
+                        timer:2000,
+                        
+                    })
                     $('.modals-product-detail').css('display','none')
                 }
                 
@@ -2045,14 +2059,32 @@ function payment_groupbuy_home(product_id){
                                         })
                                     }).then((res)=>{
                                         if(res.data.status){
-                                            swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                            // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--success">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div>   
+                                                Penambahan Data Berhasil
+                                                `,
+                                                timer:2000,
+                                                
+                                            })
                                             $('.modals-product-detail').css('display','none')
                                             $('.box-delete-success').css('display','block')
                                             // tambahin gambar yg dari mas fauzi
                                             
                                             location.replace(`../Iframe/success.html`)
                                         }else {
-                                            swal.fire("Pembelian Gagal", "", "error");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Pembelian Gagal`,
+                                                timer:2000,
+                                                
+                                            })
                                         }
                                         
                                     }).catch((err)=>{
@@ -2075,13 +2107,16 @@ function payment_groupbuy_home(product_id){
                                 var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
                                 
                                 if(total_qty_from_user > item_tersedia){
-                                    
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Oops...',
-                                        text: `Hanya Bisa Membeli ${item_tersedia}`,
-                                        // footer: '<a href="">Why do I have this issue?</a>'
-                                      })
+                    
+                                      Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Hanya Bisa Membeli ${item_tersedia}`,
+                                        timer:2000,
+                                        
+                                    })
             
                                       axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                       .then((res)=>{
@@ -2140,12 +2175,30 @@ function payment_groupbuy_home(product_id){
                                                 }).then((res)=>{
                                                     
                                                     if(res.data){
-                                                        swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div>   
+                                                            Pembelian Data Berhasil
+                                                            `,
+                                                            timer:2000,
+                                                            
+                                                        })
                                                         // tambahin gambar yg dari mas fauzi
                                                         
                                                         location.replace(`../Iframe/success.html`)
                                                     }else {
-                                                        swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
+                                                        // swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div> 
+                                                            Pembelian Gagal, Silahkan Check Cart`,
+                                                            timer:2000,
+                                                            
+                                                        })
                                                     }
                                                     // $('.modals-product-detail').css('display','none')
                                                 }).catch((err)=>{
@@ -2212,7 +2265,17 @@ function payment_groupbuy_home(product_id){
                                             }).then((res)=>{
                                                 if(res.data.status){
                                                     
-                                                    swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                    Swal.fire({
+                                                        html:`
+                                                        <div class="o-circle c-container__circle o-circle__sign--success">
+                                                            <div class="o-circle__sign"></div>  
+                                                        </div>   
+                                                        Penambahan Data Berhasil
+                                                        `,
+                                                        timer:2000,
+                                                        
+                                                    })
                                                     // close_all_open_window()
                                                     $('.modals-product-detail').css('display','none')
                                                     $('.box_iframe_groupbuy').css('display','none')
@@ -2225,7 +2288,16 @@ function payment_groupbuy_home(product_id){
             
                                                     
                                                 }else {
-                                                    swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                                                    // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                                                    Swal.fire({
+                                                        html:`
+                                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                            <div class="o-circle__sign"></div>  
+                                                        </div> 
+                                                        Penambahan Data Gagal, Silahkan Check Pengisian Data`,
+                                                        timer:2000,
+                                                        
+                                                    })
                                                     $('.modals-product-detail').css('display','none')
                                                 }
                                             }).catch((err)=>{
@@ -2252,15 +2324,16 @@ function payment_groupbuy_home(product_id){
                 }
             })
     }else { // ada yang belum di isi
-        swal.fire("Ada field yang belum di isi", "", "error");
-        
-        
-        
-        
-        
-        
-        
-        
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Ada Field yang belum Di isi`,
+            timer:2000,
+            
+        })
+
     }
 
     
@@ -2327,7 +2400,16 @@ const buyNow=(product_id)=>{
           $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
           $('.input-name',window.parent.document).val(null)
         }else {
-            swal.fire("Barang Tidak Tersedia","","warning");
+            // swal.fire("Barang Tidak Tersedia","","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Barang Tidak Tersedia`,
+                timer:2000,
+                
+            })
         }
 
     }).catch((err)=>{
@@ -2355,7 +2437,16 @@ function addToCart(product_id){
            quantity_product == undefined || quantity_product==null ||
            isNaN(quantity_product) || quantity_product < 0
         ){
-            Swal.fire("Stock Tidak Tersedia", "Error", "error");
+            // Swal.fire("Stock Tidak Tersedia", "Error", "error");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Stock Tidak Tersedia`,
+                timer:2000,
+                
+            })
         }else {
             var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
             
@@ -2373,7 +2464,17 @@ function addToCart(product_id){
                     var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
                     dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
                     $('.cart-counter').text(dataParse.length)
-                    swal.fire("Berhasil Menambahkan Quantity", "", "success");
+                    // swal.fire("Berhasil Menambahkan Quantity", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Berhasil Menambahkan Quantity
+                        `,
+                        timer:2000,
+                        
+                    })
                 }else {
                     
                     var data = {
@@ -2382,7 +2483,16 @@ function addToCart(product_id){
                     }
                     dataParse.push(data)
                     $('.cart-counter').text(dataParse.length)
-                    swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+                    // swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Berhasil Menambahkan ke Cart`,
+                        timer:2000,
+                        
+                    })
                 }
         
                 var pushToStorage = JSON.stringify(dataParse)
@@ -2678,7 +2788,16 @@ const save_product_name=()=>{
                                 .then((res)=>{
                                     
                                     $("#"+product_id+"-name").val(res.data.Name)
-                                    swal.fire("Gagal Mengubah Data", "", "error");
+                                    // swal.fire("Gagal Mengubah Data", "", "error");
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Gagal Mengubah Data`,
+                                        timer:2000,
+                                        
+                                    })
                                     re_render_item_product()
                                 }).catch((err)=>{
                                     
@@ -2688,14 +2807,31 @@ const save_product_name=()=>{
                                 .then((res)=>{
                                     
                                     if(res.data){
-                                        swal.fire("Berhasil Mengubah Data", "", "success");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                <div class="o-circle__sign"></div>  
+                                            </div>   
+                                            Berhasil Mengubah Data
+                                            `,
+                                            timer:2000,
+                                            
+                                        })
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_name')
                                          $('#id_otp').val('')
                                          $('#id_pass').val('')
                                          re_render_item_product()
                                     }else {
-                                        swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
                                         re_render_item_product()
                                     }
                                 }).catch((err)=>{
@@ -2705,14 +2841,32 @@ const save_product_name=()=>{
                             // Swal.fire('Simpan Berhasil', '', 'success')
                             $('#get_otp').modal('hide')
                         }else {
-                            Swal.fire('Simpan Gagal', '', 'error')
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
                         }
                     }).catch((err)=>{
                         
                     })
                 }else {
                     
-                    Swal.fire('Password Minimal 6 character', '', 'error')
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6`,
+                        timer:2000,
+                        
+                    })
                 }
                 
         
@@ -2755,7 +2909,16 @@ const save_product_name=()=>{
                                     .then((res)=>{
                                         
                                         $("#"+product_id+"-harga").val(res.data.Sell_Price)
-                                        swal.fire("Gagal Mengubah Data", "", "error");
+                                        // swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
                                         re_render_item_product()
                                     }).catch((err)=>{
                                         
@@ -2765,22 +2928,60 @@ const save_product_name=()=>{
                                 .then((res)=>{
                                     
                                     if(res.data){
-                                        swal.fire("Berhasil Mengubah Data", "", "success");
+                                        // swal.fire("Berhasil Mengubah Data", "", "success");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                <div class="o-circle__sign"></div>  
+                                            </div>   
+                                            Berhasil Mengubah Data
+                                            `,
+                                            timer:2000,
+                                            
+                                        })
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_sell_price')
                                         re_render_item_product()
                                     }else {
                                         re_render_item_product()
-                                        swal.fire("Gagal Mengubah Data", "", "error");
+                                        // swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
                                     }
                                 }).catch((err)=>{
                                     
                                 })
-                                Swal.fire('Simpan Berhasil', '', 'success')
+                                // Swal.fire('Simpan Berhasil', '', 'success')
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Simpan Berhasil
+                                    `,
+                                    timer:2000,
+                                    
+                                })
                                 $('#get_otp').modal('hide')
                             }
                         }else {
-                            Swal.fire('Simpan Gagal', '', 'error')
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
                         }
                     }).catch((err)=>{
                         
@@ -2788,7 +2989,16 @@ const save_product_name=()=>{
 
                 }else {
                     
-                    Swal.fire('Password Minimal 6 character', '', 'error')
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
                 }
 
             }).catch((err)=>{
@@ -2829,7 +3039,16 @@ const save_product_name=()=>{
                                 .then((res)=>{
                                     
                                     $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
-                                    swal.fire("Gagal Mengubah Data", "", "error");
+                                    // swal.fire("Gagal Mengubah Data", "", "error");
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Gagal Mengubah Data`,
+                                        timer:2000,
+                                        
+                                    })
                                     re_render_item_product()
                                 }).catch((err)=>{
                                     
@@ -2840,12 +3059,31 @@ const save_product_name=()=>{
                                 .then((res)=>{
                                     
                                     if(res.data){
-                                        swal.fire("Berhasil Mengubah Data", "", "success");
+                                        // swal.fire("Berhasil Mengubah Data", "", "success");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                <div class="o-circle__sign"></div>  
+                                            </div>   
+                                            Berhasil Mengubah Data
+                                            `,
+                                            timer:2000,
+                                            
+                                        })
                                         $('#s_product_name').removeClass(product_id)
                                         $('#s_product_name').removeClass('product_quantity')
                                         re_render_item_product()
                                     }else {
-                                        swal.fire("Gagal Mengubah Data", "", "error");
+                                        // swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
                                         re_render_item_product()
                                     }
                                 }).catch((err)=>{
@@ -2855,14 +3093,32 @@ const save_product_name=()=>{
                             // Swal.fire('Simpan Berhasil', '', 'success')
                             $('#get_otp').modal('hide')
                         }else {
-                            Swal.fire('Simpan Gagal', '', 'error')
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
                         }
                     }).catch((err)=>{
                         
                     })
                 }else {
                     
-                    Swal.fire('Password Minimal 6 character', '', 'error')
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
                 }
             }).catch((err)=>{
                 
@@ -2918,11 +3174,30 @@ const save_product_name=()=>{
                                 $("#"+product_id+"-discount").css('background-color','transparent')
                                 $('#s_product_name').removeClass(product_id)
                                 $('#s_product_name').removeClass('product_discount')
-                                swal.fire("Berhasil Mengubah Data", "", "success");
+                                // swal.fire("Berhasil Mengubah Data", "", "success");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Berhasil Mengubah Data
+                                    `,
+                                    timer:2000,
+                                    
+                                })
                                 // Swal.fire('Simpan Berhasil', '', 'success')
                                 
                             }else {
-                                swal.fire("Gagal Mengubah Data", "", "error")    
+                                // swal.fire("Gagal Mengubah Data", "", "error")    
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Gagal Mengubah Data`,
+                                    timer:2000,
+                                    
+                                })
                                 axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
                                 .then((res)=>{
                                     
@@ -2935,7 +3210,16 @@ const save_product_name=()=>{
                             
                         })
                         }else {
-                            Swal.fire('Simpan Gagal', '', 'error')
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
                         }
                     }).catch((err)=>{
                         
@@ -2943,7 +3227,16 @@ const save_product_name=()=>{
 
                 }else {
                     
-                    Swal.fire('Password Minimal 6 character', '', 'error')
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
                 }
             }).catch((err)=>{
                 
@@ -2991,7 +3284,17 @@ const save_product_name=()=>{
                         .then((res)=>{
                             
                             if(res.data){
-                                swal.fire("Berhasil Mengubah Data", "", "success");
+                                // swal.fire("Berhasil Mengubah Data", "", "success");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Berhasil Mengubah Data
+                                    `,
+                                    timer:2000,
+                                    
+                                })
                                 $('#s_product_name').removeClass(product_id)
                                 $('#s_product_name').removeClass('groupbuy_qty')
                                 $('#get_otp').modal('hide')
@@ -3000,7 +3303,16 @@ const save_product_name=()=>{
                                 $("#"+product_id+"-save_quantity").css('display','none') // icon
                                 $("#"+product_id+"-quantity").css('background-color','transparent')
                             }else {
-                                swal.fire("Gagal Mengubah Data", "", "error");
+                                // swal.fire("Gagal Mengubah Data", "", "error");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Gagal Mengubah Data`,
+                                    timer:2000,
+                                    
+                                })
                                 $("#"+product_id+"-quantity").prop('disabled',true) 
                                 $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
                                 $("#"+product_id+"-save_quantity").css('display','none') // icon
@@ -3016,14 +3328,32 @@ const save_product_name=()=>{
                             
                         })
                         }else {
-                            Swal.fire('Simpan Gagal', '', 'error')
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
                         }
                     }).catch((err)=>{
                         
                     })
                 }else {
                     
-                    Swal.fire('Password Minimal 6 character', '', 'error')
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
                 }
             }).catch((err)=>{
                 
@@ -3098,7 +3428,17 @@ const copy_link_share=()=>{
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("Copy");
-        Swal.fire('Copy berhasil', '', 'success')
+        // Swal.fire('Copy berhasil', '', 'success')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--success">
+                <div class="o-circle__sign"></div>  
+            </div>   
+            Copy Berhasil
+            `,
+            timer:2000,
+            
+        })
     }
     
 }
@@ -3271,28 +3611,64 @@ const check_input_form_supp=()=>{
         isFirst_Name = true
     }else {
         isFirst_Name = false
-        swal.fire("Nama Minimal 3 Huruf", "", "error");
+        // swal.fire("Nama Minimal 3 Huruf", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nama Minimal 3 Huruf`,
+            timer:2000,
+            
+        })
     }
     
     if(last_name != undefined && last_name.length >=3 ){
         isLast_Name = true
     }else {
         isLast_Name = false
-        swal.fire("Nama Minimal 3 Huruf", "", "error");
+        // swal.fire("Nama Minimal 3 Huruf", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nama Minimal 3 Huruf`,
+            timer:2000,
+            
+        })
     }
     
     if(password != undefined && password.length >=4 ){
         isPassword = true
     }else {
         isPassword = false
-        swal.fire("Password Salah", "", "error");
+        // swal.fire("Password Salah", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Password Salah`,
+            timer:2000,
+            
+        })
     }
     
     if(email != undefined && email.length !=0 ){
         isEmail = true
     }else {
         isEmail = false
-        swal.fire("Email Salah", "", "error");
+        // swal.fire("Email Salah", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Email Salah`,
+            timer:2000,
+            
+        })
     }
     
     
@@ -3300,14 +3676,32 @@ const check_input_form_supp=()=>{
         isNumber_1 = true
     }else {
         isNumber_1 = false
-        swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+        // swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nomor Telepon Harus Di Isi`,
+            timer:2000,
+            
+        })
     }
     
     if(account_number != undefined && account_number.length  !=0 ){
         isAccount_number = true
     }else {
         isAccount_number = false
-        swal.fire("Nomor Rekening Harus Di Isi", "", "error");
+        // swal.fire("Nomor Rekening Harus Di Isi", "", "error");/
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nomor Rekening Harus Di Isi`,
+            timer:2000,
+            
+        })
     }
     
 
@@ -3353,28 +3747,64 @@ if(first_name != undefined && first_name.length >=3 ){
     isFirst_Name = true
 }else {
     isFirst_Name = false
-    swal.fire("Nama Minimal 3 Huruf", "", "error");
+    // swal.fire("Nama Minimal 3 Huruf", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nama Minimal 3 Huruf`,
+        timer:2000,
+        
+    })
 }
 
 if(last_name != undefined && last_name.length >=3 ){
     isLast_Name = true
 }else {
     isLast_Name = false
-    swal.fire("Nama Minimal 3 Huruf", "", "error");
+    // swal.fire("Nama Minimal 3 Huruf", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nama Minimal 3 Huruf`,
+        timer:2000,
+        
+    })
 }
 
 if(password != undefined && password.length >=4 ){
     isPassword = true
 }else {
     isPassword = false
-    swal.fire("Password Salah", "", "error");
+    // swal.fire("Password Salah", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Password Salah`,
+        timer:2000,
+        
+    })
 }
 
 if(email != undefined && email.length !=0 ){
     isEmail = true
 }else {
     isEmail = false
-    swal.fire("Email Salah", "", "error");
+    // swal.fire("Email Salah", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Password Salah`,
+        timer:2000,
+        
+    })
 }
 
 
@@ -3382,21 +3812,48 @@ if(number_1 != undefined && number_1.length  !=0 ){
     isNumber_1 = true
 }else {
     isNumber_1 = false
-    swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+    // swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nomor Telepon Harus Di Isi`,
+        timer:2000,
+        
+    })
 }
 
 if(account_number != undefined && account_number.length  !=0 ){
     isAccount_number = true
 }else {
     isAccount_number = false
-    swal.fire("Nomor Rekening Harus Di Isi", "", "error");
+    // swal.fire("Nomor Rekening Harus Di Isi", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nomor Rekening Harus Di Isi`,
+        timer:2000,
+        
+    })
 }
 
 if(referral_code != undefined && referral_code.length  !=0 ){
     isReferral_code = true
 }else {
     isReferral_code = false
-    swal.fire("Referral Code Harus Di Isi", "", "error");
+    // swal.fire("Referral Code Harus Di Isi", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Referral Code Harus Di Isi`,
+        timer:2000,
+        
+    })
 }
 
 
@@ -3975,10 +4432,29 @@ const get_status=(product_id,pass)=>{
                     
                     
                     if(res.data){
-                        swal.fire("Berhasil Mengubah Data", "", "success");
+                        // swal.fire("Berhasil Mengubah Data", "", "success");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                <div class="o-circle__sign"></div>  
+                            </div>   
+                            Berhasil Mengubah Data
+                            `,
+                            timer:2000,
+                            
+                        })
                         $('#get_otp').modal('hide')
                     }else {
-                        swal.fire("Gagal Mengubah Data", "", "error");
+                        // swal.fire("Gagal Mengubah Data", "", "error");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Gagal Mengubah Data`,
+                            timer:2000,
+                            
+                        })
                         $('#get_otp').modal('hide')
                         
                     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)

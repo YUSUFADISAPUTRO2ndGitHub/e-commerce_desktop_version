@@ -1849,10 +1849,10 @@ display: flex;
     width: auto;
     height: auto;
     position: relative;
-    top: 15px;
+    /* top: 15px; */
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
 
     /* left:25px; */
@@ -2006,7 +2006,7 @@ display: flex;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: flex-start;
     /* background-color: blue; */
     margin-top: 5px;
     /* padding-right:48px; */
@@ -3021,9 +3021,18 @@ ul {
 
 .option-referral {
     width: 5% !important;
-    position: relative;
+    height:26px;
+    border-right:none !important;
+    border-top-right-radius:0 !important;
+    border-bottom-right-radius:0 !important;
+    /* position: relative;
     top: 45% !important;
-    right: 6.4% !important;
+    right: 6.4% !important; */
+}
+.inp-referral-new{
+    border-top-left-radius:0 !important;
+    border-bottom-left-radius:0 !important;
+    border-left:none !important;
 }
 
 .icon-logout {
@@ -5195,6 +5204,7 @@ img{
     }
   }  
 
+  
 
   .img-animated{
     height: 192px;
@@ -5618,7 +5628,7 @@ img{
 }
 .swal2-content{
     position:relative;
-    top:-150px;
+    top:-100px;
 }
 
 .new-input-login-1 {
@@ -6422,7 +6432,7 @@ loading new
   .new-reg-left-box{
       width:50%;
       height:100%;
-      background:red;
+      /* background:red; */
       display: flex;
       flex-direction:column;
       /* justify-content: center; */
@@ -6431,11 +6441,11 @@ loading new
   .new-reg-right-box{
     width:50%;
     height:100%;
-    background:blue;
+    /* background:blue; */
     display: flex;
     flex-direction:column;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
 
 

@@ -187,7 +187,7 @@ $(document).on('click',".btn-login",function(){
                     
                 })
                 localStorage.setItem('token',res.data)
-                $('#loginModal').modal('hide')
+                $('#newloginModal').modal('hide')
             }else {
                 // swal.fire("Login Gagal", "", "info");
                 Swal.fire({
@@ -232,9 +232,19 @@ $(document).on('click',".btn-login-product",function(){
                 
                 
                 if(res.data){
-                    swal.fire("Login Berhasil", "", "success");
+                    // swal.fire("Login Berhasil", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Login Berhasil
+                        `,
+                        timer:2000,
+                        
+                    })
                     localStorage.setItem('token',res.data)
-                    $('#loginModal').modal('hide')
+                    $('#newloginModal').modal('hide')
                     $('#login_product').modal('hide')
                     $('.box-option-login').removeClass('product')
                     $('.toast_prod_information').css('display','block')
@@ -281,7 +291,7 @@ $(document).on('click',".btn-login-product",function(){
                         
                     })
                     localStorage.setItem('token',res.data)
-                    $('#loginModal').modal('hide')
+                    $('#newloginModal').modal('hide')
                     $('#login_product').modal('hide')
                     $('.box-option-login').removeClass('commision')
                     commision_check()
@@ -588,7 +598,7 @@ $(document).on('click',"#simpan_supplier",function(){
                             
                         })
                         $('#supplierModal').modal('hide')
-                        $('#loginModal').modal('hide')
+                        $('#newloginModal').modal('hide')
                     }else{
                         // swal.fire("Register Supplier Gagal", "", "alert");
                         Swal.fire({

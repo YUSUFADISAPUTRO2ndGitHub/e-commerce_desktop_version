@@ -277,8 +277,12 @@
                                 >
                                     Daftar Customer
                                 </div>
+                                <!-- data-toggle="tooltip" data-placement="right"
+                                title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service" -->
                                 <div 
-                                class="box-for-supplier" data-toggle="tooltip" data-placement="right" title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service"
+                                class="box-for-supplier" 
+                                data-bs-target="#newRegisterSupplierModal"
+                                data-bs-toggle="modal" 
                                 >
                                     Daftar Supplier
                                 </div>
@@ -293,7 +297,7 @@
     </div>
     <!-- NEW LOGIN MODALS -->
 
-    <!-- NEW REGISTER MODALS -->
+    <!-- NEW REGISTER  CUSTOMER MODALS -->
     <div class="modal fade " id="newRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
             <div class="modal-content  modal-content-newlogin">
@@ -320,20 +324,84 @@
                     </div>
                     <div class="box-right-for-input-2">
                         <div class="new-reg-left-box">
-                            <div class="input-right-box-1">
-                                Email
-                                
-                                <div class="ins-right-box-1">
-                                    <input type="text" placeholder="Masukan Email" class="new-input-login-2" id="email_reg"
-                                    pattern=".+@globex.com" size="30" required onchange="register_email_check()">
-                                    <div class="box-for-otp" onclick="send_otp_register_for_email()">GET OTP</div>
+                                <div class="input-right-box-1"> 
+                                    Email      
+                                    <div class="ins-right-box-1">
+                                        <input type="text" placeholder="Masukan Email" class="new-input-login-2" id="email_reg"
+                                        pattern=".+@globex.com" size="30" required onchange="register_email_check()">
+                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">GET OTP</div>
+                                    </div>
                                 </div>
+                                <div class="input-right-box-1">
+                                    Password
+                                    <input type="password" placeholder="Masukan Password" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nama Depan
+                                    <input type="text" placeholder="Nama Depan" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nama Belakang
+                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Tanggal Lahir
+                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nomor Telpon Utama
+                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-2" id="password_login">
+                                </div>
+                                
+
+                            </div>
+                            <div class="new-reg-right-box">
+                                <div class="input-right-box-1">
+                                    Nomor Telpon Kedua
+                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nomor Rekening
+                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nomor KTP
+                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Alamat Lengkap
+                                    <div class="box-name-address">
+                                        <input type="text" placeholder="Nomor KTP" class="new-input-login-2" minlength="4" maxlength="50" id="alamat_lengkap_1">
+    
+                                        <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i>
+    
+                                    </div>
+                                </div>
+
+                                <div class="input-right-box-1">
+                                    Referral Code
+                                    <div class="new-reg-form">
+                                        <!-- <div class="tambah-alamat" onclick="addAddress()" >
+                                            <p>Tambah Alamat (+)</p>
+                                        </div>     -->
+                                        <select class="form-select option-referral ref-cod" aria-label="Default select example" onchange="on_select_ref()">
+                                            <option selected></option>             
+                                        </select>
+                                        <input type="text" class="new-input-login-2 inp-referral-new"
+                                        placeholder="Referral Code" id="inp_ref_code"  maxlength="20">
+                                        
+                                    </div> 
+                                </div>
+                                <div 
+                                class="box-for-customer btn-kumpulkan btn-kumpulkan" 
+                                >
+                                    Daftar 
+                                </div>
+                               
+    
                             </div>
                         </div>
-                        <!-- </div> -->
-                        <div class="new-reg-right-box">
-
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -341,7 +409,122 @@
         </div>
     </div>
 
-    <!-- NEW REGISTER MODALS -->
+    <!-- NEW REGISTER  CUSTOMER MODALS -->
+
+     <!-- NEW REGISTER SUPPLIER MODALS -->
+     <div class="modal fade " id="newRegisterSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box-login ">
+            <div class="modal-content  modal-content-newlogin">
+            <div class="modal-body box-newlogin-body">
+                <div class="newlogin-left">
+                    <div class="logo-sold-left">
+                        <img src="./img/logo.png" alt="">
+                        SOLD.CO.ID
+                    </div>
+                    <div class="desc-sold-left">
+                        <div class="ins-desc-sold-left">
+                            FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="newlogin-mid">
+                    
+                </div>
+                <div class="newlogin-right">
+                    <div class="login-right-box">
+                        <p>REGISTER</p>
+                        <p>Daftar Sebagai Supplier</p>
+                    </div>
+                    <div class="box-right-for-input-2">
+                        <div class="new-reg-left-box">
+                                <div class="input-right-box-1"> 
+                                    Email  PIC     
+                                    <div class="ins-right-box-1">
+                                        <input type="text" placeholder="Masukan Email" class="new-input-login-2" id="email_reg"
+                                        pattern=".+@globex.com" size="30" required onchange="register_email_check()">
+                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">GET OTP</div>
+                                    </div>
+                                </div>
+                                <div class="input-right-box-1">
+                                    Password
+                                    <input type="password" placeholder="Masukan Password" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nama Depan PIC
+                                    <input type="text" placeholder="Nama Depan" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nama Belakang PIC
+                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Tanggal Lahir PIC
+                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nomor Telpon Utama
+                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-2" id="password_login">
+                                </div>
+                                
+
+                            </div>
+                            <div class="new-reg-right-box">
+                                <div class="input-right-box-1">
+                                    Nomor Telpon Kedua
+                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nomor Rekening
+                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nomor KTP
+                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-2" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Alamat Lengkap
+                                    <div class="box-name-address">
+                                        <input type="text" placeholder="Nomor KTP" class="new-input-login-2" minlength="4" maxlength="50" id="alamat_lengkap_1">
+    
+                                        <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i>
+    
+                                    </div>
+                                </div>
+
+                                <div class="input-right-box-1">
+                                    Referral Code
+                                    <div class="new-reg-form">
+                                        <!-- <div class="tambah-alamat" onclick="addAddress()" >
+                                            <p>Tambah Alamat (+)</p>
+                                        </div>     -->
+                                        <select class="form-select option-referral ref-cod" aria-label="Default select example" onchange="on_select_ref()">
+                                            <option selected></option>             
+                                        </select>
+                                        <input type="text" class="new-input-login-2 inp-referral-new"
+                                        placeholder="Referral Code" id="inp_ref_code"  maxlength="20">
+                                        
+                                    </div> 
+                                </div>
+                                <div 
+                                class="box-for-customer btn-kumpulkan btn-kumpulkan" 
+                                >
+                                    Daftar 
+                                </div>
+                               
+    
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <!-- NEW REGISTER SUPPLIERODALS -->
+
     <!-- TOKEN REGISTER -->
 
     <div class="modal fade" id="newOtpRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -742,7 +925,7 @@
 
                                 </div>
                                 <div class="box-kumpulkan btn-register" id="simpan_reg" >
-                                    <div class="btn-kumpulkan" >
+                                    <div class=" " >
                                         <p>Simpan</p>
                                     </div>
                                 </div>  
