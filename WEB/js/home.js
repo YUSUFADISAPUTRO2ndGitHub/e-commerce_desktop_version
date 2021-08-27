@@ -747,6 +747,7 @@ const tahun_lahir_check=()=>{
 
 const password_check=()=>{
     var password = $('#password_reg').val()
+    console.log(password)
     if(password.length < 5){
         // Swal.fire('Wrong Password', 'Sorry', 'error')
         Swal.fire({
@@ -754,7 +755,7 @@ const password_check=()=>{
             <div class="o-circle c-container__circle o-circle__sign--failure">
                 <div class="o-circle__sign"></div>  
             </div> 
-            Wrong Password`,
+            Minimal 5 Character`,
             timer:2000,
             
         })
@@ -1130,39 +1131,61 @@ const send_otp_login_prod=()=>{
 
 const send_otp_register_for_email=()=>{
     var email = $('#email_reg').val()
-    if(email){
-        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
-        .then((res)=>{
-            if(res.data){
-                $('#newOtpRegister').modal('show')
-                console.log($('#newOtpRegister').modal('show'))
-                // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
-            }else {
+
+    axios.post(`http://customers.sold.co.id/check-if-email-is-registered?Email=${email}`)
+    .then((res)=>{   
+        
+        if(email){
+
+            if(res.data == true){
                 Swal.fire({
                     html:`
                     <div class="o-circle c-container__circle o-circle__sign--failure">
                         <div class="o-circle__sign"></div>  
                     </div> 
-                    OTP Gagal Terkirim`,
+                    OTP Gagal Terkirim, Email Sudah Terdaftar / Salah`,
                     timer:2000,
+                })
+
+            }else if (res.data == false){
+                axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+                .then((res)=>{
+                    if(res.data){
+                        $('#newOtpRegister').modal('show')
+                        console.log($('#newOtpRegister').modal('show'))
+                        // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                    }else {
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            OTP Gagal Terkirim, Email Sudah Terdaftar / Salah`,
+                            timer:2000,
+                            
+                        })
+                    }
+                }).catch((err)=>{
                     
                 })
             }
-        }).catch((err)=>{
-            
-        })
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div>   
+                Silahkan Masukan Email`,
+                timer:2000,
+                
+            })
+        }
 
-    }else {
-        Swal.fire({
-            html:`
-            <div class="o-circle c-container__circle o-circle__sign--failure">
-                <div class="o-circle__sign"></div>  
-            </div>   
-            Silahkan Masukan Email`,
-            timer:2000,
-            
-        })
-    }
+
+
+    }).catch((err)=>{
+        console.log(err)
+    })
 }
 // const save_product_name=()=>{
 //     alert('simpan jalan')
@@ -1486,21 +1509,323 @@ const close_tab_answer=(result,index)=>{
   
 //   })
 
-  $(function(){
-    $(".btn-embossed").on('click',function(){
-     
-     var data = $('.get_all_otp_register').serialize()
-    //  alert('1492 jalan')
-     console.log($('.get_all_otp_register').serialize())
-     var otp_1 = $('#otp_reg_1').val()
-     var otp_2 = $('#otp_reg_2').val()
-     var otp_3 = $('#otp_reg_3').val()
-     var otp_4 = $('#otp_reg_4').val()
-     var otp_5 = $('#otp_reg_5').val()
-     var otp_6 = $('#otp_reg_6').val()
-     var allOtp = otp_1 + otp_2 + otp_3 + otp_4 + otp_5 + otp_6
-     console.log(allOtp)
-    });
-   });
+    const verify_email_register=()=>{
+        var email = $('#email_reg').val()
+        var otp_1 = $('#otp_reg_1').val()
+        var otp_2 = $('#otp_reg_2').val()
+        var otp_3 = $('#otp_reg_3').val()
+        var otp_4 = $('#otp_reg_4').val()
+        var otp_5 = $('#otp_reg_5').val()
+        var otp_6 = $('#otp_reg_6').val()
+        var otp_7 = $('#otp_reg_7').val()
+        var otp_8 = $('#otp_reg_8').val()
+        var allOtp = otp_1 + otp_2 + otp_3 + otp_4 + otp_5 + otp_6 + otp_7 + otp_8
+        console.log(allOtp)
+        axios.post(`http://customers.sold.co.id/verify-email-address?otp=${allOtp}`)
+        .then((res)=>{
+            if(res.data){
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Email Bisa Digunakan
+                    `,
+                    timer:2000,
+                    
+                })
+                $('#newOtpRegister').modal('hide')
+                
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Salah`,
+                    timer:2000,
+                    
+                })
+            }
+        }).catch((err)=>{
+            console.log(err)
+        })
 
-   
+    }
+
+    const resend_otp_register=()=>{
+
+    }
+//   $(function(){
+//     $(".btn-embossed").on('click',function(){
+     
+//      var data = $('.get_all_otp_register').serialize()
+//     //  alert('1492 jalan')
+//      console.log($('.get_all_otp_register').serialize())
+//     });
+//    });
+
+   const provinceCheckoutRegister=()=>{
+        var province_pilihan = $('.register-provinsi option:selected').val()
+        var new_kurir_pilihan = 'tiki'
+        var kurir_kode = 'tiki'
+
+        var allProinve = []
+        var allKota =[]
+        var allDistrict = []
+        var allSub_District =[]
+
+        var province =[]
+        var kota =[]
+        var district = []
+        var sub_district = []
+
+        var isProvince_pilihan = false
+        var isKota_pilihan = false
+        var isDistrict_pilihan = false
+        var isSub_District_pilihan = false
+
+
+        if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
+            isProvince_pilihan = false
+        }else {
+            isProvince_pilihan = true
+        }
+
+        if(isProvince_pilihan){
+            console.log('masuk ke if')
+            get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+                province = response[0]
+                allProvince = response
+                get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
+                    kota= response[0]
+                    allKota = response
+                    get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota.City).done(function(response){
+                        district = response[0]
+                        allDistrict = response
+                        get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
+                            allSub_District = response
+                            // $('.register-provinsi').empty()
+                            $('.register-kota').empty()
+                            $('.register-kecamatan').empty()
+                            $('.register-kelurahan').empty()
+
+                            $('.register-kota').append(`
+                                <option selected  class="reg-kota"> Kota</option>      
+                            `)
+                            $('.register-kecamatan').append(`
+                                <option selected  class="reg-kecamatan"> Kecamatan</option>      
+                            `)
+                            $('.register-kelurahan').append(`
+                                <option selected  class="reg-kelurahan"> Kelurahan</option>      
+                            `)
+
+                            allKota.map((val,index)=>{
+                                $('.register-kota').append(`
+                                    <option  value="${val.City}" class="reg-kota">${val.City}</option> 
+                                `)
+                            })
+                            allDistrict.map((val,index)=>{
+                                $('.register-kecamatan').append(`
+                                <option  value="${val.District}" class="reg-kecamatan">${val.District}</option> 
+                                `)
+                            })
+                            allSub_District.map((val,index)=>{
+                                $('.register-kelurahan').append(`
+                                <option  value="${val.Sub_District}" class="reg-kelurahan">${val.Sub_District}</option> 
+                                `)
+                            })
+                        })
+                    })
+                })
+            })
+        }else {
+            // render ulang
+            re_render_register()
+        }
+   }
+
+   const  kotaCheckoutRegister=()=>{
+    var province_pilihan = $('.register-provinsi option:selected').val()
+    var kota_pilihan = $('.register-kota option:selected').val()
+    var new_kurir_pilihan = 'tiki'
+    var kurir_kode = 'tiki'
+
+    var allProinve = []
+    var allKota =[]
+    var allDistrict = []
+    var allSub_District =[]
+
+    var province =[]
+    var kota =[]
+    var district = []
+    var sub_district = []
+
+    var isProvince_pilihan = false
+    var isKota_pilihan = false
+    var isDistrict_pilihan = false
+    var isSub_District_pilihan = false
+
+
+    if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
+        isProvince_pilihan = false
+    }else {
+        isProvince_pilihan = true
+    }
+     if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
+        isKota_pilihan = false
+    }else {
+        isKota_pilihan = true
+    }
+
+    if(isProvince_pilihan && isKota_pilihan){
+        console.log('masuk ke if')
+        get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+            province = response[0]
+            allProvince = response
+            get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
+                kota= response[0]
+                allKota = response
+                get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
+                    district = response[0]
+                    allDistrict = response
+                    get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
+                        allSub_District = response
+                        // $('.register-provinsi').empty()
+                        // $('.register-kota').empty()
+                        $('.register-kecamatan').empty()
+                        $('.register-kelurahan').empty()
+
+                        // $('.register-kota').append(`
+                        //     <option selected  class="reg-kota"> Kota</option>      
+                        // `)
+                        $('.register-kecamatan').append(`
+                            <option selected  class="reg-kecamatan"> Kecamatan</option>      
+                        `)
+                        $('.register-kelurahan').append(`
+                            <option selected  class="reg-kelurahan"> Kelurahan</option>      
+                        `)
+
+                        // allKota.map((val,index)=>{
+                        //     $('.register-kota').append(`
+                        //         <option  value="${val.City}" class="reg-kota">${val.City}</option> 
+                        //     `)
+                        // })
+                        allDistrict.map((val,index)=>{
+                            $('.register-kecamatan').append(`
+                            <option  value="${val.District}" class="reg-kecamatan">${val.District}</option> 
+                            `)
+                        })
+                        allSub_District.map((val,index)=>{
+                            $('.register-kelurahan').append(`
+                            <option  value="${val.Sub_District}" class="reg-kelurahan">${val.Sub_District}</option> 
+                            `)
+                        })
+                    })
+                })
+            })
+        })
+    }else {
+        // render ulang
+        // alert('masuk ke else')
+        re_render_registers()
+    }
+   }
+
+   const kecamatanCheckoutRegister=()=>{
+    var province_pilihan = $('.register-provinsi option:selected').val()
+    var kota_pilihan = $('.register-kota option:selected').val()
+    var district_pilihan = $('.register-kecamatan option:selected').val()
+
+    var new_kurir_pilihan = 'tiki'
+    var kurir_kode = 'tiki'
+
+    var allProinve = []
+    var allKota =[]
+    var allDistrict = []
+    var allSub_District =[]
+
+    var province =[]
+    var kota =[]
+    var district = []
+    var sub_district = []
+
+    var isProvince_pilihan = false
+    var isKota_pilihan = false
+    var isDistrict_pilihan = false
+    var isSub_District_pilihan = false
+
+
+    if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
+        isProvince_pilihan = false
+    }else {
+        isProvince_pilihan = true
+    }
+     if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
+        isKota_pilihan = false
+    }else {
+        isKota_pilihan = true
+    }
+    if(district_pilihan == undefined || district_pilihan == 'undefined' || district_pilihan == null || district_pilihan.length == 0 || district_pilihan == 'Kecamatan'){
+        isDistrict_pilihan = false
+    }else {
+        isDistrict_pilihan = true
+    }
+
+    if(isProvince_pilihan && isKota_pilihan && isDistrict_pilihan){
+        console.log('masuk ke if')
+        get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+            province = response[0]
+            allProvince = response
+            get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
+                kota= response[0]
+                allKota = response
+                get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
+                    district = response[0]
+                    allDistrict = response
+                    get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
+                        allSub_District = response
+                        // $('.register-provinsi').empty()
+                        // $('.register-kota').empty()
+                        // $('.register-kecamatan').empty()
+                        $('.register-kelurahan').empty()
+
+                        // $('.register-kota').append(`
+                        //     <option selected  class="reg-kota"> Kota</option>      
+                        // `)
+                        // $('.register-kecamatan').append(`
+                        //     <option selected  class="reg-kecamatan"> Kecamatan</option>      
+                        // `)
+                        $('.register-kelurahan').append(`
+                            <option selected  class="reg-kelurahan"> Kelurahan</option>      
+                        `)
+
+                        // allKota.map((val,index)=>{
+                        //     $('.register-kota').append(`
+                        //         <option  value="${val.City}" class="reg-kota">${val.City}</option> 
+                        //     `)
+                        // })
+                        // allDistrict.map((val,index)=>{
+                        //     $('.register-kecamatan').append(`
+                        //     <option  value="${val.District}" class="reg-kecamatan">${val.District}</option> 
+                        //     `)
+                        // })
+                        allSub_District.map((val,index)=>{
+                            $('.register-kelurahan').append(`
+                            <option  value="${val.Sub_District}" class="reg-kelurahan">${val.Sub_District}</option> 
+                            `)
+                        })
+                    })
+                })
+            })
+        })
+    }else {
+        // render ulang
+        // alert('masuk ke else')
+        re_render_register()
+    }
+   }
+
+   const kelurahanCheckoutRegister=()=>{
+
+   }

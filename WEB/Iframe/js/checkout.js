@@ -1597,7 +1597,7 @@ const render_select_option_kurir=()=>{
                     district = response[0]
                     // 
                     // 
-                    get_all_subdistrict_from_courier(kurir.Courier, kurir.Courier_Code, district.District,).done(function(response){
+                    get_all_subdistrict_from_courier(kurir.Courier, kurir.Courier_Code, district.District).done(function(response){
                         allSub_District = response
                         sub_district = response[0]
                         // 

@@ -522,8 +522,138 @@ function sign_up_request(){
         }).catch((err)=>{
             
         })
+
+        var allKurir = []
+        var allProvince = []
+        var allKota =[]
+        var allDistrict =[]
+        var allSub_District = []
+        var province =[]
+        var kota =[]
+        var district =[]
+        var sub_district=[]
+        get_all_couriers().done(function(response){
+            // console.log(response)
+
+            get_all_province_from_courier('tiki','tiki').done(function(response){
+                province = response[0]
+                allProvince = response
+                get_all_city_from_courier('tiki','tiki',province.Province).done(function(response){
+                    
+                    kota = response[0]
+                    allKota = response
+                    get_all_district_from_courier('tiki','tiki',kota.City).done(function(response){
+                        district = response[0]
+                        allDistrict = response
+                        get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
+                            allSub_District = response
+                            sub_district = response[0]
+
+                            console.log(allProvince)
+                            console.log(allKota)
+                            console.log(allDistrict)
+                            console.log(allSub_District)
+                            allProvince.map((val,index)=>{
+                                $('.register-provinsi').append(`
+                                    <option  value="${val.Province}" class="reg-provinsi">${val.Province}</option> 
+                                `)
+                            })
+                            allKota.map((val,index)=>{
+                                $('.register-kota').append(`
+                                    <option  value="${val.City}" class="reg-kota">${val.City}</option> 
+                                `)
+                            })
+                            allDistrict.map((val,index)=>{
+                                $('.register-kecamatan').append(`
+                                <option  value="${val.District}" class="reg-kecamatan">${val.District}</option> 
+                                `)
+                            })
+                            allSub_District.map((val,index)=>{
+                                $('.register-kelurahan').append(`
+                                <option  value="${val.Sub_District}" class="reg-kelurahan">${val.Sub_District}</option> 
+                                `)
+                              
+                            })
+                        })
+                    })
+                })
+            })
+        })
 }
 
+
+const re_render_register=()=>{
+    var allKurir = []
+    var allProvince = []
+    var allKota =[]
+    var allDistrict =[]
+    var allSub_District = []
+    var province =[]
+    var kota =[]
+    var district =[]
+    var sub_district=[]
+    get_all_couriers().done(function(response){
+        // console.log(response)
+
+        get_all_province_from_courier('tiki','tiki').done(function(response){
+            province = response[0]
+            allProvince = response
+            get_all_city_from_courier('tiki','tiki',province.Province).done(function(response){
+                
+                kota = response[0]
+                allKota = response
+                get_all_district_from_courier('tiki','tiki',kota.City).done(function(response){
+                    district = response[0]
+                    allDistrict = response
+                    get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
+                        allSub_District = response
+                        sub_district = response[0]
+                        $('.register-provinsi').empty()
+                        $('.register-kota').empty()
+                        $('.register-kecamatan').empty()
+                        $('.register-kelurahan').empty()
+
+                        $('.register-provinsi').append(`
+                            <option selected  class="reg-provinsi"> Provinsi</option>      
+                        `)
+                        $('.register-kota').append(`
+                            <option selected  class="reg-kota"> Kota</option>      
+                        `)
+                        $('.register-kecamatan').append(`
+                            <option selected  class="reg-kecamatan"> Kecamatan</option>      
+                        `)
+                        $('.register-kelurahan').append(`
+                            <option selected  class="reg-kelurahan"> Kelurahan</option>      
+                        `)
+
+
+                        allProvince.map((val,index)=>{
+                            $('.register-provinsi').append(`
+                                <option  value="${val.Province}" class="reg-provinsi">${val.Province}</option> 
+                            `)
+                        })
+                        allKota.map((val,index)=>{
+                            $('.register-kota').append(`
+                                <option  value="${val.City}" class="reg-kota">${val.City}</option> 
+                            `)
+                        })
+                        allDistrict.map((val,index)=>{
+                            $('.register-kecamatan').append(`
+                            <option  value="${val.District}" class="reg-kecamatan">${val.District}</option> 
+                            `)
+                        })
+                        allSub_District.map((val,index)=>{
+                            $('.register-kelurahan').append(`
+                            <option  value="${val.Sub_District}" class="reg-kelurahan">${val.Sub_District}</option> 
+                            `)
+                          
+                        })
+                    })
+                })
+            })
+        })
+    })
+}
 
 
 

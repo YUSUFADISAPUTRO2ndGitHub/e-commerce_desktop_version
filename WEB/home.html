@@ -301,29 +301,28 @@
     <div class="modal fade " id="newRegisterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
             <div class="modal-content  modal-content-newlogin">
-            <div class="modal-body box-newlogin-body">
-                <div class="newlogin-left">
-                    <div class="logo-sold-left">
-                        <img src="./img/logo.png" alt="">
-                        SOLD.CO.ID
-                    </div>
-                    <div class="desc-sold-left">
-                        <div class="ins-desc-sold-left">
-                            FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
+                <div class="modal-body box-newlogin-body">
+                    <div class="newlogin-left">
+                        <div class="logo-sold-left">
+                            <img src="./img/logo.png" alt="">
+                            SOLD.CO.ID
+                        </div>
+                        <div class="desc-sold-left">
+                            <div class="ins-desc-sold-left">
+                                FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
+                            </div>
                         </div>
                     </div>
-                    
-                </div>
-                <div class="newlogin-mid">
-                    
-                </div>
-                <div class="newlogin-right">
-                    <div class="login-right-box">
-                        <p>REGISTER</p>
-                        <p>Daftar Sebagai Customer</p>
+                    <div class="newlogin-mid">
+                        
                     </div>
-                    <div class="box-right-for-input-2">
-                        <div class="new-reg-left-box">
+                    <div class="newlogin-right">
+                        <div class="login-right-box">
+                            <p>REGISTER</p>
+                            <p>Daftar Sebagai Customer</p>
+                        </div>
+                        <div class="box-right-for-input-2">
+                            <div class="new-reg-left-box">
                                 <div class="input-right-box-1"> 
                                     Email      
                                     <div class="ins-right-box-1">
@@ -334,48 +333,85 @@
                                 </div>
                                 <div class="input-right-box-1">
                                     Password
-                                    <input type="password" placeholder="Masukan Password" class="new-input-login-2" id="password_login">
+                                    <input type="password" placeholder="Masukan Password" class="new-input-login-2" id="password_reg"
+                                    onchange="password_check()">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Depan
-                                    <input type="text" placeholder="Nama Depan" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nama Depan" class="new-input-login-2" id="nama_depan_reg" onchange="nama_depan_check()">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Belakang
-                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-2" id="nama_belakang_reg" onchange="nama_belakang_check()">
                                 </div>
                                 <div class="input-right-box-1">
                                     Tanggal Lahir
-                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="password_login">
+                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="tanggal_lahir_reg">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nomor Telpon Utama
-                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-2"
+                                    placeholder="No telp utama" id="no_telp_reg" onchange="no_telp_check()" >
                                 </div>
-                                
-
-                            </div>
+                                <!-- </div> -->
+                            </div>    
                             <div class="new-reg-right-box">
                                 <div class="input-right-box-1">
                                     Nomor Telpon Kedua
-                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-2" id="no_telp_2_reg" onchange="no_telp_check2()">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nomor Rekening
-                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-2" id="no_rekening_reg"
+                                    minlength="4" maxlength="20"
+                                    >
                                 </div>
                                 <div class="input-right-box-1">
                                     Nomor KTP
-                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-2" maxlength="16" id="no_ktp_reg" onchange="ktp_check()">
                                 </div>
-                                <div class="input-right-box-1">
-                                    Alamat Lengkap
+                                <div class="input-address-box-1">
+                                    Nama Jalan & RT/RW
                                     <div class="box-name-address">
-                                        <input type="text" placeholder="Nomor KTP" class="new-input-login-2" minlength="4" maxlength="50" id="alamat_lengkap_1">
+                                        <input type="text" placeholder="Nama Jalan" class="new-input-login-2" minlength="4" maxlength="50" id="alamat_lengkap_1">
     
-                                        <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i>
-    
+                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
                                     </div>
+                                    <div class="box-name-address">
+                                        <select class="form-control  sp_provinsi_hover new_select_address register-provinsi" id="inputGroupSelect01" onchange="provinceCheckoutRegister(this)" >  
+                                            <option  selected  class="reg-provinsi"> Provinsi</option>  
+                    
+                                        </select>
+    
+                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
+                                    </div>
+                                    <div class="box-name-address">
+                                        <select class="form-control sp_kota_hover new_select_address register-kota" id="inputGroupSelect01" onchange="kotaCheckoutRegister(this)" >  
+                                            <option selected  class="reg-kota"> Kota</option>      
+                    
+                                        </select>
+    
+                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
+                                    </div>
+                                    <div class="box-name-address">
+                                      
+                                        <select class="form-control sp_kecamatan_hover  new_select_address register-kecamatan" id="inputGroupSelect01" onchange="kecamatanCheckoutRegister(this)" >  
+                                            <option selected  class="reg-kecamatan">Kecamatan</option>      
+                    
+                                        </select>
+    
+                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
+                                    </div>
+                                    <div class="box-name-address">
+                                
+                                        <select class="form-control sp_kelurahan_hover  new_select_address register-kelurahan" id="inputGroupSelect01" onchange="kelurahanCheckoutRegister(this)" >  
+                                            <option selected  class="reg-kelurahan">Kelurahan</option>      
+                    
+                                        </select>
+    
+                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
+                                    </div>
+                                  
                                 </div>
 
                                 <div class="input-right-box-1">
@@ -389,22 +425,20 @@
                                         </select>
                                         <input type="text" class="new-input-login-2 inp-referral-new"
                                         placeholder="Referral Code" id="inp_ref_code"  maxlength="20">
-                                        
                                     </div> 
+                                    
                                 </div>
                                 <div 
-                                class="box-for-customer btn-kumpulkan btn-kumpulkan" 
+                                class="box-for-customer btn-kumpulkan" id="simpan_reg" 
                                 >
                                     Daftar 
                                 </div>
-                               
+                            
     
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -448,63 +482,61 @@
                                 </div>
                                 <div class="input-right-box-1">
                                     Password
-                                    <input type="password" placeholder="Masukan Password" class="new-input-login-2" id="password_login">
+                                    <input type="password" placeholder="Masukan Password" class="new-input-login-3" id="password_login">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Depan PIC
-                                    <input type="text" placeholder="Nama Depan" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nama Depan" class="new-input-login-3" id="password_login">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Belakang PIC
-                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-3" id="password_login">
                                 </div>
                                 <div class="input-right-box-1">
-                                    Tanggal Lahir PIC
-                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="password_login">
-                                </div>
-                                <div class="input-right-box-1">
-                                    Nomor Telpon Utama
-                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-2" id="password_login">
+                                    Nomor KTP
+                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="password_login">
                                 </div>
                                 
+                                <div class="input-right-box-1">
+                                    Nomor Telpon Gudang Utama
+                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-3" id="password_login">
+                                </div>  
+                                <div class="input-right-box-1">
+                                    Nomor Telpon  Gudang Kedua
+                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-3" id="password_login">
+                                </div>
 
                             </div>
                             <div class="new-reg-right-box">
                                 <div class="input-right-box-1">
-                                    Nomor Telpon Kedua
-                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-2" id="password_login">
-                                </div>
-                                <div class="input-right-box-1">
                                     Nomor Rekening
-                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-3" id="password_login">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nomor KTP
-                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-2" id="password_login">
+                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="password_login">
                                 </div>
                                 <div class="input-right-box-1">
                                     Alamat Lengkap
                                     <div class="box-name-address">
-                                        <input type="text" placeholder="Nomor KTP" class="new-input-login-2" minlength="4" maxlength="50" id="alamat_lengkap_1">
+                                        <input type="text" placeholder="Nomor KTP" class="new-input-login-3" minlength="4" maxlength="50" id="alamat_lengkap_1">
     
-                                        <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i>
+                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
     
                                     </div>
                                 </div>
 
                                 <div class="input-right-box-1">
-                                    Referral Code
-                                    <div class="new-reg-form">
-                                        <!-- <div class="tambah-alamat" onclick="addAddress()" >
-                                            <p>Tambah Alamat (+)</p>
-                                        </div>     -->
-                                        <select class="form-select option-referral ref-cod" aria-label="Default select example" onchange="on_select_ref()">
-                                            <option selected></option>             
-                                        </select>
-                                        <input type="text" class="new-input-login-2 inp-referral-new"
-                                        placeholder="Referral Code" id="inp_ref_code"  maxlength="20">
-                                        
-                                    </div> 
+                                    NPWP
+                                    <input type="number" placeholder="Nomor NPWP" class="new-input-login-3" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    NIK PIC
+                                    <input type="text" placeholder="Nomor Induk Karyawan" class="new-input-login-3" id="password_login">
+                                </div>
+                                <div class="input-right-box-1">
+                                    Nama Perusahaan
+                                    <input type="text" placeholder="Nama Perusahaan" class="new-input-login-3" id="password_login">
                                 </div>
                                 <div 
                                 class="box-for-customer btn-kumpulkan btn-kumpulkan" 
@@ -523,7 +555,7 @@
         </div>
     </div>
 
-    <!-- <!-- NEW REGISTER SUPPLIERODALS -->
+    <!--  NEW REGISTER SUPPLIERODALS -->
 
     <!-- TOKEN REGISTER -->
 
@@ -534,7 +566,7 @@
                     <div id="wrapper">
                         <div id="dialog">
                           <!-- <button class="close">×</button> -->
-                          <h3>Please enter the 6-digit verification code we sent via Email:</h3>
+                          <h3>Please enter the 8-digit verification code we sent via Email:</h3>
                           <span>(we want to make sure it's you before we contact our movers)</span>
                           <div id="form" class="get_all_otp_register">
                             <input type="text" maxLength="1" size="1"  id="otp_reg_1"/>
@@ -543,12 +575,14 @@
                             <input type="text" maxLength="1" size="1" id="otp_reg_4" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_5" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_6" />
-                            <button class="btn btn-primary btn-embossed">Verify</button>
+                            <input type="text" maxLength="1" size="1" id="otp_reg_7" />
+                            <input type="text" maxLength="1" size="1" id="otp_reg_8" />
+                            <button class="btn btn-primary btn-embossed" onclick="verify_email_register()">Verify</button>
                           </div>
                           
                           <div class="resend-code-box">
                             Didn't receive the code?<br />
-                            <a href="#">Send code again</a><br />
+                            <a href="#" onclick="resend_otp_register()">Send code again</a><br />
                             
                           </div>
                            <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" />
@@ -2260,6 +2294,7 @@
 </script>
 <script type="text/javascript" src="./js/axios.js"></script>
 <script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
 <!-- <script type="text/javascript" src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
 <script type="text/javascript" src="./Iframe/js/cart.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->

@@ -1854,10 +1854,13 @@ display: flex;
     flex-direction: row;
     /* justify-content: center; */
     align-items: center;
+    margin-bottom:5px;
+    
 
     /* left:25px; */
     /* background-color: red; */
 }
+
 .icon_plus_address{
     color:gray;
     font-size: 25px;
@@ -5453,9 +5456,9 @@ img{
     justify-content: flex-start;
     align-items: center;
     flex-direction:column;
-    padding-top:40px;
+    padding-top:20px;
     padding-left:30px;
-    padding-bottom:20px;
+    /* padding-bottom:20px; */
 }
 .login-right-box{
     width: 100%;
@@ -5502,6 +5505,19 @@ img{
     flex-direction:column;
     /* border: 1px solid black; */
     color:#0652DD;
+    
+}
+
+.input-address-box-1 {
+    width:80%;
+    height:120px;
+    display: flex;
+    flex-direction:column;
+    /* border: 1px solid black; */
+    color:#0652DD;
+    /* background-color: pink; */
+    overflow:auto;
+    overflow-x:scroll;
     
 }
 .input-right-box-2 {
@@ -6450,8 +6466,8 @@ loading new
 
 
 .new-input-login-2 {
-    width:170px;
-    min-width:170px;
+    width:200px;
+    min-width:200px;
     margin-right:10px;
     border-radius:5px;
     border:1px solid lightgray;
@@ -6466,6 +6482,24 @@ loading new
     text-align: center;
     color:#0652DD;
  } 
+ .new-input-login-3 {
+    width:250px;
+    min-width:250px;
+    margin-right:10px;
+    border-radius:5px;
+    border:1px solid lightgray;
+    color:#0652DD;
+    text-align: center;
+}
+.new-input-login-3::-webkit-input-placeholder {
+    text-align: center;
+    color:gray;
+ } 
+ .new-input-login-3:focus{
+    text-align: center;
+    color:#0652DD;
+ } 
+
 
 
  /* .digit-group {
@@ -6556,14 +6590,14 @@ loading new
 }
 
 #wrapper #dialog #form input {
-    margin: 0 5px;
+    /* margin: 0 5px */
     text-align: center;
-    line-height: 50px;
-    font-size: 40px;
+    line-height: 40px;
+    font-size: 30px;
     border: solid 1px #ccc;
     box-shadow: 0 0 5px #ccc inset;
     outline: none;
-    width: 12%;
+    width: 10%;
     transition: all .2s ease-in-out;
     border-radius: 3px;
 }
@@ -6611,4 +6645,10 @@ loading new
 .resend-code-box a{
     color:lightblue;
     font-size:15px;
+}
+
+.new_select_address{
+    width:86% !important;
+    height:25px !important;
+    font-size:10px !important;
 }
