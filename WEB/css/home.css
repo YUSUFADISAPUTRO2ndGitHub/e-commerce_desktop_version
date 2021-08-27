@@ -1670,7 +1670,7 @@ display: flex;
 }
 
 .box-login-profile {
-    background-color: #217283;
+    background-color: #0652DD;;
     /* background-color: red; */
     width: 100%;
     display: flex;
@@ -2212,7 +2212,7 @@ display: flex;
     width: 250px;
     border-radius: 50px;
     height: 35px;
-    background-color: #217283;
+    background-color: #0652DD;;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2281,13 +2281,13 @@ display: flex;
     border-radius: 50px;
     height: 35px;
     background-color: white;
-    border: 1px solid #217283;
+    border: 1px solid #0652DD;;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .btn-komisi p {
-    color: #217283;
+    color: #0652DD;;
     position: relative;
     top: 8px;
     font-size: 13px;
@@ -3360,7 +3360,7 @@ ul {
     width: 250px;
     border-radius: 50px;
     height: 35px;
-    background-color: #217283;
+    background-color: #0652DD;;
     /* background-color: red; */
     border: 1px solid white;
     display: flex;

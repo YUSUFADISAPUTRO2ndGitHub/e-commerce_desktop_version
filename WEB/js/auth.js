@@ -20,176 +20,157 @@ $(document).on('click',"#simpan_reg",function(){
     var kelurahan_cust = $('.register-kelurahan option:selected').val()
 
     var final_address = jalan_cust + ' ' +province_cust + ' ' + kota_cust + ' ' + kecamatan_cust + kelurahan_cust
+    var tanggal = $('#tanggal_lahir_reg').val()
+    
+    var tanggal_splice = tanggal.split('-').join('/')
+    
+    
+    
+
     
     
 
-    var final_pass = 'testing'
-    var data = {
-        customer_data : {
-           Customer_Code : localStorage.getItem("token"),
-           First_Name : $("#nama_depan_reg").val(),
-           Last_Name : $("#nama_belakang_reg").val(),
-           User_Password :final_pass,
-           Birthday : $('#tanggal_lahir_reg').val(),
-           Created_Date : "CURRENT_TIMESTAMP()",
-           Last_Login : "CURRENT_TIMESTAMP()",
-           Email : $('#email_reg').val(),
-           Contact_Number_1 : $("#no_telp_reg").val(),
-           Contact_Number_2 : $("#no_telp_2_reg").val(),
-           Address_1 : final_address,
-           Address_2 : $("#alamat_lengkap_2").val(),
-           Address_3 : $("#alamat_lengkap_3").val(),
-           Address_4 : $("#alamat_lengkap_4").val(),
-           Address_5 : $("#alamat_lengkap_5").val(),
-           Status : "pending",
-           User_Type : "Customer",
-           account_number: $("#no_rekening_reg").val(),
-           referral_customer_code: $('#inp_ref_code').val(),
-           ktp:$("#no_ktp_reg").val()
-       }
-   }
-
-   console.log(data)
+   
 
 
 
 
 
-    // check_input_form()
+    check_input_form()
 
-    // var result_check_input_form = check_input_form()
+    var result_check_input_form = check_input_form()
 
-    // if(result_check_input_form){
-    //     var password_awal = $('#password_reg').val()
-    //     var referral_code = $('.ref-cod option:selected').val()
+    if(result_check_input_form){
+        var password_awal = $('#password_reg').val()
+        var referral_code = $('.ref-cod option:selected').val()
         
-    //     // $('#inp_ref_code').val(referral_code)
+        // $('#inp_ref_code').val(referral_code)
         
         
-    //     axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
-    //     .then((res)=>{
-    //         var final_pass = res.data
+        axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
+        .then((res)=>{
+            var final_pass = res.data
             
-    //         var ref_val = $('#inp_ref_code').val()
-    //         if(ref_val.length >3){
+            var ref_val = $('#inp_ref_code').val()
+            if(ref_val.length >3){
                 
                 
-    //             axios.post(`http://customers.sold.co.id/get-customer-code`)
-    //         .then((res)=>{
-    //             localStorage.setItem('token',res.data)
-    //             var data = {
-    //                  customer_data : {
-    //                     Customer_Code : localStorage.getItem("token"),
-    //                     First_Name : $("#nama_depan_reg").val(),
-    //                     Last_Name : $("#nama_belakang_reg").val(),
-    //                     User_Password :final_pass,
-    //                     Birthday : $("#tahun_lahir_reg").val() + "/" + $("#bulan_lahir_reg").val() + "/" + $("#tanggal_lahir_reg").val(),
-    //                     Created_Date : "CURRENT_TIMESTAMP()",
-    //                     Last_Login : "CURRENT_TIMESTAMP()",
-    //                     Email : $('#email_reg').val(),
-    //                     Contact_Number_1 : $("#no_telp_reg").val(),
-    //                     Contact_Number_2 : $("#no_telp_2_reg").val(),
-    //                     Address_1 : $("#alamat_lengkap_1").val(),
-    //                     Address_2 : $("#alamat_lengkap_2").val(),
-    //                     Address_3 : $("#alamat_lengkap_3").val(),
-    //                     Address_4 : $("#alamat_lengkap_4").val(),
-    //                     Address_5 : $("#alamat_lengkap_5").val(),
-    //                     Status : "pending",
-    //                     User_Type : "Customer",
-    //                     account_number: $("#no_rekening_reg").val(),
-    //                     referral_customer_code: $('#inp_ref_code').val(),
-    //                     ktp:$("#no_ktp_reg").val()
-    //                 }
-    //             }
+                axios.post(`http://customers.sold.co.id/get-customer-code`)
+            .then((res)=>{
+                localStorage.setItem('token',res.data)
+                var data = {
+                    customer_data : {
+                       Customer_Code : localStorage.getItem("token"),
+                       First_Name : $("#nama_depan_reg").val(),
+                       Last_Name : $("#nama_belakang_reg").val(),
+                       User_Password :final_pass,
+                       Birthday : tanggal_splice,
+                       Created_Date : "CURRENT_TIMESTAMP()",
+                       Last_Login : "CURRENT_TIMESTAMP()",
+                       Email : $('#email_reg').val(),
+                       Contact_Number_1 : $("#no_telp_reg").val(),
+                       Contact_Number_2 : $("#no_telp_2_reg").val(),
+                       Address_1 : final_address,
+                       Address_2 : $("#alamat_lengkap_2").val(),
+                       Address_3 : $("#alamat_lengkap_3").val(),
+                       Address_4 : $("#alamat_lengkap_4").val(),
+                       Address_5 : $("#alamat_lengkap_5").val(),
+                       Status : "pending",
+                       User_Type : "Customer",
+                       account_number: $("#no_rekening_reg").val(),
+                       referral_customer_code: $('#inp_ref_code').val(),
+                       ktp:$("#no_ktp_reg").val()
+                   }
+               }
                 
-    //         axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
-    //             headers:{
-    //                 "Content-Type":'application/json'
-    //             },
-    //             "data":JSON.stringify({
-    //                 "Customer_Code": data.customer_data.Customer_Code,
-    //                 "First_Name": data.customer_data.First_Name,
-    //                 "Last_Name": data.customer_data.Last_Name,
-    //                 "User_Password": data.customer_data.User_Password,
-    //                 "Birthday": data.customer_data.Birthday,
-    //                 "Created_Date": data.customer_data.Created_Date,
-    //                 "Last_Login": data.customer_data.Last_Login,
-    //                 "Email": data.customer_data.Email,
-    //                 "Contact_Number_1": data.customer_data.Contact_Number_1,
-    //                 "Contact_Number_2": data.customer_data.Contact_Number_2,
-    //                 "Address_1": data.customer_data.Address_1,
-    //                 "Address_2": data.customer_data.Address_2,
-    //                 "Address_3": data.customer_data.Address_3,
-    //                 "Address_4": data.customer_data.Address_4,
-    //                 "Address_5": data.customer_data.Address_5,
-    //                 "Status": data.customer_data.Status,
-    //                 "User_Type": data.customer_data.User_Type,
-    //                 "ktp":data.customer_data.ktp
-    //             })
-    //         }).then((res)=>{
+            axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
+                headers:{
+                    "Content-Type":'application/json'
+                },
+                "data":JSON.stringify({
+                    "Customer_Code": data.customer_data.Customer_Code,
+                    "First_Name": data.customer_data.First_Name,
+                    "Last_Name": data.customer_data.Last_Name,
+                    "User_Password": data.customer_data.User_Password,
+                    "Birthday": data.customer_data.Birthday,
+                    "Created_Date": data.customer_data.Created_Date,
+                    "Last_Login": data.customer_data.Last_Login,
+                    "Email": data.customer_data.Email,
+                    "Contact_Number_1": data.customer_data.Contact_Number_1,
+                    "Contact_Number_2": data.customer_data.Contact_Number_2,
+                    "Address_1": data.customer_data.Address_1,
+                    "Address_2": data.customer_data.Address_2,
+                    "Address_3": data.customer_data.Address_3,
+                    "Address_4": data.customer_data.Address_4,
+                    "Address_5": data.customer_data.Address_5,
+                    "Status": data.customer_data.Status,
+                    "User_Type": data.customer_data.User_Type,
+                    "ktp":data.customer_data.ktp
+                })
+            }).then((res)=>{
                 
                 
-    //             if(res.data === true){
+                if(res.data === true){
                     
-    //                 // swal.fire("Register Berhasil", "", "success");
-    //                 Swal.fire({
-    //                     html:`
-    //                     <div class="o-circle c-container__circle o-circle__sign--success">
-    //                         <div class="o-circle__sign"></div>  
-    //                     </div>   
-    //                     Regiter Berhasil
-    //                     `,
-    //                     timer:2000,
+                    // swal.fire("Register Berhasil", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Regiter Berhasil
+                        `,
+                        timer:2000,
                         
-    //                 })
-    //                 $('#registerModal').modal('hide')
-    //             }else {
-    //                 $('#registerModal').modal('hide')
-    //                 // swal.fire("Register Gagal", "", "info");
-    //                 // Swal.fire({
-    //                 //     icon: 'error',
-    //                 //     title: 'Oops...',
-    //                 //     text: 'Register gagal!',
-    //                 //     // footer: '<a href="">Why do I have this issue?</a>'
-    //                 //   })
-    //                 Swal.fire({
-    //                     html:`
-    //                     <div class="o-circle c-container__circle o-circle__sign--failure">
-    //                         <div class="o-circle__sign"></div>  
-    //                     </div> 
-    //                     Register Gagal`,
-    //                     timer:2000,
+                    })
+                    $('#newRegisterModal').modal('hide')
+                }else {
+                    $('#newRegisterModal').modal('hide')
+                    // swal.fire("Register Gagal", "", "info");
+                    // Swal.fire({
+                    //     icon: 'error',
+                    //     title: 'Oops...',
+                    //     text: 'Register gagal!',
+                    //     // footer: '<a href="">Why do I have this issue?</a>'
+                    //   })
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Register Gagal`,
+                        timer:2000,
                         
-    //                 })
-    //             }
-    //         }).catch((err)=>{
+                    })
+                }
+            }).catch((err)=>{
                 
-    //         })
+            })
     
-    //         }).catch((err)=>{
+            }).catch((err)=>{
                 
-    //         })
-    //         }else {
-    //             // swal.fire("Referral Code Harus Di isi", "", "error");
-    //             Swal.fire({
-    //                 html:`
-    //                 <div class="o-circle c-container__circle o-circle__sign--failure">
-    //                     <div class="o-circle__sign"></div>  
-    //                 </div> 
-    //                 Referral Code Harus Di Isi`,
-    //                 timer:2000,
+            })
+            }else {
+                // swal.fire("Referral Code Harus Di isi", "", "error");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Referral Code Harus Di Isi`,
+                    timer:2000,
                     
-    //             })
-    //         }
+                })
+            }
           
             
-    //     }).catch((err)=>{
+        }).catch((err)=>{
             
-    //     })
+        })
 
-    // }else {
-    //     alert('ada data yang salah')
-    // }
+    }else {
+        alert('ada data yang salah')
+    }
 
 
 
@@ -639,7 +620,7 @@ $(document).on('click',"#simpan_supplier",function(){
                             timer:2000,
                             
                         })
-                        $('#supplierModal').modal('hide')
+                        $('#newRegisterSupplierModal').modal('hide')
                         $('#newloginModal').modal('hide')
                     }else{
                         // swal.fire("Register Supplier Gagal", "", "alert");

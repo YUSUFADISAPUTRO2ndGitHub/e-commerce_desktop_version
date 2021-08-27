@@ -328,7 +328,7 @@
                                     <div class="ins-right-box-1">
                                         <input type="text" placeholder="Masukan Email" class="new-input-login-2" id="email_reg"
                                         pattern=".+@globex.com" size="30" required onchange="register_email_check()">
-                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">GET OTP</div>
+                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">Verify Email</div>
                                     </div>
                                 </div>
                                 <div class="input-right-box-1">
@@ -346,7 +346,9 @@
                                 </div>
                                 <div class="input-right-box-1">
                                     Tanggal Lahir
-                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="tanggal_lahir_reg">
+                                    <input type="date" placeholder="Tanggal Lahir" class="new-input-login-2" id="tanggal_lahir_reg"
+                                    min='1899-01-01' max='2010-12-12'
+                                    >
                                 </div>
                                 <div class="input-right-box-1">
                                     Nomor Telpon Utama
@@ -475,51 +477,51 @@
                                 <div class="input-right-box-1"> 
                                     Email  PIC     
                                     <div class="ins-right-box-1">
-                                        <input type="text" placeholder="Masukan Email" class="new-input-login-2" id="email_reg"
-                                        pattern=".+@globex.com" size="30" required onchange="register_email_check()">
-                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">GET OTP</div>
+                                        <input type="text" placeholder="Masukan Email" class="new-input-login-2" type="email" id="email_supp"
+                                        pattern=".+@globex.com" size="30" required onchange="supp_email_check()">
+                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">Verify Email</div>
                                     </div>
                                 </div>
                                 <div class="input-right-box-1">
                                     Password
-                                    <input type="password" placeholder="Masukan Password" class="new-input-login-3" id="password_login">
+                                    <input type="password" placeholder="Masukan Password" class="new-input-login-3" id="password_supp" onchange="supp_password_check()">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Depan PIC
-                                    <input type="text" placeholder="Nama Depan" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nama Depan" class="new-input-login-3" id="nama_depan_supp"
+                                    >
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Belakang PIC
-                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-3" id="nama_belakang_supp">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nomor KTP
-                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="no_ktp_supp"
+                                    maxlength="16">
                                 </div>
                                 
                                 <div class="input-right-box-1">
                                     Nomor Telpon Gudang Utama
-                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-3" id="telp_gudang_supp">
                                 </div>  
                                 <div class="input-right-box-1">
                                     Nomor Telpon  Gudang Kedua
-                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-3" id="telp_gudang2_supp">
                                 </div>
 
                             </div>
                             <div class="new-reg-right-box">
                                 <div class="input-right-box-1">
                                     Nomor Rekening
-                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-3" id="no_rek_perusahaan_supp" minlength="4" maxlength="20">
                                 </div>
-                                <div class="input-right-box-1">
-                                    Nomor KTP
-                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="password_login">
-                                </div>
+                                
                                 <div class="input-right-box-1">
                                     Alamat Lengkap
                                     <div class="box-name-address">
-                                        <input type="text" placeholder="Nomor KTP" class="new-input-login-3" minlength="4" maxlength="50" id="alamat_lengkap_1">
+                                        <input type="text" placeholder="Alamat Lengkap" class="new-input-login-3" minlength="4" maxlength="50" id="alamat_lengkap_1_supp"
+                                        >
     
                                         <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
     
@@ -528,18 +530,19 @@
 
                                 <div class="input-right-box-1">
                                     NPWP
-                                    <input type="number" placeholder="Nomor NPWP" class="new-input-login-3" id="password_login">
+                                    <input type="number" placeholder="Nomor NPWP" class="new-input-login-3" id="npwp_supp">
                                 </div>
                                 <div class="input-right-box-1">
                                     NIK PIC
-                                    <input type="text" placeholder="Nomor Induk Karyawan" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nomor Induk Karyawan" class="new-input-login-3" id="nik_supp">
                                 </div>
                                 <div class="input-right-box-1">
                                     Nama Perusahaan
-                                    <input type="text" placeholder="Nama Perusahaan" class="new-input-login-3" id="password_login">
+                                    <input type="text" placeholder="Nama Perusahaan" class="new-input-login-3" id="nama_perusahaan_supp">
                                 </div>
                                 <div 
-                                class="box-for-customer btn-kumpulkan btn-kumpulkan" 
+                                class="box-for-customer btn-kumpulkan "
+                                id="simpan_supplier" 
                                 >
                                     Daftar 
                                 </div>
@@ -667,7 +670,7 @@
 
 
       <!-- Supplier Register form MODALS -->
-      <div class="modal  fade " id="supplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- <div class="modal  fade " id="supplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-header">
@@ -796,24 +799,11 @@
                             </div>   
                         </div>
                     </div>
-                 
-                    
-                    <!-- <div class="box-new-tambah-alamat">
-                        <div class="tambah-alamat" onclick="addAddressSupp()" style="display: none;">
-                            <p>Tambah Alamat (+)</p>
-                        </div>       
-                        <div class="box-kumpulkan" id="simpan_supplier" >
-                            <div class="btn-kumpulkan" >
-                                <p>Simpan</p>
-                            </div>
-                        </div>            
-
-                    </div>  -->
                 </div>  
             </div>
           </div>
         </div>
-        </div>
+    </div> -->
     <!-- Supplier Register form MODALS -->
 
     <!-- REGISTER MODALS -->

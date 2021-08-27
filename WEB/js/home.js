@@ -1131,6 +1131,7 @@ const send_otp_login_prod=()=>{
 
 const send_otp_register_for_email=()=>{
     var email = $('#email_reg').val()
+    var email_supp = $('#email_supp').val()
 
     axios.post(`http://customers.sold.co.id/check-if-email-is-registered?Email=${email}`)
     .then((res)=>{   
@@ -1169,7 +1170,43 @@ const send_otp_register_for_email=()=>{
                     
                 })
             }
-        }else {
+        }else if (email_supp){
+            alert('masuk ke else if supp')
+            if(res.data == true){
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    OTP Gagal Terkirim, Email Sudah Terdaftar / Salah`,
+                    timer:2000,
+                })
+
+            }else if (res.data == false){
+                
+                axios.post(`http://customers.sold.co.id/get-otp?Email=${email_supp}`)
+                .then((res)=>{
+                    if(res.data){
+                        $('#newOtpRegister').modal('show')
+                        console.log($('#newOtpRegister').modal('show'))
+                        // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
+                    }else {
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            OTP Gagal Terkirim, Email Sudah Terdaftar / Salah`,
+                            timer:2000,
+                            
+                        })
+                    }
+                }).catch((err)=>{
+                    
+                })
+            }
+        }
+        else {
             Swal.fire({
                 html:`
                 <div class="o-circle c-container__circle o-circle__sign--failure">
