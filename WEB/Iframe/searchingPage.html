@@ -202,6 +202,19 @@
             border-radius:5px;
             
         }
+        .close-button-2{
+            display: none;
+            z-index: 99;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            /* background-color: darkgray; */
+            background-color: transparent;
+            opacity: 0;
+            /* color: coral; */
+        }
     </style>
 </head>
 <body>
@@ -382,6 +395,7 @@
             <div class="item-detail-1">
                 <p>Search result for : <input class="sp_name" disabled plaeholder=""/> </p>
             </div>
+            <div class="force-close-all-command close-button-2" onclick="close_all_open_window()"></div>
             <div class="item-detail-2">
                 <p>Urutkan :</p>
                 <p>Harga</p>

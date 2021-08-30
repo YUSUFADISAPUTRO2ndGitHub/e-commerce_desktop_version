@@ -126,7 +126,7 @@
         }
         .close-button{
             display: none;
-            z-index: 48;
+            z-index: 99;
             position: fixed;
             top: 0;
             left: 0;
@@ -616,7 +616,7 @@
                                 <p>Alamat Email</p>
                             </div>
                             <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email_user"
-                            pattern=".+@globex.com" size="30" required>
+                            pattern=".+@globex.com" size="30" required disabled>
                         </div>
                         <div class="login-name" style="display: none;" id="prof_thn">
                             <div class="box-name">
@@ -707,36 +707,7 @@
                     </div>  
                     <div class="reg-form-1">
                         <div class="box-tambah-alamat">
-                            <div class="login-name-3">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
-                                </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap1_user">
-                            </div>   
-                            <div class="login-name-3 sup_delete">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
-                                </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
-                            </div>  
-                            <div class="login-name-3 sup_delete">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
-                                </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
-                            </div>  
-                            <div class="login-name-3 sup_delete">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
-                                </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
-                            </div>      
-                            <div class="login-name-3 sup_delete">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
-                                </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
-                            </div>  
+                           <!-- alamat customer -->
                         </div>
                         <div class="login-name" id="id_ref_code">
                             <div class="box-name">
@@ -1270,13 +1241,17 @@
                 </div>
 
                 <!-- box for searching item -->
-                <div class="box-render-search card box-search-menu force-close-all-command" style="display: none;">
-                    <div class="card-body ">
-                        <ul class="render-li-search">
-            
-                        </ul>
+
+                
+                    <div class="box-render-search card box-search-menu force-close-all-command  " style="display: none;" onclick="close_all_open_window()">
+                        <div class="card-body ">
+                            <ul class="render-li-search">
+                
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                    <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
+                
                 <!-- box for searching item -->
             </div>
             <div class="header-option">

@@ -392,6 +392,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding-left:15px;
     /* background-color: red; */
 }
 .fa-star {
@@ -557,6 +558,7 @@
     display: flex;
     flex-direction:column;
     margin-bottom:5px;
+    padding-left:15px;
 }
 .box-description-right-id p:nth-child(1){
     color:gray;
@@ -587,6 +589,7 @@
     justify-content:space-between;
     align-items: center;
     margin-bottom:5px;
+    padding-left:15px;
     
 }
 .box-small-price-1 {
@@ -614,8 +617,8 @@
 
 .box-quality-right-id {
     width:100%;
-    height:60px;
-    min-height:60px;
+    height:150px;
+    min-height:150px;
     /* border:1px solid green; */
     display: flex;
     flex-direction:column;
@@ -624,6 +627,8 @@
     padding:3px;
     font-weight:700;
     font-size:14px;
+    /* overflow: auto; */
+    /* overflow-x:scroll; */
 }
 .box-small-price-2:hover {
     cursor:pointer;
@@ -669,6 +674,8 @@
     display: flex;
     flex-direction:row;
     height:auto;
+    overflow: auto;
+    overflow-x:scroll;
 }
 
 .box-option-right-id {
@@ -784,8 +791,10 @@
     flex-direction:row;
     flex-wrap: wrap;
     justify-content:space-between;
-    align-items: center;
+    /* align-items: center; */
     padding-bottom:5px;
+    overflow: auto;
+    overflow-x : scroll;
   
 }
 
@@ -852,6 +861,7 @@ font-size:11px;
 }
 .card-sejenis-id {
     width:45%;
+    min-width:45%;
     height:55px;
     /* border:1px solid black; */
     border-radius:10px;
@@ -865,6 +875,7 @@ font-size:11px;
     width:30%;
     height:90%;
     border:3px solid lightgray;
+    border-radius:5px;
 }
 .card-sejenis-img-id img {
     width:100%;
@@ -872,6 +883,7 @@ font-size:11px;
 }
 .card-sejenis-desc-id{
     width:65%;
+    min-width:65%;
     height:80%;
     /* border:1px solid lightgray; */
     display: flex;
@@ -1007,3 +1019,9 @@ font-size:11px;
     transition:1s;
     color:white;
 } */
+
+
+.active_product{
+    background: #217384;
+    color:white;
+}

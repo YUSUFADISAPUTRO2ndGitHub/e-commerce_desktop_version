@@ -649,7 +649,7 @@ const search_item=()=>{
 
 
 const render_searching_page=(product_name)=>{
-    
+    $('.close-button-2').css('display','block')
     var data = product_name
     
     if(data){

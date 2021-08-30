@@ -132,7 +132,7 @@ $(function(){
 
     
     var token = localStorage.getItem('token')
-    
+    console.log(token)
  
     
         axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
@@ -189,11 +189,11 @@ $(function(){
                 $('#nama_belakang_user').val(`${data_customer.Last_Name}`)
                 $('#no_telp1_user').val(`${data_customer.Contact_Number_1}`)
                 $('#no_telp2_user').val(`${data_customer.Contact_Number_2}`)
-                $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
-                $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
-                $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
-                $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
-                $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
+                // $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
+                // $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
+                // $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
+                // $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
+                // $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
                 $('#rekening_user').val(`${data_customer.bank_account_number}`)
                 $('#referral-profile').val(`${data_customer.extra_column_2}`)
                 $('#no_ktp_user').val(`${data_customer.ktp}`)
@@ -203,10 +203,79 @@ $(function(){
                 
                 $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
                 $('#nik_supp_profile').val(data_customer.extra_column_5)
-                $('#ref_code_from').val(data_customer.extra_column_2)
+                $('#ref_code_from').val(data_customer.referral_customer_code)
                 var a = $('#refer-profile').val()
                 
                 $('#profileModal').modal('show')
+
+                
+                if(data_customer.Address_1 == 'undefined'){
+                    console.log('alamat undefined')
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
+                    </div> 
+                    `)
+                    console.log('masuk ke else')
+                }
+                if(data_customer.Address_2 == 'undefined'){
+                    console.log('alamat undefined')
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
+                    </div> 
+                    `)
+                    console.log('masuk ke else')
+                }
+                if(data_customer.Address_3 == 'undefined'){
+                    console.log('alamat undefined')
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
+                    </div> 
+                    `)
+                    console.log('masuk ke else')
+                }
+                if(data_customer.Address_4 == 'undefined'){
+                    console.log('alamat undefined')
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
+                    </div> 
+                    `)
+                    console.log('masuk ke else')
+                }
+                if(data_customer.Address_5 == 'undefined'){
+                    console.log('alamat undefined')
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
+                    </div> 
+                    `)
+                    console.log('masuk ke else')
+                }
+
+
             }else {
                 
                 // $('#loginModal').modal('show') // login lama
@@ -1266,6 +1335,13 @@ $(function(){
 
     $('.input-name').on('keyup',function () {
         $('.close-button').css('display','block')
+        $('.close-button-2').css('display','block')
+        $('.modals-search-result').contents().find('.close-button-2').css('display','block');
+
+        // $('.close').css('display','block')
+        console.log($('.close-button-2'))
+        
+        
         
         
         var value = $(this).val()
@@ -2350,22 +2426,15 @@ function payment_groupbuy_home(product_id){
     
 }
 
-const close_product_detail=()=>{
-    // alert('jalan close')
-    // window.parent.document
-    $('.box_iframe_groupbuy',window.parent.document).css('display','none')
-    console.log($('.box_iframe_groupbuy',window.parent.document))
-}
 
-const open_checkout=()=>{
-    $('.iframe',window.parent.parent.document).css('display','block')
-    console.log($('.iframe',window.parent.parent.document))
-}
 
-const buyNow=(product_id)=>{
+const open_checkout=(product_id)=>{
+    // $('.iframe',window.parent.parent.document).css('display','block')
+    // console.log($('.iframe',window.parent.parent.document))
+
     console.log(product_id)
     addToCart(product_id)
-    close_product_detail()
+    
     var array = []
     localStorage.setItem('itemsToCheckout',array)
     axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
@@ -2385,14 +2454,100 @@ const buyNow=(product_id)=>{
             console.log(productToBeAdded)
     
     
-        $('.close-button').css('display','block')
+        $('.close-button',window.parent.parent.document).css('display','block')
         
-        $('.close').css('display','none')
+        $('.close',window.parent.parent.document).css('display','none')
         
-        // $('.groupbuy_sp_iframe',window.parent.document).css('display','none')
+        $('.groupbuy_sp_iframe',window.parent.document).css('display','none')
+        // $(".iframe",window.parent.document).toggle();
+        $('.iframe',window.parent.parent.document).toggle()
+        
+       
+        if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
+            $('.option-3',window.parent.parent.document).removeClass('background_grey')
+        }else {
+            $('.option-3',window.parent.parent.document).addClass('background_grey')
+        }
+
+        console.log($('.option-3',window.parent.parent.document))
+        
+        // $('.main-body').css('display','none')
+        // $('.modals-search-result').css('display','block')
+        
+        // $('.iframe').css('display','block')
+        // $('.modals-pengiriman',window.parent.document).css("display",'none')
+        // $('.modals-check-harga',window.parent.document).css("display",'none')
+        $('.option-1',window.parent.parent.document).removeClass('background_grey')
+        $('.option-2',window.parent.parent.document).removeClass('background_grey')
+        $('.option-0',window.parent.parent.document).removeClass('background_grey')
+        $(".iframe",window.parent.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+        $('.close-button',window.parent.parent.document).css('display','none')
+
+          // SEARCH ITEM BACK TO NORMAL
+          $('.box-render-search',window.parent.parent.document).css('display','none')
+          $('.input-name',window.parent.parent.document).css('border-bottom-left-radius','10px')
+          $('.input-name',window.parent.parent.document).css('border-bottom-right-radius','10px')
+          $('.input-name',window.parent.parent.document).val(null)
+        }else {
+            // swal.fire("Barang Tidak Tersedia","","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Barang Tidak Tersedia`,
+                timer:2000,
+                
+            })
+        }
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+
+}
+
+const buyNow=(product_id)=>{
+    console.log(product_id)
+    addToCart(product_id)
+    
+    var array = []
+    localStorage.setItem('itemsToCheckout',array)
+    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        if(res.data.Stock_Quantity > 1){
+            var productToBeAdded = {
+                productNo: product_id,
+                quantity: 1,
+                GroupCode: "NO COUPON",
+                priceAgreed: res.data.Sell_Price
+            }
+            array.push(productToBeAdded)
+            
+            var productToBeAddedStringify = JSON.stringify(array);
+            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    
+            console.log(productToBeAdded)
+            
+        // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+    
+        $('.close-button',window.parent.document).css('display','block')
+        
+
+        $('.close',window.parent.document).css('display','none')
+        
+        // $('.close').css('display','none')
+        
+        $('.modals-product-detail',window.parent.document).css('display','none')
         $(".iframe",window.parent.document).toggle();
         
-        
+        if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
+            $('.option-3',window.parent.parent.document).removeClass('background_grey')
+        }else {
+            $('.option-3',window.parent.parent.document).addClass('background_grey')
+        }
         
         
         // $('.main-body').css('display','none')
@@ -2428,13 +2583,6 @@ const buyNow=(product_id)=>{
     }).catch((err)=>{
         console.log(err)
     })
-
-
-
-
-
-
-
 }
 
 
@@ -2499,10 +2647,11 @@ function addToCart(product_id){
                     // swal.fire("Berhasil Menambahkan ke Cart", "", "success");
                     Swal.fire({
                         html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle c-container__circle o-circle__sign--success">
                             <div class="o-circle__sign"></div>  
-                        </div> 
-                        Berhasil Menambahkan ke Cart`,
+                        </div>   
+                        Berhasil Menambahkan ke Cart
+                        `,
                         timer:2000,
                         
                     })
