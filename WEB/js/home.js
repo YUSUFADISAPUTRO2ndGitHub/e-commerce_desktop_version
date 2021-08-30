@@ -1188,7 +1188,7 @@ const send_otp_register_for_email=()=>{
                 .then((res)=>{
                     if(res.data){
                         $('#newOtpRegister').modal('show')
-                        console.log($('#newOtpRegister').modal('show'))
+                        
                         // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
                     }else {
                         Swal.fire({
@@ -1571,6 +1571,14 @@ const close_tab_answer=(result,index)=>{
                     timer:2000,
                     
                 })
+                $('#otp_reg_1').val('')
+                $('#otp_reg_2').val('')
+                $('#otp_reg_3').val('')
+                $('#otp_reg_4').val('')
+                $('#otp_reg_5').val('')
+                $('#otp_reg_6').val('')
+                $('#otp_reg_7').val('')
+                $('#otp_reg_8').val('')
                 $('#newOtpRegister').modal('hide')
                 
             }else {

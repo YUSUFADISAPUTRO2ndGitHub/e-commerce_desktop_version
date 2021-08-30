@@ -143,84 +143,8 @@
 <body >
 
     
-    <!-- LOGIN MODALS -->
-    
-    <!-- <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog box-login ">
-          <div class="modal-content ">
-            <div class="modal-header box-login-header">
-              <p>Sign in <span style='color:#37CED5'>now!</span> <br> Hi,Welcome! Please Sign in to continue</p>
-            </div>
-            <div class="modal-body box-login-body">
-                <div class="login-form">
-                    <div class="login-form-atas">
-                        <div class="login-name">
-                            <div class="box-name" >
-                                <p>Alamat Email</p>
-                            </div>
-                            <input type="text" class="name-form" placeholder="Alamat Email" id="email_login">
-                        </div>
-                        <div class="login-pass">
-                            <div class="box-name">
-                                <p>Password</p>
-                            </div>
-                            <input type="password" class="name-form" placeholder="Password" id="password_login">     
-                        </div>
-                    </div>
-                    <div class="login-form-bawah">   
-                        <div class="login-otp">
-                            <div class="box-name" >
-                                <p>OTP</p>
-                            </div>
-                            <input type="text" class="otp-form" placeholder="OTP" id="otp_login">
-                        </div>
-                        <div class="otp_send_login" onclick="send_otp_login()">
-                            <p>Kirim OTP</p>
-                        </div>
-                        
-                    </div>
 
-                    
-                    <div class="box-option-login" >
-                        <div class="login-option btn-login">
-                            <p>Login</p>
-                        </div>
-                        <div class="box-new-login">
-                            <div class="login-option"  onclick="sign_up_request()" data-bs-toggle="modal" data-bs-target="#registerModal">
-                                <p>Bergabung Sebagai Customer</p>
-                            </div>
-                            
-                            <div class="login-option login-btn"     data-toggle="tooltip" data-placement="right" title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service" >
-                                <p>Bergabung Sebagai Supplier</p>
-                            </div>
 
-                        </div>
-                        <div class="login-option" onclick="forgot_modal_request()" data-bs-toggle="modal" data-bs-target="#forgotModal">
-                            <p>Lupa Password</p>
-                        </div>
-                    </div>
-                </div>  
-                
-                <div class="box_information_login">
-                    <div class="judul_info">
-                        <div class="judul_info_2">
-                            <i class="fas fa-info-circle"></i>
-                            <p>PANDUAN PENGGUNA</p>
-                        </div>
-                        <i class="far fa-times-circle icon_close_info" onclick="close_information_login()"></i>
-                    </div>
-                    <div class="isi_info">
-                        <p>Klik  <span class="disini_info_supplier"> di sini</span> untuk melihat bagaimana menjadi pemasok,  atau   </p>
-                            
-                        <p> klik <span class="disini_info_customer"> di sini</span> untuk melihat bagaimana Anda bisa mendapatkan keuntungan dari mendaftar ke sold.co.id</p>
-                    </div>
-
-                </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    <!-- LOGIN MODALS -->
 
 
     <!-- NEW LOGIN MODALS -->
@@ -277,12 +201,11 @@
                                 >
                                     Daftar Customer
                                 </div>
-                                <!-- data-toggle="tooltip" data-placement="right"
-                                title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service" -->
                                 <div 
                                 class="box-for-supplier" 
-                                data-bs-target="#newRegisterSupplierModal"
-                                data-bs-toggle="modal" 
+                                disabled
+                                data-toggle="tooltip" data-placement="right"
+                                title="Untuk Pendaftaran Sebagai Supplier, Silahkan Hubungi Customer Service"
                                 >
                                     Daftar Supplier
                                 </div>
@@ -447,6 +370,7 @@
 
     <!-- NEW REGISTER  CUSTOMER MODALS -->
 
+
      <!-- NEW REGISTER SUPPLIER MODALS -->
      <div class="modal fade " id="newRegisterSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
@@ -560,7 +484,7 @@
 
     <!--  NEW REGISTER SUPPLIERODALS -->
 
-    <!-- TOKEN REGISTER -->
+    <!-- TOKEN  OTP REGISTER & SUPPLER -->
 
     <div class="modal fade" id="newOtpRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-otp-register ">
@@ -598,7 +522,7 @@
     <!-- TOKEN REGISTER -->
 
         <!-- FORGOT PASSWORD MODALS -->
-        <div class="modal fade " id="forgotModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade " id="forgotModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog box-login ">
               <div class="modal-content ">
                 <div class="modal-header box-login-header">
@@ -669,324 +593,7 @@
     <!-- FORGOT PASSWORD MODALS -->
 
 
-      <!-- Supplier Register form MODALS -->
-      <!-- <div class="modal  fade " id="supplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog box-login ">
-          <div class="modal-content ">
-            <div class="modal-header box-login-header">
-              <p>Hi <span style='color:#37CED5'> there!</span> <br> Hi,Supplier2!</p>
-            </div>
-            <div class="modal-body box-login-body">
-                <div class="register-form">       
-                    <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Alamat Email PIC</p>
-                            </div>
-                            <input type="text" class="name-form" placeholder="Alamat Email PIC" type="email" id="email_supp"
-                            pattern=".+@globex.com" size="30" required onchange="supp_email_check()">
-                        </div>
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>No Telp utama Gudang</p>
-                            </div>
-                            <input type="number" class="name-form" placeholder="no Telp utama Gudang" maxlength="20" id="telp_gudang_supp"> 
-                        </div>
-                    </div>    
-                    <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Password</p>
-                            </div>
-                            <input type="password" class="name-form" placeholder="Password" id="password_supp" onchange="supp_password_check()">
-                        </div>
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>No Telp Kedua Gudang</p>
-                            </div>
-                            <input type="number" class="name-form" placeholder="No Telp Kedua Gudang" maxlength="20" id="telp_gudang2_supp">
-                        </div>
-                    </div>  
-                    <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Nama Depan PIC</p>
-                            </div>
-                            <input type="text" class="name-form" placeholder="Nama Depan PIC" id="nama_depan_supp">
-                        </div>
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Nomor Rekening Perusahaan</p>
-                            </div>
-                            <input type="number" class="name-form" placeholder="Nomor Rekening Perusahaan" id="no_rek_perusahaan_supp">
-                        </div>
-                    </div>  
-                    <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Nama Belakang PIC</p>
-                            </div>
-                            <input type="text" class="name-form" placeholder="Nama Belakang PIC" id="nama_belakang_supp">
-                        </div>
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>NPWP</p>
-                            </div>
-                            <input type="number" class="name-form" placeholder="NPWP" id="npwp_supp"> 
-                        </div>
-                    </div>  
-                    <div class="reg-form-1">
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>No KTP PIC</p>
-                            </div>
-                            <input type="number" class="name-form" placeholder="No KTP PIC" minlength="4" maxlength="8" id="no_ktp_supp">
-                        </div>
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>NIK PIC ( No Induk Karyawan )</p>
-                            </div>
-                            <input type="number" class="name-form" placeholder="NIK" id="nik_supp">
-                        </div>
-                    </div> 
-                    <div class="reg-form-1">
-                        <div class="box-tambah-alamat-supplier">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Alamat Lengkap</p>
-                                </div>
-                                <input type="text" class="form-reg-nama" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap_1_supp">
-                            </div>       
-                        </div>
-                        <div class="login-name">
-                            <div class="box-name">
-                                <p>Nama Perusahaan</p>
-                            </div>
-                            <input type="text" class="name-form" placeholder="Nama Perusahaan" id="nama_perusahaan_supp">
-                        </div>
-                    </div>   
 
-                    <div class="box_agreement">
-                        <div class="agreement-left">
-                            <div class="agreement_alert">
-                                <div class="agreement_alert_left">
-                                    <div class="agreement_box_icon">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                    </div>
-                                    <div class="agreement_isi">
-                                        <p>By Signing-up you are agreeing with our service policy. <br>
-                                            term and condition.
-                                        </p>
-                                    </div>
-
-                                </div>
-                                <div class="agreement_alert_right">
-                                    <p>Dengan mendaftar, Anda setuju dengan kebijakan syarat dan ketentuan layanan
-                                        kami.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="agreement-right">
-                            <div class="box_view_term" onclick="to_term_condition()">
-                                <p>View Term and Condition</p>
-
-                            </div>
-                            <div class="box-kumpulkan" id="simpan_supplier" >
-                                <div class="btn-kumpulkan" >
-                                    <p>Simpan</p>
-                                </div>
-                            </div>   
-                        </div>
-                    </div>
-                </div>  
-            </div>
-          </div>
-        </div>
-    </div> -->
-    <!-- Supplier Register form MODALS -->
-
-    <!-- REGISTER MODALS -->
-    <div class="modal  fade " id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog box-login ">
-              <div class="modal-content ">
-                <div class="modal-header box-login-header">
-                  <p>Hi <span style='color:#37CED5'> there!</span> <br> Hi,Welcome!</p>
-                </div>
-                <div class="modal-body box-login-body">
-                    <div class="register-form">       
-                        <div class="reg-form-1">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Alamat Email</p>
-                                </div>
-                                <input type="text" class="name-form" placeholder="Alamat Email" type="email" id="email_reg"
-                                pattern=".+@globex.com" size="30" required onchange="register_email_check()">
-                            </div>
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Tahun Lahir</p>
-                                </div>
-                                <input type="number" class="name-form" placeholder="Tahun Lahir" id="tahun_lahir_reg" onchange="tahun_lahir_check()"> 
-                            </div>
-                        </div>    
-                        <div class="reg-form-1">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Password</p>
-                                </div>
-                                <!-- <div class="box_password_reg"> -->
-                                    <input type="password" class="name-form" placeholder="Password" id="password_reg" onchange="password_check()">
-                                    <!-- <i class="fas fa-eye eye-open" ></i>
-                                    <i class="fas fa-eye-slash eye-close"></i> -->
-                                <!-- </div> -->
-                            </div>
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Bulan Lahir</p>
-                                </div>
-                                <input type="number" class="name-form" placeholder="Bulan Lahir" id="bulan_lahir_reg" onchange="bulan_lahir_check()">
-                            </div>
-                        </div>  
-                        <div class="reg-form-1">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Nama Depan</p>
-                                </div>
-                                <input type="text" class="name-form" placeholder="Nama Depan" id="nama_depan_reg" onchange="nama_depan_check()">
-                            </div>
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Tanggal Lahir</p>
-                                </div>
-                                <input type="number" class="name-form" placeholder="Tanggal Lahir" id="tanggal_lahir_reg" onchange="tanggal_lahir_check()">
-                            </div>
-                        </div>  
-                        <div class="reg-form-1">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>Nama Belakang</p>
-                                </div>
-                                <input type="text" class="name-form" placeholder="Nama Belakang" id="nama_belakang_reg" onchange="nama_belakang_check()">
-                            </div>
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>No telp utama</p>
-                                </div>
-                                <input type="number" class="name-form" placeholder="No telp utama" id="no_telp_reg" onchange="no_telp_check()"> 
-                            </div>
-                        </div>  
-                        <div class="reg-form-1">
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>No KTP</p>
-                                </div>
-                                <input type="number" class="name-form" placeholder="No KTP" minlength="4" maxlength="8" id="no_ktp_reg" onchange="ktp_check()">
-                            </div>
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>No telp kedua</p>
-                                </div>
-                                <input type="number" class="name-form" placeholder="No telp kedua" id="no_telp_2_reg" onchange="no_telp_check2()">
-                            </div>
-                        </div>  
-                        <div class="reg-form-1">
-                            <div class="box-tambah-alamat">
-                                <div class="login-name">    
-                                    <div class="box-name">
-                                        <p>Alamat Lengkap</p>
-                                    </div>
-                                    <div class="box-name-address">
-                                        <input type="text" class="form-reg-nama-1" placeholder="Alamat Lengkap" minlength="4" maxlength="50" id="alamat_lengkap_1">
-                                        <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i>
-
-                                    </div>
-                                </div>       
-                            </div>
-                            
-                            <div class="login-name">
-                                <div class="box-name">
-                                    <p>No Rekening</p>
-                                </div>
-                                <input type="type" class="name-form" placeholder="No Rekening" id="no_rekening_reg" minlength="4" maxlength="20">
-                            </div>
-                        </div>  
-                        
-                        <div class="new-reg-form">
-                            <!-- <div class="tambah-alamat" onclick="addAddress()" >
-                                <p>Tambah Alamat (+)</p>
-                            </div>     -->
-                            <select class="form-select option-referral ref-cod" aria-label="Default select example" onchange="on_select_ref()">
-                                <option selected></option>             
-                            </select>
-                            <input type="text" class="ref-form" placeholder="Referral Code" id="inp_ref_code"  maxlength="20">
-                            
-                        </div> 
-                        <div class="box_agreement">
-                            <div class="agreement-left">
-                                <div class="agreement_alert">
-                                    <div class="agreement_alert_left">
-                                        <div class="agreement_box_icon">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </div>
-                                        <div class="agreement_isi">
-                                            <p>By Signing-up you are agreeing with our service policy. <br>
-                                                term and condition.
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                    <div class="agreement_alert_right">
-                                        <p>Dengan mendaftar, Anda setuju dengan kebijakan syarat dan ketentuan layanan
-                                            kami.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="agreement-right">
-                                <div class="box_view_term" onclick="to_term_condition()">
-                                    <p>View Term and Condition</p>
-
-                                </div>
-                                <div class="box-kumpulkan btn-register" id="simpan_reg" >
-                                    <div class=" " >
-                                        <p>Simpan</p>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                      
-                         <!-- <div class="box_information_login">
-                                    <div class="judul_info">
-                                        <div class="judul_info_2">
-                                            <i class="fas fa-info-circle"></i>
-                                            <p>PANDUAN PENGGUNA</p>
-                                        </div>
-                                        <i class="far fa-times-circle icon_close_info" onclick="close_information_login()"></i>
-                                    </div>
-                                    <div class="isi_info">
-                                        <p>Klik  <span class="disini_info_supplier"> di sini</span> untuk melihat bagaimana menjadi pemasok,  atau   </p>
-                                            
-                                        <p> klik <span class="disini_info_customer"> di sini</span> untuk melihat bagaimana Anda bisa mendapatkan keuntungan dari mendaftar ke sold.co.id</p>
-                                    </div>
-                                </div> -->
-                        <!-- <div class="box-new-tambah-alamat">
-                            <div class="tambah-alamat" onclick="addAddress()" style="display: none;">
-                                <p>Tambah Alamat (+)</p>
-                            </div>       
-                            <div class="box-kumpulkan btn-register" id="simpan_reg" >
-                                <div class="btn-kumpulkan" >
-                                    <p>Simpan</p>
-                                </div>
-                            </div>            
-
-                        </div>  -->
-                    </div>  
-                </div>
-              </div>
-            </div>
-    </div>
-    <!-- REGISTER MODALS -->
 
     <!-- PROFILE MODALS -->
     <div class="modal  fade " id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

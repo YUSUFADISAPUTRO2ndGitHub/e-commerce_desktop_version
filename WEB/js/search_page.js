@@ -258,6 +258,9 @@ const get_product_detail_from_searching_page=(product_id)=>{
     $('.groupbuy_sp_iframe').css('display','block')
     $('.groupbuy_sp_iframe').attr('src',`./itemDetail.html?product_id=${product_id}`)
 
+
+    // $('.iframe',window.parent.document).css('display','block')
+    // $('.iframe',window.parent.document).css('display','block')
     // axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
     // .then((res)=>{
     //     

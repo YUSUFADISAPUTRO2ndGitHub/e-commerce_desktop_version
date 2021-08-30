@@ -2872,7 +2872,7 @@ function commafy( num ) {
                                     <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                         Tambah
                                     </div>
-                                    <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
+                                    <div class="box-small-price-2" onclick="open_checkout('${item.Product_Code}')">
                                         Beli Sekarang
                                     </div>
                                    
@@ -3074,7 +3074,7 @@ function commafy( num ) {
                                     <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                         Tambah
                                     </div>
-                                    <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
+                                    <div class="box-small-price-2" onclick="open_checkout('${item.Product_Code}')">
                                         Beli Sekarang
                                     </div>
                                     <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">

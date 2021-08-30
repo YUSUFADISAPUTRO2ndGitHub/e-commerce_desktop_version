@@ -2357,6 +2357,11 @@ const close_product_detail=()=>{
     console.log($('.box_iframe_groupbuy',window.parent.document))
 }
 
+const open_checkout=()=>{
+    $('.iframe',window.parent.parent.document).css('display','block')
+    console.log($('.iframe',window.parent.parent.document))
+}
+
 const buyNow=(product_id)=>{
     console.log(product_id)
     addToCart(product_id)
@@ -2384,8 +2389,15 @@ const buyNow=(product_id)=>{
         
         $('.close').css('display','none')
         
-        console.log($(".iframe",window.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`))
+        // $('.groupbuy_sp_iframe',window.parent.document).css('display','none')
         $(".iframe",window.parent.document).toggle();
+        
+        
+        
+        
+        // $('.main-body').css('display','none')
+        // $('.modals-search-result').css('display','block')
+        
         // $('.iframe').css('display','block')
         $('.modals-pengiriman',window.parent.document).css("display",'none')
         $('.modals-check-harga',window.parent.document).css("display",'none')
@@ -2393,7 +2405,8 @@ const buyNow=(product_id)=>{
         $('.option-2',window.parent.document).removeClass('background_grey')
         $('.option-0',window.parent.document).removeClass('background_grey')
         $(".iframe",window.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
-    
+        $('.close-button',window.parent.document).css('display','none')
+
           // SEARCH ITEM BACK TO NORMAL
           $('.box-render-search',window.parent.document).css('display','none')
           $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
