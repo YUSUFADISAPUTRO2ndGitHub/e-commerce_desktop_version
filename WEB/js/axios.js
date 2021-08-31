@@ -61,7 +61,7 @@ $( document ).ready(function() {
         if(render_from == 'home'){
             render_get_product_detail(item_category)
         }else {
-            alert('masuk ke else')
+            // alert('masuk ke else')
             render_get_product_detail_searching_page(item_category)
 
         }
@@ -2782,7 +2782,10 @@ function commafy( num ) {
 }
  const render_get_product_detail=(product_id)=>{
     console.log(product_id,'2637')
-
+    $(this).scrollTop('.modals-product-detail')
+    
+    console.log($(this).scrollTop('.box_iframe_groupbuy'))
+    var product_id_pilihan = product_id
     let allDataProduct = []
     axios.post(`http://products.sold.co.id/get-product-details`)
     .then((res)=>{
@@ -2921,7 +2924,6 @@ function commafy( num ) {
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
                                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Produk Sejenis</button>
                                             <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
                                             </div>
                                         </nav>
@@ -2943,9 +2945,7 @@ function commafy( num ) {
                                                     </div>
                                                 </div>           
                                             </div>
-                                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                                
-                                            </div>
+                                            
                                             <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
                                                 <div class="card-faq-id">
                                                     <div class="card-question-id">
@@ -3060,7 +3060,7 @@ function commafy( num ) {
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
                                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Produk Sejenis</button>
+                                            
                                             <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
                                             </div>
                                         </nav>
@@ -3082,9 +3082,7 @@ function commafy( num ) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                                      
-                                            </div>
+                                            
                                             <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
                                                 <div class="card-faq-id">
                                                     <div class="card-question-id">
@@ -3133,33 +3131,43 @@ function commafy( num ) {
                     
                         console.log(filter_product)
                         filter_product.map((val,index)=>{
-                            $('#nav-contact').append(`
-                            <div class="card-sejenis-id">
-                                <div class="card-sejenis-img-id">
-                                    <img src="../img/vantsing_shipping_method.png" alt="">
-                                </div>
-                                <div class="card-sejenis-desc-id">
-                                    <p class="limited-text-short">${val.Name}</p>
-                                    <p>RP.${val.Sell_Price}</p>
-                                    
-                                </div>
-                            </div>
-                            `)
-
-                            $('.card-quality-right-id').append(`
-                                <div class="card-sejenis-id">
+                            if(val.Product_Code == product_id_pilihan){
+                                console.log(val.Product_Code)
+                                console.log(product_id_pilihan)
+                                $('.card-quality-right-id').append(`
+                                <div class="card-sejenis-id active_product">
                                     <div class="card-sejenis-img-id">
                                         <img src="../img/vantsing_shipping_method.png" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-short">${val.Name}</p>
+                                        <p class="limited-text-commision">${val.Name}</p>
                                         <p>RP.${val.Sell_Price}</p>
                                         
                                     </div>
                                 </div>
-                            `)
+                                `)
+
+                            }else {
+                                $('.card-quality-right-id').append(`
+                                <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
+                                    <div class="card-sejenis-img-id">
+                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                    </div>
+                                    <div class="card-sejenis-desc-id">
+                                        <p class="limited-text-commision">${val.Name}</p>
+                                        <p>RP.${val.Sell_Price}</p>
+                                        
+                                    </div>
+                                </div>
+                                `)
+                            }
+
+                          
 
                         })
+                        
+
+
                         
                         var comment_parse = JSON.parse(cust_comment.User_Comments)
                         console.log(comment_parse)
@@ -3227,8 +3235,9 @@ function commafy( num ) {
 
  const render_get_product_detail_searching_page=(product_id)=>{
     console.log(product_id,'2637')
-        
-
+    $(this).scrollTop('.box_iframe_groupbuy')
+    console.log(this)
+    var product_id_pilihan = product_id
     let allDataProduct = []
 
     axios.post(`http://products.sold.co.id/get-product-details`)
@@ -3367,7 +3376,6 @@ function commafy( num ) {
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
                                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Produk Sejenis</button>
                                             <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
                                             </div>
                                         </nav>
@@ -3391,9 +3399,7 @@ function commafy( num ) {
                                               
                                                
                                             </div>
-                                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                              
-                                            </div>
+                                            
                                             <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
                                                 <div class="card-faq-id">
                                                     <div class="card-question-id">
@@ -3510,7 +3516,6 @@ function commafy( num ) {
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
                                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Produk Sejenis</button>
                                             <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
                                             </div>
                                         </nav>
@@ -3532,9 +3537,7 @@ function commafy( num ) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                               
-                                            </div>
+                                            
                                             <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
                                                 <div class="card-faq-id">
                                                     <div class="card-question-id">
@@ -3583,21 +3586,11 @@ function commafy( num ) {
     
                         console.log(filter_product)
                         filter_product.map((val,index)=>{
-                            $('#nav-contact').append(`
-                            <div class="card-sejenis-id">
-                                <div class="card-sejenis-img-id">
-                                    <img src="../img/vantsing_shipping_method.png" alt="">
-                                </div>
-                                <div class="card-sejenis-desc-id">
-                                    <p class="limited-text-short">${val.Name}</p>
-                                    <p>RP. ${val.Sell_Price}</p>
-                                    
-                                </div>
-                            </div>
-                            `)
-    
-                            $('.card-quality-right-id').append(`
-                                <div class="card-sejenis-id">
+                            console.log(val.Product_Code)
+                            console.log(product_id_pilihan)
+                            if(val.Product_Code == product_id_pilihan){
+                                $('.card-quality-right-id').append(`
+                                <div class="card-sejenis-id active_product">
                                     <div class="card-sejenis-img-id">
                                         <img src="../img/vantsing_shipping_method.png" alt="">
                                     </div>
@@ -3607,7 +3600,37 @@ function commafy( num ) {
                                         
                                     </div>
                                 </div>
-                            `)
+                                `)
+        
+                            }else {
+
+                                $('.card-quality-right-id').append(`
+                                <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
+                                    <div class="card-sejenis-img-id">
+                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                    </div>
+                                    <div class="card-sejenis-desc-id">
+                                        <p class="limited-text-short">${val.Name}</p>
+                                        <p>RP. ${val.Sell_Price}</p>
+                                        
+                                    </div>
+                                </div>
+                                `)
+        
+                            }
+
+                            // $('.card-quality-right-id').append(`
+                            //     <div class="card-sejenis-id">
+                            //         <div class="card-sejenis-img-id">
+                            //             <img src="../img/vantsing_shipping_method.png" alt="">
+                            //         </div>
+                            //         <div class="card-sejenis-desc-id">
+                            //             <p class="limited-text-short">${val.Name}</p>
+                            //             <p>RP. ${val.Sell_Price}</p>
+                                        
+                            //         </div>
+                            //     </div>
+                            // `)
     
                         })
                         
@@ -3715,6 +3738,13 @@ function addAddressSupp(){
    }else {
     idAddressSupp--
    }
+}
+
+const change_product_to=(product_id)=>{
+    // render_get_product_detail_searching_page(product_id)
+    // location.replace(`./listkategori.html?subcategory=${item}`)
+    location.replace(`./itemDetail.html?product_id=${product_id}&render_from=home`)
+
 }
 
 const newRender_list_hutang=(customer_code)=>{
