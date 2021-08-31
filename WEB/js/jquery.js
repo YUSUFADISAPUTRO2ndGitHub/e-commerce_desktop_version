@@ -207,7 +207,7 @@ $(function(){
                 var a = $('#refer-profile').val()
                 
                 $('#profileModal').modal('show')
-
+                $('.box-tambah-alamat').empty()
                 
                 if(data_customer.Address_1 == 'undefined'){
                     console.log('alamat undefined')

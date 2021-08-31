@@ -140,6 +140,7 @@ const get_product_detail_from_main_page=(product_id)=>{
 
   
     // render_get_product_detail(product_id)  
+    $(this).scrollTop('.modals-product-detail')
 $('.box-delete-success').css('display','block')
 $('.modals-product-detail').css('display','block')
 $('.close-button').css('display','block')
