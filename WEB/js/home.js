@@ -79,6 +79,7 @@ function cart_requested(x){
     // $('.iframe').css('display','block')
     $('.modals-pengiriman').css("display",'none')
     $('.modals-check-harga').css("display",'none')
+    $('.box_iframe_groupbuy').css('display','none')
     $('.option-1').removeClass('background_grey')
     $('.option-2').removeClass('background_grey')
     $('.option-0').removeClass('background_grey')

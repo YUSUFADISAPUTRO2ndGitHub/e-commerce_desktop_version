@@ -1887,13 +1887,21 @@ function groupbuy(product_id){
             location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
             
         }else {
-            close_all_open_window()
+            // alert('masuk ke else 1890')
+            
             Swal.fire({
-                title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
-                showDenyButton: true,
-                showCancelButton: false,
-                confirmButtonText: `Lihat Daftar Tagihan`,
-                denyButtonText: `Cancel`,
+                // title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div>  
+                Anda Memiliki Hutang, Silahkan Membayar Terlebih Dahulu, <br> Lalu Kembali Memesan Secara Groupbuy / Anda Dapat Memesan Dengan Harga Normal
+                `,
+                timer:2000,
+                // showDenyButton: true,
+                // showCancelButton: false,
+                // confirmButtonText: `Lihat Daftar Tagihan`,
+                // denyButtonText: `Cancel`,
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -1919,6 +1927,7 @@ function groupbuy(product_id){
                 }
                 
               })
+            //   close_all_open_window()
         }
     }).catch((err)=>{
         
@@ -1993,7 +2002,7 @@ function payment_groupbuy_home(product_id){
     
     if(alamat_lain_input.length>0){
        isAlamat_pilihan = true
-        var final_address_new = alamt_lain_input + kecamatan_pilihan + kelurahan_pilihan + kota_pilihan + province_pilihan + kodepos_pilihan
+        var final_address_new = alamat_lain_input + kecamatan_pilihan + kelurahan_pilihan + kota_pilihan + province_pilihan + kodepos_pilihan
         
     }else if (alamat_input.length > 0) {      
         isAlamat_pilihan = true

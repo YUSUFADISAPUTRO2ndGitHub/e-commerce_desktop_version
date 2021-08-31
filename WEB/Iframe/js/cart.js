@@ -414,7 +414,7 @@ function loadingMessage(interval){
     Swal.fire({
     title: 'Loading Your Request',
     html: '',
-    timer: interval*700,
+    timer: interval*500,
     timerProgressBar: true,
     allowOutsideClick: false,
     didOpen: () => {

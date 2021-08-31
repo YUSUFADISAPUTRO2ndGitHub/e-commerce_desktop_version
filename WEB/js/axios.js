@@ -138,7 +138,8 @@ const renderOptionSearch=()=>{
 
 const get_product_detail_from_main_page=(product_id)=>{
 
-  
+    var from = document.referrer
+    console.log(from)
     // render_get_product_detail(product_id)  
     $(this).scrollTop('.modals-product-detail')
 $('.box-delete-success').css('display','block')
@@ -188,7 +189,7 @@ const renderItemPromo=()=>{
                 $('.box-render-promo').append(
                     ` 
                         <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
-                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                             <div class="card-item-list">
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
@@ -666,7 +667,7 @@ const get_product_detail=(product_id)=>{
     $('.box-list-kategori').css('display','none')
     $('.box-list-kategori').css('display','none')
     $('.modals-product-detail').css('display','block')
-    $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}`)
+    $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
     // 
     // $('.modals-lk').remove()
     // 
@@ -2797,16 +2798,22 @@ function commafy( num ) {
         .then((res)=>{
             var split_product = res.data.Name.split(' ')
             console.log(split_product)
+            var all_filter_product = []
             for(var i =0; i<split_product.length; i++){
                 var filter_product = allDataProduct.filter((val)=>{
-                    // console.log(val.Names)
+                    // console.log(val.Name)
                     // console.log(split_product[i])
+                    // console.log(val.Name.includes(split_product[i]))
                     if(val.Name.includes(split_product[i])){
+                        console.log('masuk ke if')
+                        all_filter_product.push(val)
                         return val
                     }
                 })
+                console.log(all_filter_product)
             }
-            
+            console.log(filter_product,'2812')
+            console.log(all_filter_product,'luar')
 
             let timerInterval
             Swal.fire({
@@ -2903,7 +2910,7 @@ function commafy( num ) {
         
                                     <div class="box-price-right-id">
                                         <div class="box-small-price-1">
-                                            RP.${commafy(item.Sell_Price)}
+                                           
                                         </div>
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
@@ -2912,6 +2919,16 @@ function commafy( num ) {
                                             Beli Sekarang
                                         </div>
                                        
+                                    </div>
+                                    <div class="box-quality-right-id-2">
+                                        <div class="bsp-1">
+                                            <p> Normal Price : </p>
+                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                        </div>
+                                        <div class="bsp-1">
+                                            <p> Group Buy  Price : </p>
+                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
+                                        </div> 
                                     </div>
            
                                     <div class="box-quality-right-id">
@@ -3037,7 +3054,7 @@ function commafy( num ) {
         
                                     <div class="box-price-right-id">
                                         <div class="box-small-price-1">
-                                            RP.${commafy(item.GroupBuy_SellPrice)}
+                                        
                                         </div>
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
@@ -3048,6 +3065,16 @@ function commafy( num ) {
                                         <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
                                             Beli Harga Group
                                         </div>
+                                    </div>
+                                    <div class="box-quality-right-id-2">
+                                        <div class="bsp-1">
+                                            <p> Normal Price : </p>
+                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                        </div>
+                                        <div class="bsp-1">
+                                            <p> Group Buy   Price : </p>
+                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
+                                        </div> 
                                     </div>
                                  
                                     <div class="box-quality-right-id">
@@ -3131,7 +3158,7 @@ function commafy( num ) {
                         
                     
                         console.log(filter_product)
-                        filter_product.map((val,index)=>{
+                        allDataProduct.map((val,index)=>{
                             if(val.Product_Code == product_id_pilihan){
                                 console.log(val.Product_Code)
                                 console.log(product_id_pilihan)
@@ -3142,7 +3169,7 @@ function commafy( num ) {
                                     </div>
                                     <div class="card-sejenis-desc-id">
                                         <p class="limited-text-commision">${val.Name}</p>
-                                        <p>RP.${val.Sell_Price}</p>
+                                        <p>RP.${commafy(val.Sell_Price)}</p>
                                         
                                     </div>
                                 </div>
@@ -3156,7 +3183,7 @@ function commafy( num ) {
                                     </div>
                                     <div class="card-sejenis-desc-id">
                                         <p class="limited-text-commision">${val.Name}</p>
-                                        <p>RP.${val.Sell_Price}</p>
+                                        <p>RP.${commafy(val.Sell_Price)}</p>
                                         
                                     </div>
                                 </div>
@@ -3250,11 +3277,13 @@ function commafy( num ) {
     
             var split_product = res.data.Name.split(' ')
             console.log(split_product)
+            var all_filter_product = []
             for(var i =0; i<split_product.length; i++){
                 var filter_product = allDataProduct.filter((val)=>{
                     // console.log(val.Names)
                     // console.log(split_product[i])
                     if(val.Name.includes(split_product[i])){
+                        all_filter_product.push(val)
                         return val
                     }
                 })
@@ -3355,7 +3384,7 @@ function commafy( num ) {
         
                                     <div class="box-price-right-id">
                                         <div class="box-small-price-1">
-                                            RP.${commafy(item.Sell_Price)}
+                                            
                                         </div>
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
@@ -3364,6 +3393,16 @@ function commafy( num ) {
                                             Beli Sekarang
                                         </div>
                                        
+                                    </div>
+                                    <div class="box-quality-right-id-2">
+                                        <div class="bsp-1">
+                                            <p> Normal Price : </p>
+                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                        </div>
+                                        <div class="bsp-1">
+                                            <p> Group Buy Price  : </p>
+                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
+                                        </div> 
                                     </div>
                    
                                     <div class="box-quality-right-id">
@@ -3493,7 +3532,7 @@ function commafy( num ) {
         
                                     <div class="box-price-right-id">
                                         <div class="box-small-price-1">
-                                            RP.${commafy(item.GroupBuy_SellPrice)}
+                                            
                                         </div>
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
@@ -3504,6 +3543,16 @@ function commafy( num ) {
                                         <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
                                             Beli Harga Group
                                         </div>
+                                    </div>
+                                    <div class="box-quality-right-id-2">
+                                        <div class="bsp-1">
+                                            <p> Normal Price : </p>
+                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                        </div>
+                                        <div class="bsp-1">
+                                            <p> Group Buy  Price : </p>
+                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
+                                        </div> 
                                     </div>
                     
                                     <div class="box-quality-right-id">
@@ -3586,7 +3635,7 @@ function commafy( num ) {
     
     
                         console.log(filter_product)
-                        filter_product.map((val,index)=>{
+                        all_filter_product.map((val,index)=>{
                             console.log(val.Product_Code)
                             console.log(product_id_pilihan)
                             if(val.Product_Code == product_id_pilihan){
@@ -3596,8 +3645,8 @@ function commafy( num ) {
                                         <img src="../img/vantsing_shipping_method.png" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-short">${val.Name}</p>
-                                        <p>RP. ${val.Sell_Price}</p>
+                                        <p class="limited-text-commision">${val.Name}</p>
+                                        <p>RP. ${commafy(val.Sell_Price)}</p>
                                         
                                     </div>
                                 </div>
@@ -3611,27 +3660,14 @@ function commafy( num ) {
                                         <img src="../img/vantsing_shipping_method.png" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-short">${val.Name}</p>
-                                        <p>RP. ${val.Sell_Price}</p>
+                                        <p class="limited-text-commision">${val.Name}</p>
+                                        <p>RP. ${commafy(val.Sell_Price)}</p>
                                         
                                     </div>
                                 </div>
                                 `)
         
                             }
-
-                            // $('.card-quality-right-id').append(`
-                            //     <div class="card-sejenis-id">
-                            //         <div class="card-sejenis-img-id">
-                            //             <img src="../img/vantsing_shipping_method.png" alt="">
-                            //         </div>
-                            //         <div class="card-sejenis-desc-id">
-                            //             <p class="limited-text-short">${val.Name}</p>
-                            //             <p>RP. ${val.Sell_Price}</p>
-                                        
-                            //         </div>
-                            //     </div>
-                            // `)
     
                         })
                         
@@ -4303,3 +4339,9 @@ const check_user_for_login=()=>{
    }
 
 
+
+
+   function replace_vtintl_to_sold_co_id(original_url){
+        var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+    return original_url;
+}
