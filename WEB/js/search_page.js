@@ -818,7 +818,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     
     axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        // 
+        console.log(res.data)
         var arrListHutang = res.data
         var arrDataProduct = []
         var kurir_name = ''

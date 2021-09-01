@@ -2441,7 +2441,7 @@ const open_checkout=(product_id)=>{
     // $('.iframe',window.parent.parent.document).css('display','block')
     // console.log($('.iframe',window.parent.parent.document))
 
-    console.log(product_id)
+    // console.log(product_id)
     addToCart(product_id)
     
     var array = []
@@ -2460,7 +2460,7 @@ const open_checkout=(product_id)=>{
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
     
-            console.log(productToBeAdded)
+            // console.log(productToBeAdded)
     
     
         $('.close-button',window.parent.parent.document).css('display','block')
@@ -2469,7 +2469,8 @@ const open_checkout=(product_id)=>{
         
         $('.groupbuy_sp_iframe',window.parent.document).css('display','none')
         // $(".iframe",window.parent.document).toggle();
-        $('.iframe',window.parent.parent.document).toggle()
+        // $('.iframe',window.parent.parent.document).toggle()
+        $('.iframe',window.parent.parent.document).css('display','block')
         
        
         if($('.option-3',window.parent.parent.document).hasClass('background_grey')){

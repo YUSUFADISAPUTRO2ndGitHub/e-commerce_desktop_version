@@ -3787,9 +3787,10 @@ const change_product_to=(product_id)=>{
 const newRender_list_hutang=(customer_code)=>{
     const token = localStorage.getItem('token')
     $('.ul_list_hutang').empty()
-    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+    axios.post(`https://sales.sold.co.id/get-sales-order-data-per-customer?Customer_Code=${token}`)
+    
     .then((res)=>{
-        
+        console.log(res.data)
         res.data.map((val,index)=>{
             
             var tanggal = val.Start_Date.split('T')
@@ -4344,4 +4345,22 @@ const check_user_for_login=()=>{
    function replace_vtintl_to_sold_co_id(original_url){
         var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
     return original_url;
+}
+
+function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
+    if(Order_Number == ""){
+        var settings = {
+            "url": `https://sales.sold.co.id/get-sales-order-data-per-customer?Customer_Code=${Customer_Code}`,
+            "method": "POST",
+            "timeout": 0,
+        };
+    }else{
+        var settings = {
+            "url": `https://sales.sold.co.id/get-sales-order-data-per-customer?Order_Number=${Order_Number}`,
+            "method": "POST",
+            "timeout": 0,
+        };
+    }
+    
+    return $.ajax(settings);
 }
