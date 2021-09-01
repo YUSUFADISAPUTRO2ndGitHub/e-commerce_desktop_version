@@ -5,7 +5,7 @@ body{
 
 .box-unpaid{
     width:auto;
-    height:100vh;
+    height:100%;
     background-color: #f6f6f6;
     border-radius:10px;
     display: flex;
@@ -17,13 +17,15 @@ body{
 }
 
 .unpaid-title{
-    width:100%;
-    height:100px;
+    width:90%;
+    height:150px;
     background-color: #f6f6f6;
     display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
     
     /* justify-content: center; */
-    align-items: center;
+    /* align-items: center; */
 }
 .unpaid-title p{
 position: relative;
@@ -88,7 +90,7 @@ color:#217283;
 .card-body-ul{
     padding:5px;
     width:750px !important;
-    height:600px;
+    height:700px;
     /* border:1px solid black; */
     display: none;
     flex-direction: column;
@@ -174,8 +176,8 @@ color:#217283;
     /* background-color:red */
 }
 .hr-qty{
-    width: 110px;
-    min-width:110px;
+    width: 20%;
+    min-width:20%;
     /* background-color:red; */
     height:100%;
     display:flex;
@@ -230,6 +232,8 @@ color:#217283;
     background-color: #217384;
     cursor: pointer;
     color:white;
+    /* width:740px; */
+    /* min-width:740px; */
 }
 
 

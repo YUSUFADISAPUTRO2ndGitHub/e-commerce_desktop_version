@@ -3,7 +3,7 @@ var allData = []
 const getAllData2=()=>{
     // 
     
-    axios.post('http://products.sold.co.id/get-product-details')
+    axios.post('https://products.sold.co.id/get-product-details')
     .then((res)=>{
         allData = res.data
         // 

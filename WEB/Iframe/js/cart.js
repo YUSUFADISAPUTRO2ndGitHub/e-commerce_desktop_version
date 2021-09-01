@@ -58,7 +58,7 @@ function loadcart(productNo, quantity){
             $('#cart-list').append(`
                 <div class="new-card-cart productNameClass${productNo}" id="productName${productNo}">
                     <div class="cart-img" id="${productNo}second">
-                        <img src="${response.Picture_1}" alt="">
+                        <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
                     </div>
                     <div class="cart-desc" >
                         <div class="cd-1 product-checklist" id="${productNo}first">  
@@ -501,7 +501,7 @@ function checkingoutAll(){
     async function check_qty(arr_product,i){
        return new Promise(async(resolve,reject)=>{
             var quantity_product = parseInt(arr_product[i].quantity)
-            await axios.post(`http://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
+            await axios.post(`https://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
                 // 
@@ -704,4 +704,8 @@ function in_store_loading_checkout(){
         if (result.dismiss === Swal.DismissReason.timer) {
         }
     })
+}
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+return original_url;
 }

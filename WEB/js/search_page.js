@@ -11,7 +11,7 @@ $( document ).ready(function() {
     
 
     // category-list
-    axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
+    axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
     .then((res)=>{
         res.data.map((val,index)=>{
             // 
@@ -60,7 +60,7 @@ const render_sort_price=(product_name,condition)=>{
     }
     
 
-    axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
         // 
         if(condition == 'asc'){
@@ -77,7 +77,7 @@ const render_sort_price=(product_name,condition)=>{
             var hargaTotal = hargaAwal + discount
             $('.new-box-card').append(`
             <div class="card-item card_sp hvr-float-shadow">
-                    <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                    <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                 <div class="card-item-list">
                     <p class="limited-text-short">${val.Name}</p>
                     <div class="split-item">
@@ -132,7 +132,7 @@ function show_subcategory(choosen_parent_category){
     /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         
-        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
+        axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
         .then((res)=>{
             // 
             // $('.box-list-kategori').css("display", "block")
@@ -147,7 +147,7 @@ function show_subcategory(choosen_parent_category){
                     $('.box-list-kategori').append(
                       `
                         <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
-                            <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
                             <div class="card-all-item-list">
                                 <p class="limited-text-short">${val.Subcategory}</p>
                             </div>
@@ -198,7 +198,7 @@ function show_jenisproduct(jenis_product){
     /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         
-        axios.post(`http://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
+        axios.post(`https://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
         .then((res)=>{
             // 
             res.data.map((val,index)=>{
@@ -216,7 +216,7 @@ function show_jenisproduct(jenis_product){
                     $('.render-item-sub').append(
                       `
                         <div class="card-item card_sp hvr-float-shadow">
-                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                             <div class="card-item-list">
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
@@ -409,7 +409,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
 
 function groupbuy_sp_form(product_id){
     var token = localStorage.getItem('token')
-    axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
+    axios.post(`https://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
         // 
         if(res.data){
@@ -659,14 +659,14 @@ const render_searching_page=(product_name)=>{
     }
     
 
-    axios.post(`http://products.sold.co.id/get-product-details?product_name=${product_name}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_name=${product_name}`)
     .then((res)=>{
     
         var data_searching = res.data
 
 
         if(res.data.length <3){
-            axios.post(`http://products.sold.co.id/get-product-details?`)
+            axios.post(`https://products.sold.co.id/get-product-details?`)
             .then((res)=>{
                 var data_all = res.data
                 data_searching.map((val,index)=>{
@@ -680,7 +680,7 @@ const render_searching_page=(product_name)=>{
                         // 
                         $('.new-box-card').append(`
                         <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                                <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                             <div class="card-item-list">
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
@@ -710,7 +710,7 @@ const render_searching_page=(product_name)=>{
                         // 
                         $('.new-box-card').append(`
                         <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                                <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                             <div class="card-item-list">
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
@@ -742,7 +742,7 @@ const render_searching_page=(product_name)=>{
                     // 
                     $('.new-box-card').append(`
                     <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                            <img src="${val.Picture_1}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
                         <div class="card-item-list">
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
@@ -779,7 +779,7 @@ const render_searching_page=(product_name)=>{
 const render_daftar_hutang=()=>{ // render utang untuk di card
     const token = localStorage.getItem('token')
     
-    axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+    axios.post(`https://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
     .then((res)=>{
         
         res.data.map((val,index)=>{
@@ -816,18 +816,26 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     // $('#daftarHutangModal').modal('hide')
     // $('#ID_detail_hutang_modal').modal('show')
     
-    axios.post(`http://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
+    axios.post(`https://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        console.log(res.data)
+        
         var arrListHutang = res.data
-        var arrDataProduct = []
+        
+
+        axios.post(`https://sales.sold.co.id/check-delivery-order-information?Order_Number=${order_number}`)
+        .then((res)=>{
+            console.log(res.data)
+            var delivery_data = res.data
+            var delivery_parse = JSON.parse(delivery_data.Shipping_Number)
+            console.log(delivery_parse)
+            var arrDataProduct = []
         var kurir_name = ''
         var shipping_price = 0
         var product_price =0
         var customer_address = ''
-        // 
+        
         var total = arrListHutang.length
-        // 
+         
         console.log(arrListHutang)
         // render card item
         arrListHutang.map((val,index)=>{
@@ -856,7 +864,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                             ${val.Price_Based_On_Total_Quantity}
                         </div>
                         <div class="hr-qty">
-                            ${kurir_name}
+                            ${delivery_parse.paket_awb}
                         </div>     
                     </div>
                 </div>
@@ -866,12 +874,12 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
-                    // 
+                    
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
                             <div class="img-card-ul">
-                                <img src="${res.data.Picture_1}" alt="" class="img-item-ul">
+                                <img src="${replace_vtintl_to_sold_co_id(res.data.Picture_1)}" alt="" class="img-item-ul">
                             </div>
                             ${val.Product_Name}
                         </div>
@@ -889,7 +897,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                                 ${val.Price_Based_On_Total_Quantity}
                             </div>
                             <div class="hr-qty">
-                                ${kurir_name}
+                                ${delivery_parse.paket_awb}
                             </div>     
                         </div>
                     </div>
@@ -903,9 +911,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
 
         })
         var total_product_with_shipping = shipping_price + product_price
-        // 
-        // 
-        // 
+       
         $('.card-address-profile').append(`
             <div class="img-profile-ul">
                 <img src="../img/accounts.png" alt="error" class="img-prof">
@@ -1223,12 +1229,17 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     
         }
 
-        $('.unpaid-title').empty()
-        $('.unpaid-title').append(`
-            <p>Order # <br>
-            ${arrListHutang[0].Order_Number}</p>
-        `)
-
+            $('.unpaid-title').empty()
+            $('.unpaid-title').append(`
+                <p>Order Number <br>
+                ${arrListHutang[0].Order_Number}</p>
+                <p>Delivery Order Number<br>
+                ${res.data.Delivery_Order_Number}</p>
+            `)
+        }).catch((err)=>{
+            console.log(err)
+        })
+        
     }).catch((err)=>{
         
     })
@@ -1269,4 +1280,10 @@ const item_detail_for_hutang=(order_number)=>{ // detail utang dari card
         
     })
 
+}
+
+
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+return original_url;
 }

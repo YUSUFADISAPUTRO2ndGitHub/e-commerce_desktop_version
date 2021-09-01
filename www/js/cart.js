@@ -40,7 +40,7 @@ function loadcart(productNo, quantity){
             $("#" + productNo + "containerCheck").append("<input class=\"form-check-input\" id=\"checklist" + productNo + "\" type=\"checkbox\" value=\"productNo\" onchange=\"selectedCart(this,\'" + productNo + "\')\">");
             // product image
             $("#productName" + productNo).append("<td class=\"product-names\" id=\"" + productNo + "second" + "\">");
-            $("#" + productNo + "second").append("<img src=\"" + response.Picture_1 + "\" style=\"width: 50px; height: 50px; margin-right: 10px;\">" + response.Name + "<br>");
+            $("#" + productNo + "second").append("<img src=\"" + replace_vtintl_to_sold_co_id(response.Picture_1) + "\" style=\"width: 50px; height: 50px; margin-right: 10px;\">" + response.Name + "<br>");
             $("#" + productNo + "second").append("<button type=\"button\" id=\"erase" + productNo + "\" class=\"btn btn-info\" onclick=\"eraseItem(\'" + productNo + "\')\">erase</button>");
             // quantity
             $("#productName" + productNo).append("<td class=\"product-quantity\" id=\"" + productNo + "third" + "\">");

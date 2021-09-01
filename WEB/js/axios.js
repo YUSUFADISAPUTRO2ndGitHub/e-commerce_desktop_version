@@ -90,7 +90,7 @@ $( document ).ready(function() {
 const getAllData=()=>{
 // 
 
-axios.post('http://products.sold.co.id/get-product-details')
+axios.post('https://products.sold.co.id/get-product-details')
 .then((res)=>{
     allData = res.data
     // 
@@ -114,7 +114,7 @@ getAllData()
 const renderOptionSearch=()=>{
 
     var token = localStorage.getItem('token')
-        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
+        axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
         .then((res)=>{
             
             res.data.map((val,index)=>{
@@ -297,7 +297,7 @@ const renderItemNew=()=>{
             $('.box-render-new').append(
                 ` 
                     <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                         <div class="card-item-list">
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
@@ -361,7 +361,7 @@ const renderItemAll=()=>{
             $('.box-render-all').append(
                 ` 
                     <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                         <div class="card-item-list">
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
@@ -382,7 +382,7 @@ const renderItemAll=()=>{
             $('.box-render-all').append(
                 ` 
                     <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                        <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                         <div class="card-item-list">
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
@@ -403,7 +403,7 @@ const renderItemAll=()=>{
             $('.box-render-all').append(
             ` 
                 <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                    <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                    <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>
                         <div class="split-item">
@@ -432,7 +432,7 @@ const renderItemAll=()=>{
 const renderCategory=()=>{
     // var subCat = 'ADHESIVE'
     // alert('render category jalan')
-    axios.post('http://products.sold.co.id/get-product-details?Get_ALL_Category=true')
+    axios.post('https://products.sold.co.id/get-product-details?Get_ALL_Category=true')
     .then((res)=>{
         
         res.data.map((val,index)=>{
@@ -514,7 +514,7 @@ function sign_up_request(){
     $("#newloginModal").modal("hide");
     // $('#newloginModal').modal('hide')
     // $("#daftarHutangModal").modal('show')
-        axios.post(`http://customers.sold.co.id/get-available-referral-codes
+        axios.post(`https://customers.sold.co.id/get-available-referral-codes
         `).then((res)=>{
             res.data.map((val,index)=>{
                 // 
@@ -715,7 +715,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
     /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         
-        axios.post(`http://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
+        axios.post(`https://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
         .then((res)=>{
             $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
             
@@ -728,7 +728,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                 $('.box-list-kategori').append(
                 `
                     <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
-                        <img src="${val.Picture_1}" alt="" class="img-all-card">   
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
                         <div class="card-all-item-list">
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-all-item">
@@ -793,7 +793,7 @@ const renderItemBasedOnCategory=(Category)=>{
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
             
-            axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
+            axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
             .then((res)=>{
                 
                  res.data.map((val,index)=>{
@@ -803,7 +803,7 @@ const renderItemBasedOnCategory=(Category)=>{
                         `
                         <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
                             <div class="box-img-lk">
-                                <img src="${val.Picture_1}" alt="">
+                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="">
                             </div>
                             <p>${val.Subcategory}</p>
                         </div>
@@ -875,11 +875,11 @@ const render_group_buy=(product_id)=>{
    
 
 
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
         var item_product = res.data
         var option_payment
-        axios.post(`http://paymntmthd.sold.co.id/get-all-payment-method`)
+        axios.post(`https://paymntmthd.sold.co.id/get-all-payment-method`)
         .then((res)=>{          
             option_payment = res.data
            
@@ -1051,7 +1051,7 @@ const render_group_buy=(product_id)=>{
             <div class="group-right">
                 <div class="gr-2">
                     <div class="box-img-gr">
-                         <img src="${item_product.Picture_1}" alt="" class="img-gr">
+                         <img src="${replace_vtintl_to_sold_co_id(item_product.Picture_1)}" alt="" class="img-gr">
                     </div>
                 </div>
                 <div class="new-gr-1">
@@ -1245,7 +1245,7 @@ const render_group_buy=(product_id)=>{
 
             // BATAS RENDER KURIR DLL
             // alert(res.data)
-            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
             .then((res)=>{
                 // $('.modals-lk').attr('src',`../WEB/Iframe/groupbuy.html?groupbuy_id=${product_id}`)      
                 
@@ -1269,7 +1269,7 @@ const render_group_buy=(product_id)=>{
                 })
                 var token = localStorage.getItem('token')
                 
-                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                 .then((res)=>{
                     
                     if(res.data){
@@ -2783,21 +2783,22 @@ function commafy( num ) {
     }
 }
  const render_get_product_detail=(product_id)=>{
-    console.log(product_id,'2637')
+    // console.log(product_id,'2637')
     $(this).scrollTop('.modals-product-detail')
     
-    console.log($(this).scrollTop('.box_iframe_groupbuy'))
+    // console.log($(this).scrollTop('.box_iframe_groupbuy'))
     var product_id_pilihan = product_id
     let allDataProduct = []
-    axios.post(`http://products.sold.co.id/get-product-details`)
+    axios.post(`https://products.sold.co.id/get-product-details`)
     .then((res)=>{
         allDataProduct = res.data
         
         const querystring = $(location).attr('href');
-        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
         .then((res)=>{
+            console.log(res.data)
             var split_product = res.data.Name.split(' ')
-            console.log(split_product)
+            // console.log(split_product)
             var all_filter_product = []
             for(var i =0; i<split_product.length; i++){
                 var filter_product = allDataProduct.filter((val)=>{
@@ -2805,15 +2806,15 @@ function commafy( num ) {
                     // console.log(split_product[i])
                     // console.log(val.Name.includes(split_product[i]))
                     if(val.Name.includes(split_product[i])){
-                        console.log('masuk ke if')
+                        // console.log('masuk ke if')
                         all_filter_product.push(val)
                         return val
                     }
                 })
-                console.log(all_filter_product)
+                // console.log(all_filter_product)
             }
-            console.log(filter_product,'2812')
-            console.log(all_filter_product,'luar')
+            // console.log(filter_product,'2812')
+            // console.log(all_filter_product,'luar')
 
             let timerInterval
             Swal.fire({
@@ -2855,10 +2856,10 @@ function commafy( num ) {
                     var hargaAwal = parseInt(item.Sell_Price)
                     var discount = parseInt(item.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
-                    
+                    console.log(item)
                     $('.box-item-detail').empty();
     
-                    axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                    axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                     .then((res)=>{
                         var cust_comment = res.data
                         // console.log(cust_comment)
@@ -2867,20 +2868,10 @@ function commafy( num ) {
                                 `
                                 <div class="new-item-left">
                                     <div class="item-left-img-box">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-1">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-2">
-                                        <img src="${item.Picture_1}" alt="" class="img-big-active" id="img-big-3">
+                                        
                                     </div>
                                     <div class="img-option-left">
-                                        <div class="option-left-1 img-1-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-2-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-3-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
+                                       
                                     </div>
                                     <div class="box-button-next-back">
                                         <div  class="box-btn-left" onclick="back_btn()">
@@ -2899,8 +2890,14 @@ function commafy( num ) {
                                         </div>
                                     </div>  
                                     <div class="box-description-right-id">
-                                        <p>${item.Category}</p>
-                                        <p>${item.Name}</p>
+                                        <div class="bd-right-id"> 
+                                            <p>${item.Category}</p>
+                                            <div class="qty-box-pd"> 
+                                                 Quantity : ${item.Stock_Quantity}
+                                            </div>
+                                        </div>
+                                        
+                                        <p class="limited-text">${item.Name}</p>
                                         <div class="rating-bottom-2">
                                             <div class="star-box">
                                                 <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
@@ -2909,9 +2906,7 @@ function commafy( num ) {
                                     </div>
         
                                     <div class="box-price-right-id">
-                                        <div class="box-small-price-1">
-                                           
-                                        </div>
+                                        
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
                                         </div>
@@ -2922,13 +2917,12 @@ function commafy( num ) {
                                     </div>
                                     <div class="box-quality-right-id-2">
                                         <div class="bsp-1">
-                                            <p> Normal Price : </p>
-                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                                
+                                            <br>
+                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
                                         </div>
-                                        <div class="bsp-1">
-                                            <p> Group Buy  Price : </p>
-                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
-                                        </div> 
+                                       
                                     </div>
            
                                     <div class="box-quality-right-id">
@@ -3011,20 +3005,10 @@ function commafy( num ) {
                                 `
                                 <div class="new-item-left">
                                     <div class="item-left-img-box">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-1">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-2">
-                                        <img src="${item.Picture_1}" alt="" class="img-big-active" id="img-big-3">
+                                      
                                     </div>
                                     <div class="img-option-left">
-                                        <div class="option-left-1 img-1-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-2-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-3-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
+                                        
                                     </div>
                                     <div class="box-button-next-back">
                                         <div  class="box-btn-left" onclick="back_btn()">
@@ -3043,8 +3027,13 @@ function commafy( num ) {
                                         </div>
                                     </div>  
                                     <div class="box-description-right-id">
-                                        <p>${item.Category}</p>
-                                        <p>${item.Name}</p>
+                                        <div class="bd-right-id"> 
+                                            <p>${item.Category}</p>
+                                            <div class="qty-box-pd"> 
+                                                 Quantity : ${item.Stock_Quantity}
+                                            </div>
+                                        </div>
+                                        <p class="limited-text">${item.Name}</p>
                                         <div class="rating-bottom-2">
                                             <div class="star-box">
                                                 <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
@@ -3053,9 +3042,7 @@ function commafy( num ) {
                                     </div>
         
                                     <div class="box-price-right-id">
-                                        <div class="box-small-price-1">
                                         
-                                        </div>
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
                                         </div>
@@ -3068,13 +3055,12 @@ function commafy( num ) {
                                     </div>
                                     <div class="box-quality-right-id-2">
                                         <div class="bsp-1">
-                                            <p> Normal Price : </p>
-                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                                
+                                            <br>
+                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
                                         </div>
-                                        <div class="bsp-1">
-                                            <p> Group Buy   Price : </p>
-                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
-                                        </div> 
+                                        
                                     </div>
                                  
                                     <div class="box-quality-right-id">
@@ -3155,6 +3141,53 @@ function commafy( num ) {
                                 `
                             )
                         }
+
+                        $('.img-option-left').empty()
+                        $('.item-left-img-box')
+                        if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                            `)
+                        }else{
+                            $('.img-option-left').append(`
+                                <div class="option-left-1 img-1-id pop">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
+                                </div>
+                            `)
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-1">
+                            `)
+                        }
+                        if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                            `)
+                        }else{
+                            $('.img-option-left').append(`
+                                <div class="option-left-1 img-2-id pop">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
+                                </div>
+                            `)
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big" id="img-big-2">
+                            `)
+                        }
+                        if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
+
+                            
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                            `)
+                        }else{
+                            $('.img-option-left').append(`
+                                <div class="option-left-1 img-2-id pop">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
+                                </div>
+                            `)
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big" id="img-big-3">
+                            `)
+                        }
                         
                     
                         console.log(filter_product)
@@ -3221,7 +3254,7 @@ function commafy( num ) {
                                 
                                 console.log(val)
                                 console.log(val.Customer_Code)
-                                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                 .then((res)=>{
                                     console.log(res.data)
                                     // res.data.map((val,index)=>{
@@ -3268,11 +3301,11 @@ function commafy( num ) {
     var product_id_pilihan = product_id
     let allDataProduct = []
 
-    axios.post(`http://products.sold.co.id/get-product-details`)
+    axios.post(`https://products.sold.co.id/get-product-details`)
     .then((res)=>{
         allDataProduct = res.data
         const querystring = $(location).attr('href');
-        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
         .then((res)=>{
     
             var split_product = res.data.Name.split(' ')
@@ -3304,7 +3337,7 @@ function commafy( num ) {
                 </div>
             </div>
             `,
-            timer: 3000,
+            timer: 2000,
             timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading()
@@ -3329,10 +3362,10 @@ function commafy( num ) {
                     var hargaAwal = parseInt(item.Sell_Price)
                     var discount = parseInt(item.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
-                    
+                    console.log(item)
                     $('.box-item-detail').empty();
     
-                    axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                    axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                     .then((res)=>{
                         var cust_comment = res.data
                         // console.log(cust_comment)
@@ -3341,20 +3374,10 @@ function commafy( num ) {
                                 `
                                 <div class="new-item-left">
                                     <div class="item-left-img-box">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-1">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-2">
-                                        <img src="${item.Picture_1}" alt="" class="img-big-active" id="img-big-3">
+                                       
                                     </div>
                                     <div class="img-option-left">
-                                        <div class="option-left-1 img-1-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-2-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-3-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
+                                        
                                     </div>
                                     <div class="box-button-next-back">
                                         <div  class="box-btn-left" onclick="back_btn()">
@@ -3373,8 +3396,13 @@ function commafy( num ) {
                                         </div>
                                     </div>  
                                     <div class="box-description-right-id">
-                                        <p>${item.Category}</p>
-                                        <p>${item.Name}</p>
+                                        <div class="bd-right-id"> 
+                                            <p>${item.Category}</p>
+                                            <div class="qty-box-pd"> 
+                                                Quantity : ${item.Stock_Quantity}
+                                            </div>
+                                        </div>
+                                        <p class="limited-text">${item.Name}</p>
                                         <div class="rating-bottom-2">
                                             <div class="star-box">
                                                 <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
@@ -3383,9 +3411,7 @@ function commafy( num ) {
                                     </div>
         
                                     <div class="box-price-right-id">
-                                        <div class="box-small-price-1">
-                                            
-                                        </div>
+                                       
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
                                         </div>
@@ -3397,12 +3423,12 @@ function commafy( num ) {
                                     <div class="box-quality-right-id-2">
                                         <div class="bsp-1">
                                             <p> Normal Price : </p>
-                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                            
+                                            <br>
+                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
                                         </div>
-                                        <div class="bsp-1">
-                                            <p> Group Buy Price  : </p>
-                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
-                                        </div> 
+                                    
                                     </div>
                    
                                     <div class="box-quality-right-id">
@@ -3489,20 +3515,10 @@ function commafy( num ) {
                                 `
                                 <div class="new-item-left">
                                     <div class="item-left-img-box">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-1">
-                                        <img src="${item.Picture_1}" alt="" class="img-big" id="img-big-2">
-                                        <img src="${item.Picture_1}" alt="" class="img-big-active" id="img-big-3">
+                                       
                                     </div>
                                     <div class="img-option-left">
-                                        <div class="option-left-1 img-1-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-2-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
-                                        <div class="option-left-1 img-3-id pop">
-                                            <img src="${item.Picture_1}" alt="">
-                                        </div>
+                                        
                                     </div>
                                     <div class="box-button-next-back">
                                         <div  class="box-btn-left" onclick="back_btn()">
@@ -3521,8 +3537,13 @@ function commafy( num ) {
                                         </div>
                                     </div>  
                                     <div class="box-description-right-id">
-                                        <p>${item.Category}</p>
-                                        <p>${item.Name}</p>
+                                        <div class="bd-right-id"> 
+                                            <p>${item.Category}</p>
+                                            <div class="qty-box-pd"> 
+                                                Quantity : ${item.Stock_Quantity}
+                                            </div>
+                                        </div>
+                                        <p class="limited-text">${item.Name}</p>
                                         <div class="rating-bottom-2">
                                             <div class="star-box">
                                                 <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
@@ -3531,9 +3552,7 @@ function commafy( num ) {
                                     </div>
         
                                     <div class="box-price-right-id">
-                                        <div class="box-small-price-1">
-                                            
-                                        </div>
+                                       
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
                                             Tambah
                                         </div>
@@ -3546,13 +3565,13 @@ function commafy( num ) {
                                     </div>
                                     <div class="box-quality-right-id-2">
                                         <div class="bsp-1">
-                                            <p> Normal Price : </p>
-                                            <p> RP.${commafy(item.Sell_Price)}</p>
+                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                            
+                                            <br>
+                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
+                                            
                                         </div>
-                                        <div class="bsp-1">
-                                            <p> Group Buy  Price : </p>
-                                            <p> RP.${commafy(item.GroupBuy_SellPrice)}</p>
-                                        </div> 
+                                        
                                     </div>
                     
                                     <div class="box-quality-right-id">
@@ -3636,8 +3655,8 @@ function commafy( num ) {
     
                         console.log(filter_product)
                         all_filter_product.map((val,index)=>{
-                            console.log(val.Product_Code)
-                            console.log(product_id_pilihan)
+                            // console.log(val.Product_Code)
+                            // console.log(product_id_pilihan)
                             if(val.Product_Code == product_id_pilihan){
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id active_product">
@@ -3671,6 +3690,63 @@ function commafy( num ) {
     
                         })
                         
+                        $('.img-option-left').empty()
+                        $('.item-left-img-box')
+                        if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                            `)
+                        }else{
+                            $('.img-option-left').append(`
+                                <div class="option-left-1 img-1-id pop">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
+                                </div>
+                            `)
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-1">
+                            `)
+                        }
+                        if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                            `)
+                        }else{
+                            $('.img-option-left').append(`
+                                <div class="option-left-1 img-2-id pop">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
+                                </div>
+                            `)
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big" id="img-big-2">
+                            `)
+                        }
+                        if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
+
+                            
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                            `)
+                        }else{
+                            $('.img-option-left').append(`
+                                <div class="option-left-1 img-2-id pop">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
+                                </div>
+                            `)
+                            $('.item-left-img-box').append(`
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big" id="img-big-3">
+                            `)
+                        }
+                        
+                    
+                        
+                        // <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big" id="img-big-1">
+                        // <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big" id="img-big-2">
+                        // <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-3">
+
+                 
+
+                        
+
                         var comment_parse = JSON.parse(cust_comment.User_Comments)
                         console.log(comment_parse)
                         $('#nav-profile').empty()
@@ -3695,7 +3771,7 @@ function commafy( num ) {
                                 
                                 console.log(val)
                                 console.log(val.Customer_Code)
-                                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                 .then((res)=>{
                                     console.log(res.data)
                                     // res.data.map((val,index)=>{
@@ -3891,13 +3967,13 @@ const render_item_all_category=()=>{
     for(var i=0; i<data_atas.length; i++){
         // 
         
-        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
+        axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
         .then((res)=>{
             // 
             res.data.map((val,index)=>{
                 $('.top-all-category').append(`
                     <div class="card card-small-category " onclick="getAllItem_fromAllCat('${val.Subcategory}')">
-                        <img src="${val.Picture_1}" class="card-img-top">
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="card-img-top">
                         <h3 class="card-title">${val.Subcategory}</h3>
                     </div>
                 `)
@@ -3912,14 +3988,14 @@ const render_item_all_category=()=>{
     for(var i=0; i<data_bawah.length; i++){
         // 
         
-        axios.post(`http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_bawah[i]}`)
+        axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_bawah[i]}`)
         .then((res)=>{
             // 
             res.data.map((val,index)=>{
                 // 
                 $('.bot-all-category').append(`
                     <div class="card card-small-category" onclick="getAllItem_fromAllCat('${val.Subcategory}')">
-                        <img src="${val.Picture_1}" class="card-img-top">
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="card-img-top">
                         <h3 class="card-title">${val.Subcategory}</h3>
                     </div>
                 `)
@@ -4243,7 +4319,7 @@ const check_user_for_login=()=>{
     
  
     
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             // 
             var data_customer = res.data

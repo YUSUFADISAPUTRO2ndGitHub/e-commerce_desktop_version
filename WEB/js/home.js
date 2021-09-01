@@ -26,7 +26,7 @@ function cart_requested(x){
     if(cartToJson != undefined){ // kalau data cart ada isinya
         if(cartToJson.length != 0){
             
-            axios.post(`http://customers.sold.co.id/save-user-shopping-cart?Customer_Code=${token}&cart=${cartString}`)
+            axios.post(`https://customers.sold.co.id/save-user-shopping-cart?Customer_Code=${token}&cart=${cartString}`)
             .then((res)=>{
                 
                 if(res.data){
@@ -100,7 +100,7 @@ function live_chat(){
     $('.category-menu').css('display','none')
     $('.box-icon-lc').css('display','flex')
     var token = localStorage.getItem('token')
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         
         if(res.data){
@@ -256,7 +256,7 @@ const commision_check=()=>{
 
   
     // TOTAL  CUSTOMER MAKE PURCHASE
-    axios.post(`http://customers.sold.co.id/get-total-active-customers-of-a-referral-code?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-total-active-customers-of-a-referral-code?Customer_Code=${token}`)
     .then((res)=>{
         
         $('.total_cust_make_purchase').val(res.data[0].total_active_customers)
@@ -265,7 +265,7 @@ const commision_check=()=>{
     })
 
     // TOTAL ACTIVE CUSTOMER
-    axios.post(`http://customers.sold.co.id/get-total-customers-of-a-referral-code?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-total-customers-of-a-referral-code?Customer_Code=${token}`)
     .then((res)=>{
         
         $('.total_cust_with_referral').val(res.data[0].Total_Customers)
@@ -274,7 +274,7 @@ const commision_check=()=>{
     })
 
     // CUSTOMER INFORMATION  FOR TOTAL COMMISION
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         
         var tanggalAwalBuat = res.data.Created_Date
@@ -288,7 +288,7 @@ const commision_check=()=>{
         }
 
          // CUSTOMER TOTAL COMMISION THIS MONTH
-        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
+        axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
         .then((res)=>{
             
             
@@ -314,7 +314,7 @@ const commision_check=()=>{
             
         })
 
-        axios.post(`http://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
         .then((res)=>{
             
             
@@ -326,7 +326,7 @@ const commision_check=()=>{
 
           // DATA UNTUK RENDER TABLE
 
-          axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
+          axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
           .then((res)=>{
               
               
@@ -618,7 +618,7 @@ const date_commision=()=>{
     var token = localStorage.getItem('token')
     var percent;
     var total_percent;
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
 
         
@@ -632,7 +632,7 @@ const date_commision=()=>{
             total_percent = '7.5%'
         }
 
-        axios.post(`http://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggal}`)
+        axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggal}`)
     .then((res)=>{
         
         
@@ -956,10 +956,10 @@ const login_for_commision=()=>{
 const send_otp=()=>{
     // alert('kirim otw')
     var token = localStorage.getItem('token')
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{  
         
-        axios.post(`http://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
+        axios.post(`https://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
         .then((res)=>{
             if(res.data){
                 Swal.fire({
@@ -999,10 +999,10 @@ const send_otp_for_logout=()=>{
     var token = localStorage.getItem('token')
     var email = $('#email_forgot').val()
     
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{  
         
-        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+        axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
                 // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
@@ -1041,7 +1041,7 @@ const send_otp_login=()=>{
     var email = $('#email_login').val()
     console.log(email)
     if(email){
-        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+        axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
                 // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
@@ -1089,7 +1089,7 @@ const send_otp_login_prod=()=>{
     var email = $('#email_login_prod').val()
     
     if(email){
-        axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+        axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
                 Swal.fire({
@@ -1134,7 +1134,7 @@ const send_otp_register_for_email=()=>{
     var email = $('#email_reg').val()
     var email_supp = $('#email_supp').val()
 
-    axios.post(`http://customers.sold.co.id/check-if-email-is-registered?Email=${email}`)
+    axios.post(`https://customers.sold.co.id/check-if-email-is-registered?Email=${email}`)
     .then((res)=>{   
         
         if(email){
@@ -1150,7 +1150,7 @@ const send_otp_register_for_email=()=>{
                 })
 
             }else if (res.data == false){
-                axios.post(`http://customers.sold.co.id/get-otp?Email=${email}`)
+                axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
                 .then((res)=>{
                     if(res.data){
                         $('#newOtpRegister').modal('show')
@@ -1185,7 +1185,7 @@ const send_otp_register_for_email=()=>{
 
             }else if (res.data == false){
                 
-                axios.post(`http://customers.sold.co.id/get-otp?Email=${email_supp}`)
+                axios.post(`https://customers.sold.co.id/get-otp?Email=${email_supp}`)
                 .then((res)=>{
                     if(res.data){
                         $('#newOtpRegister').modal('show')
@@ -1280,7 +1280,7 @@ const choosing_shipping=(kurir,product_id)=>{
         // $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
         // $(this).addClass('selected')
         // $(this).addClass('selected')
-        axios.post(`http://products.sold.co.id/get-courier-data?Get_All_Couriers=true`)
+        axios.post(`https://products.sold.co.id/get-courier-data?Get_All_Couriers=true`)
         .then((res)=>{
             
             var kurir_id = kurir
@@ -1346,27 +1346,44 @@ const filter_item_ul=(e)=> {
 const back_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
+    var find_not_active = $('.item-left-img-box .img-big').attr('id')
+    console.log(find_active,' find_active')
+    console.log(find_not_active,' find_not_active')
     
     if(find_active == 'img-big-1'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
+        var img_3 = $('#img-big-3').attr('class')
+        var img_3_split = img_3.split(' ')
         $('#img-big-3').removeClass('img-big')
         $('#img-big-3').addClass('img-big-active')
+        if(img_3_split[1] == 'img-notfound'){
+            $('#img-big-2').removeClass('img-big')
+            $('#img-big-2').addClass('img-big-active')
+        }else if (img_3_split[0] == 'img-notfound'){
+            $('#img-big-2').removeClass('img-big')
+            $('#img-big-2').addClass('img-big-active')
+
+        }
+       
     }else if (find_active == 'img-big-2'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         $('#img-big-1').removeClass('img-big')
         $('#img-big-1').addClass('img-big-active')
+       
     }else if (find_active == 'img-big-3'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         $('#img-big-2').removeClass('img-big')
         $('#img-big-2').addClass('img-big-active')
+       
     }
 }
 const next_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
+    var find_not_active = $('.item-left-img-box .img-big').attr('id')
     
     if(find_active == 'img-big-1'){
         $(`#${find_active}`).removeClass('img-big-active')
@@ -1376,6 +1393,18 @@ const next_btn=()=>{
     }else if (find_active == 'img-big-2'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
+        var img_3 = $('#img-big-3').attr('class')
+        console.log(img_3)
+        var img_3_split = img_3.split(' ')
+        
+        if(img_3_split[1] == 'img-notfound'){
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')
+        }else if (img_3_split[0] == 'img-notfound'){
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')
+
+        }
         $('#img-big-3').removeClass('img-big')
         $('#img-big-3').addClass('img-big-active')
     }else if (find_active == 'img-big-3'){
@@ -1445,7 +1474,7 @@ const close_tab_answer=(result,index)=>{
             //     headers:{
             //         "Content-Type":'application/json'
             //     },
-            axios.post(` http://products.sold.co.id/send_user_comment`,data,{
+            axios.post(` https://products.sold.co.id/send_user_comment`,data,{
                 headers:{
                     "Content-Type":'application/json'
                 },
@@ -1464,7 +1493,7 @@ const close_tab_answer=(result,index)=>{
                     var comment_parse = JSON.parse(cust_comment.User_Comments)
                     comment_parse.map((val,index)=>{
                         console.log(val)
-                        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                         .then((res)=>{
                             console.log(res.data)
                             $('#nav-profile').append(`
@@ -1559,7 +1588,7 @@ const close_tab_answer=(result,index)=>{
         var otp_8 = $('#otp_reg_8').val()
         var allOtp = otp_1 + otp_2 + otp_3 + otp_4 + otp_5 + otp_6 + otp_7 + otp_8
         console.log(allOtp)
-        axios.post(`http://customers.sold.co.id/verify-email-address?otp=${allOtp}`)
+        axios.post(`https://customers.sold.co.id/verify-email-address?otp=${allOtp}`)
         .then((res)=>{
             if(res.data){
                 Swal.fire({

@@ -47,7 +47,7 @@ $(document).on('click',"#simpan_reg",function(){
         // $('#inp_ref_code').val(referral_code)
         
         
-        axios.post(`http://customers.sold.co.id/password-generator?Password=${password_awal}`)
+        axios.post(`https://customers.sold.co.id/password-generator?Password=${password_awal}`)
         .then((res)=>{
             var final_pass = res.data
             
@@ -55,7 +55,7 @@ $(document).on('click',"#simpan_reg",function(){
             if(ref_val.length >3){
                 
                 
-                axios.post(`http://customers.sold.co.id/get-customer-code`)
+                axios.post(`https://customers.sold.co.id/get-customer-code`)
             .then((res)=>{
                 localStorage.setItem('token',res.data)
                 var data = {
@@ -83,7 +83,7 @@ $(document).on('click',"#simpan_reg",function(){
                    }
                }
                 
-            axios.post(`http://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
+            axios.post(`https://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
                 headers:{
                     "Content-Type":'application/json'
                 },
@@ -191,10 +191,10 @@ $(document).on('click',".btn-login",function(){
     
     
     
-    axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+    axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
     .then((res)=>{
         
-        axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+        axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
         ).then((res)=>{
             
             if(res.data){
@@ -244,10 +244,10 @@ $(document).on('click',".btn-login-product",function(){
     
     
     if(item === 'product'){
-        axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+        axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
         .then((res)=>{
             
-            axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+            axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
                 
                 
@@ -294,10 +294,10 @@ $(document).on('click',".btn-login-product",function(){
         })
 
     }else if (item === 'commision'){
-        axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+        axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
         .then((res)=>{
             
-            axios.post(`http://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+            axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
                 
                 
@@ -355,7 +355,7 @@ $(document).on('click',".save-user",function(){
   
     var token = localStorage.getItem('token')
     
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         
 
@@ -385,7 +385,7 @@ $(document).on('click',".save-user",function(){
            }
        }
        
-       axios.post(`http://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
+       axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
         headers:{
             "Content-Type":'application/json'
         },
@@ -542,12 +542,12 @@ $(document).on('click',"#simpan_supplier",function(){
 
     if(result_check_input_form_supp){
         
-        axios.post(`http://customers.sold.co.id/get-customer-code`)
+        axios.post(`https://customers.sold.co.id/get-customer-code`)
         .then((res)=>{
             localStorage.setItem('token',res.data)    
             var password = $('#password_supp').val()
             
-            axios.post(`http://customers.sold.co.id/password-generator?Password=${password}`)
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
             .then((res)=>{
                 
                 var newPassword = res.data
@@ -578,7 +578,7 @@ $(document).on('click',"#simpan_supplier",function(){
                         Nama_Perusahaan: $("#nama_perusahaan_supp").val(),
                     }
                 };
-                axios.post(`http://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
+                axios.post(`https://customers.sold.co.id/create-new-customer-supplier-direct-from-user`,data,{
                     headers:{
                         "Content-Type":'application/json'
                     },
@@ -683,7 +683,7 @@ var data = {
    
   
         
-        axios.post(`http://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${Ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${password}&otp=${otp}`)
+        axios.post(`https://customers.sold.co.id/customer-forgot-password-request?Email=${Email}&ktp=${Ktp}&PrimaryContactNumber=${PrimaryContactNumber}&requestedNewPassword=${password}&otp=${otp}`)
         .then((res)=>{
             if(res.data){
                 $('#forgotModal').modal('hide')
@@ -744,7 +744,7 @@ $(document).on('change','.qty_groupbuy',function(){
     var product_id = $(this).attr('id')
     var total_qty_from_api;
     var harga_satuan;
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
         total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
         harga_satuan = res.data.GroupBuy_SellPrice

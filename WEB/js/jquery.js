@@ -135,7 +135,7 @@ $(function(){
     console.log(token)
  
     
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             // 
             var data_customer = res.data
@@ -314,12 +314,12 @@ $(function(){
     var item = $(this).val()
     
     var token= localStorage.getItem('token')
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         
         var Customer_Code = res.data.Customer_Code
         var all_data;
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
             all_data = res.data
 
@@ -448,11 +448,11 @@ $(function(){
         var item_search = $(this).val()
         
         var token = localStorage.getItem('token')
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             var Customer_Code = res.data.Customer_Code
             var all_data
-            axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+            axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
             .then((res)=>{
                 all_data = res.data
                 
@@ -1181,7 +1181,7 @@ $(function(){
    const render_searching_order=(data,status)=>{
         const token = localStorage.getItem('token')
 
-        axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+        axios.post(`https://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
         .then((res)=>{
             var all_data = res.data
             
@@ -1257,7 +1257,7 @@ $(function(){
                 })
             }else if ( data.length == 0 || data.length <0){
                 // balikin ke data awal 
-                axios.post(`http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
+                axios.post(`https://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${token}`)
                 .then((res)=>{
                     var filtering = res.data
                     
@@ -1347,7 +1347,7 @@ $(function(){
         var value = $(this).val()
         
         if(value.length > 2){
-            axios.post(`http://products.sold.co.id/get-product-details?product_name=${value}`)
+            axios.post(`https://products.sold.co.id/get-product-details?product_name=${value}`)
             .then((res)=>{
                 
                 $('.box-render-search').css('display','block')
@@ -1774,7 +1774,7 @@ function check_qty(val){
         
         var total_qty_from_api;
         var harga_satuan;
-        axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
         .then((res)=>{
             
             total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
@@ -1876,7 +1876,7 @@ function groupbuy(product_id){
     var token = localStorage.getItem('token')
     
     
-    axios.post(`http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
+    axios.post(`https://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
     .then((res)=>{
         
         // location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
@@ -2087,17 +2087,17 @@ function payment_groupbuy_home(product_id){
                     }
                 }
                 if(total_qty_from_user>0) { 
-                    axios.post(`http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
+                    axios.post(`https://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
                     .then((res)=>{
                         total_item_kebeli = res.data
                         
                         if(res.data.Total_Quantity === null) { // hasil null berarti belum ada customer lain yang beli
                             
-                            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                             .then((res)=>{
                                 
                                 detail_product = res.data
-                                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                 .then((res)=>{
                                     
                                     
@@ -2134,7 +2134,7 @@ function payment_groupbuy_home(product_id){
                                     }
                                     
             
-                                    axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                    axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                         headers:{
                                             "Content-Type":'application/json'
                                         },
@@ -2185,7 +2185,7 @@ function payment_groupbuy_home(product_id){
                             })
                         }else { // hasil else dari if null berarti ada cust yg udh beli. sisa productnya
                             
-                            axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                             .then((response)=>{
                                 
                                 
@@ -2203,11 +2203,11 @@ function payment_groupbuy_home(product_id){
                                         
                                     })
             
-                                      axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                      axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                       .then((res)=>{
                                           
                                           detail_product = res.data
-                                          axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                          axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                           .then((res)=>{
                                               
                                               data_customer = res.data
@@ -2249,7 +2249,7 @@ function payment_groupbuy_home(product_id){
                                             
                                                   
                                                   
-                                                axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                                     headers:{
                                                         "Content-Type":'application/json'
                                                     },
@@ -2297,10 +2297,10 @@ function payment_groupbuy_home(product_id){
                                       })
                                 }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
                                     
-                                    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                     .then((res)=>{
                                         detail_product = res.data
-                                        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                         .then((res)=>{
                                             data_customer =res.data
                                             
@@ -2339,7 +2339,7 @@ function payment_groupbuy_home(product_id){
                                             
                                             
             
-                                            axios.post(`http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                            axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
                                                 headers:{
                                                     "Content-Type":'application/json'
                                                 },
@@ -2446,7 +2446,7 @@ const open_checkout=(product_id)=>{
     
     var array = []
     localStorage.setItem('itemsToCheckout',array)
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
         if(res.data.Stock_Quantity > 1){
             var productToBeAdded = {
@@ -2525,7 +2525,7 @@ const buyNow=(product_id)=>{
     
     var array = []
     localStorage.setItem('itemsToCheckout',array)
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
         if(res.data.Stock_Quantity > 1){
             var productToBeAdded = {
@@ -2598,7 +2598,7 @@ const buyNow=(product_id)=>{
 
 function addToCart(product_id){
 
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res)=>{
         
         var quantity_product = parseInt(res.data.Stock_Quantity)
@@ -2925,18 +2925,18 @@ const save_product_name=()=>{
     var jenis_edit = item[2]
     if(jenis_edit === 'product_name'){
         
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             
             email = res.data.Email
             //encrypt pass
             var new_pass
-            axios.post(`http://customers.sold.co.id/password-generator?Password=${pass}`)
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
             .then((res)=>{
                 if(res.data){
                     new_pass = res.data
 
-                    axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         
                         if(res.data){
@@ -2956,7 +2956,7 @@ const save_product_name=()=>{
                             
     
                             if(nama.length <5){
-                                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                 .then((res)=>{
                                     
                                     $("#"+product_id+"-name").val(res.data.Name)
@@ -3051,15 +3051,15 @@ const save_product_name=()=>{
         })
 
     }else if (jenis_edit === 'product_sell_price'){
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             email = res.data.Email
             var new_pass
-            axios.post(`http://customers.sold.co.id/password-generator?Password=${pass}`)
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
             .then((res)=>{
                 new_pass = res.data
                 if(res.data){
-                    axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         if(res.data){
                             $("#"+product_id+"-harga").prop('disabled',true) 
@@ -3077,7 +3077,7 @@ const save_product_name=()=>{
                             
                     
                             if(harga <500){
-                                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                     .then((res)=>{
                                         
                                         $("#"+product_id+"-harga").val(res.data.Sell_Price)
@@ -3096,7 +3096,7 @@ const save_product_name=()=>{
                                         
                                     })
                             }else {
-                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
                                     
                                     if(res.data){
@@ -3180,15 +3180,15 @@ const save_product_name=()=>{
 
         })
     }else if ( jenis_edit === 'product_quantity'){
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             email = res.data.Email     
             var new_pass
-            axios.post(`http://customers.sold.co.id/password-generator?Password=${pass}`)
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
             .then((res)=>{
                 if(res.data){
                     new_pass = res.data            
-                    axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         if(res.data){
                             $("#"+product_id+"-qty").prop('disabled',true) 
@@ -3207,7 +3207,7 @@ const save_product_name=()=>{
                             
         
                             if(qty < 10){
-                                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                 .then((res)=>{
                                     
                                     $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
@@ -3227,7 +3227,7 @@ const save_product_name=()=>{
                                 })
                             }else {
                                 
-                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                                 .then((res)=>{
                                     
                                     if(res.data){
@@ -3299,17 +3299,17 @@ const save_product_name=()=>{
             
         })
     }else if (jenis_edit === 'product_discount'){
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             email = res.data.Email
 
             var new_pass
-            axios.post(`http://customers.sold.co.id/password-generator?Password=${pass}`)
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
             .then((res)=>{
                 if(res.data){
                     new_pass = res.data
                     
-                    axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         if(res.data){
                    
@@ -3335,7 +3335,7 @@ const save_product_name=()=>{
                         
                         
                         
-                        axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                        axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                         .then((res)=>{
                             
                             if(res.data){
@@ -3370,7 +3370,7 @@ const save_product_name=()=>{
                                     timer:2000,
                                     
                                 })
-                                axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
+                                axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
                                 .then((res)=>{
                                     
                                     $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
@@ -3418,17 +3418,17 @@ const save_product_name=()=>{
         })
     }else if (jenis_edit === 'groupbuy_qty'){
         
-        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             email = res.data.Email
 
             var new_pass
-            axios.post(`http://customers.sold.co.id/password-generator?Password=${pass}`)
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
             .then((res)=>{
                 if(res.data){
                     new_pass =res.data
 
-                    axios.post(`http://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
                     .then((res)=>{
                         if(res.data){
 
@@ -3452,7 +3452,7 @@ const save_product_name=()=>{
                         
                         
                         
-                        axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                        axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
                         .then((res)=>{
                             
                             if(res.data){
@@ -3489,7 +3489,7 @@ const save_product_name=()=>{
                                 $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
                                 $("#"+product_id+"-save_quantity").css('display','none') // icon
                                 $("#"+product_id+"-quantity").css('background-color','transparent')
-                                axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                 .then((res)=>{
                                     $("#"+product_id+"-quantity").val(res.data.GroupBuy_SellQuantity)
                                 }).catch((err)=>{
@@ -4047,7 +4047,7 @@ function to_detail_product(id){
     
     $('#detailProductModal').modal('show')
     $('.modals_detail_product').empty()
-    axios.post(`http://products.sold.co.id/get-product-details?product_code=${id}`)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${id}`)
     .then((res)=>{
         
             $('.modals_detail_product').append(`
@@ -4079,7 +4079,7 @@ const check_status_item=()=>{
     $('#productModal').modal('show')
     var token = localStorage.getItem('token')
     var creator;
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         
         
@@ -4087,7 +4087,7 @@ const check_status_item=()=>{
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
             
             res.data.map((val,index)=>{
@@ -4503,7 +4503,7 @@ const re_render_item_product=()=>{
     var token = localStorage.getItem('token')
     $('.tbody_product').empty()
     var creator;
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
         
         
@@ -4511,7 +4511,7 @@ const re_render_item_product=()=>{
         creator = res.data.Creator
 
         // FIND DATA BY CREATOR
-        axios.post(`http://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
         .then((res)=>{
             
             res.data.map((val,index)=>{
@@ -4596,10 +4596,10 @@ const get_status=(product_id,pass)=>{
     var email;
     var result;
 
-            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
                 email = res.data.Email
-                axios.post(`http://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
+                axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
                 .then((res)=>{
                     
                     
@@ -4629,7 +4629,7 @@ const get_status=(product_id,pass)=>{
                         })
                         $('#get_otp').modal('hide')
                         
-                    axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                     .then((res)=>{
                         
                         
