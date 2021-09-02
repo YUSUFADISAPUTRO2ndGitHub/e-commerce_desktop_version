@@ -80,36 +80,61 @@ $( document ).ready(function() {
     // }
 
 
-
+    getAllData()
 });
 
-
+setInterval(() => {
+    axios.post(`https://products.sold.co.id/get-product-details`)
+    .then((res)=>{
+        var all_data = JSON.stringify(res.data)
+        
+        localStorage.setItem('all_data_product',all_data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+}, 3600000);  
 
 
 
 const getAllData=()=>{
 // 
 
-axios.post('https://products.sold.co.id/get-product-details')
-.then((res)=>{
-    allData = res.data
-    // 
+var all_data = JSON.parse(localStorage.getItem('all_data_product'))
+    allData = all_data
 
-   
-
-    renderItemPromo()
-    renderItemNew()
-    renderItemAll()
-    renderCategory()
-    render_item_all_category()
-    renderOptionSearch()
-    // renderSubCategory('ADHESIVE')
-    // renderItemBasedOnSubCategory('SEALANT')
-}).catch((err)=>{
-    
-})
+    if(all_data == undefined || all_data == null){
+        axios.post('https://products.sold.co.id/get-product-details')
+        .then((res)=>{
+            var all_data = JSON.stringify(res.data)
+            localStorage.setItem('all_data_product',all_data)
+            allData = res.data
+            
+        
+        
+        
+            renderItemPromo()
+            renderItemNew()
+            renderItemAll()
+            renderCategory()
+            render_item_all_category()
+            renderOptionSearch()
+            // renderSubCategory('ADHESIVE')
+            // renderItemBasedOnSubCategory('SEALANT')
+        }).catch((err)=>{
+            
+        })
+    }else {
+        console.log('masuk ke else 127')
+        console.log(allData)
+        renderItemPromo()
+        renderItemNew()
+        renderItemAll()
+        renderCategory()
+        render_item_all_category()
+        renderOptionSearch()
+    }
 }
-getAllData()
+
 
 const renderOptionSearch=()=>{
 
@@ -2916,11 +2941,9 @@ function commafy( num ) {
                                        
                                     </div>
                                     <div class="box-quality-right-id-2">
-                                        <div class="bsp-1">
+                                        <div class="bsp-2">
                                             <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-                                                
-                                            <br>
-                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
+  
                                         </div>
                                        
                                     </div>
@@ -3421,12 +3444,10 @@ function commafy( num ) {
                                        
                                     </div>
                                     <div class="box-quality-right-id-2">
-                                        <div class="bsp-1">
-                                            <p> Normal Price : </p>
+                                        <div class="bsp-2">
                                             <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
                                             
-                                            <br>
-                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
+                            
                                         </div>
                                     
                                     </div>
