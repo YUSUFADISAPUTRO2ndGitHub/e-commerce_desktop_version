@@ -85,14 +85,14 @@ $( document ).ready(function() {
 
 
     async function save_locally_province_tiki(){
-        console.log('jalan 106')
+        
         // localStorage.setItem("all_province_tiki", JSON.stringify([]));
         // localStorage.setItem("all_city_tiki", JSON.stringify([]));
         // localStorage.setItem("all_district_tiki", JSON.stringify([]));
         // localStorage.setItem("all_subdistrict_tiki", JSON.stringify([]));
         await get_all_province_from_courier("tiki", "tiki").done(async function(response){
             localStorage.setItem("all_province_tiki", JSON.stringify(response));
-            console.log('jalan 113')
+            
             var i = 0;
             var all_city_tiki = [];
             for(i = 0; i < response.length; i++){
@@ -102,10 +102,10 @@ $( document ).ready(function() {
                 });
             }
             var test = JSON.parse(localStorage.getItem('all_province_tiki'))
-            console.log(test)
+            
             await localStorage.setItem("all_city_tiki", JSON.stringify(all_city_tiki));
             var all_district_tiki = [];
-            console.log('jalan 124')
+            
             for(i = 0; i < all_city_tiki.length; i++){
                 for(z = 0; z < all_city_tiki[i].City.length; z++){
                     if((all_city_tiki[i].City[z] != undefined)){
@@ -115,7 +115,7 @@ $( document ).ready(function() {
                         });   
                     }
                 }
-                console.log('LOOPING SELESAI TIKI')
+                
             }
             await localStorage.setItem("all_district_tiki", JSON.stringify(all_district_tiki));
             var all_subdistrict_tiki = [];
@@ -130,12 +130,12 @@ $( document ).ready(function() {
                         });  
                     }
                 }
-                console.log('local district function jalan')
+
                
                 
             }
             await localStorage.setItem("all_subdistrict_tiki", JSON.stringify(all_subdistrict_tiki));
-            console.log(localStorage.getItem("all_subdistrict_tiki"));
+            
         })
     }
     async function save_locally_city_tiki(Province){
@@ -172,7 +172,7 @@ $( document ).ready(function() {
     // console.log(district_storage)
     // console.log(subdistrict_storage)
 
-    if(province_storage.length >0 && city_storage.length>0 && district_storage.length >0 && subdistrict_storage.length >0){
+if(province_storage != null && city_storage != null && district_storage != null && subdistrict_storage != null){
         console.log('local province dll udah ke isi')
     }else {
         save_locally_province_tiki()
@@ -255,8 +255,8 @@ const renderOptionSearch=()=>{
 
 const get_product_detail_from_main_page=(product_id)=>{
 
-    var from = document.referrer
-    console.log(from)
+    
+    
     // render_get_product_detail(product_id)  
     $(this).scrollTop('.modals-product-detail')
 $('.box-delete-success').css('display','block')
@@ -555,7 +555,7 @@ const renderCategory=()=>{
         res.data.map((val,index)=>{
             var sub = val.Category.toUpperCase()    
             var split = sub.split(' ').join('_')
-            // console.log(split,'436')
+            
             $('.lg_home').append(
                 ` 
                 <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')" id="id_sub-${split}">${sub}</li>
@@ -597,10 +597,10 @@ const findSubCategory=(sub)=>{
     // $('')
 
     var split = sub.split(' ').join('_')
-    console.log(split, ' ini split')
+    
     $('.list-group-item').removeClass('active-cl')
     $(`#id_sub-${split}`).addClass('active-cl')
-    console.log(split, ' ini split2')
+    
     // 
     $('.closeByLogin').css('display','none')
     $('.option-0').removeClass("background_grey")
@@ -670,10 +670,7 @@ function sign_up_request(){
                             allSub_District = response
                             sub_district = response[0]
 
-                            console.log(allProvince)
-                            console.log(allKota)
-                            console.log(allDistrict)
-                            console.log(allSub_District)
+                          
                             allProvince.map((val,index)=>{
                                 $('.register-provinsi').append(`
                                     <option  value="${val.Province}" class="reg-provinsi">${val.Province}</option> 
@@ -1090,15 +1087,15 @@ const render_group_buy=(product_id)=>{
                                     <label class="input-group-text" for="inputGroupSelect01">Kota</label>
                                 </div>
                                 <select class="custom-select home_kota_hover kota-home-gb" id="inputGroupSelect01"  onchange="kotaMethodHome('${product_id}')" >  
-                                    <option selected  class="id-kurir-gb"> Kota</option>      
+                                    <option selected  class="id-kota-gb"> Kota</option>      
                                 </select>
                             </div>
                             <div class="input-group mb-3 input-card-sp">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01">Kecamatan</label>
                                 </div>
-                                <select class="custom-select kelurahan_kelurahan_hover kelurahan-home-gb" id="inputGroupSelect01" onchange="kelurahanMethodHome('${product_id}')" >  
-                                    <option selected  class="id-kurir-gb">Kelurahan</option>      
+                                <select class="custom-select kelurahan_kelurahan_hover kecamatan-home-gb" id="inputGroupSelect01" onchange="kecamatanMethodHome('${product_id}')" >  
+                                    <option selected  class="id-kecamatan-gb">Kecamatan</option>      
                                 </select>
                             </div>   
                              
@@ -1109,8 +1106,8 @@ const render_group_buy=(product_id)=>{
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="inputGroupSelect01">Kelurahan</label>
                                 </div>
-                                <select class="custom-select home_kecamatan_hover kecamatan-home-gb" id="inputGroupSelect01"  onchange="kecamatanMethodHome('${product_id}')" >  
-                                    <option selected  class="id-kurir-gb">Kecamatan</option>      
+                                <select class="custom-select home_kecamatan_hover kelurahan-home-gb" id="inputGroupSelect01"  onchange="kelurahanMethodHome('${product_id}')" >  
+                                    <option selected  class="id-kelurahan-gb">Kelurahan</option>      
                                 </select>
                             </div>
 
@@ -1709,7 +1706,7 @@ const provinceMethodHome=(product_id)=>{
     var allKurir=[]
     var allProvince=[]
     var allKota =[]
-    var allKelurahan=[]
+    var allKelurahanallKelurahan=[]
     var allKecamatan=[]
     var allPengiriman=[]
     var allDistrict = []
@@ -1763,15 +1760,10 @@ const provinceMethodHome=(product_id)=>{
             })
              $('.kecamatan-home-gb').empty()
              $('.kota-home-gb').empty() 
-            //  $('.kelurahan-home-gb').empty()
-            //  $('.kecamatan-home-gb').empty()
-            //  $('.pengiriman-home-gb').empty()
-            //  $('.asuransi-home-gb').empty()
-            //  $('.packing-home-gb').empty()
-            //  $('.kodepos-home-gb').empty()
+         
             $('.kecamatan-home-gb').append(`
                 <option  selected class="id-kecamatan-gb"> Kecamatan</option>      
-                `)
+            `)
             $('.kota-home-gb').append(`
                 <option  selected class="id-kota-gb"> Kota</option>      
             `)
@@ -1781,162 +1773,308 @@ const provinceMethodHome=(product_id)=>{
                     <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
                 `)
             })
+            console.log(allDistrict)
             allDistrict[0].map((val,index)=>{
-                $('.kecamatan-home-gb').append(`
-                    <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+                if(val.Sub_District == ''){
+                    $('.kecamatan-home-gb').append(`
+                        <option  value="${val.District}" class="id-kecamatan-gb">-</option> 
+                    `)
+                }else {
+                    $('.kecamatan-home-gb').append(`
+                        <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+                    `)
+                    
+                }
+
+            })
+            get_product_detail_func(product_id).done(function(response){
+                var item_product = response
+                console.log(district_pilihan)
+                get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
+                    kelurahan = response
+                    allKelurahan = response
+                    allSub_District = response
+                    console.log(response)
+                    
+                    var Courier_Price_Code_orig = 'CGK01.00'
+                    var packing_type = ''
+                    var berat_product = parseInt(item_product.Weight_KG)
+                    if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                        berat_product = 0.1*1.5;
+                    }else{
+                        berat_product = berat_product*1*1.5;
+                    }
+                    var length = ''
+                    var  width = '' 
+                    var  height = ''
+                    var paket_value = '' 
+    
+                    
+                    new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+    
+                        
+                        allPengiriman = response
+                        
+                        // $('.radio-group-delivery').empty()
+                        // $('.kurir-home-gb').empty()
+                        // $('.province-home-gb').empty()
+                        // $('.kota-home-gb').empty() 
+                        // $('.kecamatan-home-gb').empty()
+                        $('.kelurahan-home-gb').empty()
+                        $('.pengiriman-home-gb').empty()
+                        $('.asuransi-home-gb').empty()
+                        $('.packing-home-gb').empty()
+                        $('.kodepos-home-gb').empty()
+    
+                        // $('.province-home-gb').append(`
+                        //     <option   value="id-province-gb" >Province</option> 
+                        // `)
+                      
+                        $('.kelurahan-home-gb').append(`
+                            <option selected  class="id-kelurahan-gb">Kelurahan</option>      
+                        `)
+                       
+                        $('.pengiriman-home-gb').append(`
+                            <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                        `)
+                        $('.asuransi-home-gb').append(`
+                            <option selected  class="id-asuransi-gb">Asuransi</option>      
+                        `)
+                        $('.packing-home-gb').append(`
+                            <option selected  class="id-packing-gb">Packing</option>      
+                        `)
+                        $('.kodepos-home-gb').append(`
+                            <option selected  class="id-kodepos-gb">Kode Pos</option>      
+                        `)
+      
+                     
+                        console.log(allKelurahan)
+                        allKelurahan.map((val,index)=>{
+    
+                            if(val.Sub_District == ''){
+                                $('.kelurahan-home-gb').append(`
+                                    <option  value="${val.Sub_District}" class="id-kelurahan-gb">-</option> 
+                                `)
+                            }else {
+                                $('.kelurahan-home-gb').append(`
+                                    <option  value="${val.Sub_District}" class="id-kelurahan-gb">${val.Sub_District}</option> 
+                                `)
+                                $('.kodepos-home-gb').append(`
+                                    <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                `)
+                               
+                            }
+                        })
+    
+                        if(allPengiriman){
+    
+                            if(allPengiriman.service != undefined) {
+                                allPengiriman.service.map((val,index)=>{
+                                    
+                                    
+                                    
+                                    $('.pengiriman-home-gb').append(`
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                    `)
+                                })
+                            }
+                            if(allPengiriman.insurance !=undefined){
+                                allPengiriman.insurance.map((val,index)=>{
+                                    // 
+                                    // 
+                                    // 
+                                    $('.asuransi-home-gb').append(`
+                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                    `)
+                                })
+                            }
+                            if(allPengiriman.packing != undefined) {
+                                allPengiriman.packing.map((val,index)=>{
+                                    // 
+                                    // 
+                                    // 
+                                    $('.packing-home-gb').append(`
+                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                    `)
+                                })
+                            }
+    
+                        }
+                    })
+                })
+            })    
+
+        }else if (city_storage != undefined && city_storage .length >0 && city_storage != null){
+            alert('masuk ke else if city storage')
+            var kota_pilihan = ''
+            var district_pilihan =''
+            city_storage.forEach((val)=>{
+                if(val.Province == province_pilihan ){
+                    allKota.push(val.City)
+                    kota_pilihan = val.City[0].City
+                }
+            })
+          
+             
+             $('.kota-home-gb').empty() 
+         
+            $('.kota-home-gb').append(`
+                <option  selected class="id-kota-gb"> Kota</option>      
+            `)
+
+            allKota[0].map((val,index)=>{
+                $('.kota-home-gb').append(`
+                    <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
                 `)
             })
-
-            get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
-                kecamatan = response
-                allKecamatan = response
-                allSub_District = response
-                var array_cart = []
-                var cart_local = localStorage.getItem('itemsToCheckout')
-                      
-                var parse_cart = JSON.parse(cart_local)
-              //   console.log(parse_cart)
-                var array_cart =[]
-                for(var i =0; i<parse_cart.length; i++){
-                  //   console.log(parse_cart[i].productNo)
-                    getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-      
-                        array_cart.push(response)
-      
-                    })
-                }
-                var total_berat_product = 0
-                var Courier_Price_Code_orig = 'CGK01.00'
-                var packing_type = ''
-                // var berat_product = parseInt(item_product.Weight_KG)
-                for(var i =0; i<array_cart.length; i++){
-                    var berat_parse = array_cart[i].Weight_KG *1
-                    if(berat_parse <= 0 || berat_parse == null || berat_parse == undefined || Number.isNaN(berat_parse)){
-                        berat_parse = 0.1*1.5;
-                    }else{
-                        berat_parse = berat_parse*1*1.5;
-                    }
+            // console.log(allDistrict)
+            // allDistrict[0].map((val,index)=>{
+            //     if(val.Sub_District == ''){
+            //         $('.kecamatan-home-gb').append(`
+            //             <option  value="${val.District}" class="id-kecamatan-gb">-</option> 
+            //         `)
+            //     }else {
+            //         $('.kecamatan-home-gb').append(`
+            //             <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+            //         `)
                     
-                    total_berat_product += berat_parse
+            //     }
 
-                }
-              
-                var length = ''
-                var  width = '' 
-                var  height = ''
-                var paket_value = '' 
-                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
-
+            // })
+            get_product_detail_func(product_id).done(function(response){
+                var item_product = response
+                // console.log(district_pilihan)
+                get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
+                    allKecamatan = response
+                    console.log(response)
+                    district_pilihan = response[0].District
+                    get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
+                        kelurahan = response
+                        allKelurahan = response
+                        allSub_District = response
+                        console.log(response)
                     
-                    allPengiriman = response
-                    
-               
-                    $('.kelurahan-home-gb').empty()
-                    $('.pengiriman-home-gb').empty()
-                    $('.asuransi-home-gb').empty()
-                    $('.packing-home-gb').empty()
-                    $('.kodepos-home-gb').empty()
-
-                    // $('.province-home-gb').append(`
-                    //     <option   value="id-province-gb" >Province</option> 
-                    // `)
-                    // $('.kota-home-gb').append(`
-                    //     <option  selected class="id-kota-gb"> Kota</option>      
-                    // `)
-                    // $('.kecamatan-home-gb').append(`
-                    //     <option selected  class="id-kecamatan-gb">Kecamatan</option>      
-                    // `)
-                    $('.kelurahan-home-gb').append(`
-                        <option selected  class="id-kelurahan-gb">Kelurahan</option>      
-                    `)
-                    $('.pengiriman-home-gb').append(`
-                        <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
-                    `)
-                    $('.asuransi-home-gb').append(`
-                    <option selected  class="id-asuransi-gb">Asuransi</option>      
-                    `)
-                    $('.packing-home-gb').append(`
-                        <option selected  class="id-packing-gb">Packing</option>      
-                    `)
-                    $('.kodepos-home-gb').append(`
-                        <option selected  class="id-kodepos-gb">Kode Pos</option>      
-                    `)
-  
-                    allKota.map((val,index)=>{
-                        // 
-                        $('.kota-home-gb').append(`
-                            <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
-                        `)    
-                    })  
-                    allKecamatan.map((val,index)=>{
-                        if(val.Sub_District == ''){
-                            $('.kecamatan-home-gb').append(`
-                                <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
-                            `)
-                        }else {
-                            $('.kecamatan-home-gb').append(`
-                                <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
-                            `)
-                            $('.kodepos-home-gb').append(`
-                                <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
-                            `)
+                        
+                        var Courier_Price_Code_orig = 'CGK01.00'
+                        var packing_type = ''
+                        var berat_product = parseInt(item_product.Weight_KG)
+                        if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                            berat_product = 0.1*1.5;
+                        }else{
+                            berat_product = berat_product*1*1.5;
                         }
-
-                    })
-
-                    allKelurahan.map((val,index)=>{
-
-                        if(val.District == ''){
-                            $('.kelurahan-home-gb').append(`
-                                <option  value="${val.District}" class="id-kelurahan-gb">-</option> 
+                        var length = ''
+                        var  width = '' 
+                        var  height = ''
+                        var paket_value = '' 
+        
+                        
+                        new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+        
+                            
+                            allPengiriman = response
+                            
+                            // $('.radio-group-delivery').empty()
+                            // $('.kurir-home-gb').empty()
+                            // $('.province-home-gb').empty()
+                            // $('.kota-home-gb').empty() 
+                            $('.kecamatan-home-gb').empty()
+                            $('.kelurahan-home-gb').empty()
+                            $('.pengiriman-home-gb').empty()
+                            $('.asuransi-home-gb').empty()
+                            $('.packing-home-gb').empty()
+                            $('.kodepos-home-gb').empty()
+        
+                            $('.kecamatan-home-gb').append(`
+                                <option   value="id-kecamatan-gb" >Kecamatan</option> 
                             `)
-                        }else {
+                          
                             $('.kelurahan-home-gb').append(`
-                                <option  value="${val.District}" class="id-kelurahan-gb">${val.District}</option> 
+                                <option selected  class="id-kelurahan-gb">Kelurahan</option>      
                             `)
                            
-                        }
+                            $('.pengiriman-home-gb').append(`
+                                <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                            `)
+                            $('.asuransi-home-gb').append(`
+                                <option selected  class="id-asuransi-gb">Asuransi</option>      
+                            `)
+                            $('.packing-home-gb').append(`
+                                <option selected  class="id-packing-gb">Packing</option>      
+                            `)
+                            $('.kodepos-home-gb').append(`
+                                <option selected  class="id-kodepos-gb">Kode Pos</option>      
+                            `)
+          
+                         
+                            allKecamatan.map((val,index)=>{
+                                if(val.District == ''){
+                                    $('.kecamatan-home-gb').append(`
+                                        <option  value="${val.District}" class="id-kecamatan-gb">-</option> 
+                                    `)
+                                }else {
+                                    $('.kecamatan-home-gb').append(`
+                                        <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+                                    `)
+                                  
+                                }
+
+                            })
+                            allKelurahan.map((val,index)=>{
+        
+                                if(val.Sub_District == ''){
+                                    $('.kelurahan-home-gb').append(`
+                                        <option  value="${val.Sub_District}" class="id-kelurahan-gb">-</option> 
+                                    `)
+                                }else {
+                                    $('.kelurahan-home-gb').append(`
+                                        <option  value="${val.Sub_District}" class="id-kelurahan-gb">${val.Sub_District}</option> 
+                                    `)
+                                    $('.kodepos-home-gb').append(`
+                                        <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                    `)
+                                   
+                                }
+                            })
+        
+                            if(allPengiriman){
+        
+                                if(allPengiriman.service != undefined) {
+                                    allPengiriman.service.map((val,index)=>{
+                                        
+                                        
+                                        
+                                        $('.pengiriman-home-gb').append(`
+                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                        `)
+                                    })
+                                }
+                                if(allPengiriman.insurance !=undefined){
+                                    allPengiriman.insurance.map((val,index)=>{
+                                        // 
+                                        // 
+                                        // 
+                                        $('.asuransi-home-gb').append(`
+                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                        `)
+                                    })
+                                }
+                                if(allPengiriman.packing != undefined) {
+                                    allPengiriman.packing.map((val,index)=>{
+                                        // 
+                                        // 
+                                        // 
+                                        $('.packing-home-gb').append(`
+                                            <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                        `)
+                                    })
+                                }
+        
+                            }
+                        })
                     })
-
-                    if(allPengiriman){
-
-                        if(allPengiriman.service != undefined) {
-                            allPengiriman.service.map((val,index)=>{
-                                
-                                
-                                
-                                $('.pengiriman-home-gb').append(`
-                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                `)
-                            })
-                        }
-                        if(allPengiriman.insurance !=undefined){
-                            allPengiriman.insurance.map((val,index)=>{
-                                // 
-                                // 
-                                // 
-                                $('.asuransi-home-gb').append(`
-                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                `)
-                            })
-                        }
-                        if(allPengiriman.packing != undefined) {
-                            allPengiriman.packing.map((val,index)=>{
-                                // 
-                                // 
-                                // 
-                                $('.packing-home-gb').append(`
-                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                `)
-                            })
-                        }
-
-                    }
-                })
-            })
-
-        }else if (city_storage != undefined && city_storage .length >0){
-
+                })   
+            })    
         }else {
             if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
                 isKurir_pilihan = false
@@ -2122,6 +2260,11 @@ const provinceMethodHome=(product_id)=>{
     })
 }
 const kotaMethodHome=(product_id)=>{
+
+    var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+    var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+    var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+    var subdistrict_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
     
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
     var province_pilihan=$('.province-home-gb option:selected').val()
@@ -2157,518 +2300,375 @@ const kotaMethodHome=(product_id)=>{
     var isKelurahan_pilihan = false
     var isQty_pilihan = false
 
-    
-    if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0){
-        isQty_pilihan = false
-    }else {
-        isQty_pilihan = true
-    }
-    if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
-        isnew_kurir_pilihan = false
-    }else {
-        isKurir_pilihan = true
-    }
-    if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
-        isProvince_pilihan = false
-    }else {
-        isProvince_pilihan = true
-    }
-    if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
-        isKota_pilihan = false
-    }else {
-        isKota_pilihan = true
-    }
-
-    if(isKurir_pilihan && isKota_pilihan && isProvince_pilihan && isQty_pilihan) {
+    get_all_couriers().done(function(response){
+        var dataAllKurir = response
+        allKurir = response
         
-        $('.alert-danger').css('display','none')
-        // $('.kota-home-gb').empty()
-        // $('.kecamatan-home-gb').empty()
-        // $('.kelurahan-home-gb').empty()
-        // $('.pengiriman-home-gb').empty()
+        
+        var kurir_kode =''
+        for(var i=0; i<dataAllKurir.length; i++){
+            if(dataAllKurir[i].Courier == new_kurir_pilihan){
+                kurir_kode = dataAllKurir[i].Courier_Code
+            }
+        }
 
-        get_product_detail_func(product_id).done(function(response){
-            var item_product = response
-            get_all_couriers().done(function(response){
-                var dataAllKurir = response
-                allKurir = response
-                
-                
-                var kurir_kode =''
-                for(var i=0; i<dataAllKurir.length; i++){
-                    if(dataAllKurir[i].Courier == new_kurir_pilihan){
-                        kurir_kode = dataAllKurir[i].Courier_Code
-                    }
+        if(district_storage != null && district_storage.length > 0 &&  subdistrict_storage != null && subdistrict_storage.length > 0) {
+            alert(' masuk ke if semua storage ke isi')
+        } else if ( district_storage != null) {
+            alert('masuk ke else if  district ke isi')
+            var kecamatan_pilihan = ''
+            
+            district_storage.forEach((val,index)=>{
+                if(val.City == kota_pilihan){
+                    allDistrict.push(val.District)
+                    console.log(val)
+                    console.log(val.District[0].District)
+                    kecamatan_pilihan = val.District[0].District
                 }
-                get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
-                    province = response[0]
-                    allProvince = response
+            })
+            $('.kecamatan-home-gb').empty()
+            $('.kecamatan-home-gb').append(`
+                    <option  selected class="id-kecamatan-gb"> Kecamatan</option>      
+                `)
+            allDistrict[0].map((val,index)=>{
+                $('.kecamatan-home-gb').append(`
+                    <option  value="${val.District}" class="id-kecamatan-gb">${val.District}</option> 
+                `)
+            })
+            get_product_detail_func(product_id).done(function(response){
+                var item_product = response
+                console.log(kecamatan_pilihan)
+                console.log(new_kurir_pilihan, kurir_kode)
+                get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kecamatan_pilihan).done(function(response){
+                    kelurahan = response
+                    allKelurahan = response
+                    allSub_District = response
                     
-                    get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
-                        kota = response[0]
-                        allKota = response
+                    
+                    var Courier_Price_Code_orig = 'CGK01.00'
+                    var packing_type = ''
+                    var berat_product = parseInt(item_product.Weight_KG)
+                    if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                        berat_product = 0.1*1.5;
+                    }else{
+                        berat_product = berat_product*1*1.5;
+                    }
+                    var length = ''
+                    var  width = '' 
+                    var  height = ''
+                    var paket_value = '' 
+    
+                    
+                    new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+    
                         
-                        get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
-                            kelurahan = response[0]
-                            district = response[0]
-                            allKelurahan = response
-                            
-                            get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
-                                kecamatan = response
-                                allKecamatan = response
-                                var Courier_Price_Code_orig = 'CGK01.00'
-                                var packing_type = ''
-                                var berat_product = parseInt(item_product.Weight_KG)
-                                if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
-                                    berat_product = 0.1*1.5;
-                                }else{
-                                    berat_product = berat_product*1*1.5;
-                                }
-                                var length = ''
-                                var  width = '' 
-                                var  height = ''
-                                var paket_value = '' 
-                                
-                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+                        allPengiriman = response
+                        
+                        // $('.radio-group-delivery').empty()
+                        // $('.kurir-home-gb').empty()
+                        // $('.province-home-gb').empty()
+                        // $('.kota-home-gb').empty() 
+                        // $('.kecamatan-home-gb').empty()
+                        $('.kelurahan-home-gb').empty()
+                        $('.pengiriman-home-gb').empty()
+                        $('.asuransi-home-gb').empty()
+                        $('.packing-home-gb').empty()
+                        $('.kodepos-home-gb').empty()
     
-                                
-                                    allPengiriman = response
+                        // $('.province-home-gb').append(`
+                        //     <option   value="id-province-gb" >Province</option> 
+                        // `)
+                      
+                        $('.kelurahan-home-gb').append(`
+                            <option selected  class="id-kelurahan-gb">Kelurahan</option>      
+                        `)
+                       
+                        $('.pengiriman-home-gb').append(`
+                            <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                        `)
+                        $('.asuransi-home-gb').append(`
+                            <option selected  class="id-asuransi-gb">Asuransi</option>      
+                        `)
+                        $('.packing-home-gb').append(`
+                            <option selected  class="id-packing-gb">Packing</option>      
+                        `)
+                        $('.kodepos-home-gb').append(`
+                            <option selected  class="id-kodepos-gb">Kode Pos</option>      
+                        `)
+      
+                     
+                        
+                        allKelurahan.map((val,index)=>{
+    
+                            if(val.Sub_District == ''){
+                                $('.kelurahan-home-gb').append(`
+                                    <option  value="${val.Sub_District}" class="id-kelurahan-gb">-</option> 
+                                `)
+                            }else {
+                                $('.kelurahan-home-gb').append(`
+                                    <option  value="${val.Sub_District}" class="id-kelurahan-gb">${val.Sub_District}</option> 
+                                `)
+                                $('.kodepos-home-gb').append(`
+                                    <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                `)
+                               
+                            }
+                        })
+    
+                        if(allPengiriman){
+    
+                            if(allPengiriman.service != undefined) {
+                                allPengiriman.service.map((val,index)=>{
                                     
-                                    // $('.radio-group-delivery').empty()
-                                    $('.kurir-home-gb').empty()
-                                    // $('.province-home-gb').empty()
-                                    // $('.kota-home-gb').empty() 
-                                    $('.kelurahan-home-gb').empty()
-                                    $('.kecamatan-home-gb').empty()
-                                    $('.pengiriman-home-gb').empty()
-                                    $('.asuransi-home-gb').empty()
-                                    $('.packing-home-gb').empty()
-                                    $('.kodepos-home-gb').empty()
-    
-                                    // $('.province-home-gb').append(`
-                                    //     <option   value="id-province-gb" >Province</option> 
-                                    // `)
-                                    // $('.kota-home-gb').append(`
-                                    //     <option   class="id-kota-gb"> Kota</option>      
-                                    // `)
-                                    $('.kelurahan-home-gb').append(`
-                                        <option selected  class="id-kelurahan-gb">Kelurahan</option>      
-                                    `)
-                                    $('.kecamatan-home-gb').append(`
-                                        <option selected  class="id-kecamatan-gb">Kecamatan</option>      
-                                    `)
+                                    
+                                    
                                     $('.pengiriman-home-gb').append(`
-                                        <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                     `)
+                                })
+                            }
+                            if(allPengiriman.insurance !=undefined){
+                                allPengiriman.insurance.map((val,index)=>{
+                                    // 
+                                    // 
+                                    // 
                                     $('.asuransi-home-gb').append(`
-                                    <option selected  class="id-asuransi-gb">Asuransi</option>      
+                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                     `)
+                                })
+                            }
+                            if(allPengiriman.packing != undefined) {
+                                allPengiriman.packing.map((val,index)=>{
+                                    // 
+                                    // 
+                                    // 
                                     $('.packing-home-gb').append(`
-                                        <option selected  class="id-packing-gb">Packing</option>      
+                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                     `)
-                                    $('.kodepos-home-gb').append(`
-                                        <option selected  class="id-kodepos-gb">Kode Pos</option>      
-                                    `)
+                                })
+                            }
     
+                        }
+                    })
+                })
+            }) 
+        }else {
+            if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0){
+                isQty_pilihan = false
+            }else {
+                isQty_pilihan = true
+            }
+            if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
+                isnew_kurir_pilihan = false
+            }else {
+                isKurir_pilihan = true
+            }
+            if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
+                isProvince_pilihan = false
+            }else {
+                isProvince_pilihan = true
+            }
+            if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
+                isKota_pilihan = false
+            }else {
+                isKota_pilihan = true
+            }
+        
+            if(isKurir_pilihan && isKota_pilihan && isProvince_pilihan && isQty_pilihan) {
+                
+                $('.alert-danger').css('display','none')
+                // $('.kota-home-gb').empty()
+                // $('.kecamatan-home-gb').empty()
+                // $('.kelurahan-home-gb').empty()
+                // $('.pengiriman-home-gb').empty()
+        
+                get_product_detail_func(product_id).done(function(response){
+                    var item_product = response
+                  
+                        get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+                            province = response[0]
+                            allProvince = response
+                            
+                            get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
+                                kota = response[0]
+                                allKota = response
+                                
+                                get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
+                                    kelurahan = response[0]
+                                    district = response[0]
+                                    allKelurahan = response
                                     
-        
-                                    // allKurir.map((val,index)=>{
-                                    //     // 
-                                    //     // $('.kurir-home-gb').append(`
-                                    //     //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
-                                    //     // `)
-                                    //     $('.radio-group-delivery').append(`
-                                    //     <div class="address-card-1  id="id-kurir-gb" radio-delivery-card" data-value="${val.Courier}">
-                                    //         <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
-                                    //     </div>
-                                    // `)
-                                    // })
-                                    // allProvince.map((val,index)=>{
-                                    //     // 
-                                    //     $('.province-home-gb').append(`
-                                    //         <option  selected value="${val.Province}" class="id-province-gb">${val.Province}</option> 
-                                    //     `)
-                                    // })
-                                    // allKota.map((val,index)=>{
-                                    //     // 
-                                    //     $('.kota-home-gb').append(`
-                                    //         <option  selected value="${val.City}" class="id-kota-gb">${val.City}</option> 
-                                    //     `)    
-                                    // })  
-                                    allKecamatan.map((val,index)=>{
-        
-                                        if(val.Sub_District == ''){
-                                            $('.kecamatan-home-gb').append(`
-                                                <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
+                                    get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
+                                        kecamatan = response
+                                        allKecamatan = response
+                                        var Courier_Price_Code_orig = 'CGK01.00'
+                                        var packing_type = ''
+                                        var berat_product = parseInt(item_product.Weight_KG)
+                                        if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                                            berat_product = 0.1*1.5;
+                                        }else{
+                                            berat_product = berat_product*1*1.5;
+                                        }
+                                        var length = ''
+                                        var  width = '' 
+                                        var  height = ''
+                                        var paket_value = '' 
+                                        
+                                        new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+            
+                                        
+                                            allPengiriman = response
+                                            
+                                            // $('.radio-group-delivery').empty()
+                                            $('.kurir-home-gb').empty()
+                                            // $('.province-home-gb').empty()
+                                            // $('.kota-home-gb').empty() 
+                                            $('.kelurahan-home-gb').empty()
+                                            $('.kecamatan-home-gb').empty()
+                                            $('.pengiriman-home-gb').empty()
+                                            $('.asuransi-home-gb').empty()
+                                            $('.packing-home-gb').empty()
+                                            $('.kodepos-home-gb').empty()
+            
+                                            // $('.province-home-gb').append(`
+                                            //     <option   value="id-province-gb" >Province</option> 
+                                            // `)
+                                            // $('.kota-home-gb').append(`
+                                            //     <option   class="id-kota-gb"> Kota</option>      
+                                            // `)
+                                            $('.kelurahan-home-gb').append(`
+                                                <option selected  class="id-kelurahan-gb">Kelurahan</option>      
                                             `)
-                                        }else {
                                             $('.kecamatan-home-gb').append(`
-                                                <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
+                                                <option selected  class="id-kecamatan-gb">Kecamatan</option>      
+                                            `)
+                                            $('.pengiriman-home-gb').append(`
+                                                <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                                            `)
+                                            $('.asuransi-home-gb').append(`
+                                            <option selected  class="id-asuransi-gb">Asuransi</option>      
+                                            `)
+                                            $('.packing-home-gb').append(`
+                                                <option selected  class="id-packing-gb">Packing</option>      
                                             `)
                                             $('.kodepos-home-gb').append(`
-                                                <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                                <option selected  class="id-kodepos-gb">Kode Pos</option>      
                                             `)
-                                        }
+            
+                                            
+                
+                                            // allKurir.map((val,index)=>{
+                                            //     // 
+                                            //     // $('.kurir-home-gb').append(`
+                                            //     //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
+                                            //     // `)
+                                            //     $('.radio-group-delivery').append(`
+                                            //     <div class="address-card-1  id="id-kurir-gb" radio-delivery-card" data-value="${val.Courier}">
+                                            //         <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
+                                            //     </div>
+                                            // `)
+                                            // })
+                                            // allProvince.map((val,index)=>{
+                                            //     // 
+                                            //     $('.province-home-gb').append(`
+                                            //         <option  selected value="${val.Province}" class="id-province-gb">${val.Province}</option> 
+                                            //     `)
+                                            // })
+                                            // allKota.map((val,index)=>{
+                                            //     // 
+                                            //     $('.kota-home-gb').append(`
+                                            //         <option  selected value="${val.City}" class="id-kota-gb">${val.City}</option> 
+                                            //     `)    
+                                            // })  
+                                            allKecamatan.map((val,index)=>{
+                
+                                                if(val.Sub_District == ''){
+                                                    $('.kecamatan-home-gb').append(`
+                                                        <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
+                                                    `)
+                                                }else {
+                                                    $('.kecamatan-home-gb').append(`
+                                                        <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
+                                                    `)
+                                                    $('.kodepos-home-gb').append(`
+                                                        <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                                    `)
+                                                }
+                
+                                            })
+                
+                                            allKelurahan.map((val,index)=>{
+                
+                                                if(val.District == ''){
+                                                    $('.kelurahan-home-gb').append(`
+                                                        <option  value="${val.District}" class="id-kelurahan-gb">-</option> 
+                                                    `)
+                                                }else {
+                                                    $('.kelurahan-home-gb').append(`
+                                                        <option  value="${val.District}" class="id-kelurahan-gb">${val.District}</option> 
+                                                    `)
+                                                   
+                                                }
+                                            })
+                
+                                            if(allPengiriman){
         
+                                                if(allPengiriman.service != undefined) {
+                                                    allPengiriman.service.map((val,index)=>{
+                                                        
+                                                        
+                                                        
+                                                        $('.pengiriman-home-gb').append(`
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                        `)
+                                                    })
+                                                }
+                                                if(allPengiriman.insurance !=undefined){
+                                                    allPengiriman.insurance.map((val,index)=>{
+                                                        // 
+                                                        // 
+                                                        // 
+                                                        $('.asuransi-home-gb').append(`
+                                                            <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                        `)
+                                                    })
+                                                }
+                                                if(allPengiriman.packing != undefined) {
+                                                    allPengiriman.packing.map((val,index)=>{
+                                                        // 
+                                                        // 
+                                                        // 
+                                                        $('.packing-home-gb').append(`
+                                                            <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                        `)
+                                                    })
+                                                }
+        
+                                            }
+                
+                
+                                        })
                                     })
-        
-                                    allKelurahan.map((val,index)=>{
-        
-                                        if(val.District == ''){
-                                            $('.kelurahan-home-gb').append(`
-                                                <option  value="${val.District}" class="id-kelurahan-gb">-</option> 
-                                            `)
-                                        }else {
-                                            $('.kelurahan-home-gb').append(`
-                                                <option  value="${val.District}" class="id-kelurahan-gb">${val.District}</option> 
-                                            `)
-                                           
-                                        }
-                                    })
-        
-                                    if(allPengiriman){
-
-                                        if(allPengiriman.service != undefined) {
-                                            allPengiriman.service.map((val,index)=>{
-                                                
-                                                
-                                                
-                                                $('.pengiriman-home-gb').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                                `)
-                                            })
-                                        }
-                                        if(allPengiriman.insurance !=undefined){
-                                            allPengiriman.insurance.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
-                                                $('.asuransi-home-gb').append(`
-                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                                `)
-                                            })
-                                        }
-                                        if(allPengiriman.packing != undefined) {
-                                            allPengiriman.packing.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
-                                                $('.packing-home-gb').append(`
-                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                                `)
-                                            })
-                                        }
-
-                                    }
-        
-        
                                 })
                             })
                         })
-                    })
+                    
                 })
-            })
-        })
-    }else {
-        
-        swal.fire("Ada field yang belum di isi", "", "error");
-        $('.alert-danger').css('display','flex')
-        render_all_kurir_before_choosing(render_all_kurir_before_choosing)
+            }else {
+                
+                swal.fire("Ada field yang belum di isi", "", "error");
+                $('.alert-danger').css('display','flex')
+                render_all_kurir_before_choosing(render_all_kurir_before_choosing)
+            }
+    
+        }
+    })
 
-        
-        
-        
-        
-        
-        
-    }
+
+    
     
 }
 const kelurahanMethodHome=(product_id)=>{
-    
-    var kurir_pilihan=$('.kurir-home-gb option:selected').val()
-    var province_pilihan=$('.province-home-gb option:selected').val()
-    var kota_pilihan=$('.kota-home-gb option:selected').val()
-    var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
-    var kelurahan_pilihan=$('.kelurahan-home-gb option:selected').val()
-    var kodepos_pilihan = $('.kodepos-home-gb').val()
-    var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
-    var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
-    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
-    
-    
-    
-    
-    
-    
-
-    var allKurir=[]
-    var allProvince=[]
-    var allKota =[]
-    var allKelurahan=[]
-    var allKecamatan=[]
-    var allPengiriman=[]
-
-    var kurir=[]
-    var province = []
-    var kota = []
-    var kelurahan = []
-    var kecamatan = []
-    
-    var isKurir_pilihan = false
-    var isProvince_pilihan = false
-    var isKota_pilihan = false
-    var isKecamatan_pilihan = false
-    var isKelurahan_pilihan = false
-    var isQty_pilihan = false
-
-    if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
-        
-        isKelurahan_pilihan = false
-        kelurahan_pilihan = ''
-    }else {
-        isKelurahan_pilihan = true
-
-    }
-    // if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
-    //     
-    //      kecamatan_pilihan = ''
-    //      isKecamatan_pilihan = true
-    //  }  
-
-    if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
-        isKurir_pilihan = false
-    }else {
-        isKurir_pilihan = true
-    }
-    if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0){
-        isQty_pilihan = false
-    }else {
-        isQty_pilihan = true
-    }
-
-    if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Province'){
-        isProvince_pilihan = false
-    }else {
-        isProvince_pilihan = true
-    }
-    if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
-        isKota_pilihan = false
-    }else {
-        isKota_pilihan = true
-    }
-
-    if(isKurir_pilihan && isKota_pilihan && isProvince_pilihan && isKelurahan_pilihan  && isQty_pilihan) {
-        
-        
-        
-        
-        
-        
-        $('.alert-danger').css('display','none')
-   
-
-        get_product_detail_func(product_id).done(function(response){
-            var item_product = response
-            get_all_couriers().done(function(response){
-                var dataAllKurir = response
-                allKurir = response
-                
-                
-                var kurir_kode =''
-                for(var i=0; i<dataAllKurir.length; i++){
-                    if(dataAllKurir[i].Courier == new_kurir_pilihan){
-                        kurir_kode = dataAllKurir[i].Courier_Code
-                    }
-                }
-                get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
-                    province = response[0]
-                    allProvince = response
-                    
-                    get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
-                        kota = response[0]
-                        allKota = response
-                        
-                        get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
-                            kelurahan = response[0]
-                            allKelurahan = response
-                            
-                            get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kelurahan_pilihan).done(function(response){
-                                kecamatan = response
-                                allKecamatan = response
-                                
-                                var Courier_Price_Code_orig = 'CGK01.00'
-                                var packing_type = ''
-                                var berat_product = parseInt(item_product.Weight_KG)
-                                if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
-                                    berat_product = 0.1*1.5;
-                                }else{
-                                    berat_product = berat_product*1*1.5;
-                                }
-                                var length = ''
-                                var  width = '' 
-                                var  height = ''
-                                var paket_value = '' 
-                                
-                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
-    
-                                
-                                    allPengiriman = response
-                                    
-                                    // $('.radio-group-delivery').empty()
-                                    // $('.kurir-home-gb').empty()
-                                    // $('.province-home-gb').empty()
-                                    // $('.kota-home-gb').empty() 
-                                    // $('.kelurahan-home-gb').empty()
-                                    $('.kecamatan-home-gb').empty()
-                                    $('.pengiriman-home-gb').empty()
-                                    $('.asuransi-home-gb').empty()
-                                    $('.packing-home-gb').empty()
-                                    $('.kodepos-home-gb').empty()
-    
-                                    // $('.province-home-gb').append(`
-                                    //     <option   value="id-province-gb" >Province</option> 
-                                    // `)
-                                    // $('.kota-home-gb').append(`
-                                    //     <option   class="id-kota-gb"> Kota</option>      
-                                    // `)
-                                    // $('.kelurahan-home-gb').append(`
-                                    //     <option   class="id-kelurahan-gb">Kelurahan</option>      
-                                    // `)
-                                    $('.kecamatan-home-gb').append(`
-                                        <option selected  class="id-kecamatan-gb">Kecamatan</option>      
-                                    `)
-                                    $('.pengiriman-home-gb').append(`
-                                        <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
-                                    `)
-                                    $('.asuransi-home-gb').append(`
-                                        <option selected  class="id-asuransi-gb">Asuransi</option>      
-                                    `)
-                                    $('.packing-home-gb').append(`
-                                        <option selected  class="id-packing-gb">Packing</option>      
-                                    `)
-                                    $('.kodepos-home-gb').append(`
-                                        <option selected  class="id-kodepos-gb">Kode Pos</option>      
-                                    `)
-    
-                                    
-        
-                                    // allKurir.map((val,index)=>{
-                                    //     // 
-                                    //     // $('.kurir-home-gb').append(`
-                                    //     //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
-                                    //     // `)
-                                    //     $('.radio-group-delivery').append(`
-                                    //     <div class="address-card-1  id="id-kurir-gb" radio-delivery-card" data-value="${val.Courier}">
-                                    //         <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
-                                    //     </div>
-                                    // `)
-                                    // })
-                                    // allProvince.map((val,index)=>{
-                                    //     // 
-                                    //     $('.province-home-gb').append(`
-                                    //         <option  selected value="${val.Province}" class="id-province-gb">${val.Province}</option> 
-                                    //     `)
-                                    // })
-                                    // allKota.map((val,index)=>{
-                                    //     // 
-                                    //     $('.kota-home-gb').append(`
-                                    //         <option  selected value="${val.City}" class="id-kota-gb">${val.City}</option> 
-                                    //     `)    
-                                    // })  
-                                    allKecamatan.map((val,index)=>{
-        
-                                        if(val.Sub_District == ''){
-                                            $('.kecamatan-home-gb').append(`
-                                                <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
-                                            `)
-                                        }else {
-                                            $('.kecamatan-home-gb').append(`
-                                                <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
-                                            `)
-                                            $('.kodepos-home-gb').append(`
-                                                <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
-                                            `)
-                                        }
-        
-                                    })
-        
-                                    // allKelurahan.map((val,index)=>{
-        
-                                    //     if(val.District == ''){
-                                    //         $('.kelurahan-home-gb').append(`
-                                    //             <option selected value="${val.District}" class="id-kelurahan-gb">-</option> 
-                                    //         `)
-                                    //     }else {
-                                    //         $('.kelurahan-home-gb').append(`
-                                    //             <option selected  value="${val.District}" class="id-kelurahan-gb">${val.District}</option> 
-                                    //         `)
-                                           
-                                    //     }
-                                    // })
-        
-                                    if(allPengiriman){
-
-                                        if(allPengiriman.service != undefined) {
-                                            allPengiriman.service.map((val,index)=>{
-                                                
-                                                
-                                                
-                                                $('.pengiriman-home-gb').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                                `)
-                                            })
-                                        }
-                                        if(allPengiriman.insurance !=undefined){
-                                            allPengiriman.insurance.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
-                                                $('.asuransi-home-gb').append(`
-                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                                `)
-                                            })
-                                        }
-                                        if(allPengiriman.packing != undefined) {
-                                            allPengiriman.packing.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
-                                                $('.packing-home-gb').append(`
-                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                                `)
-                                            })
-                                        }
-
-                                    }
-        
-        
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
-    }else {
-        swal.fire("Ada field yang belum di isi", "", "error");
-        $('.alert-danger').css('display','flex')
-    
-        render_all_kurir_before_choosing(render_all_kurir_before_choosing)
-
-        
-        
-        
-        
-        
-        
-    }
-
-
-}
-const kecamatanMethodHome=(product_id)=>{
-    
-
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
     var province_pilihan=$('.province-home-gb option:selected').val()
     var kota_pilihan=$('.kota-home-gb option:selected').val()
@@ -2760,12 +2760,280 @@ const kecamatanMethodHome=(product_id)=>{
         $('.alert-danger').css('display','flex')
 
         render_all_kurir_before_choosing(product_id)
+ 
+    }
+ 
+}
+const kecamatanMethodHome=(product_id)=>{
+    
+
+    
+
+
+
+    var kurir_pilihan=$('.kurir-home-gb option:selected').val()
+    var province_pilihan=$('.province-home-gb option:selected').val()
+    var kota_pilihan=$('.kota-home-gb option:selected').val()
+    var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
+    var kelurahan_pilihan=$('.kelurahan-home-gb option:selected').val()
+    var kodepos_pilihan = $('.kodepos-home-gb').val()
+    var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()
+    var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
+
+    var allKurir=[]
+    var allProvince=[]
+    var allKota =[]
+    var allKelurahan=[]
+    var allKecamatan=[]
+    var allPengiriman=[]
+
+    var kurir=[]
+    var province = []
+    var kota = []
+    var kelurahan = []
+    var kecamatan = []
+    
+    var isKurir_pilihan = false
+    var isProvince_pilihan = false
+    var isKota_pilihan = false
+    var isKecamatan_pilihan = false
+    var isKelurahan_pilihan = false
+    var isQty_pilihan = false
+
+    if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
+        
+        isKelurahan_pilihan = false
+        kelurahan_pilihan = ''
+    }else {
+        isKelurahan_pilihan = true
+
+    }
+    // if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
+    //     
+    //      kecamatan_pilihan = ''
+    //      isKecamatan_pilihan = true
+    //  }  
+
+    if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
+        isKurir_pilihan = false
+    }else {
+        isKurir_pilihan = true
+    }
+    if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0){
+        isQty_pilihan = false
+    }else {
+        isQty_pilihan = true
+    }
+
+    if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Province'){
+        isProvince_pilihan = false
+    }else {
+        isProvince_pilihan = true
+    }
+    if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
+        isKota_pilihan = false
+    }else {
+        isKota_pilihan = true
+    }
+
+    if(isKurir_pilihan && isKota_pilihan && isProvince_pilihan && isKelurahan_pilihan  && isQty_pilihan) {
         
         
         
         
         
         
+        $('.alert-danger').css('display','none')
+   
+
+        get_product_detail_func(product_id).done(function(response){
+            var item_product = response
+            get_all_couriers().done(function(response){
+                var dataAllKurir = response
+                allKurir = response
+                
+                
+                var kurir_kode =''
+                for(var i=0; i<dataAllKurir.length; i++){
+                    if(dataAllKurir[i].Courier == new_kurir_pilihan){
+                        kurir_kode = dataAllKurir[i].Courier_Code
+                    }
+                }
+                get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+                    province = response[0]
+                    allProvince = response
+                    
+                    get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
+                        kota = response[0]
+                        allKota = response
+                        
+                        get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
+                            kecamatan = response[0]
+                            allKecamatan = response
+                            console.log(kecamatan_pilihan)
+                            get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kecamatan_pilihan).done(function(response){
+                                kelurahan = response
+                                allKelurahan = response
+                                
+                                var Courier_Price_Code_orig = 'CGK01.00'
+                                var packing_type = ''
+                                var berat_product = parseInt(item_product.Weight_KG)
+                                if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                                    berat_product = 0.1*1.5;
+                                }else{
+                                    berat_product = berat_product*1*1.5;
+                                }
+                                var length = ''
+                                var  width = '' 
+                                var  height = ''
+                                var paket_value = '' 
+                                
+                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+    
+                                
+                                    allPengiriman = response
+                                    
+                                    // $('.radio-group-delivery').empty()
+                                    // $('.kurir-home-gb').empty()
+                                    // $('.province-home-gb').empty()
+                                    // $('.kota-home-gb').empty() 
+                                    $('.kelurahan-home-gb').empty()
+                                    // $('.kecamatan-home-gb').empty()
+                                    $('.pengiriman-home-gb').empty()
+                                    $('.asuransi-home-gb').empty()
+                                    $('.packing-home-gb').empty()
+                                    $('.kodepos-home-gb').empty()
+    
+                                    // $('.province-home-gb').append(`
+                                    //     <option   value="id-province-gb" >Province</option> 
+                                    // `)
+                                    // $('.kota-home-gb').append(`
+                                    //     <option   class="id-kota-gb"> Kota</option>      
+                                    // `)
+                                    $('.kelurahan-home-gb').append(`
+                                        <option selected  class="id-kelurahan-gb">Kelurahan</option>      
+                                    `)
+                                    // $('.kecamatan-home-gb').append(`
+                                    //     <option selected  class="id-kecamatan-gb">Kecamatan</option>      
+                                    // `)
+                                    $('.pengiriman-home-gb').append(`
+                                        <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                                    `)
+                                    $('.asuransi-home-gb').append(`
+                                        <option selected  class="id-asuransi-gb">Asuransi</option>      
+                                    `)
+                                    $('.packing-home-gb').append(`
+                                        <option selected  class="id-packing-gb">Packing</option>      
+                                    `)
+                                    $('.kodepos-home-gb').append(`
+                                        <option selected  class="id-kodepos-gb">Kode Pos</option>      
+                                    `)
+    
+                                    
+        
+                                    // allKurir.map((val,index)=>{
+                                    //     // 
+                                    //     // $('.kurir-home-gb').append(`
+                                    //     //     <option  value="${val.Courier}" class="id-kurir-gb">${val.Courier}</option> 
+                                    //     // `)
+                                    //     $('.radio-group-delivery').append(`
+                                    //     <div class="address-card-1  id="id-kurir-gb" radio-delivery-card" data-value="${val.Courier}">
+                                    //         <img src="../img/tiki_shipping_method.png" alt="" class="bca_img">
+                                    //     </div>
+                                    // `)
+                                    // })
+                                    // allProvince.map((val,index)=>{
+                                    //     // 
+                                    //     $('.province-home-gb').append(`
+                                    //         <option  selected value="${val.Province}" class="id-province-gb">${val.Province}</option> 
+                                    //     `)
+                                    // })
+                                    // allKota.map((val,index)=>{
+                                    //     // 
+                                    //     $('.kota-home-gb').append(`
+                                    //         <option  selected value="${val.City}" class="id-kota-gb">${val.City}</option> 
+                                    //     `)    
+                                    // })  
+                                    // allKecamatan.map((val,index)=>{
+        
+                                    //     if(val.Sub_District == ''){
+                                    //         $('.kecamatan-home-gb').append(`
+                                    //             <option  value="${val.Sub_District}" class="id-kecamatan-gb">-</option> 
+                                    //         `)
+                                    //     }else {
+                                    //         $('.kecamatan-home-gb').append(`
+                                    //             <option  value="${val.Sub_District}" class="id-kecamatan-gb">${val.Sub_District}</option> 
+                                    //         `)
+                                    //         $('.kodepos-home-gb').append(`
+                                    //             <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                    //         `)
+                                    //     }
+        
+                                    // })
+                                    console.log(allKelurahan)
+                                    allKelurahan.map((val,index)=>{
+        
+                                        if(val.District == ''){
+                                            $('.kelurahan-home-gb').append(`
+                                                <option value="${val.Sub_District}" class="id-kelurahan-gb">-</option> 
+                                            `)
+                                        }else {
+                                            $('.kelurahan-home-gb').append(`
+                                                <option  value="${val.Sub_District}" class="id-kelurahan-gb">${val.Sub_District}</option> 
+                                            `)
+                                           
+                                        }
+                                    })
+        
+                                    if(allPengiriman){
+
+                                        if(allPengiriman.service != undefined) {
+                                            allPengiriman.service.map((val,index)=>{
+                                                
+                                                
+                                                
+                                                $('.pengiriman-home-gb').append(`
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.insurance !=undefined){
+                                            allPengiriman.insurance.map((val,index)=>{
+                                                // 
+                                                // 
+                                                // 
+                                                $('.asuransi-home-gb').append(`
+                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.packing != undefined) {
+                                            allPengiriman.packing.map((val,index)=>{
+                                                // 
+                                                // 
+                                                // 
+                                                $('.packing-home-gb').append(`
+                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                `)
+                                            })
+                                        }
+
+                                    }
+        
+        
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }else {
+        swal.fire("Ada field yang belum di isi", "", "error");
+        $('.alert-danger').css('display','flex')
+    
+        render_all_kurir_before_choosing(render_all_kurir_before_choosing)
     }
   
 }
@@ -4726,4 +4994,2605 @@ function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
     }
     
     return $.ajax(settings);
+}
+
+
+const open_checkout=(product_id)=>{
+    // $('.iframe',window.parent.parent.document).css('display','block')
+    // console.log($('.iframe',window.parent.parent.document))
+
+    // console.log(product_id)
+    addToCart(product_id)
+    
+    var array = []
+    localStorage.setItem('itemsToCheckout',array)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        if(res.data.Stock_Quantity > 1){
+            var productToBeAdded = {
+                productNo: product_id,
+                quantity: 1,
+                GroupCode: "NO COUPON",
+                priceAgreed: res.data.Sell_Price
+            }
+            array.push(productToBeAdded)
+            
+            var productToBeAddedStringify = JSON.stringify(array);
+            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    
+            // console.log(productToBeAdded)
+    
+    
+        $('.close-button',window.parent.parent.document).css('display','block')
+        
+        $('.close',window.parent.parent.document).css('display','none')
+        
+        $('.groupbuy_sp_iframe',window.parent.document).css('display','none')
+        // $(".iframe",window.parent.document).toggle();
+        // $('.iframe',window.parent.parent.document).toggle()
+        $('.iframe',window.parent.parent.document).css('display','block')
+        
+       
+        if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
+            $('.option-3',window.parent.parent.document).removeClass('background_grey')
+        }else {
+            $('.option-3',window.parent.parent.document).addClass('background_grey')
+        }
+
+        console.log($('.option-3',window.parent.parent.document))
+        
+        // $('.main-body').css('display','none')
+        // $('.modals-search-result').css('display','block')
+        
+        // $('.iframe').css('display','block')
+        // $('.modals-pengiriman',window.parent.document).css("display",'none')
+        // $('.modals-check-harga',window.parent.document).css("display",'none')
+        $('.option-1',window.parent.parent.document).removeClass('background_grey')
+        $('.option-2',window.parent.parent.document).removeClass('background_grey')
+        $('.option-0',window.parent.parent.document).removeClass('background_grey')
+        $(".iframe",window.parent.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+        $('.close-button',window.parent.parent.document).css('display','none')
+
+          // SEARCH ITEM BACK TO NORMAL
+          $('.box-render-search',window.parent.parent.document).css('display','none')
+          $('.input-name',window.parent.parent.document).css('border-bottom-left-radius','10px')
+          $('.input-name',window.parent.parent.document).css('border-bottom-right-radius','10px')
+          $('.input-name',window.parent.parent.document).val(null)
+        }else {
+            // swal.fire("Barang Tidak Tersedia","","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Barang Tidak Tersedia`,
+                timer:2000,
+                
+            })
+        }
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+
+
+
+}
+
+
+const buyNow=(product_id)=>{
+    console.log(product_id)
+    addToCart(product_id)
+    
+    var array = []
+    localStorage.setItem('itemsToCheckout',array)
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        if(res.data.Stock_Quantity > 1){
+            var productToBeAdded = {
+                productNo: product_id,
+                quantity: 1,
+                GroupCode: "NO COUPON",
+                priceAgreed: res.data.Sell_Price
+            }
+            array.push(productToBeAdded)
+            
+            var productToBeAddedStringify = JSON.stringify(array);
+            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+    
+            console.log(productToBeAdded)
+            
+        // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+    
+        $('.close-button',window.parent.document).css('display','block')
+        
+
+        $('.close',window.parent.document).css('display','none')
+        
+        // $('.close').css('display','none')
+        
+        $('.modals-product-detail',window.parent.document).css('display','none')
+        $(".iframe",window.parent.document).toggle();
+        
+        if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
+            $('.option-3',window.parent.parent.document).removeClass('background_grey')
+        }else {
+            $('.option-3',window.parent.parent.document).addClass('background_grey')
+        }
+        
+        
+        // $('.main-body').css('display','none')
+        // $('.modals-search-result').css('display','block')
+        
+        // $('.iframe').css('display','block')
+        $('.modals-pengiriman',window.parent.document).css("display",'none')
+        $('.modals-check-harga',window.parent.document).css("display",'none')
+        $('.option-1',window.parent.document).removeClass('background_grey')
+        $('.option-2',window.parent.document).removeClass('background_grey')
+        $('.option-0',window.parent.document).removeClass('background_grey')
+        $(".iframe",window.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+        $('.close-button',window.parent.document).css('display','none')
+
+          // SEARCH ITEM BACK TO NORMAL
+          $('.box-render-search',window.parent.document).css('display','none')
+          $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
+          $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
+          $('.input-name',window.parent.document).val(null)
+        }else {
+            // swal.fire("Barang Tidak Tersedia","","warning");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Barang Tidak Tersedia`,
+                timer:2000,
+                
+            })
+        }
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+function groupbuy(product_id){
+    
+    var token = localStorage.getItem('token')
+    
+    
+    axios.post(`https://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=${product_id}&Customer_Code=${token}`)
+    .then((res)=>{
+        
+        // location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
+        if(res.data){
+            
+            $('.modals-product-detail').empty()
+            $('.modals-product-detail').css('display','none')
+            location.replace(`../Iframe/groupbuy.html?groupbuy_id=${product_id}`)
+            
+        }else {
+            // alert('masuk ke else 1890')
+            
+            Swal.fire({
+                // title: 'Anda Memiliki Pembayaran Yang Belum Dibayar',
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div>  
+                Anda Memiliki Hutang, Silahkan Membayar Terlebih Dahulu, <br> Lalu Kembali Memesan Secara Groupbuy / Anda Dapat Memesan Dengan Harga Normal
+                `,
+                timer:2000,
+                // showDenyButton: true,
+                // showCancelButton: false,
+                // confirmButtonText: `Lihat Daftar Tagihan`,
+                // denyButtonText: `Cancel`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    render_daftar_hutang()
+                    
+                    // location.replace(`../Iframe/groupbuy.html?list_hutang=${product_id}`)
+                  $(".force-close-all-command").css("display", "none");
+                  $('#daftarHutangModal').modal('show')
+                  $('.modals-product-detail').css('display','none')
+                } else if (result.isDenied) {
+                    // Swal.fire('Cancel berhasil', '', 'success')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Cancel Berhasil
+                        `,
+                        timer:2000,
+                        
+                    })
+                    $('.modals-product-detail').css('display','none')
+                }
+                
+              })
+            //   close_all_open_window()
+        }
+    }).catch((err)=>{
+        
+    })
+
+    
+}
+
+
+function payment_groupbuy_home(product_id){
+   
+    var token = localStorage.getItem('token')
+    var total_price = $('#tp_iframe').val()
+    var detail_product;
+    var data_customer;
+    var items = []
+    var total_qty_from_user = parseInt($('.qty_groupbuy_home').val())
+    // BATAS TESTING
+
+    
+    var province_pilihan=$('.province-home-gb option:selected').val()
+    var kota_pilihan=$('.kota-home-gb option:selected').val()
+    var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
+    var kelurahan_pilihan=$('.kelurahan-home-gb option:selected').val()
+    var kodepos_pilihan = $('.kodepos-home-gb').val()
+    var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
+    var payment_method_pilihan = $('.radio_payment_method').attr('data-value')
+    var total_Quantity = parseInt($('.qty_groupbuy_home').val())+1
+    var pengiriman_pilihan = $('.pengiriman-home-gb option:selected').val()    
+    var asuransi_pilihan = $('.asuransi-home-gb option:selected').val()
+    var packing_pilihan = $('.packing-home-gb option:selected').val()
+    var harga_shipping = parseInt($('.pengiriman-home-gb option:selected').attr('class'))
+    var harga_asuransi = parseInt($('.asuransi-home-gb option:selected').attr('class'))
+    var harga_packing = parseInt($('.packing-home-gb option:selected').attr('class'))
+    var total_harga_shipping_with_product = $('.harga_total_prod_with_shipping_qty').attr('id')
+    var harga_shipping_qty = $('.harga_shipping_qty').attr('id')
+    var harga_total_product = $('.harga_total_product_qty').attr('id')
+    var biaya_pengiriman = parseInt(harga_shipping_qty)
+
+    var isKurir_pilihan = false
+    var isProvince_pilihan = false
+    var isKota_pilihan = false
+    var isKecamatan_pilihan = false
+    var isKelurahan_pilihan = false
+    var isQty_pilihan = false
+    var isAlamat_pilihan = false
+    var isPacking_pilihan = false
+    var isPaymentMethod_pilihan = false
+    var isPengiriman_pilihan = false
+    if(harga_packing == undefined || harga_packing == null || harga_packing == 'NULL' || harga_packing == 'undefined' || isNaN(harga_packing)){
+        harga_packing = 0
+    }
+
+    
+
+    var alamat_input = $('#alamat_gb').val()
+    var alamat_lain_input = $('#alamat_lain').val()
+    
+    
+    if(asuransi_pilihan == 'Asuransi' ){
+        asuransi_pilihan = ''
+    }
+    if(packing_pilihan == 'Packing'){
+        packing_pilihan = ''
+    }
+
+
+    var total_harga_shipping_with_insurance_packing = harga_shipping + harga_asuransi + harga_packing
+    
+
+    var product_name_shipping = pengiriman_pilihan + asuransi_pilihan + packing_pilihan
+    
+    if(alamat_lain_input.length>0){
+       isAlamat_pilihan = true
+        var final_address_new = alamat_lain_input + kecamatan_pilihan + kelurahan_pilihan + kota_pilihan + province_pilihan + kodepos_pilihan
+        
+    }else if (alamat_input.length > 0) {      
+        isAlamat_pilihan = true
+        var final_address = alamat_input + ' ' + kecamatan_pilihan + ' ' + kelurahan_pilihan + ' ' + kota_pilihan + ' ' + province_pilihan + ' ' + kodepos_pilihan
+        
+    }else {
+        isAlamat_pilihan = false
+    }
+
+    if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0){
+        isKurir_pilihan = false
+    }else {
+        isKurir_pilihan = true
+    }
+
+    if(pengiriman_pilihan == undefined || pengiriman_pilihan == 'undefined' || pengiriman_pilihan == null || pengiriman_pilihan.length == 0){
+        isPengiriman_pilihan = false
+    }else {
+        isPengiriman_pilihan = true
+    }
+
+    if(payment_method_pilihan == undefined || payment_method_pilihan == 'undefined' || payment_method_pilihan == null || payment_method_pilihan.length == 0){
+        isPaymentMethod_pilihan = false
+    }else {
+        isPaymentMethod_pilihan = true
+    }
+
+    if(packing_pilihan == undefined || packing_pilihan == null || packing_pilihan == 'NULL' || packing_pilihan == 'undefined'){
+        packing_pilihan = ''
+        isPacking_pilihan = false
+    }else {
+        isPacking_pilihan = true
+    }
+
+    if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
+        
+         kecamatan_pilihan = ''
+         isKecamatan_pilihan = false
+     }else {
+        isKecamatan_pilihan = true
+     }
+     if( kelurahan_pilihan == undefined || kelurahan_pilihan == null || kelurahan_pilihan == 'NULL' || kelurahan_pilihan == 'undefined'){
+         
+         kelurahan_pilihan = ''
+         isKelurahan_pilihan = false
+     }else {
+        isKelurahan_pilihan = true
+     }
+
+     var totalQtyIsANumber = isNaN(total_qty_from_user)
+     
+     if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0 || total_qty_from_user == NaN || totalQtyIsANumber){
+         isQty_pilihan = false
+     }else {
+         isQty_pilihan = true
+     }
+     
+     
+ 
+     if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0){
+         isProvince_pilihan = false
+     }else {
+         isProvince_pilihan = true
+     }
+     if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0){
+         isKota_pilihan = false
+     }else {
+         isKota_pilihan = true
+     }
+
+     if(isPaymentMethod_pilihan && isProvince_pilihan && isKota_pilihan && isKecamatan_pilihan && isKelurahan_pilihan && isQty_pilihan &&
+        isPengiriman_pilihan){
+            get_all_couriers().done(function(response){
+                var dataAllKurir = response
+                allKurir = response
+                
+                
+                var kurir_kode =''
+                for(var i=0; i<dataAllKurir.length; i++){
+                    if(dataAllKurir[i].Courier == new_kurir_pilihan){
+                        kurir_kode = dataAllKurir[i].Courier_Code
+                    }
+                }
+                if(total_qty_from_user>0) { 
+                    axios.post(`https://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=${product_id}`)
+                    .then((res)=>{
+                        total_item_kebeli = res.data
+                        
+                        if(res.data.Total_Quantity === null) { // hasil null berarti belum ada customer lain yang beli
+                            
+                            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                            .then((res)=>{
+                                
+                                detail_product = res.data
+                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                .then((res)=>{
+                                    
+                                    
+                                    customerDetails  ={
+                                        Customer_Code:token,
+                                        Total_Price: total_harga_shipping_with_product,
+                                        Total_Quantity : total_Quantity,
+                                        Unit:"pcs",
+                                        Shipping_Address: final_address,
+                                        Payment_Method : payment_method_pilihan,
+                                        Shipping_Fee: harga_shipping_qty,
+                                        Primary_Recipient_Name:res.data.First_Name + " " + res.data.Last_Name,
+                                        Shipping_Contact_Number:res.data.Contact_Number_1
+                                    }         
+                                    items.push( {
+                                            Customer_Code: token,
+                                            Product_Code: product_id,
+                                            Product_Name: detail_product.Name,
+                                            Quantity_Requested: $('.qty_groupbuy_home').val(),
+                                            Price_Based_On_Total_Quantity: harga_total_product
+                    
+                                    }) 
+                                    items.push( {
+                                        Customer_Code: token,
+                                        Product_Code: kurir_kode,
+                                        Product_Name: product_name_shipping,
+                                        Quantity_Requested: '1',
+                                        Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
+                
+                                    })  
+                                    var data = {
+                                        "Sales_Order_Data": customerDetails,
+                                        "Sales_Order_Detail_data": items
+                                    }
+                                    
+            
+                                    axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                        headers:{
+                                            "Content-Type":'application/json'
+                                        },
+                                        "data":JSON.stringify({
+                                            "Sales_Order_data":customerDetails,
+                                            "Sales_Order_Detail_data": items
+                                        })
+                                    }).then((res)=>{
+                                        if(res.data.status){
+                                            // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--success">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div>   
+                                                Penambahan Data Berhasil
+                                                `,
+                                                timer:2000,
+                                                
+                                            })
+                                            $('.modals-product-detail').css('display','none')
+                                            $('.box-delete-success').css('display','block')
+                                            // tambahin gambar yg dari mas fauzi
+                                            
+                                            location.replace(`../Iframe/success.html`)
+                                        }else {
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Pembelian Gagal`,
+                                                timer:2000,
+                                                
+                                            })
+                                        }
+                                        
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                    
+            
+                                }).catch((err)=>{
+                                    
+                                })
+                            }).catch((err)=>{
+                                
+                            })
+                        }else { // hasil else dari if null berarti ada cust yg udh beli. sisa productnya
+                            
+                            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                            .then((response)=>{
+                                
+                                
+                                var item_tersedia = response.data.GroupBuy_SellQuantity - total_item_kebeli.Total_Quantity
+                                
+                                if(total_qty_from_user > item_tersedia){
+                    
+                                      Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Hanya Bisa Membeli ${item_tersedia}`,
+                                        timer:2000,
+                                        
+                                    })
+            
+                                      axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                      .then((res)=>{
+                                          
+                                          detail_product = res.data
+                                          axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                          .then((res)=>{
+                                              
+                                              data_customer = res.data
+                                              var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
+                                              
+                                              
+                                              customerDetails  ={
+                                                Customer_Code:token,
+                                                Total_Price: total_harga_shipping_with_product,
+                                                Total_Quantity : item_tersedia +1,
+                                                Unit:"pcs",
+                                                Shipping_Address: final_address,
+                                                Payment_Method : payment_method_pilihan,
+                                                Shipping_Fee: harga_shipping_qty,
+                                                Shipping_Contact_Number:res.data.Contact_Number_1,
+                                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                            }         
+                                            items.push( {
+                                                    Customer_Code: token,
+                                                    Product_Code: product_id,
+                                                    Product_Name: detail_product.Name,
+                                                    Quantity_Requested: item_tersedia,
+                                                    Price_Based_On_Total_Quantity: harga_total_product
+                            
+                                            }) 
+                                            items.push( {
+                                                Customer_Code: token,
+                                                Product_Code: kurir_kode,
+                                                Product_Name: product_name_shipping,
+                                                Quantity_Requested: '1',
+                                                Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
+                        
+                                            })  
+                                            var data = {
+                                                "Sales_Order_Data": customerDetails,
+                                                "Sales_Order_Detail_data": items
+                                            }     
+                                            
+                                            
+                                                  
+                                                  
+                                                axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                    headers:{
+                                                        "Content-Type":'application/json'
+                                                    },
+                                                    "data":JSON.stringify({
+                                                        "Sales_Order_data":customerDetails,
+                                                        "Sales_Order_Detail_data": items
+                                                    })
+                                                }).then((res)=>{
+                                                    
+                                                    if(res.data){
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div>   
+                                                            Pembelian Data Berhasil
+                                                            `,
+                                                            timer:2000,
+                                                            
+                                                        })
+                                                        // tambahin gambar yg dari mas fauzi
+                                                        
+                                                        location.replace(`../Iframe/success.html`)
+                                                    }else {
+                                                        // swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div> 
+                                                            Pembelian Gagal, Silahkan Check Cart`,
+                                                            timer:2000,
+                                                            
+                                                        })
+                                                    }
+                                                    // $('.modals-product-detail').css('display','none')
+                                                }).catch((err)=>{
+                                                    
+                                                })         
+                                          }).catch((err)=>{
+                                              
+                                          })
+                                      }).catch((err)=>{
+                                          
+                                      })
+                                }else {// pembelian jika total qty dari user tidak melebihi item yang tersedia
+                                    
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    .then((res)=>{
+                                        detail_product = res.data
+                                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                                        .then((res)=>{
+                                            data_customer =res.data
+                                            
+                                            customerDetails  ={
+                                                Customer_Code:token,
+                                                Total_Price: total_harga_shipping_with_product,
+                                                Total_Quantity : total_Quantity,
+                                                Unit:"pcs",
+                                                Shipping_Address: final_address,
+                                                Payment_Method : payment_method_pilihan,
+                                                Shipping_Fee: harga_shipping_qty,
+                                                Shipping_Contact_Number:res.data.Contact_Number_1,
+                                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                            }         
+                                            items.push( {
+                                                    Customer_Code: token,
+                                                    Product_Code: product_id,
+                                                    Product_Name: product_name_shipping,
+                                                    Quantity_Requested: $('.qty_groupbuy_home').val(),
+                                                    Price_Based_On_Total_Quantity: harga_total_product
+                            
+                                            }) 
+                                            items.push( { // data kurir
+                                                Customer_Code: token,
+                                                Product_Code: kurir_kode,
+                                                Product_Name: product_name_shipping,
+                                                Quantity_Requested: '1',
+                                                Price_Based_On_Total_Quantity:total_harga_shipping_with_insurance_packing
+                        
+                                            })  
+                                            var data = {
+                                                "Sales_Order_Data": customerDetails,
+                                                "Sales_Order_Detail_data": items
+                                            }    
+                                            
+                                            
+                                            
+            
+                                            axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                headers:{
+                                                    "Content-Type":'application/json'
+                                                },
+                                                "data":JSON.stringify({
+                                                    "Sales_Order_data":customerDetails,
+                                                    "Sales_Order_Detail_data": items
+                                                })
+                                            }).then((res)=>{
+                                                if(res.data.status){
+                                                    
+                                                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                    Swal.fire({
+                                                        html:`
+                                                        <div class="o-circle c-container__circle o-circle__sign--success">
+                                                            <div class="o-circle__sign"></div>  
+                                                        </div>   
+                                                        Penambahan Data Berhasil
+                                                        `,
+                                                        timer:2000,
+                                                        
+                                                    })
+                                                    // close_all_open_window()
+                                                    $('.modals-product-detail').css('display','none')
+                                                    $('.box_iframe_groupbuy').css('display','none')
+                                                    
+                                                    
+                                                    $('.box_iframe_groupbuy').remove()
+                                                    // tambahin gambar yg dari mas fauzi
+                                                    
+                                                    location.replace(`../Iframe/success.html`)
+            
+                                                    
+                                                }else {
+                                                    // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                                                    Swal.fire({
+                                                        html:`
+                                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                            <div class="o-circle__sign"></div>  
+                                                        </div> 
+                                                        Penambahan Data Gagal, Silahkan Check Pengisian Data`,
+                                                        timer:2000,
+                                                        
+                                                    })
+                                                    $('.modals-product-detail').css('display','none')
+                                                }
+                                            }).catch((err)=>{
+                                                
+                                            })
+                                            // refresh()
+            
+                                        }).catch((err)=>{
+                                            
+                                        })
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                }
+                            }).catch((err)=>{
+                                
+                            })
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+                }else {
+                    
+                }
+            })
+    }else { // ada yang belum di isi
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Ada Field yang belum Di isi`,
+            timer:2000,
+            
+        })
+
+    }
+    
+}
+
+function addToCart(product_id){
+
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+    .then((res)=>{
+        
+        var quantity_product = parseInt(res.data.Stock_Quantity)
+        
+
+        if(quantity_product == 0 || quantity_product == '0' ||
+           quantity_product == undefined || quantity_product==null ||
+           isNaN(quantity_product) || quantity_product < 0
+        ){
+            // Swal.fire("Stock Tidak Tersedia", "Error", "error");
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Stock Tidak Tersedia`,
+                timer:2000,
+                
+            })
+        }else {
+            var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+            
+            if(dataParse){
+                
+        
+                var filterdatakosong = dataParse.filter((filtering)=>{
+                    if(filtering.productNo === product_id){
+                        return filtering
+                    }
+                })
+                if(filterdatakosong.length){
+                    
+                    
+                    var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
+                    dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
+                    $('.cart-counter').text(dataParse.length)
+                    // swal.fire("Berhasil Menambahkan Quantity", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Berhasil Menambahkan Quantity
+                        `,
+                        timer:2000,
+                        
+                    })
+                }else {
+                    
+                    var data = {
+                    "productNo":product_id,
+                    "quantity":1
+                    }
+                    dataParse.push(data)
+                    $('.cart-counter').text(dataParse.length)
+                    // swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        Berhasil Menambahkan ke Cart
+                        `,
+                        timer:2000,
+                        
+                    })
+                }
+        
+                var pushToStorage = JSON.stringify(dataParse)
+                localStorage.setItem('itemsInCart',pushToStorage)
+        
+            }else {
+                
+                var cart = [
+                    {
+                    "productNo":product_id,
+                    "quantity":1
+                    }
+                ]
+                var pushToStorage2 = JSON.stringify(cart)
+                localStorage.setItem('itemsInCart',pushToStorage2)     
+            }
+        
+
+        }
+    }).catch((err)=>{
+        
+    })
+    
+   
+  
+  
+
+    
+
+}
+
+
+function addressMethod(address,item){
+    
+    // 
+    $('.radio_address_card').removeClass('selected')
+    $('.radio_address_card').removeClass('active_address_method')
+
+    var address_id = address
+    var id = $('.radio_address_card').attr('id')
+    
+    
+
+    $(`#${address}`).addClass('selected')
+    $(`#${address}`).addClass('active_address_method')
+    // if(address_id == id ){
+    //     
+    //     $(`#${address}`).addClass('selected')
+    //     $(`#${address}`).addClass('active_payment_method')
+    // }else {
+    //     
+    // }
+
+    if(item === 'Alamat Terdaftar'){
+        
+        $('.option-alamat-gb').css('display','flex')
+        $('.new-alamat-pengiriman').css('display','none')
+    }else if (item === 'Alamat Baru'){
+        
+        $('.option-alamat-gb').css('display','none')
+        $('.new-alamat-pengiriman').css('display','flex')
+    }
+}
+
+// EDIT DISCOUNT
+const edit_product_discount=(product_id)=>{
+    $("#"+product_id+"-discount").prop('disabled',false) 
+    $("#"+product_id+"-discount").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_discount").css('display','none') // icon 
+    $("#"+product_id+"-save_discount").css('display','block') // icon
+}
+
+const save_edit_discount=(product_id)=>{
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(product_id)
+    $('#s_product_name').addClass('product_discount')
+
+    clearOTPform()
+
+}
+
+//  QTY
+const edit_product_qty=(product_id)=>{
+    $("#"+product_id+"-qty").prop('disabled',false) 
+    $("#"+product_id+"-qty").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_qty").css('display','none') // icon 
+    $("#"+product_id+"-save_qty").css('display','block') // icon
+ }
+
+//  
+ const save_edit_qty=(product_id)=>{
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(product_id)
+    $('#s_product_name').addClass('product_quantity')
+
+    clearOTPform()
+ }
+
+ // HARGA
+const edit_product_harga=(product_id)=>{
+    $("#"+product_id+"-harga").prop('disabled',false) 
+    $("#"+product_id+"-harga").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_harga").css('display','none') // icon 
+    $("#"+product_id+"-save_harga").css('display','block') // icon
+    
+}
+
+const save_edit_harga=(product_id)=>{
+
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(product_id)
+    $('#s_product_name').addClass('product_sell_price')
+
+    clearOTPform()
+
+}
+
+
+// NAME
+const edit_product_name=(product_id)=>{
+    // $("input").prop('disabled', true);
+    // alert(product_id)
+    // $(".prod_name").prop('disabled', false); 6900005030114
+    
+    $("#"+product_id+"-name").prop('disabled',false) 
+    $("#"+product_id+"-name").css('background-color','#ddd')
+    $("#"+product_id+"-box_edit_name").css('display','none') // icon 
+    $("#"+product_id+"-save_name").css('display','block') // icon
+
+    // $('.icon-edit-prod').prop('disabled',true)
+  
+
+}
+
+const clearOTPform=()=>{
+    $('#id_otp').val('')
+    $('#id_pass').val('')
+}
+
+
+const save_edit_name=(product_id)=>{
+    // alert($("#"+product_id+"-name").val())
+    
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(product_id)
+    $('#s_product_name').addClass('product_name')
+ 
+
+    clearOTPform()
+}
+
+
+const check_number_wa=()=>{
+
+    Swal.fire({
+        title: 'Whatsapp Number  <br> +62812 7777 8888',
+        text: "Ingin Menghubungi Customer Service?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+          
+          if(result.dismiss==='cancel'){
+        }else {
+            
+            window.open("https://wa.me/6281277778888","_blank")
+          }
+      })
+}
+
+
+const change_status_otp=(token)=>{
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(token)
+    $('#s_product_name').addClass('status_gb')
+
+    clearOTPform()
+}
+
+const save_product_name=()=>{
+    // alert('simpan jalan')
+    var otp = $('#id_otp').val()
+    var pass = $('#id_pass').val()
+    var token = localStorage.getItem('token')
+    var email;
+    var item = document.getElementById('s_product_name').className.split(/\s+/);
+    var product_id = item[1]
+    var jenis_edit = item[2]
+    if(jenis_edit === 'product_name'){
+        
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            
+            email = res.data.Email
+            //encrypt pass
+            var new_pass
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+            .then((res)=>{
+                if(res.data){
+                    new_pass = res.data
+
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    .then((res)=>{
+                        
+                        if(res.data){
+                            $("#"+product_id+"-name").prop('disabled',true) 
+                            $("#"+product_id+"-box_edit_name").css('display','block') // icon 
+                            $("#"+product_id+"-save_name").css('display','none') // icon
+                            $("#"+product_id+"-name").css('background-color','transparent')
+    
+                            var nama = $("#"+product_id+"-name").val()
+                            var harga = $("#"+product_id+"-harga").val()
+                            var qty = $("#"+product_id+"-qty").val()
+                            var token = localStorage.getItem('token')
+    
+                            
+                            
+                            
+                            
+    
+                            if(nama.length <5){
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                .then((res)=>{
+                                    
+                                    $("#"+product_id+"-name").val(res.data.Name)
+                                    // swal.fire("Gagal Mengubah Data", "", "error");
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Gagal Mengubah Data`,
+                                        timer:2000,
+                                        
+                                    })
+                                    re_render_item_product()
+                                }).catch((err)=>{
+                                    
+                                })
+                            }else {
+                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                .then((res)=>{
+                                    
+                                    if(res.data){
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                <div class="o-circle__sign"></div>  
+                                            </div>   
+                                            Berhasil Mengubah Data
+                                            `,
+                                            timer:2000,
+                                            
+                                        })
+                                        $('#s_product_name').removeClass(product_id)
+                                        $('#s_product_name').removeClass('product_name')
+                                         $('#id_otp').val('')
+                                         $('#id_pass').val('')
+                                         re_render_item_product()
+                                    }else {
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
+                                        re_render_item_product()
+                                    }
+                                }).catch((err)=>{
+                                    
+                                })
+                            }
+                            // Swal.fire('Simpan Berhasil', '', 'success')
+                            $('#get_otp').modal('hide')
+                        }else {
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+                }else {
+                    
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6`,
+                        timer:2000,
+                        
+                    })
+                }
+                
+        
+               
+            }).catch((err)=>{
+                
+            })
+        }).catch((err)=>{
+            
+        })
+
+    }else if (jenis_edit === 'product_sell_price'){
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            email = res.data.Email
+            var new_pass
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+            .then((res)=>{
+                new_pass = res.data
+                if(res.data){
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    .then((res)=>{
+                        if(res.data){
+                            $("#"+product_id+"-harga").prop('disabled',true) 
+                            $("#"+product_id+"-box_edit_harga").css('display','block') // icon 
+                            $("#"+product_id+"-save_harga").css('display','none') // icon
+                            $("#"+product_id+"-harga").css('background-color','transparent')
+                    
+                            var nama = $("#"+product_id+"-name").val()
+                            var harga = $("#"+product_id+"-harga").val()
+                            var qty = $("#"+product_id+"-qty").val()
+                            var token = localStorage.getItem('token')
+                            
+                            
+                            
+                            
+                    
+                            if(harga <500){
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    .then((res)=>{
+                                        
+                                        $("#"+product_id+"-harga").val(res.data.Sell_Price)
+                                        // swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
+                                        re_render_item_product()
+                                    }).catch((err)=>{
+                                        
+                                    })
+                            }else {
+                                axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                .then((res)=>{
+                                    
+                                    if(res.data){
+                                        // swal.fire("Berhasil Mengubah Data", "", "success");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                <div class="o-circle__sign"></div>  
+                                            </div>   
+                                            Berhasil Mengubah Data
+                                            `,
+                                            timer:2000,
+                                            
+                                        })
+                                        $('#s_product_name').removeClass(product_id)
+                                        $('#s_product_name').removeClass('product_sell_price')
+                                        re_render_item_product()
+                                    }else {
+                                        re_render_item_product()
+                                        // swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
+                                    }
+                                }).catch((err)=>{
+                                    
+                                })
+                                // Swal.fire('Simpan Berhasil', '', 'success')
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Simpan Berhasil
+                                    `,
+                                    timer:2000,
+                                    
+                                })
+                                $('#get_otp').modal('hide')
+                            }
+                        }else {
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+
+                }else {
+                    
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
+                }
+
+            }).catch((err)=>{
+                
+            })
+        }).catch((err)=>{
+
+        })
+    }else if ( jenis_edit === 'product_quantity'){
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            email = res.data.Email     
+            var new_pass
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+            .then((res)=>{
+                if(res.data){
+                    new_pass = res.data            
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    .then((res)=>{
+                        if(res.data){
+                            $("#"+product_id+"-qty").prop('disabled',true) 
+                            $("#"+product_id+"-box_edit_qty").css('display','block') // icon 
+                            $("#"+product_id+"-save_qty").css('display','none') // icon
+                            $("#"+product_id+"-qty").css('background-color','transparent')
+        
+                            var nama = $("#"+product_id+"-name").val()
+                            var harga = $("#"+product_id+"-harga").val()
+                            var qty = $("#"+product_id+"-qty").val()
+                            var token = localStorage.getItem('token')
+        
+                            
+                            
+                            
+                            
+        
+                            if(qty < 10){
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                .then((res)=>{
+                                    
+                                    $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
+                                    // swal.fire("Gagal Mengubah Data", "", "error");
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Gagal Mengubah Data`,
+                                        timer:2000,
+                                        
+                                    })
+                                    re_render_item_product()
+                                }).catch((err)=>{
+                                    
+                                })
+                            }else {
+                                
+                                axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                .then((res)=>{
+                                    
+                                    if(res.data){
+                                        // swal.fire("Berhasil Mengubah Data", "", "success");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                <div class="o-circle__sign"></div>  
+                                            </div>   
+                                            Berhasil Mengubah Data
+                                            `,
+                                            timer:2000,
+                                            
+                                        })
+                                        $('#s_product_name').removeClass(product_id)
+                                        $('#s_product_name').removeClass('product_quantity')
+                                        re_render_item_product()
+                                    }else {
+                                        // swal.fire("Gagal Mengubah Data", "", "error");
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Gagal Mengubah Data`,
+                                            timer:2000,
+                                            
+                                        })
+                                        re_render_item_product()
+                                    }
+                                }).catch((err)=>{
+                                    
+                                })
+                            }
+                            // Swal.fire('Simpan Berhasil', '', 'success')
+                            $('#get_otp').modal('hide')
+                        }else {
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+                }else {
+                    
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
+                }
+            }).catch((err)=>{
+                
+            })
+        }).catch((err)=>{
+            
+        })
+    }else if (jenis_edit === 'product_discount'){
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            email = res.data.Email
+
+            var new_pass
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+            .then((res)=>{
+                if(res.data){
+                    new_pass = res.data
+                    
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    .then((res)=>{
+                        if(res.data){
+                   
+
+                        var status = $("#"+product_id+"-status").val()
+                        if(status == 'on'){
+                            status = true
+                        }else {
+                            status = false
+                        }
+
+                        var Product_Code = $("#"+product_id+"-pCode").val()
+                        var Name = $("#"+product_id+"-pName").val()
+                        var qty = $("#"+product_id+"-quantity").val()
+                        var price = $("#"+product_id+"-discount").val()
+                        var token = localStorage.getItem('token')
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                        .then((res)=>{
+                            
+                            if(res.data){
+                                $('#get_otp').modal('hide')
+                                $("#"+product_id+"-discount").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_discount").css('display','block') // icon 
+                                $("#"+product_id+"-save_discount").css('display','none') // icon
+                                $("#"+product_id+"-discount").css('background-color','transparent')
+                                $('#s_product_name').removeClass(product_id)
+                                $('#s_product_name').removeClass('product_discount')
+                                // swal.fire("Berhasil Mengubah Data", "", "success");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Berhasil Mengubah Data
+                                    `,
+                                    timer:2000,
+                                    
+                                })
+                                // Swal.fire('Simpan Berhasil', '', 'success')
+                                
+                            }else {
+                                // swal.fire("Gagal Mengubah Data", "", "error")    
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Gagal Mengubah Data`,
+                                    timer:2000,
+                                    
+                                })
+                                axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
+                                .then((res)=>{
+                                    
+                                    $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                                }).catch((err)=>{
+                                    
+                                })
+                            }
+                        }).catch((err)=>{
+                            
+                        })
+                        }else {
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+
+                }else {
+                    
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
+                }
+            }).catch((err)=>{
+                
+            })
+        }).catch((err)=>{
+            
+        })
+    }else if (jenis_edit === 'groupbuy_qty'){
+        
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            email = res.data.Email
+
+            var new_pass
+            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+            .then((res)=>{
+                if(res.data){
+                    new_pass =res.data
+
+                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                    .then((res)=>{
+                        if(res.data){
+
+ 
+
+                        var status = $("#"+product_id+"-status").val()
+                        if(status == 'on'){
+                            status = true
+                        }else {
+                            status = false
+                        }
+
+                        // discount price minimal 500perak
+                        // qty minimal 5
+                        var Product_Code = $("#"+product_id+"-pCode").val()
+                        var Name = $("#"+product_id+"-pName").val()
+                        var qty = $("#"+product_id+"-quantity").val()
+                        var price = $("#"+product_id+"-discount").val()
+                        var token = localStorage.getItem('token')
+                        
+                        
+                        
+                        
+                        axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                        .then((res)=>{
+                            
+                            if(res.data){
+                                // swal.fire("Berhasil Mengubah Data", "", "success");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Berhasil Mengubah Data
+                                    `,
+                                    timer:2000,
+                                    
+                                })
+                                $('#s_product_name').removeClass(product_id)
+                                $('#s_product_name').removeClass('groupbuy_qty')
+                                $('#get_otp').modal('hide')
+                                $("#"+product_id+"-quantity").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
+                                $("#"+product_id+"-save_quantity").css('display','none') // icon
+                                $("#"+product_id+"-quantity").css('background-color','transparent')
+                            }else {
+                                // swal.fire("Gagal Mengubah Data", "", "error");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Gagal Mengubah Data`,
+                                    timer:2000,
+                                    
+                                })
+                                $("#"+product_id+"-quantity").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
+                                $("#"+product_id+"-save_quantity").css('display','none') // icon
+                                $("#"+product_id+"-quantity").css('background-color','transparent')
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                .then((res)=>{
+                                    $("#"+product_id+"-quantity").val(res.data.GroupBuy_SellQuantity)
+                                }).catch((err)=>{
+                                    
+                                })
+                            }
+                        }).catch((err)=>{
+                            
+                        })
+                        }else {
+                            // Swal.fire('Simpan Gagal', '', 'error')
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Simpan Gagal`,
+                                timer:2000,
+                                
+                            })
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+                }else {
+                    
+                    // Swal.fire('Password Minimal 6 character', '', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Password Minimal 6 Character`,
+                        timer:2000,
+                        
+                    })
+                }
+            }).catch((err)=>{
+                
+            })
+
+        }).catch((err)=>{
+            
+        })
+    }else if (jenis_edit === 'status_gb'){
+        get_status(product_id,pass)
+        $('#s_product_name').removeClass(product_id)
+        $('#s_product_name').removeClass('status_gb')
+    }
+    else {
+        
+    }
+    
+
+
+}
+
+
+
+const about_dirjen=()=>{
+    Swal.fire({
+        title: `   
+         <div class="box-dirjen-2">
+            <p>DIREKTORAT JENDERAL PERLINDUNGAN KONSUMEN DAN TERTIB NIAGA  <br> KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA</p>
+            <div class="dirjen-alamat">
+                <p>Alamat : </p>
+                <p>Gedung 1 Lantai 3 <br> Jalan M.I.Riwdwan Rais No.5 <br> Jakpus 10110</p>
+            </div>
+            <div class="dirjen-alamat">
+                <p>Telepon :</p>
+                <p> +62-21-3858171, <br>+62-21-3451692</p>
+            </div>
+            <div class="dirjen-alamat">
+                <p>Faksimili :</p>
+                <p> +62-21-3858205, <br>+62-21-3842531</p>
+            </div>
+            <div class="dirjen-alamat">
+                <p>Email :</p>
+                <a href="mailto:contact.us@kemendag.go.id" target="_blank">contact.us@kemendag.go.id</a>
+                <!-- <p>contact.us@kemendag.go.id</p> -->
+            </div>
+        
+        </div>
+        `,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+}
+
+
+const copy_link_share=()=>{
+    // alert('function jalan')
+    var copyText = document.getElementById("copyClipboard");
+    if(copyText){
+        
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("Copy");
+        // Swal.fire('Copy berhasil', '', 'success')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--success">
+                <div class="o-circle__sign"></div>  
+            </div>   
+            Copy Berhasil
+            `,
+            timer:2000,
+            
+        })
+    }
+    
+}
+
+const gorillaworkout=(name)=>{
+    
+    var copyText = document.getElementById("copyClipboardul");
+    // var copyText = 'Gorilla Workout'
+    
+    var text = $('.easteregg').val()
+    
+    if(copyText){
+        
+        copyText.select();
+        
+        // copyText.setSelectionRange(0, 99999);
+        document.execCommand("Copy");
+        // Swal.fire('Copy berhasil', '', 'success')
+    }
+
+}
+
+
+const nonActiveSkeleton=()=>{
+    // alert('jalan')
+    $('.box-render-promo-animated').css('display','none')
+    $('.box-render-promo').css('display','flex')
+    $('.box-render-new').css('display','flex')
+    $('.box-render-all').css('display','flex')
+}
+
+
+
+const check_input_form_supp=()=>{
+    // var customer_code = localStorage.getItem('token')
+    var first_name = $("#nama_depan_supp").val()
+    var last_name = $("#nama_belakang_supp").val()
+    var password= $('#password_supp').val()
+    var email = $('#email_supp').val()
+    var number_1 = $('#telp_gudang_supp').val()
+    var account_number = $('#no_rek_perusahaan_supp').val()
+    // var referral_code = $('#inp_ref_code').val()
+    
+    // var isCustomer_code = false
+    var isFirst_Name = false
+    var isLast_Name=false
+    var isPassword = false
+    var isEmail = false
+    var isNumber_1 = false
+    var isAccount_number = false
+    // var isReferral_code = false
+
+    if(first_name != undefined && first_name.length >=3 ){
+        isFirst_Name = true
+    }else {
+        isFirst_Name = false
+        // swal.fire("Nama Minimal 3 Huruf", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nama Minimal 3 Huruf`,
+            timer:2000,
+            
+        })
+    }
+    
+    if(last_name != undefined && last_name.length >=3 ){
+        isLast_Name = true
+    }else {
+        isLast_Name = false
+        // swal.fire("Nama Minimal 3 Huruf", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nama Minimal 3 Huruf`,
+            timer:2000,
+            
+        })
+    }
+    
+    if(password != undefined && password.length >=4 ){
+        isPassword = true
+    }else {
+        isPassword = false
+        // swal.fire("Password Salah", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Password Salah`,
+            timer:2000,
+            
+        })
+    }
+    
+    if(email != undefined && email.length !=0 ){
+        isEmail = true
+    }else {
+        isEmail = false
+        // swal.fire("Email Salah", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Email Salah`,
+            timer:2000,
+            
+        })
+    }
+    
+    
+    if(number_1 != undefined && number_1.length  !=0 ){
+        isNumber_1 = true
+    }else {
+        isNumber_1 = false
+        // swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nomor Telepon Harus Di Isi`,
+            timer:2000,
+            
+        })
+    }
+    
+    if(account_number != undefined && account_number.length  !=0 ){
+        isAccount_number = true
+    }else {
+        isAccount_number = false
+        // swal.fire("Nomor Rekening Harus Di Isi", "", "error");/
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            Nomor Rekening Harus Di Isi`,
+            timer:2000,
+            
+        })
+    }
+    
+
+    
+    
+    if(isFirst_Name == true 
+        && isLast_Name == true && isPassword == true && isEmail == true && isNumber_1 == true
+        && isAccount_number == true ){
+            // alert('bisa register')
+            return true 
+        }else {
+            // alert('ada data yg kosong')
+            return false
+        }
+    
+}
+
+
+
+
+const check_input_form=()=>{
+// var customer_code = localStorage.getItem('token')
+var first_name = $("#nama_depan_reg").val()
+var last_name = $("#nama_belakang_reg").val()
+var password= $('#password_reg').val()
+var email = $('#email_reg').val()
+var number_1 = $('#no_telp_reg').val()
+var account_number = $('#no_rekening_reg').val()
+var referral_code = $('#inp_ref_code').val()
+
+// var isCustomer_code = false
+var isFirst_Name = false
+var isLast_Name=false
+var isPassword = false
+var isEmail = false
+var isNumber_1 = false
+var isAccount_number = false
+var isReferral_code = false
+
+
+
+if(first_name != undefined && first_name.length >=3 ){
+    isFirst_Name = true
+}else {
+    isFirst_Name = false
+    // swal.fire("Nama Minimal 3 Huruf", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nama Minimal 3 Huruf`,
+        timer:2000,
+        
+    })
+}
+
+if(last_name != undefined && last_name.length >=3 ){
+    isLast_Name = true
+}else {
+    isLast_Name = false
+    // swal.fire("Nama Minimal 3 Huruf", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nama Minimal 3 Huruf`,
+        timer:2000,
+        
+    })
+}
+
+if(password != undefined && password.length >=4 ){
+    isPassword = true
+}else {
+    isPassword = false
+    // swal.fire("Password Salah", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Password Salah`,
+        timer:2000,
+        
+    })
+}
+
+if(email != undefined && email.length !=0 ){
+    isEmail = true
+}else {
+    isEmail = false
+    // swal.fire("Email Salah", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Password Salah`,
+        timer:2000,
+        
+    })
+}
+
+
+if(number_1 != undefined && number_1.length  !=0 ){
+    isNumber_1 = true
+}else {
+    isNumber_1 = false
+    // swal.fire("Nomor Telepon Harus Di Isi", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nomor Telepon Harus Di Isi`,
+        timer:2000,
+        
+    })
+}
+
+if(account_number != undefined && account_number.length  !=0 ){
+    isAccount_number = true
+}else {
+    isAccount_number = false
+    // swal.fire("Nomor Rekening Harus Di Isi", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Nomor Rekening Harus Di Isi`,
+        timer:2000,
+        
+    })
+}
+
+if(referral_code != undefined && referral_code.length  !=0 ){
+    isReferral_code = true
+}else {
+    isReferral_code = false
+    // swal.fire("Referral Code Harus Di Isi", "", "error");
+    Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Referral Code Harus Di Isi`,
+        timer:2000,
+        
+    })
+}
+
+
+
+if( isFirst_Name == true 
+    && isLast_Name == true && isPassword == true && isEmail == true && isNumber_1 == true
+    && isAccount_number == true && isReferral_code == true){
+        // alert('bisa register')
+        return true 
+    }else {
+        // alert('ada data yg kosong')
+        return false
+    }
+
+}
+
+
+function to_detail_product(id){
+    
+    $('#detailProductModal').modal('show')
+    $('.modals_detail_product').empty()
+    axios.post(`https://products.sold.co.id/get-product-details?product_code=${id}`)
+    .then((res)=>{
+        
+            $('.modals_detail_product').append(`
+                <tr>
+                    <td>${res.data.Product_Code} </td>
+                    <td>${res.data.Name} </td>
+                    <td>${res.data.Sell_Price} </td>
+                    <td>${res.data.Stock_Quantity}</td>
+                    <td>${res.data.Category} </td>
+                    <td>${res.data.Subcategory} </td>
+                    <td>${res.data.Specification} </td>
+                    <td>
+                        <p class="limited-text">${res.data.Description} </p>
+                    </td>
+                </tr>
+
+            `)
+        
+    }).catch((err)=>{
+        
+    })
+}
+
+
+
+
+const check_status_item=()=>{
+    // alert('function check status jalan')
+    $('#productModal').modal('show')
+    var token = localStorage.getItem('token')
+    var creator;
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        
+        
+        var Customer_Code = res.data.Customer_Code
+        creator = res.data.Creator
+
+        // FIND DATA BY CREATOR
+        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        .then((res)=>{
+            
+            res.data.map((val,index)=>{
+                
+                
+                $('.input_total_row_gb').val('TOTAL ROW = ' + res.data.length)
+                
+               
+                
+                if(val.GroupBuy_Purchase === 'true'){
+                    if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else {
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }
+                }else {
+                    if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                        $('.tbody_detail_product').append(`
+                             <tr class="tr_detail_prod">
+                                 <td>
+                                     <div class="box-switch">
+                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                     </div> 
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                             
+                                         </div>             
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>
+                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                 
+                                             </div>   
+                                         </div>
+                                     </div>
+                                 </td>
+                                 <td>
+                                     <div class="br-option">
+                                         <div class="br-option-input">
+                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>  
+                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                 
+                                             </div>            
+                                         </div>
+                                     </div>
+                                 </td>
+                             </tr>     
+                             `) 
+                    }else {
+                        $('.tbody_detail_product').append(`
+                        <tr class="tr_detail_prod">
+                            <td>
+                                <div class="box-switch">
+                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                </div> 
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                        
+                                    </div>             
+                                </div>
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                            <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                            
+                                        </div>
+                                        <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                            
+                                        </div>   
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="br-option">
+                                    <div class="br-option-input">
+                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                            <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                            
+                                        </div>  
+                                        <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                            
+                                        </div>            
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>     
+                        `) 
+                       
+                    }
+                }
+
+
+
+
+                // BATAS TABLE ATAS
+
+                $('.tbody_product').append(`
+                <tr>
+                    <td >
+                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>    
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>      
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                           
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                            
+                        </div>
+                    </td>
+                    <td>${val.Last_Updated}</td>
+                </tr>
+                `)
+            })
+        }).catch((err)=>{
+            
+        })
+    }).catch((err)=>{
+        
+    })
+}
+
+const re_render_item_product=()=>{
+    
+    
+    var token = localStorage.getItem('token')
+    $('.tbody_product').empty()
+    var creator;
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        
+        
+        var Customer_Code = res.data.Customer_Code
+        creator = res.data.Creator
+
+        // FIND DATA BY CREATOR
+        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+        .then((res)=>{
+            
+            res.data.map((val,index)=>{
+
+
+                $('.tbody_product').append(`
+                <tr>
+                    <td >
+                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>    
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>      
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                           
+                        </div>
+                    </td>
+                    <td>
+                        <div class="box-prod-name hvr-grow">
+                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> EDIT</p>
+                            </div>   
+                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                <p class="save-prod"> SAVE</p >
+                            </div>   
+                            
+                        </div>
+                    </td>
+                    <td>${val.Last_Updated}</td>
+                </tr>
+                `)
+            })
+        }).catch((err)=>{
+            
+        })
+    }).catch((err)=>{
+        
+    })
+    
+}
+
+const edit_product_quantity=(product_id)=>{
+    $("#"+product_id+"-quantity").prop('disabled',false) 
+    $("#"+product_id+"-quantity").css('background-color','#ddd')
+
+
+    $("#"+product_id+"-box_edit_quantity").css('display','none') // icon 
+    $("#"+product_id+"-save_quantity").css('display','block') // icon
+}
+
+const get_status=(product_id,pass)=>{
+    // alert(item_status)
+    var password = pass
+    var Product_Code = $("#"+product_id+"-pCode").val()
+    var Name = $("#"+product_id+"-pName").val()
+    var qty = $("#"+product_id+"-quantity").val()
+    var price = $("#"+product_id+"-discount").val()
+    var token = localStorage.getItem('token')
+    var email;
+    var result;
+
+            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then((res)=>{
+                email = res.data.Email
+                axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
+                .then((res)=>{
+                    
+                    
+                    if(res.data){
+                        // swal.fire("Berhasil Mengubah Data", "", "success");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                <div class="o-circle__sign"></div>  
+                            </div>   
+                            Berhasil Mengubah Data
+                            `,
+                            timer:2000,
+                            
+                        })
+                        $('#get_otp').modal('hide')
+                    }else {
+                        // swal.fire("Gagal Mengubah Data", "", "error");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Gagal Mengubah Data`,
+                            timer:2000,
+                            
+                        })
+                        $('#get_otp').modal('hide')
+                        
+                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                    .then((res)=>{
+                        
+                        
+                        // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                        if(res.data.GroupBuy_Purchase == 'true'){
+                            $('#'+product_id+"-status").prop('checked',true)
+                        }else {
+                            $('#'+product_id+"-status").prop('checked',false)
+                            
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+                }
+    
+                }).catch((err)=>{
+    
+                })
+            }).catch((err)=>{
+                
+            })
+            
+            if($('#'+product_id+"-status").is(':checked')){
+                result = true
+            }else {
+                result = false
+            }
+            
+ }
+
+const save_edit_quantity=(product_id)=>{
+
+    $('#get_otp').modal('show')
+    $('#s_product_name').addClass(product_id)
+    $('#s_product_name').addClass('groupbuy_qty')
+
+
+
+    clearOTPform()
 }
