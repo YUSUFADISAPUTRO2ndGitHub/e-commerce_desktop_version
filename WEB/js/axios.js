@@ -81,6 +81,103 @@ $( document ).ready(function() {
 
 
     getAllData()
+   
+
+
+    async function save_locally_province_tiki(){
+        console.log('jalan 106')
+        // localStorage.setItem("all_province_tiki", JSON.stringify([]));
+        // localStorage.setItem("all_city_tiki", JSON.stringify([]));
+        // localStorage.setItem("all_district_tiki", JSON.stringify([]));
+        // localStorage.setItem("all_subdistrict_tiki", JSON.stringify([]));
+        await get_all_province_from_courier("tiki", "tiki").done(async function(response){
+            localStorage.setItem("all_province_tiki", JSON.stringify(response));
+            console.log('jalan 113')
+            var i = 0;
+            var all_city_tiki = [];
+            for(i = 0; i < response.length; i++){
+                all_city_tiki.push({
+                    Province: response[i].Province,
+                    City: await save_locally_city_tiki(response[i].Province)
+                });
+            }
+            var test = JSON.parse(localStorage.getItem('all_province_tiki'))
+            console.log(test)
+            await localStorage.setItem("all_city_tiki", JSON.stringify(all_city_tiki));
+            var all_district_tiki = [];
+            console.log('jalan 124')
+            for(i = 0; i < all_city_tiki.length; i++){
+                for(z = 0; z < all_city_tiki[i].City.length; z++){
+                    if((all_city_tiki[i].City[z] != undefined)){
+                        all_district_tiki.push({
+                            City: all_city_tiki[i].City[z].City,
+                            District: await save_locally_district_tiki(all_city_tiki[i].City[z].City)
+                        });   
+                    }
+                }
+                console.log('LOOPING SELESAI TIKI')
+            }
+            await localStorage.setItem("all_district_tiki", JSON.stringify(all_district_tiki));
+            var all_subdistrict_tiki = [];
+            console.log('jalan 137')
+            for(i = 0; i < all_district_tiki.length; i++){
+                for(z = 0; z < all_district_tiki[i].District.length; z++){
+                    if((all_district_tiki[i].District[z] != undefined)){
+                        // console.log(all_district_tiki[i].District[z].District)
+                        all_subdistrict_tiki.push({
+                            District: all_district_tiki[i].District[z].District,
+                            SubDistrict: await save_locally_subdistrict_tiki(all_district_tiki[i].District[z].District)
+                        });  
+                    }
+                }
+                console.log('local district function jalan')
+               
+                
+            }
+            await localStorage.setItem("all_subdistrict_tiki", JSON.stringify(all_subdistrict_tiki));
+            console.log(localStorage.getItem("all_subdistrict_tiki"));
+        })
+    }
+    async function save_locally_city_tiki(Province){
+        return new Promise(async (resolve, reject) => {
+            await get_all_city_from_courier("tiki", "tiki", Province).done(async function(response){
+                resolve(response);
+            })
+        })
+    }
+    async function save_locally_district_tiki(City){
+        return new Promise(async (resolve, reject) => {
+            await get_all_district_from_courier("tiki", "tiki", City).done(async function(response){
+                resolve(response);
+            })
+        })
+    }
+    async function save_locally_subdistrict_tiki(District){
+        return new Promise(async (resolve, reject) => {
+            await get_all_subdistrict_from_courier("tiki", "tiki", District).done(async function(response){
+                resolve(response);
+            })
+        })
+    }
+
+    
+       
+    
+    var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+    var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+    var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+    var subdistrict_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
+    // console.log(province_storage)
+    // console.log(city_storage)
+    // console.log(district_storage)
+    // console.log(subdistrict_storage)
+
+    if(province_storage.length >0 && city_storage.length>0 && district_storage.length >0 && subdistrict_storage.length >0){
+        console.log('local province dll udah ke isi')
+    }else {
+        save_locally_province_tiki()
+    }
+
 });
 
 setInterval(() => {
@@ -92,7 +189,18 @@ setInterval(() => {
     }).catch((err)=>{
         console.log(err)
     })
+
+    var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+    var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+    var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+    var subdistrict_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
+    console.log(province_storage)
+    console.log(city_storage)
+    console.log(district_storage)
+    console.log(subdistrict_storage)
+
 }, 3600000);  
+
 
 
 
@@ -124,8 +232,8 @@ var all_data = JSON.parse(localStorage.getItem('all_data_product'))
             
         })
     }else {
-        console.log('masuk ke else 127')
-        console.log(allData)
+        // console.log('masuk ke else 127')
+        // console.log(allData)
         renderItemPromo()
         renderItemNew()
         renderItemAll()
@@ -219,8 +327,8 @@ const renderItemPromo=()=>{
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
                                     <div class="item-price">
-                                        <p>RP. ${hargaTotal}</p>
-                                        <p>Rp. ${hargaAwal}</p>
+                                        <p>RP. ${commafy(hargaTotal)}</p>
+                                        <p>Rp. ${commafy(hargaAwal)}</p>
                                     </div>
                                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -327,8 +435,8 @@ const renderItemNew=()=>{
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
                                 <div class="item-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
+                                    <p>RP. ${commafy(hargaTotal)}</p>
+                                    <p>Rp. ${commafy(hargaAwal)}</p>
                                 </div>
                                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                     <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -391,8 +499,8 @@ const renderItemAll=()=>{
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
                                 <div class="item-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
+                                    <p>RP. ${commafy(hargaTotal)}</p>
+                                    <p>Rp. ${commafy(hargaAwal)}</p>
                                 </div>
                                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                     <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -412,8 +520,8 @@ const renderItemAll=()=>{
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
                                 <div class="item-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
+                                    <p>RP. ${commafy(hargaTotal)}</p>
+                                    <p>Rp. ${commafy(hargaAwal)}</p>
                                 </div>
                                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                     <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -433,8 +541,8 @@ const renderItemAll=()=>{
                         <p class="limited-text-short">${val.Name}</p>
                         <div class="split-item">
                             <div class="item-price">
-                                <p>RP. ${hargaTotal}</p>
-                                <p>Rp. ${hargaAwal}</p>
+                                <p>RP. ${commafy(hargaTotal)}</p>
+                                <p>Rp. ${commafy(hargaAwal)}</p>
                             </div>
                             <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                 <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">

@@ -1248,6 +1248,9 @@ const  about_us=()=>{
     // alert('function jalan')
      $('#about_us').modal('show')
 }
+
+
+
 const refresh=()=>{
     window.location.reload()
 }

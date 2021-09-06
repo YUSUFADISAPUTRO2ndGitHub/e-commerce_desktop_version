@@ -63,8 +63,11 @@ body {
     align-items: center;
     margin:0 !important;
 }
+.p_about_ins:hover {
+    color:white;
+}
 .ins_ma_right_1{
-    width:100%;
+    width:20%;
     height:80%;
     /* background-color: red; */
     /* border:1px solid black; */
@@ -74,6 +77,20 @@ body {
     margin-right:3px;
 }
 .ins_ma_right_1:hover{
+    cursor: pointer;
+}
+
+.ins_ma_right_2{
+    width:40%;
+    height:80%;
+    /* background-color: red; */
+    /* border:1px solid black; */
+    border-right:1px solid gray;
+    border-left:1px solid gray;
+    margin-left:3px;
+    margin-right:3px;
+}
+.ins_ma_right_2:hover{
     cursor: pointer;
 }
 .main-header {
