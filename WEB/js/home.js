@@ -1302,28 +1302,10 @@ const choosing_shipping=(kurir,product_id)=>{
                     i=res.data.length
                 }
             }
-
-            
-            
-        //     var id = $('.radio-delivery-card').attr('id')
-        //     
-        //     
-         
-        // 
-        //     if(id == kurir_id){
-        //         
-                
-        //     }
-            
-            
-            // $(this).addClass('selected');
-            // $(this).attr('id','testing_id_kurir')
-            // $(this).addClass('active_payment_method');
-            
     
             var val = $(this).attr('data-value');
             result = val
-            var class_payment = $(this)
+            
             
             var new_kurir_pilihan = $('.active_delivery_method').attr('data-value')
             
