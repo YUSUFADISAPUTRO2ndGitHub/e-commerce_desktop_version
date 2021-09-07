@@ -5129,7 +5129,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
 const check_user_for_login=()=>{
     var token = localStorage.getItem('token')
-    
+    console.log(token)
  
     
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
@@ -5170,6 +5170,14 @@ const check_user_for_login=()=>{
                     $('#prof_tgl').css('display','none')
                     
                 }
+
+                axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                .then((res)=>{
+                    console.log(token)
+                    $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                }).catch((err)=>{
+                    console.log(err)
+                })
     
                 var tahun = data_customer.Birthday.slice(0,4)
                 var bulan = data_customer.Birthday.slice(5,7)
@@ -8298,3 +8306,4 @@ function replace_value_to(x){
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
 }   
+

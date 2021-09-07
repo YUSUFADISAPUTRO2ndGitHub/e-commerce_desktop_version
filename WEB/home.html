@@ -600,11 +600,19 @@
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-profile">
-                <p>Hi<input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
-                <div class="box-code-referral">
-                    <p>Your Customer Code for Referral :</p>
-                    <input type="text" disabled  id="refer-profile" class="ref-profile">
-                    
+                <div class="div-left-profile">
+                    <div class="profil-pic-div">
+                        <img src="./img/accounts.png" alt="" id="img-profile-id">
+                        <div class="upload-profile">
+                            <input type="file" id="inp-profile-img">
+                        </div>
+                    </div>
+                    <p>Hi<input type="text" disabled  id="refer-profile" class="nama_user_profile"> <br> Hi,Welcome!</p>
+                    <div class="box-code-referral">
+                        <p>Your Customer Code for Referral :</p>
+                        <input type="text" disabled  id="refer-profile" class="ref-profile">
+                        
+                    </div>
                 </div>
                 <i class="fas fa-sign-out-alt icon-logout" onclick="logoutProfile()"></i>
             </div>
@@ -1866,7 +1874,76 @@
 <script type="text/javascript" src="./js/axios.js"></script>
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript" src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
-<!-- <script type="text/javascript" src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
-<script type="text/javascript" src="./Iframe/js/cart.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script>
+    var token  = localStorage.getItem('token')
+    function readFile() {
+    // console.log(this)
+    // console.log(this.files)
+    console.log(this.files[0])
+    
+    var testing = this.files[0]
+    var size_img = testing.size
+    console.log(size_img)
+    
+    if (this.files && this.files[0]) {
+        var FR= new FileReader();
+        FR.addEventListener("load", function(e) {
+            // console.log('masuk ke FR')
+            // console.log(e.target.result, '1887') 
+            // document.getElementById("img-profile-id").src = e.target.result;
+            // document.getElementById("b64").innerHTML = e.target.result;
+            // console.log(e.target.result)
+
+            var data = {
+                profile_picture:e.target.result
+            }
+            if(size_img > 130000){
+                Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Ukuran Gambar Harus Kurang Dari 100KB`,
+                timer:2000,
+                
+            })
+            }
+            else {
+                axios.post(`https://customers.sold.co.id/upload-profile-image?Customer_Code=${token}`,data,{
+                    headers:{
+                    "Content-Type":'application/json'
+                },
+                    "data":JSON.stringify({
+                        "profile_picture": data.profile_picture
+                    })
+                }).then((res)=>{
+                    // console.log('selesai res')
+                    if(res.data){
+                        console.log('masuk ke if')
+                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                        .then((res)=>{
+                            console.log(token)
+                            $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+                    }else {
+                        console.log('false')
+                    }
+                }).catch((err)=>{
+                    console.log(err)
+                })
+                
+            }
+            // console.log(data)
+           
+        }); 
+        FR.readAsDataURL( this.files[0] );
+        // console.log('selesai')
+    }
+}
+
+document.getElementById("inp-profile-img").addEventListener("change", readFile);
+        
+</script>
 </html>

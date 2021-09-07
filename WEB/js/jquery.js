@@ -103,6 +103,15 @@ $(function(){
    
   
 
+   $('.profil-pic-div').on('mouseenter',function(){
+        $('.upload-profile').css('display','flex')
+   })
+   $('.profil-pic-div').on('mouseleave',function(){
+    $('.upload-profile').css('display','none')
+    })
+
+    
+
 //    OPEN MODALS PROFILE
 
    
@@ -151,6 +160,8 @@ $(function(){
                     $('#prof_tgl').css('display','none')
                     
                 }
+
+                
     
                 var tahun = data_customer.Birthday.slice(0,4)
                 var bulan = data_customer.Birthday.slice(5,7)
