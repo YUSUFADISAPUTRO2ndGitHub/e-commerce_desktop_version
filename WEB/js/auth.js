@@ -19,7 +19,7 @@ $(document).on('click',"#simpan_reg",function(){
     var kecamatan_cust = $('.register-kecamatan option:selected').val()
     var kelurahan_cust = $('.register-kelurahan option:selected').val()
 
-    var final_address = jalan_cust + ' ' +province_cust + ' ' + kota_cust + ' ' + kecamatan_cust + kelurahan_cust
+    var final_address = jalan_cust + ',' +province_cust + ',' + kota_cust + ',' + kecamatan_cust +  ',' + kelurahan_cust
     var tanggal = $('#tanggal_lahir_reg').val()
     
     var tanggal_splice = tanggal.split('-').join('/')

@@ -102,16 +102,33 @@ function loadcart(productNo, quantity){
 function selectAllCart(){
     // checklist830100100002
     // checklist830100100002
+    // alert('jalan')
     
-    
-    $('#checklist830100100004').prop('checked', true);
-    $('#checklist830100100003').prop('checked', true);
+    var allProduct = JSON.parse(localStorage.getItem('itemsInCart'))
+    console.log(allProduct)
+    var total_harga_barang = 0
+    allProduct.map((val,index)=>{
+        if($(`#checklist${val.productNo}`).prop('checked') === true){
+            console.log('masuk ke if 112')
+            $(`#checklist${val.productNo}`).prop(`checked`,false)
+            $(`#productName${val.productNo}`).css('border','none')
+            $('#total_selected_price').html('')
+        }else {
+            get_product_detail_func(val.productNo).done(function(response){
+                
+                $(`#productName${val.productNo}`).css('border','3px solid #00a8ff')
+                $(`#checklist${val.productNo}`).prop(`checked`,true)
+                console.log(response)
+                total_harga_barang += val.quantity * parseInt(response.Sell_Price)
+                console.log(total_harga_barang)
+                $('#total_selected_price').html(total_harga_barang)
+            })
+            var item = $(`#checklist${val.productNo}`).is('checked')
+                console.log(item)
 
-    $('.ins_total_price_cart').empty()
-    $('.ins_total_price_cart').append(`
-        <p> Total Price Selected Cart : RP </p>
-        <p id="total_selected_price">bayu</p>
-    `)
+        }
+        
+    })
 
 }
 
@@ -708,4 +725,15 @@ function in_store_loading_checkout(){
 function replace_vtintl_to_sold_co_id(original_url){
     var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
 return original_url;
+}
+
+
+function get_product_detail_func(product_id){
+    var settings = {
+        "url": `http://products.sold.co.id/get-product-details?product_code=${product_id}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
 }

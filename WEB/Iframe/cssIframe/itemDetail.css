@@ -455,6 +455,7 @@
     width:100%;
     height:100%;
     transition:3s fadein;
+    border-radius:10px;
 }
 
 .img-option-left{
@@ -633,8 +634,8 @@
     flex-direction: column;
 }
 .bsp-1{
-    height:100%;
-    min-height:80%;
+    height:65%;
+    min-height:65%;
     width:50%;
     min-width:40%;
     /* display: flex; */

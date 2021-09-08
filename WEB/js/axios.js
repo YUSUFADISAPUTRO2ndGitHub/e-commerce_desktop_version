@@ -200,10 +200,6 @@ var all_data = JSON.parse(localStorage.getItem('all_data_product'))
             var all_data = JSON.stringify(res.data)
             localStorage.setItem('all_data_product',all_data)
             allData = res.data
-            
-        
-        
-        
             renderItemPromo()
             renderItemNew()
             renderItemAll()
@@ -293,16 +289,12 @@ const renderItemPromo=()=>{
         // 
         // 
         // 
-        // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-        // ){
+        if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+        ){
           
-        // }else {
-            // 
-          
+        }else {
             if(val.GroupBuy_Purchase == 'true' || val.GroupBuy_Purchase == true || val.GroupBuy_Purchase == 'yes'){
-                // 
-                // 
-                // 
+
                 $('.box-render-promo').append(
                     ` 
                         <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
@@ -324,51 +316,7 @@ const renderItemPromo=()=>{
                         `
                     )
                 }
-            // }else if (val.Categorize_NEW == 'true'){
-            //     $('.box-render-promo').append(
-            //         ` 
-            //             <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
-            //                 <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-            //                 <div class="card-item-list">
-            //                     <p class="limited-text-short">${val.Name}</p>
-            //                     <div class="split-item">
-            //                         <div class="item-price">
-            //                             <p>RP. ${hargaTotal}</p>
-            //                             <p>Rp. ${hargaAwal}</p>
-            //                         </div>
-            //                         <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-            //                             <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-            //                             <img src="./img/badge_new.png" alt="" class="img-badge-best">
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //             `
-            //         )
-            // }else {
-            //     $('.box-render-promo').append(
-            //     ` 
-            //         <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
-            //             <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
-            //             <div class="card-item-list">
-            //                 <p class="limited-text-short">${val.Name}</p>
-            //                 <div class="split-item">
-            //                     <div class="item-price">
-            //                         <p>RP. ${hargaTotal}</p>
-            //                         <p>Rp. ${hargaAwal}</p>
-            //                     </div>
-            //                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-            //                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-            //                         <img src="./img/best_seller.png" alt="" class="img-badge-best">
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //         </div>
-            //         `
-            //     )
-            // }
-
-        // }
+            }        
     })
 }
 const renderItemNew=()=>{
@@ -1225,14 +1173,14 @@ const render_group_buy=(product_id)=>{
                                     kecamatan = response
                                     allKecamatan = response
                                     allSub_District = response
-                                    // 
-                                    // 
+                                    
+                                    
 
                                     var Courier_Price_Code_orig = 'CGK01.00'
                                     var packing_type = ''
                                     var berat_product = parseInt(item_product.Weight_KG)
-                                    // 
-                                    // 
+                                    
+                                    
                                     if(berat_product == 0){
                                         berat_product = 0.1
                                     }
@@ -3871,7 +3819,7 @@ function commafy( num ) {
                                         <div class="bsp-1">
                                             <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
                                                 
-                                            <br>
+                                            
                                             <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
                                         </div>
                                         
@@ -4012,7 +3960,7 @@ function commafy( num ) {
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id active_product">
                                     <div class="card-sejenis-img-id">
-                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                        <img src="${val.Picture_1}" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
                                         <p class="limited-text-commision">${val.Name}</p>
@@ -4026,7 +3974,7 @@ function commafy( num ) {
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
                                     <div class="card-sejenis-img-id">
-                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                        <img src="${val.Picture_1}" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
                                         <p class="limited-text-commision">${val.Name}</p>
@@ -4090,7 +4038,7 @@ function commafy( num ) {
                                                         <img src="${link_gambar}" alt="">
                                                         <div class="user-card-desc-top-id">
                                                             <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                            <p>*****</p>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="user-card-bot-id">
@@ -4412,7 +4360,7 @@ function commafy( num ) {
                                         <div class="bsp-1">
                                             <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
                                             
-                                            <br>
+                                            
                                             <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
                                             
                                         </div>
@@ -4500,13 +4448,13 @@ function commafy( num ) {
     
                         console.log(filter_product)
                         all_filter_product.map((val,index)=>{
-                            // console.log(val.Product_Code)
+                            console.log(val)
                             // console.log(product_id_pilihan)
                             if(val.Product_Code == product_id_pilihan){
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id active_product">
                                     <div class="card-sejenis-img-id">
-                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                        <img src="${val.Picture_1}" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
                                         <p class="limited-text-commision">${val.Name}</p>
@@ -4521,7 +4469,7 @@ function commafy( num ) {
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
                                     <div class="card-sejenis-img-id">
-                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                        <img src="${val.Picture_1}" alt="">
                                     </div>
                                     <div class="card-sejenis-desc-id">
                                         <p class="limited-text-commision">${val.Name}</p>
@@ -4626,7 +4574,6 @@ function commafy( num ) {
                                                         <img src="${link_gambar}" alt="">
                                                         <div class="user-card-desc-top-id">
                                                             <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                            <p>*****</p>
                                                         </div>
                                                     </div>
                                                     <div class="user-card-bot-id">
@@ -4645,7 +4592,7 @@ function commafy( num ) {
                                                         <img src="../img/accounts.png" alt="">
                                                         <div class="user-card-desc-top-id">
                                                             <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                            <p>*****</p>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="user-card-bot-id">

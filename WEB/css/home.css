@@ -1095,8 +1095,8 @@ body {
     /* fallback color */
     /* border:1px solid black; */
     position: relative;
-    top: -185px;
-    left:-20px;
+    top: -65px;
+    left:-10px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1122,8 +1122,8 @@ body {
     /* fallback color */
     /* border:1px solid black; */
     position: relative;
-    top: -185px;
-    left:20px;
+    top: -65px;
+    left:10px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1151,8 +1151,8 @@ body {
     /* fallback color */
     /* border:1px solid black; */
     position: relative;
-    top: -105px;
-    left:20px;
+    top: 50px;
+    left:10px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1180,8 +1180,8 @@ body {
     /* fallback color */
     /* border:1px solid black; */
     position: relative;
-    top: -105px;
-    left:-20px;
+    top: 50px;
+    left:-10px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1262,18 +1262,21 @@ body {
     justify-content: space-between;
 }
 .box_for_button_top_all{
-    width:80%;
+    width:94%;
     height:auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: absolute;
+    /* top:-50px; */
 }
 .box_for_button_bot_all{
-    width:80%;
+    width:94%;
     height:auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position:absolute;
 }
 
 .icon-prev {
@@ -5292,7 +5295,7 @@ img{
   }
 
   .box-all-category{
-      height:300px;
+      height:250px;
       width:100%;
       /* background-color: red; */
       display: flex;
@@ -5308,7 +5311,7 @@ img{
   }
 .top-all-category{
     height:50%;
-    width:81%;
+    width:95%;
     display: flex;
     flex-direction: row;
     overflow: auto;
@@ -5316,7 +5319,7 @@ img{
 }
 .bot-all-category{
     height:50%;
-    width:81%;
+    width:95%;
     display: flex;
     flex-direction: row;
     overflow: auto;
@@ -6717,4 +6720,23 @@ loading new
 #inp-profile-img:hover {
     cursor: pointer;
   
+}
+
+#sub-delivery-option{
+    display: none;
+}
+#sub-cart-option{
+    display: none;
+}
+#sub-kota-option{
+    display: none;
+}
+#sub-kecamatan-option{
+    display: none;
+}
+#sub-kelurahan-option{
+    display: none;
+}
+#sub-kodepos-option{
+    display: none;
 }
