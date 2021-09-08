@@ -4042,57 +4042,90 @@ function commafy( num ) {
                         })
                         
 
-
+                        
+                        // axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                        // .then((res)=>{
+                        //     console.log(token)
+                        //     if(res.data){
+                        //         $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                        //     }else {
+                        //         $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
+                        //     }
+                        // }).catch((err)=>{
+                        //     console.log(err)
+                        // })
                         
                         var comment_parse = JSON.parse(cust_comment.User_Comments)
                         console.log(comment_parse)
                         $('#nav-profile').empty()
                         if(comment_parse == 'null' || comment_parse == null){
                             $('#nav-profile').append(`
-                                
-                                <div class="user-card-top-id">
-                                    <img src="../img/liked.png" alt="">
-                                    <div class="user-card-desc-top-id">
-                                        Tambah Comment 
-                                        <div class="card-for-comment">
-                                            <input type="text" class="input_comment_cust" >
-                                            <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
-                                                SEND
-                                            </div>
+                            <div class="user-card-top-id">
+                                <img src="../img/accounts.png" alt="">
+                                <div class="user-card-desc-top-id">
+                                    Tambah Comment 
+                                    <div class="card-for-comment">
+                                        <input type="text" class="input_comment_cust" >
+                                        <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
+                                            SEND
                                         </div>
                                     </div>
                                 </div>
-                            `)
-                        }else if (comment_parse.length >0){
+                            </div>
+                        `)
+                        }else if (comment_parse.length > 0 ) {
                             comment_parse.map((val,index)=>{
-                                
-                                console.log(val)
-                                console.log(val.Customer_Code)
-                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                 .then((res)=>{
-                                    console.log(res.data)
-                                    // res.data.map((val,index)=>{
-                                        $('#nav-profile').append(`
-                                        <div class="user-card-id">
-                                            <div class="user-card-top-id">
-                                                <img src="../img/accounts.png" alt="">
-                                                <div class="user-card-desc-top-id">
-                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                    <p>*****</p>
+                                    console.log('axios jalan')
+                                    if(res.data){
+                                        var link_gambar = res.data
+                                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                        .then((res)=>{
+                                            console.log(res.data)
+                                            // res.data.map((val,index)=>{
+                                                $('#nav-profile').append(`
+                                                <div class="user-card-id">
+                                                    <div class="user-card-top-id">
+                                                        <img src="${link_gambar}" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                            <p>*****</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="user-card-bot-id">
+                                                        <p>${val.Comment}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="user-card-bot-id">
-                                                <p>${val.Comment}</p>
-                                            </div>
-                                        </div>
-                                        `)
-                                    // })
+                                                `)
+                                            // })
+                                        }).catch((err)=>{
+                                            console.log(err)
+                                        })
+                                    } else {
+                                        $('#nav-profile').append(`
+                                                <div class="user-card-id">
+                                                    <div class="user-card-top-id">
+                                                        <img src="../img/accounts.png" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                            <p>*****</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="user-card-bot-id">
+                                                        <p>${val.Comment}</p>
+                                                    </div>
+                                                </div>
+                                                `)
+                                    }
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
                             })
-    
+
                         }
+                        
+                       
                     }).catch((err)=>{
                         console.log(err)
                     })
@@ -4557,56 +4590,75 @@ function commafy( num ) {
 
                  
 
-                        
-
+                    
                         var comment_parse = JSON.parse(cust_comment.User_Comments)
                         console.log(comment_parse)
                         $('#nav-profile').empty()
                         if(comment_parse == 'null' || comment_parse == null){
                             $('#nav-profile').append(`
-                                
-                                <div class="user-card-top-id">
-                                    <img src="../img/liked.png" alt="">
-                                    <div class="user-card-desc-top-id">
-                                        Tambah Comment 
-                                        <div class="card-for-comment">
-                                            <input type="text" class="input_comment_cust" >
-                                            <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
-                                                SEND
-                                            </div>
+                            <div class="user-card-top-id">
+                                <img src="../img/accounts.png" alt="">
+                                <div class="user-card-desc-top-id">
+                                    Tambah Comment 
+                                    <div class="card-for-comment">
+                                        <input type="text" class="input_comment_cust" >
+                                        <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
+                                            SEND
                                         </div>
                                     </div>
                                 </div>
-                            `)
-                        }else if (comment_parse.length >0){
+                            </div>
+                        `)
+                        }else if (comment_parse.length > 0 ) {
                             comment_parse.map((val,index)=>{
-                                
-                                console.log(val)
-                                console.log(val.Customer_Code)
-                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                 .then((res)=>{
-                                    console.log(res.data)
-                                    // res.data.map((val,index)=>{
-                                        $('#nav-profile').append(`
-                                        <div class="user-card-id">
-                                            <div class="user-card-top-id">
-                                                <img src="../img/accounts.png" alt="">
-                                                <div class="user-card-desc-top-id">
-                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                    <p>*****</p>
+                                    console.log('axios jalan')
+                                    if(res.data){
+                                        var link_gambar = res.data
+                                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                        .then((res)=>{
+                                            console.log(res.data)
+                                            // res.data.map((val,index)=>{
+                                                $('#nav-profile').append(`
+                                                <div class="user-card-id">
+                                                    <div class="user-card-top-id">
+                                                        <img src="${link_gambar}" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                            <p>*****</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="user-card-bot-id">
+                                                        <p>${val.Comment}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="user-card-bot-id">
-                                                <p>${val.Comment}</p>
-                                            </div>
-                                        </div>
-                                        `)
-                                    // })
+                                                `)
+                                            // })
+                                        }).catch((err)=>{
+                                            console.log(err)
+                                        })
+                                    } else {
+                                        $('#nav-profile').append(`
+                                                <div class="user-card-id">
+                                                    <div class="user-card-top-id">
+                                                        <img src="../img/accounts.png" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                            <p>*****</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="user-card-bot-id">
+                                                        <p>${val.Comment}</p>
+                                                    </div>
+                                                </div>
+                                                `)
+                                    }
                                 }).catch((err)=>{
                                     console.log(err)
                                 })
                             })
-    
+
                         }
                     }).catch((err)=>{
                         console.log(err)
@@ -5174,7 +5226,11 @@ const check_user_for_login=()=>{
                 axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                 .then((res)=>{
                     console.log(token)
-                    $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                    if(res.data){
+                        $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                    }else {
+                        $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
+                    }
                 }).catch((err)=>{
                     console.log(err)
                 })
