@@ -1326,44 +1326,51 @@ $(function(){
         $('.close-button').css('display','block')
         $('.close-button-2').css('display','block')
         $('.modals-search-result').contents().find('.close-button-2').css('display','block');
-
-        // $('.close').css('display','block')
-        console.log($('.close-button-2'))
-        
-        
-        
-        
         var value = $(this).val()
-        
-        if(value.length > 2){
-            axios.post(`https://products.sold.co.id/get-product-details?product_name=${value}`)
-            .then((res)=>{
+        // $('.close').css('display','block')
+        // console.log($('.close-button-2'))
+        var allProduct= JSON.parse(localStorage.getItem('all_data_product'))
+
+
+        if(allProduct != undefined  && allProduct != null && allProduct.length > 0 ){
+            if(value.length > 2){
+                    $('.box-render-search').css('display','block')
+                    $('.box-search-menu').css('display','block')
+                    $('.input-name').css('border-bottom-left-radius','0px')
+                    $('.input-name').css('border-bottom-right-radius','0px')
+                    $('.render-li-search').empty()
+                    var all_product_filter = []
                 
-                $('.box-render-search').css('display','block')
-                $('.box-search-menu').css('display','block')
-                $('.input-name').css('border-bottom-left-radius','0px')
-                $('.input-name').css('border-bottom-right-radius','0px')
-                $('.render-li-search').empty()
-                if(res.data[0] === false){
-                    res.data.map((val,index)=>{
-                        
-                        
+
+                var filter_product = allProduct.filter((val)=>{
+                    console.log(val.Name)
+                    console.log(value)
+                    var valueCap = value.toUpperCase()
+                    
+                    if(val.Name.toUpperCase().includes(valueCap)){
+                        // console.log('masuk ke if')
+                        all_product_filter.push(val)
+                        return val
+                    }
+                })
+                console.log(filter_product)
+                console.log(all_product_filter)
+                
+                console.log(all_product_filter)
+                all_product_filter.map((val,index)=>{
+                    console.log(val, '1352')
+                    if(val === false){
                         $('.render-li-search').append(`
                             <li  id="${val.Name}">${value} Tidak Ditemukan</li>
                         `)
 
-                    })
-                }else {
-                    res.data.map((val,index)=>{
-                        
-                        
+                    }else {
                         $('.render-li-search').append(`
                             <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
                         `)
-
-                    })
-
-                }
+                    }
+                })
+           
                 
                 $('.closeByLogin').css('display','none')
                 $('.option-0').removeClass("background_grey")
@@ -1371,17 +1378,70 @@ $(function(){
                 $('.option-2').removeClass("background_grey")
                 $('.option-3').removeClass("background_grey")
                 $('.box-information').hide(1000)
-            }).catch((err)=>{
-                
-            })
+             
+            }else {
+                close_all_open_window()
+                    $('.box-render-search').css('display','none')
+                $('.input-name').css('border-bottom-left-radius','10px')
+                $('.input-name').css('border-bottom-right-radius','10px')
+            }
+             
 
         }else {
-            close_all_open_window()
-                $('.box-render-search').css('display','none')
-            $('.input-name').css('border-bottom-left-radius','10px')
-            $('.input-name').css('border-bottom-right-radius','10px')
-
+            if(value.length > 2){
+                axios.post(`https://products.sold.co.id/get-product-details?product_name=${value}`)
+                .then((res)=>{
+                    
+                    $('.box-render-search').css('display','block')
+                    $('.box-search-menu').css('display','block')
+                    $('.input-name').css('border-bottom-left-radius','0px')
+                    $('.input-name').css('border-bottom-right-radius','0px')
+                    $('.render-li-search').empty()
+                    if(res.data[0] === false){
+                        res.data.map((val,index)=>{
+                            
+                            
+                            $('.render-li-search').append(`
+                                <li  id="${val.Name}">${value} Tidak Ditemukan</li>
+                            `)
+    
+                        })
+                    }else {
+                        res.data.map((val,index)=>{
+                            
+                            
+                            $('.render-li-search').append(`
+                                <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
+                            `)
+    
+                        })
+    
+                    }
+                    
+                    $('.closeByLogin').css('display','none')
+                    $('.option-0').removeClass("background_grey")
+                    $('.option-1').removeClass("background_grey")
+                    $('.option-2').removeClass("background_grey")
+                    $('.option-3').removeClass("background_grey")
+                    $('.box-information').hide(1000)
+                }).catch((err)=>{
+                    
+                })
+    
+            }else {
+                close_all_open_window()
+                    $('.box-render-search').css('display','none')
+                $('.input-name').css('border-bottom-left-radius','10px')
+                $('.input-name').css('border-bottom-right-radius','10px')
+    
+            }
         }
+        
+        
+
+        
+        
+        
 
     }); 
 

@@ -121,7 +121,7 @@ function selectAllCart(){
                 console.log(response)
                 total_harga_barang += val.quantity * parseInt(response.Sell_Price)
                 console.log(total_harga_barang)
-                $('#total_selected_price').html(total_harga_barang)
+                $('#total_selected_price').html(commafy(total_harga_barang))
             })
             var item = $(`#checklist${val.productNo}`).is('checked')
                 console.log(item)
