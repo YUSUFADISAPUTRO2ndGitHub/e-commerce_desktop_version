@@ -199,7 +199,7 @@ $(function(){
                 $('.box-tambah-alamat').empty()
                 
                 if(data_customer.Address_1 == 'undefined'){
-                    console.log('alamat undefined')
+                    // console.log('alamat undefined')
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -209,10 +209,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
                     </div> 
                     `)
-                    console.log('masuk ke else')
+                    // console.log('masuk ke else')
                 }
                 if(data_customer.Address_2 == 'undefined'){
-                    console.log('alamat undefined')
+                    // console.log('alamat undefined')
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -222,10 +222,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
                     </div> 
                     `)
-                    console.log('masuk ke else')
+                    // console.log('masuk ke else')
                 }
                 if(data_customer.Address_3 == 'undefined'){
-                    console.log('alamat undefined')
+                    // console.log('alamat undefined')
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -235,10 +235,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
                     </div> 
                     `)
-                    console.log('masuk ke else')
+                    // console.log('masuk ke else')
                 }
                 if(data_customer.Address_4 == 'undefined'){
-                    console.log('alamat undefined')
+                    // console.log('alamat undefined')
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -248,10 +248,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
                     </div> 
                     `)
-                    console.log('masuk ke else')
+                    // console.log('masuk ke else')
                 }
                 if(data_customer.Address_5 == 'undefined'){
-                    console.log('alamat undefined')
+                    // console.log('alamat undefined')
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -261,7 +261,7 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
                     </div> 
                     `)
-                    console.log('masuk ke else')
+                    // console.log('masuk ke else')
                 }
 
 
@@ -273,7 +273,7 @@ $(function(){
                 $('.box_information_login').css('display','flex')
             }
         }).catch((err)=>{
-            console.log(err)
+            // console.log(err)
         })
 
         $('.closeByLogin').css('display','none')
@@ -1635,7 +1635,7 @@ else if (gambar_active == 2){
 
 
         await $('.ads-3').css('background-color',hex)
-        await  $('.ads-1').css('background-color',hex)
+        await $('.ads-1').css('background-color',hex)
         // $('#status').html(cord + "<br>" + hex);
         gambar_active = 1
         

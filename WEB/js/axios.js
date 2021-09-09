@@ -1335,23 +1335,23 @@ const render_group_buy=(product_id)=>{
                 .then((res)=>{
                     
                     if(res.data){
-                        if(res.data.Address_1 !== 'NULL'){
+                        if(res.data.Address_1 !== 'NULL' && res.data.Address_1 != "undefined"){
                             $('.option-alamat-gb').append(`
                             <option value="${res.data.Address_1}" id="alamat_gb">${res.data.Address_1}</option> 
                             `)
-                        }else if ( res.data.Address_2 !== 'NULL'){
+                        }else if ( res.data.Address_2 !== 'NULL'&& res.data.Address_2 != "undefined"){
                             $('.option-alamat-gb').append(`
                             <option value="${res.data.Address_2}" id="alamat_gb">${res.data.Address_2}</option> 
                             `)  
-                        }else if (res.data.Address_3 !== 'NULL'){
+                        }else if (res.data.Address_3 !== 'NULL' && res.data.Address_3 != "undefined"){
                             $('.option-alamat-gb').append(`
-                            <option value="${res.data.Address_3}" id="alamat_gb">${res.data.Address_3}</option> 
+                            <option value="${res.data.Address_3 }" id="alamat_gb">${res.data.Address_3}</option> 
                             `) 
-                        }else if (res.data.Address_4 !== 'NULL'){
+                        }else if (res.data.Address_4 !== 'NULL' && res.data.Address_4 != "undefined"){
                             $('.option-alamat-gb').append(`
                             <option value="${res.data.Address_4}" id="alamat_gb">${res.data.Address_4}</option> 
                             `) 
-                        }else if (res.data.Address_5 !== 'NULL'){
+                        }else if (res.data.Address_5 !== 'NULL' && res.data.Address_5 != "undefined"){
                             $('.option-alamat-gb').append(`
                             <option value="${res.data.Address_5}" id="alamat_gb">${res.data.Address_5}</option> 
                             `) 
@@ -3551,36 +3551,8 @@ function commafy( num ) {
     $(this).scrollTop('.modals-product-detail')
     
     // console.log($(this).scrollTop('.box_iframe_groupbuy'))
-    var product_id_pilihan = product_id
-    let allDataProduct = []
-    axios.post(`https://products.sold.co.id/get-product-details`)
-    .then((res)=>{
-        allDataProduct = res.data
-        
-        const querystring = $(location).attr('href');
-        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-        .then((res)=>{
-            console.log(res.data)
-            var split_product = res.data.Name.split(' ')
-            // console.log(split_product)
-            var all_filter_product = []
-            for(var i =0; i<split_product.length; i++){
-                var filter_product = allDataProduct.filter((val)=>{
-                    // console.log(val.Name)
-                    // console.log(split_product[i])
-                    // console.log(val.Name.includes(split_product[i]))
-                    if(val.Name.includes(split_product[i])){
-                        // console.log('masuk ke if')
-                        all_filter_product.push(val)
-                        return val
-                    }
-                })
-                // console.log(all_filter_product)
-            }
-            // console.log(filter_product,'2812')
-            // console.log(all_filter_product,'luar')
 
-            let timerInterval
+    let timerInterval
             Swal.fire({
             title: 'Please Wait',
             html: ` 
@@ -3597,32 +3569,41 @@ function commafy( num ) {
             `,
             timer: 3000,
             timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-                timerInterval = setInterval(() => {
-                const content = Swal.getHtmlContainer()
-                if (content) {
-                    const b = content.querySelector('b')
-                    if (b) {
-                    b.textContent = Swal.getTimerLeft()
-                    }
-                }
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-            }).then((result) => {
-            /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
+            })
+
+            var product_id_pilihan = product_id
+            let allDataProduct = []
+            axios.post(`https://products.sold.co.id/get-product-details`)
+            .then((res)=>{
+                allDataProduct = res.data
                 
+                const querystring = $(location).attr('href');
+                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                .then((res)=>{
+                    console.log(res.data)
                     item = res.data
+                    var split_product = res.data.Name.split(' ')
+                    // console.log(split_product)
+                    var all_filter_product = []
+                    for(var i =0; i<split_product.length; i++){
+                        var filter_product = allDataProduct.filter((val)=>{
+                            // console.log(val.Name)
+                            // console.log(split_product[i])
+                            // console.log(val.Name.includes(split_product[i]))
+                            if(val.Name.includes(split_product[i])){
+                                // console.log('masuk ke if')
+                                all_filter_product.push(val)
+                                return val
+                            }
+                        })
+                    }
+                    // BATAS
                     var hargaAwal = parseInt(item.Sell_Price)
                     var discount = parseInt(item.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
                     console.log(item)
                     $('.box-item-detail').empty();
-    
+                
                     axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                     .then((res)=>{
                         var cust_comment = res.data
@@ -3668,7 +3649,7 @@ function commafy( num ) {
                                             </div>
                                         </div>
                                     </div>
-        
+                
                                     <div class="box-price-right-id">
                                         
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
@@ -3682,11 +3663,11 @@ function commafy( num ) {
                                     <div class="box-quality-right-id-2">
                                         <div class="bsp-2">
                                             <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-  
+                
                                         </div>
                                        
                                     </div>
-           
+                
                                     <div class="box-quality-right-id">
                                         Product Sejenis
                                         <div class="card-quality-right-id">
@@ -3727,7 +3708,7 @@ function commafy( num ) {
                                                         <div class="card-for-minus-plus-id">
                                                             <div class="btn-minus-id" id="icon-minus-id-1">
                                                                 <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-        
+                
                                                             </div>
                                                             <div class=" btn-plus-id" id="icon-plus-id-1"> 
                                                                 <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
@@ -3802,7 +3783,7 @@ function commafy( num ) {
                                             </div>
                                         </div>
                                     </div>
-        
+                
                                     <div class="box-price-right-id">
                                         
                                         <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
@@ -3866,7 +3847,7 @@ function commafy( num ) {
                                                         <div class="card-for-minus-plus-id">
                                                             <div class="btn-minus-id" id="icon-minus-id-1">
                                                                 <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-        
+                
                                                             </div>
                                                             <div class=" btn-plus-id" id="icon-plus-id-1"> 
                                                                 <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
@@ -3903,7 +3884,7 @@ function commafy( num ) {
                                 `
                             )
                         }
-
+                
                         $('.img-option-left').empty()
                         $('.item-left-img-box')
                         if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
@@ -3935,7 +3916,7 @@ function commafy( num ) {
                             `)
                         }
                         if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
-
+                
                             
                             $('.item-left-img-box').append(`
                                 <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
@@ -3969,7 +3950,7 @@ function commafy( num ) {
                                     </div>
                                 </div>
                                 `)
-
+                
                             }else {
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
@@ -3984,12 +3965,12 @@ function commafy( num ) {
                                 </div>
                                 `)
                             }
-
+                
                           
-
+                
                         })
                         
-
+                
                         
                         // axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                         // .then((res)=>{
@@ -4070,29 +4051,46 @@ function commafy( num ) {
                                     console.log(err)
                                 })
                             })
-
+                
                         }
                         
                        
                     }).catch((err)=>{
                         console.log(err)
                     })
+                    //BATAS 
+                }).catch((err)=>{
                     
-                }   
-             })
-        }).catch((err)=>{
-            
-        })
-    }).catch((err)=>{
-        console.log(err)
-    })
-        
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
  }
 
  const render_get_product_detail_searching_page=(product_id)=>{
     console.log(product_id,'2637')
     $(this).scrollTop('.box_iframe_groupbuy')
-    console.log(this)
+    let timerInterval
+    Swal.fire({
+    title: 'Please Wait',
+    html: ` 
+     <div class="boxcon">
+        <div class="box1">
+        </div>
+        <div id="sold-id-loading">
+        SOLD 
+        </div>
+            
+        <div class="box2">
+        </div>
+    </div>
+    `,
+    timer: 2000,
+    timerProgressBar: true
+    })
+
+    
+    // console.log(this)
     var product_id_pilihan = product_id
     let allDataProduct = []
 
@@ -4102,7 +4100,7 @@ function commafy( num ) {
         const querystring = $(location).attr('href');
         axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
         .then((res)=>{
-    
+            item = res.data
             var split_product = res.data.Name.split(' ')
             console.log(split_product)
             var all_filter_product = []
@@ -4117,43 +4115,6 @@ function commafy( num ) {
                 })
             }
 
-            let timerInterval
-            Swal.fire({
-            title: 'Please Wait',
-            html: ` 
-             <div class="boxcon">
-                <div class="box1">
-                </div>
-                <div id="sold-id-loading">
-                SOLD 
-                </div>
-                    
-                <div class="box2">
-                </div>
-            </div>
-            `,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-                Swal.showLoading()
-                timerInterval = setInterval(() => {
-                const content = Swal.getHtmlContainer()
-                if (content) {
-                    const b = content.querySelector('b')
-                    if (b) {
-                    b.textContent = Swal.getTimerLeft()
-                    }
-                }
-                }, 100)
-            },
-            willClose: () => {
-                clearInterval(timerInterval)
-            }
-            }).then((result) => {
-            /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                
-                    item = res.data
                     var hargaAwal = parseInt(item.Sell_Price)
                     var discount = parseInt(item.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
@@ -4302,8 +4263,6 @@ function commafy( num ) {
                                 </div>`
                             )
                         }else{
-                
-                            
                             $('.box-item-detail').append(
                                 `
                                 <div class="new-item-left">
@@ -4444,8 +4403,6 @@ function commafy( num ) {
                                 `
                             )
                         }
-    
-    
                         console.log(filter_product)
                         all_filter_product.map((val,index)=>{
                             console.log(val)
@@ -4611,8 +4568,8 @@ function commafy( num ) {
                         console.log(err)
                     })
                     
-                }   
-             })
+                
+             
         }).catch((err)=>{
             
         })
@@ -8310,3 +8267,26 @@ function replace_value_to(x){
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
 }   
 
+
+
+
+function calculateSize(img, maxWidth, maxHeight) {
+    let width = img.width;
+    let height = img.height;
+  
+    // calculate the width and height, constraining the proportions
+    if (width > height) {
+      if (width > maxWidth) {
+        height = Math.round((height * maxWidth) / width);
+        width = maxWidth;
+      }
+    } else {
+      if (height > maxHeight) {
+        width = Math.round((width * maxHeight) / height);
+        height = maxHeight;
+      }
+    }
+    return [width, height];
+  }
+  
+        

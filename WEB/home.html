@@ -1871,79 +1871,101 @@
 
  
 </script>
-<script type="text/javascript" src="./js/axios.js"></script>
-<script type="text/javascript" src="./js/jquery.js"></script>
-<script type="text/javascript" src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
+
 <script>
     var token  = localStorage.getItem('token')
     function readFile() {
     // console.log(this)
     // console.log(this.files)
-    console.log(this.files[0])
-    
-    var testing = this.files[0]
-    var size_img = testing.size
-    console.log(size_img)
-    
-    if (this.files && this.files[0]) {
-        var FR= new FileReader();
-        FR.addEventListener("load", function(e) {
-            // console.log('masuk ke FR')
-            // console.log(e.target.result, '1887') 
-            // document.getElementById("img-profile-id").src = e.target.result;
-            // document.getElementById("b64").innerHTML = e.target.result;
-            // console.log(e.target.result)
-
-            var data = {
-                profile_picture:e.target.result
-            }
-            if(size_img > 100000){
-                Swal.fire({
-                html:`
-                <div class="o-circle c-container__circle o-circle__sign--failure">
-                    <div class="o-circle__sign"></div>  
-                </div> 
-                Ukuran Gambar Harus Kurang Dari 100KB`,
-                timer:2000,
-                
-            })
-            }
-            else {
-                axios.post(`https://customers.sold.co.id/upload-profile-image?Customer_Code=${token}`,data,{
-                    headers:{
-                    "Content-Type":'application/json'
-                },
-                    "data":JSON.stringify({
-                        "profile_picture": data.profile_picture
-                    })
-                }).then((res)=>{
-                    // console.log('selesai res')
-                    if(res.data){
-                        console.log('masuk ke if')
-                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
-                        .then((res)=>{
-                            console.log(token)
-                            $(`#img-profile-id`).attr(`src`, `${res.data}`);
-                        }).catch((err)=>{
-                            console.log(err)
-                        })
-                    }else {
-                        console.log('false')
-                    }
-                }).catch((err)=>{
-                    console.log(err)
-                })
-                
-            }
-            // console.log(data)
-           
-        }); 
-        FR.readAsDataURL( this.files[0] );
-        // console.log('selesai')
+    var file = this.files[0]
+    const MAX_WIDTH = 320;
+    const MAX_HEIGHT = 180;
+    const MIME_TYPE = "image/jpeg";
+    const QUALITY = 0.7;
+    const input = document.getElementById("inp-profile-img");
+    var new_size_blob = 0
+    const blobURL = URL.createObjectURL(file)
+    var convert_base = ''
+    const img = new Image()
+    img.src = blobURL
+    img.onerror = function (){
+        URL.revokeObjectURL(this.src)
+        console.log('Cannot Load Image')
     }
+    console.log(img,'1896')
+    img.onload = function () {
+        URL.revokeObjectURL(this.src);
+        const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
+        const canvas = document.createElement("canvas");
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+        console.log(canvas) 
+        canvas.toBlob(
+        (blob) => {
+            
+            // Handle the compressed image. es. upload or save in local state
+            var size_blob = blob.size
+            new_size_blob += size_blob
+            var reader = new FileReader();
+            reader.readAsDataURL(blob); 
+            reader.onloadend = function() {
+            var base64data = reader.result;   
+            convert_base = base64data            
+                if(new_size_blob<100000){
+                    var data = {profile_picture:convert_base}
+                    axios.post(`https://customers.sold.co.id/upload-profile-image?Customer_Code=${token}`,data,{
+                        headers:{
+                        "Content-Type":'application/json'
+                    },
+                        "data":JSON.stringify({
+                            "profile_picture": data.profile_picture
+                        })
+                    }).then((res)=>{
+                        if(res.data){
+                            console.log(data,'1938')
+                            axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                            .then((res)=>{
+                                console.log(token,'token')
+                                console.log(res.data,'harusnya base 64')
+                                $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                        }else {
+                            console.log('false')
+                        }
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }else {
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Ukuran Gambar Harus Kurang Dari 100KB`,
+                        timer:2000,
+                    })
+                }
+            }
+        },
+        MIME_TYPE,
+        QUALITY
+        );
+        
+  };
+    
 }
 
 document.getElementById("inp-profile-img").addEventListener("change", readFile);
-        
+
+// Utility functions for demo purpose
+
+  
 </script>
+<script type="text/javascript" src="./js/axios.js"></script>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./Iframe/js/accessingAccurateAPIsGroup1.js"></script>
 </html>

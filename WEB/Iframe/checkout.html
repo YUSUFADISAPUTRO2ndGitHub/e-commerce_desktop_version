@@ -163,10 +163,10 @@
             <div class="form-group" id="new-address-section">
                 <br>
                 <div class="alert alert-primary" role="alert">
-                    Street (Alamat lengkap pengiriman)
+                    Alamat
                 </div>
                 <!-- <label>Street (Alamat lengkap pengiriman)</label> -->
-                <textarea id="street" class="form-control" placeholder="Alamat lengkap pengiriman Anda" rows="3" onchange="checkingSpecialCharacter(this)" required></textarea>
+                <textarea id="street" class="form-control" placeholder="Nama Jalan" rows="3" maxlength="15" onchange="checkingSpecialCharacter(this)" required></textarea>
             </div>
 
             <div class="form-group" id="delivery-option">
@@ -215,7 +215,7 @@
                       
                     </select>
 
-                    <input type="number" class="form-control sp_kodepos_hover cart-total-pengiriman" placeholder="ESTIMASI HARGA PENGIRIMAN" id="option-kodepos-gb" onchange="kodeposCheckout(this)"  disabled>  
+                    <!-- <input type="number" class="form-control sp_kodepos_hover cart-total-pengiriman" placeholder="ESTIMASI HARGA PENGIRIMAN" id="option-kodepos-gb" onchange="kodeposCheckout(this)"  disabled>   -->
                 </div>
             </div>
             
