@@ -336,6 +336,12 @@ function addressOptionSelected(x){
     }else{
         $("#address-selection-sub-saved-address").css("display", "block");
         $("#new-address-section").css("display", "none");
+        $("#new-address-section").css("display", "none");
+        $('#sub-cart-option').css('display','none')
+        $('#sub-kota-option').css('display','none')
+        $('#sub-kecamatan-option').css('display','none')
+        $('#sub-kelurahan-option').css('display','none')
+        // $('#sub-kodepos-option').css('display','none')
     }
 }
 

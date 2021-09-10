@@ -985,13 +985,13 @@ const render_group_buy=(product_id)=>{
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <!-- <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option3" > -->
-                                            <div class="address-card-1 radio_address_card" data-value="Alamat Lain" id="id-address-gb-baru" onclick="addressMethod('id-address-gb-baru','Alamat Baru')">
+                                            <div class="address-card-1 radio_address_card  selected active_address_method" data-value="Alamat Lain" id="id-address-gb-baru" onclick="addressMethod('id-address-gb-baru','Alamat Baru')">
                                                 <img src="../img/alamat_lain.png" alt="" class="bca_img">
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="new-login-name new-alamat-pengiriman" style="display:none">
+                                <div class="new-login-name new-alamat-pengiriman">
                                     <div class="box-name" >
                                         <p>Input New Address</p>
                                     </div>
@@ -1144,15 +1144,11 @@ const render_group_buy=(product_id)=>{
             </div>
             `)
 
-
             //  RENDER KURIR DLL
                 get_all_couriers().done(function(response){
                     
                     kurir = response[0]
-                    
-                    // if(kurir.Courier != 'tiki'){
-                    //     kurir.Courier = 'tiki'
-                    // }
+
                     allKurir = response
                     get_all_province_from_courier(kurir.Courier,kurir.Courier_Code).done(function(response){
                         province = response[0]
@@ -1174,8 +1170,6 @@ const render_group_buy=(product_id)=>{
                                     allKecamatan = response
                                     allSub_District = response
                                     
-                                    
-
                                     var Courier_Price_Code_orig = 'CGK01.00'
                                     var packing_type = ''
                                     var berat_product = parseInt(item_product.Weight_KG)
@@ -2920,11 +2914,6 @@ const kelurahanMethodHome=(product_id)=>{
  
 }
 const kecamatanMethodHome=(product_id)=>{
-    
-
-    
-
-
 
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
     var province_pilihan=$('.province-home-gb option:selected').val()
@@ -2993,15 +2982,8 @@ const kecamatanMethodHome=(product_id)=>{
     }
 
     if(isKurir_pilihan && isKota_pilihan && isProvince_pilihan && isKelurahan_pilihan  && isQty_pilihan) {
-        
-        
-        
-        
-        
-        
-        $('.alert-danger').css('display','none')
-   
 
+        $('.alert-danger').css('display','none')
         get_product_detail_func(product_id).done(function(response){
             var item_product = response
             get_all_couriers().done(function(response){
@@ -6024,7 +6006,7 @@ function addressMethod(address,item){
     $(`#${address}`).addClass('active_address_method')
 
     if(item === 'Alamat Terdaftar'){
-        
+        $('.new-alamat-pengiriman').css('display','none')
         $('.option-alamat-gb').css('display','flex')
         $('.new-alamat-pengiriman').css('display','none')
         // $('.province-box-gb').css('display','none')
@@ -6167,6 +6149,7 @@ function addressMethod(address,item){
         $('.new-card-kurir-sp').css('display','flex')
         $('.new-box-card-kurir-sp').css('height','600px')
         $('.new-box-card-kurir-sp').css('min-height','600px')
+        $('.new-alamat-pengiriman').css('display','flex')
         // $('.new-box-card-kurir-sp-top').css('display','flex')
         // $('.province-box-gb').css('display','flex')
         // $('.kota-box-gb').css('display','flex')
@@ -7965,263 +7948,376 @@ function check_qty(val){
         var testing_alamat = 'Jalanin Dulu aja  DKI Jakarta  Kota Jakarta Barat  Kebon Jeruk  Kelapa Dua'
         var split_alamat = testing_alamat.split('  ')
         var nama_jalan = split_alamat[0]
-        var nama_province = split_alamat[1]
-        var nama_kota = split_alamat[2]
-        var nama_kecamatan = split_alamat[3]
-        var nama_kelurahan = split_alamat[4]
-        var nama_kurir = 'tiki'
-        var kurir_kode = 'tiki'
+            province_pilihan = split_alamat[1]
+            kota_pilihan = split_alamat[2]
+            kecamatan_pilihan = split_alamat[3]
+            kelurahan_pilihan = split_alamat[4]
+            kurir_pilihan = 'tiki'
+            kurir_kode = 'tiki'
         var allKelurahan = []
-        var product_id = $('.qty_groupbuy_home').attr('id')
-                
-                var total_qty_from_api;
-                var harga_satuan;
-        
-                get_product_detail_func(product_id).done(function(response){
-                    var item_product = response
-                    get_all_couriers().done(function(response){
-                        var dataAllKurir = response
-                        var kurir_kode =''
-                        for(var i=0; i<dataAllKurir.length; i++){
-                            if(dataAllKurir[i].Courier == new_kurir_pilihan){
-                                kurir_kode = dataAllKurir[i].Courier_Code
-                            }
+        isKurir_pilihan = true
+        isProvince_pilihan = true
+        isKota_pilihan = true
+        isKecamatan_pilihan = true
+        isKelurahan_pilihan = true
+        if(total_qty_from_user == undefined || total_qty_from_user == 'undefined' || total_qty_from_user == null || total_qty_from_user.length == 0){
+            isQty_pilihan = false
+        }else {
+            isQty_pilihan = true
+        }
+        if(pengiriman_pilihan == undefined || pengiriman_pilihan == 'undefined' || pengiriman_pilihan == null || pengiriman_pilihan.length == 0){
+            isPengiriman_pilihan = false
+        }else {
+            isPengiriman_pilihan = true
+        }
+        if(isKurir_pilihan && isKota_pilihan  && isPengiriman_pilihan&& isProvince_pilihan && isKelurahan_pilihan && isKecamatan_pilihan && isQty_pilihan) {
+            var product_id = $('.qty_groupbuy_home').attr('id')
+            
+            var total_qty_from_api;
+            var harga_satuan;
+    
+            get_product_detail_func(product_id).done(function(response){
+                var item_product = response
+                get_all_couriers().done(function(response){
+                    var dataAllKurir = response
+                    var kurir_kode =''
+                    for(var i=0; i<dataAllKurir.length; i++){
+                        if(dataAllKurir[i].Courier == new_kurir_pilihan){
+                            kurir_kode = dataAllKurir[i].Courier_Code
                         }
+                    }
+                    
+                    get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kelurahan_pilihan).done(function(response){
                         
-                        get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,nama_kelurahan).done(function(response){
-                            console.log(item_product)
-                            var allKelurahan = response
-                          
-                            var Courier_Price_Code_orig = 'CGK01.00'
-                            var packing_type = ''
-                            var berat_product = parseInt(item_product.Weight_KG)
-                            var item_dimension = item_product.Dimension_CM_CUBIC
-                            var split_item_dimension = item_dimension.split('*')
-                            console.log(split_item_dimension)
-                            var item_length = split_item_dimension[0]
-                            var item_width = split_item_dimension[1]
-                            var item_height = split_item_dimension[2]
-                            var paket_value = ''
-                            var allPengiriman = []
-                            if(item_length != undefined && item_length != null && item_length != "undefined"){
-                                
-                            }else {
-                                item_length = 1
-                            }
-                            if(item_width != undefined && item_width != null && item_width != "undefined"){
-                                
-                            }else {
-                                item_width = 1
-                            }
-                            if(item_height != undefined && item_height != null && item_height != "undefined"){
-                                
-                            }else {
-                                item_height = 1
-                            }
-                            if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
-                                berat_product = 0.1*1.5;
-                            }else{
-                                berat_product = berat_product*1*1.5;
-                            }
-                            var total_berat_product = Math.ceil(berat_product * total_qty_from_user)
+                        var allKelurahan = response
+                      
+                        var Courier_Price_Code_orig = 'CGK01.00'
+                        var packing_type = ''
+                        var berat_product = parseInt(item_product.Weight_KG)
+                        var item_dimension = item_product.Dimension_CM_CUBIC
+                        var split_item_dimension = item_dimension.split('*')
+                        console.log(split_item_dimension)
+                        var item_length = split_item_dimension[0]
+                        var item_width = split_item_dimension[1]
+                        var item_height = split_item_dimension[2]
+                        var paket_value = ''
+                        var allPengiriman = []
+                        if(item_length != undefined && item_length != null && item_length != "undefined"){
                             
-                            var paket_value = '' 
-                            new_get_shipping_fee(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
-                                var data_shipping_fee = response
-                                var asuransi_pilihan = $('.asuransi-home-gb option:selected').val()
-                                var packing_pilihan = $('.packing-home-gb option:selected').val()
-                                var harga_shipping = parseInt($('.pengiriman-home-gb option:selected').attr('class'))
-                                var harga_asuransi = parseInt($('.asuransi-home-gb option:selected').attr('class'))
-                                var harga_packing = parseInt($('.packing-home-gb option:selected').attr('class'))
-
-                                var isAsuransi_pilihan = false
-                                var isPacking_pilihan = false
-                                var isPengiriman_pilihan = false
+                        }else {
+                            item_length = 1
+                        }
+                        if(item_width != undefined && item_width != null && item_width != "undefined"){
+                            
+                        }else {
+                            item_width = 1
+                        }
+                        if(item_height != undefined && item_height != null && item_height != "undefined"){
+                            
+                        }else {
+                            item_height = 1
+                        }
+                        if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                            berat_product = 0.1*1.5;
+                        }else{
+                            berat_product = berat_product*1*1.5;
+                        }
+                        var total_berat_product = Math.ceil(berat_product * total_qty_from_user)
+                        var paket_value = '' 
+                        new_get_shipping_fee(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
+                            var data_shipping_fee = response
+                            var asuransi_pilihan = $('.asuransi-home-gb option:selected').val()
+                            var packing_pilihan = $('.packing-home-gb option:selected').val()
+                            var harga_shipping = parseInt($('.pengiriman-home-gb option:selected').attr('class'))
+                            var harga_asuransi = parseInt($('.asuransi-home-gb option:selected').attr('class'))
+                            var harga_packing = parseInt($('.packing-home-gb option:selected').attr('class'))
+                            
+                            
+                            
+                            
+                            var isAsuransi_pilihan = false
+                            var isPacking_pilihan = false
+                            var isPengiriman_pilihan = false
+                            
+    
+                            if(asuransi_pilihan == 'Asuransi' || asuransi_pilihan == null || asuransi_pilihan == undefined){
+                                isAsuransi_pilihan = false
+                            }else {
+                                isAsuransi_pilihan = true
+                            }
+                            if(packing_pilihan == 'Packing' || packing_pilihan == null || packing_pilihan == undefined){
+                                isPacking_pilihan = false
+                            }else {
+                                isPacking_pilihan = true
+                            }
+                            if(pengiriman_pilihan == 'Pengiriman' || pengiriman_pilihan == null || pengiriman_pilihan == undefined){
+                                isPengiriman_pilihan = false
+                            }else {
+                                isPengiriman_pilihan = true
+                            }
+    
+                            if(isAsuransi_pilihan && isPacking_pilihan && isPengirimanPilihan){
+                                console.log('masuk ke if 8077')
+                                $('.ndps-left').empty()
+                                $('.ndps-right').empty()
+    
+                                $('#total_biaya_pengiriman_gb').val('100.000')
+                                $('.ndps-left').append(`
+                                <div class="detail-ndps-left">
+                                    <p class="limited-text-short"> testing <br>
+                                       testing
+                                    </p>
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Shipping Fee
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Total Amount
+                                </div>
+                             `)
+                            $('.ndps-right').append(`
+                                <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
+                                    Rp ${harga_total_product}
+                                </div>
+                                <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
+                                    Rp ${harga_shipping}
+                                </div>
+                                <div class="detail-ndps-right harga_total_prod_with_shipping_qty"id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
+                                    Rp ${harga_total_product_with_shipping}
+                                </div>
+                            `)
+                            }else if (isPengiriman_pilihan && isAsuransi_pilihan) {
+                                console.log('masuk ke else if 8107')
                                 
-        
-                                if(asuransi_pilihan == 'Asuransi' || asuransi_pilihan == null || asuransi_pilihan == undefined){
-                                    isAsuransi_pilihan = false
-                                }else {
-                                    isAsuransi_pilihan = true
-                                }
-                                if(packing_pilihan == 'Packing' || packing_pilihan == null || packing_pilihan == undefined){
-                                    isPacking_pilihan = false
-                                }else {
-                                    isPacking_pilihan = true
-                                }
-                                if(pengiriman_pilihan == 'Pengiriman' || pengiriman_pilihan == null || pengiriman_pilihan == undefined){
-                                    isPengiriman_pilihan = false
-                                }else {
-                                    isPengiriman_pilihan = true
-                                }
-        
-                                if(isAsuransi_pilihan && isPacking_pilihan && isPengirimanPilihan){
-        
-                                    $('.ndps-left').empty()
-                                    $('.ndps-right').empty()
-        
-                                    $('#total_biaya_pengiriman_gb').val('100.000')
-                                    $('.ndps-left').append(`
-                                    <div class="detail-ndps-left">
-                                        <p class="limited-text-short"> testing <br>
-                                           testing
-                                        </p>
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Shipping Fee
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Total Amount
-                                    </div>
-                                 `)
-                                $('.ndps-right').append(`
-                                    <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
-                                        Rp ${harga_total_product}
-                                    </div>
-                                    <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
-                                        Rp ${harga_shipping}
-                                    </div>
-                                    <div class="detail-ndps-right harga_total_prod_with_shipping_qty"id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
-                                        Rp ${harga_total_product_with_shipping}
-                                    </div>
-                                `)
-                                }else if (isPengiriman_pilihan && isAsuransi_pilihan) {
-                                    
-                                    
-                                    var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
-                                    var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_asuransi
-        
-                                     
-                                    $('.ndps-left').empty()
-                                    $('.ndps-right').empty()
-        
-                                    $('#total_biaya_pengiriman_gb').val(harga_shipping)
-                                    $('.ndps-left').append(`
-                                    <div class="detail-ndps-left">
-                                        <p class="limited-text-short"> ${item_product.Name} <br>
-                                                ${total_qty_from_user} x Rp ${item_product.GroupBuy_SellPrice}
-                                        </p>
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Shipping Fee
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Insurance
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Total Amount
-                                    </div>
-                                 `)
-                                $('.ndps-right').append(`
-                                    <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
-                                        Rp ${harga_total_product}
-                                    </div>
-                                    <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
-                                        Rp ${harga_shipping}
-                                    </div>
-                                    <div class="detail-ndps-right">
-                                        Rp ${harga_asuransi}
-                                    </div>
-                                    <div class="detail-ndps-right harga_total_prod_with_shipping_qty"id="${harga_total_product_with_shipping}"  value="${harga_total_product_with_shipping}">
-                                        Rp ${harga_total_product_with_shipping}
-                                    </div>
-                                   
-                                `)
-                                }else if (isPengiriman_pilihan && isPacking_pilihan){
-                                    
-                                    
-                                    var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
-                                    var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_packing
-        
-                                     
-                                    $('.ndps-left').empty()
-                                    $('.ndps-right').empty()
-        
-                                    $('#total_biaya_pengiriman_gb').val(harga_shipping)
-                                    $('.ndps-left').append(`
-                                    <div class="detail-ndps-left">
-                                        <p class="limited-text-short"> ${item_product.Name} <br>
-                                                ${total_qty_from_user} x Rp ${item_product.GroupBuy_SellPrice}
-                                        </p>
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Shipping Fee
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Packing
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Total Amount
-                                    </div>
-                                 `)
-                                $('.ndps-right').append(`
-                                    <div class="detail-ndps-right harga_total_product_qty harga_total_product"  id="${harga_total_product}"value="${harga_total_product}">
-                                        Rp ${harga_total_product}
-                                    </div>
-                                    <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
-                                        Rp ${harga_shipping}
-                                    </div>
-                                    <div class="detail-ndps-right">
-                                        Rp ${harga_packing}
-                                    </div>
-                                    <div class="detail-ndps-right harga_total_prod_with_shipping_qty" id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
-                                        Rp ${harga_total_product_with_shipping}
-                                    </div>
-                                  
-                                `)
-                                }else if(isPengiriman_pilihan){
-        
-                                    
-                                    
-                                    var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
-                                    var harga_total_product_with_shipping = harga_total_product + harga_shipping
-        
-                                     
-                                    $('.ndps-left').empty()
-                                    $('.ndps-right').empty()
-        
-                                    $('#total_biaya_pengiriman_gb').val(harga_shipping)
-                                    $('.ndps-left').append(`
-                                    <div class="detail-ndps-left">
-                                        <p class="limited-text-short"> ${item_product.Name} <br>
-                                                ${total_qty_from_user} x Rp ${item_product.GroupBuy_SellPrice}
-                                        </p>
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Shipping Fee
-                                    </div>
-                                    <div class="detail-ndps-left">
-                                        Total Amount
-                                    </div>
-                                 `)
-                                $('.ndps-right').append(`
-                                    <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
-                                        Rp ${harga_total_product}
-                                    </div>
-                                    <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
-                                        Rp ${harga_shipping}
-                                    </div>
-                                    <div class="detail-ndps-right harga_total_prod_with_shipping_qty" id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
-                                        Rp ${harga_total_product_with_shipping}
-                                    </div>
-                                `)
-                                }else {
-                                    
-        
-                                }
-        
-        
-                            })
+                                var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
+                                var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_asuransi
+    
+                                 
+                                $('.ndps-left').empty()
+                                $('.ndps-right').empty()
+    
+                                $('#total_biaya_pengiriman_gb').val(harga_shipping)
+                                $('.ndps-left').append(`
+                                <div class="detail-ndps-left">
+                                    <p class="limited-text-short"> ${item_product.Name} <br>
+                                            ${total_qty_from_user} x Rp ${item_product.GroupBuy_SellPrice}
+                                    </p>
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Shipping Fee
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Insurance
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Total Amount
+                                </div>
+                             `)
+                            $('.ndps-right').append(`
+                                <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
+                                    Rp ${harga_total_product}
+                                </div>
+                                <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
+                                    Rp ${harga_shipping}
+                                </div>
+                                <div class="detail-ndps-right">
+                                    Rp ${harga_asuransi}
+                                </div>
+                                <div class="detail-ndps-right harga_total_prod_with_shipping_qty"id="${harga_total_product_with_shipping}"  value="${harga_total_product_with_shipping}">
+                                    Rp ${harga_total_product_with_shipping}
+                                </div>
+                               
+                            `)
+                            }else if (isPengiriman_pilihan && isPacking_pilihan){
+                                console.log('masuk ke else if 8149')
+                                
+                                var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
+                                var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_packing
+    
+                                 
+                                $('.ndps-left').empty()
+                                $('.ndps-right').empty()
+    
+                                $('#total_biaya_pengiriman_gb').val(harga_shipping)
+                                $('.ndps-left').append(`
+                                <div class="detail-ndps-left">
+                                    <p class="limited-text-short"> ${item_product.Name} <br>
+                                            ${total_qty_from_user} x Rp ${item_product.GroupBuy_SellPrice}
+                                    </p>
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Shipping Fee
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Packing
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Total Amount
+                                </div>
+                             `)
+                            $('.ndps-right').append(`
+                                <div class="detail-ndps-right harga_total_product_qty harga_total_product"  id="${harga_total_product}"value="${harga_total_product}">
+                                    Rp ${harga_total_product}
+                                </div>
+                                <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
+                                    Rp ${harga_shipping}
+                                </div>
+                                <div class="detail-ndps-right">
+                                    Rp ${harga_packing}
+                                </div>
+                                <div class="detail-ndps-right harga_total_prod_with_shipping_qty" id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
+                                    Rp ${harga_total_product_with_shipping}
+                                </div>
+                              
+                            `)
+                            }else if(isPengiriman_pilihan){
+                                console.log('masuk ke 8191  ')
+                                
+                                
+                                var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
+                                var harga_total_product_with_shipping = harga_total_product + harga_shipping
+    
+                                 
+                                $('.ndps-left').empty()
+                                $('.ndps-right').empty()
+    
+                                $('#total_biaya_pengiriman_gb').val(harga_shipping)
+                                $('.ndps-left').append(`
+                                <div class="detail-ndps-left">
+                                    <p class="limited-text-short"> ${item_product.Name} <br>
+                                            ${total_qty_from_user} x Rp ${item_product.GroupBuy_SellPrice}
+                                    </p>
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Shipping Fee
+                                </div>
+                                <div class="detail-ndps-left">
+                                    Total Amount
+                                </div>
+                             `)
+                            $('.ndps-right').append(`
+                                <div class="detail-ndps-right harga_total_product_qty" id="${harga_total_product}" value="${harga_total_product}">
+                                    Rp ${harga_total_product}
+                                </div>
+                                <div class="detail-ndps-right harga_shipping_qty" id="${harga_shipping}" value="${harga_shipping}">
+                                    Rp ${harga_shipping}
+                                </div>
+                                <div class="detail-ndps-right harga_total_prod_with_shipping_qty" id="${harga_total_product_with_shipping}" id="harga_total_prod_with_shipping_qty" value="${harga_total_product_with_shipping}">
+                                    Rp ${harga_total_product_with_shipping}
+                                </div>
+                            `)
+                            }else {
+                                
+    
+                            }
+    
+    
                         })
-        
                     })
-        
+    
                 })
+    
+            })
+        }else{
+            var total_qty_from_user = val
+            
+            var product_id = $('.qty_groupbuy_home').attr('id')
+            
+            var total_qty_from_api;
+            var harga_satuan;
+            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            .then((res)=>{
+                
+                total_qty_from_api = parseInt(res.data.GroupBuy_SellQuantity)
+                harga_satuan = res.data.GroupBuy_SellPrice
+                var total_harga = harga_satuan * total_qty_from_user
+                if(total_qty_from_api > total_qty_from_user) {
+                    // $('#tp_sp').val(total_harga)
+                    // $('#tp_iframe').val(total_harga)
+                    $('.ndps-left').empty()
+                    $('.ndps-right').empty()
+                    
+                    get_product_detail_func(product_id).done(function(response){
+                        $('.ndps-left').append(`
+                        <div class="detail-ndps-left">
+                            <p class="limited-text-short"> ${response.Name} <br>
+                                ${total_qty_from_user} x Rp ${response.GroupBuy_SellPrice}
+                            </p>
+                        </div>
+                        <div class="detail-ndps-left">
+                            Shipping Fee
+                        </div>
+                        <div class="detail-ndps-left">
+                            Total Amount
+                        </div>
+                        `)
+                        $('.ndps-right').append(`
+                            <div class="detail-ndps-right">
+                            Rp ${total_harga}
+                            </div>
+                            <div class="detail-ndps-right">
+                                
+                            </div>
+                            <div class="detail-ndps-right"id="tp_iframe">
+                                
+                            </div>
+                        `)
+                    })
+              }else {
+                  $('.ndps-left').empty()
+                  $('.ndps-right').empty()
+                
+              
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Quantity Yang Tersisa Hanya : ${total_qty_from_api}!`,
+                    timer:2000,
+                    
+                })
+                    var total_price = harga_satuan * total_qty_from_api
+                    $('.qty_groupbuy_home').val(total_price)
+                    // alert(total_qty_from_api)
+                    // $('#tp_sp').val(total_harga)
+                    // $('#tp_iframe').val(total_price)
+                    get_product_detail_func(product_id).done(function(response){
+                        $('.ndps-left').append(`
+                        <div class="detail-ndps-left">
+                            <p class="limited-text-short"> ${response.Name} <br>
+                               Rp ${total_qty_from_api} x Rp ${response.GroupBuy_SellPrice}
+                            </p>
+                           
+                            </div>
+                            <div class="detail-ndps-left">
+                                Shipping Fee
+                            </div>
+                            <div class="detail-ndps-left">
+                                Total Amount
+                            </div>
+                        `)
+                        $('.ndps-right').append(`
+                            <div class="detail-ndps-right">
+                                ${total_price}
+                            </div>
+                            <div class="detail-ndps-right">
+                                
+                            </div>
+                            <div class="detail-ndps-right"id="tp_iframe">
+                                
+                            </div>
+                        `)
+                    })
+              }
+        
+            }).catch((err)=>{
+                
+            })
+    
+         }
         
     }else {
-           
-        
-        
             if(kecamatan_pilihan == undefined || kecamatan_pilihan == null || kecamatan_pilihan == 'NULL' || kecamatan_pilihan == 'undefined'){
                 
                  kecamatan_pilihan = ''
@@ -8289,7 +8385,7 @@ function check_qty(val){
                             var Courier_Price_Code_orig = 'CGK01.00'
                             var packing_type = ''
                             var berat_product = parseInt(item_product.Weight_KG)
-                            var item_dimension = response.Dimension_CM_CUBIC
+                            var item_dimension = item_product.Dimension_CM_CUBIC
                             var split_item_dimension = item_dimension.split('*')
                             console.log(split_item_dimension)
                             var item_length = split_item_dimension[0]
