@@ -2,6 +2,36 @@
 
 
 $(function(){
+    setTimeout(()=>{
+        $('.insta-box').css('transform','translateX(100%)')
+        $('.fa-arrow-circle-left').css('visibility','visible')
+
+    },10000)
+
+    $('#unhide-insta').on('click',function(){
+        $('.insta-box').css('transform','translateX(1%)')
+        $('#hide-insta').css('display','block')
+        $('#unhide-insta').css('display','none')
+        $('.fa-arrow-circle-left').css('transition','0.5s')
+        $('.fa-arrow-circle-right').css('transition','0.5s')
+        $('.fa-arrow-circle-left').css('visibility','hidden')
+        $('.fa-arrow-circle-right').css('visibility','visible')
+        $('.fa-arrow-circle-right').css('transform','translateX(-310px)')
+        $('.fa-arrow-circle-left').css('transform','translateX(-310px)')
+    })
+    $('#hide-insta').on('click',function(){
+        $('.insta-box').css('transform','translateX(100%)')
+        $('#unhide-insta').css('display','block')
+        $('#hide-insta').css('display','none')
+        $('.fa-arrow-circle-left').css('transition','0.5s')
+        $('.fa-arrow-circle-right').css('transition','0.5s')
+        $('.fa-arrow-circle-left').css('visibility','visible')
+        $('.fa-arrow-circle-left').css('transform','translateX(0px)')
+        $('.fa-arrow-circle-right').css('transform','translateX(0px)')
+        $('.fa-arrow-circle-right').css('visibility','none')
+    })
+
+
     setInterval(() => {
         var productModal = $('#productModal').css('display') == 'none' 
         if(productModal == true){

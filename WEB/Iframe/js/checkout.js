@@ -1102,7 +1102,7 @@ function renderCartCheckout(product){
     // var alamat = $('#address-selection option:selected').val()
     // var alamat_pilihan = $('#sub-saved-address option:selected').val()
     // console.log(alamat_pilihan)
-    // // var testingAlamat = 'Jalan Jalan,DKI JAKARTA,JAKARTA BARAT,Kebon Jeruk,Kelapa Dua,'
+    // var testingAlamat = 'Jalan Jalan,DKI JAKARTA,JAKARTA BARAT,Kebon Jeruk,Kelapa Dua,'
     // var split_testing2 = alamat_pilihan.split(',')
     // console.log(split_testing2)
     // var kota =split_testing2[2]
@@ -1119,7 +1119,8 @@ function renderCartCheckout(product){
     .then((res)=>{
         console.log(res.data)
         var alamat_pilihan = res.data.Address_1
-        var split_testing2 = alamat_pilihan.split(',')
+        var testingAlamat = 'Jalan Jalan,DKI JAKARTA,JAKARTA BARAT,Kebon Jeruk,Kelapa Dua,'
+        var split_testing2 = testingAlamat.split(',')
         console.log(alamat_pilihan)
         console.log(split_testing2)
         var kota =split_testing2[2]

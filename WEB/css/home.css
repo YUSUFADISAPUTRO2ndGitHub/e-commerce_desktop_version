@@ -6742,3 +6742,72 @@ loading new
 .card-item:hover {
     cursor: pointer;
 }
+
+.insta-box{
+position:fixed;
+right:0;
+top:0;
+z-index:100;
+transition:2s;
+border-radius:20px;
+
+}
+
+
+#drag-insta {
+    position: absolute;
+    z-index: 101;
+    background-color: #217384;
+    color: white;
+    text-align: center;
+    padding: 1%
+  }
+  
+  #drag-instaheader {
+    
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;
+  }
+
+.new-insta-box {
+    position:fixed;
+    right:0;
+    top:60%;
+    z-index:102;
+    transition:2s;
+    border-radius:20px;
+
+}
+
+.fa-arrow-circle-right{
+    visibility: hidden;
+    position:fixed;
+    right:0%;
+    font-size:30px;
+    color:#217384;
+    transition:0.5s;
+    
+    /* z-index:102; */
+}
+.fa-arrow-circle-right:hover{
+  cursor: pointer;
+  color:red;
+}
+
+.fa-arrow-circle-left{
+    visibility: hidden;
+    
+    position:fixed;
+    right:0%;
+    font-size:30px;
+    color:#217384;
+    transition:0.5s;
+    /* z-index:102; */
+}
+.fa-arrow-circle-left:hover{
+  cursor: pointer;
+  color:red;
+}
