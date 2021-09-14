@@ -332,6 +332,7 @@ function addressOptionSelected(x){
         $('#sub-kecamatan-option').css('display','block')
         $('#sub-kelurahan-option').css('display','block')
         $('#sub-kodepos-option').css('display','block')
+        $('#sub-delivery-option').css('display','block')
         
     }else{
         $("#address-selection-sub-saved-address").css("display", "block");
@@ -1094,44 +1095,191 @@ function personalDetailsWithNewAddress(address){
     });
 }
 
+const find_subDistrict_from_address=async(district)=>{
+    return new Promise(async(resolve,reject)=>{
+        var subDistrict_from_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
+        var kelurahan_pilihan = ''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+
+        await get_all_couriers().done( async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then(async(res)=>{
+                alamat_pilihan = res.data.Address_1
+                if(subDistrict_from_storage != undefined && subDistrict_from_storage.length != 0 ){
+
+                }else {
+                    await get_all_subdistrict_from_courier(kurir_pilihan,kurir_kode,district).done( function(response){
+                        response.forEach((val,index)=>{
+                            console.log(val)
+                            if(alamat_pilihan.toUpperCase().includes(val.Sub_District.toUpperCase())){
+                                kelurahan_pilihan = val.Sub_District
+                                console.log(kelurahan_pilihan, index)
+                                resolve(kelurahan_pilihan)
+                            }
+                        })
+                        console.log(response)
+                    })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    })
+}
+
+const find_district_from_address=async(city)=>{
+    return new Promise(async(resolve,reject)=>{
+        var district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+        var kecamatan_pilihan = ''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+        await get_all_couriers().done( async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then(async(res)=>{
+                alamat_pilihan = res.data.Address_1
+                await get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
+                    response.forEach((val,index)=>{
+                        if(alamat_pilihan.toUpperCase().includes(val.District.toUpperCase())){
+                            kecamatan_pilihan = val.District
+                            console.log(kecamatan_pilihan)
+                            resolve(kecamatan_pilihan)
+                        }
+                    })
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+        
+   
+    })
+}
+
+const find_city_from_address= async (province)=>{
+    return new Promise(async(resolve,reject)=>{
+        var city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+        var kota_pilihan = ''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+        await get_all_couriers().done( async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then( async (res)=>{
+                alamat_pilihan  = res.data.Address_1
+                if(city_from_storage != undefined && city_from_storage.length != 0){
+                    city_from_storage.forEach((val,index)=>{
+                        if(val.Province == province){
+                            val.City.forEach((city,id)=>{
+                                if(alamat_pilihan.toUpperCase().includes(city.City.toUpperCase())){
+                                    kota_pilihan = city.City
+                                    resolve(kota_pilihan)
+                                }
+                            })
+                        }
+                    })
+                }else {
+                    await get_all_city_from_courier(kurir_pilihan,kurir_kode,province).done(function(response){
+                            response.forEach((val,index)=>{
+                                if(alamat_pilihan.toUpperCase().includes(val.City.toUpperCase())){
+                                    kota_pilihan = val.City
+                                    resolve(kota_pilihan)
+                                }
+                            })
+                    })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    })
+}
 
 
-function renderCartCheckout(product){
-    console.log(product)
+const find_province_from_address= async ()=>{
+    return new Promise(async (resolve, reject) => {
+        var province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+        var province_pilihan =''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+        await get_all_couriers().done(async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then(async (res)=>{
+                alamat_pilihan = res.data.Address_1
+                if(province_from_storage != undefined &&  province_from_storage.length != 0){
+                    province_from_storage.forEach((val,index)=>{
+                        if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
+                            province_pilihan = val.Province
+                            resolve(province_pilihan) 
+                        }
+                    })
+                }else {
+                    await get_all_province_from_courier(kurir_pilihan,kurir_kode).done(async function(response){
+                        response.forEach((val,index)=>{
+                            if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
+                                province_pilihan = val.Province
+                                resolve(province_pilihan) 
+                            }
+                        })
+                    })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    })
 
-    // var alamat = $('#address-selection option:selected').val()
-    // var alamat_pilihan = $('#sub-saved-address option:selected').val()
-    // console.log(alamat_pilihan)
-    // var testingAlamat = 'Jalan Jalan,DKI JAKARTA,JAKARTA BARAT,Kebon Jeruk,Kelapa Dua,'
-    // var split_testing2 = alamat_pilihan.split(',')
-    // console.log(split_testing2)
-    // var kota =split_testing2[2]
-    // var province = split_testing2[1]
-    // var kecamatan = split_testing2[3]
-    // var kelurahan = split_testing2[4]
+}
+
+
+
+
+ async function renderCartCheckout(product){
+    // console.log(product)
+    var token = localStorage.getItem('token')
+    var province_pilihan =  await find_province_from_address()
+    var kota_pilihan = await find_city_from_address(province_pilihan)
+    var kecamatan_pilihan = await find_district_from_address(kota_pilihan)
+    var kelurahan_pilihan = await find_subDistrict_from_address(kecamatan_pilihan)
+    console.log(province_pilihan, ' ini province pilihan')
+    console.log(kota_pilihan , ' ini kota pilihan')
+    console.log(kecamatan_pilihan, ' ini kecamatan pilihan')
+    console.log(kelurahan_pilihan,' ini kelurahan pilihan')
     var allKota = []
     var allProduct = []
     var berat_product = 0
     var allKelurahan = []
     var allPengiriman = []
-    var token = localStorage.getItem('token')
-    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+     axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(res.data)
+        // console.log(province_pilihan, '1167')
         var alamat_pilihan = res.data.Address_1
         var testingAlamat = 'Jalan Jalan,DKI JAKARTA,JAKARTA BARAT,Kebon Jeruk,Kelapa Dua,'
         var split_testing2 = testingAlamat.split(',')
-        console.log(alamat_pilihan)
-        console.log(split_testing2)
+
         var kota =split_testing2[2]
         var province = split_testing2[1]
         var kecamatan = split_testing2[3]
         var kelurahan = split_testing2[4]
-        console.log(kecamatan,'ini kecamatan')
-        get_all_city_from_courier('tiki','tiki',province).done(function(response){
+        get_all_city_from_courier('tiki','tiki',province_pilihan).done(function(response){
             allKota = response
-            get_all_district_from_courier('tiki','tiki',kota).done(function(response){
-                get_all_subdistrict_from_courier('tiki','tiki',kecamatan).done(function(response){
+            get_all_district_from_courier('tiki','tiki',kota_pilihan).done(function(response){
+                get_all_subdistrict_from_courier('tiki','tiki',kecamatan_pilihan).done(function(response){
                     allKelurahan =response
                     console.log(response)
                     product.map((val,index)=>{
