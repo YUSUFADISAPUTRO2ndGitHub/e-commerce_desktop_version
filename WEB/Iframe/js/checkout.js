@@ -1293,7 +1293,7 @@ const find_province_from_address= async ()=>{
 
             if(province_pilihan != undefined && kota_pilihan != undefined &&
                 kecamatan_pilihan != undefined && kelurahan_pilihan !=undefined){
-                    console.log('masuk ke if 1296')
+                    console.log('masuk ke if alamat dari localStorage')
             }else {
                 console.log('masuk ke if 1298')
                     province_pilihan =  await find_province_from_address()
@@ -1913,7 +1913,7 @@ function saveExpressOrderId(orderid){
 
 
 
-const render_select_option_kurir=()=>{
+const render_select_option_kurir=async()=>{
 
     var alamat = $('#address-selection option:selected').val()
     var alamat_pilihan = $('#sub-saved-address option:selected').val()
@@ -1924,6 +1924,37 @@ const render_select_option_kurir=()=>{
     if(alamat == 'TO SAVED ADDRESS'){
         // var split_alamat = alamat_pilihan.split(' ')
         // console.log(split_alamat)
+        var province = localStorage.getItem('province_customer')
+        var city = localStorage.getItem('city_customer')
+        var district = localStorage.getItem('district_customer')
+        var sub_district = localStorage.getItem('sub_district_customer')
+
+        if(province != undefined && city != undefined 
+            && district != undefined && sub_district != undefined){
+                console.log('masuk ke if 1934')
+            }else {
+                province = await find_province_from_address()
+                city = await find_city_from_address(province)
+                district = await find_district_from_address(city)
+                sub_district = await find_subDistrict_from_address(district)
+            }
+            var kurir_pilihan = ''
+            var kurir_kode = ''
+            get_all_couriers().done(function(response){
+                kurir_pilihan = response.Courier
+                kurir_kode = response.Courier_Code
+                var item_product = ''
+                var cart_local = localStorage.getItem('itemsToCheckout')
+                var parse_cart = JSON.parse(cart_local)
+                var array_cart =[]
+                for(var i =0; i<parse_cart.length; i++){
+                    getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
+                    array_cart.push(response)
+                    })
+                }
+                
+            })
+
     }else {
             console.log('render select option kurir active')
             var alamat = $('#address-selection option:selected').val()
@@ -2094,33 +2125,17 @@ const re_render_select_option=()=>{
 
     
     get_all_couriers().done(function(response){
-        // var alamat_customer = 'jalan Tumaritis nomor 131 - 11550 - kelapa dua - kebon jeruk - jakarta barat - dki jakarta'
-        // var split_alamat = alamat_customer.split('-')
-        // var jalan_customer = split_alamat[0]
-        // var kodepos_customer = split_alamat[1]
-        // var sub_district_customer = split_alamat[2]
-        // var district_customer = split_alamat[3]
-        // var kota_customer = split_alamat[4]
-        // var province_customer = split_alamat[5]
         var item_product = ''
         var cart_local = localStorage.getItem('itemsToCheckout')
-        // 
         var parse_cart = JSON.parse(cart_local)
-        // 
         kurir = response[0]
         allKurir = response
-        // 
         var array_cart =[]
         for(var i =0; i<parse_cart.length; i++){
-            
             getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-            // get_product_detail_func(parse_cart[i].productNo).done(function(response){
-            
-            
             array_cart.push(response)
             })
         }
-        // 
         get_all_province_from_courier(kurir.Courier, kurir.Courier_Code).done(function(response){
             province = response[0]
             allProvince = response
@@ -2130,12 +2145,9 @@ const re_render_select_option=()=>{
                 get_all_district_from_courier(kurir.Courier, kurir.Courier_Code, kota.City).done(function(response){
                     allDistrict = response
                     district = response[0]
-                    // 
-                    // 
                     get_all_subdistrict_from_courier(kurir.Courier, kurir.Courier_Code, district.District,).done(function(response){
                         allSub_District = response
                         sub_district = response[0]
-                        // 
                         var total_berat_product=0
                         var Courier_Price_Code_orig = 'CGK01.00'
                         var packing_type = ''

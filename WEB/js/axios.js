@@ -86,10 +86,7 @@ $( document ).ready(function() {
 
     async function save_locally_province_tiki(){
         
-        // localStorage.setItem("all_province_tiki", JSON.stringify([]));
-        // localStorage.setItem("all_city_tiki", JSON.stringify([]));
-        // localStorage.setItem("all_district_tiki", JSON.stringify([]));
-        // localStorage.setItem("all_subdistrict_tiki", JSON.stringify([]));
+   
         await get_all_province_from_courier("tiki", "tiki").done(async function(response){
             localStorage.setItem("all_province_tiki", JSON.stringify(response));
             
@@ -191,7 +188,7 @@ setInterval(() => {
 const getAllData=async()=>{
 var all_data = JSON.parse(localStorage.getItem('all_data_product'))
     allData = all_data
-   
+   console.log('get all data jalan')
     if(all_data == undefined || all_data == null){
         axios.post('https://products.sold.co.id/get-product-details')
         .then((res)=>{
@@ -219,10 +216,175 @@ var all_data = JSON.parse(localStorage.getItem('all_data_product'))
         render_item_all_category()
         renderOptionSearch()
     }
+    
+
+    var province =  await new_find_province_from_address()
+    var city =  await new_find_city_from_address(province)
+    var district =  await new_find_district_from_address(district)
+    var subdistrict =  await new_find_subDistrict_from_address(subdistrict)
+    console.log(province)
+    console.log(city)
+    console.log(district)
+    console.log(subdistrict)
+
+    localStorage.setItem('province_customer',province)
+    localStorage.setItem('city_customer',city)
+    localStorage.setItem('district_customer',district)
+    localStorage.setItem('sub_district_customer',subdistrict)
 
 
 }
 
+
+const new_find_subDistrict_from_address=async(district)=>{
+    return new Promise(async(resolve,reject)=>{
+        var subDistrict_from_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
+        var kelurahan_pilihan = ''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+
+        await get_all_couriers().done( async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then(async(res)=>{
+                alamat_pilihan = res.data.Address_1
+                if(subDistrict_from_storage != undefined && subDistrict_from_storage.length != 0 ){
+
+                }else {
+                    await get_all_subdistrict_from_courier(kurir_pilihan,kurir_kode,district).done( function(response){
+                        response.forEach((val,index)=>{
+                            if(alamat_pilihan.toUpperCase().includes(val.Sub_District.toUpperCase())){
+                                kelurahan_pilihan = val.Sub_District
+                                console.log(kelurahan_pilihan, 'ini kelurahan pilihan')
+                                resolve(kelurahan_pilihan)
+                            }
+                        })
+                        console.log(response)
+                    })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    })
+}
+
+const new_find_district_from_address=async(city)=>{
+    return new Promise(async(resolve,reject)=>{
+        var district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+        var kecamatan_pilihan = ''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+        await get_all_couriers().done( async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then(async(res)=>{
+                alamat_pilihan = res.data.Address_1
+                await get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
+                    response.forEach((val,index)=>{
+                        if(alamat_pilihan.toUpperCase().includes(val.District.toUpperCase())){
+                            kecamatan_pilihan = val.District
+                            console.log(kecamatan_pilihan)
+                            resolve(kecamatan_pilihan)
+                        }
+                    })
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+        
+   
+    })
+}
+
+const new_find_city_from_address= async (province)=>{
+    return new Promise(async(resolve,reject)=>{
+        var city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+        var kota_pilihan = ''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+        await get_all_couriers().done( async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then( async (res)=>{
+                alamat_pilihan  = res.data.Address_1
+                if(city_from_storage != undefined && city_from_storage.length != 0){
+                    city_from_storage.forEach((val,index)=>{
+                        if(val.Province == province){
+                            val.City.forEach((city,id)=>{
+                                if(alamat_pilihan.toUpperCase().includes(city.City.toUpperCase())){
+                                    kota_pilihan = city.City
+                                    resolve(kota_pilihan)
+                                }
+                            })
+                        }
+                    })
+                }else {
+                    await get_all_city_from_courier(kurir_pilihan,kurir_kode,province).done(function(response){
+                            response.forEach((val,index)=>{
+                                if(alamat_pilihan.toUpperCase().includes(val.City.toUpperCase())){
+                                    kota_pilihan = val.City
+                                    resolve(kota_pilihan)
+                                }
+                            })
+                    })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    })
+}
+
+
+const new_find_province_from_address= async ()=>{
+    return new Promise(async (resolve, reject) => {
+        var province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+        var province_pilihan =''
+        var token = localStorage.getItem('token')
+        var kurir_pilihan = ''
+        var kurir_kode = ''
+        var alamat_pilihan = ''
+        await get_all_couriers().done(async function(response){
+            kurir_pilihan = response[0].Courier
+            kurir_kode = response[0].Courier_Code
+            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then(async (res)=>{
+                alamat_pilihan = res.data.Address_1
+                if(province_from_storage != undefined &&  province_from_storage.length != 0){
+                    province_from_storage.forEach((val,index)=>{
+                        if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
+                            province_pilihan = val.Province
+                            resolve(province_pilihan) 
+                        }
+                    })
+                }else {
+                    await get_all_province_from_courier(kurir_pilihan,kurir_kode).done(async function(response){
+                        response.forEach((val,index)=>{
+                            if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
+                                province_pilihan = val.Province
+                                resolve(province_pilihan) 
+                            }
+                        })
+                    })
+                }
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+    })
+
+}
 
 const renderOptionSearch=()=>{
 
