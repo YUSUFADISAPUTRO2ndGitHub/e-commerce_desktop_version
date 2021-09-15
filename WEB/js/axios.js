@@ -912,9 +912,63 @@ function back_to_home(){
     $('.main-body').css('display','block')
     $('.active_search').css('top','0px')
 }
+// const find_province_from_address= async ()=>{
+//     return new Promise(async (resolve, reject) => {
+//         var province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+//         var province_pilihan =''
+//         var token = localStorage.getItem('token')
+//         var kurir_pilihan = ''
+//         var kurir_kode = ''
+//         var alamat_pilihan = ''
+//         await get_all_couriers().done(async function(response){
+//             kurir_pilihan = response[0].Courier
+//             kurir_kode = response[0].Courier_Code
+//             await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+//             .then(async (res)=>{
+//                 alamat_pilihan = res.data.Address_1
+//                 if(province_from_storage != undefined &&  province_from_storage.length != 0){
+//                     province_from_storage.forEach((val,index)=>{
+//                         if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
+//                             province_pilihan = val.Province
+//                             resolve(province_pilihan) 
+//                         }
+//                     })
+//                 }else {
+//                     await get_all_province_from_courier(kurir_pilihan,kurir_kode).done(async function(response){
+//                         response.forEach((val,index)=>{
+//                             if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
+//                                 province_pilihan = val.Province
+//                                 resolve(province_pilihan) 
+//                             }
+//                         })
+//                     })
+//                 }
+//             }).catch((err)=>{
+//                 console.log(err)
+//             })
+//         })
+//     })
 
+// }
 
 const render_group_buy=(product_id)=>{
+    console.log('jalan')
+    Swal.fire({
+        title: 'Uploading Data',
+        timer:2000,
+        html: ` 
+        <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLD 
+            </div>
+                
+            <div class="box2">
+            </div>
+        </div>
+    `
+    })
 
     var allKurir=[]
     var allProvince=[]
@@ -924,8 +978,7 @@ const render_group_buy=(product_id)=>{
     var allPengiriman=[]
     var allDistrict = []
     var allSub_District = []
-    
-
+   
 
 
     var kurir=[]
@@ -1143,6 +1196,14 @@ const render_group_buy=(product_id)=>{
                 </div>    
             </div>
             `)
+            // var province_pilihan =  await find_province_from_address()
+            // var kota_pilihan = await find_city_from_address(province_pilihan)
+            // var kecamatan_pilihan = await find_district_from_address(kota_pilihan)
+            // var kelurahan_pilihan = await find_subDistrict_from_address(kecamatan_pilihan)
+            // console.log(province_pilihan)
+            // console.log(kota_pilihan)
+            // console.log(kecamatan_pilihan)
+            // console.log(kelurahan_pilihan)
 
             //  RENDER KURIR DLL
                 get_all_couriers().done(function(response){
@@ -1160,14 +1221,14 @@ const render_group_buy=(product_id)=>{
                             
                             get_all_district_from_courier(kurir.Courier,kurir.Courier_Code,kota.City).done(function(response){
                                 
-                                kelurahan = response[0]
+                                kecamatan = response[0]
                                 district = response[0]
-                                allKelurahan = response
+                                allKecamatan = response
                                 allDistrict = response
                                 
-                                get_all_subdistrict_from_courier(kurir.Courier,kurir.Courier_Code,district.District).done(function(response){
-                                    kecamatan = response
-                                    allKecamatan = response
+                                get_all_subdistrict_from_courier(kurir.Courier,kurir.Courier_Code,kecamatan.District).done(function(response){
+                                    kelurahan = response
+                                    allKelurahan = response
                                     allSub_District = response
                                     
                                     var Courier_Price_Code_orig = 'CGK01.00'
@@ -1185,10 +1246,14 @@ const render_group_buy=(product_id)=>{
                                     
                                     
                                     // get_shipping_cost_informations(kurir.Courier,kurir.Courier_Code,province.Province,kota.City,kelurahan.District,kecamatan[0].Sub_District).done(function(response){
-                                        new_get_shipping_cost_informations(Courier_Price_Code_orig , allKecamatan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
-
+                                        new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+                                            allPengiriman = response
+                                            console.log(allProvince)
+                                            console.log(allKota)
+                                            console.log(allKecamatan)
+                                            console.log(allKelurahan)
+                                            console.log(allPengiriman)
                                         
-                                        allPengiriman = response
                                         
                                         if(allPengiriman){
 
@@ -1258,7 +1323,7 @@ const render_group_buy=(product_id)=>{
                                                 <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
                                             `)    
                                         })  
-                                        allKecamatan.map((val,index)=>{
+                                        allKelurahan.map((val,index)=>{
 
                                             if(val.Sub_District == ''){
                                                 $('.kecamatan-home-gb').append(`
@@ -1275,7 +1340,7 @@ const render_group_buy=(product_id)=>{
     
                                         })
     
-                                        allKelurahan.map((val,index)=>{
+                                        allKecamatan.map((val,index)=>{
 
                                             if(val.District == ''){
                                                 $('.kelurahan-home-gb').append(`
@@ -3521,10 +3586,6 @@ function commafy( num ) {
  const render_get_product_detail=(product_id)=>{
     // console.log(product_id,'2637')
     $(this).scrollTop('.modals-product-detail')
-    
-    // console.log($(this).scrollTop('.box_iframe_groupbuy'))
-
-    let timerInterval
             Swal.fire({
             title: 'Please Wait',
             html: ` 
@@ -6144,7 +6205,7 @@ function addToCart(product_id){
 }
 
 
-function addressMethod(address,item){
+async function addressMethod(address,item){
     
     // 
     $('.radio_address_card').removeClass('selected')
@@ -6170,14 +6231,10 @@ function addressMethod(address,item){
         $('.new-box-card-kurir-sp').css('height','240px')
         $('.new-box-card-kurir-sp').css('min-height','240px')
 
-        var alamat_terdafar = $(`.option-alamat-gb option:selected`).val()
-        var testing_alamat = 'Jalanin Dulu aja  DKI Jakarta  Kota Jakarta Barat  Kebon Jeruk  Kelapa Dua'
-        var split_alamat = testing_alamat.split('  ')
-        var nama_jalan = split_alamat[0]
-        var nama_province = split_alamat[1]
-        var nama_kota = split_alamat[2]
-        var nama_kecamatan = split_alamat[3]
-        var nama_kelurahan = split_alamat[4]
+        var nama_province =  await find_province_from_address()
+        var nama_kota = await find_city_from_address(nama_province)
+        var nama_kecamatan = await find_district_from_address(nama_kota)
+        var nama_kelurahan = await find_subDistrict_from_address(nama_kecamatan)
         var nama_kurir = 'tiki'
         var kurir_kode = 'tiki'
         var allKelurahan = []
@@ -6187,7 +6244,7 @@ function addressMethod(address,item){
                 get_all_district_from_courier(nama_kurir,kurir_kode,nama_kota).done(function(response){
                     get_all_subdistrict_from_courier(nama_kurir,kurir_kode,nama_kecamatan).done(function(response){
                         allKelurahan = response
-                        console.log(response)
+                        // console.log(response)
                         var Courier_Price_Code_orig = 'CGK01.00'
                         var packing_type = ''
                         const queryString = window.location.search;
@@ -6195,10 +6252,10 @@ function addressMethod(address,item){
                         var product_id = urlParams.get('groupbuy_id')
                         get_product_detail_func(product_id).done(function(response){
                             var item_product = response
-                            console.log(item_product)
+                            // console.log(item_product)
                             var item_dimension = response.Dimension_CM_CUBIC
                             var split_item_dimension = item_dimension.split('*')
-                            console.log(split_item_dimension)
+                            // console.log(split_item_dimension)
                             var item_length = split_item_dimension[0]
                             var item_width = split_item_dimension[1]
                             var item_height = split_item_dimension[2]
@@ -6227,8 +6284,8 @@ function addressMethod(address,item){
                             }
                             new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
                                 allPengiriman = response
-                                console.log(allPengiriman)
-                                console.log(allKelurahan)
+                                // console.log(allPengiriman)
+                                // console.log(allKelurahan)
                                 $('.kelurahan-home-gb').empty()
                                 $('.pengiriman-home-gb').empty()
                                 $('.asuransi-home-gb').empty()
@@ -8915,3 +8972,4 @@ function calculateSize(img, maxWidth, maxHeight) {
   }
   
         
+  
