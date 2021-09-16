@@ -2699,14 +2699,6 @@ const provinceCheckout=(product_id)=>{
     var isKota_pilihan = false
     var isDistrict_pilihan = false
     var isSub_District_pilihan = false
-
-
-
-
-    
-    // console.log(city_storage)
-    // console.log(district_storage)
-
     get_all_couriers().done(function(response){
         var dataAllKurir = response
         allKurir = response
@@ -2749,7 +2741,6 @@ const provinceCheckout=(product_id)=>{
                   <option  value="${val.City}" class="co-kota">${val.City}</option> 
               `)
           })
-          console.log(allDistrict)
           allDistrict[0].map((val,index)=>{
             $('.cart-kecamatan').append(`
                 <option  value="${val.District}" class="reg-kecamatan">${val.District}</option> 
@@ -2761,21 +2752,13 @@ const provinceCheckout=(product_id)=>{
           var cart_local = localStorage.getItem('itemsToCheckout')
                       
           var parse_cart = JSON.parse(cart_local)
-        //   console.log(parse_cart)
           var array_cart =[]
           for(var i =0; i<parse_cart.length; i++){
-            //   console.log(parse_cart[i].productNo)
               getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-
                   array_cart.push(response)
-
               })
           }
-          console.log(kota_pilihan)
-          console.log(kota_pilihan)
           get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
-            // console.log(response)
-            
             allDistrict = response
             district = response[0]
             get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
@@ -2868,52 +2851,33 @@ const provinceCheckout=(product_id)=>{
                     })
               
             })
-        })
-       
-            
+        })  
         }else if ( city_storage !=undefined){
-            // alert('asuk ke if yg ke isi')
             var kota_pilihan = ''
             city_storage.forEach((val)=>{
-                // console.log(val.Province)
-                // console.log(province_pilihan)
                 if(val.Province == province_pilihan ){
-                    // console.log(val.Province)
                     allKota.push(val.City)
                     kota_pilihan = val.City[0]
                 }
             })
-            
             $('.cart-kota').empty() 
             $('.cart-kota').append(`
                 <option selected  class="co-kota"> Kota</option>      
             `)
             allKota[0].map((val,index)=>{
-                
                 $('.cart-kota').append(`
                     <option  value="${val.City}" class="co-kota">${val.City}</option> 
                 `)
             })
-
-
             var cart_local = localStorage.getItem('itemsToCheckout')
-                        
             var parse_cart = JSON.parse(cart_local)
-            // console.log(parse_cart)
             var array_cart =[]
             for(var i =0; i<parse_cart.length; i++){
-                // console.log(parse_cart[i].productNo)
                 getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-                // get_product_detail_func(parse_cart[i].productNo).done(function(response){
                     array_cart.push(response)
-                    // console.log(response)
-                
-                    // console.log(array_cart,'dalem if')
                 })
             }
             get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan.City).done(function(response){
-                // console.log(response)
-                
                 allDistrict = response
                 district = response[0]
                 get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
@@ -2933,9 +2897,7 @@ const provinceCheckout=(product_id)=>{
                         }else{
                             berat_parse = berat_parse*1*1.5;
                         }
-                        
                         total_berat_product += berat_parse
-
                     }
                         new_get_shipping_cost_informations(Courier_Price_Code_orig , allSub_District[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
                             allPengiriman = response

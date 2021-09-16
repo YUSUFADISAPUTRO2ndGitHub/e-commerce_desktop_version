@@ -918,27 +918,11 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
        </div>
    </div>
    `,
-    timer: 1000,
+    timer: 30000000,
     timerProgressBar: true,
     didOpen: () => {
         Swal.showLoading()
-        timerInterval = setInterval(() => {
-        const content = Swal.getHtmlContainer()
-        if (content) {
-            const b = content.querySelector('b')
-            if (b) {
-            b.textContent = Swal.getTimerLeft()
-            }
-        }
-        }, 100)
-    },
-    willClose: () => {
-        clearInterval(timerInterval)
-    }
-    }).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-        
+         
         axios.post(`https://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
         .then((res)=>{
             $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
@@ -957,8 +941,8 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-all-item">
                                 <div class="item-all-price">
-                                    <p>RP. ${hargaTotal}</p>
-                                    <p>Rp. ${hargaAwal}</p>
+                                    <p>RP. ${commafy(hargaTotal)}</p>
+                                    <p>Rp. ${commafy(hargaAwal)}</p>
                                 </div>
                             </div>
                         </div>
@@ -968,11 +952,26 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
             }) 
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             $('.modals-lk').css('display','block')
-            // 
+            Swal.fire({
+                title: 'Uploading Data',
+                timer:100,
+            }) 
             
         }).catch((err)=>{
             
         })
+        timerInterval = setInterval(() => {
+        const content = Swal.getHtmlContainer()
+        if (content) {
+            const b = content.querySelector('b')
+            if (b) {
+            b.textContent = Swal.getTimerLeft()
+            }
+        }
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
     }
     })
    
@@ -984,6 +983,7 @@ const renderItemBasedOnCategory=(Category)=>{
     let timerInterval
         Swal.fire({
         title: 'Uploading Data',
+        timer:300000000,
         html: ` 
         <div class="boxcon">
             <div class="box1">
@@ -1000,23 +1000,6 @@ const renderItemBasedOnCategory=(Category)=>{
         timerProgressBar: true,
         didOpen: () => {
             Swal.showLoading()
-            timerInterval = setInterval(() => {
-            const content = Swal.getHtmlContainer()
-            if (content) {
-                const b = content.querySelector('b')
-                if (b) {
-                b.textContent = Swal.getTimerLeft()
-                }
-            }
-            }, 100)
-        },
-        willClose: () => {
-            clearInterval(timerInterval)
-        }
-        }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-            
             axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
             .then((res)=>{
                 
@@ -1039,9 +1022,25 @@ const renderItemBasedOnCategory=(Category)=>{
                     // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
                     $('.modals-lk').css('display','block')  
                     // alert('render item based on category jalan 407')
+                    Swal.fire({
+                        title: 'Uploading Data',
+                        timer:100,
+                    })
                 }).catch((err)=>{
                     
                 })
+            timerInterval = setInterval(() => {
+            const content = Swal.getHtmlContainer()
+            if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                b.textContent = Swal.getTimerLeft()
+                }
+            }
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
         }
         })
     
@@ -3892,504 +3891,497 @@ function commafy( num ) {
                 </div>
             </div>
             `,
-            timer: 3000,
+            timer: 30000000,
             timerProgressBar: true,
+            didOpen:()=>{
+                var product_id_pilihan = product_id
+                let allDataProduct = []
+                axios.post(`https://products.sold.co.id/get-product-details`)
+                .then((res)=>{
+                    allDataProduct = res.data
+                    
+                    const querystring = $(location).attr('href');
+                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                    .then((res)=>{
+                        console.log(res.data)
+                        item = res.data
+                        var split_product = res.data.Name.split(' ')
+                        // console.log(split_product)
+                        var all_filter_product = []
+                        for(var i =0; i<split_product.length; i++){
+                            var filter_product = allDataProduct.filter((val)=>{
+                                // console.log(val.Name)
+                                // console.log(split_product[i])
+                                // console.log(val.Name.includes(split_product[i]))
+                                if(val.Name.includes(split_product[i])){
+                                    // console.log('masuk ke if')
+                                    all_filter_product.push(val)
+                                    return val
+                                }
+                            })
+                        }
+                        // BATAS
+                        var hargaAwal = parseInt(item.Sell_Price)
+                        var discount = parseInt(item.Sell_Price * 0.1)
+                        var hargaTotal = hargaAwal + discount
+                        console.log(item)
+                        $('.box-item-detail').empty();
+                    
+                        axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                        .then((res)=>{
+                            var cust_comment = res.data
+                            // console.log(cust_comment)
+                            if(item.GroupBuy_Purchase == "false"){
+                                $('.box-item-detail').append(
+                                    `
+                                    <div class="new-item-left">
+                                        <div class="item-left-img-box">
+                                            
+                                        </div>
+                                        <div class="img-option-left">
+                                           
+                                        </div>
+                                        <div class="box-button-next-back">
+                                            <div  class="box-btn-left" onclick="back_btn()">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </div>
+                                            <div class="box-btn-right" onclick="next_btn()">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-item-right">    
+                                        <div class="box-back-right-id">
+                                            <div class="btn-back-right-id" onclick="close_product_detail()">
+                                                <i class="fas fa-arrow-left"></i>
+                                                Kembali
+                                            </div>
+                                        </div>  
+                                        <div class="box-description-right-id">
+                                            <div class="bd-right-id"> 
+                                                <p>${item.Category}</p>
+                                                <div class="qty-box-pd"> 
+                                                     Quantity : ${item.Stock_Quantity}
+                                                </div>
+                                            </div>
+                                            
+                                            <p class="limited-text">${item.Name}</p>
+                                            <div class="rating-bottom-2">
+                                                <div class="star-box">
+                                                    <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        <div class="box-price-right-id">
+                                            
+                                            <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
+                                                Tambah
+                                            </div>
+                                            <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
+                                                Beli Sekarang
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="box-quality-right-id-2">
+                                            <div class="bsp-2">
+                                                <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                    
+                                            </div>
+                                           
+                                        </div>
+                    
+                                        <div class="box-quality-right-id">
+                                            Product Sejenis
+                                            <div class="card-quality-right-id">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="box-option-right-id">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
+                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
+                                                <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                ${item.Description}
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                    <div class="user-card-top-id">
+                                                        <img src="../img/liked.png" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            Tambah Comment 
+                                                            <div class="card-for-comment">
+                                                                <input type="text" class="input_comment_cust">
+                                                                <div class="btn-send-comment " disabled onclick="send_comment_cust()">
+                                                                    SEND
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>           
+                                                </div>
+                                                
+                                                <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="btn-minus-id" id="icon-minus-id-1">
+                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
+                    
+                                                                </div>
+                                                                <div class=" btn-plus-id" id="icon-plus-id-1"> 
+                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-1-id">
+                                                            TIDAK BISA
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="card-for-minus-plus-id">
+                                                                    <div class="btn-minus-id" id="icon-minus-id-2">
+                                                                        <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
+                                    
+                                                                    </div>
+                                                                    <div class=" btn-plus-id" id="icon-plus-id-2"> 
+                                                                        <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-2-id">
+                                                            TIDAK BISA
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`
+                                )
+                            }else{        
+                                $('.box-item-detail').append(
+                                    `
+                                    <div class="new-item-left">
+                                        <div class="item-left-img-box">
+                                          
+                                        </div>
+                                        <div class="img-option-left">
+                                            
+                                        </div>
+                                        <div class="box-button-next-back">
+                                            <div  class="box-btn-left" onclick="back_btn()">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </div>
+                                            <div class="box-btn-right" onclick="next_btn()">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-item-right">    
+                                        <div class="box-back-right-id">
+                                            <div class="btn-back-right-id" onclick="close_product_detail()">
+                                                <i class="fas fa-arrow-left"></i>
+                                                Kembali
+                                            </div>
+                                        </div>  
+                                        <div class="box-description-right-id">
+                                            <div class="bd-right-id"> 
+                                                <p>${item.Category}</p>
+                                                <div class="qty-box-pd"> 
+                                                     Quantity : ${item.Stock_Quantity}
+                                                </div>
+                                            </div>
+                                            <p class="limited-text">${item.Name}</p>
+                                            <div class="rating-bottom-2">
+                                                <div class="star-box">
+                                                    <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        <div class="box-price-right-id">
+                                            
+                                            <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
+                                                Tambah
+                                            </div>
+                                            <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
+                                                Beli Sekarang
+                                            </div>
+                                            <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
+                                                Beli Harga Group
+                                            </div>
+                                        </div>
+                                        <div class="box-quality-right-id-2">
+                                            <div class="bsp-1">
+                                                <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                                    
+                                                
+                                                <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
+                                            </div>
+                                            
+                                        </div>
+                                     
+                                        <div class="box-quality-right-id">
+                                            Product Sejenis
+                                            <div class="card-quality-right-id">
+                                                                                          
+                                            </div>
+                                        </div>
+                                        <div class="box-option-right-id">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
+                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
+                                                
+                                                <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                    ${item.Description}
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                    <div class="user-card-top-id">
+                                                        <img src="../img/liked.png" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            Tambah Comment 
+                                                            <div class="card-for-comment">
+                                                                <input type="text" class="input_comment_cust">
+                                                                <div class="btn-send-comment " disabled onclick="send_comment_cust()">
+                                                                    SEND
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="btn-minus-id" id="icon-minus-id-1">
+                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
+                    
+                                                                </div>
+                                                                <div class=" btn-plus-id" id="icon-plus-id-1"> 
+                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-1-id">
+                                                            TIDAK BISA
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="card-for-minus-plus-id">
+                                                                    <div class="btn-minus-id" id="icon-minus-id-2">
+                                                                        <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
+                                    
+                                                                    </div>
+                                                                    <div class=" btn-plus-id" id="icon-plus-id-2"> 
+                                                                        <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-2-id">
+                                                            TIDAK BISA
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    `
+                                )
+                            }
+                    
+                            $('.img-option-left').empty()
+                            $('.item-left-img-box')
+                            if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                                `)
+                            }else{
+                                $('.img-option-left').append(`
+                                    <div class="option-left-1 img-1-id pop">
+                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
+                                    </div>
+                                `)
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-1">
+                                `)
+                            }
+                            if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                                `)
+                            }else{
+                                $('.img-option-left').append(`
+                                    <div class="option-left-1 img-2-id pop">
+                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
+                                    </div>
+                                `)
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big" id="img-big-2">
+                                `)
+                            }
+                            if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
+                    
+                                
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                                `)
+                            }else{
+                                $('.img-option-left').append(`
+                                    <div class="option-left-1 img-2-id pop">
+                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
+                                    </div>
+                                `)
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big" id="img-big-3">
+                                `)
+                            }
+                            
+                        
+                            console.log(filter_product)
+                            allDataProduct.map((val,index)=>{
+                                if(val.Product_Code == product_id_pilihan){
+                                    console.log(val.Product_Code)
+                                    console.log(product_id_pilihan)
+                                    $('.card-quality-right-id').append(`
+                                    <div class="card-sejenis-id active_product">
+                                        <div class="card-sejenis-img-id">
+                                            <img src="${val.Picture_1}" alt="">
+                                        </div>
+                                        <div class="card-sejenis-desc-id">
+                                            <p class="limited-text-commision">${val.Name}</p>
+                                            <p>RP.${commafy(val.Sell_Price)}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    `)
+                    
+                                }else {
+                                    $('.card-quality-right-id').append(`
+                                    <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
+                                        <div class="card-sejenis-img-id">
+                                            <img src="${val.Picture_1}" alt="">
+                                        </div>
+                                        <div class="card-sejenis-desc-id">
+                                            <p class="limited-text-commision">${val.Name}</p>
+                                            <p>RP.${commafy(val.Sell_Price)}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    `)
+                                }
+                    
+                              
+                    
+                            })
+
+                            var comment_parse = JSON.parse(cust_comment.User_Comments)
+                            console.log(comment_parse)
+                            $('#nav-profile').empty()
+                            if(comment_parse == 'null' || comment_parse == null){
+                                $('#nav-profile').append(`
+                                <div class="user-card-top-id">
+                                    <img src="../img/accounts.png" alt="">
+                                    <div class="user-card-desc-top-id">
+                                        Tambah Comment 
+                                        <div class="card-for-comment">
+                                            <input type="text" class="input_comment_cust" >
+                                            <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
+                                                SEND
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `)
+                            }else if (comment_parse.length > 0 ) {
+                                comment_parse.map((val,index)=>{
+                                    axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                    .then((res)=>{
+                                        console.log('axios jalan')
+                                        if(res.data){
+                                            var link_gambar = res.data
+                                            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                            .then((res)=>{
+                                                console.log(res.data)
+                                                // res.data.map((val,index)=>{
+                                                    $('#nav-profile').append(`
+                                                    <div class="user-card-id">
+                                                        <div class="user-card-top-id">
+                                                            <img src="${link_gambar}" alt="">
+                                                            <div class="user-card-desc-top-id">
+                                                                <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-card-bot-id">
+                                                            <p>${val.Comment}</p>
+                                                        </div>
+                                                    </div>
+                                                    `)
+                                                // })
+                                            }).catch((err)=>{
+                                                console.log(err)
+                                            })
+                                        } else {
+                                            $('#nav-profile').append(`
+                                                    <div class="user-card-id">
+                                                        <div class="user-card-top-id">
+                                                            <img src="../img/accounts.png" alt="">
+                                                            <div class="user-card-desc-top-id">
+                                                                <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                <p>*****</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-card-bot-id">
+                                                            <p>${val.Comment}</p>
+                                                        </div>
+                                                    </div>
+                                                    `)
+                                        }
+                                    }).catch((err)=>{
+                                        console.log(err)
+                                    })
+                                })
+                    
+                            }
+                            
+                            Swal.fire({
+                                title: 'Uploading Data',
+                                timer:100,
+                            })
+                           
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+                        //BATAS 
+                    }).catch((err)=>{
+                        
+                    })
+                }).catch((err)=>{
+                    console.log(err)
+                })
+
+            }
             })
 
-            var product_id_pilihan = product_id
-            let allDataProduct = []
-            axios.post(`https://products.sold.co.id/get-product-details`)
-            .then((res)=>{
-                allDataProduct = res.data
-                
-                const querystring = $(location).attr('href');
-                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                .then((res)=>{
-                    console.log(res.data)
-                    item = res.data
-                    var split_product = res.data.Name.split(' ')
-                    // console.log(split_product)
-                    var all_filter_product = []
-                    for(var i =0; i<split_product.length; i++){
-                        var filter_product = allDataProduct.filter((val)=>{
-                            // console.log(val.Name)
-                            // console.log(split_product[i])
-                            // console.log(val.Name.includes(split_product[i]))
-                            if(val.Name.includes(split_product[i])){
-                                // console.log('masuk ke if')
-                                all_filter_product.push(val)
-                                return val
-                            }
-                        })
-                    }
-                    // BATAS
-                    var hargaAwal = parseInt(item.Sell_Price)
-                    var discount = parseInt(item.Sell_Price * 0.1)
-                    var hargaTotal = hargaAwal + discount
-                    console.log(item)
-                    $('.box-item-detail').empty();
-                
-                    axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
-                    .then((res)=>{
-                        var cust_comment = res.data
-                        // console.log(cust_comment)
-                        if(item.GroupBuy_Purchase == "false"){
-                            $('.box-item-detail').append(
-                                `
-                                <div class="new-item-left">
-                                    <div class="item-left-img-box">
-                                        
-                                    </div>
-                                    <div class="img-option-left">
-                                       
-                                    </div>
-                                    <div class="box-button-next-back">
-                                        <div  class="box-btn-left" onclick="back_btn()">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                        <div class="box-btn-right" onclick="next_btn()">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="new-item-right">    
-                                    <div class="box-back-right-id">
-                                        <div class="btn-back-right-id" onclick="close_product_detail()">
-                                            <i class="fas fa-arrow-left"></i>
-                                            Kembali
-                                        </div>
-                                    </div>  
-                                    <div class="box-description-right-id">
-                                        <div class="bd-right-id"> 
-                                            <p>${item.Category}</p>
-                                            <div class="qty-box-pd"> 
-                                                 Quantity : ${item.Stock_Quantity}
-                                            </div>
-                                        </div>
-                                        
-                                        <p class="limited-text">${item.Name}</p>
-                                        <div class="rating-bottom-2">
-                                            <div class="star-box">
-                                                <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                    <div class="box-price-right-id">
-                                        
-                                        <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
-                                            Tambah
-                                        </div>
-                                        <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
-                                            Beli Sekarang
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="box-quality-right-id-2">
-                                        <div class="bsp-2">
-                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-                
-                                        </div>
-                                       
-                                    </div>
-                
-                                    <div class="box-quality-right-id">
-                                        Product Sejenis
-                                        <div class="card-quality-right-id">
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="box-option-right-id">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
-                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                            ${item.Description}
-                                            </div>
-                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                                <div class="user-card-top-id">
-                                                    <img src="../img/liked.png" alt="">
-                                                    <div class="user-card-desc-top-id">
-                                                        Tambah Comment 
-                                                        <div class="card-for-comment">
-                                                            <input type="text" class="input_comment_cust">
-                                                            <div class="btn-send-comment " disabled onclick="send_comment_cust()">
-                                                                SEND
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>           
-                                            </div>
-                                            
-                                            <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="btn-minus-id" id="icon-minus-id-1">
-                                                                <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-                
-                                                            </div>
-                                                            <div class=" btn-plus-id" id="icon-plus-id-1"> 
-                                                                <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-1-id">
-                                                        TIDAK BISA
-                                                    </div>
-                                                </div>
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="card-for-minus-plus-id">
-                                                                <div class="btn-minus-id" id="icon-minus-id-2">
-                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
-                                
-                                                                </div>
-                                                                <div class=" btn-plus-id" id="icon-plus-id-2"> 
-                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-2-id">
-                                                        TIDAK BISA
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>`
-                            )
-                        }else{        
-                            $('.box-item-detail').append(
-                                `
-                                <div class="new-item-left">
-                                    <div class="item-left-img-box">
-                                      
-                                    </div>
-                                    <div class="img-option-left">
-                                        
-                                    </div>
-                                    <div class="box-button-next-back">
-                                        <div  class="box-btn-left" onclick="back_btn()">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                        <div class="box-btn-right" onclick="next_btn()">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="new-item-right">    
-                                    <div class="box-back-right-id">
-                                        <div class="btn-back-right-id" onclick="close_product_detail()">
-                                            <i class="fas fa-arrow-left"></i>
-                                            Kembali
-                                        </div>
-                                    </div>  
-                                    <div class="box-description-right-id">
-                                        <div class="bd-right-id"> 
-                                            <p>${item.Category}</p>
-                                            <div class="qty-box-pd"> 
-                                                 Quantity : ${item.Stock_Quantity}
-                                            </div>
-                                        </div>
-                                        <p class="limited-text">${item.Name}</p>
-                                        <div class="rating-bottom-2">
-                                            <div class="star-box">
-                                                <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                    <div class="box-price-right-id">
-                                        
-                                        <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
-                                            Tambah
-                                        </div>
-                                        <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
-                                            Beli Sekarang
-                                        </div>
-                                        <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
-                                            Beli Harga Group
-                                        </div>
-                                    </div>
-                                    <div class="box-quality-right-id-2">
-                                        <div class="bsp-1">
-                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-                                                
-                                            
-                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
-                                        </div>
-                                        
-                                    </div>
-                                 
-                                    <div class="box-quality-right-id">
-                                        Product Sejenis
-                                        <div class="card-quality-right-id">
-                                                                                      
-                                        </div>
-                                    </div>
-                                    <div class="box-option-right-id">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
-                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            
-                                            <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                ${item.Description}
-                                            </div>
-                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                                <div class="user-card-top-id">
-                                                    <img src="../img/liked.png" alt="">
-                                                    <div class="user-card-desc-top-id">
-                                                        Tambah Comment 
-                                                        <div class="card-for-comment">
-                                                            <input type="text" class="input_comment_cust">
-                                                            <div class="btn-send-comment " disabled onclick="send_comment_cust()">
-                                                                SEND
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="btn-minus-id" id="icon-minus-id-1">
-                                                                <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-                
-                                                            </div>
-                                                            <div class=" btn-plus-id" id="icon-plus-id-1"> 
-                                                                <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-1-id">
-                                                        TIDAK BISA
-                                                    </div>
-                                                </div>
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="card-for-minus-plus-id">
-                                                                <div class="btn-minus-id" id="icon-minus-id-2">
-                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
-                                
-                                                                </div>
-                                                                <div class=" btn-plus-id" id="icon-plus-id-2"> 
-                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-2-id">
-                                                        TIDAK BISA
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                `
-                            )
-                        }
-                
-                        $('.img-option-left').empty()
-                        $('.item-left-img-box')
-                        if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
-                            `)
-                        }else{
-                            $('.img-option-left').append(`
-                                <div class="option-left-1 img-1-id pop">
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
-                                </div>
-                            `)
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-1">
-                            `)
-                        }
-                        if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
-                            `)
-                        }else{
-                            $('.img-option-left').append(`
-                                <div class="option-left-1 img-2-id pop">
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
-                                </div>
-                            `)
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big" id="img-big-2">
-                            `)
-                        }
-                        if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
-                
-                            
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
-                            `)
-                        }else{
-                            $('.img-option-left').append(`
-                                <div class="option-left-1 img-2-id pop">
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
-                                </div>
-                            `)
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big" id="img-big-3">
-                            `)
-                        }
-                        
-                    
-                        console.log(filter_product)
-                        allDataProduct.map((val,index)=>{
-                            if(val.Product_Code == product_id_pilihan){
-                                console.log(val.Product_Code)
-                                console.log(product_id_pilihan)
-                                $('.card-quality-right-id').append(`
-                                <div class="card-sejenis-id active_product">
-                                    <div class="card-sejenis-img-id">
-                                        <img src="${val.Picture_1}" alt="">
-                                    </div>
-                                    <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-commision">${val.Name}</p>
-                                        <p>RP.${commafy(val.Sell_Price)}</p>
-                                        
-                                    </div>
-                                </div>
-                                `)
-                
-                            }else {
-                                $('.card-quality-right-id').append(`
-                                <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
-                                    <div class="card-sejenis-img-id">
-                                        <img src="${val.Picture_1}" alt="">
-                                    </div>
-                                    <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-commision">${val.Name}</p>
-                                        <p>RP.${commafy(val.Sell_Price)}</p>
-                                        
-                                    </div>
-                                </div>
-                                `)
-                            }
-                
-                          
-                
-                        })
-                        
-                
-                        
-                        // axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
-                        // .then((res)=>{
-                        //     console.log(token)
-                        //     if(res.data){
-                        //         $(`#img-profile-id`).attr(`src`, `${res.data}`);
-                        //     }else {
-                        //         $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
-                        //     }
-                        // }).catch((err)=>{
-                        //     console.log(err)
-                        // })
-                        
-                        var comment_parse = JSON.parse(cust_comment.User_Comments)
-                        console.log(comment_parse)
-                        $('#nav-profile').empty()
-                        if(comment_parse == 'null' || comment_parse == null){
-                            $('#nav-profile').append(`
-                            <div class="user-card-top-id">
-                                <img src="../img/accounts.png" alt="">
-                                <div class="user-card-desc-top-id">
-                                    Tambah Comment 
-                                    <div class="card-for-comment">
-                                        <input type="text" class="input_comment_cust" >
-                                        <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
-                                            SEND
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `)
-                        }else if (comment_parse.length > 0 ) {
-                            comment_parse.map((val,index)=>{
-                                axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
-                                .then((res)=>{
-                                    console.log('axios jalan')
-                                    if(res.data){
-                                        var link_gambar = res.data
-                                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                        .then((res)=>{
-                                            console.log(res.data)
-                                            // res.data.map((val,index)=>{
-                                                $('#nav-profile').append(`
-                                                <div class="user-card-id">
-                                                    <div class="user-card-top-id">
-                                                        <img src="${link_gambar}" alt="">
-                                                        <div class="user-card-desc-top-id">
-                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-card-bot-id">
-                                                        <p>${val.Comment}</p>
-                                                    </div>
-                                                </div>
-                                                `)
-                                            // })
-                                        }).catch((err)=>{
-                                            console.log(err)
-                                        })
-                                    } else {
-                                        $('#nav-profile').append(`
-                                                <div class="user-card-id">
-                                                    <div class="user-card-top-id">
-                                                        <img src="../img/accounts.png" alt="">
-                                                        <div class="user-card-desc-top-id">
-                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                            <p>*****</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-card-bot-id">
-                                                        <p>${val.Comment}</p>
-                                                    </div>
-                                                </div>
-                                                `)
-                                    }
-                                }).catch((err)=>{
-                                    console.log(err)
-                                })
-                            })
-                
-                        }
-                        
-                       
-                    }).catch((err)=>{
-                        console.log(err)
-                    })
-                    //BATAS 
-                }).catch((err)=>{
-                    
-                })
-            }).catch((err)=>{
-                console.log(err)
-            })
  }
 
  const render_get_product_detail_searching_page=(product_id)=>{
@@ -4411,265 +4403,121 @@ function commafy( num ) {
     </div>
     `,
     timer: 2000,
-    timerProgressBar: true
-    })
-
+    timerProgressBar: true,
+    didOpen:()=>{
+        var product_id_pilihan = product_id
+        let allDataProduct = []
     
-    // console.log(this)
-    var product_id_pilihan = product_id
-    let allDataProduct = []
-
-    axios.post(`https://products.sold.co.id/get-product-details`)
-    .then((res)=>{
-        allDataProduct = res.data
-        const querystring = $(location).attr('href');
-        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+        axios.post(`https://products.sold.co.id/get-product-details`)
         .then((res)=>{
-            item = res.data
-            var split_product = res.data.Name.split(' ')
-            console.log(split_product)
-            var all_filter_product = []
-            for(var i =0; i<split_product.length; i++){
-                var filter_product = allDataProduct.filter((val)=>{
-                    // console.log(val.Names)
-                    // console.log(split_product[i])
-                    if(val.Name.includes(split_product[i])){
-                        all_filter_product.push(val)
-                        return val
-                    }
-                })
-            }
-
-                    var hargaAwal = parseInt(item.Sell_Price)
-                    var discount = parseInt(item.Sell_Price * 0.1)
-                    var hargaTotal = hargaAwal + discount
-                    console.log(item)
-                    $('.box-item-detail').empty();
+            allDataProduct = res.data
+            const querystring = $(location).attr('href');
+            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            .then((res)=>{
+                item = res.data
+                var split_product = res.data.Name.split(' ')
+                console.log(split_product)
+                var all_filter_product = []
+                for(var i =0; i<split_product.length; i++){
+                    var filter_product = allDataProduct.filter((val)=>{
+                        // console.log(val.Names)
+                        // console.log(split_product[i])
+                        if(val.Name.includes(split_product[i])){
+                            all_filter_product.push(val)
+                            return val
+                        }
+                    })
+                }
     
-                    axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
-                    .then((res)=>{
-                        var cust_comment = res.data
-                        // console.log(cust_comment)
-                        if(item.GroupBuy_Purchase == "false"){
-                            $('.box-item-detail').append(
-                                `
-                                <div class="new-item-left">
-                                    <div class="item-left-img-box">
-                                       
-                                    </div>
-                                    <div class="img-option-left">
-                                        
-                                    </div>
-                                    <div class="box-button-next-back">
-                                        <div  class="box-btn-left" onclick="back_btn()">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                        <div class="box-btn-right" onclick="next_btn()">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="new-item-right">    
-                                    <div class="box-back-right-id">
-                                        <div class="btn-back-right-id" onclick="close_product_detail()">
-                                            <i class="fas fa-arrow-left"></i>
-                                            Kembali
-                                        </div>
-                                    </div>  
-                                    <div class="box-description-right-id">
-                                        <div class="bd-right-id"> 
-                                            <p>${item.Category}</p>
-                                            <div class="qty-box-pd"> 
-                                                Quantity : ${item.Stock_Quantity}
-                                            </div>
-                                        </div>
-                                        <p class="limited-text">${item.Name}</p>
-                                        <div class="rating-bottom-2">
-                                            <div class="star-box">
-                                                <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                                            </div>
-                                        </div>
-                                    </div>
+                        var hargaAwal = parseInt(item.Sell_Price)
+                        var discount = parseInt(item.Sell_Price * 0.1)
+                        var hargaTotal = hargaAwal + discount
+                        console.log(item)
+                        $('.box-item-detail').empty();
         
-                                    <div class="box-price-right-id">
-                                       
-                                        <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
-                                            Tambah
+                        axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                        .then((res)=>{
+                            var cust_comment = res.data
+                            // console.log(cust_comment)
+                            if(item.GroupBuy_Purchase == "false"){
+                                $('.box-item-detail').append(
+                                    `
+                                    <div class="new-item-left">
+                                        <div class="item-left-img-box">
+                                           
                                         </div>
-                                        <div class="box-small-price-2" onclick="open_checkout('${item.Product_Code}')">
-                                            Beli Sekarang
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="box-quality-right-id-2">
-                                        <div class="bsp-2">
-                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-                                            
-                            
-                                        </div>
-                                    
-                                    </div>
-                   
-                                    <div class="box-quality-right-id">
-                                        Product Sejenis
-                                        <div class="card-quality-right-id">
+                                        <div class="img-option-left">
                                             
                                         </div>
+                                        <div class="box-button-next-back">
+                                            <div  class="box-btn-left" onclick="back_btn()">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </div>
+                                            <div class="box-btn-right" onclick="next_btn()">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="box-option-right-id">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
-                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
+                                    <div class="new-item-right">    
+                                        <div class="box-back-right-id">
+                                            <div class="btn-back-right-id" onclick="close_product_detail()">
+                                                <i class="fas fa-arrow-left"></i>
+                                                Kembali
                                             </div>
-                                        </nav>
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                            ${item.Description}
-                                            </div>
-                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                            <div class="user-card-top-id">
-                                                <img src="../img/liked.png" alt="">
-                                                <div class="user-card-desc-top-id">
-                                                    Tambah Comment 
-                                                    <div class="card-for-comment">
-                                                        <input type="text" class="input_comment_cust">
-                                                        <div class="btn-send-comment " disabled onclick="send_comment_cust()">
-                                                            SEND
-                                                        </div>
-                                                    </div>
+                                        </div>  
+                                        <div class="box-description-right-id">
+                                            <div class="bd-right-id"> 
+                                                <p>${item.Category}</p>
+                                                <div class="qty-box-pd"> 
+                                                    Quantity : ${item.Stock_Quantity}
                                                 </div>
                                             </div>
-                                              
-                                               
-                                            </div>
-                                            
-                                            <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="btn-minus-id" id="icon-minus-id-1">
-                                                                <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-        
-                                                            </div>
-                                                            <div class=" btn-plus-id" id="icon-plus-id-1"> 
-                                                                <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-1-id">
-                                                        TIDAK BISA
-                                                    </div>
+                                            <p class="limited-text">${item.Name}</p>
+                                            <div class="rating-bottom-2">
+                                                <div class="star-box">
+                                                    <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
                                                 </div>
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="card-for-minus-plus-id">
-                                                                <div class="btn-minus-id" id="icon-minus-id-2">
-                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
+                                            </div>
+                                        </div>
+            
+                                        <div class="box-price-right-id">
+                                           
+                                            <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
+                                                Tambah
+                                            </div>
+                                            <div class="box-small-price-2" onclick="open_checkout('${item.Product_Code}')">
+                                                Beli Sekarang
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="box-quality-right-id-2">
+                                            <div class="bsp-2">
+                                                <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                                
                                 
-                                                                </div>
-                                                                <div class=" btn-plus-id" id="icon-plus-id-2"> 
-                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-2-id">
-                                                        TIDAK BISA
-                                                    </div>
+                                            </div>
+                                        
+                                        </div>
+                       
+                                        <div class="box-quality-right-id">
+                                            Product Sejenis
+                                            <div class="card-quality-right-id">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="box-option-right-id">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
+                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
+                                                <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>`
-                            )
-                        }else{
-                            $('.box-item-detail').append(
-                                `
-                                <div class="new-item-left">
-                                    <div class="item-left-img-box">
-                                       
-                                    </div>
-                                    <div class="img-option-left">
-                                        
-                                    </div>
-                                    <div class="box-button-next-back">
-                                        <div  class="box-btn-left" onclick="back_btn()">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </div>
-                                        <div class="box-btn-right" onclick="next_btn()">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="new-item-right">    
-                                    <div class="box-back-right-id">
-                                        <div class="btn-back-right-id" onclick="close_product_detail()">
-                                            <i class="fas fa-arrow-left"></i>
-                                            Kembali
-                                        </div>
-                                    </div>  
-                                    <div class="box-description-right-id">
-                                        <div class="bd-right-id"> 
-                                            <p>${item.Category}</p>
-                                            <div class="qty-box-pd"> 
-                                                Quantity : ${item.Stock_Quantity}
-                                            </div>
-                                        </div>
-                                        <p class="limited-text">${item.Name}</p>
-                                        <div class="rating-bottom-2">
-                                            <div class="star-box">
-                                                <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="box-price-right-id">
-                                       
-                                        <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
-                                            Tambah
-                                        </div>
-                                        <div class="box-small-price-2" onclick="open_checkout('${item.Product_Code}')">
-                                            Beli Sekarang
-                                        </div>
-                                        <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
-                                            Beli Harga Group
-                                        </div>
-                                    </div>
-                                    <div class="box-quality-right-id-2">
-                                        <div class="bsp-1">
-                                            <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-                                            
-                                            
-                                            <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                    
-                                    <div class="box-quality-right-id">
-                                        Product Sejenis
-                                        <div class="card-quality-right-id">
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="box-option-right-id">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
-                                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                            <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
-                                            </div>
-                                        </nav>
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                                 ${item.Description}
-                                            </div>
-                                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                                 <div class="user-card-top-id">
                                                     <img src="../img/liked.png" alt="">
                                                     <div class="user-card-desc-top-id">
@@ -4682,193 +4530,325 @@ function commafy( num ) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                  
+                                                   
+                                                </div>
+                                                
+                                                <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="btn-minus-id" id="icon-minus-id-1">
+                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
+            
+                                                                </div>
+                                                                <div class=" btn-plus-id" id="icon-plus-id-1"> 
+                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-1-id">
+                                                            TIDAK BISA
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="card-for-minus-plus-id">
+                                                                    <div class="btn-minus-id" id="icon-minus-id-2">
+                                                                        <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
+                                    
+                                                                    </div>
+                                                                    <div class=" btn-plus-id" id="icon-plus-id-2"> 
+                                                                        <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-2-id">
+                                                            TIDAK BISA
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`
+                                )
+                            }else{
+                                $('.box-item-detail').append(
+                                    `
+                                    <div class="new-item-left">
+                                        <div class="item-left-img-box">
+                                           
+                                        </div>
+                                        <div class="img-option-left">
+                                            
+                                        </div>
+                                        <div class="box-button-next-back">
+                                            <div  class="box-btn-left" onclick="back_btn()">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </div>
+                                            <div class="box-btn-right" onclick="next_btn()">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-item-right">    
+                                        <div class="box-back-right-id">
+                                            <div class="btn-back-right-id" onclick="close_product_detail()">
+                                                <i class="fas fa-arrow-left"></i>
+                                                Kembali
+                                            </div>
+                                        </div>  
+                                        <div class="box-description-right-id">
+                                            <div class="bd-right-id"> 
+                                                <p>${item.Category}</p>
+                                                <div class="qty-box-pd"> 
+                                                    Quantity : ${item.Stock_Quantity}
+                                                </div>
+                                            </div>
+                                            <p class="limited-text">${item.Name}</p>
+                                            <div class="rating-bottom-2">
+                                                <div class="star-box">
+                                                    <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="box-price-right-id">
+                                           
+                                            <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
+                                                Tambah
+                                            </div>
+                                            <div class="box-small-price-2" onclick="open_checkout('${item.Product_Code}')">
+                                                Beli Sekarang
+                                            </div>
+                                            <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
+                                                Beli Harga Group
+                                            </div>
+                                        </div>
+                                        <div class="box-quality-right-id-2">
+                                            <div class="bsp-1">
+                                                <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
+                                                
+                                                
+                                                <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
+                                                
                                             </div>
                                             
-                                            <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
-                                                            <div class="btn-minus-id" id="icon-minus-id-1">
-                                                                <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-        
-                                                            </div>
-                                                            <div class=" btn-plus-id" id="icon-plus-id-1"> 
-                                                                <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
+                                        </div>
+                        
+                                        <div class="box-quality-right-id">
+                                            Product Sejenis
+                                            <div class="card-quality-right-id">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="box-option-right-id">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
+                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
+                                                <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                    ${item.Description}
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                    <div class="user-card-top-id">
+                                                        <img src="../img/liked.png" alt="">
+                                                        <div class="user-card-desc-top-id">
+                                                            Tambah Comment 
+                                                            <div class="card-for-comment">
+                                                                <input type="text" class="input_comment_cust">
+                                                                <div class="btn-send-comment " disabled onclick="send_comment_cust()">
+                                                                    SEND
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="card-answer-id" id="answer-1-id">
-                                                        TIDAK BISA
                                                     </div>
                                                 </div>
-                                                <div class="card-faq-id">
-                                                    <div class="card-question-id">
-                                                        Apakah Bisa Pre Order ?
-                                                        <div class="card-for-minus-plus-id">
+                                                
+                                                <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
                                                             <div class="card-for-minus-plus-id">
-                                                                <div class="btn-minus-id" id="icon-minus-id-2">
-                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
-                                
+                                                                <div class="btn-minus-id" id="icon-minus-id-1">
+                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
+            
                                                                 </div>
-                                                                <div class=" btn-plus-id" id="icon-plus-id-2"> 
-                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
+                                                                <div class=" btn-plus-id" id="icon-plus-id-1"> 
+                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="card-answer-id" id="answer-1-id">
+                                                            TIDAK BISA
+                                                        </div>
                                                     </div>
-                                                    <div class="card-answer-id" id="answer-2-id">
-                                                        TIDAK BISA
+                                                    <div class="card-faq-id">
+                                                        <div class="card-question-id">
+                                                            Apakah Bisa Pre Order ?
+                                                            <div class="card-for-minus-plus-id">
+                                                                <div class="card-for-minus-plus-id">
+                                                                    <div class="btn-minus-id" id="icon-minus-id-2">
+                                                                        <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
+                                    
+                                                                    </div>
+                                                                    <div class=" btn-plus-id" id="icon-plus-id-2"> 
+                                                                        <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-answer-id" id="answer-2-id">
+                                                            TIDAK BISA
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                `
-                            )
-                        }
-                        console.log(filter_product)
-                        all_filter_product.map((val,index)=>{
-                            console.log(val)
-                            // console.log(product_id_pilihan)
-                            if(val.Product_Code == product_id_pilihan){
-                                $('.card-quality-right-id').append(`
-                                <div class="card-sejenis-id active_product">
-                                    <div class="card-sejenis-img-id">
-                                        <img src="${val.Picture_1}" alt="">
-                                    </div>
-                                    <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-commision">${val.Name}</p>
-                                        <p>RP. ${commafy(val.Sell_Price)}</p>
-                                        
-                                    </div>
-                                </div>
-                                `)
-        
-                            }else {
-
-                                $('.card-quality-right-id').append(`
-                                <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
-                                    <div class="card-sejenis-img-id">
-                                        <img src="${val.Picture_1}" alt="">
-                                    </div>
-                                    <div class="card-sejenis-desc-id">
-                                        <p class="limited-text-commision">${val.Name}</p>
-                                        <p>RP. ${commafy(val.Sell_Price)}</p>
-                                        
-                                    </div>
-                                </div>
-                                `)
-        
+                                    `
+                                )
                             }
+                            console.log(filter_product)
+                            all_filter_product.map((val,index)=>{
+                                console.log(val)
+                                // console.log(product_id_pilihan)
+                                if(val.Product_Code == product_id_pilihan){
+                                    $('.card-quality-right-id').append(`
+                                    <div class="card-sejenis-id active_product">
+                                        <div class="card-sejenis-img-id">
+                                            <img src="${val.Picture_1}" alt="">
+                                        </div>
+                                        <div class="card-sejenis-desc-id">
+                                            <p class="limited-text-commision">${val.Name}</p>
+                                            <p>RP. ${commafy(val.Sell_Price)}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    `)
+            
+                                }else {
     
-                        })
-                        
-                        $('.img-option-left').empty()
-                        $('.item-left-img-box')
-                        if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
-                            `)
-                        }else{
-                            $('.img-option-left').append(`
-                                <div class="option-left-1 img-1-id pop">
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
-                                </div>
-                            `)
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-1">
-                            `)
-                        }
-                        if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
-                            `)
-                        }else{
-                            $('.img-option-left').append(`
-                                <div class="option-left-1 img-2-id pop">
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
-                                </div>
-                            `)
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big" id="img-big-2">
-                            `)
-                        }
-                        if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
-
+                                    $('.card-quality-right-id').append(`
+                                    <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
+                                        <div class="card-sejenis-img-id">
+                                            <img src="${val.Picture_1}" alt="">
+                                        </div>
+                                        <div class="card-sejenis-desc-id">
+                                            <p class="limited-text-commision">${val.Name}</p>
+                                            <p>RP. ${commafy(val.Sell_Price)}</p>
+                                            
+                                        </div>
+                                    </div>
+                                    `)
+            
+                                }
+        
+                            })
                             
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
-                            `)
-                        }else{
-                            $('.img-option-left').append(`
-                                <div class="option-left-1 img-2-id pop">
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
-                                </div>
-                            `)
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big" id="img-big-3">
-                            `)
-                        }
+                            $('.img-option-left').empty()
+                            $('.item-left-img-box')
+                            if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                                `)
+                            }else{
+                                $('.img-option-left').append(`
+                                    <div class="option-left-1 img-1-id pop">
+                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
+                                    </div>
+                                `)
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-1">
+                                `)
+                            }
+                            if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                                `)
+                            }else{
+                                $('.img-option-left').append(`
+                                    <div class="option-left-1 img-2-id pop">
+                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
+                                    </div>
+                                `)
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big" id="img-big-2">
+                                `)
+                            }
+                            if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
+    
+                                
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                                `)
+                            }else{
+                                $('.img-option-left').append(`
+                                    <div class="option-left-1 img-2-id pop">
+                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
+                                    </div>
+                                `)
+                                $('.item-left-img-box').append(`
+                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big" id="img-big-3">
+                                `)
+                            }
                         
-                    
-                        
-                        // <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big" id="img-big-1">
-                        // <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big" id="img-big-2">
-                        // <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big-active" id="img-big-3">
-
-                 
-
-                    
-                        var comment_parse = JSON.parse(cust_comment.User_Comments)
-                        console.log(comment_parse)
-                        $('#nav-profile').empty()
-                        if(comment_parse == 'null' || comment_parse == null){
-                            $('#nav-profile').append(`
-                            <div class="user-card-top-id">
-                                <img src="../img/accounts.png" alt="">
-                                <div class="user-card-desc-top-id">
-                                    Tambah Comment 
-                                    <div class="card-for-comment">
-                                        <input type="text" class="input_comment_cust" >
-                                        <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
-                                            SEND
+                            var comment_parse = JSON.parse(cust_comment.User_Comments)
+                            console.log(comment_parse)
+                            $('#nav-profile').empty()
+                            if(comment_parse == 'null' || comment_parse == null){
+                                $('#nav-profile').append(`
+                                <div class="user-card-top-id">
+                                    <img src="../img/accounts.png" alt="">
+                                    <div class="user-card-desc-top-id">
+                                        Tambah Comment 
+                                        <div class="card-for-comment">
+                                            <input type="text" class="input_comment_cust" >
+                                            <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
+                                                SEND
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        `)
-                        }else if (comment_parse.length > 0 ) {
-                            comment_parse.map((val,index)=>{
-                                axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
-                                .then((res)=>{
-                                    console.log('axios jalan')
-                                    if(res.data){
-                                        var link_gambar = res.data
-                                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                        .then((res)=>{
-                                            console.log(res.data)
-                                            // res.data.map((val,index)=>{
-                                                $('#nav-profile').append(`
-                                                <div class="user-card-id">
-                                                    <div class="user-card-top-id">
-                                                        <img src="${link_gambar}" alt="">
-                                                        <div class="user-card-desc-top-id">
-                                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                            `)
+                            }else if (comment_parse.length > 0 ) {
+                                comment_parse.map((val,index)=>{
+                                    axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                    .then((res)=>{
+                                        console.log('axios jalan')
+                                        if(res.data){
+                                            var link_gambar = res.data
+                                            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                            .then((res)=>{
+                                                console.log(res.data)
+                                                // res.data.map((val,index)=>{
+                                                    $('#nav-profile').append(`
+                                                    <div class="user-card-id">
+                                                        <div class="user-card-top-id">
+                                                            <img src="${link_gambar}" alt="">
+                                                            <div class="user-card-desc-top-id">
+                                                                <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="user-card-bot-id">
+                                                            <p>${val.Comment}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="user-card-bot-id">
-                                                        <p>${val.Comment}</p>
-                                                    </div>
-                                                </div>
-                                                `)
-                                            // })
-                                        }).catch((err)=>{
-                                            console.log(err)
-                                        })
-                                    } else {
-                                        $('#nav-profile').append(`
+                                                    `)
+                                                // })
+                                            }).catch((err)=>{
+                                                console.log(err)
+                                            })
+                                        } else {
+                                            $('#nav-profile').append(`
                                                 <div class="user-card-id">
                                                     <div class="user-card-top-id">
                                                         <img src="../img/accounts.png" alt="">
@@ -4881,26 +4861,36 @@ function commafy( num ) {
                                                         <p>${val.Comment}</p>
                                                     </div>
                                                 </div>
-                                                `)
-                                    }
-                                }).catch((err)=>{
-                                    console.log(err)
+                                            `)
+                                        }
+                                        
+                                    }).catch((err)=>{
+                                        console.log(err)
+                                    })
                                 })
+                            }
+                            Swal.fire({
+                                title: 'Uploading Data',
+                                timer:100,
                             })
-
-                        }
-                    }).catch((err)=>{
-                        console.log(err)
-                    })
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+                        
                     
+                 
+            }).catch((err)=>{
                 
-             
+            })
         }).catch((err)=>{
-            
+            console.log(err)
         })
-    }).catch((err)=>{
-        console.log(err)
+
+    }
     })
+
+    
+    // console.log(this)
  }
 
 
@@ -6514,7 +6504,7 @@ async function addressMethod(address,item){
     if(item === 'Alamat Terdaftar'){
         Swal.fire({
             title: 'Uploading Data',
-            timer:3000,
+            timer:300000000,
             html: ` 
             <div class="boxcon">
                 <div class="box1">
@@ -6526,145 +6516,151 @@ async function addressMethod(address,item){
                 <div class="box2">
                 </div>
             </div>
-        `
-        })
-        $('.new-alamat-pengiriman').css('display','none')
-        $('.option-alamat-gb').css('display','flex')
-        $('.new-alamat-pengiriman').css('display','none')
-        // $('.province-box-gb').css('display','none')
-        // $('.kota-box-gb').css('display','none')
-        // $('.kecamatan-box-gb').css('display','none')
-        $('.kelurahan-box-gb').css('display','none')
-        $('.new-card-kurir-sp').css('display','none')
-        $('.new-box-card-kurir-sp').css('height','240px')
-        $('.new-box-card-kurir-sp').css('min-height','240px')
+        `,didOpen:async()=>{
 
-        var nama_province =  await find_province_from_address()
-        var nama_kota = await find_city_from_address(nama_province)
-        var nama_kecamatan = await find_district_from_address(nama_kota)
-        var nama_kelurahan = await find_subDistrict_from_address(nama_kecamatan)
-        var nama_kurir = 'tiki'
-        var kurir_kode = 'tiki'
-        var allKelurahan = []
-
-        get_all_province_from_courier(nama_kurir,kurir_kode).done(function(response){
-            get_all_city_from_courier(nama_kurir,kurir_kode,nama_province).done(function(response){
-                get_all_district_from_courier(nama_kurir,kurir_kode,nama_kota).done(function(response){
-                    get_all_subdistrict_from_courier(nama_kurir,kurir_kode,nama_kecamatan).done(function(response){
-                        allKelurahan = response
-                        // console.log(response)
-                        var Courier_Price_Code_orig = 'CGK01.00'
-                        var packing_type = ''
-                        const queryString = window.location.search;
-                        const urlParams = new URLSearchParams(queryString);
-                        var product_id = urlParams.get('groupbuy_id')
-                        get_product_detail_func(product_id).done(function(response){
-                            var item_product = response
-                            // console.log(item_product)
-                            var item_dimension = response.Dimension_CM_CUBIC
-                            var split_item_dimension = item_dimension.split('*')
-                            // console.log(split_item_dimension)
-                            var item_length = split_item_dimension[0]
-                            var item_width = split_item_dimension[1]
-                            var item_height = split_item_dimension[2]
-                            var paket_value = ''
-                            var allPengiriman = []
-                            if(item_length != undefined && item_length != null && item_length != "undefined"){
-                                
-                            }else {
-                                item_length = 1
-                            }
-                            if(item_width != undefined && item_width != null && item_width != "undefined"){
-                                
-                            }else {
-                                item_width = 1
-                            }
-                            if(item_height != undefined && item_height != null && item_height != "undefined"){
-                                
-                            }else {
-                                item_height = 1
-                            }
-                            var berat_product = parseInt(response.Weight_KG)
-                            if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
-                                berat_product = 0.1*1.5;
-                            }else{
-                                berat_product = berat_product*1*1.5;
-                            }
-                            new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
-                                allPengiriman = response
-                                // console.log(allPengiriman)
-                                // console.log(allKelurahan)
-                                $('.kelurahan-home-gb').empty()
-                                $('.pengiriman-home-gb').empty()
-                                $('.asuransi-home-gb').empty()
-                                $('.packing-home-gb').empty()
-                                $('.kodepos-home-gb').empty()
-                                $('.kodepos-home-gb').append(`
-                                    <option selected  class="id-kodepos-gb">Kode Pos</option>      
-                                `)
-                                $('.pengiriman-home-gb').append(`
-                                    <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
-                                `)
-                                $('.asuransi-home-gb').append(`
-                                    <option selected  class="id-asuransi-gb">Asuransi</option>      
-                                `)
-                                $('.packing-home-gb').append(`
-                                    <option selected  class="id-packing-gb">Packing</option>      
-                                `)
-                                allKelurahan.map((val,index)=>{
-                                    if(val.Sub_District == ''){
-                                        $('.kelurahan-home-gb').append(`
-                                            <option  value="${val.Sub_District}" class="id-kelurahan-gb">-</option> 
-                                        `)
-                                    }else {
-                                        $('.kelurahan-home-gb').append(`
-                                            <option  value="${val.Sub_District}" class="id-kelurahan-gb">${val.Sub_District}</option> 
-                                        `)
-                                        $('.kodepos-home-gb').append(`
-                                            <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
-                                        `)
-                                    }
-            
-                                })
-            
-
-                                if(allPengiriman){
-
-                                    if(allPengiriman.service != undefined) {
-                                        allPengiriman.service.map((val,index)=>{
-                                            $('.pengiriman-home-gb').append(`
-                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
-                                            `)
-                                        })
-                                    }
-                                    if(allPengiriman.insurance !=undefined){
-                                        allPengiriman.insurance.map((val,index)=>{
-                                            $('.asuransi-home-gb').append(`
-                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                            `)
-                                        })
-                                    }
-                                    if(allPengiriman.packing != undefined) {
-                                        allPengiriman.packing.map((val,index)=>{
-                                            $('.packing-home-gb').append(`
-                                                <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                            `)
-                                        })
-                                    }
-            
+            $('.new-alamat-pengiriman').css('display','none')
+            $('.option-alamat-gb').css('display','flex')
+            $('.new-alamat-pengiriman').css('display','none')
+            // $('.province-box-gb').css('display','none')
+            // $('.kota-box-gb').css('display','none')
+            // $('.kecamatan-box-gb').css('display','none')
+            $('.kelurahan-box-gb').css('display','none')
+            $('.new-card-kurir-sp').css('display','none')
+            $('.new-box-card-kurir-sp').css('height','240px')
+            $('.new-box-card-kurir-sp').css('min-height','240px')
+    
+            var nama_province =  await find_province_from_address()
+            var nama_kota = await find_city_from_address(nama_province)
+            var nama_kecamatan = await find_district_from_address(nama_kota)
+            var nama_kelurahan = await find_subDistrict_from_address(nama_kecamatan)
+            var nama_kurir = 'tiki'
+            var kurir_kode = 'tiki'
+            var allKelurahan = []
+    
+            get_all_province_from_courier(nama_kurir,kurir_kode).done(function(response){
+                get_all_city_from_courier(nama_kurir,kurir_kode,nama_province).done(function(response){
+                    get_all_district_from_courier(nama_kurir,kurir_kode,nama_kota).done(function(response){
+                        get_all_subdistrict_from_courier(nama_kurir,kurir_kode,nama_kecamatan).done(function(response){
+                            allKelurahan = response
+                            // console.log(response)
+                            var Courier_Price_Code_orig = 'CGK01.00'
+                            var packing_type = ''
+                            const queryString = window.location.search;
+                            const urlParams = new URLSearchParams(queryString);
+                            var product_id = urlParams.get('groupbuy_id')
+                            get_product_detail_func(product_id).done(function(response){
+                                var item_product = response
+                                // console.log(item_product)
+                                var item_dimension = response.Dimension_CM_CUBIC
+                                var split_item_dimension = item_dimension.split('*')
+                                // console.log(split_item_dimension)
+                                var item_length = split_item_dimension[0]
+                                var item_width = split_item_dimension[1]
+                                var item_height = split_item_dimension[2]
+                                var paket_value = ''
+                                var allPengiriman = []
+                                if(item_length != undefined && item_length != null && item_length != "undefined"){
+                                    
+                                }else {
+                                    item_length = 1
                                 }
+                                if(item_width != undefined && item_width != null && item_width != "undefined"){
+                                    
+                                }else {
+                                    item_width = 1
+                                }
+                                if(item_height != undefined && item_height != null && item_height != "undefined"){
+                                    
+                                }else {
+                                    item_height = 1
+                                }
+                                var berat_product = parseInt(response.Weight_KG)
+                                if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                                    berat_product = 0.1*1.5;
+                                }else{
+                                    berat_product = berat_product*1*1.5;
+                                }
+                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
+                                    allPengiriman = response
+                                    // console.log(allPengiriman)
+                                    // console.log(allKelurahan)
+                                    $('.kelurahan-home-gb').empty()
+                                    $('.pengiriman-home-gb').empty()
+                                    $('.asuransi-home-gb').empty()
+                                    $('.packing-home-gb').empty()
+                                    $('.kodepos-home-gb').empty()
+                                    $('.kodepos-home-gb').append(`
+                                        <option selected  class="id-kodepos-gb">Kode Pos</option>      
+                                    `)
+                                    $('.pengiriman-home-gb').append(`
+                                        <option selected  class="id-pengiriman-gb">Waktu Pengiriman</option>      
+                                    `)
+                                    $('.asuransi-home-gb').append(`
+                                        <option selected  class="id-asuransi-gb">Asuransi</option>      
+                                    `)
+                                    $('.packing-home-gb').append(`
+                                        <option selected  class="id-packing-gb">Packing</option>      
+                                    `)
+                                    allKelurahan.map((val,index)=>{
+                                        if(val.Sub_District == ''){
+                                            $('.kelurahan-home-gb').append(`
+                                                <option  value="${val.Sub_District}" class="id-kelurahan-gb">-</option> 
+                                            `)
+                                        }else {
+                                            $('.kelurahan-home-gb').append(`
+                                                <option  value="${val.Sub_District}" class="id-kelurahan-gb">${val.Sub_District}</option> 
+                                            `)
+                                            $('.kodepos-home-gb').append(`
+                                                <option  value="${val.Zipcode}" class="id-kodepos-gb">${val.Zipcode}</option> 
+                                            `)
+                                        }
+                
+                                    })
+                
+    
+                                    if(allPengiriman){
+    
+                                        if(allPengiriman.service != undefined) {
+                                            allPengiriman.service.map((val,index)=>{
+                                                $('.pengiriman-home-gb').append(`
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.insurance !=undefined){
+                                            allPengiriman.insurance.map((val,index)=>{
+                                                $('.asuransi-home-gb').append(`
+                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                `)
+                                            })
+                                        }
+                                        if(allPengiriman.packing != undefined) {
+                                            allPengiriman.packing.map((val,index)=>{
+                                                $('.packing-home-gb').append(`
+                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                `)
+                                            })
+                                        }
+                
+                                    }
+                                    Swal.fire({
+                                        title: 'Uploading Data',
+                                        timer:100,
+                                    })
+                                })
                             })
                         })
                     })
                 })
             })
+        }
         })
         
 
     }else if (item === 'Alamat Baru'){
         Swal.fire({
             title: 'Uploading Data',
-            timer:3000,
+            timer:300000000,
             html: ` 
             <div class="boxcon">
                 <div class="box1">
@@ -6676,20 +6672,25 @@ async function addressMethod(address,item){
                 <div class="box2">
                 </div>
             </div>
-        `
+        `,didOpen:()=>{
+            $('.option-alamat-gb').css('display','none')
+            $('.new-card-kurir-sp').css('display','flex')
+            $('.new-box-card-kurir-sp').css('height','600px')
+            $('.new-box-card-kurir-sp').css('min-height','600px')
+            $('.new-alamat-pengiriman').css('display','flex')
+            $('#id-kurir-gb-tiki').addClass('selected')
+            $('#id-kurir-gb-tiki').addClass('active_kurir_method')
+            // $('.new-box-card-kurir-sp-top').css('display','flex')
+            // $('.province-box-gb').css('display','flex')
+            // $('.kota-box-gb').css('display','flex')
+            // $('.kecamatan-box-gb').css('display','flex')
+            $('.kelurahan-box-gb').css('display','flex')
+            Swal.fire({
+                title: 'Uploading Data',
+                timer:100,
+            })
+        }
         })
-        $('.option-alamat-gb').css('display','none')
-        $('.new-card-kurir-sp').css('display','flex')
-        $('.new-box-card-kurir-sp').css('height','600px')
-        $('.new-box-card-kurir-sp').css('min-height','600px')
-        $('.new-alamat-pengiriman').css('display','flex')
-        $('#id-kurir-gb-tiki').addClass('selected')
-        $('#id-kurir-gb-tiki').addClass('active_kurir_method')
-        // $('.new-box-card-kurir-sp-top').css('display','flex')
-        // $('.province-box-gb').css('display','flex')
-        // $('.kota-box-gb').css('display','flex')
-        // $('.kecamatan-box-gb').css('display','flex')
-        $('.kelurahan-box-gb').css('display','flex')
     }
 }
 
