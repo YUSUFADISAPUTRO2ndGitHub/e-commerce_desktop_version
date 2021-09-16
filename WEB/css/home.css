@@ -6725,7 +6725,9 @@ loading new
 /* #sub-delivery-option{
     display: none;
 } */
-#sub-cart-option{
+
+
+/* #sub-cart-option{
     display: none;
 }
 #sub-kota-option{
@@ -6736,7 +6738,7 @@ loading new
 }
 #sub-kelurahan-option{
     display: none;
-}
+} */
 
 
 .card-item:hover {

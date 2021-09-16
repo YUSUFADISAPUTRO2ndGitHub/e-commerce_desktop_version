@@ -217,7 +217,7 @@ function loadCheckoutFinalConfirmationTable(condition){
         `)
 
     }else if(condition == "COD"){
-        render_select_option_kurir()
+        // render_select_option_kurir()
         var itemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
         var i = 0;
         var harga_shipping = 20000
@@ -346,7 +346,7 @@ function addressOptionSelected(x){
         $('#sub-kelurahan-option').css('display','block')
         $('#sub-kodepos-option').css('display','block')
         $('#sub-delivery-option').css('display','block')
-        re_render_select_option()
+        // re_render_select_option()
         
     }else{
         $("#address-selection-sub-saved-address").css("display", "block");
@@ -356,6 +356,7 @@ function addressOptionSelected(x){
         $('#sub-kota-option').css('display','none')
         $('#sub-kecamatan-option').css('display','none')
         $('#sub-kelurahan-option').css('display','none')
+        re_render_select_option()
         // $('#sub-kodepos-option').css('display','none')
     }
 }
@@ -1309,6 +1310,9 @@ const find_province_from_address= async ()=>{
             var allKota = []
             var allProduct = []
             var berat_product = 0
+            var allProvince = []
+            var allKota =[]
+            var allKecamatan = []
             var allKelurahan = []
             var allPengiriman = []
             var allKurir = []
@@ -1318,116 +1322,144 @@ const find_province_from_address= async ()=>{
                 var alamat_pilihan = res.data.Address_1
                 get_all_couriers().done(function(response){
                     allKurir = response
-                    get_all_city_from_courier('tiki','tiki',province_pilihan).done(function(response){
-                        allKota = response
-                        get_all_district_from_courier('tiki','tiki',kota_pilihan).done(function(response){
-                            get_all_subdistrict_from_courier('tiki','tiki',kecamatan_pilihan).done(function(response){
-                                allKelurahan =response
-                                // console.log(response)
-                                product.map((val,index)=>{
-                                    // console.log(val)
-                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.productNo}`)
-                                    .then((res)=>{
-                                        // console.log(res.data)
-                                        allProduct.push(res.data)
-                                        berat_product += (res.data.Weight_KG * 0.1)
-                                    }).catch((err)=>{
-                                        console.log(err)
-                                    })
-                                })
-                
-                                var Courier_Price_Code_orig = 'CGK01.00'
-                                var packing_type = ''
-                                // var berat_product = parseInt(item_product.Weight_KG)
-                                // console.log(allKelurahan)
-                                
-                                if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
-                                    berat_product = 0.1*1.5;
-                                }else{
-                                    berat_product = berat_product*1*1.5;
-                                }
-                                var length = ''
-                                var  width = '' 
-                                var  height = ''
-                                var paket_value = '' 
-                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
-                                    allPengiriman = response
-                                    $('.cart-pengiriman').empty()
-                                    $('.cart-asuransi').empty()
-                                    $('.cart-packing').empty()
-                                    $('.cart-kodepos').empty()
-                                    $('#sub-delivery-option').empty()
-                                    $('.cart-pengiriman').append(`
-                                            <option selected  class="co-pengiriman"> Pengiriman</option>      
-                                        `)
-                                    $('.cart-asuransi').append(`
-                                            <option selected  class="co-asuransi"> Asuransi</option>      
-                                        `)
-                                    $('.cart-packing').append(`
-                                            <option selected  class="co-packing"> Packing</option>      
-                                        `)
-                                    $('.cart-kodepos').append(`
-                                        <option selected  class="co-kodepos"> Kode Pos</option>      
-                                        `)
-                
-                                    allKelurahan.map((val,index)=>{
-                                        $('.cart-kodepos').append(`
-                                            <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
-                                        `)
-                                    })
-                                    allKurir.map((val,index)=>{
-                                        $('#sub-delivery-option').append(`
-                                            <option  value="${val.Courier_Code}" class="co-kurir">${val.Courier}</option> 
-                                        `)
-                                    })
-        
-                
-                                    if(allPengiriman){
-                                        console.log('masuk ke 1154')
-                                        if(allPengiriman.service != undefined){
-                                            allPengiriman.service.map((val,index)=>{
-                                                $('.cart-pengiriman').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
-                                                `)
-                                            })
-                                        }
-                                        if(allPengiriman.insurance != undefined){
-                                            allPengiriman.insurance.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
-                                                $('.cart-asuransi').append(`
-                                                    <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                                `)
-                                            })
-                                        }
-                                        if(allPengiriman.packing != undefined) {
-                                            allPengiriman.packing.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
-                                                $('.cart-packing').append(`
-                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                                `)
-                                            })
-                                        }
-                                        Swal.fire({
-                                            title: 'Uploading Data',
-                                            timer:100,
-                                        //     html: ` 
-                                        //     <div class="boxcon">
-                                        //         <div class="box1">
-                                        //         </div>
-                                        //         <div id="sold-id-loading">
-                                        //         SOLD 
-                                        //         </div>
-                                                    
-                                        //         <div class="box2">
-                                        //         </div>
-                                        //     </div>
-                                        // `,
+                    get_all_province_from_courier('tiki','tiki').done(function(response){
+                        allProvince = response
+                        get_all_city_from_courier('tiki','tiki',province_pilihan).done(function(response){
+                            allKota = response
+                            get_all_district_from_courier('tiki','tiki',kota_pilihan).done(function(response){
+                                allKecamatan = response
+                                get_all_subdistrict_from_courier('tiki','tiki',kecamatan_pilihan).done(function(response){
+                                    allKelurahan =response
+                                    product.map((val,index)=>{
+                                        axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.productNo}`)
+                                        .then((res)=>{
+                                            allProduct.push(res.data)
+                                            berat_product += (res.data.Weight_KG * 0.1)
+                                        }).catch((err)=>{
+                                            console.log(err)
                                         })
+                                    })
+                    
+                                    var Courier_Price_Code_orig = 'CGK01.00'
+                                    var packing_type = ''
+                                    // var berat_product = parseInt(item_product.Weight_KG)
+                                    // console.log(allKelurahan)
+                                    
+                                    if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                                        berat_product = 0.1*1.5;
+                                    }else{
+                                        berat_product = berat_product*1*1.5;
                                     }
+                                    var length = ''
+                                    var  width = '' 
+                                    var  height = ''
+                                    var paket_value = '' 
+                                    new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+                                        allPengiriman = response
+                                        $('.cart-pengiriman').empty()
+                                        $('.cart-provinsi').empty()
+                                        $('.cart-kota').empty()
+                                        $('.cart-kecamatan').empty()
+                                        $('.cart-kelurahan').empty()
+                                        $('.cart-asuransi').empty()
+                                        $('.cart-packing').empty()
+                                        $('.cart-kodepos').empty()
+                                        $('#sub-delivery-option').empty()
+
+                                        $('.cart-provinsi').append(`
+                                            <option selected  class="co-provinsi">Provinsi</option>      
+                                        `)
+                                        $('.cart-kota').append(`
+                                            <option selected  class="co-kota">Kota</option>      
+                                        `)
+                                        $('.cart-kecamatan').append(`
+                                            <option selected  class="co-kecamatan">Kecamatan</option>      
+                                        `)
+                                        $('.cart-kelurahan').append(`
+                                            <option selected  class="co-kelurahan">Kelurahan</option>      
+                                        `)
+
+                                        $('.cart-pengiriman').append(`
+                                                <option selected  class="co-pengiriman"> Pengiriman</option>      
+                                            `)
+                                        $('.cart-asuransi').append(`
+                                                <option selected  class="co-asuransi"> Asuransi</option>      
+                                            `)
+                                        $('.cart-packing').append(`
+                                                <option selected  class="co-packing"> Packing</option>      
+                                            `)
+                                        $('.cart-kodepos').append(`
+                                            <option selected  class="co-kodepos"> Kode Pos</option>      
+                                        `)
+                                        
+                                            console.log(allProvince)
+                                            console.log(allKecamatan)
+                                            console.log(allKelurahan)
+                                        allKurir.map((val,index)=>{
+                                            $('#sub-delivery-option').append(`
+                                                <option  value="${val.Courier_Code}" class="co-kurir">${val.Courier}</option> 
+                                            `)
+                                        })
+                                        allProvince.map((val,index)=>{
+                                            $('.cart-provinsi').append(`
+                                                <option  value="${val.Province}" class="co-provinsi">${val.Province}</option> 
+                                            `)
+                                        })
+                                        allKota.map((val,index)=>{
+                                            $('.cart-kota').append(`
+                                                <option  value="${val.City}" class="co-kota">${val.City}</option> 
+                                            `)
+                                        })
+                                        allKecamatan.map((val,index)=>{
+                                            $('.cart-kecamatan').append(`
+                                                <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
+                                            `)
+                                        })
+                                        allKelurahan.map((val,index)=>{
+                                            $('.cart-kelurahan').append(`
+                                                <option  value="${val.Sub_District}" class="co-kelurahan">${val.Sub_District}</option> 
+                                            `)
+                                            $('.cart-kodepos').append(`
+                                                <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
+                                            `)
+                                        })
+                                       
+            
+                    
+                                        if(allPengiriman){
+                                            console.log('masuk ke 1154')
+                                            if(allPengiriman.service != undefined){
+                                                allPengiriman.service.map((val,index)=>{
+                                                    $('.cart-pengiriman').append(`
+                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                    `)
+                                                })
+                                            }
+                                            if(allPengiriman.insurance != undefined){
+                                                allPengiriman.insurance.map((val,index)=>{
+                                                    $('.cart-asuransi').append(`
+                                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                    `)
+                                                })
+                                            }
+                                            if(allPengiriman.packing != undefined) {
+                                                allPengiriman.packing.map((val,index)=>{
+                                                    $('.cart-packing').append(`
+                                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                    `)
+                                                })
+                                            }
+                                            $('#sub-cart-option').css('display','none')
+                                            $('#sub-kota-option').css('display','none')
+                                            $('#sub-kecamatan-option').css('display','none')
+                                            $('#sub-kelurahan-option').css('display','none')
+
+                                            Swal.fire({
+                                                title: 'Uploading Data',
+                                                timer:100,
+                                            })
+                                        }
+                                    })
                                 })
                             })
                         })
@@ -1436,7 +1468,9 @@ const find_province_from_address= async ()=>{
             }).catch((err)=>{
                 console.log(err)
             })
-           
+            
+            $('.card-checkout-cc').empty()
+            console.log(product,'1445')
             product.map((val,index)=>{
                 
                 getProductsWithProductNo("","",val.productNo).done(function(response){
@@ -1922,10 +1956,7 @@ const render_select_option_kurir=async()=>{
     var token = localStorage.getItem('token')
     var alamat = $('#address-selection option:selected').val()
     var alamat_pilihan = $('#sub-saved-address option:selected').val()
-    // console.log(alamat_pilihan)
-    var testingAlamat = 'Jalan Jalan,DKI JAKARTA,JAKARTA BARAT,Kebon Jeruk,Kelapa Dua,'
-    // var split_testing2 = alamat_pilihan.split(',')
-    // console.log(split_testing2)
+   
     console.log(alamat)
     if(alamat == 'TO SAVED ADDRESS'){
         console.log('masuk ke alamat if to saved address')
@@ -1949,8 +1980,8 @@ const render_select_option_kurir=async()=>{
             var kurir_pilihan = ''
             var kurir_kode = ''
             get_all_couriers().done(function(response){
-                kurir_pilihan = response.Courier
-                kurir_kode = response.Courier_Code
+                kurir_pilihan = response[0].Courier
+                kurir_kode = response[0].Courier_Code
                 var item_product = ''
                 var cart_local = localStorage.getItem('itemsToCheckout')
                 var parse_cart = JSON.parse(cart_local)
@@ -1964,14 +1995,20 @@ const render_select_option_kurir=async()=>{
             .then((res)=>{
                 // console.log(province_pilihan, '1167')
                 var alamat_pilihan = res.data.Address_1
+                console.log(kurir_pilihan)
+                console.log(kurir_kode)
+                console.log(province)
+                console.log(city)
+                console.log(district)
+                console.log(sub_district)
                 get_all_couriers().done(function(response){
                     allKurir = response
-                    get_all_city_from_courier('tiki','tiki',province).done(function(response){
+                    get_all_city_from_courier(kurir_pilihan,kurir_kode,province).done(function(response){
                         allKota = response
-                        get_all_district_from_courier('tiki','tiki',city).done(function(response){
-                            get_all_subdistrict_from_courier('tiki','tiki',district).done(function(response){
+                        get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
+                            get_all_subdistrict_from_courier(kurir_pilihan,kurir_kode,district).done(function(response){
                                 allKelurahan =response
-                                // console.log(response)
+                                console.log(response)
                                 var berat_product = 0
                                 var allProduct = []
                                 product.map((val,index)=>{
@@ -2086,12 +2123,13 @@ const render_select_option_kurir=async()=>{
             }).catch((err)=>{
                 console.log(err)
             })
-           
+
+            console.log(product, '2099')
+            $('.card-checkout-cc').empty()
             product.map((val,index)=>{
                 
                 getProductsWithProductNo("","",val.productNo).done(function(response){
                     var berat_barang = parseFloat(response.Weight_KG)
-                    // 
                     var total_berat_barang = berat_barang  * val.quantity
                     var fixed_total_berat_barang = total_berat_barang.toFixed(2)
                     if(product.length>4 ){
@@ -2221,7 +2259,7 @@ const render_select_option_kurir=async()=>{
                                     })
                                     allDistrict.map((val,index)=>{
                                         $('.cart-kecamatan').append(`
-                                        <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
+                                            <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
                                         `)
                                     })
                                     allSub_District.map((val,index)=>{
@@ -2243,9 +2281,6 @@ const render_select_option_kurir=async()=>{
                                         }
                                         if(allPengiriman.insurance != undefined){
                                             allPengiriman.insurance.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
                                                 $('.cart-asuransi').append(`
                                                     <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                                 `)
@@ -2253,16 +2288,12 @@ const render_select_option_kurir=async()=>{
                                         }
                                         if(allPengiriman.packing != undefined) {
                                             allPengiriman.packing.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
                                                 $('.cart-packing').append(`
                                                     <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                                 `)
                                             })
                                         }
                                     }
-        
                                 })
                             })  
                         })  
@@ -2273,140 +2304,139 @@ const render_select_option_kurir=async()=>{
 }
 
 
-const re_render_select_option=()=>{
-    var allKurir = []
-    var allProvince = []
-    var allKota =[]
-    var allDistrict =[]
-    var allSub_District = []
-    var allPengiriman =[]
-
-    var kurir=[]
-    var province =[]
-    var kota =[]
-    var district =[]
-    var sub_district=[]
-    var item_product =''
-
+const re_render_select_option=async()=>{
+        var alamat = $('#address-selection option:selected').val()
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const checkout = urlParams.get('checkout_array');
+        var checkout_stringify = JSON.parse(checkout)
+        var product = checkout_stringify
     
-    get_all_couriers().done(function(response){
-        var item_product = ''
-        var cart_local = localStorage.getItem('itemsToCheckout')
-        var parse_cart = JSON.parse(cart_local)
-        kurir = response[0]
-        allKurir = response
-        var array_cart =[]
-        for(var i =0; i<parse_cart.length; i++){
-            getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-            array_cart.push(response)
-            })
+        var allKurir = []
+        var allProvince = []
+        var allKota =[]
+        var allDistrict =[]
+        var allSub_District = []
+        var allPengiriman =[]
+    
+        var kurir=[]
+        var province =[]
+        var kota =[]
+        var district =[]
+        var sub_district=[]
+        var item_product =''
+
+    if(alamat == 'TO SAVED ADDRESS'){
+        console.log('masuk ke alamat if to saved address')
+        // var split_alamat = alamat_pilihan.split(' ')
+        // console.log(split_alamat)
+        var province = localStorage.getItem('province_customer')
+        var city = localStorage.getItem('city_customer')
+        var district = localStorage.getItem('district_customer')
+        var sub_district = localStorage.getItem('sub_district_customer')
+        var allKelurahan = []
+        var allPengiriman = []
+        var token = localStorage.getItem('token')
+        if(province != undefined && city != undefined 
+            && district != undefined && sub_district != undefined){
+                console.log('masuk ke if 1934')
+        }else {
+            province = await find_province_from_address()
+            city = await find_city_from_address(province)
+            district = await find_district_from_address(city)
+            sub_district = await find_subDistrict_from_address(district)
         }
-        get_all_province_from_courier(kurir.Courier, kurir.Courier_Code).done(function(response){
-            province = response[0]
-            allProvince = response
-            get_all_city_from_courier(kurir.Courier, kurir.Courier_Code,province.Province).done(function(response){
-                allKota = response
-                kota = response[0]
-                get_all_district_from_courier(kurir.Courier, kurir.Courier_Code, kota.City).done(function(response){
-                    allDistrict = response
-                    district = response[0]
-                    get_all_subdistrict_from_courier(kurir.Courier, kurir.Courier_Code, district.District,).done(function(response){
-                        allSub_District = response
-                        sub_district = response[0]
-                        var total_berat_product=0
-                        var Courier_Price_Code_orig = 'CGK01.00'
-                        var packing_type = ''
-                        var length = ''
-                        var  width = '' 
-                        var  height = ''
-                        var paket_value = '' 
-                        for(var i =0; i<array_cart.length; i++){
-                            var berat_parse = array_cart[i].Weight_KG *1
-                            if(berat_parse <= 0 || berat_parse == null || berat_parse == undefined || Number.isNaN(berat_parse)){
-                                berat_parse = 0.1*1.5;
-                            }else{
-                                berat_parse = berat_parse*1*1.5;
-                            }
-                            // 
-                            total_berat_product += berat_parse
-                            // 
-                        }
-                        var total_berat_ceil =Math.ceil(total_berat_product)
-                        // 
-                        new_get_shipping_cost_informations(Courier_Price_Code_orig , allSub_District[0].Courier_Price_Code, packing_type, total_berat_ceil, length, width, height, paket_value).done(function(response){
-                            allPengiriman = response
-                                /* Read more about handling dismissals below */
+            var kurir_pilihan = ''
+            var kurir_kode = ''
+            get_all_couriers().done(function(response){
+                kurir_pilihan = response[0].Courier
+                kurir_kode = response[0].Courier_Code
+                var item_product = ''
+                var cart_local = localStorage.getItem('itemsToCheckout')
+                var parse_cart = JSON.parse(cart_local)
+                var array_cart =[]
+                for(var i =0; i<parse_cart.length; i++){
+                    getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
+                    array_cart.push(response)
+                    })
+                }
+                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then((res)=>{
+                // console.log(province_pilihan, '1167')
+                var alamat_pilihan = res.data.Address_1
+                get_all_couriers().done(function(response){
+                    allKurir = response
+                    get_all_city_from_courier(kurir_pilihan,kurir_kode,province).done(function(response){
+                        allKota = response
+                        get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
+                            get_all_subdistrict_from_courier(kurir_pilihan,kurir_kode,district).done(function(response){
+                                allKelurahan =response
+                                console.log(province)
+                                console.log(city)
+                                console.log(district)
+                                console.log(sub_district)
+                                var berat_product = 0
+                                var allProduct = []
+                                product.map((val,index)=>{
+                                    // console.log(val)
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.productNo}`)
+                                    .then((res)=>{
+                                        // console.log(res.data)
+                                        allProduct.push(res.data)
+                                        berat_product += (res.data.Weight_KG * 0.1)
+                                    }).catch((err)=>{
+                                        console.log(err)
+                                    })
+                                })
+                
+                                var Courier_Price_Code_orig = 'CGK01.00'
+                                var packing_type = ''
+                                // var berat_product = parseInt(item_product.Weight_KG)
+                                console.log(allKelurahan)
                                 
-                                    
-                                    $('#sub-delivery-option').empty()
-                                    $('.cart-provinsi').empty() 
-                                    $('.cart-kota').empty() 
-                                    $('.cart-kecamatan').empty()
-                                    $('.cart-kelurahan').empty()
-                                    $('.cart-kodepos').empty()
+                                if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                                    berat_product = 0.1*1.5;
+                                }else{
+                                    berat_product = berat_product*1*1.5;
+                                }
+                                var length = ''
+                                var  width = '' 
+                                var  height = ''
+                                var paket_value = '' 
+                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
+                                    allPengiriman = response
                                     $('.cart-pengiriman').empty()
                                     $('.cart-asuransi').empty()
                                     $('.cart-packing').empty()
-        
-        
-                                    $('#sub-delivery-option').append(`
-                                        <option selected  class="co-kurir"> Kurir</option>      
-                                    `)
-                                    $('.cart-provinsi').append(`
-                                        <option selected  class="co-provinsi"> Provinsi</option>      
-                                    `)
-        
-                                    $('.cart-kota').append(`
-                                        <option selected  class="co-kota"> Kota</option>      
-                                    `)
-                                    $('.cart-kecamatan').append(`
-                                        <option selected  class="co-kecamatan"> Kecamatan</option>      
-                                    `)
-                                    $('.cart-kelurahan').append(`
-                                        <option selected  class="co-kelurahan"> Kelurahan</option>      
-                                    `)
-                                    $('.cart-kodepos').append(`
-                                        <option selected  class="co-kodepos"> Kodepos</option>      
-                                    `)
+                                    $('.cart-kodepos').empty()
+                                    $('#sub-delivery-option').empty()
                                     $('.cart-pengiriman').append(`
-                                        <option selected  class="co-pengiriman"> Pengiriman</option>      
-                                    `)
+                                            <option selected  class="co-pengiriman"> Pengiriman</option>      
+                                        `)
                                     $('.cart-asuransi').append(`
-                                        <option selected  class="co-asuransi"> Asuransi</option>      
-                                    `)
+                                            <option selected  class="co-asuransi"> Asuransi</option>      
+                                        `)
                                     $('.cart-packing').append(`
-                                        <option selected  class="co-packing"> Packing</option>      
-                                    `)
-                                    
+                                            <option selected  class="co-packing"> Packing</option>      
+                                        `)
+                                    $('.cart-kodepos').append(`
+                                        <option selected  class="co-kodepos"> Kode Pos</option>      
+                                        `)
+                
+                                    allKelurahan.map((val,index)=>{
+                                        $('.cart-kodepos').append(`
+                                            <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
+                                        `)
+                                    })
                                     allKurir.map((val,index)=>{
                                         $('#sub-delivery-option').append(`
-                                            <option value="${val.Courier}">${val.Courier}</option>        
-                                        `)
-                                    })  
-                                    allProvince.map((val,index)=>{
-                                        $('.cart-provinsi').append(`
-                                            <option  value="${val.Province}" class="co-provinsi">${val.Province}</option> 
+                                            <option  value="${val.Courier_Code}" class="co-kurir">${val.Courier}</option> 
                                         `)
                                     })
-                                    allKota.map((val,index)=>{
-                                        $('.cart-kota').append(`
-                                            <option  value="${val.City}" class="co-kota">${val.City}</option> 
-                                        `)
-                                    })
-                                    allDistrict.map((val,index)=>{
-                                        $('.cart-kecamatan').append(`
-                                        <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
-                                        `)
-                                    })
-                                    allSub_District.map((val,index)=>{
-                                        $('.cart-kelurahan').append(`
-                                        <option  value="${val.Sub_District}" class="co-kelurahan">${val.Sub_District}</option> 
-                                        `)
-                                        $('.cart-kodepos').append(`
-                                        <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
-                                        `)
-                                    })
+        
+                
                                     if(allPengiriman){
+                                        console.log('masuk ke 1154')
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,index)=>{
                                                 $('.cart-pengiriman').append(`
@@ -2426,23 +2456,222 @@ const re_render_select_option=()=>{
                                         }
                                         if(allPengiriman.packing != undefined) {
                                             allPengiriman.packing.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
                                                 $('.cart-packing').append(`
                                                     <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                                 `)
                                             })
                                         }
+                                        Swal.fire({
+                                            title: 'Uploading Data',
+                                            timer:100,
+                                        })
                                     }
-                                
-                            
+                                })
+                            })
                         })
+                    })
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+            console.log(product, ' 2447 render')
+            $('.card-checkout-cc').empty()
+            product.map((val,index)=>{
+                
+                getProductsWithProductNo("","",val.productNo).done(function(response){
+                    var berat_barang = parseFloat(response.Weight_KG)
+                    // 
+                    var total_berat_barang = berat_barang  * val.quantity
+                    var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+                    if(product.length>4 ){
+                        $('.card-checkout-cc').css('height','300px')
+                    }
+                    
+                    $('.card-checkout-cc').append(`
+                        <div class="card-item-checkout-cc">
+                            <div class="img-item-checkout-cc">
+                                <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
+                            </div>
+                            <div class="desc-item-checkout-cc">
+                                <p>${response.Name}</p>
+                                <div class="desc-item-2-checkout-cc">
+                                    <p>Quantity : ${val.quantity}</p>
+                                    <p>Berat  : ${fixed_total_berat_barang}</p>
+                                    <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+                                </div>
+                                <div class="for_input_coupon"> 
+                                    <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                    <div class="card-coupon-used" id="delete-${val.productNo}" >
+            
+                                    <div>
+                                </div>
+                            </div>
+                        </div>
+                    `)   
+                })
+            })
+            })
+    }else {
+        get_all_couriers().done(function(response){
+            var item_product = ''
+            var cart_local = localStorage.getItem('itemsToCheckout')
+            var parse_cart = JSON.parse(cart_local)
+            kurir = response[0]
+            allKurir = response
+            var array_cart =[]
+            for(var i =0; i<parse_cart.length; i++){
+                getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
+                array_cart.push(response)
+                })
+            }
+            get_all_province_from_courier(kurir.Courier, kurir.Courier_Code).done(function(response){
+                province = response[0]
+                allProvince = response
+                get_all_city_from_courier(kurir.Courier, kurir.Courier_Code,province.Province).done(function(response){
+                    allKota = response
+                    kota = response[0]
+                    get_all_district_from_courier(kurir.Courier, kurir.Courier_Code, kota.City).done(function(response){
+                        allDistrict = response
+                        district = response[0]
+                        get_all_subdistrict_from_courier(kurir.Courier, kurir.Courier_Code, district.District,).done(function(response){
+                            allSub_District = response
+                            sub_district = response[0]
+                            var total_berat_product=0
+                            var Courier_Price_Code_orig = 'CGK01.00'
+                            var packing_type = ''
+                            var length = ''
+                            var  width = '' 
+                            var  height = ''
+                            var paket_value = '' 
+                            for(var i =0; i<array_cart.length; i++){
+                                var berat_parse = array_cart[i].Weight_KG *1
+                                if(berat_parse <= 0 || berat_parse == null || berat_parse == undefined || Number.isNaN(berat_parse)){
+                                    berat_parse = 0.1*1.5;
+                                }else{
+                                    berat_parse = berat_parse*1*1.5;
+                                }
+                                // 
+                                total_berat_product += berat_parse
+                                // 
+                            }
+                            var total_berat_ceil =Math.ceil(total_berat_product)
+                            // 
+                            new_get_shipping_cost_informations(Courier_Price_Code_orig , allSub_District[0].Courier_Price_Code, packing_type, total_berat_ceil, length, width, height, paket_value).done(function(response){
+                                allPengiriman = response
+                                    /* Read more about handling dismissals below */
+                                    
+                                        
+                                        $('#sub-delivery-option').empty()
+                                        $('.cart-provinsi').empty() 
+                                        $('.cart-kota').empty() 
+                                        $('.cart-kecamatan').empty()
+                                        $('.cart-kelurahan').empty()
+                                        $('.cart-kodepos').empty()
+                                        $('.cart-pengiriman').empty()
+                                        $('.cart-asuransi').empty()
+                                        $('.cart-packing').empty()
+            
+            
+                                        $('#sub-delivery-option').append(`
+                                            <option selected  class="co-kurir"> Kurir</option>      
+                                        `)
+                                        $('.cart-provinsi').append(`
+                                            <option selected  class="co-provinsi"> Provinsi</option>      
+                                        `)
+            
+                                        $('.cart-kota').append(`
+                                            <option selected  class="co-kota"> Kota</option>      
+                                        `)
+                                        $('.cart-kecamatan').append(`
+                                            <option selected  class="co-kecamatan"> Kecamatan</option>      
+                                        `)
+                                        $('.cart-kelurahan').append(`
+                                            <option selected  class="co-kelurahan"> Kelurahan</option>      
+                                        `)
+                                        $('.cart-kodepos').append(`
+                                            <option selected  class="co-kodepos"> Kodepos</option>      
+                                        `)
+                                        $('.cart-pengiriman').append(`
+                                            <option selected  class="co-pengiriman"> Pengiriman</option>      
+                                        `)
+                                        $('.cart-asuransi').append(`
+                                            <option selected  class="co-asuransi"> Asuransi</option>      
+                                        `)
+                                        $('.cart-packing').append(`
+                                            <option selected  class="co-packing"> Packing</option>      
+                                        `)
+                                        
+                                        allKurir.map((val,index)=>{
+                                            $('#sub-delivery-option').append(`
+                                                <option value="${val.Courier}">${val.Courier}</option>        
+                                            `)
+                                        })  
+                                        allProvince.map((val,index)=>{
+                                            $('.cart-provinsi').append(`
+                                                <option  value="${val.Province}" class="co-provinsi">${val.Province}</option> 
+                                            `)
+                                        })
+                                        allKota.map((val,index)=>{
+                                            $('.cart-kota').append(`
+                                                <option  value="${val.City}" class="co-kota">${val.City}</option> 
+                                            `)
+                                        })
+                                        allDistrict.map((val,index)=>{
+                                            $('.cart-kecamatan').append(`
+                                            <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
+                                            `)
+                                        })
+                                        allSub_District.map((val,index)=>{
+                                            $('.cart-kelurahan').append(`
+                                            <option  value="${val.Sub_District}" class="co-kelurahan">${val.Sub_District}</option> 
+                                            `)
+                                            $('.cart-kodepos').append(`
+                                            <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
+                                            `)
+                                        })
+                                        if(allPengiriman){
+                                            if(allPengiriman.service != undefined){
+                                                allPengiriman.service.map((val,index)=>{
+                                                    $('.cart-pengiriman').append(`
+                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                    `)
+                                                })
+                                            }
+                                            if(allPengiriman.insurance != undefined){
+                                                allPengiriman.insurance.map((val,index)=>{
+                                                    // 
+                                                    // 
+                                                    // 
+                                                    $('.cart-asuransi').append(`
+                                                        <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                    `)
+                                                })
+                                            }
+                                            if(allPengiriman.packing != undefined) {
+                                                allPengiriman.packing.map((val,index)=>{
+                                                    // 
+                                                    // 
+                                                    // 
+                                                    $('.cart-packing').append(`
+                                                        <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                    `)
+                                                })
+                                            }
+                                        }
+                                    
+                                
+                            })
+                        })  
                     })  
-                })  
+                })
             })
         })
-    })
+    }
+
+
+
+
+    
 }
 
 
@@ -3145,20 +3374,12 @@ const kotaCheckout=()=>{
         }
     
         if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan){
-            // 
             $('.danger-error').css('display','none')
             var cart_local = localStorage.getItem('itemsToCheckout')
-            // 
             var parse_cart = JSON.parse(cart_local)
-            // 
-            // 
             var array_cart =[]
             for(var i =0; i<parse_cart.length; i++){
-                // 
                 getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-                // get_product_detail_func(parse_cart[i].productNo).done(function(response){
-                // 
-                // 
                 array_cart.push(response)
                 })
             }
@@ -3167,18 +3388,14 @@ const kotaCheckout=()=>{
                 get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
                     province =response[0]
                     allProvince = response
-                    // 
                     get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
                         kota = response[0]
                         allKota = response
-                        // 
                         get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
                             district = response[0]
                             allDistrict = response
-                            // 
                             get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district.District).done(function(response){
                                 allSub_District = response
-                                // 
                                 var total_berat_product=0
                                 var Courier_Price_Code_orig = 'CGK01.00'
                                 var packing_type = ''
@@ -3229,11 +3446,7 @@ const kotaCheckout=()=>{
                                     $('.cart-packing').append(`
                                         <option selected  class="co-packing"> Packing</option>      
                                     `)
-                                    // allKota.map((val,index)=>{
-                                    //     $('.cart-kota').append(`
-                                    //         <option  value="${val.City}" class="co-kota">${val.City}</option> 
-                                    //     `)
-                                    // })
+
                                     allDistrict.map((val,index)=>{
                                         $('.cart-kecamatan').append(`
                                         <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
@@ -3257,9 +3470,6 @@ const kotaCheckout=()=>{
                                         }
                                         if(allPengiriman.insurance != undefined){
                                             allPengiriman.insurance.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
                                                 $('.cart-asuransi').append(`
                                                     <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                                 `)
@@ -3267,9 +3477,6 @@ const kotaCheckout=()=>{
                                         }
                                         if(allPengiriman.packing != undefined) {
                                             allPengiriman.packing.map((val,index)=>{
-                                                // 
-                                                // 
-                                                // 
                                                 $('.cart-packing').append(`
                                                     <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                                 `)
