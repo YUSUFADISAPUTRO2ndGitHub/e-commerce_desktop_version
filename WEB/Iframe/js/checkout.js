@@ -13,7 +13,6 @@ $(document).ready(async function(){
 
 
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
-        console.log('line 3 jalan checkout')
         if(response != false){
             if(response.Address_1 != "NULL" && response.Address_1 != null && response.Address_1 != "undefined"){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_1 + "\">" + response.Address_1 + "</option>");

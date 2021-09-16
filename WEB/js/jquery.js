@@ -1373,8 +1373,6 @@ $(function(){
                 
 
                 var filter_product = allProduct.filter((val)=>{
-                    console.log(val.Name)
-                    console.log(value)
                     var valueCap = value.toUpperCase()
                     
                     if(val.Name.toUpperCase().includes(valueCap)){
@@ -1383,12 +1381,8 @@ $(function(){
                         return val
                     }
                 })
-                console.log(filter_product)
-                console.log(all_product_filter)
-                
-                console.log(all_product_filter)
                 all_product_filter.map((val,index)=>{
-                    console.log(val, '1352')
+                    // console.log(val, '1352')
                     if(val === false){
                         $('.render-li-search').append(`
                             <li  id="${val.Name}">${value} Tidak Ditemukan</li>
