@@ -332,7 +332,7 @@ function getAllCategories(access_token, session_id){
 
 function getAllSubCategories(Get_ALL_Sub_Category_Based_On_Category){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Get_ALL_Sub_Category_Based_On_Category}`,
+        "url": `https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Get_ALL_Sub_Category_Based_On_Category}`,
         "method": "POST",
         "timeout": 0,
     };

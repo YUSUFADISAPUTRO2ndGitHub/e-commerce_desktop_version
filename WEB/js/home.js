@@ -1251,9 +1251,9 @@ const  about_us=()=>{
 
 
 
-const refresh=()=>{
-    window.location.reload()
-}
+// const refresh=()=>{
+//     window.location.reload()
+// }
 
 const close_toast=()=>{
     $('.toast_prod_information').css('display','none')

@@ -4,13 +4,10 @@
 
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-    // 
-    // 
     if(dataParse != null || dataParse != undefined ){
         $('.cart-counter').css('display','block')
         $('.cart-counter').text(dataParse.length)
     }else {
-        // $('.cart-counter').text('0')
         $('.cart-counter').css('display','none')
     }
 }, 1000);   
@@ -18,21 +15,11 @@ var allData = []
 
 
 $( document ).ready(function() {
-    
+    getAllData()
     $('.ref-cod').on('change',function(){
         var selectedVal = $('.ref-cod option:selected').val()
         
     })
-
-    // var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-    // 
-    // $('.cart-counter').text(dataParse.length)
-    // var test =$('.cart-counter').val()
-    // 
-
-    
-
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const render_from = urlParams.get('render_from')
@@ -75,12 +62,9 @@ $( document ).ready(function() {
     }else if (detail_list_hutang != undefined){
         detail_hutang_home(detail_list_hutang)
     }
-    // else {
-    //     
-    // }
 
 
-    getAllData()
+    
    
 
 
@@ -183,6 +167,38 @@ setInterval(() => {
 }, 3600000);  
 
 
+const get_all_cat_subCat_for_storage=()=>{
+
+    
+    var allData_category = []
+    axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
+    .then((res)=>{
+        // console.log(res.data)
+        var cat_stringify = JSON.stringify(res.data)
+        localStorage.setItem('all_category',cat_stringify)
+
+
+        
+        var allData_subcat = []
+        var detail_allCategory = []
+        res.data.forEach((val,index)=>{
+            axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${val.Category}`)
+            .then((res)=>{
+                // console.log(res.data)
+                allData_subcat.push([{"Category":val.Category},res.data])
+                var array_stringify = JSON.stringify(allData_subcat)
+                localStorage.setItem('all_subCategory',array_stringify)
+                // var get_array = JSON.parse(localStorage.getItem('all_subCategory'))
+                // console.log(get_array)
+            }).catch((err)=>{
+    
+            })
+        })
+        console.log(allData_subcat)
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
 
 
 const getAllData=async()=>{
@@ -214,6 +230,8 @@ var all_data = JSON.parse(localStorage.getItem('all_data_product'))
         render_item_all_category()
         renderOptionSearch()
     }
+    get_all_cat_subCat_for_storage()
+
     
 
     var province =  await new_find_province_from_address()
@@ -385,16 +403,13 @@ const renderOptionSearch=()=>{
     var token = localStorage.getItem('token')
         axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
         .then((res)=>{
-            console.log(res.data)
+            // console.log(res.data)
             res.data.map((val,index)=>{
-                // if(){
-                    if(index<5){
-                        $('.header-search-option').append(`
-                        <p onclick="getAllItem_fromAllCat('${val.Category}')">${val.Category}</p>
-                        `)
-                    }
-    
-                // }
+                if(index<5){
+                    $('.header-search-option').append(`
+                    <p onclick="getAllItem_fromAllCat('${val.Category}')">${val.Category}</p>
+                    `)
+                }
             })
 
         }).catch((err)=>{
@@ -921,46 +936,95 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
     timerProgressBar: true,
     didOpen: () => {
         Swal.showLoading()
-         console.log(subCategory)
-        axios.post(`https://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
-        .then((res)=>{
-            // $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
-            console.log('get all item from all cat jalan')
-            console.log(res.data)
-            res.data.map((val,index)=>{
-                console.log(val)
+
+
+        var allDataProduct = []
+        var allData_storage = JSON.parse(localStorage.getItem('all_data_product'))
+        
+        if(allData_storage != undefined && allData_storage.length !=0){
+            console.log('masuk ke if 945 subcategory')
+            allData_storage.forEach((val,index)=>{
+                console.log(val.Subcategory == subCategory,'ini val local', val.Subcategory, subCategory)
+                // console.log(subCategory,' ini params')
                 
-                var hargaAwal = parseInt(val.Sell_Price)
-                var discount = parseInt(val.Sell_Price * 0.1)
-                var hargaTotal = hargaAwal + discount
-                $('.box-list-kategori').append(
-                `
-                    <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
-                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
-                        <div class="card-all-item-list">
-                            <p class="limited-text-short">${val.Name}</p>
-                            <div class="split-all-item">
-                                <div class="item-all-price">
-                                    <p>RP. ${commafy(hargaTotal)}</p>
-                                    <p>Rp. ${commafy(hargaAwal)}</p>
+                if(val.Subcategory == subCategory){
+                    console.log(val)
+                    allDataProduct.push(val)
+                    var hargaAwal = parseInt(val.Sell_Price)
+                    var discount = parseInt(val.Sell_Price * 0.1)
+                    var hargaTotal = hargaAwal + discount
+                    $('.box-list-kategori').append(
+                        `
+                            <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
+                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
+                                <div class="card-all-item-list">
+                                    <p class="limited-text-short">${val.Name}</p>
+                                    <div class="split-all-item">
+                                        <div class="item-all-price">
+                                            <p>RP. ${commafy(hargaTotal)}</p>
+                                            <p>Rp. ${commafy(hargaAwal)}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    `
-                )
-            }) 
+                            `
+                            )
+                }
+            })
+            // console.log(subCategory)
+            // console.log('get all item from all cat jalan')
+            // console.log(res.data)
+          
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             $('.modals-lk').css('display','block')
             Swal.fire({
                 title: 'Uploading Data',
                 timer:100,
             }) 
-            console.log('selesai render 957')
-            
-        }).catch((err)=>{
-            
-        })
+        }else {
+            axios.post(`https://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
+            .then((res)=>{
+                // $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
+                console.log(subCategory)
+                console.log('masuk ke else 991 subcategory')
+                // console.log(res.data)
+                res.data.map((val,index)=>{
+                    console.log(val)
+                    
+                    var hargaAwal = parseInt(val.Sell_Price)
+                    var discount = parseInt(val.Sell_Price * 0.1)
+                    var hargaTotal = hargaAwal + discount
+                    $('.box-list-kategori').append(
+                    `
+                        <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
+                            <div class="card-all-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-all-item">
+                                    <div class="item-all-price">
+                                        <p>RP. ${commafy(hargaTotal)}</p>
+                                        <p>Rp. ${commafy(hargaAwal)}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    )
+                }) 
+                $('.modals-lk').addClass('melihat') // ini bisa hampir
+                $('.modals-lk').css('display','block')
+                Swal.fire({
+                    title: 'Uploading Data',
+                    timer:100,
+                }) 
+            }).catch((err)=>{
+                
+            })
+
+        }
+
+     
+        console.log('selesai render 957')
         timerInterval = setInterval(() => {
         const content = Swal.getHtmlContainer()
         if (content) {
@@ -1001,35 +1065,74 @@ const renderItemBasedOnCategory=(Category)=>{
         timerProgressBar: true,
         didOpen: () => {
             Swal.showLoading()
-            axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
-            .then((res)=>{
-                
-                 res.data.map((val,index)=>{
-                    
-                    
-                    $('.box-list-kategori').append(
-                        `
-                        <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
-                            <div class="box-img-lk">
-                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="">
-                            </div>
-                            <p>${val.Subcategory}</p>
-                        </div>
-                        `
-                        )
-                    })
-                //     myFrame.html(test);
-                    $('.modals-lk').addClass('melihat') // ini bisa hampir
-                    // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
-                    $('.modals-lk').css('display','block')  
-                    // alert('render item based on category jalan 407')
-                    Swal.fire({
-                        title: 'Uploading Data',
-                        timer:100,
-                    })
-                }).catch((err)=>{
-                    
+
+            var allDataProduct = []
+            var allData_storage = JSON.parse(localStorage.getItem('all_subCategory'))
+            // var allData_storage = []
+            console.log(allData_storage)
+            if(allData_storage != undefined && allData_storage.length !=0) {
+                console.log(allData_storage,'ini category 1009')
+                allData_storage.forEach((val,index)=>{
+                    // console.log(val.Category.toUpperCase())
+                    // console.log(val[0].Category.toUpperCase())
+                    if(val[0].Category.toUpperCase() == Category ){
+                        // console.log(val)
+                        allDataProduct.push(val)
+                    }
                 })
+                console.log(allDataProduct)
+                allDataProduct[0][1].map((val,index)=>{
+                    console.log(val.Subcategory)
+                   $('.box-list-kategori').append(
+                       `
+                       <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
+                           <div class="box-img-lk">
+                               <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="">
+                           </div>
+                           <p>${val.Subcategory}</p>
+                       </div>
+                       `
+                       )
+                   })
+                   $('.modals-lk').addClass('melihat') // ini bisa hampir
+                   // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
+                   $('.modals-lk').css('display','block')  
+                   // alert('render item based on category jalan 407')
+                   Swal.fire({
+                       title: 'Uploading Data',
+                       timer:100,
+                   })
+            }else {
+                console.log('masuk ke else 1053')
+                axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
+                .then((res)=>{
+                    allDataProduct.push(res.data)
+                    console.log(allDataProduct)
+                    res.data.map((val,index)=>{
+                       $('.box-list-kategori').append(
+                           `
+                           <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
+                               <div class="box-img-lk">
+                                   <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="">
+                               </div>
+                               <p>${val.Subcategory}</p>
+                           </div>
+                           `
+                           )
+                       })
+                       $('.modals-lk').addClass('melihat') // ini bisa hampir
+                       // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${subcategory}`) 
+                       $('.modals-lk').css('display','block')  
+                       // alert('render item based on category jalan 407')
+                       Swal.fire({
+                           title: 'Uploading Data',
+                           timer:100,
+                       })
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            }
+          
             timerInterval = setInterval(() => {
             const content = Swal.getHtmlContainer()
             if (content) {
@@ -3912,11 +4015,9 @@ function commafy( num ) {
                         allData_storage.filter((item,index)=>{
                             if(item.Name.includes(val)){
                                 all_filter_product.push(item)
-                                
                             }
                         })
                     })
-
                     var hargaAwal = parseInt(data_for_render[0].Sell_Price)
                     var discount = parseInt(data_for_render[0].Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
