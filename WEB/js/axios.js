@@ -1075,7 +1075,7 @@ const renderItemBasedOnCategory=(Category)=>{
                 allData_storage.forEach((val,index)=>{
                     // console.log(val.Category.toUpperCase())
                     // console.log(val[0].Category.toUpperCase())
-                    if(val[0].Category.toUpperCase() == Category ){
+                    if(val[0].Category.toUpperCase() == Category.toUpperCase() ){
                         // console.log(val)
                         allDataProduct.push(val)
                     }
