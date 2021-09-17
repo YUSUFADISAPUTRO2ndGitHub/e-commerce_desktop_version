@@ -2427,7 +2427,7 @@ input:focus {
     border-radius: 10px;
     box-shadow: 5px 5px 20px #217283;
     /* padding-left:100px; */
-    background-color: transparent;
+    background-color: white;
 }
 
 .modals-search-result {
@@ -2837,6 +2837,7 @@ input:focus {
     color: #217283;
     margin: 10px;
     border-radius: 10px;
+    box-shadow: 5px 5px 20px #217283 !important;
 }
 .card-all-item:hover {
     cursor: pointer;

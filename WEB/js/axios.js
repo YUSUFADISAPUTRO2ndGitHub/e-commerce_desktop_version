@@ -148,10 +148,6 @@ $( document ).ready(function() {
     var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
     var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
     var subdistrict_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
-    // console.log(province_storage)
-    // console.log(city_storage)
-    // console.log(district_storage)
-    // console.log(subdistrict_storage)
 
 if(province_storage != null && city_storage != null && district_storage != null && subdistrict_storage != null){
         console.log('local province dll udah ke isi')
@@ -194,7 +190,7 @@ const get_all_cat_subCat_for_storage=()=>{
     
             })
         })
-        console.log(allData_subcat)
+        // console.log(allData_subcat)
     }).catch((err)=>{
         console.log(err)
     })
@@ -270,7 +266,7 @@ const new_find_subDistrict_from_address=async(district)=>{
                         response.forEach((val,index)=>{
                             if(alamat_pilihan.toUpperCase().includes(val.Sub_District.toUpperCase())){
                                 kelurahan_pilihan = val.Sub_District
-                                console.log(kelurahan_pilihan, 'ini kelurahan pilihan')
+                                // console.log(kelurahan_pilihan, 'ini kelurahan pilihan')
                                 resolve(kelurahan_pilihan)
                             }
                         })
@@ -302,7 +298,7 @@ const new_find_district_from_address=async(city)=>{
                     response.forEach((val,index)=>{
                         if(alamat_pilihan.toUpperCase().includes(val.District.toUpperCase())){
                             kecamatan_pilihan = val.District
-                            console.log(kecamatan_pilihan)
+                            // console.log(kecamatan_pilihan)
                             resolve(kecamatan_pilihan)
                         }
                     })
@@ -4022,6 +4018,7 @@ function commafy( num ) {
                     var discount = parseInt(data_for_render[0].Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
                     $('.box-item-detail').empty()
+                    console.log(data_for_render)
                     axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                     .then((res)=>{
                         var cust_comment = res.data
@@ -4306,9 +4303,9 @@ function commafy( num ) {
                         $('.item-left-img-box').empty()
 
                         if(data_for_render[0].Picture_1 == undefined || data_for_render[0].Picture_1 == null || data_for_render[0].Picture_1 == 'NULL' || data_for_render[0].Picture_1 == ''){
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
-                            `)
+                            // $('.item-left-img-box').append(`
+                            //     <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                            // `)
                         }else{
                             $('.img-option-left').append(`
                                 <div class="option-left-1 img-1-id pop">
@@ -4320,9 +4317,9 @@ function commafy( num ) {
                             `)
                         }
                         if(data_for_render[0].Picture_2 == undefined || data_for_render[0].Picture_2 == null || data_for_render[0].Picture_2 == 'NULL' || data_for_render[0].Picture_2 == ''){
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
-                            `)
+                            // $('.item-left-img-box').append(`
+                            //     <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                            // `)
                         }else{
                             $('.img-option-left').append(`
                                 <div class="option-left-1 img-2-id pop">
@@ -4336,9 +4333,9 @@ function commafy( num ) {
                         if(data_for_render[0].Picture_3 == undefined || data_for_render[0].Picture_3 == null || data_for_render[0].Picture_3 == 'NULL' || data_for_render[0].Picture_3 == ''){
                 
                             
-                            $('.item-left-img-box').append(`
-                                <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
-                            `)
+                            // $('.item-left-img-box').append(`
+                            //     <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                            // `)
                         }else{
                             $('.img-option-left').append(`
                                 <div class="option-left-1 img-2-id pop">
@@ -4776,9 +4773,9 @@ function commafy( num ) {
                                 $('.img-option-left').empty()
                                 $('.item-left-img-box').empty()
                                 if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
-                                    $('.item-left-img-box').append(`
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
-                                    `)
+                                    // $('.item-left-img-box').append(`
+                                    //     <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                                    // `)
                                 }else{
                                     $('.img-option-left').append(`
                                         <div class="option-left-1 img-1-id pop">
@@ -4790,9 +4787,9 @@ function commafy( num ) {
                                     `)
                                 }
                                 if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
-                                    $('.item-left-img-box').append(`
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
-                                    `)
+                                    // $('.item-left-img-box').append(`
+                                    //     <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                                    // `)
                                 }else{
                                     $('.img-option-left').append(`
                                         <div class="option-left-1 img-2-id pop">
@@ -4806,9 +4803,9 @@ function commafy( num ) {
                                 if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
                         
                                     
-                                    $('.item-left-img-box').append(`
-                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
-                                    `)
+                                    // $('.item-left-img-box').append(`
+                                    //     <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                                    // `)
                                 }else{
                                     $('.img-option-left').append(`
                                         <div class="option-left-1 img-2-id pop">
@@ -5320,9 +5317,9 @@ function commafy( num ) {
                             $('.img-option-left').empty()
                             $('.item-left-img-box')
                             if(item.Picture_1 == undefined || item.Picture_1 == null || item.Picture_1 == 'NULL' || item.Picture_1 == ''){
-                                $('.item-left-img-box').append(`
-                                    <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
-                                `)
+                                // $('.item-left-img-box').append(`
+                                //     <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="" class="img-big img-notfound" id="img-big-1" val="img-notfound">
+                                // `)
                             }else{
                                 $('.img-option-left').append(`
                                     <div class="option-left-1 img-1-id pop">
@@ -5334,9 +5331,9 @@ function commafy( num ) {
                                 `)
                             }
                             if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
-                                $('.item-left-img-box').append(`
-                                    <img src="${item.Picture_2}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
-                                `)
+                                // $('.item-left-img-box').append(`
+                                //     <img src="${item.Picture_2}" alt="" class="img-big img-notfound" id="img-big-2" val="img-notfound">
+                                // `)
                             }else{
                                 $('.img-option-left').append(`
                                     <div class="option-left-1 img-2-id pop">
@@ -5350,9 +5347,9 @@ function commafy( num ) {
                             if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
     
                                 
-                                $('.item-left-img-box').append(`
-                                    <img src="${item.Picture_3}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
-                                `)
+                                // $('.item-left-img-box').append(`
+                                //     <img src="${item.Picture_3}" alt="" class="img-big img-notfound" id="img-big-3" val="img-notfound">
+                                // `)
                             }else{
                                 $('.img-option-left').append(`
                                     <div class="option-left-1 img-2-id pop">
