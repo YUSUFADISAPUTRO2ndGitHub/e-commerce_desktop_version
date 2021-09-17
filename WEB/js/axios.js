@@ -3905,7 +3905,7 @@ function commafy( num ) {
                             return val
                         }
                     })
-                    console.log('masuk ke if dari local storage 3908')
+                    // console.log('masuk ke if dari local storage 3908')
                     var split_product = data_for_render[0].Name.split(' ')
                     var all_filter_product = []
                     split_product.forEach((val,index)=>{
@@ -4843,10 +4843,8 @@ function commafy( num ) {
                         console.log(err)
                     })
                 }
-
             }
-            })
-
+        })
  }
 
  const render_get_product_detail_searching_page=(product_id)=>{
