@@ -2,6 +2,10 @@
 
 
 $(function(){
+
+
+
+
     setTimeout(()=>{
         $('.insta-box').css('transform','translateX(100%)')
         $('.fa-arrow-circle-left').css('visibility','visible')

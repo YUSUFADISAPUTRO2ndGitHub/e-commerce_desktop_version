@@ -59,6 +59,7 @@
     /* left:-10px; */
     font-weight: 600;
     font-size:13px;
+    text-align: center;
 }
 .card-lk:hover {
     cursor: pointer;
