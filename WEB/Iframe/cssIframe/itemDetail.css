@@ -802,9 +802,18 @@
     left:-5%;
     color:#217384;
     font-weight:500;
+    transition:0.5s;
 }
 .btn-back-right-id:hover {
     cursor:pointer;
+    color:red;
+}
+.fa-arrow-left{
+    transition:0.5s;
+}
+.btn-back-right-id:hover .fa-arrow-left {
+    cursor: pointer;
+    color:red;
 }
 .btn-back-right-id i {
     color:#217283;

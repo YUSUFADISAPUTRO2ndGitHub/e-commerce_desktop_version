@@ -100,7 +100,6 @@ $( document ).ready(function() {
             }
             await localStorage.setItem("all_district_tiki", JSON.stringify(all_district_tiki));
             var all_subdistrict_tiki = [];
-            console.log('jalan 137')
             for(i = 0; i < all_district_tiki.length; i++){
                 for(z = 0; z < all_district_tiki[i].District.length; z++){
                     if((all_district_tiki[i].District[z] != undefined)){
@@ -257,8 +256,6 @@ async function get_all_blob(val,index){
                   });
                 
             }else if (val.Picture_3.length >0 && val.Picture_3 != 'NULL'){
-                console.log('hanya ada pic 3',index)
-
                 await loadXHR(`${val.Picture_3}`).then(function(blob) {
                     // here the image is a blob
                     resolve([{blob_3:blob,val}])
@@ -300,7 +297,6 @@ async function loop_through_items(page, item_no){
                         let i = 0;
                         for(i; i < response_body.d.length; i++){
                             let item_information = (await get_item_details(response_body.d[i].id));
-                            console.log(item_information.no);
                             if(item_no === item_information.no){
                                 resolve(item_information);
                                 i = response_body.d.length;
@@ -324,7 +320,6 @@ const getAllData=async()=>{
     var all_data = JSON.parse(localStorage.getItem('all_data_product'))
     allData = all_data
    console.log('get all data jalan')
-   console.log(all_data)
    axios.post('https://products.sold.co.id/get-product-details')
    .then((res)=>{
         if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
@@ -609,6 +604,8 @@ const get_product_detail_from_main_page=(product_id)=>{
     
     // render_get_product_detail(product_id)  
     $(this).scrollTop('.modals-product-detail')
+     var height = $('.box-render-new').position()
+    console.log('height top',height.top)
 $('.box-delete-success').css('display','block')
 $('.modals-product-detail').css('display','block')
 $('.close-button').css('display','block')
@@ -735,7 +732,7 @@ const renderItemNew=()=>{
                                     </div>
                                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                        <img src="./img/badge_new.png" alt="" class="img-badge-best">
+                                        <img src="./img/badge_new.png" alt="" class="img-badge-new">
                                     </div>
                                 </div>
                             </div>
@@ -825,7 +822,7 @@ const renderItemAll=()=>{
                                 </div>
                                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                     <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                    <img src="./img/badge_new.png" alt="" class="img-badge-best">
+                                    <img src="./img/badge_new.png" alt="" class="img-badge-new">
                                 </div>
                             </div>
                         </div>
@@ -1142,11 +1139,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
         var allData_storage = JSON.parse(localStorage.getItem('all_data_product'))
         
         if(allData_storage != undefined && allData_storage.length !=0){
-            console.log('masuk ke if 945 subcategory')
-            allData_storage.forEach((val,index)=>{
-                console.log(val.Subcategory == subCategory,'ini val local', val.Subcategory, subCategory)
-                // console.log(subCategory,' ini params')
-                
+            allData_storage.forEach((val,index)=>{ 
                 if(val.Subcategory == subCategory){
                     console.log(val)
                     allDataProduct.push(val)
@@ -1185,12 +1178,8 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
             axios.post(`https://products.sold.co.id/get-product-details?subcategory=${subCategory}`)
             .then((res)=>{
                 // $('.modals-lk').attr('src',`../WEB/Iframe/kategoriItem.html?subcategory=${subCategory}`)  
-                console.log(subCategory)
-                console.log('masuk ke else 991 subcategory')
-                // console.log(res.data)
+
                 res.data.map((val,index)=>{
-                    console.log(val)
-                    
                     var hargaAwal = parseInt(val.Sell_Price)
                     var discount = parseInt(val.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
@@ -1224,7 +1213,6 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
         }
 
      
-        console.log('selesai render 957')
         timerInterval = setInterval(() => {
         const content = Swal.getHtmlContainer()
         if (content) {
@@ -1269,9 +1257,7 @@ const renderItemBasedOnCategory=(Category)=>{
             var allDataProduct = []
             var allData_storage = JSON.parse(localStorage.getItem('all_subCategory'))
             // var allData_storage = []
-            console.log(allData_storage)
             if(allData_storage != undefined && allData_storage.length !=0) {
-                console.log(allData_storage,'ini category 1009')
                 allData_storage.forEach((val,index)=>{
                     // console.log(val.Category.toUpperCase())
                     // console.log(val[0].Category.toUpperCase())
@@ -1280,9 +1266,7 @@ const renderItemBasedOnCategory=(Category)=>{
                         allDataProduct.push(val)
                     }
                 })
-                console.log(allDataProduct)
                 allDataProduct[0][1].map((val,index)=>{
-                    console.log(val.Subcategory)
                    $('.box-list-kategori').append(
                        `
                        <div class="card-lk hvr-float-shadow" onclick="getAllItem('${val.Subcategory}')">
@@ -1303,11 +1287,9 @@ const renderItemBasedOnCategory=(Category)=>{
                        timer:100,
                    })
             }else {
-                console.log('masuk ke else 1053')
                 axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
                 .then((res)=>{
                     allDataProduct.push(res.data)
-                    console.log(allDataProduct)
                     res.data.map((val,index)=>{
                        $('.box-list-kategori').append(
                            `
@@ -1417,7 +1399,6 @@ function back_to_home(){
 // }
 
 const render_group_buy=(product_id)=>{
-    console.log('jalan')
     Swal.fire({
         // title: 'Uploading Data',
         timer:300000000,
@@ -1456,11 +1437,6 @@ const render_group_buy=(product_id)=>{
         var city_customer = localStorage.getItem('city_customer')
         var district_customer = localStorage.getItem('district_customer')
         var sub_district_customer = localStorage.getItem('sub_district_customer')
-        console.log(province_customer)
-        console.log(city_customer)
-        console.log(district_customer)
-        console.log(sub_district_customer)
-    
     
         axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
         .then((res)=>{
@@ -1722,12 +1698,6 @@ const render_group_buy=(product_id)=>{
                                                 // get_shipping_cost_informations(kurir.Courier,kurir.Courier_Code,province.Province,kota.City,kelurahan.District,kecamatan[0].Sub_District).done(function(response){
                                                     new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
                                                         allPengiriman = response
-                                                        console.log(allProvince)
-                                                        console.log(allKota)
-                                                        console.log(allKecamatan)
-                                                        console.log(allKelurahan)
-                                                        console.log(allPengiriman)
-                                                    
                                                     
                                                     if(allPengiriman){
                                                         if(allPengiriman.service != undefined) {
@@ -1859,12 +1829,6 @@ const render_group_buy=(product_id)=>{
                                                 // get_shipping_cost_informations(kurir.Courier,kurir.Courier_Code,province.Province,kota.City,kelurahan.District,kecamatan[0].Sub_District).done(function(response){
                                                     new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
                                                         allPengiriman = response
-                                                        console.log(allProvince)
-                                                        console.log(allKota)
-                                                        console.log(allKecamatan)
-                                                        console.log(allKelurahan)
-                                                        console.log(allPengiriman)
-                                                    
                                                     
                                                     if(allPengiriman){
                                                         if(allPengiriman.service != undefined) {
@@ -2127,8 +2091,6 @@ const kurirMethodHome=(kurir,product_id)=>{
         $('.kodepos-home-gb').append(`
             <option selected  class="id-kodepos-gb">Kode Pos</option>      
         `)
-            console.log(province_storage)
-            console.log(city_storage)
             var province_pilihan = ''
         province_storage.map((val,index)=>{
             if(index == 0 ){
@@ -2145,9 +2107,6 @@ const kurirMethodHome=(kurir,product_id)=>{
                 kota_pilihan = val.City[0].City
             }
         })
-        console.log(kota_pilihan)
-    
-
         allKota[0].map((val,index)=>{
             $('.kota-home-gb').append(`
                 <option   value="${val.City}" class="id-kota-gb">${val.City}</option> 
@@ -2541,7 +2500,6 @@ const provinceMethodHome=(product_id)=>{
             })
             district_storage.forEach((val)=>{
                 if(val.City == kota_pilihan){
-                    console.log(val.District)
                     allDistrict.push(val.District)
                     district_pilihan = val.District[0].District
                 }
@@ -2561,7 +2519,6 @@ const provinceMethodHome=(product_id)=>{
                     <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
                 `)
             })
-            console.log(allDistrict)
             allDistrict[0].map((val,index)=>{
                 if(val.Sub_District == ''){
                     $('.kecamatan-home-gb').append(`
@@ -2576,13 +2533,11 @@ const provinceMethodHome=(product_id)=>{
 
             })
             get_product_detail_func(product_id).done(function(response){
-                var item_product = response
-                console.log(district_pilihan)
+                var item_product = response                
                 get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
                     kelurahan = response
                     allKelurahan = response
                     allSub_District = response
-                    console.log(response)
                     
                     var Courier_Price_Code_orig = 'CGK01.00'
                     var packing_type = ''
@@ -2599,8 +2554,6 @@ const provinceMethodHome=(product_id)=>{
     
                     
                     new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
-                        console.log(Courier_Price_Code_orig ,'/', allKelurahan[0].Courier_Price_Code, '/', allKelurahan , '/', packing_type,'/',  berat_product, '/',length,'/', width, '/',height, '/',paket_value)
-                        console.log(response)
                         allPengiriman = response
                         
                         // $('.radio-group-delivery').empty()
@@ -2635,8 +2588,6 @@ const provinceMethodHome=(product_id)=>{
                             <option selected  class="id-kodepos-gb">Kode Pos</option>      
                         `)
       
-                     
-                        console.log(allKelurahan)
                         allKelurahan.map((val,index)=>{
     
                             if(val.Sub_District == ''){
@@ -2734,13 +2685,11 @@ const provinceMethodHome=(product_id)=>{
                 // console.log(district_pilihan)
                 get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
                     allKecamatan = response
-                    console.log(response)
                     district_pilihan = response[0].District
                     get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
                         kelurahan = response
                         allKelurahan = response
                         allSub_District = response
-                        console.log(response)
                     
                         
                         var Courier_Price_Code_orig = 'CGK01.00'
@@ -3118,8 +3067,6 @@ const kotaMethodHome=(product_id)=>{
             district_storage.forEach((val,index)=>{
                 if(val.City == kota_pilihan){
                     allDistrict.push(val.District)
-                    console.log(val)
-                    console.log(val.District[0].District)
                     kecamatan_pilihan = val.District[0].District
                 }
             })
@@ -3134,8 +3081,6 @@ const kotaMethodHome=(product_id)=>{
             })
             get_product_detail_func(product_id).done(function(response){
                 var item_product = response
-                console.log(kecamatan_pilihan)
-                console.log(new_kurir_pilihan, kurir_kode)
                 get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kecamatan_pilihan).done(function(response){
                     kelurahan = response
                     allKelurahan = response
@@ -3213,7 +3158,6 @@ const kotaMethodHome=(product_id)=>{
                         })
                         
                         if(allPengiriman){
-                            console.log('masuk ke if 2419')
                             if(allPengiriman.service != undefined) {
                                 allPengiriman.service.map((val,index)=>{
                                     
@@ -3668,36 +3612,25 @@ const kecamatanMethodHome=(product_id)=>{
                         get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
                             kecamatan = response[0]
                             allKecamatan = response
-                            console.log(kecamatan_pilihan)
                             get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,kecamatan_pilihan).done(function(response){
                                 kelurahan = response
                                 allKelurahan = response
-                                console.log(response)
                                 
                                 var Courier_Price_Code_orig = 'CGK01.00'
                                 var packing_type = ''
                                 var berat_product = parseInt(item_product.Weight_KG)
-                                console.log(berat_product)
                                 if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
                                     berat_product = 0.1*1.5;
-                                    console.log(berat_product)
                                 }else{
                                     berat_product = berat_product*1*1.5;
-                                    console.log(berat_product*1*1.5)
                                 }
                                 var total_berat_product = berat_product.toFixed(2)
-                                console.log(total_berat_product)
-                                console.log(berat_product)
-                                console.log(item_product)
                                 var length = '1'
                                 var  width = '1' 
                                 var  height = '1'
                                 var paket_value = '' 
                                 new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
-                                   
-                                    console.log(Courier_Price_Code_orig ,'/', allKelurahan[0].Courier_Price_Code,'/', packing_type,'/', total_berat_product,'/', length,'/', width, '/',height,'/', paket_value)
-                                    console.log(response)
-                                
+
                                     allPengiriman = response
                                     
                                     // $('.radio-group-delivery').empty()
@@ -3777,7 +3710,6 @@ const kecamatanMethodHome=(product_id)=>{
                                     //     }
         
                                     // })
-                                    console.log(allKelurahan)
                                     allKelurahan.map((val,index)=>{
         
                                         if(val.Sub_District == ''){
@@ -3794,14 +3726,10 @@ const kecamatanMethodHome=(product_id)=>{
                                            
                                         }
                                     })
-                                    console.log(allPengiriman)
                                     if(allPengiriman){
 
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
-                                                console.log(val)
-                                                
-                                                
                                                 $('.pengiriman-home-gb').append(`
                                                     <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
                                                 `)
@@ -3858,8 +3786,7 @@ const kecamatanMethodHome=(product_id)=>{
 const pengirimanMethodHome=(product_id)=>{
     
 
-    var alamat_pilihan = $('.active_address_method').attr('data-value')
-    console.log(alamat_pilihan)
+        var alamat_pilihan = $('.active_address_method').attr('data-value')
         var province_pilihan=$('.province-home-gb option:selected').val()
         var kota_pilihan=$('.kota-home-gb option:selected').val()
         var kecamatan_pilihan=$('.kecamatan-home-gb option:selected').val()
@@ -3947,10 +3874,6 @@ const pengirimanMethodHome=(product_id)=>{
         if(isKurir_pilihan && isKota_pilihan && isProvince_pilihan && isKelurahan_pilihan && isKecamatan_pilihan && isQty_pilihan) {
             $('.alert-danger').css('display','none')
             check_qty()
-            console.log('masuk ke 3277')
-            console.log(isQty_pilihan)
-            console.log(total_qty_from_user)
-     
         }else {
            
             Swal.fire({
@@ -4181,6 +4104,8 @@ function commafy( num ) {
  const render_get_product_detail=(product_id)=>{
     // console.log(product_id,'2637')
     $(this).scrollTop('.modals-product-detail')
+    // var height = $('.box-render-new').position()
+    // console.log('height top',height.top)
             Swal.fire({
             title: 'Please Wait',
             html: ` 
@@ -4236,12 +4161,10 @@ function commafy( num ) {
                     var img_2 = ''
                     var img_3 = ''
 
-                        console.log('jalan 3')
                         var hargaAwal = parseInt(data_for_render[0].Sell_Price)
                         var discount = parseInt(data_for_render[0].Sell_Price * 0.1)
                         var hargaTotal = hargaAwal + discount
                         $('.box-item-detail').empty()
-                        console.log(data_for_render)
                         if(data_for_render[0].GroupBuy_Purchase == "false"){
                             $('.box-item-detail').append(
                                 `
@@ -4571,8 +4494,6 @@ function commafy( num ) {
                                 var cust_comment = res.data
                                 allData_storage.map((val,index)=>{
                                     if(val.Product_Code == product_id_pilihan){
-                                        console.log(val.Product_Code)
-                                        console.log(product_id_pilihan)
                                         $('.card-quality-right-id').append(`
                                         <div class="card-sejenis-id active_product">
                                             <div class="card-sejenis-img-id">
@@ -4603,7 +4524,6 @@ function commafy( num ) {
                                 })
         
                                 var comment_parse = JSON.parse(cust_comment.User_Comments)
-                                console.log(comment_parse)
                                 $('#nav-profile').empty()
                                 if(comment_parse == 'null' || comment_parse == null){
                                     $('#nav-profile').append(`
@@ -4624,12 +4544,11 @@ function commafy( num ) {
                                     comment_parse.map((val,index)=>{
                                         axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
-                                            console.log('axios jalan')
+
                                             if(res.data){
                                                 var link_gambar = res.data
                                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                                 .then((res)=>{
-                                                    console.log(res.data)
                                                     // res.data.map((val,index)=>{
                                                         $('#nav-profile').append(`
                                                         <div class="user-card-id">
@@ -4708,7 +4627,6 @@ function commafy( num ) {
                             var hargaAwal = parseInt(item.Sell_Price)
                             var discount = parseInt(item.Sell_Price * 0.1)
                             var hargaTotal = hargaAwal + discount
-                            console.log(item)
                             $('.box-item-detail').empty();
                         
                             if(item.GroupBuy_Purchase == "false"){
@@ -5039,12 +4957,8 @@ function commafy( num ) {
                             axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                             .then((res)=>{
                                 var cust_comment = res.data
-                                // console.log(cust_comment)
-                                console.log(filter_product)
                                 allDataProduct.map((val,index)=>{
                                     if(val.Product_Code == product_id_pilihan){
-                                        console.log(val.Product_Code)
-                                        console.log(product_id_pilihan)
                                         $('.card-quality-right-id').append(`
                                         <div class="card-sejenis-id active_product">
                                             <div class="card-sejenis-img-id">
@@ -5078,7 +4992,6 @@ function commafy( num ) {
                                 })
     
                                 var comment_parse = JSON.parse(cust_comment.User_Comments)
-                                console.log(comment_parse)
                                 $('#nav-profile').empty()
                                 if(comment_parse == 'null' || comment_parse == null){
                                     $('#nav-profile').append(`
@@ -5099,12 +5012,10 @@ function commafy( num ) {
                                     comment_parse.map((val,index)=>{
                                         axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
-                                            console.log('axios jalan')
                                             if(res.data){
                                                 var link_gambar = res.data
                                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                                .then((res)=>{
-                                                    console.log(res.data)
+                                                .then((res)=>{                                                    
                                                     // res.data.map((val,index)=>{
                                                         $('#nav-profile').append(`
                                                         <div class="user-card-id">
@@ -5198,12 +5109,9 @@ function commafy( num ) {
             .then((res)=>{
                 item = res.data
                 var split_product = res.data.Name.split(' ')
-                console.log(split_product)
                 var all_filter_product = []
                 for(var i =0; i<split_product.length; i++){
                     var filter_product = allDataProduct.filter((val)=>{
-                        // console.log(val.Names)
-                        // console.log(split_product[i])
                         if(val.Name.includes(split_product[i])){
                             all_filter_product.push(val)
                             return val
@@ -5495,7 +5403,6 @@ function commafy( num ) {
                                 `
                             )
                         }
-                        console.log(filter_product)
                         all_filter_product.map((val,index)=>{
                             // console.log(val)
                             // console.log(product_id_pilihan)
@@ -5604,12 +5511,10 @@ function commafy( num ) {
                                 comment_parse.map((val,index)=>{
                                     axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                     .then((res)=>{
-                                        console.log('axios jalan')
                                         if(res.data){
                                             var link_gambar = res.data
                                             axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                             .then((res)=>{
-                                                console.log(res.data)
                                                 // res.data.map((val,index)=>{
                                                     $('#nav-profile').append(`
                                                     <div class="user-card-id">
@@ -5730,22 +5635,9 @@ const newRender_list_hutang=(customer_code)=>{
     axios.post(`https://sales.sold.co.id/get-sales-order-data-per-customer?Customer_Code=${token}`)
     
     .then((res)=>{
-        console.log(res.data)
         res.data.map((val,index)=>{
             
             var tanggal = val.Start_Date.split('T')
-
-            // $('.ul_list_hutang').append(`
-            //     <tr>
-            //         <td>
-            //             <p class="limited-text-short" onclick="open_detail_hutang_home('${val.Order_Number}')">${val.Order_Number} </p> 
-            //         </td>
-            //         <td >${val.Total_Price}</td>
-            //         <td >${val.Payment_Method}</td>
-            //         <td>${val.Shipping_Address}</td>
-            //         <td >${val.Status}</td>           
-            //     </tr>
-            // `)
 
             $('.new-box-card-item-ul').append(`
             <div class="new-card-item-bd">
@@ -5981,7 +5873,7 @@ function new_get_shipping_fee(Courier_Price_Code_orig , Courier_Price_Code_dest,
 const render_all_kurir_before_choosing=(product_id)=>{
 
     var alamat_pilihan = $('.active_address_method').attr('data-value')
-    console.log(alamat_pilihan)
+
 
     if(alamat_pilihan == 'Alamat Terdaftar'){
         // $('.alert-danger').css('display','none')
@@ -6003,7 +5895,6 @@ const render_all_kurir_before_choosing=(product_id)=>{
                 get_all_district_from_courier(nama_kurir,kurir_kode,nama_kota).done(function(response){
                     get_all_subdistrict_from_courier(nama_kurir,kurir_kode,nama_kecamatan).done(function(response){
                         allKelurahan = response
-                        console.log(response)
                         var Courier_Price_Code_orig = 'CGK01.00'
                         var packing_type = ''
                         const queryString = window.location.search;
@@ -6011,10 +5902,8 @@ const render_all_kurir_before_choosing=(product_id)=>{
                         var product_id = urlParams.get('groupbuy_id')
                         get_product_detail_func(product_id).done(function(response){
                             var item_product = response
-                            console.log(item_product)
                             var item_dimension = response.Dimension_CM_CUBIC
                             var split_item_dimension = item_dimension.split('*')
-                            console.log(split_item_dimension)
                             var item_length = split_item_dimension[0]
                             var item_width = split_item_dimension[1]
                             var item_height = split_item_dimension[2]
@@ -6043,8 +5932,6 @@ const render_all_kurir_before_choosing=(product_id)=>{
                             }
                             new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
                                 allPengiriman = response
-                                console.log(allPengiriman)
-                                console.log(allKelurahan)
                                 $('.kelurahan-home-gb').empty()
                                 $('.pengiriman-home-gb').empty()
                                 $('.asuransi-home-gb').empty()
@@ -6318,17 +6205,10 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
 const check_user_for_login=()=>{
     var token = localStorage.getItem('token')
-    console.log(token)
- 
-    
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-        .then((res)=>{
-            // 
+        .then((res)=>{ 
             var data_customer = res.data
-            console.log(data_customer)
             if(data_customer){
-                
-                
                 if(data_customer.User_Type === 'Customer'){
                     $('.btn-status-barang').css('display','none')
                     $('.sup_delete').css('display','flex')
@@ -6402,7 +6282,6 @@ const check_user_for_login=()=>{
                 $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
                 $('#nik_supp_profile').val(data_customer.extra_column_5)
                 $('#ref_code_from').val(`${data_customer.referral_customer_code}`)
-                console.log(data_customer.referral_customer_code)
                 var a = $('#refer-profile').val()
                 
                 $('#profileModal').modal('show')
@@ -6498,7 +6377,6 @@ const open_checkout=(product_id)=>{
             $('.option-3',window.parent.parent.document).addClass('background_grey')
         }
 
-        console.log($('.option-3',window.parent.parent.document))
         
         // $('.main-body').css('display','none')
         // $('.modals-search-result').css('display','block')
@@ -6540,7 +6418,6 @@ const open_checkout=(product_id)=>{
 
 
 const buyNow=(product_id)=>{
-    console.log(product_id)
     addToCart(product_id)
     
     var array = []
@@ -6557,10 +6434,7 @@ const buyNow=(product_id)=>{
             array.push(productToBeAdded)
             
             var productToBeAddedStringify = JSON.stringify(array);
-            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-    
-            console.log(productToBeAdded)
-            
+            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);            
         // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
     
         $('.close-button',window.parent.document).css('display','block')
@@ -7331,10 +7205,8 @@ async function addressMethod(address,item){
                             var product_id = urlParams.get('groupbuy_id')
                             get_product_detail_func(product_id).done(function(response){
                                 var item_product = response
-                                // console.log(item_product)
                                 var item_dimension = response.Dimension_CM_CUBIC
                                 var split_item_dimension = item_dimension.split('*')
-                                // console.log(split_item_dimension)
                                 var item_length = split_item_dimension[0]
                                 var item_width = split_item_dimension[1]
                                 var item_height = split_item_dimension[2]
@@ -9237,7 +9109,6 @@ function check_qty(val){
 
 
     var alamat_pilihan = $('.active_address_method').attr('data-value')
-    console.log(alamat_pilihan)
     var kurir_pilihan=$('.kurir-home-gb option:selected').val()
     var province_pilihan=$('.province-home-gb option:selected').val()
     var kota_pilihan=$('.kota-home-gb option:selected').val()
@@ -9313,7 +9184,6 @@ function check_qty(val){
                         var berat_product = parseInt(item_product.Weight_KG)
                         var item_dimension = item_product.Dimension_CM_CUBIC
                         var split_item_dimension = item_dimension.split('*')
-                        console.log(split_item_dimension)
                         var item_length = split_item_dimension[0]
                         var item_width = split_item_dimension[1]
                         var item_height = split_item_dimension[2]
@@ -9374,7 +9244,6 @@ function check_qty(val){
                             }
     
                             if(isAsuransi_pilihan && isPacking_pilihan && isPengirimanPilihan){
-                                console.log('masuk ke if 8077')
                                 $('.ndps-left').empty()
                                 $('.ndps-right').empty()
     
@@ -9404,8 +9273,6 @@ function check_qty(val){
                                 </div>
                             `)
                             }else if (isPengiriman_pilihan && isAsuransi_pilihan) {
-                                console.log('masuk ke else if 8107')
-                                
                                 var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
                                 var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_asuransi
     
@@ -9446,8 +9313,7 @@ function check_qty(val){
                                
                             `)
                             }else if (isPengiriman_pilihan && isPacking_pilihan){
-                                console.log('masuk ke else if 8149')
-                                
+
                                 var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
                                 var harga_total_product_with_shipping = harga_total_product + harga_shipping + harga_packing
     
@@ -9488,9 +9354,7 @@ function check_qty(val){
                               
                             `)
                             }else if(isPengiriman_pilihan){
-                                console.log('masuk ke 8191  ')
-                                
-                                
+
                                 var harga_total_product = item_product.GroupBuy_SellPrice * total_qty_from_user
                                 var harga_total_product_with_shipping = harga_total_product + harga_shipping
     
@@ -9703,8 +9567,7 @@ function check_qty(val){
                             var packing_type = ''
                             var berat_product = parseInt(item_product.Weight_KG)
                             var item_dimension = item_product.Dimension_CM_CUBIC
-                            var split_item_dimension = item_dimension.split('*')
-                            console.log(split_item_dimension)
+                            var split_item_dimension = item_dimension.split('*') 
                             var item_length = split_item_dimension[0]
                             var item_width = split_item_dimension[1]
                             var item_height = split_item_dimension[2]
@@ -10076,5 +9939,18 @@ function calculateSize(img, maxWidth, maxHeight) {
     return [width, height];
   }
   
+
+  const close_product_detail=()=>{
+      close_all_open_window()
+    //   $('body').scrollTo('.box-render-new',window.parent);
+    //   $(".main-body",window.parent).animate({ scrollTop: $('.main-body',window.parent) }, 1270);
+    $('html, body').animate({ scrollTop: ('.box-card',window.parent) }, 1000);
+    console.log($('.main-structure',window.parent.parent))
+    
+
+    // $("body").click(function() {
+        $('html, body').animate({ scrollTop: $(".main-body, .box-render-all").offset().top }, 1000);
+    
+  }
         
   

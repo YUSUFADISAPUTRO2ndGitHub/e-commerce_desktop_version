@@ -1880,10 +1880,7 @@
 <script>
     var token  = localStorage.getItem('token')
     function readFile() {
-    // console.log(this)
-    // console.log(this.files)
     var file = this.files[0]
-    console.log(file,'1886')
     const MAX_WIDTH = 320;
     const MAX_HEIGHT = 180;
     const MIME_TYPE = "image/jpeg";
@@ -1898,7 +1895,6 @@
         URL.revokeObjectURL(this.src)
         console.log('Cannot Load Image')
     }
-    console.log(img,'1896')
     img.onload = function () {
         URL.revokeObjectURL(this.src);
         const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
@@ -1907,7 +1903,6 @@
         canvas.height = newHeight;
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, newWidth, newHeight);
-        console.log(canvas) 
         canvas.toBlob(
         (blob) => {
             
@@ -1930,11 +1925,8 @@
                         })
                     }).then((res)=>{
                         if(res.data){
-                            console.log(data,'1938')
                             axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                             .then((res)=>{
-                                console.log(token,'token')
-                                console.log(res.data,'harusnya base 64')
                                 $(`#img-profile-id`).attr(`src`, `${res.data}`);
                             }).catch((err)=>{
                                 console.log(err)

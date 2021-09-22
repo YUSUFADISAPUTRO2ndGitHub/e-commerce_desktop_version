@@ -748,7 +748,6 @@ const tahun_lahir_check=()=>{
 
 const password_check=()=>{
     var password = $('#password_reg').val()
-    console.log(password)
     if(password.length < 5){
         // Swal.fire('Wrong Password', 'Sorry', 'error')
         Swal.fire({
@@ -1039,7 +1038,6 @@ const send_otp_for_logout=()=>{
 
 const send_otp_login=()=>{
     var email = $('#email_login').val()
-    console.log(email)
     if(email){
         axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
@@ -1154,7 +1152,6 @@ const send_otp_register_for_email=()=>{
                 .then((res)=>{
                     if(res.data){
                         $('#newOtpRegister').modal('show')
-                        console.log($('#newOtpRegister').modal('show'))
                         // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
                     }else {
                         Swal.fire({
@@ -1332,8 +1329,6 @@ const back_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
     var find_not_active = $('.item-left-img-box .img-big').attr('id')
-    console.log(find_active,' find_active')
-    console.log(find_not_active,' find_not_active')
     
     if(find_active == 'img-big-1'){
         $(`#${find_active}`).removeClass('img-big-active')
@@ -1379,9 +1374,7 @@ const next_btn=()=>{
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         var img_3 = $('#img-big-3').attr('class')
-        console.log(img_3)
         var img_3_split = img_3.split(' ')
-        
         if(img_3_split[1] == 'img-notfound'){
             $('#img-big-1').removeClass('img-big')
             $('#img-big-1').addClass('img-big-active')
@@ -1422,15 +1415,9 @@ const close_tab_answer=(result,index)=>{
 // }
 
 
-    $('.modals-product-detail').on('load',function(){
-        // write your code here
-        console.log('1108 jalan')
-        
-        
-    })
+
     $('.input_comment_cust').on('keyup',function(){
         var data_comment = $(this).val()
-        console.log(data_comment)
         if(data_comment.length>0){
             $('.btn-send-comment').removeAttr('disabled')
             $('.btn-send-comment').addClass('active_send_comment')
@@ -1440,12 +1427,9 @@ const close_tab_answer=(result,index)=>{
         }
     })
     const send_comment_cust=(product_id)=>{
-        console.log(product_id,'1124')
         var result_comment = $('.input_comment_cust').val()
         var token = localStorage.getItem('token')
-        // {
-            // }
-            // var product_id = '84818039900005'
+
             var data = {
                 User_Comments:
                 {
@@ -1469,18 +1453,13 @@ const close_tab_answer=(result,index)=>{
                     "Product_Code":data.User_Comments.Product_Code
                 })
             }).then((res)=>{
-                console.log(data)
-                console.log(res.data)
                 axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                 .then((res)=>{
                     var cust_comment = res.data
-                    console.log(cust_comment)
                     var comment_parse = JSON.parse(cust_comment.User_Comments)
                     comment_parse.map((val,index)=>{
-                        console.log(val)
                         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                         .then((res)=>{
-                            console.log(res.data)
                             $('#nav-profile').append(`
                             <div class="user-card-id">
                                 <div class="user-card-top-id">
@@ -1572,7 +1551,6 @@ const close_tab_answer=(result,index)=>{
         var otp_7 = $('#otp_reg_7').val()
         var otp_8 = $('#otp_reg_8').val()
         var allOtp = otp_1 + otp_2 + otp_3 + otp_4 + otp_5 + otp_6 + otp_7 + otp_8
-        console.log(allOtp)
         axios.post(`https://customers.sold.co.id/verify-email-address?otp=${allOtp}`)
         .then((res)=>{
             if(res.data){
@@ -1653,7 +1631,6 @@ const close_tab_answer=(result,index)=>{
         }
 
         if(isProvince_pilihan){
-            console.log('masuk ke if')
             get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
                 province = response[0]
                 allProvince = response
@@ -1739,7 +1716,6 @@ const close_tab_answer=(result,index)=>{
     }
 
     if(isProvince_pilihan && isKota_pilihan){
-        console.log('masuk ke if')
         get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
             province = response[0]
             allProvince = response
@@ -1833,7 +1809,6 @@ const close_tab_answer=(result,index)=>{
     }
 
     if(isProvince_pilihan && isKota_pilihan && isDistrict_pilihan){
-        console.log('masuk ke if')
         get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
             province = response[0]
             allProvince = response

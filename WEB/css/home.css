@@ -1003,7 +1003,7 @@ body {
     /* background-color: red; */
 }
 .item-price {
-    width: 50%;
+    width: 70%;
     /* background-color: blue; */
     line-height: 0.7;
 }
@@ -2888,22 +2888,22 @@ input:focus {
     height:50px;
     width:50px;
     position: relative;
-    top:-240px;
-    left:35px;
+    top:-245px;
+    left:5px;
 }
 .img-badge-best{
-    height:50px;
-    width:50px;
+    height:30px;
+    width:30px;
     position: relative;
-    top:-240px;
-    left:35px;
+    top:-255px;
+    left:30px;
 }
 .img-badge-new{
-    height:50px;
-    width:50px;
+    height:30px;
+    width:30px;
     position: relative;
     top:-245px;
-    left:36px;
+    left:25px;
 }
 .item-all-price p:nth-child(1) {
     text-decoration: line-through;

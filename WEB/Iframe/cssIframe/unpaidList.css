@@ -1139,3 +1139,11 @@ font-size:13px;
     
 }
 /* unpaidlist */
+
+
+.limited-text {
+    white-space: nowrap;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

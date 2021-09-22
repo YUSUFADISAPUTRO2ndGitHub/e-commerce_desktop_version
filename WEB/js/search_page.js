@@ -109,12 +109,52 @@ function show_subcategory(choosen_parent_category){
 
     let timerInterval
     Swal.fire({
-    title: 'Please Wait',
-    // html: 'I will close in <b></b> milliseconds.',
-    timer: 2000,
+    // title: 'Please Wait',
+    html: ` 
+    <div class="boxcon">
+       <div class="box1">
+       </div>
+       <div id="sold-id-loading">
+       SOLD 
+       </div>
+           
+       <div class="box2">
+       </div>
+   </div>
+   `,
+
+    timer: 30000000,
     timerProgressBar: true,
     didOpen: () => {
         Swal.showLoading()
+
+        axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
+        .then((res)=>{
+            console.log(res.data)
+            // $('.box-list-kategori').css("display", "block")
+            $('.box-list-kategori').toggle()
+            $('.box-list-kategori').empty()
+            res.data.map((val,index)=>{
+                
+                    $('.box-list-kategori').append(
+                      `
+                        <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
+                            <div class="card-all-item-list">
+                                <p class="limited-text-short">${val.Subcategory}</p>
+                            </div>
+                        </div>
+                        `
+                    )
+            }) 
+            Swal.fire({
+                title: 'Uploading Data',
+                timer:100,
+            }) 
+            
+        }).catch((err)=>{
+            
+        })
         timerInterval = setInterval(() => {
         const content = Swal.getHtmlContainer()
         if (content) {
@@ -127,40 +167,6 @@ function show_subcategory(choosen_parent_category){
     },
     willClose: () => {
         clearInterval(timerInterval)
-    }
-    }).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-        
-        axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
-        .then((res)=>{
-            // 
-            // $('.box-list-kategori').css("display", "block")
-            $('.box-list-kategori').toggle()
-            $('.box-list-kategori').empty()
-            res.data.map((val,index)=>{
-                if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
-                val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                ){
-                    console.log('data gak ke render, undefined dll')
-                }else {
-                    $('.box-list-kategori').append(
-                      `
-                        <div class="card-all-item hvr-float-shadow" id="${val.Subcategory}" onclick="show_jenisproduct('${val.Subcategory}')">
-                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
-                            <div class="card-all-item-list">
-                                <p class="limited-text-short">${val.Subcategory}</p>
-                            </div>
-                        </div>
-                        `
-                    )
-
-                }
-            }) 
-            
-        }).catch((err)=>{
-            
-        })
     }
     })
 }
@@ -175,12 +181,58 @@ function show_jenisproduct(jenis_product){
 
     let timerInterval
     Swal.fire({
-    title: 'Please Wait',
+    // title: 'Please Wait',
     // html: 'I will close in <b></b> milliseconds.',
+    html: ` 
+    <div class="boxcon">
+       <div class="box1">
+       </div>
+       <div id="sold-id-loading">
+       SOLD 
+       </div>
+           
+       <div class="box2">
+       </div>
+   </div>
+   `,
     timer: 2000,
     timerProgressBar: true,
     didOpen: () => {
         Swal.showLoading()
+        axios.post(`https://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
+        .then((res)=>{
+            res.data.map((val,index)=>{
+                var hargaAwal = parseInt(val.Sell_Price)
+                var discount = parseInt(val.Sell_Price * 0.1)
+                var hargaTotal = hargaAwal + discount
+                $('.render-item-sub').append(
+                    `
+                    <div class="card-item card_sp hvr-float-shadow">
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                        <div class="card-item-list">
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                <div class="item-price">
+                                    <p>RP. ${commafy(hargaTotal)}</p>
+                                    <p>Rp. ${commafy(hargaAwal)}</p>
+                                </div>
+                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                )
+            }) 
+            Swal.fire({
+                title: 'Uploading Data',
+                timer:100,
+            }) 
+            // $('.modals-lk').addClass('melihat') // ini bisa hampir
+        }).catch((err)=>{
+            
+        })
         timerInterval = setInterval(() => {
         const content = Swal.getHtmlContainer()
         if (content) {
@@ -193,55 +245,6 @@ function show_jenisproduct(jenis_product){
     },
     willClose: () => {
         clearInterval(timerInterval)
-    }
-    }).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-        
-        axios.post(`https://products.sold.co.id/get-product-details?subcategory=${jenis_product}`)
-        .then((res)=>{
-            // 
-            res.data.map((val,index)=>{
-                // 
-                // 
-                var hargaAwal = parseInt(val.Sell_Price)
-                var discount = parseInt(val.Sell_Price * 0.1)
-                var hargaTotal = hargaAwal + discount
-                // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == 0 || val.Sell_Price < 1 ||
-                // val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                // ){
-                    
-                // }else {
-                    
-                    $('.render-item-sub').append(
-                      `
-                        <div class="card-item card_sp hvr-float-shadow">
-                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                            <div class="card-item-list">
-                                <p class="limited-text-short">${val.Name}</p>
-                                <div class="split-item">
-                                    <div class="item-price">
-                                        <p>RP. ${commafy(hargaTotal)}</p>
-                                        <p>Rp. ${commafy(hargaAwal)}</p>
-                                    </div>
-                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                        <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        `
-                    )
-
-                // }
-            }) 
-            // $('.modals-lk').addClass('melihat') // ini bisa hampir
-            
-            
-            
-        }).catch((err)=>{
-            
-        })
     }
     })
 
@@ -494,19 +497,14 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
 
         axios.post(`https://sales.sold.co.id/check-delivery-order-information?Order_Number=${order_number}`)
         .then((res)=>{
-            console.log(res.data)
             var delivery_data = res.data
             var delivery_parse = JSON.parse(delivery_data.Shipping_Number)
-            console.log(delivery_parse)
             var arrDataProduct = []
         var kurir_name = ''
         var shipping_price = 0
         var product_price =0
         var customer_address = ''
-        
         var total = arrListHutang.length
-         
-        console.log(arrListHutang)
         // render card item
         arrListHutang.map((val,index)=>{
             customer_address =  val.Shipping_Address

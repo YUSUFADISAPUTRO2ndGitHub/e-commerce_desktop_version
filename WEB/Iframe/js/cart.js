@@ -65,7 +65,7 @@ function loadcart(productNo, quantity){
                             <div class="form-check" id ="${productNo}containerCheck">
                                 <input class="form-check-input" id="checklist${productNo}" type="checkbox" value="productNo" onchange="selectedCart(this,'${productNo}')">    
                             </div>
-                            <p>${response.Name}</p>
+                            <p class="limited-text">${response.Name}</p>
                             <div class="card-delete-cart">
                                 <i class="far fa-times-circle" onclick="eraseItem('${productNo}')"></i>
                             </div>
@@ -105,11 +105,9 @@ function selectAllCart(){
     // alert('jalan')
     
     var allProduct = JSON.parse(localStorage.getItem('itemsInCart'))
-    console.log(allProduct)
     var total_harga_barang = 0
     allProduct.map((val,index)=>{
         if($(`#checklist${val.productNo}`).prop('checked') === true){
-            console.log('masuk ke if 112')
             $(`#checklist${val.productNo}`).prop(`checked`,false)
             $(`#productName${val.productNo}`).css('border','none')
             $('#total_selected_price').html('')
@@ -118,18 +116,12 @@ function selectAllCart(){
                 
                 $(`#productName${val.productNo}`).css('border','3px solid #00a8ff')
                 $(`#checklist${val.productNo}`).prop(`checked`,true)
-                console.log(response)
                 total_harga_barang += val.quantity * parseInt(response.Sell_Price)
-                console.log(total_harga_barang)
                 $('#total_selected_price').html(commafy(total_harga_barang))
             })
             var item = $(`#checklist${val.productNo}`).is('checked')
-                console.log(item)
-
         }
-        
     })
-
 }
 
 function zoomIn(x){
