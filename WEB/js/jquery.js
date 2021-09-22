@@ -55,7 +55,7 @@ $(function(){
 
   
     $('.input-group').on('click',function(){
-        $('.list-group').toggle(1000)
+        $('.new-box-category').toggle(1000)
     // $('.list-group').show(1000)
     })
 

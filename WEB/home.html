@@ -40,30 +40,52 @@
     
     <title>SOLD</title>
     <style>
+        .card-body {
+            padding:0 !important;
+            background-color: white  !important;
+            border-radius:5px  !important;
+            transition:0.5s;
+            /* border:1px solid #535353; */
+        }
+        
+        .ig-group-menu {
+            height:40px  !important;
+            width:150px  !important;
+        }
         .category-menu{
-            width: 18%;
+            width: 14%;
+            height:50px;
             position: absolute;
-            top: 6%;
-            left: 4.7%;
+            top: 7%;
+            left: 8%;
+            /* top:50%; */
             z-index: 100;
+            /* border-right:1px solid #dedede; */
             /* border: 1px solid #217283; */
             /* box-shadow:  5px 8px #0a3d62; */
-            box-shadow: 5px 5px 20px #217283;
-            border-radius:10px !important;
+            /* box-shadow: 5px 5px 20px #217283; */
+            
+            /* border-radius:10px !important; */
         }
+        
         .semua-kategori-name{
+            width:50px  !important;
             border: none !important;
             background-color: transparent !important;
             color: black !important;
+            border-radius:5px !important;
         }
         .category-list{
             border: none;
+            border-bottom:1px solid #dcdde1;
             background-color: transparent;
+            font-size:14px;
         }
         .category-list:hover{
             border: none;
-            background-color: #217384;
-            color: white;
+            /* background-color: #217384; */
+            background: #dedede;
+            color: #4BACE5;
         }
 
         
@@ -1186,12 +1208,11 @@
     <div class="main-structure">
         <div class="main-about">
             <div class="ma_left">
-                <div class="ins_ma_left_1">
-
+                <div class="ins_ma_left_2">
+                    <img src="./img/bank.png" alt="" class="phone_img_header">
+                    Download Sold App
                 </div>
-                <div class="ins_ma_left_1">
-
-                </div>
+                
                 <div class="ins_ma_left_1">
 
                 </div>
@@ -1204,15 +1225,19 @@
 
             </div>
             <div class="ma_right">
-                <div class="ins_ma_right_1">
-
+                <div class="ins_ma_right_2 hvr-grow">
+                    <p class="p_about_ins">Mitra Sold.co.id</p>
                 </div>
-                <div class="ins_ma_right_1">
-
+                <div class="ins_ma_right_2 hvr-grow">
+                    <p class="p_about_ins">Panduan Seller</p>
                 </div>
                 
                 <div class="ins_ma_right_2 hvr-grow">
-                    <a href="https://sold.co.id/Sold.co.idPrivacyPolicy.html" class="p_about_ins" style="text-decoration: none;" target="_blank"> Privacy & Policy</a>
+                    <p class="p_about_ins">Panduan Customer</p>
+                </div>
+                
+                <div class="ins_ma_right_1 hvr-grow">
+                    <a href="https://sold.co.id/Sold.co.idPrivacyPolicy.html" class="p_about_ins" style="text-decoration: none;" target="_blank"> Kebijakan</a>
                     
                 </div>
                 <div class="ins_ma_right_1 hvr-grow" onclick="about_us()">
@@ -1222,13 +1247,31 @@
             </div>
         </div>
         <div class="main-header">
-            <div class="header-cat">
+            <!-- <div class="header-cat">
                 
+            </div> -->
+            <div class="box-logo-header">
+                <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
+                    <img src="../WEB/img/logo.png" alt="" class="icon-logo " onclick="back_to_home()">
+                </div>
+
             </div>
-            <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
-                <img src="../WEB/img/logo.png" alt="" class="icon-logo " onclick="back_to_home()">
+            <div class="card category-menu">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="input-group ig-group-menu">
+                            <div class="input-group-prepend">
+                                <!-- <span class="input-group-text" id="basic-addon1">
+                                    <img src="../WEB/img/categories.png" alt="error" class="icon-opt">
+                                </span> -->
+                            </div>
+                            <!-- <p class="form-control">Semua Kategori</p> -->
+                            <input class="form-control semua-kategori-name" placeholder="Semua Kategori" disabled>
+                        </div>
+                    </h5>       
+                </div>
             </div>
-            
+
             <div class="main-header-search">
                 <div class="header-search">
                     <input type="text" placeholder="Ketik Merek / Nama / Kategori Produk" class="input-name" id="search_item" >
@@ -1288,6 +1331,16 @@
                 </div>
                 
             </div>
+
+            <div class="new-box-category" style="display: none;">
+                <ul class="list-group  lg_home"  >
+                    <!-- render Category -->
+    
+                    <!-- render Category -->
+                </ul>
+
+            </div>
+            
             
             <div>
                 <iframe class="force-close-all-command modals-lk close closeByLogin" src=""></iframe> <!-- List  SubKategori  -->
@@ -1324,29 +1377,8 @@
            
 
         </div>
-            
-        <div class="main-body">
-            <div class="card category-menu">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <img src="../WEB/img/categories.png" alt="error" class="icon-opt">
-                                </span>
-                            </div>
-                            <!-- <p class="form-control">Semua Kategori</p> -->
-                            <input class="form-control semua-kategori-name" placeholder="Semua Kategori" disabled>
-                        </div>
-                    </h5>
-                    <ul class="list-group  lg_home" style="display: none;" >
-                        <!-- render Category -->
-    
-                        <!-- render Category -->
-                    </ul>         
-                </div>
-            </div>
-    
+        
+        <div class="main-body">    
             <div class="box-ads">
                 <div class="ads-1 animated-background" >
                     

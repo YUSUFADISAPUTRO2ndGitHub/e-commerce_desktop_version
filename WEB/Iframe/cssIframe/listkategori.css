@@ -38,7 +38,8 @@
     align-items: center;
     flex-direction: column;
     border-radius:10px;
-    box-shadow: 5px 5px 20px #217283 !important;
+    /* box-shadow: 5px 5px 20px #217283 !important; */
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px !important;
 }
 
 .box-img-lk{
