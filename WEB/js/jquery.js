@@ -54,10 +54,10 @@ $(function(){
     $('[data-toggle="tooltip"]').tooltip()
 
   
-    $('.input-group').on('click',function(){
-        $('.new-box-category').toggle(1000)
-    // $('.list-group').show(1000)
-    })
+    // $('.input-group').on('click',function(){
+    //     $('.new-box-category').toggle(1000)
+    // // $('.list-group').show(1000)
+    // })
 
     $('#icon-plus')
         

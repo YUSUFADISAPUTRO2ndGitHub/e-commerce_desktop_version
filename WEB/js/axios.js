@@ -9954,3 +9954,10 @@ function calculateSize(img, maxWidth, maxHeight) {
   }
         
   
+
+  const open_category_home=()=>{
+    //   alert('jalan')
+    $('.new-box-category').toggle(1000)
+    $('.list-group-item').removeClass('active-cl')
+    // console.log($('.new-box-category'))
+  }

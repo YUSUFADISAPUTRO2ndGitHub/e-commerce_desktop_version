@@ -11,7 +11,15 @@
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCQGHBY1MG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-SCQGHBY1MG');
+    </script>
+    
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -54,10 +62,11 @@
         }
         .category-menu{
             width: 14%;
-            height:50px;
-            position: absolute;
+            height:95px;
+            background-color: transparent !important;;
+            /* position: absolute; */
             top: 7%;
-            left: 8%;
+            /* left: 8%; */
             /* top:50%; */
             z-index: 100;
             /* border-right:1px solid #dedede; */
@@ -73,11 +82,11 @@
             border: none !important;
             background-color: transparent !important;
             color: black !important;
-            border-radius:5px !important;
+            border-radius:10px !important;
         }
         .category-list{
             border: none;
-            border-bottom:1px solid #dcdde1;
+            /* border-bottom:1px solid #dcdde1; */
             background-color: transparent;
             font-size:14px;
         }
@@ -1133,8 +1142,8 @@
     </div>
     <!--Term And Condition  MODALS -->
 
-     <!--Term And Condition MODALS -->
-     <div class="modal  fade " id="about_us" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <!--ABOUT US MODALS -->
+    <div class="modal  fade " id="about_us" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  ">
             <div class="modal-content box-about-us">
                 <div class="bg_about">
@@ -1150,11 +1159,11 @@
         
         </div>
     </div>
-    <!--Term And Condition  MODALS -->
+    <!--ABOUT US  MODALS -->
 
 
        <!--OTP LOGIN PRODUCT -->
-       <div class="modal  fade " id="login_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade " id="login_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  ">
             <div class="modal-content box-otp-product">
                 <div class="modal-header header-prod">
@@ -1258,8 +1267,8 @@
             </div>
             <div class="card category-menu">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <div class="input-group ig-group-menu">
+                    <h5 class="card-title cd-title-menu">
+                        <div class="input-group ig-group-menu" onclick="open_category_home()">
                             <div class="input-group-prepend">
                                 <!-- <span class="input-group-text" id="basic-addon1">
                                     <img src="../WEB/img/categories.png" alt="error" class="icon-opt">
