@@ -1682,7 +1682,7 @@ function rgbToHex(r, g, b) {
 
 var timeout = setTimeout(function(){
     yourFunction()
-},2000);
+},500);
 const yourFunction=()=>{
     $('.ads-1').removeClass('animated-background')
     $('.ads-2').removeClass('animated-background')

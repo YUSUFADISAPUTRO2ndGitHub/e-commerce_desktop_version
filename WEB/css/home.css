@@ -74,6 +74,7 @@ body {
     /* top:10% !important; */
     left:10%;
     width:80%;
+    border:none !important;
 }
 .ins_ma_left_2{
     width:50%;
@@ -144,10 +145,12 @@ body {
     align-items: center;
 }
 .main-header {
+    padding-top:10px;
     width: 100%;
     /* height:100px; */
     /* background-color: red; */
-    height: 10%;
+    /* height: 10%; */
+    height:80px !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -170,8 +173,11 @@ body {
 }
 .main-body {
     width: 100%;
-    height: 70%;
+    /* height:70% */
+    height: 100%;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -518,13 +524,38 @@ body {
 
 .box-ads {
     width: 100%;
-    height: 300px;
+    height: 390px;
     /* background: red; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.box-img-slider-header{
+    width:95%;
+    height:90%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* left:1%; */
+    /* border:1px solid black; */
+    /* border-radius:10px; */
 
+}
+.splide_img_1{
+    width:100%;
+    height:200px !important;
+}
+
+.ads-mixed { 
+    width:75%;
+    height:100%;
+    transition:2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
 .ads-1 {
     width: 25%;
     height: 100%;
@@ -538,7 +569,7 @@ body {
 }
 
 .ads-3 {
-    width: 28%;
+    width: 25%;
     height: 100%;
     background: #f8ef1b;
     display: flex;
@@ -2405,6 +2436,10 @@ input:focus {
 }
 .list-group li:hover {
     cursor: pointer;
+    
+}
+.list-group-item {
+    border:none !important;
 }
 
 .active-cl {
@@ -2490,7 +2525,7 @@ input:focus {
     position: absolute;
     z-index: 20;
     /* top: 100px; */
-    top:17.6%;
+    top:14.9%;
     /* left:327px; */
     /* left: 22.8%; */
     left:20.8%;
@@ -6902,13 +6937,111 @@ border-radius:20px;
 .new-box-category{
     width:300px;
     height:auto;
-    /* border:1px solid black; */
     display:flex;
     position:absolute;
-    top:17.6%;
+    top:14.9%;
     left:0;
     background-color: white;
-    border-right:1px solid #dedede;
+    border:none;
     border-top:1px solid #dedede;
-    /* border-radius:5px; */
+      /* overflow: auto;
+      overflow-x: scroll; */
+      /* flex-wrap: wrap; */
+}
+
+.new-box-allcategory{
+    height:450px;
+    width:100%;
+    background-color: #f1f2f6;
+    display: flex;
+    flex-direction: column;
+    min-width: 20% !important;
+    padding:10px;
+    justify-content: center;
+    align-items: center;
+      /* overflow: auto;
+      overflow-x: scroll; */
+      /* flex-wrap: wrap; */
+}
+
+
+.nbc-category{
+    width:75%;
+    height:100%;
+    /* border:1px solid black; */
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius:5px;
+    
+}
+
+
+.nbc-category-name {
+    width: 100%;
+    height:70px;
+    min-height:70px;
+    font-size:20px;
+    color:#4BACE5;
+    padding-left:10px;
+    display: flex;
+    align-items: center;
+    border-bottom:1px solid #f1f2f6;
+    
+}
+
+
+
+.box-render-new-category {
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* border:1px solid white; */
+    /* overflow:auto;
+    overflow-x:scroll; */
+    
+    
+}
+
+.card-new-category { 
+    width:16.668%;
+    height:50%;
+    /* border:1px solid #dedede; */
+    border-right:1px solid #f1f2f6;
+    border-left:1px solid #f1f2f6;
+    border-bottom:1px solid #f1f2f6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px;
+    padding-top:10px;
+    
+    /* border:1px solid #dedede; */
+}
+.card-new-category:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    cursor: pointer;
+}
+.card-new-category p {
+    font-size:16px;
+    margin-top:5px;
+}
+
+.cd-image-category {
+    width:110px;
+    height:110px;
+    
+    background-color: #dedede;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cd-img-category {
+    width:100px;
+    height:100px;
+    /* border-radius:50%; */
 }
