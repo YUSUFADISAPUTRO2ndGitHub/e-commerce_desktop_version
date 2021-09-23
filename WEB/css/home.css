@@ -107,6 +107,9 @@ body {
 .ins_ma_right_1{
     width:10%;
     height:80%;
+    display:flex !important;
+    justify-content: center;
+    align-items: center;
     /* background-color: red; */
     /* border:1px solid black; */
     /* border-right:1px solid gray; */
@@ -121,6 +124,9 @@ body {
 .ins_ma_right_2{
     width:17%;
     height:80%;
+    display:flex !important;
+    justify-content: center;
+    align-items: center;
     /* background-color: red; */
     /* border:1px solid black; */
     /* border-right:1px solid rgb(126, 36, 36); */
