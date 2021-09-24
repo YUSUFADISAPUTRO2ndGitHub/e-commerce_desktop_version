@@ -1593,85 +1593,88 @@ function toDataURL(url, callback) {
     xhr.responseType = 'blob';
     xhr.send();
 }
+
+// BUAT GANTI GAMBAR HOME
   
 var gambar_active = 3
-setInterval(()=>{
-    if(gambar_active == 1){
-//   
-    toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
-    // 
-        await $('#scream').attr('src',dataUrl)
-        var example = document.getElementById('example');
-        var context = example.getContext('2d');
-        var img = document.getElementById("scream");
-        context.drawImage(img, 0, 0, 500, 500);
+// setInterval(()=>{
+//     if(gambar_active == 1){
+// //   
+//     toDataURL('http://sold.co.id/img/promo1.png',  async function(dataUrl) {
+//     // 
+//         await $('#scream').attr('src',dataUrl)
+//         var example = document.getElementById('example');
+//         var context = example.getContext('2d');
+//         var img = document.getElementById("scream");
+//         context.drawImage(img, 0, 0, 500, 500);
         
-        // var c = example.getContext('2d');
-        var p =  context.getImageData(10, 10, 1, 1).data; 
-    //   
-        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-        // alert(hex)
+//         // var c = example.getContext('2d');
+//         var p =  context.getImageData(10, 10, 1, 1).data; 
+//     //   
+//         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+//         // alert(hex)
 
 
-        await $('.ads-3').css('background-color',hex)
-        await $('.ads-1').css('background-color',hex)
-        // $('#status').html(cord + "<br>" + hex);
-        gambar_active = 2
+//         await $('.ads-3').css('background-color',hex)
+//         await $('.ads-1').css('background-color',hex)
+//         // $('#status').html(cord + "<br>" + hex);
+//         gambar_active = 2
         
-    })
+//     })
 
-}
-else if (gambar_active == 2){
-//   
-    toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
-    // 
-        await $('#scream').attr('src',dataUrl)
-        var example = document.getElementById('example');
-        var context = example.getContext('2d');
-        var img = document.getElementById("scream");
-        context.drawImage(img, 0, 0, 500, 500);
+// }
+// else if (gambar_active == 2){
+// //   
+//     toDataURL('http://sold.co.id/img/promo3.png', async function(dataUrl) {
+//     // 
+//         await $('#scream').attr('src',dataUrl)
+//         var example = document.getElementById('example');
+//         var context = example.getContext('2d');
+//         var img = document.getElementById("scream");
+//         context.drawImage(img, 0, 0, 500, 500);
         
-        // var c = example.getContext('2d');
-        var p =  context.getImageData(10, 10, 1, 1).data; 
-    //   
-        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-        // alert(hex,'GA2')
+//         // var c = example.getContext('2d');
+//         var p =  context.getImageData(10, 10, 1, 1).data; 
+//     //   
+//         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+//         // alert(hex,'GA2')
 
 
-        await $('.ads-3').css('background-color',hex)
-        await  $('.ads-1').css('background-color',hex)
-        // $('#status').html(cord + "<br>" + hex);
-        gambar_active = 3
+//         await $('.ads-3').css('background-color',hex)
+//         await  $('.ads-1').css('background-color',hex)
+//         // $('#status').html(cord + "<br>" + hex);
+//         gambar_active = 3
         
-    })
-}else {
-//   
-    // 
-    toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
-    // 
-        await  $('#scream').attr('src',dataUrl)
-        var example = document.getElementById('example');
-        var context = example.getContext('2d');
-        var img = document.getElementById("scream");
-        context.drawImage(img, 0, 0, 500, 500);
+//     })
+// }else {
+// //   
+//     // 
+//     toDataURL('http://sold.co.id/img/promo5.png',  async function(dataUrl) {
+//     // 
+//         await  $('#scream').attr('src',dataUrl)
+//         var example = document.getElementById('example');
+//         var context = example.getContext('2d');
+//         var img = document.getElementById("scream");
+//         context.drawImage(img, 0, 0, 500, 500);
         
-        // var c = example.getContext('2d');
-        var p =  context.getImageData(10, 10, 1, 1).data; 
-    //   
-        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-        // alert(hex,'GA2')
+//         // var c = example.getContext('2d');
+//         var p =  context.getImageData(10, 10, 1, 1).data; 
+//     //   
+//         var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+//         // alert(hex,'GA2')
 
 
-        await $('.ads-3').css('background-color',hex)
-        await $('.ads-1').css('background-color',hex)
-        // $('#status').html(cord + "<br>" + hex);
-        gambar_active = 1
+//         await $('.ads-3').css('background-color',hex)
+//         await $('.ads-1').css('background-color',hex)
+//         // $('#status').html(cord + "<br>" + hex);
+//         gambar_active = 1
         
-    })
-}
-},3000)
+//     })
+// }
+// },3000)
 
 
+// BUAT GANTI GAMBAR HOME
 
 function rgbToHex(r, g, b) {
     if (r > 255 || g > 255 || b > 255)

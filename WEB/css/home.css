@@ -548,12 +548,13 @@ body {
 }
 
 .ads-mixed { 
-    width:75%;
+    width:65%;
     height:100%;
     transition:2s;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #f1f2f6;
 
 }
 .ads-1 {
@@ -569,9 +570,10 @@ body {
 }
 
 .ads-3 {
-    width: 25%;
+    width: 35%;
     height: 100%;
-    background: #f8ef1b;
+    /* background: white; */
+    background-color:#f1f2f6 ;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -586,6 +588,7 @@ body {
     /* background-color: red; */
     justify-content: flex-end;
     z-index: 30;
+    position:fixed;
 }
 
 .box-customer {
@@ -774,6 +777,27 @@ body {
 .box-dirjen-2 p:nth-child(1) {
     font-size: 8px;
     font-weight: 600;
+}
+
+.ads-3-new-box {
+     width:100%;
+     height:100%;
+     /* border:1px solid black; */
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     /* align-items: center; */
+}
+.img-ads-3-right{
+    width:90%;
+    height: 45%;
+    /* border:1px solid black; */
+    border-radius:20px;
+}
+.img-ads-3-right img {
+    width:100%;
+    height:100%;
+    border-radius:20px;
 }
 
 .img-dirjen {
@@ -2523,7 +2547,7 @@ input:focus {
 /* MODALS LIST ITEM BY SUB CATEGORY */
 .modals-lk {
     position: absolute;
-    z-index: 20;
+    z-index: 100;
     /* top: 100px; */
     top:14.9%;
     /* left:327px; */
@@ -6897,7 +6921,7 @@ border-radius:20px;
 .new-insta-box {
     position:fixed;
     right:0;
-    top:60%;
+    top:64%;
     z-index:102;
     transition:2s;
     border-radius:20px;
