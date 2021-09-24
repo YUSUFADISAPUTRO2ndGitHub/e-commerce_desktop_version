@@ -2544,6 +2544,7 @@ input:focus {
 
 /* modals delivery list*/
 
+
 /* MODALS LIST ITEM BY SUB CATEGORY */
 .modals-lk {
     position: absolute;
@@ -6968,6 +6969,8 @@ border-radius:20px;
     background-color: white;
     border:none;
     border-top:1px solid #dedede;
+    border-right:1px solid #dedede;
+    z-index:100;
       /* overflow: auto;
       overflow-x: scroll; */
       /* flex-wrap: wrap; */
@@ -7011,9 +7014,15 @@ border-radius:20px;
     display: flex;
     align-items: center;
     border-bottom:1px solid #f1f2f6;
-    
+    letter-spacing:0.5em;
+    /* text-decoration:underline; */
 }
-
+.download-new-app:hover {
+    color:#217384;
+}
+.nbc-category-name span{
+    color:#e74c3c;
+}
 
 
 .box-render-new-category {
@@ -7068,4 +7077,9 @@ border-radius:20px;
     width:100px;
     height:100px;
     /* border-radius:50%; */
+}
+
+
+.splide__slide { 
+border-radius:20px !important;
 }

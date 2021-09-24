@@ -1261,6 +1261,7 @@ const renderItemBasedOnCategory=(Category)=>{
             var allData_storage = JSON.parse(localStorage.getItem('all_subCategory'))
             // var allData_storage = []
             if(allData_storage != undefined && allData_storage.length !=0) {
+                // console.log('masuk ke if ')
                 allData_storage.forEach((val,index)=>{
                     // console.log(val.Category.toUpperCase())
                     // console.log(val[0].Category.toUpperCase())
@@ -1290,6 +1291,7 @@ const renderItemBasedOnCategory=(Category)=>{
                        timer:100,
                    })
             }else {
+                // console.log('masuk ke if ')
                 axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
                 .then((res)=>{
                     allDataProduct.push(res.data)
@@ -5726,7 +5728,7 @@ const render_item_all_category=()=>{
         'HARDWARE',
         'ADHESIVE'
     ]
-    console.log(data_atas)
+    // console.log(data_atas)
 
     var all_subcategory_storage = JSON.parse(localStorage.getItem('all_subCategory'))
     var index_for_render = 0 // kalo udah 12 stop looping
@@ -5735,9 +5737,9 @@ const render_item_all_category=()=>{
             val[1].map((item,id)=>{
                 if(index_for_render <=11){
                     index_for_render +=1
-                    console.log(index_for_render)
+                    // console.log(index_for_render)
                     $('.box-render-new-category').append(`
-                        <div class="card-new-category">
+                        <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
                             <div class="cd-image-category">
                                 <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" class="cd-img-category">
                             </div>
@@ -5753,12 +5755,12 @@ const render_item_all_category=()=>{
             axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
             .then((res)=>{
                 // console.log(res.data)
-                console.log(res.data.length)
+                // console.log(res.data.length)
              $('.box-render-new-category').empty()
                 res.data.map((val,index)=>{
                     if(index<13){
                         $('.box-render-new-category').append(`
-                        <div class="card-new-category">
+                        <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${val.Subcategory}')">
                             <div class="cd-image-category">
                                 <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="cd-img-category">
                             </div>
@@ -9999,7 +10001,8 @@ function calculateSize(img, maxWidth, maxHeight) {
 
   const open_category_home=()=>{
     //   alert('jalan')
-    $('.new-box-category').toggle(1000)
+    $('.new-box-category').toggle(500)
     $('.list-group-item').removeClass('active-cl')
+    close_all_open_window()
     // console.log($('.new-box-category'))
   }
