@@ -143,6 +143,16 @@ function listPaymentMethods(){
 }
 
 function loadCheckoutFinalConfirmationTable(condition){
+    var dataItemsToCheckout = JSON.parse(localStorage.getItem("itemsToCheckout"));
+
+    dataItemsToCheckout.forEach((val,index)=>{
+        if(val.quantity > 10){
+            
+        }else {
+            
+        }
+    })
+
     $(".final_checkout").empty();
     $(".final_checkout").append("<tr><th>PRODUCT NAME</th><th>QUANTITY</th><th>TOTAL PRICE</th></tr>");
     const queryString = window.location.search;
@@ -157,9 +167,8 @@ function loadCheckoutFinalConfirmationTable(condition){
         var harga_shipping = 20000
         var total_price_with_shipping=harga_shipping
         var Shipping_option = $('#sub-delivery-option option:selected').val()
-        // 
+         
         itemsToCheckout.map((val,id)=>{
-            // 
             // parseFloat('100,000.00'.replace(/,/g, ''))
             var price = parseFloat(val.priceAgreed.replace(/,/g, ''))
             total_price_with_shipping +=price

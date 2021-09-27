@@ -7,7 +7,11 @@ $(document).ready(async function(){
     }else{
         loadingMessage(1);
     }
+
     for(i; i < cartToJson.length; i ++){
+        if(cartToJson[i].quantity > 10){
+            $('.alert-cart-over').css('display','flex')
+        }
         await loadcart(cartToJson[i].productNo, cartToJson[i].quantity);
     }
 
@@ -183,6 +187,12 @@ function quantityUpdatedDirectly(x, id){
         totalPrice = totalPrice - parseInt(removeComma($("#" + id).val()));
         checkboxCounter--;
         $("#total_selected_price").html(commafy(totalPrice));
+    }
+
+    if($(x).val()> 10){
+        $('.alert-cart-over').css('display','flex')
+    }else {
+        $('.alert-cart-over').css('display','none')
     }
     if($(x).val() > 0){
         loadingMessage(2);
