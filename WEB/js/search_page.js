@@ -322,122 +322,243 @@ const search_item=()=>{
 
 
 const render_searching_page=(product_name)=>{
-    $('.close-button-2').css('display','block')
-    var data = product_name
-    
-    if(data){
-        $('.sp_name').val(data)
-    }else {
-        $('.sp_name').val('All')
-    }
-    
 
-    axios.post(`https://products.sold.co.id/get-product-details?product_name=${product_name}`)
-    .then((res)=>{
-    
-        var data_searching = res.data
-
-
-        if(res.data.length <3){
-            axios.post(`https://products.sold.co.id/get-product-details?`)
-            .then((res)=>{
-                var data_all = res.data
-                data_searching.map((val,index)=>{
-                    var hargaAwal = parseInt(val.Sell_Price)
-                    var discount = parseInt(val.Sell_Price * 0.1)
-                    var hargaTotal = hargaAwal + discount
-                    // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                    // ){
-                    //    
-                    // }else {
-                        // 
-                        $('.new-box-card').append(`
-                        <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                            <div class="card-item-list">
-                                <p class="limited-text-short">${val.Name}</p>
-                                <div class="split-item">
-                                    <div class="item-price">
-                                        <p>RP. ${commafy(hargaTotal)}</p>
-                                        <p>Rp. ${commafy(hargaAwal)}</p>
-                                    </div>
-                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                        <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        `)
+    Swal.fire({
+        title: 'Uploading Data',
+        timer:300000000,
+        html: ` 
+        <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLD 
+            </div>
+                
+            <div class="box2">
+            </div>
+        </div>
+    `,didOpen:async()=>{
+        $('.close-button-2').css('display','block')
+        var data = product_name
         
-                    // }
-                })
-                data_all.map((val,index)=>{
-                    var hargaAwal = parseInt(val.Sell_Price)
-                    var discount = parseInt(val.Sell_Price * 0.1)
-                    var hargaTotal = hargaAwal + discount
-                    // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                    // ){
-                    //     
-                    //     
-                    // }else {
-                        // 
-                        $('.new-box-card').append(`
-                        <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                            <div class="card-item-list">
-                                <p class="limited-text-short">${val.Name}</p>
-                                <div class="split-item">
-                                    <div class="item-price">
-                                        <p>RP. ${commafy(hargaTotal)}</p>
-                                        <p>Rp. ${commafy(hargaAwal)}</p>
-                                    </div>
-                                    <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                        <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        `)
-        
-                    // }
+        if(data){
+            $('.sp_name').val(data)
+        }else {
+            $('.sp_name').val('All')
+        }
+
+        var all_product_storage = JSON.parse(localStorage.getItem('all_data_product'))
+
+        if(all_product_storage.length >0 || all_product_storage !=null || all_product_storage != undefined){
+            console.log('masuk ke if')
+            var arr_filter_product = []
+            var arr_split_filter_product = []
+            var arr_for_render_split_filter = []
+            var split_product = product_name.split(' ')
+            console.log(split_product,'split product 356')
+            let uniqueProduct = [];
+            all_product_storage.forEach((val,index)=>{ // semua product dari local storage
+                split_product.forEach((res,id)=>{ // data split dari product yang dicari
+                    if(val.Name.toUpperCase().includes(res.toUpperCase())){ // kalo product ada yg termasuk dari yg di split
+                        arr_for_render_split_filter.push(val)
+
+                        
+                        arr_for_render_split_filter.forEach((product_code) => {
+                            if (!uniqueProduct.includes(product_code)) {
+                                uniqueProduct.push(product_code);
+                            }
+                        });
+                        
+                        console.log(arr_for_render_split_filter)
+                    }
                 })
             })
-        }else {
-            data_searching.map((val,index)=>{
+            uniqueProduct.map((val,index)=>{
                 var hargaAwal = parseInt(val.Sell_Price)
                 var discount = parseInt(val.Sell_Price * 0.1)
                 var hargaTotal = hargaAwal + discount
-                // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                // ){
-                //     
-                //     
-                // }else {
-                    // 
-                    $('.new-box-card').append(`
-                    <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                        <div class="card-item-list">
-                            <p class="limited-text-short">${val.Name}</p>
-                            <div class="split-item">
-                                <div class="item-price">
-                                    <p>RP. ${commafy(hargaTotal)}</p>
-                                    <p>Rp. ${commafy(hargaAwal)}</p>
-                                </div>
-                                <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                    <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                </div>
+                $('.new-box-card').append(`
+                <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                    <div class="card-item-list">
+                        <p class="limited-text-short">${val.Name}</p>
+                        <div class="split-item">
+                            <div class="item-price">
+                                <p>RP. ${commafy(hargaTotal)}</p>
+                                <p>Rp. ${commafy(hargaAwal)}</p>
+                            </div>
+                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
                             </div>
                         </div>
                     </div>
-                    `)
-    
+                </div>
+                `)   
+            })
+            console.log(uniqueProduct)
+
+            var split_item = all_product_storage.filter((val)=>{
+
+            })
+           
+            var filter_product = all_product_storage.filter((val)=>{
+                // console.log(val.Name.toUpperCase(), product_name.toUpperCase())
+                // console.log(val.Name.toUpperCase().includes(product_name.toUpperCase()))
+                // if(val.Name.toUpperCase().includes(product_name.toUpperCase())){
+                //     arr_filter_product.push(val)
+                //     console.log(val)
+                //     var hargaAwal = parseInt(val.Sell_Price)
+                //     var discount = parseInt(val.Sell_Price * 0.1)
+                //     var hargaTotal = hargaAwal + discount
+                //     $('.new-box-card').append(`
+                //     <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                //             <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                //         <div class="card-item-list">
+                //             <p class="limited-text-short">${val.Name}</p>
+                //             <div class="split-item">
+                //                 <div class="item-price">
+                //                     <p>RP. ${commafy(hargaTotal)}</p>
+                //                     <p>Rp. ${commafy(hargaAwal)}</p>
+                //                 </div>
+                //                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                //                     <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                //     `)      
                 // }
             })
-        }
+            console.log(filter_product)
+        }else {
+            axios.post(`https://products.sold.co.id/get-product-details?product_name=${product_name}`)
+            .then((res)=>{
+            console.log(res.data)
+                var data_searching = res.data
+        
+        
+                if(res.data.length <3){
+                    axios.post(`https://products.sold.co.id/get-product-details?`)
+                    .then((res)=>{
+                        console.log('masuk ke if 360')
+                        var data_all = res.data
+                        data_searching.map((val,index)=>{
+                            var hargaAwal = parseInt(val.Sell_Price)
+                            var discount = parseInt(val.Sell_Price * 0.1)
+                            var hargaTotal = hargaAwal + discount
+                            // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                            // ){
+                            //    
+                            // }else {
+                                // 
+                                $('.new-box-card').append(`
+                                <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                                    <div class="card-item-list">
+                                        <p class="limited-text-short">${val.Name}</p>
+                                        <div class="split-item">
+                                            <div class="item-price">
+                                                <p>RP. ${commafy(hargaTotal)}</p>
+                                                <p>Rp. ${commafy(hargaAwal)}</p>
+                                            </div>
+                                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                                <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `)
+                
+                            // }
+                        })
+                        data_all.map((val,index)=>{
+                            var hargaAwal = parseInt(val.Sell_Price)
+                            var discount = parseInt(val.Sell_Price * 0.1)
+                            var hargaTotal = hargaAwal + discount
+                            // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                            // ){
+                            //     
+                            //     
+                            // }else {
+                                // 
+                                $('.new-box-card').append(`
+                                <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                                    <div class="card-item-list">
+                                        <p class="limited-text-short">${val.Name}</p>
+                                        <div class="split-item">
+                                            <div class="item-price">
+                                                <p>RP. ${commafy(hargaTotal)}</p>
+                                                <p>Rp. ${commafy(hargaAwal)}</p>
+                                            </div>
+                                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                                <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `)
+                
+                            // }
+                        })
+    
+                    })
+                    Swal.fire({
+                        title: 'Uploading Data',
+                        timer:100,
+                    })
+                }else {
+                    console.log('masuk ke else 428')
+                    data_searching.map((val,index)=>{
+                        var hargaAwal = parseInt(val.Sell_Price)
+                        var discount = parseInt(val.Sell_Price * 0.1)
+                        var hargaTotal = hargaAwal + discount
+                        // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
+                        // ){
+                        //     
+                        //     
+                        // }else {
+                            // 
+                            $('.new-box-card').append(`
+                            <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
+                                    <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
+                                <div class="card-item-list">
+                                    <p class="limited-text-short">${val.Name}</p>
+                                    <div class="split-item">
+                                        <div class="item-price">
+                                            <p>RP. ${commafy(hargaTotal)}</p>
+                                            <p>Rp. ${commafy(hargaAwal)}</p>
+                                        </div>
+                                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                            <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `)
+            
+                        // }
+                    })
+                    Swal.fire({
+                        title: 'Uploading Data',
+                        timer:100,
+                    })
+                }
+        
+                
+            }).catch((err)=>{
+                
+            })
 
+        }
         
-    }).catch((err)=>{
-        
+    
+       
+        Swal.fire({
+            title: 'Uploading Data',
+            timer:100,
+        })
+    }
     })
 
 

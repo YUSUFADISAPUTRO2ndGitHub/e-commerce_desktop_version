@@ -323,9 +323,15 @@ const getAllData=async()=>{
    axios.post('https://products.sold.co.id/get-product-details')
    .then((res)=>{
        console.log('jalan 325')
+       console.log(res.data)
        console.log(all_data.length , ' local storage all data')
        console.log(res.data.length , ' res data')
+       console.log(all_data == undefined,' undefined')
+       console.log(all_data == null,' null')
+       console.log(all_data.length == 0 ,' undefined')
+       console.log(all_data.length !== res.data.length ,' res data alldata')
         if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
+            // alert('masuk ke if')
                 allData = res.data
                 renderItemPromo()
                 renderItemNew()
