@@ -2510,11 +2510,11 @@ input:focus {
 .modals-check-harga {
     position: absolute;
     z-index: 20;
-    top:17%;
+    top:15%;
     border-radius: 10px;
     /* left:105px; */
     /* right:242px; */
-    right: 14.3%;
+    right: 16.8%;
     height: 455px;
     width: 400px;
     /* background-color: red; */
@@ -3081,7 +3081,7 @@ input:focus {
 /* box render search */
 .box-render-search {
     /* height:300px; */
-    width: 475px;
+    width: 670px;
     height: auto;
     max-height: 400px;
     background-color: #ecf0f1;
@@ -5067,9 +5067,9 @@ img{
 
 .modals-hutang-home {
     position: absolute;
-    top: 17%; 
+    top: 15%; 
     border-radius:10px;
-    left:26%;
+    left:23.5%;
     height: 61vh;
     width: 54%;
     display:none;

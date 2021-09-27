@@ -6481,20 +6481,21 @@ const buyNow=(product_id)=>{
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);            
         // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
     
-        $('.close-button',window.parent.document).css('display','block')
+        $('.close-button',window.parent.parent.document).css('display','block')
         
 
-        $('.close',window.parent.document).css('display','none')
+        $('.close',window.parent.parent.document).css('display','none')
         
         // $('.close').css('display','none')
         
-        $('.modals-product-detail',window.parent.document).css('display','none')
-        $(".iframe",window.parent.document).toggle();
+        // $('.modals-product-detail',window.parent.document).css('display','none')
+        $('.modals-lk', window.parent.parent.document).css('display','none')
+        $(".iframe",window.parent.parent.document).toggle();
         
-        if($('.option-3',window.parent.document).hasClass('background_grey')){
-            $('.option-3',window.parent.document).removeClass('background_grey')
+        if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
+            $('.option-3',window.parent.parent.document).removeClass('background_grey')
         }else {
-            $('.option-3',window.parent.document).addClass('background_grey')
+            $('.option-3',window.parent.parent.document).addClass('background_grey')
         }
         
         
@@ -6502,12 +6503,12 @@ const buyNow=(product_id)=>{
         // $('.modals-search-result').css('display','block')
         
         // $('.iframe').css('display','block')
-        $('.modals-pengiriman',window.parent.document).css("display",'none')
-        $('.modals-check-harga',window.parent.document).css("display",'none')
-        $('.option-1',window.parent.document).removeClass('background_grey')
-        $('.option-2',window.parent.document).removeClass('background_grey')
-        $('.option-0',window.parent.document).removeClass('background_grey')
-        $(".iframe",window.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+        $('.modals-pengiriman',window.parent.parent.document).css("display",'none')
+        $('.modals-check-harga',window.parent.parent.document).css("display",'none')
+        $('.option-1',window.parent.parent.document).removeClass('background_grey')
+        $('.option-2',window.parent.parent.document).removeClass('background_grey')
+        $('.option-0',window.parent.parent.document).removeClass('background_grey')
+        $(".iframe",window.parent.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
         // $('.close-button',window.parent.document).css('display','none')
 
           // SEARCH ITEM BACK TO NORMAL
