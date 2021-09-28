@@ -603,6 +603,7 @@ const render_daftar_hutang=()=>{ // render utang untuk di card
 const detail_hutang_home=(order_number)=>{ // detail utang di home header
     // alert('function jalan')
     // $('.tableFixHead_ul_hutang').css('display','none')
+    console.log(order_number)
     $('.card-body-ul').css('display','flex')
     $('.box-card-item-ul').empty()
     $('.card-address-profile').empty()
@@ -612,25 +613,48 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     
     axios.post(`https://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        
+        console.log(res.data)
         var arrListHutang = res.data
-        
-
         axios.post(`https://sales.sold.co.id/check-delivery-order-information?Order_Number=${order_number}`)
         .then((res)=>{
-            var delivery_data = res.data
+            console.log(res.data)
+        var delivery_data = res.data
+        console.log(delivery_data == null)
+        console.log(delivery_data == undefined)
+        console.log(delivery_data.length == 0)
+        console.log(delivery_data == '')
+        if(delivery_data  == null || delivery_data ==undefined || delivery_data.length == 0 || delivery_data == ''){
+            console.log('masuk ke if 623')
+            $('.unpaid-title').empty()
+            $('.unpaid-title').append(`
+                <p>Order Number <br>
+                ${arrListHutang[0].Order_Number}</p>
+                <p>Delivery Order Number<br>
+                - </p>
+            `)
+        }else {
             var delivery_parse = JSON.parse(delivery_data.Shipping_Number)
-            var arrDataProduct = []
+            $('.unpaid-title').empty()
+            $('.unpaid-title').append(`
+                <p>Order Number <br>
+                ${arrListHutang[0].Order_Number}</p>
+                <p>Delivery Order Number<br>
+                ${res.data.Delivery_Order_Number}</p>
+            `)
+        }
+        var arrDataProduct = []
         var kurir_name = ''
         var shipping_price = 0
         var product_price =0
         var customer_address = ''
         var total = arrListHutang.length
         // render card item
+        console.log(arrListHutang)
         arrListHutang.map((val,index)=>{
             customer_address =  val.Shipping_Address
-
+            // ${delivery_parse.paket_awb}
             if(val.Product_Code == 'tiki'){
+                console.log('masuk ke if tiki')
                 $('.box-card-item-ul').append(`
                 <div class="card-item-ul">
                     <div class="card-desc">
@@ -653,13 +677,14 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                             ${val.Price_Based_On_Total_Quantity}
                         </div>
                         <div class="hr-qty">
-                            ${delivery_parse.paket_awb}
+
                         </div>     
                     </div>
                 </div>
                 `)
 
             }else {
+                console.log('masuk ke else  tiki 687')
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
@@ -727,61 +752,61 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         `)
 
         $('.cb-right').append(`
-        <div class="card-address-detail">
-            <div class="address-detail">
-            Order Summary
-            <div class="confirmed">
-                Confirmed
+            <div class="card-address-detail">
+                <div class="address-detail">
+                Order Summary
+                <div class="confirmed">
+                    Confirmed
+                </div>
+                </div>
+                <div class="card-summary">
+                <div class="cs-left">
+                    <div class="cs-left-item">
+                    All Product Price
+                    </div>
+                    <div class="cs-left-item">
+                    Shipping Price
+                    </div>
+                    <div class="cs-left-item">
+                    Shipping Method
+                    </div>
+                
+                </div>
+                <div class="cs-right">
+                    <div class="cs-right-item">
+                    ${product_price}
+                    </div>
+                    <div class="cs-right-item">
+                    ${shipping_price}
+                    </div>
+                    <div class="cs-right-item">
+                    ${kurir_name}
+                    </div>
+                </div>
+                </div>
             </div>
+            <div class="card-address-total">
+                <div class="address-detail">
+                    <div class="total-summary-left">
+                        Total
+                    </div>
+                    <div class="total-summary-right">
+                        ${total_product_with_shipping}
+                    </div>   
+                </div>
             </div>
-            <div class="card-summary">
-            <div class="cs-left">
-                <div class="cs-left-item">
-                All Product Price
-                </div>
-                <div class="cs-left-item">
-                Shipping Price
-                </div>
-                <div class="cs-left-item">
-                Shipping Method
-                </div>
             
-            </div>
-            <div class="cs-right">
-                <div class="cs-right-item">
-                ${product_price}
+            <div class="card-address-ul">
+                <div class="address-detail">
+                Order Details
                 </div>
-                <div class="cs-right-item">
-                ${shipping_price}
+                <div class="address-detail-2">
+                Shipping Address
                 </div>
-                <div class="cs-right-item">
-                ${kurir_name}
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="card-address-total">
-            <div class="address-detail">
-                <div class="total-summary-left">
-                    Total
-                </div>
-                <div class="total-summary-right">
-                    ${total_product_with_shipping}
-                </div>   
-            </div>
-        </div>
-        
-        <div class="card-address-ul">
-            <div class="address-detail">
-            Order Details
-            </div>
-            <div class="address-detail-2">
-            Shipping Address
-            </div>
-            <div class="address-detail-3">
-                ${customer_address}
-            </div>  
-        </div>   
+                <div class="address-detail-3">
+                    ${customer_address}
+                </div>  
+            </div>   
         `)
        
         if(arrListHutang[0].Payment_Method == 'transfer'){
@@ -1018,13 +1043,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     
         }
 
-            $('.unpaid-title').empty()
-            $('.unpaid-title').append(`
-                <p>Order Number <br>
-                ${arrListHutang[0].Order_Number}</p>
-                <p>Delivery Order Number<br>
-                ${res.data.Delivery_Order_Number}</p>
-            `)
+            
         }).catch((err)=>{
             console.log(err)
         })

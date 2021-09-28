@@ -709,40 +709,58 @@ function checking_payment(){
     
     
     async function success(isSuccess){
-        // 
-        if(isSuccess){
-            // 
-            if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan 
-                && isKecamatan_pilihan && isKelurahan_pilihan && isPengiriman_pilihan
-                && isPaymentMethod_pilihan){
-        
-                    // $('#exampleModalLong').modal('show')
-                    requestToFinish()
-                } else {
-                    // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Penambahan Data Gagal`,
-                        timer:2000,
-                        
-                    })
-                }
+        console.log(isKurir_pilihan.valueOf, ' kurir')
+        console.log(isProvince_pilihan,' province')
+        console.log(isKota_pilihan,'kota')
+        console.log(isKecamatan_pilihan,' kecamatan')
+        console.log(isKelurahan_pilihan, ' kelurahan')
+        console.log(isPengiriman_pilihan,' pengiriman')
+        console.log(isPaymentMethod_pilihan,' payment method')
+        var alamat = $('#address-selection option:selected').val()
+        var province = localStorage.getItem('province_customer')
+        var city = localStorage.getItem('city_customer')
+        var district = localStorage.getItem('district_customer')
+        var sub_district = localStorage.getItem('sub_district_customer')
+
+        if(alamat == 'TO SAVED ADDRESS'){
+            requestToFinish()
         }else {
+            if(isSuccess){
+                // 
+                if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan 
+                    && isKecamatan_pilihan && isKelurahan_pilihan && isPengiriman_pilihan
+                    && isPaymentMethod_pilihan){
             
-            // Swal.fire("Quantity Kurang", "Error", "error");
-            Swal.fire({
-                html:`
-                <div class="o-circle c-container__circle o-circle__sign--failure">
-                    <div class="o-circle__sign"></div>  
-                </div> 
-                Quantity Kurang`,
-                timer:2000,
+                        // $('#exampleModalLong').modal('show')
+                        requestToFinish()
+                    } else {
+                        // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "error");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Pembelian  Gagal`,
+                            timer:2000,
+                            
+                        })
+                    }
+            }else {
                 
-            })
+                // Swal.fire("Quantity Kurang", "Error", "error");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Quantity Kurang`,
+                    timer:2000,
+                    
+                })
+            }
+
         }
+
         return isSuccess
     }
     

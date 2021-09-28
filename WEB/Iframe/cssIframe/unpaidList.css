@@ -1158,13 +1158,14 @@ font-size:13px;
 .box-alert-over {
     width:95%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 .fa-exclamation-triangle{
-    font-size:25px;
+    font-size:35px;
     color:#a94442;
+    margin-bottom:10px;
 }
 
 .icon-alert-ul {
@@ -1173,7 +1174,7 @@ font-size:13px;
 
 .alert-cart-over-ul {
     width:100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -1183,8 +1184,21 @@ font-size:13px;
     display: flex;
     justify-content: space-around !important;
     align-items: center;
+    flex-direction: column;
 }
 
 .detail-alert-over-checkout { 
     margin-left:20px;
+}
+
+.box-alert-over-2 {
+     display: flex;
+     flex-direction: column;
+     height:auto;
+}
+
+.line-1-alert{
+    width:95%;
+    height:10px;
+    border-top:1px solid gray;
 }
