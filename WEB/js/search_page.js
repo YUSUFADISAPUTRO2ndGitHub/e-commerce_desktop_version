@@ -644,43 +644,44 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         }
         var arrDataProduct = []
         var kurir_name = ''
-        var shipping_price = 0
+        var shipping_price = parseInt(arrListHutang[0].Shipping_Fee)
         var product_price =0
         var customer_address = ''
         var total = arrListHutang.length
         // render card item
         console.log(arrListHutang)
+        var total_product_with_shipping = shipping_price + product_price
         arrListHutang.map((val,index)=>{
             customer_address =  val.Shipping_Address
             // ${delivery_parse.paket_awb}
             if(val.Product_Code == 'tiki'){
                 console.log('masuk ke if tiki')
                 $('.box-card-item-ul').append(`
-                <div class="card-item-ul">
-                    <div class="card-desc">
-                        <div class="img-card-ul">
-                            <img src="../img/vantsing_shipping_method.png" alt="" class="img-item-ul">
+                    <div class="card-item-ul">
+                        <div class="card-desc">
+                            <div class="img-card-ul">
+                                <img src="../img/vantsing_shipping_method.png" alt="" class="img-item-ul">
+                            </div>
+                            ${val.Product_Name}
                         </div>
-                        ${val.Product_Name}
-                    </div>
-                    <div class="header-right">
-                        <div class="hr-qty">
-                            ${val.Product_Code}
-                        </div>
-                        <div class="hr-qty">
-                            ${val.Payment_Method}
-                        </div>
-                        <div class="hr-qty">
-                            ${val.Quantity_Requested} Pcs
-                        </div>
-                        <div class="hr-qty">
-                            ${val.Price_Based_On_Total_Quantity}
-                        </div>
-                        <div class="hr-qty">
+                        <div class="header-right">
+                            <div class="hr-qty">
+                                ${val.Product_Code}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Payment_Method}
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Quantity_Requested} Pcs
+                            </div>
+                            <div class="hr-qty">
+                                ${val.Price_Based_On_Total_Quantity}
+                            </div>
+                            <div class="hr-qty">
 
-                        </div>     
+                            </div>     
+                        </div>
                     </div>
-                </div>
                 `)
 
             }else {
@@ -688,7 +689,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
-                    
+                    console.log(res.data)
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
@@ -711,7 +712,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                                 ${val.Price_Based_On_Total_Quantity}
                             </div>
                             <div class="hr-qty">
-                                ${delivery_parse.paket_awb}
+                                
                             </div>     
                         </div>
                     </div>
@@ -724,7 +725,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
 
 
         })
-        var total_product_with_shipping = shipping_price + product_price
+        
        
         $('.card-address-profile').append(`
             <div class="img-profile-ul">
@@ -791,7 +792,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                         Total
                     </div>
                     <div class="total-summary-right">
-                        ${total_product_with_shipping}
+                        ${arrListHutang[0].Total_Price}
                     </div>   
                 </div>
             </div>

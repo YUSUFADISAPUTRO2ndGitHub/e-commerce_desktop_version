@@ -318,20 +318,14 @@ async function loop_through_items(page, item_no){
 const getAllData=async()=>{
 // var all_data = JSON.parse(localStorage.getItem('all_data_product'))
     var all_data = JSON.parse(localStorage.getItem('all_data_product'))
+    var token = localStorage.getItem('token')
     allData = all_data
    console.log('get all data jalan')
    axios.post('https://products.sold.co.id/get-product-details')
    .then((res)=>{
-       console.log('jalan 325')
-       console.log(res.data)
-       console.log(all_data.length , ' local storage all data')
-       console.log(res.data.length , ' res data')
-       console.log(all_data == undefined,' undefined')
-       console.log(all_data == null,' null')
-       console.log(all_data.length == 0 ,' undefined')
-       console.log(all_data.length !== res.data.length ,' res data alldata')
+      
         if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
-            // alert('masuk ke if')
+            alert('masuk ke if')
                 allData = res.data
                 renderItemPromo()
                 renderItemNew()
@@ -370,15 +364,19 @@ const getAllData=async()=>{
             
 })
     get_all_cat_subCat_for_storage()
-    var province =  await new_find_province_from_address()
-    var city =  await new_find_city_from_address(province)
-    var district =  await new_find_district_from_address(district)
-    var subdistrict =  await new_find_subDistrict_from_address(subdistrict)
-
-    localStorage.setItem('province_customer',province)
-    localStorage.setItem('city_customer',city)
-    localStorage.setItem('district_customer',district)
-    localStorage.setItem('sub_district_customer',subdistrict)
+    if(token !== null && token !== undefined && token.length>0) {
+        console.log('masuk ke if 376')
+        var province =  await new_find_province_from_address()
+        var city =  await new_find_city_from_address(province)
+        var district =  await new_find_district_from_address(city)
+        var subdistrict =  await new_find_subDistrict_from_address(district)
+        localStorage.setItem('bayu','testingbayu')
+        localStorage.setItem('province_customer',province)
+        localStorage.setItem('city_customer',city)
+        localStorage.setItem('district_customer',district)
+        localStorage.setItem('sub_district_customer',subdistrict)
+      
+    }
 
 
 }
@@ -454,12 +452,14 @@ const new_find_subDistrict_from_address=async(district)=>{
             .then(async(res)=>{
                 alamat_pilihan = res.data.Address_1
                 if(subDistrict_from_storage != undefined && subDistrict_from_storage.length != 0 ){
-
+                    console.log('masuk ke if 458')
                 }else {
                     await get_all_subdistrict_from_courier(kurir_pilihan,kurir_kode,district).done( function(response){
                         response.forEach((val,index)=>{
                             if(alamat_pilihan.toUpperCase().includes(val.Sub_District.toUpperCase())){
                                 kelurahan_pilihan = val.Sub_District
+                                console.log(kelurahan_pilihan,' kelurahn pilihan 497')
+                                localStorage.setItem('sub_district_customer',kelurahan_pilihan)
                                 // console.log(kelurahan_pilihan, 'ini kelurahan pilihan')
                                 resolve(kelurahan_pilihan)
                             }
@@ -475,6 +475,7 @@ const new_find_subDistrict_from_address=async(district)=>{
 }
 
 const new_find_district_from_address=async(city)=>{
+    console.log(city)
     return new Promise(async(resolve,reject)=>{
         var district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
         var kecamatan_pilihan = ''
@@ -482,18 +483,30 @@ const new_find_district_from_address=async(city)=>{
         var kurir_pilihan = ''
         var kurir_kode = ''
         var alamat_pilihan = ''
+        console.log('new_find_district_from_address jalan')
         await get_all_couriers().done( async function(response){
             kurir_pilihan = response[0].Courier
             kurir_kode = response[0].Courier_Code
+            console.log('new_find_district_from_address jalan 1')
             await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async(res)=>{
                 alamat_pilihan = res.data.Address_1
+                console.log('new_find_district_from_address jalan 2')
                 await get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
+                    console.log(response)
+                    console.log('new_find_district_from_address jalan 3')
+
                     response.forEach((val,index)=>{
+                        console.log(response)
+                        console.log('new_find_district_from_address jalan 4')
                         if(alamat_pilihan.toUpperCase().includes(val.District.toUpperCase())){
                             kecamatan_pilihan = val.District
+                            console.log(kecamatan_pilihan,' kecamatan pilihan 497')
+                            localStorage.setItem('district_customer',kecamatan_pilihan)
                             // console.log(kecamatan_pilihan)
                             resolve(kecamatan_pilihan)
+                        }else {
+                            console.log('masuk ke else 505 new find district from address pilihan')
                         }
                     })
                 })
@@ -526,6 +539,7 @@ const new_find_city_from_address= async (province)=>{
                             val.City.forEach((city,id)=>{
                                 if(alamat_pilihan.toUpperCase().includes(city.City.toUpperCase())){
                                     kota_pilihan = city.City
+                                    localStorage.setItem('city_customer',kota_pilihan)
                                     resolve(kota_pilihan)
                                 }
                             })
@@ -536,6 +550,7 @@ const new_find_city_from_address= async (province)=>{
                             response.forEach((val,index)=>{
                                 if(alamat_pilihan.toUpperCase().includes(val.City.toUpperCase())){
                                     kota_pilihan = val.City
+                                    localStorage.setItem('city_customer',kota_pilihan)
                                     resolve(kota_pilihan)
                                 }
                             })
@@ -562,11 +577,14 @@ const new_find_province_from_address= async ()=>{
             kurir_kode = response[0].Courier_Code
             await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async (res)=>{
+                console.log(res.data,'565')
                 alamat_pilihan = res.data.Address_1
                 if(province_from_storage != undefined &&  province_from_storage.length != 0){
                     province_from_storage.forEach((val,index)=>{
                         if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
                             province_pilihan = val.Province
+                            console.log(province_pilihan,' ini province_pilihan')
+                            localStorage.setItem('province_customer',province_pilihan)
                             resolve(province_pilihan) 
                         }
                     })
@@ -575,6 +593,8 @@ const new_find_province_from_address= async ()=>{
                         response.forEach((val,index)=>{
                             if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
                                 province_pilihan = val.Province
+                                console.log(province_pilihan,' ini province_pilihan')
+                                localStorage.setItem('province_customer',province_pilihan)
                                 resolve(province_pilihan) 
                             }
                         })
@@ -630,6 +650,7 @@ const renderItemPromo=()=>{
     // $('.box-render-promo-animated').css('display','none')
     // $('.box-render-promo').css('display','flex')
 // alert('render itempromo jalan')
+console.log('render item promo jalan')
     $('.box-render-promo').append(`
         <div class="promo_card">
             <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
