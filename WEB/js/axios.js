@@ -325,7 +325,7 @@ const getAllData=async()=>{
    .then((res)=>{
       
         if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
-            alert('masuk ke if')
+            // alert('masuk ke if')
                 allData = res.data
                 renderItemPromo()
                 renderItemNew()

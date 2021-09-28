@@ -7031,15 +7031,26 @@ border-radius:20px;
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    overflow:auto;
+    overflow-x:scroll;
     /* border:1px solid white; */
     /* overflow:auto;
     overflow-x:scroll; */
     
-    
+}
+
+.box-render-new-category::-webkit-scrollbar {
+    display: inherit;
+    width: 10px;
+}
+.box-render-new-category::-webkit-scrollbar-thumb {
+    background-color: #dedede;
+    border-radius: 10px;
 }
 
 .card-new-category { 
-    width:16.668%;
+    /* width:16.668%; */
+    width:17%;
     height:50%;
     /* border:1px solid #dedede; */
     border-right:1px solid #f1f2f6;
