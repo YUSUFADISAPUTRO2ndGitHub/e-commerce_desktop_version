@@ -103,7 +103,7 @@ $( document ).ready(function() {
             for(i = 0; i < all_district_tiki.length; i++){
                 for(z = 0; z < all_district_tiki[i].District.length; z++){
                     if((all_district_tiki[i].District[z] != undefined)){
-                        // console.log(all_district_tiki[i].District[z].District)
+                        // 
                         all_subdistrict_tiki.push({
                             District: all_district_tiki[i].District[z].District,
                             SubDistrict: await save_locally_subdistrict_tiki(all_district_tiki[i].District[z].District)
@@ -149,7 +149,7 @@ $( document ).ready(function() {
     var subdistrict_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
 
 if(province_storage != null && city_storage != null && district_storage != null && subdistrict_storage != null){
-        console.log('local province dll udah ke isi')
+        
     }else {
         save_locally_province_tiki()
     }
@@ -168,7 +168,7 @@ const get_all_cat_subCat_for_storage=()=>{
     var allData_category = []
     axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
     .then((res)=>{
-        // console.log(res.data)
+        // 
         var cat_stringify = JSON.stringify(res.data)
         localStorage.setItem('all_category',cat_stringify)
 
@@ -179,19 +179,19 @@ const get_all_cat_subCat_for_storage=()=>{
         res.data.forEach((val,index)=>{
             axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${val.Category}`)
             .then((res)=>{
-                // console.log(res.data)
+                // 
                 allData_subcat.push([{"Category":val.Category},res.data])
                 var array_stringify = JSON.stringify(allData_subcat)
                 localStorage.setItem('all_subCategory',array_stringify)
                 // var get_array = JSON.parse(localStorage.getItem('all_subCategory'))
-                // console.log(get_array)
+                // 
             }).catch((err)=>{
     
             })
         })
-        // console.log(allData_subcat)
+        // 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 }
 
@@ -199,26 +199,26 @@ const get_all_cat_subCat_for_storage=()=>{
 const getBase64Img=(product)=>{
     var all_array = []
     product.forEach((val,index)=>{
-        // console.log(val)
+        // 
         convertImgToBase64(val.Picture_1, function(base64Img){
-            // console.log([`base64:${base64Img}`,`Product_Code:${val.Product_Code}`,val])
+            // 
             all_array.push([`{"base64":${base64Img}}`,`{"Product_Code":${val.Product_Code}}`,val])
        
           });
-        //   console.log(all_array)
+        //   
     })
-    // console.log(all_array)
+    // 
 }
 
 async function get_all_blob(val,index){
-    // console.log(val,index)
+    // 
     return new Promise(async(resolve,reject)=>{
         // await product.forEach(async(val,index)=>{
             if(val.Picture_1.length >0 && val.Picture_1 != 'NULL' && val.Picture_2.length >0  && val.Picture_2 != 'NULL'&& val.Picture_3.length >0 && val.Picture_3 != 'NULL'){
                 await loadXHR(`${val.Picture_1}`).then(async function(blob_1) {
                     await loadXHR(`${val.Picture_2}`).then(async function(blob_2) {
                         await loadXHR(`${val.Picture_3}`).then(async function(blob_3) {
-                            // console.log([{blob_1:blob_1, blob_2:blob_2,blob_3:blob_3,val}])
+                            // 
                             resolve([{blob_1:blob_1, blob_2:blob_2,blob_3:blob_3,val}])
                           });
                       });
@@ -244,7 +244,7 @@ async function get_all_blob(val,index){
         }
         else {
             if(val.Picture_1.length >0 && val.Picture_1 != 'NULL'){
-                // console.log('hanya ada pic 1', index)
+                // 
                 await loadXHR(`${val.Picture_1}`).then(function(blob) {
                     resolve([{blob_1:blob,val}])
                   });
@@ -262,12 +262,12 @@ async function get_all_blob(val,index){
                   });
             }else {
 
-                console.log('masuk ke else, gaada gambar',)
+                
             }
-            // console.log('jalan index ke ' ,index)
+            // 
             
         }
-        // console.log(allData_with_blob)
+        // 
         // })
     })
 }
@@ -288,7 +288,7 @@ async function loop_through_items(page, item_no){
         };
         await request(options, async function (error, response) {
             if (error) {
-                console.log(error);
+                
                 resolve(await loop_through_items(page, item_no));
             }else{
                 if(response.body != undefined){
@@ -320,7 +320,7 @@ const getAllData=async()=>{
     var all_data = JSON.parse(localStorage.getItem('all_data_product'))
     var token = localStorage.getItem('token')
     allData = all_data
-   console.log('get all data jalan')
+   
    axios.post('https://products.sold.co.id/get-product-details')
    .then((res)=>{
       
@@ -336,11 +336,11 @@ const getAllData=async()=>{
                 // var all_data_with_blob = []
                 // res.data.forEach(async(val,index)=>{
                 //     var result = await  get_all_blob(val,index)
-                //     console.log(result)
+                //     
                 //     all_data_with_blob.push(result)
-                //     console.log(all_data_with_blob)
+                //     
                 //     var stringify = JSON.stringify(result)
-                //     console.log(stringify)
+                //     
                 //     localStorage.setItem('all_data_product',stringify   )
                 // })
                 var stringify = JSON.stringify(allData)
@@ -352,7 +352,7 @@ const getAllData=async()=>{
             
         }else {
         
-            console.log('masuk ke else 231')
+            
             renderItemPromo()
             renderItemNew()
             renderItemAll()
@@ -365,7 +365,7 @@ const getAllData=async()=>{
 })
     get_all_cat_subCat_for_storage()
     if(token !== null && token !== undefined && token.length>0) {
-        console.log('masuk ke if 376')
+        
         var province =  await new_find_province_from_address()
         var city =  await new_find_city_from_address(province)
         var district =  await new_find_district_from_address(city)
@@ -413,7 +413,7 @@ reader.readAsDataURL(blob)
 reader.onloadend = function(){
     var base64data = reader.result
     convert_base = base64data
-    console.log(convert_base,'235')
+    
 }
 
 
@@ -452,30 +452,30 @@ const new_find_subDistrict_from_address=async(district)=>{
             .then(async(res)=>{
                 alamat_pilihan = res.data.Address_1
                 if(subDistrict_from_storage != undefined && subDistrict_from_storage.length != 0 ){
-                    console.log('masuk ke if 458')
+                    
                 }else {
                     await get_all_subdistrict_from_courier(kurir_pilihan,kurir_kode,district).done( function(response){
                         response.forEach((val,index)=>{
                             if(alamat_pilihan.toUpperCase().includes(val.Sub_District.toUpperCase())){
                                 kelurahan_pilihan = val.Sub_District
-                                console.log(kelurahan_pilihan,' kelurahn pilihan 497')
+                                // 
                                 localStorage.setItem('sub_district_customer',kelurahan_pilihan)
-                                // console.log(kelurahan_pilihan, 'ini kelurahan pilihan')
+                                // 
                                 resolve(kelurahan_pilihan)
                             }
                         })
-                        console.log(response)
+                        
                     })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     })
 }
 
 const new_find_district_from_address=async(city)=>{
-    console.log(city)
+    
     return new Promise(async(resolve,reject)=>{
         var district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
         var kecamatan_pilihan = ''
@@ -483,35 +483,35 @@ const new_find_district_from_address=async(city)=>{
         var kurir_pilihan = ''
         var kurir_kode = ''
         var alamat_pilihan = ''
-        console.log('new_find_district_from_address jalan')
+    
         await get_all_couriers().done( async function(response){
             kurir_pilihan = response[0].Courier
             kurir_kode = response[0].Courier_Code
-            console.log('new_find_district_from_address jalan 1')
+    
             await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async(res)=>{
                 alamat_pilihan = res.data.Address_1
-                console.log('new_find_district_from_address jalan 2')
+    
                 await get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
-                    console.log(response)
-                    console.log('new_find_district_from_address jalan 3')
+                    // 
+    
 
                     response.forEach((val,index)=>{
-                        console.log(response)
-                        console.log('new_find_district_from_address jalan 4')
+    
+    
                         if(alamat_pilihan.toUpperCase().includes(val.District.toUpperCase())){
                             kecamatan_pilihan = val.District
-                            console.log(kecamatan_pilihan,' kecamatan pilihan 497')
+    
                             localStorage.setItem('district_customer',kecamatan_pilihan)
-                            // console.log(kecamatan_pilihan)
+                            // 
                             resolve(kecamatan_pilihan)
                         }else {
-                            console.log('masuk ke else 505 new find district from address pilihan')
+                            
                         }
                     })
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
         
@@ -557,7 +557,7 @@ const new_find_city_from_address= async (province)=>{
                     })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     })
@@ -577,13 +577,13 @@ const new_find_province_from_address= async ()=>{
             kurir_kode = response[0].Courier_Code
             await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async (res)=>{
-                console.log(res.data,'565')
+                
                 alamat_pilihan = res.data.Address_1
                 if(province_from_storage != undefined &&  province_from_storage.length != 0){
                     province_from_storage.forEach((val,index)=>{
                         if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
                             province_pilihan = val.Province
-                            console.log(province_pilihan,' ini province_pilihan')
+                
                             localStorage.setItem('province_customer',province_pilihan)
                             resolve(province_pilihan) 
                         }
@@ -593,7 +593,7 @@ const new_find_province_from_address= async ()=>{
                         response.forEach((val,index)=>{
                             if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
                                 province_pilihan = val.Province
-                                console.log(province_pilihan,' ini province_pilihan')
+                                
                                 localStorage.setItem('province_customer',province_pilihan)
                                 resolve(province_pilihan) 
                             }
@@ -601,7 +601,7 @@ const new_find_province_from_address= async ()=>{
                     })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     })
@@ -613,7 +613,7 @@ const renderOptionSearch=()=>{
     var token = localStorage.getItem('token')
         axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
         .then((res)=>{
-            // console.log(res.data)
+            // 
             res.data.map((val,index)=>{
                 if(index<7){
                     $('.header-search-option').append(`
@@ -629,12 +629,12 @@ const renderOptionSearch=()=>{
 
 const get_product_detail_from_main_page=(product_id)=>{
 
-    
+    $('.new-box-category').toggle(500)
     
     // render_get_product_detail(product_id)  
     $(this).scrollTop('.modals-product-detail')
      var height = $('.box-render-new').position()
-    console.log('height top',height.top)
+    
 $('.box-delete-success').css('display','block')
 $('.modals-product-detail').css('display','block')
 $('.close-button').css('display','block')
@@ -650,7 +650,7 @@ const renderItemPromo=()=>{
     // $('.box-render-promo-animated').css('display','none')
     // $('.box-render-promo').css('display','flex')
 // alert('render itempromo jalan')
-console.log('render item promo jalan')
+
     $('.box-render-promo').append(`
         <div class="promo_card">
             <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
@@ -675,7 +675,7 @@ console.log('render item promo jalan')
 
                 var imgBase = ''
                     // convertImgToBase64(val.Picture_1, function(base64Img){
-                        // console.log([`base64:${base64Img}`,`Product_Code:${val.Product_Code}`,val])
+                        // 
                         // all_array.push([`{"base64":${base64Img}}`,`{"Product_Code":${val.Product_Code}}`,val])
                         // imgBase = base64Img
                         $('.box-render-promo').append(
@@ -698,7 +698,7 @@ console.log('render item promo jalan')
                                 </div>
                                 `
                             )
-                            // console.log(imgBase)
+                            // 
                     // });
                   }
 
@@ -906,7 +906,7 @@ const renderCategory=()=>{
                 )
         })
     }).catch((err)=>{
-        console.log(err)
+        
     })
 }
 
@@ -944,6 +944,9 @@ const getAllItem=(item)=>{
 const findSubCategory=(sub)=>{
     // $('.modals-lk').css('display','block')
     // alert('findsubcategory jalan')
+
+    $('.box_iframe_groupbuy').css('display','none')
+
     $('.close-button').css('display','block')
     // $('')
 
@@ -1005,7 +1008,7 @@ function sign_up_request(){
         var district =[]
         var sub_district=[]
         get_all_couriers().done(function(response){
-            // console.log(response)
+            // 
 
             get_all_province_from_courier('tiki','tiki').done(function(response){
                 province = response[0]
@@ -1062,7 +1065,7 @@ const re_render_register=()=>{
     var district =[]
     var sub_district=[]
     get_all_couriers().done(function(response){
-        // console.log(response)
+        // 
 
         get_all_province_from_courier('tiki','tiki').done(function(response){
             province = response[0]
@@ -1171,7 +1174,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
         if(allData_storage != undefined && allData_storage.length !=0){
             allData_storage.forEach((val,index)=>{ 
                 if(val.Subcategory == subCategory){
-                    console.log(val)
+                    
                     allDataProduct.push(val)
                     var hargaAwal = parseInt(val.Sell_Price)
                     var discount = parseInt(val.Sell_Price * 0.1)
@@ -1194,9 +1197,9 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                             )
                 }
             })
-            // console.log(subCategory)
-            // console.log('get all item from all cat jalan')
-            // console.log(res.data)
+            // 
+            // 
+            // 
           
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             $('.modals-lk').css('display','block')
@@ -1288,12 +1291,12 @@ const renderItemBasedOnCategory=(Category)=>{
             var allData_storage = JSON.parse(localStorage.getItem('all_subCategory'))
             // var allData_storage = []
             if(allData_storage != undefined && allData_storage.length !=0) {
-                // console.log('masuk ke if ')
+                // 
                 allData_storage.forEach((val,index)=>{
-                    // console.log(val.Category.toUpperCase())
-                    // console.log(val[0].Category.toUpperCase())
+                    // 
+                    // 
                     if(val[0].Category.toUpperCase() == Category.toUpperCase() ){
-                        // console.log(val)
+                        // 
                         allDataProduct.push(val)
                     }
                 })
@@ -1318,7 +1321,7 @@ const renderItemBasedOnCategory=(Category)=>{
                        timer:100,
                    })
             }else {
-                // console.log('masuk ke if ')
+                // 
                 axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}`)
                 .then((res)=>{
                     allDataProduct.push(res.data)
@@ -1343,7 +1346,7 @@ const renderItemBasedOnCategory=(Category)=>{
                            timer:100,
                        })
                 }).catch((err)=>{
-                    console.log(err)
+                    
                 })
             }
           
@@ -1367,7 +1370,7 @@ const renderItemBasedOnCategory=(Category)=>{
 
 
 function close_all_open_window(){
-    console.log('close all open windows is active')
+    
     $(".force-close-all-command").css("display", "none");
     $('.option-0').removeClass("background_grey");
     $('.option-1').removeClass("background_grey");
@@ -1423,7 +1426,7 @@ function back_to_home(){
 //                     })
 //                 }
 //             }).catch((err)=>{
-//                 console.log(err)
+//                 
 //             })
 //         })
 //     })
@@ -1680,10 +1683,10 @@ const render_group_buy=(product_id)=>{
                 // var kota_pilihan = await find_city_from_address(province_pilihan)
                 // var kecamatan_pilihan = await find_district_from_address(kota_pilihan)
                 // var kelurahan_pilihan = await find_subDistrict_from_address(kecamatan_pilihan)
-                // console.log(province_pilihan)
-                // console.log(kota_pilihan)
-                // console.log(kecamatan_pilihan)
-                // console.log(kelurahan_pilihan)
+                // 
+                // 
+                // 
+                // 
     
                 //  RENDER KURIR DLL
                     get_all_couriers().done(function(response){
@@ -2519,7 +2522,7 @@ const provinceMethodHome=(product_id)=>{
         }
 
         if(city_storage !=undefined && city_storage.length >0 && district_storage != undefined && district_storage.length >0 && subdistrict_storage != undefined && subdistrict_storage.length >0){
-            console.log('masuk ke if semua storage ke isi')
+            
         }else if(city_storage != undefined && city_storage.length>0 && district_storage != undefined && district_storage.length >0){
            
             var kota_pilihan = ''
@@ -2698,7 +2701,7 @@ const provinceMethodHome=(product_id)=>{
                     <option  value="${val.City}" class="id-kota-gb">${val.City}</option> 
                 `)
             })
-            // console.log(allDistrict)
+            // 
             // allDistrict[0].map((val,index)=>{
             //     if(val.Sub_District == ''){
             //         $('.kecamatan-home-gb').append(`
@@ -2714,7 +2717,7 @@ const provinceMethodHome=(product_id)=>{
             // })
             get_product_detail_func(product_id).done(function(response){
                 var item_product = response
-                // console.log(district_pilihan)
+                // 
                 get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
                     allKecamatan = response
                     district_pilihan = response[0].District
@@ -4134,10 +4137,10 @@ function commafy( num ) {
     }
 }
  const render_get_product_detail=(product_id)=>{
-    // console.log(product_id,'2637')
+    // 
     $(this).scrollTop('.modals-product-detail')
     // var height = $('.box-render-new').position()
-    // console.log('height top',height.top)
+    // 
             Swal.fire({
             title: 'Please Wait',
             html: ` 
@@ -4177,7 +4180,7 @@ function commafy( num ) {
                             return val
                         }
                     })
-                    // console.log('masuk ke if dari local storage 3908')
+                    // 
                     var split_product = data_for_render[0].Name.split(' ')
                     var all_filter_product = []
                     
@@ -4598,7 +4601,7 @@ function commafy( num ) {
                                                         `)
                                                     // })
                                                 }).catch((err)=>{
-                                                    console.log(err)
+                                                    
                                                 })
                                             } else {
                                                 $('#nav-profile').append(`
@@ -4617,7 +4620,7 @@ function commafy( num ) {
                                                         `)
                                             }
                                         }).catch((err)=>{
-                                            console.log(err)
+                                            
                                         })
                                     })
                         
@@ -4630,7 +4633,7 @@ function commafy( num ) {
                                 timer:100,
                             })
                         }).catch((err)=>{
-                            console.log(err)
+                            
                         })
                     
                 }else {
@@ -4642,14 +4645,14 @@ function commafy( num ) {
                         const querystring = $(location).attr('href');
                         axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                         .then((res)=>{
-                            console.log(res.data)
+                            
                             item = res.data
                             var split_product = res.data.Name.split(' ')
                             var all_filter_product = []
                             for(var i =0; i<split_product.length; i++){
                                 var filter_product = allDataProduct.filter((val)=>{
                                     if(val.Name.includes(split_product[i])){
-                                        // console.log('masuk ke if')
+                                        // 
                                         all_filter_product.push(val)
                                         return val
                                     }
@@ -5065,7 +5068,7 @@ function commafy( num ) {
                                                         `)
                                                     // })
                                                 }).catch((err)=>{
-                                                    console.log(err)
+                                                    
                                                 })
                                             } else {
                                                 $('#nav-profile').append(`
@@ -5084,7 +5087,7 @@ function commafy( num ) {
                                                         `)
                                             }
                                         }).catch((err)=>{
-                                            console.log(err)
+                                            
                                         })
                                     })
                         
@@ -5096,14 +5099,14 @@ function commafy( num ) {
                                 })
                                
                             }).catch((err)=>{
-                                console.log(err)
+                                
                             })
                             //BATAS 
                         }).catch((err)=>{
                             
                         })
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }
             }
@@ -5154,7 +5157,7 @@ function commafy( num ) {
                         var hargaAwal = parseInt(item.Sell_Price)
                         var discount = parseInt(item.Sell_Price * 0.1)
                         var hargaTotal = hargaAwal + discount
-                        console.log(item)
+                        
                         $('.box-item-detail').empty();
         
                         if(item.GroupBuy_Purchase == "false"){
@@ -5436,8 +5439,8 @@ function commafy( num ) {
                             )
                         }
                         all_filter_product.map((val,index)=>{
-                            // console.log(val)
-                            // console.log(product_id_pilihan)
+                            // 
+                            // 
                             if(val.Product_Code == product_id_pilihan){
                                 $('.card-quality-right-id').append(`
                                 <div class="card-sejenis-id active_product">
@@ -5521,7 +5524,7 @@ function commafy( num ) {
                         axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                         .then((res)=>{
                             var cust_comment = res.data
-                            // console.log(cust_comment)
+                            // 
                             var comment_parse = JSON.parse(cust_comment.User_Comments)
                             $('#nav-profile').empty()
                             if(comment_parse == 'null' || comment_parse == null){
@@ -5563,7 +5566,7 @@ function commafy( num ) {
                                                     `)
                                                 // })
                                             }).catch((err)=>{
-                                                console.log(err)
+                                                
                                             })
                                         } else {
                                             $('#nav-profile').append(`
@@ -5583,12 +5586,12 @@ function commafy( num ) {
                                         }
                                         
                                     }).catch((err)=>{
-                                        console.log(err)
+                                        
                                     })
                                 })
                             }
                         }).catch((err)=>{
-                            console.log(err)
+                            
                         })
                         
                         Swal.fire({
@@ -5601,14 +5604,14 @@ function commafy( num ) {
                 
             })
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
     }
     })
 
     
-    // console.log(this)
+    // 
  }
 
 
@@ -5755,7 +5758,7 @@ const render_item_all_category=()=>{
         'HARDWARE',
         'ADHESIVE'
     ]
-    // console.log(data_atas)
+    // 
 
     var all_subcategory_storage = JSON.parse(localStorage.getItem('all_subCategory'))
     var index_for_render = 0 // kalo udah 12 stop looping
@@ -5764,7 +5767,7 @@ const render_item_all_category=()=>{
             val[1].map((item,id)=>{
                 if(index_for_render <=11){
                     index_for_render +=1
-                    // console.log(index_for_render)
+                    // 
                     $('.box-render-new-category').append(`
                         <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
                             <div class="cd-image-category">
@@ -5781,8 +5784,8 @@ const render_item_all_category=()=>{
             
             axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
             .then((res)=>{
-                // console.log(res.data)
-                // console.log(res.data.length)
+                // 
+                // 
              $('.box-render-new-category').empty()
                 res.data.map((val,index)=>{
                     if(index<13){
@@ -5922,7 +5925,7 @@ function new_get_shipping_cost_informations(Courier_Price_Code_orig , Courier_Pr
         "timeout": 0,
     };
 
-    console.log(settings.url)
+    
     
     
     return $.ajax(settings);
@@ -6313,14 +6316,14 @@ const check_user_for_login=()=>{
 
                 axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                 .then((res)=>{
-                    console.log(token)
+                    
                     if(res.data){
                         $(`#img-profile-id`).attr(`src`, `${res.data}`);
                     }else {
                         $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
                     }
                 }).catch((err)=>{
-                    console.log(err)
+                    
                 })
     
                 var tahun = data_customer.Birthday.slice(0,4)
@@ -6408,9 +6411,9 @@ function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
 
 const open_checkout=(product_id)=>{
     // $('.iframe',window.parent.parent.document).css('display','block')
-    // console.log($('.iframe',window.parent.parent.document))
+    // 
 
-    // console.log(product_id)
+    // 
     addToCart(product_id)
     
     var array = []
@@ -6429,7 +6432,7 @@ const open_checkout=(product_id)=>{
             var productToBeAddedStringify = JSON.stringify(array);
             localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
     
-            // console.log(productToBeAdded)
+            // 
     
     
         $('.close-button',window.parent.parent.document).css('display','block')
@@ -6480,7 +6483,7 @@ const open_checkout=(product_id)=>{
         }
 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 
@@ -6557,7 +6560,7 @@ const buyNow=(product_id)=>{
         }
 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 }
 
@@ -7269,7 +7272,7 @@ async function addressMethod(address,item){
                     get_all_district_from_courier(nama_kurir,kurir_kode,nama_kota).done(function(response){
                         get_all_subdistrict_from_courier(nama_kurir,kurir_kode,nama_kecamatan).done(function(response){
                             allKelurahan = response
-                            // console.log(response)
+                            // 
                             var Courier_Price_Code_orig = 'CGK01.00'
                             var packing_type = ''
                             const queryString = window.location.search;
@@ -7307,8 +7310,8 @@ async function addressMethod(address,item){
                                 }
                                 new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, item_length, item_width, item_height, paket_value).done(function(response){
                                     allPengiriman = response
-                                    // console.log(allPengiriman)
-                                    // console.log(allKelurahan)
+                                    // 
+                                    // 
                                     $('.kelurahan-home-gb').empty()
                                     $('.pengiriman-home-gb').empty()
                                     $('.asuransi-home-gb').empty()
@@ -10017,7 +10020,7 @@ function calculateSize(img, maxWidth, maxHeight) {
     //   $('body').scrollTo('.box-render-new',window.parent);
     //   $(".main-body",window.parent).animate({ scrollTop: $('.main-body',window.parent) }, 1270);
     $('html, body').animate({ scrollTop: ('.box-card',window.parent) }, 1000);
-    console.log($('.main-structure',window.parent.parent))
+    
     
 
     // $("body").click(function() {
@@ -10032,5 +10035,5 @@ function calculateSize(img, maxWidth, maxHeight) {
     $('.new-box-category').toggle(500)
     $('.list-group-item').removeClass('active-cl')
     close_all_open_window()
-    // console.log($('.new-box-category'))
+    // 
   }

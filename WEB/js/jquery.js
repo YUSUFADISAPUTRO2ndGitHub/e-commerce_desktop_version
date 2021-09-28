@@ -9,7 +9,7 @@ $(function(){
     setTimeout(()=>{
         $('.insta-box').css('transform','translateX(100%)')
         $('.fa-arrow-circle-left').css('visibility','visible')
-
+        $('.fa-arrow-circle-right').css('visibility','hidden')
     },10000)
 
     $('#unhide-insta').on('click',function(){
@@ -153,7 +153,7 @@ $(function(){
 
     
     var token = localStorage.getItem('token')
-    console.log(token)
+    
  
     
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
@@ -233,7 +233,7 @@ $(function(){
                 $('.box-tambah-alamat').empty()
                 
                 if(data_customer.Address_1 == 'undefined'){
-                    // console.log('alamat undefined')
+                    // 
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -243,10 +243,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
                     </div> 
                     `)
-                    // console.log('masuk ke else')
+                    // 
                 }
                 if(data_customer.Address_2 == 'undefined'){
-                    // console.log('alamat undefined')
+                    // 
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -256,10 +256,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
                     </div> 
                     `)
-                    // console.log('masuk ke else')
+                    // 
                 }
                 if(data_customer.Address_3 == 'undefined'){
-                    // console.log('alamat undefined')
+                    // 
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -269,10 +269,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
                     </div> 
                     `)
-                    // console.log('masuk ke else')
+                    // 
                 }
                 if(data_customer.Address_4 == 'undefined'){
-                    // console.log('alamat undefined')
+                    // 
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -282,10 +282,10 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
                     </div> 
                     `)
-                    // console.log('masuk ke else')
+                    // 
                 }
                 if(data_customer.Address_5 == 'undefined'){
-                    // console.log('alamat undefined')
+                    // 
                 }else{
                     $('.box-tambah-alamat').append(`
                     <div class="login-name-3">
@@ -295,7 +295,7 @@ $(function(){
                         <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
                     </div> 
                     `)
-                    // console.log('masuk ke else')
+                    // 
                 }
 
 
@@ -307,7 +307,7 @@ $(function(){
                 $('.box_information_login').css('display','flex')
             }
         }).catch((err)=>{
-            // console.log(err)
+            // 
         })
 
         $('.closeByLogin').css('display','none')
@@ -1362,7 +1362,7 @@ $(function(){
         $('.modals-search-result').contents().find('.close-button-2').css('display','block');
         var value = $(this).val()
         // $('.close').css('display','block')
-        // console.log($('.close-button-2'))
+        // 
         var allProduct= JSON.parse(localStorage.getItem('all_data_product'))
 
 
@@ -1380,13 +1380,13 @@ $(function(){
                     var valueCap = value.toUpperCase()
                     
                     if(val.Name.toUpperCase().includes(valueCap)){
-                        // console.log('masuk ke if')
+                        // 
                         all_product_filter.push(val)
                         return val
                     }
                 })
                 all_product_filter.map((val,index)=>{
-                    // console.log(val, '1352')
+                    // 
                     if(val === false){
                         $('.render-li-search').append(`
                             <li  id="${val.Name}">${value} Tidak Ditemukan</li>

@@ -1219,7 +1219,7 @@ const send_otp_register_for_email=()=>{
 
 
     }).catch((err)=>{
-        console.log(err)
+        
     })
 }
 // const save_product_name=()=>{
@@ -1408,10 +1408,10 @@ const close_tab_answer=(result,index)=>{
 }
 
 // const onInputComment=(val)=>{
-//     console.log(val)
+//     
 //     alert('jalan    ')
 //     var comment = $('#input_comment_cust').val()
-//     console.log(comment)
+//     
 // }
 
 
@@ -1475,16 +1475,16 @@ const close_tab_answer=(result,index)=>{
                             </div>
                             `)
                         }).catch((err)=>{
-                            console.log(err)
+                            
                         })
 
                     })
                     $('.input_comment_cust').val('')
                 }).catch((err)=>{
-                    console.log(err)
+                    
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
     
         }
@@ -1503,7 +1503,7 @@ const close_tab_answer=(result,index)=>{
 //       var key = e.which,
 //         t = $(e.target),
 //         sib = t.next('input');
-//         console.log(key)
+//         
 //       if (key != 9 && (key < 48 || key > 90) ) {
 //         e.preventDefault();
 //         return false;
@@ -1586,7 +1586,7 @@ const close_tab_answer=(result,index)=>{
                 })
             }
         }).catch((err)=>{
-            console.log(err)
+            
         })
 
     }
@@ -1599,7 +1599,7 @@ const close_tab_answer=(result,index)=>{
      
 //      var data = $('.get_all_otp_register').serialize()
 //     //  alert('1492 jalan')
-//      console.log($('.get_all_otp_register').serialize())
+//      
 //     });
 //    });
 

@@ -2009,7 +2009,7 @@
     img.src = blobURL
     img.onerror = function (){
         URL.revokeObjectURL(this.src)
-        console.log('Cannot Load Image')
+        
     }
     img.onload = function () {
         URL.revokeObjectURL(this.src);
@@ -2045,13 +2045,13 @@
                             .then((res)=>{
                                 $(`#img-profile-id`).attr(`src`, `${res.data}`);
                             }).catch((err)=>{
-                                console.log(err)
+                                
                             })
                         }else {
-                            console.log('false')
+                            
                         }
                     }).catch((err)=>{
-                        console.log(err)
+                        
                     })
                 }else {
                     Swal.fire({

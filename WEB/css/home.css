@@ -2598,8 +2598,8 @@ input:focus {
 .modals-product-detail-position-home {
     /* position: fixed; */
     position: absolute;
-    top: 25%;
-    left: 50%;
+    top: 14.9%;
+    left: 43%;
     margin-left: -27%;
 }
 
@@ -6930,13 +6930,14 @@ border-radius:20px;
 }
 
 .fa-arrow-circle-right{
-    visibility: hidden;
+    /* visibility: hidden; */
     position:fixed;
     right:0%;
     font-size:30px;
     color:#217384;
     transition:0.5s;
-    
+    /* transform','translateX(-310px)' */
+    transform:translate(-310px)
     /* z-index:102; */
 }
 .fa-arrow-circle-right:hover{
@@ -7049,8 +7050,8 @@ border-radius:20px;
 }
 
 .card-new-category { 
-    /* width:16.668%; */
-    width:17%;
+    width:16.66%;
+    /* width:17%; */
     height:50%;
     /* border:1px solid #dedede; */
     border-right:1px solid #f1f2f6;

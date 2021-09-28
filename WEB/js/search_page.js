@@ -130,7 +130,7 @@ function show_subcategory(choosen_parent_category){
 
         axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${choosen_parent_category}`)
         .then((res)=>{
-            console.log(res.data)
+            
             // $('.box-list-kategori').css("display", "block")
             $('.box-list-kategori').toggle()
             $('.box-list-kategori').empty()
@@ -350,12 +350,12 @@ const render_searching_page=(product_name)=>{
         var all_product_storage = JSON.parse(localStorage.getItem('all_data_product'))
 
         if(all_product_storage.length >0 || all_product_storage !=null || all_product_storage != undefined){
-            console.log('masuk ke if')
+            
             var arr_filter_product = []
             var arr_split_filter_product = []
             var arr_for_render_split_filter = []
             var split_product = product_name.split(' ')
-            console.log(split_product,'split product 356')
+            
             let uniqueProduct = [];
             all_product_storage.forEach((val,index)=>{ // semua product dari local storage
                 split_product.forEach((res,id)=>{ // data split dari product yang dicari
@@ -369,7 +369,7 @@ const render_searching_page=(product_name)=>{
                             }
                         });
                         
-                        console.log(arr_for_render_split_filter)
+                        
                     }
                 })
             })
@@ -395,18 +395,18 @@ const render_searching_page=(product_name)=>{
                 </div>
                 `)   
             })
-            console.log(uniqueProduct)
+            
 
             var split_item = all_product_storage.filter((val)=>{
 
             })
            
             var filter_product = all_product_storage.filter((val)=>{
-                // console.log(val.Name.toUpperCase(), product_name.toUpperCase())
-                // console.log(val.Name.toUpperCase().includes(product_name.toUpperCase()))
+                // 
+                // 
                 // if(val.Name.toUpperCase().includes(product_name.toUpperCase())){
                 //     arr_filter_product.push(val)
-                //     console.log(val)
+                //     
                 //     var hargaAwal = parseInt(val.Sell_Price)
                 //     var discount = parseInt(val.Sell_Price * 0.1)
                 //     var hargaTotal = hargaAwal + discount
@@ -429,18 +429,18 @@ const render_searching_page=(product_name)=>{
                 //     `)      
                 // }
             })
-            console.log(filter_product)
+            
         }else {
             axios.post(`https://products.sold.co.id/get-product-details?product_name=${product_name}`)
             .then((res)=>{
-            console.log(res.data)
+            
                 var data_searching = res.data
         
         
                 if(res.data.length <3){
                     axios.post(`https://products.sold.co.id/get-product-details?`)
                     .then((res)=>{
-                        console.log('masuk ke if 360')
+                        
                         var data_all = res.data
                         data_searching.map((val,index)=>{
                             var hargaAwal = parseInt(val.Sell_Price)
@@ -508,7 +508,7 @@ const render_searching_page=(product_name)=>{
                         timer:100,
                     })
                 }else {
-                    console.log('masuk ke else 428')
+                    
                     data_searching.map((val,index)=>{
                         var hargaAwal = parseInt(val.Sell_Price)
                         var discount = parseInt(val.Sell_Price * 0.1)
@@ -603,7 +603,7 @@ const render_daftar_hutang=()=>{ // render utang untuk di card
 const detail_hutang_home=(order_number)=>{ // detail utang di home header
     // alert('function jalan')
     // $('.tableFixHead_ul_hutang').css('display','none')
-    console.log(order_number)
+    
     $('.card-body-ul').css('display','flex')
     $('.box-card-item-ul').empty()
     $('.card-address-profile').empty()
@@ -613,18 +613,18 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     
     axios.post(`https://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        console.log(res.data)
+        
         var arrListHutang = res.data
         axios.post(`https://sales.sold.co.id/check-delivery-order-information?Order_Number=${order_number}`)
         .then((res)=>{
-            console.log(res.data)
+            
         var delivery_data = res.data
-        console.log(delivery_data == null)
-        console.log(delivery_data == undefined)
-        console.log(delivery_data.length == 0)
-        console.log(delivery_data == '')
+        
+        
+        
+        
         if(delivery_data  == null || delivery_data ==undefined || delivery_data.length == 0 || delivery_data == ''){
-            console.log('masuk ke if 623')
+            
             $('.unpaid-title').empty()
             $('.unpaid-title').append(`
                 <p>Order Number <br>
@@ -649,13 +649,13 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         var customer_address = ''
         var total = arrListHutang.length
         // render card item
-        console.log(arrListHutang)
+        
         var total_product_with_shipping = shipping_price + product_price
         arrListHutang.map((val,index)=>{
             customer_address =  val.Shipping_Address
             // ${delivery_parse.paket_awb}
             if(val.Product_Code == 'tiki'){
-                console.log('masuk ke if tiki')
+                
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
@@ -685,11 +685,11 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 `)
 
             }else {
-                console.log('masuk ke else  tiki 687')
+                
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
-                    console.log(res.data)
+                    
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
@@ -1046,7 +1046,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
 
             
         }).catch((err)=>{
-            console.log(err)
+            
         })
         
     }).catch((err)=>{

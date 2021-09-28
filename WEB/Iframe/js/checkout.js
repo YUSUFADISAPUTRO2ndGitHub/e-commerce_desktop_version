@@ -709,13 +709,13 @@ function checking_payment(){
     
     
     async function success(isSuccess){
-        console.log(isKurir_pilihan.valueOf, ' kurir')
-        console.log(isProvince_pilihan,' province')
-        console.log(isKota_pilihan,'kota')
-        console.log(isKecamatan_pilihan,' kecamatan')
-        console.log(isKelurahan_pilihan, ' kelurahan')
-        console.log(isPengiriman_pilihan,' pengiriman')
-        console.log(isPaymentMethod_pilihan,' payment method')
+        
+        
+        
+        
+        
+        
+        
         var alamat = $('#address-selection option:selected').val()
         var province = localStorage.getItem('province_customer')
         var city = localStorage.getItem('city_customer')
@@ -1147,11 +1147,11 @@ const find_subDistrict_from_address=async(district)=>{
                                 resolve(kelurahan_pilihan)
                             }
                         })
-                        // console.log(response)
+                        // 
                     })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     })
@@ -1180,7 +1180,7 @@ const find_district_from_address=async(city)=>{
                     })
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
         
@@ -1224,7 +1224,7 @@ const find_city_from_address= async (province)=>{
                     })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     })
@@ -1263,7 +1263,7 @@ const find_province_from_address= async ()=>{
                     })
                 }
             }).catch((err)=>{
-                console.log(err)
+                
             })
         })
     })
@@ -1274,7 +1274,7 @@ const find_province_from_address= async ()=>{
 
 
  async function renderCartCheckout(product){
-    // console.log(product)
+    // 
     
     var province_pilihan = localStorage.getItem('province_customer')
     var kota_pilihan = localStorage.getItem('city_customer')
@@ -1304,7 +1304,7 @@ const find_province_from_address= async ()=>{
 
             if(province_pilihan != undefined && kota_pilihan != undefined &&
                 kecamatan_pilihan != undefined && kelurahan_pilihan !=undefined){
-                    console.log('masuk ke if alamat dari localStorage')
+                    
             }else {
                     province_pilihan =  await find_province_from_address()
                     kota_pilihan = await find_city_from_address(province_pilihan)
@@ -1322,7 +1322,7 @@ const find_province_from_address= async ()=>{
             var allKurir = []
              axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
-                // console.log(province_pilihan, '1167')
+                // 
                 var alamat_pilihan = res.data.Address_1
                 get_all_couriers().done(function(response){
                     allKurir = response
@@ -1340,7 +1340,7 @@ const find_province_from_address= async ()=>{
                                             allProduct.push(res.data)
                                             berat_product += (res.data.Weight_KG * 0.1)
                                         }).catch((err)=>{
-                                            console.log(err)
+                                            
                                         })
                                     })
                     
@@ -1464,7 +1464,7 @@ const find_province_from_address= async ()=>{
                     })
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
             
             $('.card-checkout-cc').empty()
@@ -1546,7 +1546,7 @@ const delete_coupon=(product_id)=>{
         var newItemsToCheckout = JSON.stringify(itemsToCheckout)
         localStorage.setItem("itemsToCheckout",newItemsToCheckout)
     }).catch((err)=>{
-        console.log(err)
+        
     })
 
 }
@@ -1591,7 +1591,7 @@ const onInputCoupon=(product_id)=>{
         
 
 
-        // console.log(checkout_stringify)
+        // 
         
         
         // $('.card-checkout-cc').empty()
@@ -1620,13 +1620,13 @@ const onInputCoupon=(product_id)=>{
             
             } 
         }
-        // console.log(itemsToCheckout)
+        // 
         // var newItemsToCheckout = JSON.stringify(itemsToCheckout)
         // localStorage.setItem("itemsToCheckout",newItemsToCheckout)
 
         // $('.card-checkout-cc').empty()
         // renderCartCheckout(checkout_stringify)
-        // console.log( $(`.input_coupon_checkout_${product_id}`))
+        // 
     }
 
 }
@@ -1946,7 +1946,7 @@ const render_select_option_kurir=async()=>{
    
     if(alamat == 'TO SAVED ADDRESS'){
         // var split_alamat = alamat_pilihan.split(' ')
-        // console.log(split_alamat)
+        // 
         var province = localStorage.getItem('province_customer')
         var city = localStorage.getItem('city_customer')
         var district = localStorage.getItem('district_customer')
@@ -1955,7 +1955,7 @@ const render_select_option_kurir=async()=>{
         var allPengiriman = []
         if(province != undefined && city != undefined 
             && district != undefined && sub_district != undefined){
-                console.log('masuk ke semua local storage ke isi 1933 checkout js')
+                
         }else {
             province = await find_province_from_address()
             city = await find_city_from_address(province)
@@ -1978,7 +1978,7 @@ const render_select_option_kurir=async()=>{
                 }
                 axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
-                // console.log(province_pilihan, '1167')
+                // 
                 var alamat_pilihan = res.data.Address_1
                 get_all_couriers().done(function(response){
                     allKurir = response
@@ -1990,14 +1990,14 @@ const render_select_option_kurir=async()=>{
                                 var berat_product = 0
                                 var allProduct = []
                                 product.map((val,index)=>{
-                                    // console.log(val)
+                                    // 
                                     axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.productNo}`)
                                     .then((res)=>{
-                                        // console.log(res.data)
+                                        // 
                                         allProduct.push(res.data)
                                         berat_product += (res.data.Weight_KG * 0.1)
                                     }).catch((err)=>{
-                                        console.log(err)
+                                        
                                     })
                                 })
                 
@@ -2097,7 +2097,7 @@ const render_select_option_kurir=async()=>{
                     })
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
 
             $('.card-checkout-cc').empty()
@@ -2310,7 +2310,7 @@ const re_render_select_option=async()=>{
         var token = localStorage.getItem('token')
         if(province != undefined && city != undefined 
             && district != undefined && sub_district != undefined){
-                console.log('masuk ke local storage ke isi semua 2288 checkout js')
+                
         }else {
             province = await find_province_from_address()
             city = await find_city_from_address(province)
@@ -2333,7 +2333,7 @@ const re_render_select_option=async()=>{
                 }
                 axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
-                // console.log(province_pilihan, '1167')
+                // 
                 var alamat_pilihan = res.data.Address_1
                 get_all_couriers().done(function(response){
                     allKurir = response
@@ -2345,14 +2345,14 @@ const re_render_select_option=async()=>{
                                 var berat_product = 0
                                 var allProduct = []
                                 product.map((val,index)=>{
-                                    // console.log(val)
+                                    // 
                                     axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.productNo}`)
                                     .then((res)=>{
-                                        // console.log(res.data)
+                                        // 
                                         allProduct.push(res.data)
                                         berat_product += (res.data.Weight_KG * 0.1)
                                     }).catch((err)=>{
-                                        console.log(err)
+                                        
                                     })
                                 })
                 
@@ -2435,7 +2435,7 @@ const re_render_select_option=async()=>{
                     })
                 })
             }).catch((err)=>{
-                console.log(err)
+                
             })
             $('.card-checkout-cc').empty()
             product.map((val,index)=>{
@@ -2672,7 +2672,7 @@ const provinceCheckout=(product_id)=>{
         
         
         if(city_storage != undefined && district_storage != undefined && subdistrict_storage != undefined){ // city, district, sub ada isinya
-            console.log('masuk ke if semua storage ke isi 2650 checkout js')
+            
         }else if (city_storage != undefined && city_storage.length >0 && district_storage != undefined && district_storage.length >0){ // city district ada isinya
 
           var kota_pilihan = ''
@@ -3163,7 +3163,7 @@ const kotaCheckout=()=>{
         var cart_local = localStorage.getItem('itemsToCheckout')
                         
         var parse_cart = JSON.parse(cart_local)
-        // console.log(parse_cart)
+        // 
         var array_cart =[]
         for(var i =0; i<parse_cart.length; i++){
             getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
