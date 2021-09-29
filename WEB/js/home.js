@@ -151,6 +151,47 @@ function pengiriman_requested(x){
     
 }
 
+
+function bulk_order_home(x){
+    var token = localStorage.getItem('token')
+    // var data_customer;
+    // alert('jaalan')
+    $('.close-button').css('display','block')
+    $('.close').css('display','none') 
+    if($(x).hasClass("background_grey")){
+        $(x).removeClass("background_grey");
+        $('.modals-bulk-order').css('display','none')
+    }else{
+        $(x).addClass("background_grey");
+        $('.modals-bulk-order').css('display','block')
+    }
+    if($(x).hasClass('close-button')){
+        // alert('masuk ke line 72')
+        $('.close-button').css('display','none')
+    }
+    
+    // $(".modals-bulk-orde").toggle();
+    $(".modals-bulk-order").attr("src", `./Iframe/bulk_order.html`);
+    // $(".modals-hutang-home").attr("src", `./Iframe/unpaidList.html?list_hutang=${token}`);
+
+
+    // ngilangin block abu abu pas di klik
+    $('.option-2').removeClass('background_grey')
+    $('.option-3').removeClass('background_grey')
+    $('.option-1').removeClass('background_grey')
+
+    // SEARCH ITEM BACK TO NORMAL
+    $('.box-render-search').css('display','none')
+    $('.input-name').css('border-bottom-left-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
+    $('.input-name').val(null)
+
+    // untuk close iframe sebelahnya
+    $('.modals-pengiriman').css("display",'none')
+    $('.modals-check-harga').css("display",'none')
+    $(".iframe").css('display','none')
+}
+
 function cek_daftar_hutang(x){
     // alert('function jalan')
     // 
@@ -169,11 +210,6 @@ function cek_daftar_hutang(x){
         // alert('masuk ke line 72')
         $('.close-button').css('display','none')
     }
-   
-    
-        
-        
-    
     
     // $(".modals-hutang-home").toggle();
     $(".modals-hutang-home").attr("src", `./Iframe/unpaidList.html?list_hutang=${token}`);
@@ -1329,21 +1365,27 @@ const back_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
     var find_not_active = $('.item-left-img-box .img-big').attr('id')
-    
+    console.log(find_active)
+    console.log(find_not_active)
     if(find_active == 'img-big-1'){
+        console.log('masuk ke if 1334')
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
-        var img_3 = $('#img-big-3').attr('class')
-        var img_3_split = img_3.split(' ')
-        $('#img-big-3').removeClass('img-big')
-        $('#img-big-3').addClass('img-big-active')
-        if(img_3_split[1] == 'img-notfound'){
+        var img_4 = $('#img-big-4').attr('class')
+        var img_4_split = img_4.split(' ')
+        // $(`#${find_not_active}`).removeClass('img-big')
+        // $(`#${find_not_active}`).addClass('img-big-active')
+        console.log(img_4_split)
+        $('#img-big-4').removeClass('img-big')
+        $('#img-big-4').addClass('img-big-active')
+        if(img_4_split[1] == 'img-notfound'){
             $('#img-big-2').removeClass('img-big')
             $('#img-big-2').addClass('img-big-active')
-        }else if (img_3_split[0] == 'img-notfound'){
+        }else if (img_4_split[0] == 'img-notfound'){
             $('#img-big-2').removeClass('img-big')
             $('#img-big-2').addClass('img-big-active')
-
+        }else {
+            console.log('masuk ke else 1351')
         }
        
     }else if (find_active == 'img-big-2'){
@@ -1356,36 +1398,78 @@ const back_btn=()=>{
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         $('#img-big-2').removeClass('img-big')
-        $('#img-big-2').addClass('img-big-active')
-       
+        $('#img-big-2').addClass('img-big-active')   
+    }else if (find_active == 'img-big-4'){
+        console.log('masuk ke else if  1363')
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        var img_3 = $('#img-big-3').attr('class')
+        var img_2 = $('#img-big-2').attr('class')
+        if(img_3 == 'img-notfound' && img_2 == 'img-notfound'){
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')  
+        }else if(img_3 == 'img-notfound' && img_2 =='img-big'){
+            $('#img-big-2').removeClass('img-big')
+            $('#img-big-2').addClass('img-big-active')  
+        }else {
+            $('#img-big-3').removeClass('img-big')
+            $('#img-big-3').addClass('img-big-active')  
+        }
+        // $(`#${find_not_active}`).removeClass('img-big')
+        // $(`#${find_not_active}`).addClass('img-big-active')
+        // $('#img-big-1').removeClass('img-big')
+        // $('#img-big-1').addClass('img-big-active')   
     }
 }
 const next_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
     var find_not_active = $('.item-left-img-box .img-big').attr('id')
-    
+    console.log(find_active, ' ini active')
+    console.log(find_not_active,' not active')
     if(find_active == 'img-big-1'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
-        $('#img-big-2').removeClass('img-big')
-        $('#img-big-2').addClass('img-big-active')
+        $(`#${find_not_active}`).removeClass('img-big')
+        $(`#${find_not_active}`).addClass('img-big-active')
+        // $('#img-big-2').removeClass('img-big')
+        // $('#img-big-2').addClass('img-big-active')
     }else if (find_active == 'img-big-2'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
+       
+        // $(`#${find_not_active}`).removeClass('img-big')
+        // $(`#${find_not_active}`).addClass('img-big-active')
         var img_3 = $('#img-big-3').attr('class')
-        var img_3_split = img_3.split(' ')
-        if(img_3_split[1] == 'img-notfound'){
-            $('#img-big-1').removeClass('img-big')
-            $('#img-big-1').addClass('img-big-active')
-        }else if (img_3_split[0] == 'img-notfound'){
+        var img_4 = $('#img-big-4').attr('class')
+
+        if(img_3 == 'img-notfound' && img_4 == 'img-notfound'){
             $('#img-big-1').removeClass('img-big')
             $('#img-big-1').addClass('img-big-active')
 
+        }else if (img_3 == 'img-notfound' && img_4 == 'img-big'){
+            $('#img-big-4').removeClass('img-big')
+            $('#img-big-4').addClass('img-big-active')
         }
-        $('#img-big-3').removeClass('img-big')
-        $('#img-big-3').addClass('img-big-active')
+        console.log(img_3)
     }else if (find_active == 'img-big-3'){
+        $(`#${find_active}`).removeClass('img-big-active')
+        $(`#${find_active}`).addClass('img-big')
+        var img_4 = $('#img-big-4').attr('class')
+        var img_4_split = img_4.split(' ')
+        console.log(img_4_split)
+        if(img_4_split[1] == 'img-notfound'){
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')
+        }else if (img_4_split[0] == 'img-notfound'){
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')
+        }
+
+
+        $('#img-big-4').removeClass('img-big')
+        $('#img-big-4').addClass('img-big-active')
+    }else if (find_active == 'img-big-4'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         $('#img-big-1').removeClass('img-big')

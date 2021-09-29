@@ -5,17 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../WEB/css/home.css">
+    
     <!-- <link rel="stylesheet" href="../WEB/Iframe/home.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css"> -->
-    <!-- <link rel="stylesheet" href="path-to-the-file/splide.min.css"> -->
-
     <link rel="stylesheet" href="./css/splide-2.4.21/dist/css/splide.min.css">
-    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- GOOGLE ANALYTICS -->
@@ -29,11 +25,6 @@
     </script>
 
     <!-- GOOGLE ANALYTICS -->
-
-    <!-- SPLIDE JS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> -->
-    <!-- SPLIDE JS -->
-    
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -51,20 +42,10 @@
     <script src="./css/splide-2.4.21/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="./js/auth.js"></script>
     <script type="text/javascript" src="./js/home.js"></script>
-    
     <script type="text/javascript" src="./js/search_page.js"></script>
     <script type="text/javascript" src="./js/redirect_page_to_mobile_version.js"></script>
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>  -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-   
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  
-
-    <!-- testing crypto js sha256 -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.min.js"></script> -->
-    
     <title>SOLD</title>
     <style>
         .card-body {
@@ -414,112 +395,104 @@
 
 
      <!-- NEW REGISTER SUPPLIER MODALS -->
-     <div class="modal fade " id="newRegisterSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog box-login ">
-            <div class="modal-content  modal-content-newlogin">
-            <div class="modal-body box-newlogin-body">
-                <div class="newlogin-left">
-                    <div class="logo-sold-left">
-                        <img src="./img/logo.png" alt="">
-                        SOLD.CO.ID
-                    </div>
-                    <div class="desc-sold-left">
-                        <div class="ins-desc-sold-left">
-                            FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="newlogin-mid">
-                    
-                </div>
-                <div class="newlogin-right">
-                    <div class="login-right-box">
-                        <p>REGISTER</p>
-                        <p>Daftar Sebagai Supplier</p>
-                    </div>
-                    <div class="box-right-for-input-2">
-                        <div class="new-reg-left-box">
-                                <div class="input-right-box-1"> 
-                                    Email  PIC     
-                                    <div class="ins-right-box-1">
-                                        <input type="text" placeholder="Masukan Email" class="new-input-login-2" type="email" id="email_supp"
-                                        pattern=".+@globex.com" size="30" required onchange="supp_email_check()">
-                                        <div class="box-for-otp" onclick="send_otp_register_for_email()">Verify Email</div>
-                                    </div>
-                                </div>
-                                <div class="input-right-box-1">
-                                    Password
-                                    <input type="password" placeholder="Masukan Password" class="new-input-login-3" id="password_supp" onchange="supp_password_check()">
-                                </div>
-                                <div class="input-right-box-1">
-                                    Nama Depan PIC
-                                    <input type="text" placeholder="Nama Depan" class="new-input-login-3" id="nama_depan_supp"
-                                    >
-                                </div>
-                                <div class="input-right-box-1">
-                                    Nama Belakang PIC
-                                    <input type="text" placeholder="Nama Belakang" class="new-input-login-3" id="nama_belakang_supp">
-                                </div>
-                                <div class="input-right-box-1">
-                                    Nomor KTP
-                                    <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="no_ktp_supp"
-                                    maxlength="16">
-                                </div>
-                                
-                                <div class="input-right-box-1">
-                                    Nomor Telpon Gudang Utama
-                                    <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-3" id="telp_gudang_supp">
-                                </div>  
-                                <div class="input-right-box-1">
-                                    Nomor Telpon  Gudang Kedua
-                                    <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-3" id="telp_gudang2_supp">
-                                </div>
-
+    <div class="modal fade " id="newRegisterSupplierModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog box-login ">
+                <div class="modal-content  modal-content-newlogin">
+                    <div class="modal-body box-newlogin-body">
+                        <div class="newlogin-left">
+                            <div class="logo-sold-left">
+                                <img src="./img/logo.png" alt="">
+                                SOLD.CO.ID
                             </div>
-                            <div class="new-reg-right-box">
-                                <div class="input-right-box-1">
-                                    Nomor Rekening
-                                    <input type="text" placeholder="Nomor Rekening" class="new-input-login-3" id="no_rek_perusahaan_supp" minlength="4" maxlength="20">
+                            <div class="desc-sold-left">
+                                <div class="ins-desc-sold-left">
+                                    FOR US CUSTOMER <br> SATISFACTION  <br> IS THE MOST IMPORTANT
                                 </div>
-                                
-                                <div class="input-right-box-1">
-                                    Alamat Lengkap
-                                    <div class="box-name-address">
-                                        <input type="text" placeholder="Alamat Lengkap" class="new-input-login-3" minlength="4" maxlength="50" id="alamat_lengkap_1_supp"
-                                        >
-    
-                                        <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
-    
+                            </div>
+                            
+                        </div>
+                        <div class="newlogin-mid">
+                            
+                        </div>
+                        <div class="newlogin-right">
+                            <div class="login-right-box">
+                                <p>REGISTER</p>
+                                <p>Daftar Sebagai Supplier</p>
+                            </div>
+                            <div class="box-right-for-input-2">
+                                    <div class="new-reg-left-box">
+                                        <div class="input-right-box-1"> 
+                                            Email  PIC     
+                                            <div class="ins-right-box-1">
+                                                <input type="text" placeholder="Masukan Email" class="new-input-login-2" type="email" id="email_supp"
+                                                pattern=".+@globex.com" size="30" required onchange="supp_email_check()">
+                                                <div class="box-for-otp" onclick="send_otp_register_for_email()">Verify Email</div>
+                                            </div>
+                                        </div>
+                                        <div class="input-right-box-1">
+                                            Password
+                                            <input type="password" placeholder="Masukan Password" class="new-input-login-3" id="password_supp" onchange="supp_password_check()">
+                                        </div>
+                                        <div class="input-right-box-1">
+                                            Nama Depan PIC
+                                            <input type="text" placeholder="Nama Depan" class="new-input-login-3" id="nama_depan_supp">
+                                        </div>
+                                        <div class="input-right-box-1">
+                                            Nama Belakang PIC
+                                            <input type="text" placeholder="Nama Belakang" class="new-input-login-3" id="nama_belakang_supp">
+                                        </div>
+                                        <div class="input-right-box-1">
+                                            Nomor KTP
+                                            <input type="text" placeholder="Nomor KTP" class="new-input-login-3" id="no_ktp_supp"
+                                            maxlength="16">
+                                        </div>
+                                        
+                                        <div class="input-right-box-1">
+                                            Nomor Telpon Gudang Utama
+                                            <input type="text" placeholder="Nomor Telpon Utama" class="new-input-login-3" id="telp_gudang_supp">
+                                        </div>  
+                                        <div class="input-right-box-1">
+                                            Nomor Telpon  Gudang Kedua
+                                            <input type="text" placeholder="Nomor Telpon Kedua" class="new-input-login-3" id="telp_gudang2_supp">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="new-reg-right-box">
+                                        <div class="input-right-box-1">
+                                            Nomor Rekening
+                                            <input type="text" placeholder="Nomor Rekening" class="new-input-login-3" id="no_rek_perusahaan_supp" minlength="4" maxlength="20">
+                                        </div>
+                                        
+                                        <div class="input-right-box-1">
+                                            Alamat Lengkap
+                                            <div class="box-name-address">
+                                                <input type="text" placeholder="Alamat Lengkap" class="new-input-login-3" minlength="4" maxlength="50" id="alamat_lengkap_1_supp"
+                                                >
+            
+                                                <!-- <i class="fas fa-plus-circle icon_plus_address" onclick="addAddress()"></i> -->
+            
+                                            </div>
+                                        </div>
 
-                                <div class="input-right-box-1">
-                                    NPWP
-                                    <input type="number" placeholder="Nomor NPWP" class="new-input-login-3" id="npwp_supp">
-                                </div>
-                                <div class="input-right-box-1">
-                                    NIK PIC
-                                    <input type="text" placeholder="Nomor Induk Karyawan" class="new-input-login-3" id="nik_supp">
-                                </div>
-                                <div class="input-right-box-1">
-                                    Nama Perusahaan
-                                    <input type="text" placeholder="Nama Perusahaan" class="new-input-login-3" id="nama_perusahaan_supp">
-                                </div>
-                                <div 
-                                class="box-for-customer btn-kumpulkan "
-                                id="simpan_supplier" 
-                                >
-                                    Daftar 
-                                </div>
-                               
-    
+                                        <div class="input-right-box-1">
+                                            NPWP
+                                            <input type="number" placeholder="Nomor NPWP" class="new-input-login-3" id="npwp_supp">
+                                        </div>
+                                        <div class="input-right-box-1">
+                                            NIK PIC
+                                            <input type="text" placeholder="Nomor Induk Karyawan" class="new-input-login-3" id="nik_supp">
+                                        </div>
+                                        <div class="input-right-box-1">
+                                            Nama Perusahaan
+                                            <input type="text" placeholder="Nama Perusahaan" class="new-input-login-3" id="nama_perusahaan_supp">
+                                        </div>
+                                        <div class="box-for-customer btn-kumpulkan "id="simpan_supplier">
+                                            Daftar 
+                                        </div>
+                                    </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -873,7 +846,7 @@
     <!-- COMMISION MODALS -->
 
       <!-- PRODUCT MODALS -->
-      <div class="modal  fade " id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade " id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
           <div class="modal-content ">
             <div class="modal-header box-login-product">
@@ -963,7 +936,7 @@
     <!-- PRODUCT MODALS -->
 
        <!--DETAIL PRODUCT MODALS -->
-       <div class="modal  fade " id="detailProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade " id="detailProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
           <div class="modal-content">
             <div class="modal-header box-login-profile">
@@ -1009,10 +982,8 @@
     </div>
     <!--DETAIL PRODUCT MODALS -->
 
-  
-
       <!--item detail MODALS -->
-      <div class="modal  fade " id="detailHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade " id="detailHutangModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box_daftar_hutang ">
             <div class="modal-content ">
                 <div class="modal-header box-login-profile">
@@ -1109,7 +1080,7 @@
     <!---searching input HUTANG MODALS -->
 
        <!--OTP MODALS MODALS -->
-       <div class="modal  fade " id="get_otp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade " id="get_otp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  ">
             <div class="modal-content box-otp-product">
                 <div class="modal-header header-prod">
@@ -1145,7 +1116,7 @@
     <!---OTP MODALS HUTANG MODALS -->
 
      <!--Term And Condition MODALS -->
-     <div class="modal  fade " id="term_condition_modals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal  fade " id="term_condition_modals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  ">
             <div class="modal-content box-otp-product">
                 <div class="modal-header header-prod">
@@ -1232,13 +1203,25 @@
         </div>
     </div>
     <!---OTP LOGIN PRODUCT -->
+    
+
+    <div class="loading-page-awal">
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+       
+    </div>  
 
     <div class="main-structure">
+        
         <div class="main-about">
             <div class="ma_left">
                 <div class="ins_ma_left_2">
                     <img src="./img/bank.png" alt="" class="phone_img_header">
-                    <a href="http://bit.ly/sold-co-id-trial" target="_blank" style="text-decoration: none;" class="download-new-app hvr-grow" >
+                    <a href="https://play.google.com/store/apps/details?id=sold.co.id.ecommerce" target="_blank" style="text-decoration: none;" class="download-new-app hvr-grow" >
                         Download Sold App
                     </a>
                 </div>
@@ -1314,15 +1297,14 @@
                 <!-- box for searching item -->
 
                 
-                    <div class="box-render-search card box-search-menu force-close-all-command  " style="display: none;" onclick="close_all_open_window()">
-                        <div class="card-body ">
-                            <ul class="render-li-search">
-                
-                            </ul>
-                        </div>
+                <div class="box-render-search card box-search-menu force-close-all-command  " style="display: none;" onclick="close_all_open_window()">
+                    <div class="card-body ">
+                        <ul class="render-li-search">
+            
+                        </ul>
                     </div>
-                    <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
-                
+                </div>
+                <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
                 <!-- box for searching item -->
             </div>
             <div class="header-option">
@@ -1334,12 +1316,13 @@
                 <!-- ada bug
                  data-toggle="tooltip" data-placement="bottom" title="fungsi ini hanya untuk membantu Anda, jika Anda berbelanja langsung di toko kami"
                 -->
-                <div class="option-1 " onclick="cek_harga_requested(this)"
-               
-                id="cek_harga_req"
-                >
+                <!-- <div class="option-1 " onclick="cek_harga_requested(this)"id="cek_harga_req">
                     <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
                     <p>Cek Harga</p>
+                </div> -->
+                <div class="option-5 " onclick="bulk_order_home(this)"id="bulk_order">
+                    <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
+                    <p>Bulk Order</p>
                 </div>
                 <!-- <div class="option-2 " onclick="pengiriman_requested(this)">
                     <img src="../WEB/img/truck.png" alt="error" class="icon-opt">
@@ -1370,8 +1353,7 @@
                 </ul>
 
             </div>
-            
-            
+
             <div>
                 <iframe class="force-close-all-command modals-lk close closeByLogin" src=""></iframe> <!-- List  SubKategori  -->
                 <div class="force-close-all-command close-button" onclick="close_all_open_window()"></div>
@@ -1383,10 +1365,9 @@
             <iframe class="force-close-all-command modals-delivery-list close" src=""></iframe> <!-- Modals Delivery  -->
             <iframe class="force-close-all-command modals-live-chat close" src=""></iframe> <!-- Live Chat  -->
             <iframe class="force-close-all-command modals-hutang-home close" src=""></iframe> <!-- Live Chat  -->
+            <iframe class="force-close-all-command modals-bulk-order close" src=""></iframe> <!-- Live Chat  -->
             <!-- <iframe  src="../WEB/Iframe/rating-stars/index.html?product_code=6900005030114"></iframe> Modals Delivery  -->
-
-
-            
+        
             <div class="box_iframe_groupbuy">
                 <iframe class="force-close-all-command modals-product-detail modals-product-detail-position-home" src="">
                 </iframe> <!-- Modals product detail  -->
@@ -1397,18 +1378,13 @@
                 </div> -->
             </div>
             
-                <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
-
-            
+            <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
             <iframe class="force-close-all-command-2 modals-search-result" src="./Iframe/searchingPage.html"></iframe>
             <iframe class="force-close-all-command modals-information-login" src=""></iframe>
             <!-- <iframe class="modals-cart" src=""></iframe> Header Cart  -->
-
-           
-
         </div>
         
-        <div class="main-body">    
+        <div class="main-body">  
             <div class="box-ads">
                 <!-- <div class="ads-1 animated-background" >
                     
@@ -1418,7 +1394,7 @@
                         <div id="image-slider" class="splide">
                             <div class="splide__track">
                                 <ul class="splide__list">
-                                    <li class="splide__slide">
+                                    <li class="splide__slide ">
                                         <img src="./img/promo1.png" style="height:370px;border-radius:20px;" class="splide_img_1">
                                     </li>
                                     <li class="splide__slide">
@@ -1565,11 +1541,6 @@
 
             </div>
             <!-- TOAST product information -->
-            <!-- <div class="new-box-category">
-                testing
-            </div> -->
-            
-
 
             <div class="box-card">
                 <div class="ins_card">
@@ -1643,31 +1614,6 @@
                 </div>
             </div>
             <!-- RENDER PROMO ITEM END -->
-
-            <!-- <div class="box-all-category">
-                <div class="top-all-category">   
-                </div>
-                <div class="bot-all-category">
-                </div>
-
-                <div class="box_for_button_top_all">
-                    <div class="box-back-top-all" id="promo" onclick="backItem('back_top')">
-                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
-                    </div>
-                    <div class="box-next-top-all next-promo" id="promo" onclick="nextItem('next_top')">
-                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
-                    </div>
-                </div>
-
-                <div class="box_for_button_bot_all">
-                    <div class="box-back-bot-all" id="promo" onclick="backItem('back_bot')">
-                        <i class="fas fa-chevron-left icon-prev icon-back" ></i>
-                    </div>
-                    <div class="box-next-bot-all next-promo" id="promo" onclick="nextItem('next_bot')">
-                        <i class="fas fa-chevron-right icon-prev icon-next" ></i>
-                    </div>
-                </div>
-            </div> -->
 
             <!-- RENDER NEW ITEM -->
             <div class="small-ads" >

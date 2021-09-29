@@ -1139,5 +1139,6 @@ font-size:11px;
     color:white;
 }
 .img-notfound{
-    visibility:hidden !important;
+    /* visibility:hidden !important; */
+    display: none !important;
 }

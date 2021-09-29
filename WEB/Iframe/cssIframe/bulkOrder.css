@@ -1,0 +1,53 @@
+.container-bulk {
+    width:100%;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulk-title {
+    width:100%;
+    height:5%;
+    background-color: #dedede;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+}
+.bulk-product {
+    width:100%;
+    height:80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.bp-left{
+    width:75%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid pink;
+}
+.bp-right{
+    width:25%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blue;
+}
+
+.bulk-btn-box{
+    width:100%;
+    height:20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border:1px solid black;
+}
