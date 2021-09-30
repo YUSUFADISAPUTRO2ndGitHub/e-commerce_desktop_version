@@ -1948,3 +1948,382 @@ const close_tab_answer=(result,index)=>{
    const kelurahanCheckoutRegister=()=>{
 
    }
+
+   const add_to_cart_bulk_order=()=>{
+    var id_1 = $('#prod-bo-number-1').val()
+    var id_2 = $('#prod-bo-number-2').val()
+    var id_3 = $('#prod-bo-number-3').val()
+    var id_4 = $('#prod-bo-number-4').val()
+    var id_5 = $('#prod-bo-number-5').val()
+    var data_keisi = []
+    var array_bo = [id_1,id_2,id_3,id_4,id_5]
+
+    array_bo.forEach((val,index)=>{
+        if(val !== ''){
+            var id = index+1
+            var qty_item = $(`#prod-bo-qty-${id}`).val()
+            data_keisi.push({"product_name":val,"qty_product":qty_item})
+        }
+    })
+    console.log(data_keisi)
+
+    var all_data_storage = JSON.parse(localStorage.getItem('all_data_product'))
+    var dataParse = JSON.parse(localStorage.getItem('itemsInCart'))
+    var all_filter_from_storage = []
+    
+    
+        if(all_data_storage  !== undefined || all_data_storage  !== null || all_data_storage.length  >0){
+           data_keisi.forEach((item,id)=>{
+               all_data_storage.filter((value,index)=>{
+                    if(item.product_name.toUpperCase().includes(value.Name.toUpperCase())){
+                        console.log(value)
+                        if(dataParse){ // kalo data storage ada masuk if
+                            var filterdatakosong = dataParse.filter((filtering)=>{
+                                if(filtering.productNo === value.Product_Code){
+                                    return filtering
+                                }
+                            })
+                            if(filterdatakosong.length){
+                                var objIndex = dataParse.findIndex((obj => obj.productNo == value.Product_Code));
+                                dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
+                                $('.cart-counter').text(dataParse.length)
+                                // swal.fire("Berhasil Menambahkan Quantity", "", "success");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Berhasil Menambahkan Quantity
+                                    `,
+                                    timer:2000,
+                                    
+                                })
+                            }else {
+                                var data = {
+                                "productNo":value.Product_Code,
+                                "quantity":1
+                                }
+                                dataParse.push(data)
+                                $('.cart-counter').text(dataParse.length)
+                                // swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>  
+                                    </div>   
+                                    Berhasil Menambahkan ke Cart
+                                    `,
+                                    timer:2000,
+                                    
+                                })
+                            }   
+                        var pushToStorage = JSON.stringify(dataParse)
+                        localStorage.setItem('itemsInCart',pushToStorage) 
+                    }else { // storage kosong jadi nambahin 1 item
+                        var cart = [
+                            {
+                                "productNo":value.Product_Code,
+                                "quantity":1
+                            }
+                        ]
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                <div class="o-circle__sign"></div>  
+                            </div>   
+                            Berhasil Menambahkan Cart
+                            `,
+                            timer:2000,
+                            
+                        })
+                        var pushToStorage2 = JSON.stringify(cart)
+                        localStorage.setItem('itemsInCart',pushToStorage2)
+                    }
+                    }
+               })
+           })
+        }else {
+            
+        }
+  
+
+   }
+
+
+
+
+const replace_bo_to =(value,id)=>{
+
+    if(id == 'prod-bo-number-1'){ // check input mana yang dipakai
+        var id_2 = $('#prod-bo-number-2').val()
+        var id_3 = $('#prod-bo-number-3').val()
+        var id_4 = $('#prod-bo-number-4').val()
+        var id_5 = $('#prod-bo-number-5').val()
+        if(value == id_2 ){
+            var qty_2 = parseInt($('#prod-bo-qty-2').val())
+            var qty_total = qty_2 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-2`).val(qty_total)
+        }else if ( value == id_3){
+            var qty_3 = parseInt($('#prod-bo-qty-3').val())
+            var qty_total = qty_3 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-3`).val(qty_total)
+        }else if ( value == id_4){
+            var qty_4 = parseInt($('#prod-bo-qty-4').val())
+            var qty_total = qty_4 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-4`).val(qty_total)
+        }else if ( value == id_5){
+            var qty_5 = parseInt($('#prod-bo-qty-5').val())
+            var qty_total = qty_5 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-5`).val(qty_total)
+        }else {
+            $(`#${id}`).val(value)
+        }
+    }else if (id == 'prod-bo-number-2'){
+        var id_1 = $('#prod-bo-number-1').val()
+        var id_3 = $('#prod-bo-number-3').val()
+        var id_4 = $('#prod-bo-number-4').val()
+        var id_5 = $('#prod-bo-number-5').val()
+        var qty_2 = parseInt($('#prod-bo-qty-2').val())
+        var qty_total = qty_2 +1
+
+        if(value == id_1 ){
+            var qty_1 = parseInt($('#prod-bo-qty-1').val())
+            var qty_total = qty_1 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-1`).val(qty_total)
+        }else if ( value == id_3){
+            var qty_3 = parseInt($('#prod-bo-qty-3').val())
+            var qty_total = qty_3 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-3`).val(qty_total)
+        }else if ( value == id_4){
+            var qty_4 = parseInt($('#prod-bo-qty-4').val())
+            var qty_total = qty_4 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-4`).val(qty_total)
+        }else if ( value == id_5){
+            var qty_5 = parseInt($('#prod-bo-qty-5').val())
+            var qty_total = qty_5 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-5`).val(qty_total)
+        }else {
+            $(`#${id}`).val(value)
+        }
+
+    }else if (id == 'prod-bo-number-3'){
+        var id_1 = $('#prod-bo-number-1').val()
+        var id_2 = $('#prod-bo-number-2').val()
+        var id_4 = $('#prod-bo-number-4').val()
+        var id_5 = $('#prod-bo-number-5').val()
+        var qty_2 = parseInt($('#prod-bo-qty-2').val())
+        var qty_total = qty_2 +1
+
+        if(value == id_1 ){
+            var qty_1 = parseInt($('#prod-bo-qty-1').val())
+            var qty_total = qty_1 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-1`).val(qty_total)
+        }else if ( value == id_2){
+            var qty_2 = parseInt($('#prod-bo-qty-2').val())
+            var qty_total = qty_2 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-2`).val(qty_total)
+        }else if ( value == id_4){
+            var qty_4 = parseInt($('#prod-bo-qty-4').val())
+            var qty_total = qty_4 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-4`).val(qty_total)
+        }else if ( value == id_5){
+            var qty_5 = parseInt($('#prod-bo-qty-5').val())
+            var qty_total = qty_5 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-5`).val(qty_total)
+        }else {
+            $(`#${id}`).val(value)
+        }
+    }else if (id == 'prod-bo-number-4'){
+        var id_1 = $('#prod-bo-number-1').val()
+        var id_2 = $('#prod-bo-number-2').val()
+        var id_3 = $('#prod-bo-number-3').val()
+        var id_5 = $('#prod-bo-number-5').val()
+        var qty_2 = parseInt($('#prod-bo-qty-2').val())
+        var qty_total = qty_2 +1
+
+        if(value == id_1 ){
+            var qty_1 = parseInt($('#prod-bo-qty-1').val())
+            var qty_total = qty_1 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-1`).val(qty_total)
+        }else if ( value == id_2){
+            var qty_2 = parseInt($('#prod-bo-qty-2').val())
+            var qty_total = qty_2 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-2`).val(qty_total)
+        }else if ( value == id_3){
+            var qty_3 = parseInt($('#prod-bo-qty-3').val())
+            var qty_total = qty_3 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-3`).val(qty_total)
+        }else if ( value == id_5){
+            var qty_5 = parseInt($('#prod-bo-qty-5').val())
+            var qty_total = qty_5 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-5`).val(qty_total)
+        }else {
+            $(`#${id}`).val(value)
+        }
+    }else {
+        var id_1 = $('#prod-bo-number-1').val()
+        var id_2 = $('#prod-bo-number-2').val()
+        var id_3 = $('#prod-bo-number-3').val()
+        var id_4 = $('#prod-bo-number-4').val()
+        var qty_2 = parseInt($('#prod-bo-qty-2').val())
+        var qty_total = qty_2 +1
+
+        if(value == id_1 ){
+            var qty_1 = parseInt($('#prod-bo-qty-1').val())
+            var qty_total = qty_1 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-1`).val(qty_total)
+        }else if ( value == id_2){
+            var qty_2 = parseInt($('#prod-bo-qty-2').val())
+            var qty_total = qty_2 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-2`).val(qty_total)
+        }else if ( value == id_4){
+            var qty_4 = parseInt($('#prod-bo-qty-4').val())
+            var qty_total = qty_4 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-4`).val(qty_total)
+        }else if ( value == id_3){
+            var qty_3 = parseInt($('#prod-bo-qty-3').val())
+            var qty_total = qty_3 + 1
+            $(`#${id}`).val('')
+            $(`#prod-bo-qty-3`).val(qty_total)
+        }else {
+            $(`#${id}`).val(value)
+        }
+    }
+
+
+    // console.log(value)
+    // console.log(id)
+    // $(`#${id}`).val(value)
+    $('#searching-bo').modal('hide')
+}
+
+
+   $(function(){
+
+    // SEARCHING PRODUCT ITEM BULK ORDER
+   $('.inp-prod-bo').on('keyup',function () {
+    //    console.log(this)
+       var id_dipakai = $(this).attr('id')
+       var split_id = id_dipakai.split('-')
+    //    console.log(id_dipakai)
+    var all_data_storage = JSON.parse(localStorage.getItem('all_data_product'))
+    var value_searching = $(this).val()
+    if(value_searching.length > 2){
+        if(all_data_storage  !== undefined || all_data_storage  !== null || all_data_storage.length  >0){
+            var all_data_push=[]
+            var data_filter = all_data_storage.filter((value,index)=>{
+                if(value.Name.toUpperCase().includes(value_searching.toUpperCase()) || value.Product_Code.includes(value_searching)){
+                    // console.log(all_data_push)
+                    all_data_push.push(value)
+                    return value
+                }
+            })
+            console.log(data_filter)
+            $('.searching-bo-body').empty()
+            if(data_filter == undefined || data_filter == null || data_filter.length == 0 ){
+                $('.searching-bo-body').append(`
+                    Product Code / Product Name Tidak Ada
+                `)
+            }else {
+                data_filter.map((val,index)=>{
+                    $('.searching-bo-body').append(`
+                        <div class="box-item-bo"  onclick="replace_bo_to('${val.Name}','${id_dipakai}')"> 
+                            
+                            <img src="${val.Picture_1}" alt="">
+                            <p class="p-bo-item">${val.Name} </p>
+                        </div>
+                    `)
+                })
+
+            }
+            $('#searching-bo').modal('show')
+        }else {
+            $('#searching-bo').modal('hide')
+        }
+    }else {
+        $('#searching-bo').modal('hide')
+        $(`#prod-bo-qty-${split_id[3]}`).val(1)
+    }
+   })
+
+//    CHECK QTY PRODUCT ITEM BULK ORDER
+
+   $('.inp-qty-bo').on('keyup',function(){
+    var id_dipakai = $(this).attr('id')
+    var qty_from_input = $(this).val()
+    console.log(qty_from_input)
+    var split_id = id_dipakai.split('-')
+    var qty_product_dipakai = parseInt($(`#prod-bo-qty-${split_id[3]}`).val())
+    var product_dipakai = $(`#prod-bo-number-${split_id[3]}`).val()
+    // console.log(product_dipakai)
+    // console.log(id_dipakai)
+    var all_data_storage = JSON.parse(localStorage.getItem('all_data_product'))
+        if(product_dipakai  !== '' || product_dipakai !== undefined){
+            if(qty_from_input  !== '' || qty_from_input !== undefined || qty_from_input !== NaN ){
+                console.log('masuk ke if')
+                if(all_data_storage  !== undefined || all_data_storage  !== null || all_data_storage.length  >0){
+                    var filter_product = all_data_storage.filter((val,index)=>{
+                        if(val.Name.toUpperCase().includes(product_dipakai.toUpperCase())){
+                            var qty_from_storage = parseInt(val.Stock_Quantity)
+                            if(qty_product_dipakai <= qty_from_storage){
+                                if(qty_from_input >0){
+                                    $(`#prod-bo-qty-${split_id[3]}`).val(qty_product_dipakai)
+                                }else {
+                                    $(`#prod-bo-qty-${split_id[3]}`).val(1)
+                                }
+                            }else if (qty_from_input == ''){
+                                // setInterval(()=>{
+                                //     $(`#prod-bo-qty-${split_id[3]}`).val(1)
+                                // },5000)
+                            }else {
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Stock Tidak Tersedia`,
+                                    timer:2500,
+                                    
+                                })
+                                var maks_qty = qty_from_input -1
+                                $(`#prod-bo-qty-${split_id[3]}`).val(maks_qty)
+                            }
+                        }
+                    })
+                }else {
+                    // else untuk filter by API
+                }
+            }else {
+                $(`#prod-bo-qty-${split_id[3]}`).val(1)
+            }
+        }else {
+            console.log('masuk ke else 2242')
+            $(`#prod-bo-qty-${split_id[3]}`).val(1)
+        }
+   })
+
+
+   })
+
+//    $('.inp-prod-bo').on('keyup',function(){
+//        console.log('jalan')
+//    })

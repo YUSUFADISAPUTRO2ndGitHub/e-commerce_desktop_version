@@ -1,7 +1,4 @@
 
-
-// 
-
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     if(dataParse != null || dataParse != undefined ){
@@ -7732,9 +7729,7 @@ function addToCart(product_id){
                         return filtering
                     }
                 })
-                if(filterdatakosong.length){
-                    
-                    
+                if(filterdatakosong.length){         
                     var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
                     dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
                     $('.cart-counter').text(dataParse.length)
@@ -7783,20 +7778,12 @@ function addToCart(product_id){
                 ]
                 var pushToStorage2 = JSON.stringify(cart)
                 localStorage.setItem('itemsInCart',pushToStorage2)     
-            }
-        
-
+            }       
         }
     }).catch((err)=>{
         
     })
-    
-   
-  
-  
-
-    
-
+      
 }
 
 
