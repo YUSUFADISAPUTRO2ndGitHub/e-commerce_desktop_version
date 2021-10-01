@@ -5,10 +5,25 @@ $( document ).ready(function() {
     const search = urlParams.get('search');
     const subcategory = urlParams.get('category')
     const searching = urlParams.get('searching')
+    // const list_hutang = urlParams.get('list_hutang')
+    // const detail_list_hutang = urlParams.get('detail_list_hutang')
     if(searching != undefined){
         render_searching_page(searching)
-    }
+    } 
     
+    
+    
+    // const queryString = window.location.search;
+// const urlParams = new URLSearchParams(queryString);
+
+
+
+
+
+
+
+
+
 
     // category-list
     axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
@@ -613,15 +628,12 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
     
     axios.post(`https://sales.sold.co.id/get-sales-order-data-and-detail?Order_Number=${order_number}`)
     .then((res)=>{
-        
+        console.log(res.data)
         var arrListHutang = res.data
         axios.post(`https://sales.sold.co.id/check-delivery-order-information?Order_Number=${order_number}`)
         .then((res)=>{
             
         var delivery_data = res.data
-        
-        
-        
         
         if(delivery_data  == null || delivery_data ==undefined || delivery_data.length == 0 || delivery_data == ''){
             
@@ -651,11 +663,12 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
         // render card item
         
         var total_product_with_shipping = shipping_price + product_price
+        console.log(arrListHutang)
         arrListHutang.map((val,index)=>{
             customer_address =  val.Shipping_Address
             // ${delivery_parse.paket_awb}
             if(val.Product_Code == 'tiki'){
-                
+                console.log(val)
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">
                         <div class="card-desc">
@@ -685,10 +698,13 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 `)
 
             }else {
-                
+                console.log('masuk ke else')
+                console.log(val.Product_Code)
                 product_price += val.Price_Based_On_Total_Quantity *1
                 axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
+                    console.log(val)
+                    console.log(res.data)
                     
                 $('.box-card-item-ul').append(`
                     <div class="card-item-ul">

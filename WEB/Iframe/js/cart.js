@@ -499,21 +499,15 @@ function checkingoutAll(){
         var isSuccess = true
         var arr = localStorage.getItem('itemsInCart')
         var arr_product = JSON.parse(arr)
-        // 
          for (var i=0; i<arr_product.length; i++){
-           isSuccess=  await check_qty(arr_product,i)     
-           
-           //    
+           isSuccess=  await check_qty(arr_product,i)               
            $(`#productName${arr_product[i].productNo}`).css('border','none')
            if(isSuccess == 'false' || isSuccess == false){
-               
-               
-               
                $(`#productName${arr_product[i].productNo}`).css('border','3px solid red')
                i=arr_product.length
            } 
         }
-        // 
+        
         await success(isSuccess)
         
     }

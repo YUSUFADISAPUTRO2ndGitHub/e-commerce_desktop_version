@@ -53,7 +53,8 @@ $( document ).ready(function() {
         // 
         // alert(group_buy)
         render_group_buy(group_buy)
-    }else if (list_hutang !=undefined){
+    }
+    else if (list_hutang !=undefined){
         // render_daftar_hutang()
         newRender_list_hutang()
     }else if (detail_list_hutang != undefined){
@@ -6244,6 +6245,20 @@ const change_product_to=(product_id)=>{
 
 }
 
+
+
+
+// const open_detail_hutang_home=(order_number)=>{
+//     // var token = localStorage.getItem('token')
+//     location.replace(`./detailUnpaidList.html?detail_list_hutang=${order_number}`)
+// }
+
+
+
+const open_detail_hutang_home=(order_number)=>{
+    // var token = localStorage.getItem('token')
+    location.replace(`./detailUnpaidList.html?detail_list_hutang=${order_number}`)
+}
 const newRender_list_hutang=(customer_code)=>{
     const token = localStorage.getItem('token')
     $('.ul_list_hutang').empty()
@@ -6272,19 +6287,24 @@ const newRender_list_hutang=(customer_code)=>{
                     </div>     
                 </div>
                 <div class="card-detail-item-bd">
-                <img src="../img/vantsing_shipping_method.png" alt="">
-                <div class="order-card-item-2-bd"> 
-                    <p>${val.Order_Number}</p>
-                    <p>${val.Total_Quantity} barang</p>
-                </div>
-                <div class="price-card-item-bd">
-                    Total Belanja: <br>
-                    RP ${commafy(val.Total_Price)}
-                </div>
+                    <img src="../img/vantsing_shipping_method.png" alt="">
+                    <div class="order-card-item-2-bd"> 
+                        <p>${val.Order_Number}</p>
+                        <p>${val.Total_Quantity} barang</p>
+                    </div>
+                    <div class="price-card-item-bd">
+                        Total Belanja: <br>
+                        RP ${commafy(val.Total_Price)}
+                    </div>
                 </div>
                 <div class="check-detail-card-item-bd">
                     <div class="address-detail-card-item-bd">
-                    ${val.Shipping_Address}
+                        ${val.Shipping_Address}
+                    </div>
+                    <div class="address-detail-btn-payment"> 
+                        <div class="box-btn-payment" onclick="unpaid_payment('${val.midtrans_redirect_url}')">
+                            BAYAR
+                        </div>
                     </div>
                     <div class="btn-card-detail-item-bd hvr-grow" onclick="open_detail_hutang_home('${val.Order_Number}')">
                         Lihat Detail Transaksi
@@ -6293,8 +6313,6 @@ const newRender_list_hutang=(customer_code)=>{
             </div>
             
             `)
-
-      
         })
         
 
@@ -6314,11 +6332,12 @@ function commafy( num ) {
     })
 }
 
-
-const open_detail_hutang_home=(order_number)=>{
-    // var token = localStorage.getItem('token')
-    location.replace(`./detailUnpaidList.html?detail_list_hutang=${order_number}`)
+const unpaid_payment=(link)=>{
+    // alert(order_number)
+    close_all_open_window()
+    window.open(`${link}`,'_blank')
 }
+
 
 const render_item_all_category=()=>{
     // http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}
@@ -6435,6 +6454,8 @@ function get_all_couriers(){
         "method": "POST",
         "timeout": 0,
     };
+
+    // console.log('get all couriers jalan')
     
     return $.ajax(settings);
 }

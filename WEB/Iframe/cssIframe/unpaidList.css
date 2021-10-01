@@ -1126,13 +1126,39 @@ font-size:13px;
 }
 
 .address-detail-card-item-bd {
-    width:80%;
+    width:60%;
     height:100%;
     /* border:1px solid black; */
     display:flex;
     /* justify-content:center; */
     align-items: center;
     font-size:13px;
+}
+
+.address-detail-btn-payment {
+    width:20%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    font-size:13px;
+    /* border:1px solid black; */
+    justify-content: center;
+}
+.box-btn-payment {
+    width:100px;
+    height:30px;
+    border-radius:10px;
+    background-color: #dedede;
+    font-size:13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+.box-btn-payment:hover {
+    background-color: #4bace5;
+    cursor: pointer;
+    color:white;
 }
 .btn-card-detail-item-bd:hover {
     cursor: pointer;

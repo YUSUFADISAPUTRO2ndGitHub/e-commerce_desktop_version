@@ -104,11 +104,14 @@ function loadingMessage(timer){
     Swal.fire({
     // title: 'Loading Your Request',
     html: `
-    <div class="container">
-        <div class="loader">
-            <div class="ball">
-                
-            </div>
+    <div class="boxcon">
+        <div class="box1">
+        </div>
+        <div id="sold-id-loading">
+        SOLD 
+        </div>
+            
+        <div class="box2">
         </div>
     </div>
     `,
@@ -678,10 +681,9 @@ function checking_payment(){
         var arr = localStorage.getItem('itemsToCheckout')
         var arr_product = JSON.parse(arr)
         // 
-         for (var i=0; i<arr_product.length; i++){
+         for (var i=0; i<arr_product.length; i++){ // looping dullu check qty abis itu kalo sukses
            isSuccess=  await check_qty(arr_product,i)
         }
-        // 
         await success(isSuccess)
         
     }
@@ -691,15 +693,10 @@ function checking_payment(){
             await axios.post(`https://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
-                // 
                 var qty_sisa = res.data.Stock_Quantity
-                // 
-                // 
-                // 
                 if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa)){
                     isSuccess = false
                 }
-                // 
                 resolve(isSuccess)
             }).catch((err)=>{
                 
@@ -709,11 +706,6 @@ function checking_payment(){
     
     
     async function success(isSuccess){
-        
-        
-        
-        
-        
         
         
         var alamat = $('#address-selection option:selected').val()
@@ -776,11 +768,6 @@ function checking_payment(){
 async function requestToFinish(){
     loadingMessage(10000);
     
-
- 
-            // batas
-       
-
 
             var addressSelection = $("#address-selection").children("option:selected").val();
             var address = "";
@@ -885,10 +872,12 @@ function personalDetailsWithCurrentAddress(){
     //         periodSelection = 60;
     //     }
     // }
+
+    // paymentMethod  diganti jd gorillaworkout soalnya kalo diisi transfer error di backend
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
         request = {
             customerId: localStorage.getItem("token"),
-            paymentMethod: paymentSelection,
+            paymentMethod: 'BNI VA TRANSFER',
             paymentMethodDetailes: periodSelection,
             address: alamat_final,
             fullName: response.First_Name + " " + response.Last_Name,
@@ -1700,6 +1689,8 @@ async function sendFinalRequestToEnquiryAndEnquiryDetailsWithoutGroupBuy(request
     
     
     getCustomersWithCustomerNo(customer_information.Customer_Code).done(function (response) {
+        console.log(customer_information)
+        console.log(item_bought)
         if(response != false){
             createNewSalesOrder(item_bought, customer_information, response.Email, $("#checkout-otp-number").val(), $("#checkout-password").val()).done(async function (response) {
                 if(response.status == true){
@@ -1888,6 +1879,7 @@ async function reorderJSON(customerDetails, productArr){
             );
             total_price = total_price + parseFloat(productArr[i].totalPrice);
             total_quantity = total_quantity + parseFloat(productArr[i].quantity);
+            console.log(item_bought)
         }else{
             // swal.fire("Salah satu item kamu tidak mempunyai harga, pesanan untuk barang tersebut tidak bisa diproses (item : " + productArr[i].productCode + ")", "barang-barang lain tetap dapat diproses","warning");
             Swal.fire({
@@ -1901,7 +1893,10 @@ async function reorderJSON(customerDetails, productArr){
             })
         }
     }
+    
     customer_information = {};
+    
+    
     return new Promise(async resolve => {
         await getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
             if(response != false){
@@ -1920,10 +1915,13 @@ async function reorderJSON(customerDetails, productArr){
                     Shipping_Fee: total_harga_shipping_with_insurance_packing,
                     Primary_Recipient_Name: response.First_Name + " " + response.Last_Name
                 });
+                console.log(customer_information)
+                console.log(item_bought)
                 
             }
         });
     });
+   
 }
 
 function saveExpressOrderId(orderid){
@@ -3897,10 +3895,9 @@ const pengirimanCheckout=async()=>{
                     }else{
                         berat_parse = berat_parse*1*1.5;
                     }
-                    
                     total_berat_product += berat_parse
-                    
                 }
+
                 new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
                     allPengiriman = response
                     $('.cart-asuransi').empty()
@@ -3917,9 +3914,7 @@ const pengirimanCheckout=async()=>{
                     if(allPengiriman.insurance != undefined){
 
                         allPengiriman.insurance.map((val,index)=>{
-                            // 
-                            // 
-                            // 
+
                             $('.cart-asuransi').append(`
                                 <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                             `)
@@ -3928,9 +3923,6 @@ const pengirimanCheckout=async()=>{
                     if(allPengiriman.packing != undefined){
 
                         allPengiriman.packing.map((val,index)=>{
-                            // 
-                            // 
-                            // 
                             $('.cart-packing').append(`
                                 <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                             `)
@@ -4309,9 +4301,6 @@ const asuransiCheckout=async()=>{
               
                         
                         allPengiriman.packing.map((val,index)=>{
-                            // 
-                            // 
-                            // 
                             $('.cart-packing').append(`
                                 <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                             `)
