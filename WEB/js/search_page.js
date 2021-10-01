@@ -603,7 +603,7 @@ const render_daftar_hutang=()=>{ // render utang untuk di card
 const detail_hutang_home=(order_number)=>{ // detail utang di home header
     // alert('function jalan')
     // $('.tableFixHead_ul_hutang').css('display','none')
-    
+    var token = localStorage.getItem('token')
     $('.card-body-ul').css('display','flex')
     $('.box-card-item-ul').empty()
     $('.card-address-profile').empty()
