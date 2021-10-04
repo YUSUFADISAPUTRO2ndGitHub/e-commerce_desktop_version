@@ -1260,6 +1260,10 @@ const find_province_from_address= async ()=>{
 }
 
 
+const find_province_from_company_address=()=>{
+    address = 'Jl. Dr. Susilo Raya No.C2, RT.1/RW.5, Grogol, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11450'
+}
+
 
 
  async function renderCartCheckout(product){
