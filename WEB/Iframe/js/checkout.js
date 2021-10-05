@@ -1260,14 +1260,172 @@ const find_province_from_address= async ()=>{
 }
 
 
-const find_province_from_company_address=()=>{
-    address = 'Jl. Dr. Susilo Raya No.C2, RT.1/RW.5, Grogol, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11450'
+
+
+
+const find_address_from_product_company=()=>{
+    var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+    var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+    var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+    var all_district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+    var province_company = ''
+    itemsToCheckout.forEach((val,index)=>{
+        getProductsWithProductNo("", "", val.productNo).done(function (response) {
+            // console.log(response)
+            var company_address = response.PIC_company_address  
+            // console.log(company_address)  
+            if(all_province_from_storage !== null || all_province_from_storage !== undefined
+                && all_city_from_storage !== null || all_city_from_storage
+                && all_district_from_storage !== null || all_district_from_storage  !== unddefined
+            ){ // kalo local storage ke isi berarti pake data dari local Storage
+                var filter_province = all_province_from_storage.filter((item,id)=>{
+                    // console.log(item)
+                    var split_company = company_address.split(' ')
+                    var split_company_bycoma = company_address.split(',')
+                    all_province_from_storage.forEach((value,index)=>{
+                        split_company.forEach((resp,ind)=>{ 
+                            if(value.Province.toUpperCase().includes(resp.toUpperCase())){
+                                console.log(value.Province)
+                                province_company = value.Province
+                                // all_city_from_storage.forEach((val,id)=>{
+                                //     // console.log(val.Province)
+                                //     if(val.Province.toUpperCase().includes(province_company.toUpperCase())){
+                                //         // console.log(val)
+                                //     }
+                                // })
+
+                                return value.Province
+                            }
+                        })
+                    })
+
+                    
+                    all_city_from_storage.forEach((value,index)=>{
+                        
+                        value.City.forEach((val,id)=>{
+                            split_company.forEach((resp,ind)=>{
+                                // console.log(val.City.toUpperCase())
+                                // console.log(resp.toUpperCase())
+                                if(val.City.toUpperCase().includes(resp.toUpperCase())){
+                                    console.log(val.City)
+                                }
+                                
+                            })
+
+                        })
+                    })
+                    
+                    
+                })
+            }else { // local storage ada yg blm ke isi. berarti pake full API
+
+            }
+            
+        })
+    })
 }
 
+const find_province_from_product_company=async(address)=>{
+    return new Promise(async(resolve,reject)=>{
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+        var result_province = []
+        // itemsToCheckout.forEach((val,index)=>{
+            //  getProductsWithProductNo("", "", val.productNo).done( function (response) {
+                // var company_address = response.PIC_company_address  
+                var filter_province = all_province_from_storage.filter((item,id)=>{
+                    var split_company = address.split(' ')
+                    all_province_from_storage.forEach((value,index)=>{
+                        split_company.forEach((resp,ind)=>{ 
+                            // if(value.Province.toUpperCase().includes(resp.toUpperCase())){
+                            //     var province_company = value.Province
+                            //     resolve(province_company,split_company)
+                            //     return value.Province
+                            // }
+                            console.log(resp.toUpperCase())
+                            console.log(value.Province.toUpperCase())
+                            if(resp.toUpperCase().includes(value.Province.toUpperCase())){
+                                var province_company = value.Province
+                                resolve(province_company, split_company)
+                                return value.Province
+                            }
+                        })
+                    })
+                })
+            // })
+        // })
+    })
+}
 
+const find_city_from_product_company=async(province,address)=>{
+    return new Promise(async(resolve,reject)=>{
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+        var split_company = address.split(' ')
+        all_city_from_storage.forEach((value,index)=>{
+            if(value.Province.toUpperCase().includes(province.toUpperCase())){
+                value.City.forEach((val,id)=>{
+                    split_company.forEach((res,index_sc)=>{
+                        if(val.City.toUpperCase().includes(res.toUpperCase())){
+                            resolve(val.City)
+                        }
+                    })
+                })
+            }
+        })
+    })
+}
+
+const find_district_from_product_company=async(city,address)=>{
+    return new Promise(async(resolve,reject)=>{
+        var all_district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+        var split_company = address.split(' ')
+        all_district_from_storage.forEach((value,index)=>{
+            if(value.City.toUpperCase().includes(city.toUpperCase())){
+                resolve(value.District[0])
+            }
+        })
+    })
+}
+
+const find_courier_price_code_from_product_company=async(district,address)=>{
+    return new Promise((resolve,reject)=>{
+        // console.log(district)
+        get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
+            resolve(response[0].Courier_Price_Code)
+        })
+    })
+}
+
+// masih gabisa
+const checking_product_company=async()=>{
+    return new Promise(async(resolve,reject)=>{
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        var checking_product_company = []
+        itemsToCheckout.forEach(async(val,index)=>{
+        await getProductsWithProductNo("", "", val.productNo).done(async function (response) {
+                checking_product_company.push(response.PIC_company_address)
+                const resultArr = checking_product_company.reduce((acc,item)=>{
+                    if(!acc.includes(item)){
+                        acc.push(item);
+                    }
+                    return acc;
+                },[])
+                resolve(resultArr)
+            })
+        })
+    })
+}
+// masih gabisa
 
  async function renderCartCheckout(product){
-    // 
+    // find_address_from_product_company()
+    // var province_company = await find_province_from_product_company()
+    // console.log(province_company)
+
+  
+   
+
     
     var province_pilihan = localStorage.getItem('province_customer')
     var kota_pilihan = localStorage.getItem('city_customer')
@@ -1295,8 +1453,12 @@ const find_province_from_company_address=()=>{
         $('.danger-error').css('display','none')
             var token = localStorage.getItem('token')
 
+            // var checking_product_company =  await checking_product_company()
+            // console.log(checking_product_company
+
+
             if(province_pilihan != undefined && kota_pilihan != undefined &&
-                kecamatan_pilihan != undefined && kelurahan_pilihan !=undefined){
+                kecamatan_pilihan != undefined && kelurahan_pilihan !=undefined){ // ngecheck udh keisi apa blm
                     
             }else {
                     province_pilihan =  await find_province_from_address()
@@ -1313,6 +1475,108 @@ const find_province_from_company_address=()=>{
             var allKelurahan = []
             var allPengiriman = []
             var allKurir = []
+
+            // PENCARIAN PRODUCT COMPANY
+            var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+            var checking_product_company = []
+            var result_address_company = []
+            var province_company = ''
+            var city_company = ''
+            var district_company = ''
+            var courier_price_code_company = ''
+            itemsToCheckout.forEach((val,index,arr)=>{
+                getProductsWithProductNo("", "", val.productNo).done( async function (response) {
+                    checking_product_company.push(response.PIC_company_address)
+                    const resultArr = checking_product_company.reduce((acc,item)=>{
+                        if(!acc.includes(item)){
+                            acc.push(item);
+                        }
+                        return acc;
+                    },[])
+                    result_address_company = resultArr
+                    console.log(result_address_company)
+                    
+                    if(result_address_company !== undefined || result_address_company !== null  || 
+                        result_address_company.length === 1
+                    ){
+                        // masuk ke if kalo ternyata semua product dari alamat yang sama
+                         province_company = await find_province_from_product_company(result_address_company[0])
+                         city_company = await find_city_from_product_company(province_company,result_address_company[0])
+                         district_company = await find_district_from_product_company(city_company,result_address_company[0])
+                         courier_price_code_company = await find_courier_price_code_from_product_company(district_company,result_address_company[0])
+                         console.log(province_company)
+                         console.log(city_company)
+                         console.log(district_company)
+                         console.log(courier_price_code_company)
+                         console.log($('.new-card-product-cc'))
+                        $('.card-checkout-cc').empty()
+                        $('.new-card-product-cc').empty()
+                         $('.card-checkout-cc').append(`
+                            <div class="new-card-checkout-cc">
+                                <div class="new-card-product-cc">
+
+                                </div>
+                                <div class="new-card-option-cc">
+                                    <select class="form-control sp_kelurahan_hover cart-pengiriman" id="sub-pengiriman-option" onchange="pengirimanCheckout(this)" >  
+                                        <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
+                                    </select>
+                
+                                    <select class="form-control sp_kelurahan_hover cart-asuransi" id="sub-asuransi-option" onchange="asuransiCheckout(this)" >  
+                                        <option selected  class="co-asuransi">Insurance</option>      
+                                        
+                                    </select>
+                                    <select class="form-control sp_kelurahan_hover cart-packing" id="sub-packing-option" onchange="packingCheckout(this)" >  
+                                        <option selected  class="co-packing">Packing</option>      
+                                    
+                                    </select>
+                                </div>
+                            </div>
+                         `)
+                         console.log(product)
+              
+                        if(index === arr.length -1){
+                            product.map((val,index)=>{
+                                getProductsWithProductNo("","",val.productNo).done(function(response){
+                                    var berat_barang = parseFloat(response.Weight_KG)
+                                    var total_berat_barang = berat_barang  * val.quantity
+                                    var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+                                    // if(product.length>4 ){
+                                    //     $('.card-checkout-cc').css('height','300px')
+                                    // }
+                                    console.log('jalan 1717')
+                                    $('.new-card-product-cc').append(`
+                                        <div class="card-item-checkout-cc">
+                                            <div class="img-item-checkout-cc">
+                                                <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
+                                            </div>
+                                            <div class="desc-item-checkout-cc">
+                                                <p>${response.Name}</p>
+                                                <div class="desc-item-2-checkout-cc">
+                                                    <p>Quantity : ${val.quantity}</p>
+                                                    <p>Berat  : ${fixed_total_berat_barang}</p>
+                                                    <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+                                                </div>
+                                                <div class="for_input_coupon"> 
+                                                    <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                                    <div class="card-coupon-used" id="delete-${val.productNo}" >
+                            
+                                                    <div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `)  
+                                })
+                            })
+                        }
+                    }else {
+                        console.log('masuk ke else')
+                        // masuk ke else kalo ternyata semua product dari alamat yang beda, berarti harus di looping lg 
+                    }
+
+                })
+            })
+  
+            // BATAS PENCARIAN PRODUCT COMPANY
              axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
                 // 
@@ -1460,41 +1724,44 @@ const find_province_from_company_address=()=>{
                 
             })
             
-            $('.card-checkout-cc').empty()
-            product.map((val,index)=>{
-                
-                getProductsWithProductNo("","",val.productNo).done(function(response){
-                    var berat_barang = parseFloat(response.Weight_KG)
-                    // 
-                    var total_berat_barang = berat_barang  * val.quantity
-                    var fixed_total_berat_barang = total_berat_barang.toFixed(2)
-                    if(product.length>4 ){
-                        $('.card-checkout-cc').css('height','300px')
-                    }
-                    
-                    $('.card-checkout-cc').append(`
-                        <div class="card-item-checkout-cc">
-                            <div class="img-item-checkout-cc">
-                                <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
-                            </div>
-                            <div class="desc-item-checkout-cc">
-                                <p>${response.Name}</p>
-                                <div class="desc-item-2-checkout-cc">
-                                    <p>Quantity : ${val.quantity}</p>
-                                    <p>Berat  : ${fixed_total_berat_barang}</p>
-                                    <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
-                                </div>
-                                <div class="for_input_coupon"> 
-                                    <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
-                                    <div class="card-coupon-used" id="delete-${val.productNo}" >
+            // $('.card-checkout-cc').empty()
+
             
-                                    <div>
-                                </div>
-                            </div>
-                        </div>
-                    `)   
-                })
-            })
+            // product.map((val,index)=>{
+                
+            //     getProductsWithProductNo("","",val.productNo).done(function(response){
+            //         var berat_barang = parseFloat(response.Weight_KG)
+            //         // 
+            //         var total_berat_barang = berat_barang  * val.quantity
+            //         var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+            //         if(product.length>4 ){
+            //             $('.card-checkout-cc').css('height','300px')
+            //         }
+                    
+            //         $('.card-checkout-cc').append(`
+            //             <div class="card-item-checkout-cc">
+            //                 <div class="img-item-checkout-cc">
+            //                     <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
+            //                 </div>
+            //                 <div class="desc-item-checkout-cc">
+            //                     <p>${response.Name}</p>
+            //                     <div class="desc-item-2-checkout-cc">
+            //                         <p>Quantity : ${val.quantity}</p>
+            //                         <p>Berat  : ${fixed_total_berat_barang}</p>
+            //                         <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+            //                     </div>
+            //                     <div class="for_input_coupon"> 
+            //                         <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+            //                         <div class="card-coupon-used" id="delete-${val.productNo}" >
+            
+            //                         <div>
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //         `)   
+                  
+            //     })
+            // })
 
            
         timerInterval = setInterval(() => {
