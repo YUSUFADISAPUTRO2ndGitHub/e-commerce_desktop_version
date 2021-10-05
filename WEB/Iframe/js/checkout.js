@@ -1333,25 +1333,46 @@ const find_province_from_product_company=async(address)=>{
         // itemsToCheckout.forEach((val,index)=>{
             //  getProductsWithProductNo("", "", val.productNo).done( function (response) {
                 // var company_address = response.PIC_company_address  
+                var all_filter_province = []
                 var filter_province = all_province_from_storage.filter((item,id)=>{
                     var split_company = address.split(' ')
                     all_province_from_storage.forEach((value,index)=>{
                         split_company.forEach((resp,ind)=>{ 
-                            // if(value.Province.toUpperCase().includes(resp.toUpperCase())){
+                            // console.log(value.Province,' dr local storage')
+                            // console.log(resp,'alamat split')
+                            // console.log(value.Province.toUpperCase().includes(resp.toUpperCase()))
+                            if(value.Province.toUpperCase().includes(resp.toUpperCase())){
+                                var province_company = value.Province
+                                all_filter_province.push(province_company)
+                                console.log(all_filter_province)
+                                const resultArr = all_filter_province.reduce((acc,item)=>{
+                                    if(!acc.includes(item)){
+                                        acc.push(item);
+                                    }
+                                    return acc;
+                                },[])
+
+
+                                // for(var i = 1; i<split_company.length; i+2){
+                                //     var b = split_company[i-1] + split_company[i]
+                                //     console.log(b)
+                                // }
+                                // console.log(resultArr)
+                                // resolve(province_company,split_company)
+                                // return value.Province
+                            }
+                            // console.log(resp.toUpperCase())
+                            // console.log(value.Province.toUpperCase())
+                            // if(resp.toUpperCase().includes(value.Province.toUpperCase())){
                             //     var province_company = value.Province
-                            //     resolve(province_company,split_company)
+                            //     resolve(province_company, split_company)
                             //     return value.Province
                             // }
-                            console.log(resp.toUpperCase())
-                            console.log(value.Province.toUpperCase())
-                            if(resp.toUpperCase().includes(value.Province.toUpperCase())){
-                                var province_company = value.Province
-                                resolve(province_company, split_company)
-                                return value.Province
-                            }
                         })
                     })
                 })
+                resolve(resultArr)
+
             // })
         // })
     })
