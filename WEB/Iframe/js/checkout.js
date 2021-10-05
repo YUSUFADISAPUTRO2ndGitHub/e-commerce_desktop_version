@@ -1330,48 +1330,143 @@ const find_province_from_product_company=async(address)=>{
         var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
         var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
         var result_province = []
-        // itemsToCheckout.forEach((val,index)=>{
+        var split_company = address.split(' ')
+            // itemsToCheckout.forEach((val,index)=>{
             //  getProductsWithProductNo("", "", val.productNo).done( function (response) {
                 // var company_address = response.PIC_company_address  
                 var all_filter_province = []
-                var filter_province = all_province_from_storage.filter((item,id)=>{
-                    var split_company = address.split(' ')
-                    all_province_from_storage.forEach((value,index)=>{
-                        split_company.forEach((resp,ind)=>{ 
-                            // console.log(value.Province,' dr local storage')
-                            // console.log(resp,'alamat split')
-                            // console.log(value.Province.toUpperCase().includes(resp.toUpperCase()))
+                var all_result_arr =[]
+                var sec_filter_province = []
+                console.log(address)
+                var filter_province =  all_province_from_storage.filter((item,id)=>{
+                    all_province_from_storage.forEach((value,index,arr)=>{ // allProduct from storage
+                        split_company.forEach((resp,ind,array)=>{  // alamat split by spasi
                             if(value.Province.toUpperCase().includes(resp.toUpperCase())){
                                 var province_company = value.Province
                                 all_filter_province.push(province_company)
-                                console.log(all_filter_province)
-                                const resultArr = all_filter_province.reduce((acc,item)=>{
+                                const resultArr = all_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
                                     if(!acc.includes(item)){
                                         acc.push(item);
                                     }
                                     return acc;
                                 },[])
-
-
-                                // for(var i = 1; i<split_company.length; i+2){
-                                //     var b = split_company[i-1] + split_company[i]
-                                //     console.log(b)
+                                all_result_arr = resultArr // hasil dari ngapus data yg sama
+                                console.log(all_result_arr)
+                                console.log(index === arr.length - 2, index, arr.length -2)
+                                // console.log(ind, array.length-2)
+                                // if(ind === array.length - 2){
+                                    console.log('masuk ke looping terakhir if')
+                                    // if(all_result_arr.length >1){
+                                     
+                                    //     console.log('masuk ke if 1354 arr lebih dari 1')
+                                    //     // if(index === array.length - 1){
+                                    //         console.log('masuk ke  if 1356')
+                                    //         var sec_filter_province = []
+                                    //         for(var i=1; i<split_company.length; i++){
+                                    //             var minus_satu = split_company[i-1]
+                                    //             var plus_dua = split_company[i+2]
+                                    //             if(minus_satu === undefined || minus_satu === null){
+                                    //                 minus_satu = ''
+                                    //             }else if (plus_dua === undefined || plus_dua === undefined){
+                                    //                 plus_dua = ''
+                                    //             }
+                                    //             var new_alamat = minus_satu +' ' + plus_dua
+                                    //             all_result_arr.forEach((val,index)=>{
+                                    //                 // console.log(val)
+                                    //                 // console.log(new_alamat.toUpperCase())
+                                    //                 if(val.toUpperCase().includes(new_alamat.toUpperCase())){
+                                    //                     sec_filter_province.push(val)
+                                    //                     for(var i=1; i<split_company.length; i++){
+                                    //                         var min_satu = split_company[i-1]
+                                    //                         var plus_tiga = split_company[i+3]
+                                    //                         var new_alamat2 = minus_satu + ' ' + plus_tiga
+                                    //                         // console.log(new_alamat2,' new alamat 2')
+                                    //                         if(min_satu === undefined || min_satu === null){
+                                    //                             min_satu = ''
+                                    //                         }else if (plus_tiga === undefined || plus_tiga === undefined){
+                                    //                             plus_tiga = ''
+                                    //                         }
+                                    //                         sec_filter_province.forEach((value,index)=>{
+                                    //                             if(value.toUpperCase().includes(new_alamat2.toUpperCase())){
+                                    //                                 console.log(value,' final answer', index)
+                                    //                                 resolve(value)
+                                                                    
+                                    //                             }
+                                    //                         })
+            
+                                    //                     }
+                                                    
+                                    //                 }
+                                    //             })
+                                    //         }
+                                    //     // }else {
+                                    //     //     console.log('masuk ke else ')
+                                    //     //     console.log(index)
+                                    //     // }
+                                    // }
+                                    // else if (all_result_arr.length >0 && all_result_arr.length <2 ) {
+                                    //     console.log('masuk ke else if 1398 cuma ada 1')
+                                    //     // if(index === arr.length - 1){
+                                    //         console.log(all_result_arr[0],'final result')
+                                    //         resolve (all_result_arr[0])
+                                    //     // }
+                                    // }else {
+                                    //     console.log('masuk ke else error ini checkout js 1397')
+                                    // }
+                                // }else {
+                                //     console.log('masuk ke looping terakhir else')
                                 // }
-                                // console.log(resultArr)
-                                // resolve(province_company,split_company)
-                                // return value.Province
+                                                            
                             }
-                            // console.log(resp.toUpperCase())
-                            // console.log(value.Province.toUpperCase())
-                            // if(resp.toUpperCase().includes(value.Province.toUpperCase())){
-                            //     var province_company = value.Province
-                            //     resolve(province_company, split_company)
-                            //     return value.Province
-                            // }
                         })
+
                     })
+                    console.log('1421')
+                    if(all_result_arr.length == 1 ){
+                        console.log(all_result_arr[0])
+                        resolve(all_result_arr[0])
+                    }else {
+                        for(var i=1; i<split_company.length; i++){
+                            var minus_satu = split_company[i-1]
+                            var plus_dua = split_company[i+2]
+                            if(minus_satu === undefined || minus_satu === null){
+                                minus_satu = ''
+                            }else if (plus_dua === undefined || plus_dua === undefined){
+                                plus_dua = ''
+                            }
+                            var new_alamat = minus_satu +' ' + plus_dua
+                            all_result_arr.forEach((val,index)=>{
+                                // console.log(val)
+                                // console.log(new_alamat.toUpperCase())
+                                if(val.toUpperCase().includes(new_alamat.toUpperCase())){
+                                    sec_filter_province.push(val)
+                                    for(var i=1; i<split_company.length; i++){
+                                        var min_satu = split_company[i-1]
+                                        var plus_tiga = split_company[i+3]
+                                        var new_alamat2 = minus_satu + ' ' + plus_tiga
+                                        // console.log(new_alamat2,' new alamat 2')
+                                        if(min_satu === undefined || min_satu === null){
+                                            min_satu = ''
+                                        }else if (plus_tiga === undefined || plus_tiga === undefined){
+                                            plus_tiga = ''
+                                        }
+                                        sec_filter_province.forEach((value,index)=>{
+                                            if(value.toUpperCase().includes(new_alamat2.toUpperCase())){
+                                                console.log(value,' final answer', index)
+                                                resolve(value)
+                                                
+                                            }
+                                        })
+        
+                                    }
+                                
+                                }
+                            })
+                        }
+
+                    }
                 })
-                resolve(resultArr)
+                // resolve(all_result_arr)
 
             // })
         // })
