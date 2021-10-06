@@ -7289,3 +7289,11 @@ border-radius:20px !important;
     padding:5px;
 }
 
+
+
+#no_ktp_reg {
+    visibility: hidden !important;
+}
+#no_rekening_reg {
+    visibility: hidden !important;
+}

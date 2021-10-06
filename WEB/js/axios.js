@@ -7769,7 +7769,8 @@ function addToCart(product_id){
                     
                     var data = {
                     "productNo":product_id,
-                    "quantity":1
+                    "quantity":1,
+                    "company_address":res.data.PIC_company_address
                     }
                     dataParse.push(data)
                     $('.cart-counter').text(dataParse.length)
@@ -7787,6 +7788,8 @@ function addToCart(product_id){
                 }
         
                 var pushToStorage = JSON.stringify(dataParse)
+                console.log(dataParse)
+                console.log(pushToStorage)
                 localStorage.setItem('itemsInCart',pushToStorage)
         
             }else {
@@ -7794,10 +7797,12 @@ function addToCart(product_id){
                 var cart = [
                     {
                     "productNo":product_id,
-                    "quantity":1
+                    "quantity":1,
+                    "company_address":res.data.PIC_company_address
                     }
                 ]
                 var pushToStorage2 = JSON.stringify(cart)
+                console.log(pushToStorage2)
                 localStorage.setItem('itemsInCart',pushToStorage2)     
             }       
         }

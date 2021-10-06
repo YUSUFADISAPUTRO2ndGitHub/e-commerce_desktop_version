@@ -1325,195 +1325,147 @@ const find_address_from_product_company=()=>{
     })
 }
 
-const find_province_from_product_company=async(address)=>{
-    return new Promise(async(resolve,reject)=>{
-        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
-        var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
-        var result_province = []
-        var split_company = address.split(' ')
-            // itemsToCheckout.forEach((val,index)=>{
-            //  getProductsWithProductNo("", "", val.productNo).done( function (response) {
-                // var company_address = response.PIC_company_address  
-                var all_filter_province = []
-                var all_result_arr =[]
-                var sec_filter_province = []
-                console.log(address)
-                var filter_province =  all_province_from_storage.filter((item,id)=>{
-                    all_province_from_storage.forEach((value,index,arr)=>{ // allProduct from storage
-                        split_company.forEach((resp,ind,array)=>{  // alamat split by spasi
-                            if(value.Province.toUpperCase().includes(resp.toUpperCase())){
-                                var province_company = value.Province
-                                all_filter_province.push(province_company)
-                                const resultArr = all_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
-                                    if(!acc.includes(item)){
-                                        acc.push(item);
-                                    }
-                                    return acc;
-                                },[])
-                                all_result_arr = resultArr // hasil dari ngapus data yg sama
-                                console.log(all_result_arr)
-                                console.log(index === arr.length - 2, index, arr.length -2)
-                                // console.log(ind, array.length-2)
-                                // if(ind === array.length - 2){
-                                    console.log('masuk ke looping terakhir if')
-                                    // if(all_result_arr.length >1){
-                                     
-                                    //     console.log('masuk ke if 1354 arr lebih dari 1')
-                                    //     // if(index === array.length - 1){
-                                    //         console.log('masuk ke  if 1356')
-                                    //         var sec_filter_province = []
-                                    //         for(var i=1; i<split_company.length; i++){
-                                    //             var minus_satu = split_company[i-1]
-                                    //             var plus_dua = split_company[i+2]
-                                    //             if(minus_satu === undefined || minus_satu === null){
-                                    //                 minus_satu = ''
-                                    //             }else if (plus_dua === undefined || plus_dua === undefined){
-                                    //                 plus_dua = ''
-                                    //             }
-                                    //             var new_alamat = minus_satu +' ' + plus_dua
-                                    //             all_result_arr.forEach((val,index)=>{
-                                    //                 // console.log(val)
-                                    //                 // console.log(new_alamat.toUpperCase())
-                                    //                 if(val.toUpperCase().includes(new_alamat.toUpperCase())){
-                                    //                     sec_filter_province.push(val)
-                                    //                     for(var i=1; i<split_company.length; i++){
-                                    //                         var min_satu = split_company[i-1]
-                                    //                         var plus_tiga = split_company[i+3]
-                                    //                         var new_alamat2 = minus_satu + ' ' + plus_tiga
-                                    //                         // console.log(new_alamat2,' new alamat 2')
-                                    //                         if(min_satu === undefined || min_satu === null){
-                                    //                             min_satu = ''
-                                    //                         }else if (plus_tiga === undefined || plus_tiga === undefined){
-                                    //                             plus_tiga = ''
-                                    //                         }
-                                    //                         sec_filter_province.forEach((value,index)=>{
-                                    //                             if(value.toUpperCase().includes(new_alamat2.toUpperCase())){
-                                    //                                 console.log(value,' final answer', index)
-                                    //                                 resolve(value)
-                                                                    
-                                    //                             }
-                                    //                         })
-            
-                                    //                     }
-                                                    
-                                    //                 }
-                                    //             })
-                                    //         }
-                                    //     // }else {
-                                    //     //     console.log('masuk ke else ')
-                                    //     //     console.log(index)
-                                    //     // }
-                                    // }
-                                    // else if (all_result_arr.length >0 && all_result_arr.length <2 ) {
-                                    //     console.log('masuk ke else if 1398 cuma ada 1')
-                                    //     // if(index === arr.length - 1){
-                                    //         console.log(all_result_arr[0],'final result')
-                                    //         resolve (all_result_arr[0])
-                                    //     // }
-                                    // }else {
-                                    //     console.log('masuk ke else error ini checkout js 1397')
-                                    // }
-                                // }else {
-                                //     console.log('masuk ke looping terakhir else')
-                                // }
-                                                            
-                            }
-                        })
-
-                    })
-                    console.log('1421')
-                    if(all_result_arr.length == 1 ){
-                        console.log(all_result_arr[0])
-                        resolve(all_result_arr[0])
-                    }else {
-                        for(var i=1; i<split_company.length; i++){
-                            var minus_satu = split_company[i-1]
-                            var plus_dua = split_company[i+2]
-                            if(minus_satu === undefined || minus_satu === null){
-                                minus_satu = ''
-                            }else if (plus_dua === undefined || plus_dua === undefined){
-                                plus_dua = ''
-                            }
-                            var new_alamat = minus_satu +' ' + plus_dua
-                            all_result_arr.forEach((val,index)=>{
-                                // console.log(val)
-                                // console.log(new_alamat.toUpperCase())
-                                if(val.toUpperCase().includes(new_alamat.toUpperCase())){
-                                    sec_filter_province.push(val)
-                                    for(var i=1; i<split_company.length; i++){
-                                        var min_satu = split_company[i-1]
-                                        var plus_tiga = split_company[i+3]
-                                        var new_alamat2 = minus_satu + ' ' + plus_tiga
-                                        // console.log(new_alamat2,' new alamat 2')
-                                        if(min_satu === undefined || min_satu === null){
-                                            min_satu = ''
-                                        }else if (plus_tiga === undefined || plus_tiga === undefined){
-                                            plus_tiga = ''
-                                        }
-                                        sec_filter_province.forEach((value,index)=>{
-                                            if(value.toUpperCase().includes(new_alamat2.toUpperCase())){
-                                                console.log(value,' final answer', index)
-                                                resolve(value)
-                                                
-                                            }
-                                        })
-        
-                                    }
+// const find_province_from_product_company=async(address)=>{
+//     return new Promise(async(resolve,reject)=>{
+//         var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+//         var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+//         var result_province = []
+//         var split_company = address.split(' ')
+//         var all_filter_province = []
+//         var all_result_arr =[]
+//         var sec_filter_province = []
+//         console.log(address)
+//         var filter_province =  all_province_from_storage.filter((item,id)=>{
+//             all_province_from_storage.forEach((value,index,arr)=>{ // allProduct from storage
+//                 split_company.forEach((resp,ind,array)=>{  // alamat split by spasi
+//                     if(value.Province.toUpperCase().includes(resp.toUpperCase())){
+//                         var province_company = value.Province
+//                         all_filter_province.push(province_company)
+//                         const resultArr = all_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
+//                             if(!acc.includes(item)){
+//                                 acc.push(item);
+//                             }
+//                             return acc;
+//                         },[])
+//                         all_result_arr = resultArr // hasil dari ngapus data yg sama
+//                     }
+//                 })
+//             })
+//             if(all_result_arr.length == 1 ){
+//                 // console.log(all_result_arr[0])
+//                 resolve(all_result_arr[0])
+//             }else {
+//                 for(var i=1; i<split_company.length; i++){
+//                     var minus_satu = split_company[i-1]
+//                     var plus_dua = split_company[i+2]
+//                     if(minus_satu === undefined || minus_satu === null){
+//                         minus_satu = ''
+//                     }else if (plus_dua === undefined || plus_dua === undefined){
+//                         plus_dua = ''
+//                     }
+//                     var new_alamat = minus_satu +' ' + plus_dua
+//                     all_result_arr.forEach((val,index)=>{
+//                         if(val.toUpperCase().includes(new_alamat.toUpperCase())){
+//                             sec_filter_province.push(val)
+//                             for(var i=1; i<split_company.length; i++){
+//                                 var min_satu = split_company[i-1]
+//                                 var plus_tiga = split_company[i+3]
                                 
-                                }
-                            })
-                        }
+//                                 var new_alamat2 = minus_satu + ' ' + plus_tiga
+//                                 // console.log(new_alamat2,' new alamat 2')
+//                                 if(min_satu === undefined || min_satu === null){
+//                                     min_satu = ''
+//                                 }else if (plus_tiga === undefined || plus_tiga === undefined){
+//                                     plus_tiga = ''
+//                                 }
+//                                 sec_filter_province.forEach((value,index)=>{
+//                                     if(value.toUpperCase().includes(new_alamat2.toUpperCase())){
+//                                         // console.log(value,' final answer', index)
+//                                         resolve(value)
+                                        
+//                                     }
+//                                 })
 
-                    }
-                })
-                // resolve(all_result_arr)
+//                             }
+                        
+//                         }
+//                     })
+//                 }
 
-            // })
-        // })
-    })
-}
+//             }
+//         })
+//     })
+// }
 
-const find_city_from_product_company=async(province,address)=>{
-    return new Promise(async(resolve,reject)=>{
-        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
-        var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
-        var split_company = address.split(' ')
-        all_city_from_storage.forEach((value,index)=>{
-            if(value.Province.toUpperCase().includes(province.toUpperCase())){
-                value.City.forEach((val,id)=>{
-                    split_company.forEach((res,index_sc)=>{
-                        if(val.City.toUpperCase().includes(res.toUpperCase())){
-                            resolve(val.City)
-                        }
-                    })
-                })
-            }
-        })
-    })
-}
+// const find_city_from_product_company=async(province,address)=>{
+//     return new Promise(async(resolve,reject)=>{
+//         var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+//         var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+//         var delete_coma = address.replace(/,/g, "");
+//         var split_company = delete_coma.split(' ')
+//         console.log(split_company)
+        
+//         var arr_city = []
+//         var final_result_city=[]
+//         all_city_from_storage.forEach((value,index)=>{
+//             if(value.Province.toUpperCase().includes(province.toUpperCase())){
+//                 value.City.forEach((val,id)=>{
+//                     split_company.forEach((res,index_sc)=>{
+//                         if(val.City.toUpperCase().includes(res.toUpperCase())){
+//                             arr_city.push(val.City)
+//                             resolve(val.City)
+//                         }
+//                     })
+//                 })
+//             }
+//         })
+//         if(arr_city.length == 1){
+//             resolv(arr_city[0])
+//         }else {
+//             for(var i=1; i<split_company.length; i++){
+//                 var normal_i = split_company[i]
+//                 var plus_satu = split_company[i+1]
+//                 var new_alamat = normal_i + ' ' + plus_satu
+//                 if(normal_i === undefined || normal_i === null){
+//                     normal_i = ''
+//                 }else if (plus_satu === undefined || plus_satu === null){
+//                     plus_satu = ''
+//                 }
+//                 arr_city.forEach((val,index)=>{
+//                     if(val.toUpperCase().includes(new_alamat.toUpperCase())){
+//                         // console.log(val,'final answer',index)
+//                         resolve(val)
+//                     }
+//                 })
+//             }
+//             // console.log('masuk ke else. arr city lebih dari 1')
+//         }
+//     })
+// }
 
-const find_district_from_product_company=async(city,address)=>{
-    return new Promise(async(resolve,reject)=>{
-        var all_district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
-        var split_company = address.split(' ')
-        all_district_from_storage.forEach((value,index)=>{
-            if(value.City.toUpperCase().includes(city.toUpperCase())){
-                resolve(value.District[0])
-            }
-        })
-    })
-}
+// const find_district_from_product_company=async(city,address)=>{
+//     return new Promise(async(resolve,reject)=>{
+//         var all_district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+//         var split_company = address.split(' ')
+//         all_district_from_storage.forEach((value,index)=>{
+//             if(value.City.toUpperCase().includes(city.toUpperCase())){
+//                 resolve(value.District[0])
+//             }
+//         })
+//     })
+// }
 
-const find_courier_price_code_from_product_company=async(district,address)=>{
-    return new Promise((resolve,reject)=>{
-        // console.log(district)
-        get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
-            resolve(response[0].Courier_Price_Code)
-        })
-    })
-}
+// const find_courier_price_code_from_product_company=async(district,address)=>{
+//     return new Promise((resolve,reject)=>{
+//         // console.log(district)
+//         get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
+//             resolve(response[0].Courier_Price_Code)
+//         })
+//     })
+// }
 
 // masih gabisa
+
 const checking_product_company=async()=>{
     return new Promise(async(resolve,reject)=>{
         var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
@@ -1566,6 +1518,7 @@ const checking_product_company=async()=>{
     `,
     didOpen: async() => {
         Swal.showLoading()
+        console.log(product)
         $('.danger-error').css('display','none')
             var token = localStorage.getItem('token')
 
@@ -1591,106 +1544,108 @@ const checking_product_company=async()=>{
             var allKelurahan = []
             var allPengiriman = []
             var allKurir = []
+            console.log('checkout jalan')
+            $('.card-checkout-cc').empty()
+            $('.new-card-product-cc').empty()
+            $('.card-checkout-cc').append(`
+                <div class="new-card-checkout-cc">
+                    <div class="new-card-product-cc">
 
-            // PENCARIAN PRODUCT COMPANY
-            var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
-            var checking_product_company = []
-            var result_address_company = []
-            var province_company = ''
-            var city_company = ''
-            var district_company = ''
-            var courier_price_code_company = ''
-            itemsToCheckout.forEach((val,index,arr)=>{
-                getProductsWithProductNo("", "", val.productNo).done( async function (response) {
-                    checking_product_company.push(response.PIC_company_address)
-                    const resultArr = checking_product_company.reduce((acc,item)=>{
-                        if(!acc.includes(item)){
-                            acc.push(item);
-                        }
-                        return acc;
-                    },[])
-                    result_address_company = resultArr
-                    console.log(result_address_company)
-                    
-                    if(result_address_company !== undefined || result_address_company !== null  || 
-                        result_address_company.length === 1
-                    ){
-                        // masuk ke if kalo ternyata semua product dari alamat yang sama
-                         province_company = await find_province_from_product_company(result_address_company[0])
-                         city_company = await find_city_from_product_company(province_company,result_address_company[0])
-                         district_company = await find_district_from_product_company(city_company,result_address_company[0])
-                         courier_price_code_company = await find_courier_price_code_from_product_company(district_company,result_address_company[0])
-                         console.log(province_company)
-                         console.log(city_company)
-                         console.log(district_company)
-                         console.log(courier_price_code_company)
-                         console.log($('.new-card-product-cc'))
-                        $('.card-checkout-cc').empty()
-                        $('.new-card-product-cc').empty()
-                         $('.card-checkout-cc').append(`
-                            <div class="new-card-checkout-cc">
-                                <div class="new-card-product-cc">
-
-                                </div>
-                                <div class="new-card-option-cc">
-                                    <select class="form-control sp_kelurahan_hover cart-pengiriman" id="sub-pengiriman-option" onchange="pengirimanCheckout(this)" >  
-                                        <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
-                                    </select>
+                    </div>
+                    <div class="new-card-option-cc">
+                        <select class="form-control sp_kelurahan_hover cart-pengiriman" id="sub-pengiriman-option" onchange="pengirimanCheckout(this)" >  
+                            <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
+                        </select>
+    
+                        <select class="form-control sp_kelurahan_hover cart-asuransi" id="sub-asuransi-option" onchange="asuransiCheckout(this)" >  
+                            <option selected  class="co-asuransi">Insurance</option>      
+                            
+                        </select>
+                        <select class="form-control sp_kelurahan_hover cart-packing" id="sub-packing-option" onchange="packingCheckout(this)" >  
+                            <option selected  class="co-packing">Packing</option>      
+                        
+                        </select>
+                    </div>
+                </div>
+                `)
+                // console.log(product)
+                product.sort(function (a, b) {
+                    let left = a.company_address.toUpperCase();
+                    let right = b.company_address.toUpperCase();
                 
-                                    <select class="form-control sp_kelurahan_hover cart-asuransi" id="sub-asuransi-option" onchange="asuransiCheckout(this)" >  
-                                        <option selected  class="co-asuransi">Insurance</option>      
-                                        
-                                    </select>
-                                    <select class="form-control sp_kelurahan_hover cart-packing" id="sub-packing-option" onchange="packingCheckout(this)" >  
-                                        <option selected  class="co-packing">Packing</option>      
-                                    
-                                    </select>
+                    return (left === right) ? 0 : left > right ? 1 : -1;
+                  });
+                //   console.log(product)
+                var array_for_render = [] 
+                var big_array_for_render = []
+                var reduce_array_for_render = []
+                for(var i=0; i<=product.length; i++){
+                    console.log('looping ke -' , i)
+                    if(i === product.length -1){
+                        console.log('looping berakhir')
+                    }else {
+                        var index_now = product[i]
+                        var next_index = product[i+1]
+                        console.log(next_index)
+                        console.log(product[i], i)
+                        console.log(product[i+1], (i+1))
+                        if(next_index === undefined || next_index === null){
+                            console.log('masuk ke if')
+                            break;
+                            
+                        }else {
+                            console.log('masuk ke else')
+                            if(index_now.company_address === next_index.company_address){
+                                array_for_render.push(index_now)
+                                array_for_render.push(next_index)
+                                reduce_array_for_render = array_for_render.reduce((acc,item)=>{
+                                    if(!acc.includes(item)){
+                                        acc.push(item)
+                                    }
+                                    return acc
+                                },[])
+                                // product.splice(1 ,i)
+                                product.shift() // HAPUS DARI LOOPING I KEBELAKANG
+                            }
+                        }
+                    }
+                }
+                
+                console.log(reduce_array_for_render, 'reduce array for render')    
+                // console.log(array_for_render,'array for render')
+                console.log(product,'ini product')
+                product.map((val,index)=>{
+                    getProductsWithProductNo("","",val.productNo).done(function(response){
+                        var berat_barang = parseFloat(response.Weight_KG)
+                        var total_berat_barang = berat_barang  * val.quantity
+                        var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+                        // if(product.length>4 ){
+                        //     $('.card-checkout-cc').css('height','300px')
+                        // }
+                        console.log('jalan 1717')
+                        $('.new-card-product-cc').append(`
+                            <div class="card-item-checkout-cc">
+                                <div class="img-item-checkout-cc">
+                                    <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
+                                </div>
+                                <div class="desc-item-checkout-cc">
+                                    <p>${response.Name}</p>
+                                    <div class="desc-item-2-checkout-cc">
+                                        <p>Quantity : ${val.quantity}</p>
+                                        <p>Berat  : ${fixed_total_berat_barang}</p>
+                                        <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+                                    </div>
+                                    <div class="for_input_coupon"> 
+                                        <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                        <div class="card-coupon-used" id="delete-${val.productNo}" >
+                
+                                        <div>
+                                    </div>
                                 </div>
                             </div>
-                         `)
-                         console.log(product)
-              
-                        if(index === arr.length -1){
-                            product.map((val,index)=>{
-                                getProductsWithProductNo("","",val.productNo).done(function(response){
-                                    var berat_barang = parseFloat(response.Weight_KG)
-                                    var total_berat_barang = berat_barang  * val.quantity
-                                    var fixed_total_berat_barang = total_berat_barang.toFixed(2)
-                                    // if(product.length>4 ){
-                                    //     $('.card-checkout-cc').css('height','300px')
-                                    // }
-                                    console.log('jalan 1717')
-                                    $('.new-card-product-cc').append(`
-                                        <div class="card-item-checkout-cc">
-                                            <div class="img-item-checkout-cc">
-                                                <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
-                                            </div>
-                                            <div class="desc-item-checkout-cc">
-                                                <p>${response.Name}</p>
-                                                <div class="desc-item-2-checkout-cc">
-                                                    <p>Quantity : ${val.quantity}</p>
-                                                    <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                    <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
-                                                </div>
-                                                <div class="for_input_coupon"> 
-                                                    <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
-                                                    <div class="card-coupon-used" id="delete-${val.productNo}" >
-                            
-                                                    <div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `)  
-                                })
-                            })
-                        }
-                    }else {
-                        console.log('masuk ke else')
-                        // masuk ke else kalo ternyata semua product dari alamat yang beda, berarti harus di looping lg 
-                    }
-
+                        `)  
+                    })
                 })
-            })
   
             // BATAS PENCARIAN PRODUCT COMPANY
              axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
@@ -1839,47 +1794,7 @@ const checking_product_company=async()=>{
             }).catch((err)=>{
                 
             })
-            
-            // $('.card-checkout-cc').empty()
 
-            
-            // product.map((val,index)=>{
-                
-            //     getProductsWithProductNo("","",val.productNo).done(function(response){
-            //         var berat_barang = parseFloat(response.Weight_KG)
-            //         // 
-            //         var total_berat_barang = berat_barang  * val.quantity
-            //         var fixed_total_berat_barang = total_berat_barang.toFixed(2)
-            //         if(product.length>4 ){
-            //             $('.card-checkout-cc').css('height','300px')
-            //         }
-                    
-            //         $('.card-checkout-cc').append(`
-            //             <div class="card-item-checkout-cc">
-            //                 <div class="img-item-checkout-cc">
-            //                     <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
-            //                 </div>
-            //                 <div class="desc-item-checkout-cc">
-            //                     <p>${response.Name}</p>
-            //                     <div class="desc-item-2-checkout-cc">
-            //                         <p>Quantity : ${val.quantity}</p>
-            //                         <p>Berat  : ${fixed_total_berat_barang}</p>
-            //                         <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
-            //                     </div>
-            //                     <div class="for_input_coupon"> 
-            //                         <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
-            //                         <div class="card-coupon-used" id="delete-${val.productNo}" >
-            
-            //                         <div>
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //         `)   
-                  
-            //     })
-            // })
-
-           
         timerInterval = setInterval(() => {
         const content = Swal.getHtmlContainer()
         if (content) {

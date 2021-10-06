@@ -42,23 +42,7 @@ function loadcart(productNo, quantity){
                 }
             }
         }else{
-            // $("#cart-list").append("<tr class=\"table-primary\" id=\"productName" + productNo + "\">"); // change id (productName) to actual product id or name
-            // // checklist
-            // $("#productName" + productNo).append("<td class=\"product-checklist\" scope=\"row\" id=\"" + productNo + "first" + "\">");
-            // $("#" + productNo + "first").append("<div class=\"form-check\" id=\"" + productNo + "containerCheck" + "\">");
-            // $("#" + productNo + "containerCheck").append("<input class=\"form-check-input\" id=\"checklist" + productNo + "\" type=\"checkbox\" value=\"productNo\" onchange=\"selectedCart(this,\'" + productNo + "\')\">");
-            // // product image
-            // $("#productName" + productNo).append("<td class=\"product-names\" id=\"" + productNo + "second" + "\">");
-            // $("#" + productNo + "second").append("<img src=\"" + response.Picture_1 + "\" style=\"width: 50px; height: 50px; margin-right: 10px;\">" + response.Name + "<br>");
-            // $("#" + productNo + "second").append("<button type=\"button\" id=\"erase" + productNo + "\" class=\"btn btn-info\" onclick=\"eraseItem(\'" + productNo + "\')\">erase</button>");
-            // // quantity
-            // $("#productName" + productNo).append("<td class=\"product-quantity\" id=\"" + productNo + "third" + "\">");
-            // $("#" + productNo + "third").append("<i onclick=\"reduceQuantity(\'" + productNo + "\')\" class=\"glyphicon glyphicon-chevron-left\" id=\"productNo" + productNo + "decrease" +"\"></i>");
-            // $("#" + productNo + "third").append("<input id=\"quantity" + productNo + "\" class=\"fake\" value=\"" + quantity + "\" onclick=zoomIn(this) onchange=\"quantityUpdatedDirectly(this, \'" + productNo + "\')\"></input>");
-            // $("#" + productNo + "third").append("<i onclick=\"addQuantity(\'" + productNo + "\')\" class=\"glyphicon glyphicon-chevron-right\" id=\"productNo" + productNo + "increase" +"\"></i>");
-            // // price
-            // $("#productName" + productNo).append("<td class=\"product-price\" id=\"" + productNo + "fourth" + "\">");
-            // $("#" + productNo + "fourth").append("<input class=\"fake-1\" id=\"" + productNo + "\" value=\"" + commafy(Math.round(((quantity * response.Sell_Price)*1)* 100)/ 100) + "\" disabled></input>");
+
             $('#cart-list').append(`
                 <div class="new-card-cart productNameClass${productNo}" id="productName${productNo}">
                     <div class="cart-img" id="${productNo}second">
@@ -517,27 +501,16 @@ function checkingoutAll(){
             await axios.post(`https://products.sold.co.id/get-product-details?product_code=${arr_product[i].productNo}`)
             .then(async(res)=>{
                 var isSuccess = true
-                // 
                 var qty_sisa = res.data.Stock_Quantity
-                // 
-                // 
-                // 
-                // 
-                // 
                 if(quantity_product > qty_sisa || qty_sisa == 'undefined' || qty_sisa == 'null' || qty_sisa == null || isNaN(qty_sisa
                     || res.data.Sell_Price == null || res.data.Sell_Price == 'null' || res.data.Sell_Price ==undefined
                     )){
                     isSuccess = false
-
-                    // 
                 }
                 if(res.data.Sell_Price == 'null'){
                     isSuccess = false
-                    // 
                 }
-                // 
-                resolve(isSuccess)
-                // 
+                resolve(isSuccess) 
             }).catch((err)=>{
                 
             })
@@ -546,39 +519,63 @@ function checkingoutAll(){
     
     
     async function success(isSuccess){
-        // 
         if(isSuccess){
                 var token = localStorage.getItem("token");
-                // 
                 if((token != "" || token == null)){
                     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
-                    // 
                     if(cartToJson.length != 0){
+                        // console.log(cartToJson)
+                        var checking_product_company = []
+                        var result_address_company = []
+                        var province_company = ''
+                        var city_company = ''
+                        var district_company = ''
+                        var courier_price_code_company = ''
+                        
+                        
+
+
+                        // update baru
                         var array = [];
                         var productToBeAddedStringify = JSON.stringify(array);
                         localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                         var i = 0;
+                        var product_number = ''
                         for(i; i < cartToJson.length; i ++){
-                            // 
-                            
-                            var productToBeAdded = {
-                                productNo: cartToJson[i].productNo,
-                                quantity: parseInt($("#quantity" + cartToJson[i].productNo).val()),
-                                GroupCode: "NO COUPON",
-                                priceAgreed: $("#" + cartToJson[i].productNo).val()
-                            };
-                            array.push(productToBeAdded);
-                        
-                            // saving to storage
-                            var productToBeAddedStringify = JSON.stringify(array);
-                            
-                            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+                            product_number = cartToJson[i].productNo               
+                                // console.log(product_number)
+                                province_company = await find_province_from_product_company(cartToJson[i].company_address)
+                                city_company = await find_city_from_product_company(province_company,cartToJson[i].company_address)
+                                district_company = await find_district_from_product_company(city_company,cartToJson[i].company_address)
+                                courier_price_code_company = await find_courier_price_code_from_product_company(district_company,cartToJson[i].company_address)
+                                // console.log(province_company)
+                                // console.log(city_company)
+                                // console.log(district_company)
+                                // console.log(courier_price_code_company)
+
+                                var productToBeAdded = {
+                                    productNo: product_number,
+                                    quantity: parseInt($("#quantity" + product_number).val()),
+                                    GroupCode: "NO COUPON",
+                                    priceAgreed: $("#" + product_number).val(),
+                                    courier_price_code:courier_price_code_company,
+                                    company_address:cartToJson[i].company_address
+                                };
+                                array.push(productToBeAdded);  
+                                // saving to storage
+                                var productToBeAddedStringify = JSON.stringify(array)                            
+                                localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+                                // console.log(array)                      
+
+                                if(i === cartToJson.length -1 ){
+                                     window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
+                                }
                             
                         }
 
                         
                         // swal.fire("Final Step","","success");
-                        window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
+                        // window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
                     }else{
                         swal.fire("Something is missing","You do not have anything in Cart","warning");
                     }
@@ -630,7 +627,141 @@ function checkingoutAll(){
 
 
 
+const find_province_from_product_company=async(address)=>{
+    return new Promise(async(resolve,reject)=>{
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+        var result_province = []
+        var split_company = address.split(' ')
+        var all_filter_province = []
+        var all_result_arr =[]
+        var sec_filter_province = []
+        console.log(address)
+        var filter_province =  all_province_from_storage.filter((item,id)=>{
+            all_province_from_storage.forEach((value,index,arr)=>{ // allProduct from storage
+                split_company.forEach((resp,ind,array)=>{  // alamat split by spasi
+                    if(value.Province.toUpperCase().includes(resp.toUpperCase())){
+                        var province_company = value.Province
+                        all_filter_province.push(province_company)
+                        const resultArr = all_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                            if(!acc.includes(item)){
+                                acc.push(item);
+                            }
+                            return acc;
+                        },[])
+                        all_result_arr = resultArr // hasil dari ngapus data yg sama
+                    }
+                })
+            })
+            if(all_result_arr.length == 1 ){
+                resolve(all_result_arr[0])
+            }else {
+                // console.log('masuk ke else')
+                for(var i=0; i<split_company.length; i++){
+                    var minus_satu = split_company[i]
+                    var plus_satu = split_company[i+1]
+                    if(minus_satu === undefined || minus_satu === null){
+                        minus_satu = ''
+                    }else if (plus_satu === undefined || plus_satu === undefined){
+                        plus_satu = ''
+                    }
+                    var new_alamat = minus_satu + plus_satu
+                    all_result_arr.forEach((val,index)=>{
+                        var province = val.split(' ').join('')
+                        if(province.toUpperCase().includes(new_alamat.toUpperCase())){
+                            sec_filter_province.push(val)
+                            for(var i=1; i<split_company.length; i++){
 
+                                var min_satu = split_company[i]
+                                var plus_1 = split_company[i+1]
+                                if(min_satu === undefined || min_satu === null){
+                                    min_satu = ''
+                                }else if (plus_1 === undefined || plus_1 === undefined){
+                                    plus_1 = ''
+                                }
+                                var new_alamat2 = min_satu+plus_1
+                                sec_filter_province.forEach((value,index)=>{
+                                    var province = value.split(' ').join('')
+                                    if(province.toUpperCase().includes(new_alamat2.toUpperCase())){
+                                        // console.log(value,' final answer', index)
+                                        resolve(value)      
+                                    }
+                                })
+                            }        
+                        }
+                    })
+                }
+            }
+        })
+    })
+}
+
+const find_city_from_product_company=async(province,address)=>{
+    return new Promise(async(resolve,reject)=>{
+        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+        var delete_coma = address.replace(/,/g, "");
+        var split_company = delete_coma.split(' ')
+        // console.log(split_company)
+        
+        var arr_city = []
+        var final_result_city=[]
+        all_city_from_storage.forEach((value,index)=>{
+            if(value.Province.toUpperCase().includes(province.toUpperCase())){
+                value.City.forEach((val,id)=>{
+                    split_company.forEach((res,index_sc)=>{
+                        if(val.City.toUpperCase().includes(res.toUpperCase())){
+                            arr_city.push(val.City)
+                            resolve(val.City)
+                        }
+                    })
+                })
+            }
+        })
+        if(arr_city.length == 1){
+            resolv(arr_city[0])
+        }else {
+            for(var i=1; i<split_company.length; i++){
+                var normal_i = split_company[i]
+                var plus_satu = split_company[i+1]
+                var new_alamat = normal_i + ' ' + plus_satu
+                if(normal_i === undefined || normal_i === null){
+                    normal_i = ''
+                }else if (plus_satu === undefined || plus_satu === null){
+                    plus_satu = ''
+                }
+                arr_city.forEach((val,index)=>{
+                    if(val.toUpperCase().includes(new_alamat.toUpperCase())){
+                        // console.log(val,'final answer',index)
+                        resolve(val)
+                    }
+                })
+            }
+            // console.log('masuk ke else. arr city lebih dari 1')
+        }
+    })
+}
+
+const find_district_from_product_company=async(city,address)=>{
+    return new Promise(async(resolve,reject)=>{
+        var all_district_from_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+        var split_company = address.split(' ')
+        all_district_from_storage.forEach((value,index)=>{
+            if(value.City.toUpperCase().includes(city.toUpperCase())){
+                resolve(value.District[0])
+            }
+        })
+    })
+}
+
+const find_courier_price_code_from_product_company=async(district,address)=>{
+    return new Promise((resolve,reject)=>{
+        // console.log(district)
+        get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
+            resolve(response[0].Courier_Price_Code)
+        })
+    })
+}
 
 function checkingoutAllInStore(){
     in_store_loading_checkout();

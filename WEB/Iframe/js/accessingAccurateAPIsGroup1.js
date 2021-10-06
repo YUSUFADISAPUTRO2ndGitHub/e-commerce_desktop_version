@@ -358,3 +358,13 @@ function encryptPassword(Password){
     
     return $.ajax(settings);
 }
+
+function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
+    var settings = {
+        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
