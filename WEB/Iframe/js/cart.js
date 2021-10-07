@@ -559,7 +559,10 @@ function checkingoutAll(){
                                     GroupCode: "NO COUPON",
                                     priceAgreed: $("#" + product_number).val(),
                                     courier_price_code:courier_price_code_company,
-                                    company_address:cartToJson[i].company_address
+                                    company_address:cartToJson[i].company_address,
+                                    province_company:province_company,
+                                    city_company:city_company,
+                                    district_company:district_company.District
                                 };
                                 array.push(productToBeAdded);  
                                 // saving to storage

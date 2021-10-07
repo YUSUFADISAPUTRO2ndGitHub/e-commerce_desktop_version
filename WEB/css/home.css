@@ -5910,6 +5910,16 @@ img{
 }
 
 
+.box-new-card-checkout-cc-2{
+    width:100%;
+    height:auto;
+    background-color: #cfe2ff;
+    border-radius:5px;
+    display: flex;
+    flex-direction: column;
+    padding:5px;
+    margin-bottom:10px;
+}
 
 
 .card-checkout-cc {
@@ -5921,8 +5931,8 @@ img{
     padding:5px;
     margin-top:10px;
     border-radius:5px;
-    border:1px solid #cfe2ff;
-    box-shadow: 5px 5px 20px #cfe2ff;
+    /* border:1px solid #cfe2ff; */
+    /* box-shadow: 5px 5px 20px #cfe2ff; */
     display: flex;
     flex-direction:column;
     overflow-x:auto;
@@ -5936,6 +5946,7 @@ img{
     min-height:140px;
     border-radius:5px;
     border:1px solid #cfe2ff;
+    background-color: white;
     display:flex;
     flex-direction:row;
     align-items: center;
@@ -7275,6 +7286,7 @@ border-radius:20px !important;
     align-items: center;
     /* overflow: auto; */
     /* overflow-x: scroll; */
+    /* background-color: white; */
     flex-direction: column;
     padding:5px ;
 }

@@ -1544,108 +1544,234 @@ const checking_product_company=async()=>{
             var allKelurahan = []
             var allPengiriman = []
             var allKurir = []
-            console.log('checkout jalan')
+            // console.log('checkout jalan')
             $('.card-checkout-cc').empty()
             $('.new-card-product-cc').empty()
-            $('.card-checkout-cc').append(`
-                <div class="new-card-checkout-cc">
-                    <div class="new-card-product-cc">
 
-                    </div>
-                    <div class="new-card-option-cc">
-                        <select class="form-control sp_kelurahan_hover cart-pengiriman" id="sub-pengiriman-option" onchange="pengirimanCheckout(this)" >  
-                            <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
-                        </select>
-    
-                        <select class="form-control sp_kelurahan_hover cart-asuransi" id="sub-asuransi-option" onchange="asuransiCheckout(this)" >  
-                            <option selected  class="co-asuransi">Insurance</option>      
-                            
-                        </select>
-                        <select class="form-control sp_kelurahan_hover cart-packing" id="sub-packing-option" onchange="packingCheckout(this)" >  
-                            <option selected  class="co-packing">Packing</option>      
-                        
-                        </select>
-                    </div>
-                </div>
-                `)
-                // console.log(product)
                 product.sort(function (a, b) {
                     let left = a.company_address.toUpperCase();
                     let right = b.company_address.toUpperCase();
                 
                     return (left === right) ? 0 : left > right ? 1 : -1;
                   });
-                //   console.log(product)
-                var array_for_render = [] 
-                var big_array_for_render = []
-                var reduce_array_for_render = []
-                for(var i=0; i<=product.length; i++){
-                    console.log('looping ke -' , i)
-                    if(i === product.length -1){
-                        console.log('looping berakhir')
-                    }else {
-                        var index_now = product[i]
-                        var next_index = product[i+1]
-                        console.log(next_index)
-                        console.log(product[i], i)
-                        console.log(product[i+1], (i+1))
-                        if(next_index === undefined || next_index === null){
-                            console.log('masuk ke if')
-                            break;
-                            
-                        }else {
-                            console.log('masuk ke else')
-                            if(index_now.company_address === next_index.company_address){
-                                array_for_render.push(index_now)
-                                array_for_render.push(next_index)
-                                reduce_array_for_render = array_for_render.reduce((acc,item)=>{
-                                    if(!acc.includes(item)){
-                                        acc.push(item)
+
+                var checking_array_render = []
+                var product_pertama = [product[0]]
+                checking_array_render.push(product_pertama)
+                checking_array_render.forEach((val,index)=>{
+                        for(var i=0; i<product.length; i++){
+                            var next_index = product[i+1]
+                            if(next_index === undefined || next_index === null){
+                                checking_array_render.push([product[product.length-1]])
+                                i = product.length
+                            }else {
+                                if(val[index].company_address === product[i].company_address){
+                                    if(val[index].productNo !== product[i].productNo){
+                                        checking_array_render[index].push(product[i])
+                                    }else {
+                                        console.log('ada data yang sama jadi gak di push ke array')
                                     }
-                                    return acc
-                                },[])
-                                // product.splice(1 ,i)
-                                product.shift() // HAPUS DARI LOOPING I KEBELAKANG
-                            }
+                            }else {
+                                checking_array_render.push([product[i]])
+                            } 
                         }
                     }
-                }
-                
-                console.log(reduce_array_for_render, 'reduce array for render')    
-                // console.log(array_for_render,'array for render')
-                console.log(product,'ini product')
-                product.map((val,index)=>{
-                    getProductsWithProductNo("","",val.productNo).done(function(response){
-                        var berat_barang = parseFloat(response.Weight_KG)
-                        var total_berat_barang = berat_barang  * val.quantity
-                        var fixed_total_berat_barang = total_berat_barang.toFixed(2)
-                        // if(product.length>4 ){
-                        //     $('.card-checkout-cc').css('height','300px')
-                        // }
-                        console.log('jalan 1717')
-                        $('.new-card-product-cc').append(`
-                            <div class="card-item-checkout-cc">
-                                <div class="img-item-checkout-cc">
-                                    <img src="${replace_vtintl_to_sold_co_id(response.Picture_1)}" alt="">
-                                </div>
-                                <div class="desc-item-checkout-cc">
-                                    <p>${response.Name}</p>
-                                    <div class="desc-item-2-checkout-cc">
-                                        <p>Quantity : ${val.quantity}</p>
-                                        <p>Berat  : ${fixed_total_berat_barang}</p>
-                                        <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+                })
+
+               
+
+                checking_array_render.forEach((value,index)=>{
+                    var checking_array_index = value
+                    // console.log(value,index)
+                    value.map((val,id,arr)=>{
+                        // console.log(val,id)
+                        var qty_product_index = val.quantity
+                        var Courier_Price_Code_orig = val.courier_price_code
+                        var product_number_index = val.productNo
+                        var price_agreed_index = val.priceAgreed
+                        getProductsWithProductNo("","",val.productNo).done(function(response){
+                            var product_index = response
+                            var berat_barang = parseFloat(response.Weight_KG)
+                            var total_berat_barang = berat_barang  * val.quantity
+                            var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+                            // if(product.length>4 ){
+                            //     $('.card-checkout-cc').css('height','300px')
+                            // }
+
+                            if(id === 0){
+                                // console.log(value,'render ke', id)
+                                var allKurir = []
+                                var allProvince=[]
+                                var allKota = []
+                                var allKecamatan = []
+                                var allKelurahan = []
+                                var province_company = val.province_company
+                                var city_company = val.city_company
+                                var district_company = val.district_company
+                                var allPengiriman = []
+                                
+
+                                // if(province_storage != undefined && city_storage !=undefined && district_storage != undefined){
+                                //     var berat_product = 0
+                                //     var kota_pilihan = ''
+                                //     var kecamatan_pilihan =''
+                                    
+                                //     city_storage.forEach((val)=>{
+                                //         if(val.Province == province_company){
+                                //             allKota.push(val.City)
+                                //             kota_pilihan = val.City[0].City
+                                //         }
+                                //     })
+                                //     district_storage.forEach((val)=>{
+                                //         if(val.City == city_company){
+                                //             allKecamatan.push(val.District)
+                                //             kecamatan_pilihan = val.District
+                                //         }
+                                //     })
+                                //     get_all_subdistrict_from_courier('tiki','tiki',district_company).done(function(response){
+                                //         allKelurahan = response
+                                //         console.log(allKota,' ini all kota')
+                                //         console.log(allKecamatan,' ini all kecamatan')
+                                //         console.log(checking_array_index)
+                                //         checking_array_index.forEach((val,index)=>{
+                                //             console.log(val)
+                                //             axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.productNo}`)
+                                //             .then((res)=>{
+                                //                 // allProduct.push(res.data)
+                                //                 console.log(parseFloat(res.data.Weight_KG))
+                                //                 // berat_product += (res.data.Weight_KG * 0.1) * qty_product_index
+                                //                 berat_product += parseFloat(res.data.Weight_KG * qty_product_index)
+                                //                 console.log(berat_product)
+                                //             }).catch((err)=>{
+                                                
+                                //             })
+                                //         })
+                                //         if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
+                                //             berat_product = 0.1*1.5;
+                                //         }else{
+                                //             berat_product = berat_product*1*1.5;
+                                //         }
+                                //         var length = ''
+                                //         var  width = '' 
+                                //         var  height = ''
+                                //         var paket_value = '' 
+                                //         var packing_type = ''
+                                //         console.log(value[0])
+                                //         new_get_shipping_cost_informations(Courier_Price_Code_orig,Courier_Price_Code_orig,packing_type,berat_product,length,width,height,paket_value).done(function(response){
+                                //             console.log(response)
+                                //             allPengiriman = response
+
+                                //         })
+                                //     })
+
+                                // }else { // get data from API
+
+                                // }
+                                $('.card-checkout-cc').append(`
+                                    <div class="box-new-card-checkout-cc-2"> 
+                                        <div class="new-card-checkout-cc">
+                                            <div class="new-card-product-cc">
+                                                <div class="card-item-checkout-cc">
+                                                    <div class="img-item-checkout-cc">
+                                                        <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
+                                                    </div>
+                                                    <div class="desc-item-checkout-cc">
+                                                        <p>${product_index.Name}</p>
+                                                        <div class="desc-item-2-checkout-cc">
+                                                            <p>Quantity : ${qty_product_index}</p>
+                                                            <p>Berat  : ${fixed_total_berat_barang}</p>
+                                                            <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                        </div>
+                                                        <div class="for_input_coupon"> 
+                                                            <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                                            <div class="card-coupon-used" id="delete-${product_number_index}" >
+                                    
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-card-option-cc">
+                                                <select class="form-control sp_kelurahan_hover cart-pengiriman new-cart-pengiriman-${index}" id="sub-pengiriman-option" onchange="pengirimanCheckout(this)" >  
+                                                    <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
+                                                </select>
+                            
+                                                <select class="form-control sp_kelurahan_hover cart-asuransi new-asuransi-pengiriman-${index}" id="sub-asuransi-option" onchange="asuransiCheckout(this)" >  
+                                                    <option selected  class="co-asuransi">Insurance</option>           
+                                                </select>
+                                                <select class="form-control sp_kelurahan_hover cart-packing new-packing-pengiriman-${index}" id="sub-packing-option" onchange="packingCheckout(this)" >  
+                                                    <option selected  class="co-packing">Packing</option>      
+                                                </select>
+                                            </div>
+                                        </div>      
                                     </div>
-                                    <div class="for_input_coupon"> 
-                                        <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
-                                        <div class="card-coupon-used" id="delete-${val.productNo}" >
-                
-                                        <div>
+                                `)
+                           
+                                
+                            }else {
+                                console.log(value,'render ke' ,id)
+                                $('.new-card-product-cc').append(`
+                                    <div class="card-item-checkout-cc">
+                                        <div class="img-item-checkout-cc">
+                                            <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
+                                        </div>
+                                        <div class="desc-item-checkout-cc">
+                                            <p>${product_index.Name}</p>
+                                            <div class="desc-item-2-checkout-cc">
+                                                <p>Quantity : ${qty_product_index}</p>
+                                                <p>Berat  : ${fixed_total_berat_barang}</p>
+                                                <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                            </div>
+                                            <div class="for_input_coupon"> 
+                                                <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                                <div class="card-coupon-used" id="delete-${product_number_index}" >
+                        
+                                                <div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        `)  
+                                `)  
+                            }
+                        })        
                     })
                 })
+
+                // RENDER UNTUK SELECTED   
+                var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+                var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+                var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+                var berat_product = 0;
+                var province_customer = localStorage.getItem('province_customer')
+                var city_customer = localStorage.getItem('city_customer')
+                var district_customer = localStorage.getItem('district_customer')
+                var kecamatan_pilihan = ''
+                var allProvince = []
+                var allKota = []
+                var allKecamatan = []
+                var allKelurahan = []
+
+                if(province_storage != undefined && city_storage !=undefined && district_storage != undefined){
+                    city_storage.forEach((val,index)=>{
+                        if(val.Province == province_customer){
+                            allKota.push(val.City)
+                        }
+                    })
+                    district_storage.forEach((val,index)=>{
+                        if(val.City == city_customer){
+                            allKecamatan.push(val.City)
+                        }
+                    })
+
+                    get_all_subdistrict_from_courier('tiki','tiki',district_customer).done(function(response){
+                        allKelurahan = response
+                        console.log(response)
+                    })
+
+                }else{
+                    // GET DATA FROM API
+                }
+
+                // RENDER UNTUK SELECTED
   
             // BATAS PENCARIAN PRODUCT COMPANY
              axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
