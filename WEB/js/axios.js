@@ -7770,7 +7770,8 @@ function addToCart(product_id){
                     var data = {
                     "productNo":product_id,
                     "quantity":1,
-                    "company_address":res.data.PIC_company_address
+                    "company_address":res.data.PIC_company_address,
+                    "weight_kg":res.data.Weight_KG
                     }
                     dataParse.push(data)
                     $('.cart-counter').text(dataParse.length)
@@ -7798,7 +7799,8 @@ function addToCart(product_id){
                     {
                     "productNo":product_id,
                     "quantity":1,
-                    "company_address":res.data.PIC_company_address
+                    "company_address":res.data.PIC_company_address,
+                    "weight_kg":res.data.Weight_KG
                     }
                 ]
                 var pushToStorage2 = JSON.stringify(cart)

@@ -542,6 +542,7 @@ function checkingoutAll(){
                         var i = 0;
                         var product_number = ''
                         for(i; i < cartToJson.length; i ++){
+                            // console.log(cartToJson[i].weight_kg)
                             product_number = cartToJson[i].productNo               
                                 // console.log(product_number)
                                 province_company = await find_province_from_product_company(cartToJson[i].company_address)
@@ -562,8 +563,10 @@ function checkingoutAll(){
                                     company_address:cartToJson[i].company_address,
                                     province_company:province_company,
                                     city_company:city_company,
-                                    district_company:district_company.District
+                                    district_company:district_company.District,
+                                    weight_kg:cartToJson[i].weight_kg
                                 };
+                                // console.log(productToBeAdded)
                                 array.push(productToBeAdded);  
                                 // saving to storage
                                 var productToBeAddedStringify = JSON.stringify(array)                            
