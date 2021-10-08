@@ -1621,14 +1621,14 @@ const checking_product_company=async()=>{
                                                 </div>
                                             </div>
                                             <div class="new-card-option-cc">
-                                                <select class="form-control sp_kelurahan_hover cart-pengiriman new-cart-pengiriman-${index}" id="sub-pengiriman-option" onchange="pengirimanCheckout(this)" >  
+                                                <select class="form-control sp_kelurahan_hover cart-pengiriman new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this)" >  
                                                     <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
                                                 </select>
                             
-                                                <select class="form-control sp_kelurahan_hover cart-asuransi new-asuransi-pengiriman-${index}" id="sub-asuransi-option" onchange="asuransiCheckout(this)" >  
+                                                <select class="form-control sp_kelurahan_hover cart-asuransi new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this)" >  
                                                     <option selected  class="co-asuransi">Insurance</option>           
                                                 </select>
-                                                <select class="form-control sp_kelurahan_hover cart-packing new-packing-pengiriman-${index}" id="sub-packing-option" onchange="packingCheckout(this)" >  
+                                                <select class="form-control sp_kelurahan_hover cart-packing new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this)" >  
                                                     <option selected  class="co-packing">Packing</option>      
                                                 </select>
                                             </div>
@@ -1699,27 +1699,27 @@ const checking_product_company=async()=>{
                             get_all_subdistrict_from_courier('tiki','tiki',district_customer).done(function(response){
                                 allKelurahan = response
                                 // console.log(response)
-                                console.log(item)
+                                // console.log(item)
                                 var Courier_Price_Code_orig = ''
                                 item.forEach((resp,id)=>{ // ngitung berat
                                         Courier_Price_Code_orig = resp.courier_price_code
                                         berat_product += parseFloat(resp.weight_kg) * parseFloat(resp.quantity)
-                                        console.log(berat_product)
+                                        // console.log(berat_product)
                                 })
-                                console.log(berat_product,'final berat product')
+                                // console.log(berat_product,'final berat product')
                                 if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
                                     berat_product = 0.1*1.5;
                                 }else{
                                     berat_product = berat_product*1*1.5;
                                 }
-                                console.log(berat_product,'final berat product')
+                                // console.log(berat_product,'final berat product')
                                 var length = ''
                                 var  width = '' 
                                 var  height = ''
                                 var paket_value = '' 
                                 var packing_type = ''
                                 new_get_shipping_cost_informations(Courier_Price_Code_orig,allKelurahan[0].Courier_Price_Code,packing_type,berat_product,length,width,height,paket_value).done(function(response){
-                                    console.log(response)
+                                    // console.log(response)
                                     allPengiriman = response
                                     $('.cart-pengiriman').empty()
                                     $('.cart-provinsi').empty()
@@ -1785,26 +1785,28 @@ const checking_product_company=async()=>{
                                         `)
                                     })
                                     if(allPengiriman){
-                                        console.log(allPengiriman)
+                                        // console.log(allPengiriman)
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,indexPengiriman)=>{
+                                                console.log(val,'ini yg di looping')
                                                 console.log(index_car, ' ini index')
-                                                console.log($(`.new-card-pengiriman-${index_car}`))
-                                                $(`.new-cart-pengiriman-0`).append(`
+                                                console.log(`.new-cart-pengiriman-${index_car}`)
+                                                console.log($(`.new-cart-pengiriman-${index_car}`))
+                                                $(`#sub-pengiriman-option-${index_car}`).append(`
                                                     <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
                                                 `)
                                             })
                                         }
                                         if(allPengiriman.insurance != undefined){
                                             allPengiriman.insurance.map((val,indexPengiriman)=>{
-                                                $(`.new-asuransi-pengiriman-${index_car}`).append(`
+                                                $(`#sub-asuransi-option-${index_car}`).append(`
                                                     <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
                                                 `)
                                             })
                                         }
                                         if(allPengiriman.packing != undefined) {
                                             allPengiriman.packing.map((val,indexPengiriman)=>{
-                                                $(`.new-asuransi-pengiriman-${index_car}`).append(`
+                                                $(`#sub-packing-option-${index_car}`).append(`
                                                     <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
                                                 `)
                                             })
