@@ -6012,29 +6012,48 @@ img{
 
 .new-total-price-cc {
     width:100%;
-    height:70px;
+    height:auto;
     border-radius:5px;
     /* border:1px solid #cfe2ff; */
     display:none;
     flex-direction:column;
     justify-content:center;
     align-items: center;
+    background-color: #cfe2ff;
     /* box-shadow: 5px 5px 20px #cfe2ff; */
     padding:5px;
     margin-top:10px;
 }
 
+.new-total-price-cc-2 {
+    width:100%;
+    height:300px;
+    background-color: #cfe2ff;
+    border:1px solid black;
+    padding:5px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+
 .total_price_cc {
-    width:70%;
+    width:100%;
     display: flex;
     flex-direction:row;
     height:100%;
-    border:1px solid #cde2ff;
+    border:1px solid #dedede;
+    margin:5px;
+    background-color: white;;
     border-radius:5px;
     justify-content:space-between;
     box-shadow : 5px 5px 20px #cfe2ff;
     align-items: center;
     padding:5px;
+}
+
+.final-total-harga {
+    width:100%;
+    height:auto;
 }
 .total_price_cc p {
     margin:0px !important;
@@ -7304,17 +7323,26 @@ border-radius:20px !important;
 
 .new-company-address-cc {
     width:100%;
-    height:50px;
+    /* height:50px; */
+    height:auto;
     /* min-height:140px; */
     border-radius:5px;
     /* border:1px solid #cfe2ff; */
     /* background-color: white; */
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     align-items: center;
     padding:5px;
     margin-bottom:5px;
     
+}
+.new-total-price-box {
+    width:100%;
+    height:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .new-company-address-cc p{
     background-color: white;
