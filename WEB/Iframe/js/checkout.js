@@ -2052,7 +2052,11 @@ const checking_product_company=async()=>{
 
                             $('.final-total-harga').empty()
                             $('.final-total-harga').append(`
-                                ${final_total_harga_barang}
+                                <div class="box-ft-harga">
+                                <p> Harga Total</p>
+                                <p id="final_total_harga_barang"> ${final_total_harga_barang}</p>
+
+                                </div>  
                             `)
                         }
                     })

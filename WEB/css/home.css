@@ -6053,7 +6053,26 @@ img{
 
 .final-total-harga {
     width:100%;
-    height:auto;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left:10px;
+    padding-right:10px;
+    background-color: #cfe2ff;
+    border-radius:5px;
+
+
+}
+.box-ft-harga{
+    width:90%;
+    height:50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:5px;
+    flex-direction: row;
 }
 .total_price_cc p {
     margin:0px !important;
