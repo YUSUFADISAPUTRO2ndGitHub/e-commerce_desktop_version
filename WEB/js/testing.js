@@ -17,4 +17,3 @@ cars.sort(function (a, b) {
     return (left === right) ? 0 : left > right ? 1 : -1;
   });
 
-console.log(cars)

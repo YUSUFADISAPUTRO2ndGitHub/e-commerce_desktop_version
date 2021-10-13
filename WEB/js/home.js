@@ -1368,17 +1368,17 @@ const back_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
     var find_not_active = $('.item-left-img-box .img-big').attr('id')
-    console.log(find_active)
-    console.log(find_not_active)
+    
+    
     if(find_active == 'img-big-1'){
-        console.log('masuk ke if 1334')
+        
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         var img_4 = $('#img-big-4').attr('class')
         var img_4_split = img_4.split(' ')
         // $(`#${find_not_active}`).removeClass('img-big')
         // $(`#${find_not_active}`).addClass('img-big-active')
-        console.log(img_4_split)
+        
         $('#img-big-4').removeClass('img-big')
         $('#img-big-4').addClass('img-big-active')
         if(img_4_split[1] == 'img-notfound'){
@@ -1388,7 +1388,7 @@ const back_btn=()=>{
             $('#img-big-2').removeClass('img-big')
             $('#img-big-2').addClass('img-big-active')
         }else {
-            console.log('masuk ke else 1351')
+            
         }
        
     }else if (find_active == 'img-big-2'){
@@ -1403,7 +1403,7 @@ const back_btn=()=>{
         $('#img-big-2').removeClass('img-big')
         $('#img-big-2').addClass('img-big-active')   
     }else if (find_active == 'img-big-4'){
-        console.log('masuk ke else if  1363')
+        
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         var img_3 = $('#img-big-3').attr('class')
@@ -1428,8 +1428,8 @@ const next_btn=()=>{
     // alert('jalan')
     var find_active = $('.item-left-img-box .img-big-active').attr('id')
     var find_not_active = $('.item-left-img-box .img-big').attr('id')
-    console.log(find_active, ' ini active')
-    console.log(find_not_active,' not active')
+    
+    
     if(find_active == 'img-big-1'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
@@ -1454,13 +1454,13 @@ const next_btn=()=>{
             $('#img-big-4').removeClass('img-big')
             $('#img-big-4').addClass('img-big-active')
         }
-        console.log(img_3)
+        
     }else if (find_active == 'img-big-3'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
         var img_4 = $('#img-big-4').attr('class')
         var img_4_split = img_4.split(' ')
-        console.log(img_4_split)
+        
         if(img_4_split[1] == 'img-notfound'){
             $('#img-big-1').removeClass('img-big')
             $('#img-big-1').addClass('img-big-active')
@@ -1968,7 +1968,7 @@ const close_tab_answer=(result,index)=>{
             data_keisi.push({"product_name":val,"qty_product":qty_item})
         }
     })
-    console.log(data_keisi)
+    
 
     var all_data_storage = JSON.parse(localStorage.getItem('all_data_product'))
     var dataParse = JSON.parse(localStorage.getItem('itemsInCart'))
@@ -1979,7 +1979,7 @@ const close_tab_answer=(result,index)=>{
            data_keisi.forEach((item,id)=>{
                all_data_storage.filter((value,index)=>{
                     if(item.product_name.toUpperCase().includes(value.Name.toUpperCase())){
-                        console.log(value)
+                        
                         if(dataParse){ // kalo data storage ada masuk if
                             var filterdatakosong = dataParse.filter((filtering)=>{
                                 if(filtering.productNo === value.Product_Code){
@@ -2213,8 +2213,8 @@ const replace_bo_to =(value,id)=>{
     }
 
 
-    // console.log(value)
-    // console.log(id)
+    // 
+    // 
     // $(`#${id}`).val(value)
     $('#searching-bo').modal('hide')
 }
@@ -2224,10 +2224,10 @@ const replace_bo_to =(value,id)=>{
 
     // SEARCHING PRODUCT ITEM BULK ORDER
    $('.inp-prod-bo').on('keyup',function () {
-    //    console.log(this)
+    //    
        var id_dipakai = $(this).attr('id')
        var split_id = id_dipakai.split('-')
-    //    console.log(id_dipakai)
+    //    
     var all_data_storage = JSON.parse(localStorage.getItem('all_data_product'))
     var value_searching = $(this).val()
     if(value_searching.length > 2){
@@ -2235,12 +2235,12 @@ const replace_bo_to =(value,id)=>{
             var all_data_push=[]
             var data_filter = all_data_storage.filter((value,index)=>{
                 if(value.Name.toUpperCase().includes(value_searching.toUpperCase()) || value.Product_Code.includes(value_searching)){
-                    // console.log(all_data_push)
+                    // 
                     all_data_push.push(value)
                     return value
                 }
             })
-            console.log(data_filter)
+            
             $('.searching-bo-body').empty()
             if(data_filter == undefined || data_filter == null || data_filter.length == 0 ){
                 $('.searching-bo-body').append(`
@@ -2273,16 +2273,16 @@ const replace_bo_to =(value,id)=>{
    $('.inp-qty-bo').on('keyup',function(){
     var id_dipakai = $(this).attr('id')
     var qty_from_input = $(this).val()
-    console.log(qty_from_input)
+    
     var split_id = id_dipakai.split('-')
     var qty_product_dipakai = parseInt($(`#prod-bo-qty-${split_id[3]}`).val())
     var product_dipakai = $(`#prod-bo-number-${split_id[3]}`).val()
-    // console.log(product_dipakai)
-    // console.log(id_dipakai)
+    // 
+    // 
     var all_data_storage = JSON.parse(localStorage.getItem('all_data_product'))
         if(product_dipakai  !== '' || product_dipakai !== undefined){
             if(qty_from_input  !== '' || qty_from_input !== undefined || qty_from_input !== NaN ){
-                console.log('masuk ke if')
+                
                 if(all_data_storage  !== undefined || all_data_storage  !== null || all_data_storage.length  >0){
                     var filter_product = all_data_storage.filter((val,index)=>{
                         if(val.Name.toUpperCase().includes(product_dipakai.toUpperCase())){
@@ -2319,7 +2319,7 @@ const replace_bo_to =(value,id)=>{
                 $(`#prod-bo-qty-${split_id[3]}`).val(1)
             }
         }else {
-            console.log('masuk ke else 2242')
+            
             $(`#prod-bo-qty-${split_id[3]}`).val(1)
         }
    })
@@ -2328,5 +2328,5 @@ const replace_bo_to =(value,id)=>{
    })
 
 //    $('.inp-prod-bo').on('keyup',function(){
-//        console.log('jalan')
+//        
 //    })

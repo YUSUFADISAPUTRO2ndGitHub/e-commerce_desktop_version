@@ -4532,8 +4532,8 @@ function commafy( num ) {
                                 <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_3)}" alt="" class="img-big" id="img-big-3">
                             `)
                         }
-                        console.log(data_for_render[0])
-                        console.log(data_for_render[0].extra_column_1)
+                        
+                        
                         if(data_for_render[0].extra_column_1 == undefined || data_for_render[0].extra_column_1 == null || data_for_render[0].extra_column_1 == 'NULL' || data_for_render[0].extra_column_1 == ''){
 
                         
@@ -5017,7 +5017,7 @@ function commafy( num ) {
                                 `)
                             }
 
-                            console.log(item.extra_column_1)
+                            
                             if(item.extra_column_1 == undefined || item.extra_column_1 == null || item.extra_column_1 == 'NULL' || item.extra_column_1 == ''){
     
                             
@@ -5188,13 +5188,13 @@ function commafy( num ) {
         var allData_storage = JSON.parse(localStorage.getItem('all_data_product'))
 
         if(allData_storage != undefined && allData_storage.length != 0){
-            console.log('masuk ke if 5191s')
+            
             var item = allData_storage.filter((val,index)=>{
                 if(val.Product_Code == product_id){
                     return val
                 }
             })
-            console.log(item)
+            
 
             var split_product = item[0].Name.split(' ')
             var all_filter_product = []
@@ -6455,7 +6455,7 @@ function get_all_couriers(){
         "timeout": 0,
     };
 
-    // console.log('get all couriers jalan')
+    // 
     
     return $.ajax(settings);
 }
@@ -7790,8 +7790,8 @@ function addToCart(product_id){
                 }
         
                 var pushToStorage = JSON.stringify(dataParse)
-                console.log(dataParse)
-                console.log(pushToStorage)
+                
+                
                 localStorage.setItem('itemsInCart',pushToStorage)
         
             }else {
@@ -7806,7 +7806,7 @@ function addToCart(product_id){
                     }
                 ]
                 var pushToStorage2 = JSON.stringify(cart)
-                console.log(pushToStorage2)
+                
                 localStorage.setItem('itemsInCart',pushToStorage2)     
             }       
         }

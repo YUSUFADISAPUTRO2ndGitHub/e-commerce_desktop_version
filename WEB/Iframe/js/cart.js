@@ -524,7 +524,7 @@ function checkingoutAll(){
                 if((token != "" || token == null)){
                     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
                     if(cartToJson.length != 0){
-                        // console.log(cartToJson)
+                        // 
                         var checking_product_company = []
                         var result_address_company = []
                         var province_company = ''
@@ -542,19 +542,19 @@ function checkingoutAll(){
                         var i = 0;
                         var product_number = ''
                         for(i; i < cartToJson.length; i ++){
-                            // console.log(cartToJson[i].weight_kg)
+                            // 
                             product_number = cartToJson[i].productNo               
-                                // console.log(product_number)
+                                // 
                                 province_company = await find_province_from_product_company(cartToJson[i].company_address)
                                 city_company = await find_city_from_product_company(province_company,cartToJson[i].company_address)
                                 district_company = await find_district_from_product_company(city_company,cartToJson[i].company_address)
                                 courier_price_code_company = await find_courier_price_code_from_product_company(district_company,cartToJson[i].company_address)
-                                // console.log(province_company)
-                                // console.log(city_company)
-                                // console.log(district_company)
-                                // console.log(courier_price_code_company)
+                                // 
+                                // 
+                                // 
+                                // 
                                 var berat_product = parseFloat(cartToJson[i].weight_kg) * parseInt($("#quantity" + product_number).val())
-                                // console.log(cartToJson[i])
+                                // 
                                 var productToBeAdded = {
                                     productNo: product_number,
                                     quantity: parseInt($("#quantity" + product_number).val()),
@@ -569,12 +569,12 @@ function checkingoutAll(){
                                     berat_product:berat_product,
                                     product_name:cartToJson[i].product_name
                                 };
-                                // console.log(productToBeAdded)
+                                // 
                                 array.push(productToBeAdded);  
                                 // saving to storage
                                 var productToBeAddedStringify = JSON.stringify(array)                            
                                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
-                                // console.log(array)                      
+                                // 
 
                                 if(i === cartToJson.length -1 ){
                                      window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
@@ -637,6 +637,7 @@ function checkingoutAll(){
 
 
 const find_province_from_product_company=async(address)=>{
+    console.log(address)
     return new Promise(async(resolve,reject)=>{
         var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
         var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
@@ -645,7 +646,7 @@ const find_province_from_product_company=async(address)=>{
         var all_filter_province = []
         var all_result_arr =[]
         var sec_filter_province = []
-        console.log(address)
+        
         var filter_province =  all_province_from_storage.filter((item,id)=>{
             all_province_from_storage.forEach((value,index,arr)=>{ // allProduct from storage
                 split_company.forEach((resp,ind,array)=>{  // alamat split by spasi
@@ -665,7 +666,7 @@ const find_province_from_product_company=async(address)=>{
             if(all_result_arr.length == 1 ){
                 resolve(all_result_arr[0])
             }else {
-                // console.log('masuk ke else')
+                // 
                 for(var i=0; i<split_company.length; i++){
                     var minus_satu = split_company[i]
                     var plus_satu = split_company[i+1]
@@ -692,7 +693,7 @@ const find_province_from_product_company=async(address)=>{
                                 sec_filter_province.forEach((value,index)=>{
                                     var province = value.split(' ').join('')
                                     if(province.toUpperCase().includes(new_alamat2.toUpperCase())){
-                                        // console.log(value,' final answer', index)
+                                        // 
                                         resolve(value)      
                                     }
                                 })
@@ -711,7 +712,7 @@ const find_city_from_product_company=async(province,address)=>{
         var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
         var delete_coma = address.replace(/,/g, "");
         var split_company = delete_coma.split(' ')
-        // console.log(split_company)
+        // 
         
         var arr_city = []
         var final_result_city=[]
@@ -741,12 +742,12 @@ const find_city_from_product_company=async(province,address)=>{
                 }
                 arr_city.forEach((val,index)=>{
                     if(val.toUpperCase().includes(new_alamat.toUpperCase())){
-                        // console.log(val,'final answer',index)
+                        // 
                         resolve(val)
                     }
                 })
             }
-            // console.log('masuk ke else. arr city lebih dari 1')
+            // 
         }
     })
 }
@@ -765,7 +766,7 @@ const find_district_from_product_company=async(city,address)=>{
 
 const find_courier_price_code_from_product_company=async(district,address)=>{
     return new Promise((resolve,reject)=>{
-        // console.log(district)
+        // 
         get_all_subdistrict_from_courier('tiki','tiki',district.District).done(function(response){
             resolve(response[0].Courier_Price_Code)
         })
