@@ -554,7 +554,7 @@ function checkingoutAll(){
                                 // console.log(district_company)
                                 // console.log(courier_price_code_company)
                                 var berat_product = parseFloat(cartToJson[i].weight_kg) * parseInt($("#quantity" + product_number).val())
-
+                                // console.log(cartToJson[i])
                                 var productToBeAdded = {
                                     productNo: product_number,
                                     quantity: parseInt($("#quantity" + product_number).val()),
@@ -566,7 +566,8 @@ function checkingoutAll(){
                                     city_company:city_company,
                                     district_company:district_company.District,
                                     weight_kg:cartToJson[i].weight_kg,
-                                    berat_product:berat_product
+                                    berat_product:berat_product,
+                                    product_name:cartToJson[i].product_name
                                 };
                                 // console.log(productToBeAdded)
                                 array.push(productToBeAdded);  
