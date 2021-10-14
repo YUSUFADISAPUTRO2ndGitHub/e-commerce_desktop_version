@@ -1355,7 +1355,7 @@ $(function(){
     return str.join('.');
 }
 
-
+    // input name searching home
     $('.input-name').on('keyup',function () {
         $('.close-button').css('display','block')
         $('.close-button-2').css('display','block')
@@ -1385,14 +1385,23 @@ $(function(){
                         return val
                     }
                 })
+                console.log(all_product_filter)
+
+                if(all_product_filter.length === 0){
+                    $('.render-li-search').append(`
+                        <li  id="${value}">${value} Tidak Ditemukan</li>
+                    `)
+                }
                 all_product_filter.map((val,index)=>{
-                    // 
-                    if(val === false){
+                    console.log(val)
+                    if(val.length === 0){
+                        console.log('masuk ke if 1392')
                         $('.render-li-search').append(`
                             <li  id="${val.Name}">${value} Tidak Ditemukan</li>
                         `)
 
                     }else {
+                        console.log('masuk ke if 1398')
                         $('.render-li-search').append(`
                             <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
                         `)

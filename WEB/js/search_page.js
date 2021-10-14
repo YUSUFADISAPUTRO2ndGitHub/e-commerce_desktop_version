@@ -269,7 +269,7 @@ function show_jenisproduct(jenis_product){
 const get_product_detail_from_searching_page=(product_id)=>{
     
     // $('.item_detail_sp').empty()
-    $(this).scrollTop('.item_detail_sp')
+    // $(this).scrollTop('.item_detail_sp')
     $('.box-list-subcategory').css('display','none')
     // $('.item_detail_sp').css('display','flex')
     $('.close-button').css('display','block')

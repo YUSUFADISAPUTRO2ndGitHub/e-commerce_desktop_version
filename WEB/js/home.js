@@ -22,6 +22,7 @@ function forgot_modal_request(){
     $('#newloginModal').modal('hide')
 }
 function cart_requested(x){
+    back_to_home()
     var cartToJson = JSON.parse(localStorage.getItem('itemsInCart'))
     var cartString = localStorage.getItem('itemsInCart')
     var token = localStorage.getItem('token')
@@ -75,8 +76,10 @@ function cart_requested(x){
     // 
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
+        $('.close-button').css('display','none')
     }else{
         $(x).addClass("background_grey");
+        $('.new-box-category').css('display','none')
     }
     $(".iframe").toggle();
     // $('.iframe').css('display','block')
@@ -86,6 +89,7 @@ function cart_requested(x){
     $('.option-1').removeClass('background_grey')
     $('.option-2').removeClass('background_grey')
     $('.option-0').removeClass('background_grey')
+    $('.option-5').removeClass('background_grey')
     $(".iframe").attr("src", "./cart.html");
 
       // SEARCH ITEM BACK TO NORMAL
@@ -156,6 +160,7 @@ function pengiriman_requested(x){
 
 
 function bulk_order_home(x){
+    back_to_home()
     var token = localStorage.getItem('token')
     // var data_customer;
     // alert('jaalan')
@@ -167,6 +172,7 @@ function bulk_order_home(x){
     }else{
         $(x).addClass("background_grey");
         $('.modals-bulk-order').css('display','block')
+        $('.new-box-category').css('display','none')
     }
     if($(x).hasClass('close-button')){
         // alert('masuk ke line 72')
@@ -182,6 +188,7 @@ function bulk_order_home(x){
     $('.option-2').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
     $('.option-1').removeClass('background_grey')
+    $('.option-0').removeClass('background_grey')
 
     // SEARCH ITEM BACK TO NORMAL
     $('.box-render-search').css('display','none')
@@ -197,7 +204,7 @@ function bulk_order_home(x){
 
 function cek_daftar_hutang(x){
     // alert('function jalan')
-    // 
+    back_to_home()
     var token = localStorage.getItem('token')
     // var data_customer;
     $('.close-button').css('display','block')
@@ -205,9 +212,11 @@ function cek_daftar_hutang(x){
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
         $('.modals-hutang-home').css('display','none')
+        $('.close-button').css('display','none')
     }else{
         $(x).addClass("background_grey");
         $('.modals-hutang-home').css('display','block')
+        $('.new-box-category').css('display','none')
     }
     if($(x).hasClass('close-button')){
         // alert('masuk ke line 72')

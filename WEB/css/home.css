@@ -375,8 +375,8 @@ body {
     /* box-shadow: 5px 5px 20px #217283; */
 }
 .icon-logo {
-    height: 50px;
-    width: 50px;
+    height: 100%;
+    width: 100%;
 }
 
 .input-name {
@@ -2628,7 +2628,9 @@ input:focus {
 
 .modals-product-detail-position-home {
     /* position: fixed; */
-    position: absolute;
+    /* position: absolute; */
+    z-index:101;
+    position:fixed;
     top: 14.9%;
     left: 43%;
     margin-left: -27%;
@@ -3112,12 +3114,15 @@ input:focus {
 /* box render search */
 .box-render-search {
     /* height:300px; */
-    width: 670px;
+    width: 665px;
     height: auto;
     max-height: 400px;
     background-color: #ecf0f1;
+    border-right:3px solid #dedede;
+    border-left:1px solid #dedede;
+    border-bottom:1px solid #dedede;
     position: absolute;
-    top: 12%;
+    top: 10%;
     margin-left: 1px;
     /* left:35.9%; */
     /* left:10px; */
@@ -3240,7 +3245,8 @@ ul {
 }
 
 .active_search {
-    z-index: 100;
+    /* z-index: 100; */
+    z-index:4;
     position: relative;
     /* top:575px; */
     background-color: white;

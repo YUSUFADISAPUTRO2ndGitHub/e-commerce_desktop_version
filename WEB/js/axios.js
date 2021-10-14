@@ -615,7 +615,7 @@ const renderOptionSearch=()=>{
             res.data.map((val,index)=>{
                 if(index<7){
                     $('.header-search-option').append(`
-                    <p onclick="getAllItem_fromAllCat('${val.Category}')">${val.Category}</p>
+                    <p  class="hvr-grow" onclick="getAllItem_fromAllCat('${val.Category}')">${val.Category}</p>
                     `)
                 }
             })
@@ -630,7 +630,7 @@ const get_product_detail_from_main_page=(product_id)=>{
     $('.new-box-category').toggle(500)
     
     // render_get_product_detail(product_id)  
-    $(this).scrollTop('.modals-product-detail')
+    // $(this).scrollTop('.modals-product-detail')
      var height = $('.box-render-new').position()
     
 $('.box-delete-success').css('display','block')
@@ -638,7 +638,7 @@ $('.modals-product-detail').css('display','block')
 $('.close-button').css('display','block')
 $('.box_iframe_groupbuy').css('display','block')
 $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
-// 
+$('.new-box-category').css('display','none')
 // 
 }
 
@@ -920,6 +920,7 @@ const getAllItem_fromAllCat=(item)=>{
     $('.close-button').css('display','block')
     $('.modals-lk').css('display','block')
     $('.modals-lk').attr('src',`./Iframe/listkategori.html?category=${item}`)
+    $('.new-box-category').css('display','none')
 }
 
 const getAllItem_fromAllSubCat=(item)=>{
@@ -931,6 +932,8 @@ const getAllItem_fromAllSubCat=(item)=>{
     $('.close-button').css('display','block')
     $('.modals-lk').css('display','block')
     $('.modals-lk').attr('src',`./Iframe/listkategori.html?subcategory=${item}`)
+    // $('.new-box-category').toggle(500)
+    $('.new-box-category').css('display','none')
 }
 const getAllItem=(item)=>{
     // 
@@ -6879,6 +6882,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
 
 const check_user_for_login=()=>{
+    back_to_home()
     var token = localStorage.getItem('token')
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{ 
@@ -6966,6 +6970,16 @@ const check_user_for_login=()=>{
                 $('#newloginModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
             }
+            // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL
+            $('.option-5').removeClass('background_grey')
+            $('.option-4').removeClass('background_grey')
+            $('.option-3').removeClass('background_grey')
+            $('.option-2').removeClass('background_grey')
+            $('.option-1').removeClass('background_grey')
+            $('.option-0').removeClass('background_grey')
+
+            // NGAPUS CATEGORY PRODUCT
+            $('.new-box-category').css('display','none')
         }).catch((err)=>{
             
         })
@@ -10632,6 +10646,7 @@ function calculateSize(img, maxWidth, maxHeight) {
 
   const open_category_home=()=>{
     //   alert('jalan')
+    back_to_home()
     $('.new-box-category').toggle(500)
     $('.list-group-item').removeClass('active-cl')
     close_all_open_window()
