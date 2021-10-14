@@ -47,8 +47,8 @@
     <script type="text/javascript" src="./js/redirect_page_to_mobile_version.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="./css/splide-2.4.21/dist/js/splide.min.js"></script>
-    <title>SOLD</title>
+    
+    <title>SOLDAYS</title>
     <style>
         .card-body {
             padding:0 !important;
@@ -1269,7 +1269,6 @@
                 <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
                     <img src="../WEB/img/newSoldLogo.png" alt="" class="icon-logo " onclick="back_to_home()">
                 </div>
-
             </div>
             <div class="card category-menu">
                 <div class="card-body">
@@ -1398,13 +1397,13 @@
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     <li class="splide__slide ">
-                                        <img src="./img/promo1.png" style="height:370px;border-radius:20px;" class="splide_img_1">
+                                        <img src="./img/promo1.png" style="height:300px;border-radius:20px;" class="splide_img_1">
                                     </li>
                                     <li class="splide__slide">
-                                        <img src="./img/promo5.png" style="height:370px;border-radius:20px;" class="splide_img_1">
+                                        <img src="./img/promo5.png" style="height:300px;border-radius:20px;" class="splide_img_1">
                                     </li>
                                     <li class="splide__slide">
-                                        <img src="./img/promo2.png" style="height:370px;border-radius:20px" class="splide_img_1">
+                                        <img src="./img/promo2.png" style="height:300px;border-radius:20px" class="splide_img_1">
                                     </li>
                                 </ul>
                             </div>
@@ -1414,12 +1413,43 @@
                 </div>
                 <div class="ads-3 animated-background" id="expand-box">
                     <div class="ads-3-new-box">
-                        <div class="img-ads-3-right">
-                            <img src="./img/promo1.png" alt="">
+                        <div id="image-slider-2" class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide">
+                                        <img src="./img/promo5.png" style="height:300px;border-radius:20px;" class="splide_img_1">
+                                    </li>
+                                    <li class="splide__slide ">
+                                        <img src="./img/promo1.png" style="height:300px;border-radius:20px;" class="splide_img_1">
+                                    </li>
+                                    <li class="splide__slide">
+                                        <img src="./img/promo2.png" style="height:300px;border-radius:20px" class="splide_img_1">
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="img-ads-3-right">
-                            <img src="./img/promo1.png" alt="">
+                        <div id="image-slider-3" class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide">
+                                        <img src="./img/promo2.png" style="height:300px;border-radius:20px" class="splide_img_1">
+                                    </li>
+                                    <li class="splide__slide">
+                                        <img src="./img/promo5.png" style="height:300px;border-radius:20px;" class="splide_img_1">
+                                    </li>
+                                    <li class="splide__slide ">
+                                        <img src="./img/promo1.png" style="height:300px;border-radius:20px;" class="splide_img_1">
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                        
+                        <!-- <div class="img-ads-3-right">
+                            <img src="./img/promo1.png" alt="">
+                        </div> -->
+                        <!-- <div class="img-ads-3-right">
+                            <img src="./img/promo1.png" alt="">
+                        </div> -->
                     </div>
                     <!-- <div class="expand">
                         <div class="box-customer">
@@ -1771,7 +1801,7 @@
             <!-- RENDER  ALL ITEM -->
         </div>
 
-         <div class="box-product active_search">
+        <div class="box-product active_search">
             <div class="product-socmed">
                 <div class="box_for_socmed-1">
                     <a href="https://web.facebook.com/VantsingID" target="_blank"style="text-decoration: none;">
@@ -1881,17 +1911,50 @@
         'cover'      : true,
         type:'loop',
         // heightRatio:'1',
-		height:'370px',
+		height:'330px',
         width:'100%',
-        borderRadius:'20px',
+        borderRadius:'10px',
         // autoWidth: true,
         // autoWidth:true,
-        autoplay:true,
+        // autoplay:true,
         interval:5000,
         speed:1000
         // resetProgress:true
 	} ).mount();
 } );
+document.addEventListener( 'DOMContentLoaded', function () {
+	new Splide( '#image-slider-2', {
+        'cover'      : true,
+        type:'loop',
+        // heightRatio:'1',
+		height:'150px',
+        width:'90%',
+        borderRadius:'10px',
+        // autoWidth: true,
+        // autoWidth:true,
+        autoplay:true,
+        interval:4000,
+        speed:1000
+        // resetProgress:true
+	} ).mount();
+} );
+document.addEventListener( 'DOMContentLoaded', function () {
+	new Splide( '#image-slider-3', {
+        'cover'      : true,
+        type:'loop',
+        // heightRatio:'1',
+		height:'150px',
+        width:'90%',
+        borderRadius:'10px',
+        // autoWidth: true,
+        // autoWidth:true,
+        autoplay:true,
+        interval:3000,
+        speed:1000
+        // resetProgress:true
+	} ).mount();
+} );
+
 
 // document.addEventListener( 'DOMContentLoaded', function () {
 // 	new Splide( '#fullscreen-slider', {
@@ -2072,8 +2135,9 @@ function dragElement(elmnt) {
 </script>
 <!-- <script type="text/javascript" src="./Iframe/js/checkout.js"></script> -->
 <script type="text/javascript" src="./js/jquery.js"></script>
-
+<script src="./css/splide-2.4.21/dist/js/splide.min.js"></script>
 <script type="text/javascript" src="./js/axios.js"></script>
+<script src="./js/find_province_city.js"></script>
 <!-- SPLIDE JS -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> -->
 <!-- SPLIDE JS -->
