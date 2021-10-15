@@ -149,179 +149,179 @@ $(function(){
 //    OPEN MODALS PROFILE
 
    
-   $('.option-4').on('click',function(){
+//    $('.option-4').on('click',function(){
 
     
-    var token = localStorage.getItem('token')
+//     var token = localStorage.getItem('token')
     
  
     
-        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-        .then((res)=>{
-            // 
-            var data_customer = res.data
+//         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+//         .then((res)=>{
+//             // 
+//             var data_customer = res.data
             
-            if(data_customer){
+//             if(data_customer){
                 
                 
-                if(data_customer.User_Type === 'Customer'){
-                    $('.btn-status-barang').css('display','none')
-                    $('.sup_delete').css('display','flex')
-                    $('.box-kumpulkan-profile').css('top','70px')
+//                 if(data_customer.User_Type === 'Customer'){
+//                     $('.btn-status-barang').css('display','none')
+//                     $('.sup_delete').css('display','flex')
+//                     $('.box-kumpulkan-profile').css('top','70px')
 
-                    $('#prof_perusahaan_nama').css('display','none')
-                    $('#prof_npwp').css('display','none')
-                    $('#prof_nik').css('display','none')
+//                     $('#prof_perusahaan_nama').css('display','none')
+//                     $('#prof_npwp').css('display','none')
+//                     $('#prof_nik').css('display','none')
                     
-                    $('#prof_thn').css('display','flex')
-                    $('#prof_bln').css('display','flex')
-                    $('#prof_tgl').css('display','flex')
-                    $('#id_ref_code').css('visibility','show')
+//                     $('#prof_thn').css('display','flex')
+//                     $('#prof_bln').css('display','flex')
+//                     $('#prof_tgl').css('display','flex')
+//                     $('#id_ref_code').css('visibility','show')
 
-                    // $('.sup_delete').css('left','20px')
-                }else {
-                    $('.btn-status-barang').css('display','block')
-                    $('.sup_delete').css('display','none')
-                    $('.box-kumpulkan-profile').css('top','0px')
-                    $('#id_ref_code').css('visibility','hidden')
+//                     // $('.sup_delete').css('left','20px')
+//                 }else {
+//                     $('.btn-status-barang').css('display','block')
+//                     $('.sup_delete').css('display','none')
+//                     $('.box-kumpulkan-profile').css('top','0px')
+//                     $('#id_ref_code').css('visibility','hidden')
 
-                    $('#prof_perusahaan_nama').css('display','flex')
-                    $('#prof_npwp').css('display','flex')
-                    $('#prof_nik').css('display','flex')
+//                     $('#prof_perusahaan_nama').css('display','flex')
+//                     $('#prof_npwp').css('display','flex')
+//                     $('#prof_nik').css('display','flex')
                     
-                    $('#prof_thn').css('display','none')
-                    $('#prof_bln').css('display','none')
-                    $('#prof_tgl').css('display','none')
+//                     $('#prof_thn').css('display','none')
+//                     $('#prof_bln').css('display','none')
+//                     $('#prof_tgl').css('display','none')
                     
-                }
+//                 }
 
                 
     
-                var tahun = data_customer.Birthday.slice(0,4)
-                var bulan = data_customer.Birthday.slice(5,7)
-                var hari = data_customer.Birthday.slice(8,10)
-                var newReferralCode = data_customer.Customer_Code
+//                 var tahun = data_customer.Birthday.slice(0,4)
+//                 var bulan = data_customer.Birthday.slice(5,7)
+//                 var hari = data_customer.Birthday.slice(8,10)
+//                 var newReferralCode = data_customer.Customer_Code
                 
                 
-                $('#email_user').val(`${data_customer.Email}`)
-                $('.nama_user_profile').val(`${data_customer.First_Name}`)
-                $('#tahun_lahir_user').val(tahun)
-                $('#bulan_lahir_user').val(bulan)
-                $('#tanggal_lahir_user').val(hari)
-                $('#nama_depan_user').val(`${data_customer.First_Name}`)
-                $('#nama_belakang_user').val(`${data_customer.Last_Name}`)
-                $('#no_telp1_user').val(`${data_customer.Contact_Number_1}`)
-                $('#no_telp2_user').val(`${data_customer.Contact_Number_2}`)
-                // $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
-                // $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
-                // $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
-                // $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
-                // $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
-                $('#rekening_user').val(`${data_customer.bank_account_number}`)
-                $('#referral-profile').val(`${data_customer.extra_column_2}`)
-                $('#no_ktp_user').val(`${data_customer.ktp}`)
-                $('.ref-profile').val(token)
-                $('#npwp_supp_prof').val(data_customer.npwp)
+//                 $('#email_user').val(`${data_customer.Email}`)
+//                 $('.nama_user_profile').val(`${data_customer.First_Name}`)
+//                 $('#tahun_lahir_user').val(tahun)
+//                 $('#bulan_lahir_user').val(bulan)
+//                 $('#tanggal_lahir_user').val(hari)
+//                 $('#nama_depan_user').val(`${data_customer.First_Name}`)
+//                 $('#nama_belakang_user').val(`${data_customer.Last_Name}`)
+//                 $('#no_telp1_user').val(`${data_customer.Contact_Number_1}`)
+//                 $('#no_telp2_user').val(`${data_customer.Contact_Number_2}`)
+//                 // $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
+//                 // $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
+//                 // $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
+//                 // $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
+//                 // $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
+//                 $('#rekening_user').val(`${data_customer.bank_account_number}`)
+//                 $('#referral-profile').val(`${data_customer.extra_column_2}`)
+//                 $('#no_ktp_user').val(`${data_customer.ktp}`)
+//                 $('.ref-profile').val(token)
+//                 $('#npwp_supp_prof').val(data_customer.npwp)
                 
                 
-                $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
-                $('#nik_supp_profile').val(data_customer.extra_column_5)
-                $('#ref_code_from').val(data_customer.referral_customer_code)
-                var a = $('#refer-profile').val()
+//                 $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
+//                 $('#nik_supp_profile').val(data_customer.extra_column_5)
+//                 $('#ref_code_from').val(data_customer.referral_customer_code)
+//                 var a = $('#refer-profile').val()
                 
-                $('#profileModal').modal('show')
-                $('.box-tambah-alamat').empty()
+//                 $('#profileModal').modal('show')
+//                 $('.box-tambah-alamat').empty()
                 
-                if(data_customer.Address_1 == 'undefined'){
-                    // 
-                }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
-                        </div>
-                        <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
-                    </div> 
-                    `)
-                    // 
-                }
-                if(data_customer.Address_2 == 'undefined'){
-                    // 
-                }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
-                        </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
-                    </div> 
-                    `)
-                    // 
-                }
-                if(data_customer.Address_3 == 'undefined'){
-                    // 
-                }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
-                        </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
-                    </div> 
-                    `)
-                    // 
-                }
-                if(data_customer.Address_4 == 'undefined'){
-                    // 
-                }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
-                        </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
-                    </div> 
-                    `)
-                    // 
-                }
-                if(data_customer.Address_5 == 'undefined'){
-                    // 
-                }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
-                        </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
-                    </div> 
-                    `)
-                    // 
-                }
+//                 if(data_customer.Address_1 == 'undefined'){
+//                     // 
+//                 }else{
+//                     $('.box-tambah-alamat').append(`
+//                     <div class="login-name-3">
+//                         <div class="box-name">
+//                             <p>Alamat Lengkap</p>
+//                         </div>
+//                         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
+//                     </div> 
+//                     `)
+//                     // 
+//                 }
+//                 if(data_customer.Address_2 == 'undefined'){
+//                     // 
+//                 }else{
+//                     $('.box-tambah-alamat').append(`
+//                     <div class="login-name-3">
+//                         <div class="box-name">
+//                             <p>Alamat Lengkap</p>
+//                         </div>
+//                         <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
+//                     </div> 
+//                     `)
+//                     // 
+//                 }
+//                 if(data_customer.Address_3 == 'undefined'){
+//                     // 
+//                 }else{
+//                     $('.box-tambah-alamat').append(`
+//                     <div class="login-name-3">
+//                         <div class="box-name">
+//                             <p>Alamat Lengkap</p>
+//                         </div>
+//                         <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
+//                     </div> 
+//                     `)
+//                     // 
+//                 }
+//                 if(data_customer.Address_4 == 'undefined'){
+//                     // 
+//                 }else{
+//                     $('.box-tambah-alamat').append(`
+//                     <div class="login-name-3">
+//                         <div class="box-name">
+//                             <p>Alamat Lengkap</p>
+//                         </div>
+//                         <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
+//                     </div> 
+//                     `)
+//                     // 
+//                 }
+//                 if(data_customer.Address_5 == 'undefined'){
+//                     // 
+//                 }else{
+//                     $('.box-tambah-alamat').append(`
+//                     <div class="login-name-3">
+//                         <div class="box-name">
+//                             <p>Alamat Lengkap</p>
+//                         </div>
+//                         <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
+//                     </div> 
+//                     `)
+//                     // 
+//                 }
 
 
-            }else {
+//             }else {
                 
-                // $('#loginModal').modal('show') // login lama
+//                 // $('#loginModal').modal('show') // login lama
                 
-                $('#newloginModal').modal('show') // login lama
-                $('.box_information_login').css('display','flex')
-            }
-        }).catch((err)=>{
-            // 
-        })
+//                 $('#newloginModal').modal('show') // login lama
+//                 $('.box_information_login').css('display','flex')
+//             }
+//         }).catch((err)=>{
+//             // 
+//         })
 
-        $('.closeByLogin').css('display','none')
-        $('.option-0').removeClass("background_grey")
-        $('.option-1').removeClass("background_grey")
-        $('.option-2').removeClass("background_grey")
-        $('.option-3').removeClass("background_grey")
-          // SEARCH ITEM BACK TO NORMAL
-        $('.box-render-search').css('display','none')
-        $('.input-name').css('border-bottom-left-radius','10px')
-        $('.input-name').css('border-bottom-right-radius','10px')
-        // $('.option-4').removeClass("background_grey")
+//         $('.closeByLogin').css('display','none')
+//         $('.option-0').removeClass("background_grey")
+//         $('.option-1').removeClass("background_grey")
+//         $('.option-2').removeClass("background_grey")
+//         $('.option-3').removeClass("background_grey")
+//           // SEARCH ITEM BACK TO NORMAL
+//         $('.box-render-search').css('display','none')
+//         $('.input-name').css('border-bottom-left-radius','10px')
+//         $('.input-name').css('border-bottom-right-radius','10px')
+//         // $('.option-4').removeClass("background_grey")
         
-   })
+//    })
 
    $('.category-name').on('click',function(){
         $('.closeByLogin').css('display','none')

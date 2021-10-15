@@ -2336,6 +2336,15 @@ const replace_bo_to =(value,id)=>{
 
    })
 
+
+   const tambah_alamat_profile=(maks_alamat)=>{
+
+   }
+   const edit_alamat=(index)=>{
+
+   }
+   
+
 //    $('.inp-prod-bo').on('keyup',function(){
 //        
 //    })

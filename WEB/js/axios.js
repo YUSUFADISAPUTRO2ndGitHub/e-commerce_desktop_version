@@ -6892,6 +6892,7 @@ const check_user_for_login=()=>{
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{ 
             var data_customer = res.data
+            
             if(data_customer){
                 if(data_customer.User_Type === 'Customer'){
                     $('.btn-status-barang').css('display','none')
@@ -6967,13 +6968,83 @@ const check_user_for_login=()=>{
                 $('#nik_supp_profile').val(data_customer.extra_column_5)
                 $('#ref_code_from').val(`${data_customer.referral_customer_code}`)
                 var a = $('#refer-profile').val()
+
+
+                if(data_customer.Address_1 == 'undefined'){
+                    // 
+                }else{
+                    $('#alamat-new-profile').html(`${data_customer.Address_1}`)
+                    // $('.new-profile-box').append(`
+                    //     <div class="login-name-3">
+                    //         <div class="box-name">
+                    //             <p>Alamat Lengkap</p>
+                    //         </div>
+                    //         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
+                    //     </div> 
+                    
+                    // `)
+                    // 
+                }
+                if(data_customer.Address_2 == 'undefined'){
+                    // 
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
+                    </div> 
+                    `)
+                    // 
+                }
+                if(data_customer.Address_3 == 'undefined'){
+                    // 
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
+                    </div> 
+                    `)
+                    // 
+                }
+                if(data_customer.Address_4 == 'undefined'){
+                    // 
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
+                    </div> 
+                    `)
+                    // 
+                }
+                if(data_customer.Address_5 == 'undefined'){
+                    // 
+                }else{
+                    $('.box-tambah-alamat').append(`
+                    <div class="login-name-3">
+                        <div class="box-name">
+                            <p>Alamat Lengkap</p>
+                        </div>
+                        <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
+                    </div> 
+                    `)
+                    // 
+                }
                 
-                $('#profileModal').modal('show')
+                $('#newProfileModal').modal('show')
             }else {
                 
                 // $('#loginModal').modal('show') // login lama
                 $('#newloginModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
+                // $('#newProfileModal').modal('show')
             }
             // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL
             $('.option-5').removeClass('background_grey')
