@@ -7610,6 +7610,7 @@ border-radius:20px !important;
 
 .new-content-alamat{
     height:70px;
+    min-height:70px;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -7633,20 +7634,26 @@ border-radius:20px !important;
 }
 .new-content-isi-alamat{
     width:100%;
-    height:100%;
-    display: flex;
+    height:430px;
+    min-height:430px;
+    display: block;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding:15px;
-    overflow-x: scroll;
-    overflow: auto;
+    /* padding:15px; */
+    /* padding-top:30px; */
+    padding-left:15px;
+    padding-right:15px;
+
+    overflow:auto;
+    /* overflow-y: scroll; */
+    /* position: relative; */
     
 }
 .new-box-alamat{
     width:100%;
-    height:150px;
-    min-height:150px;
+    height:140px;
+    min-height:140px;
     border:1px solid #dedede;
     display: flex;
     flex-direction: column;
@@ -7660,6 +7667,7 @@ border-radius:20px !important;
     width: 10px;
 }
 .new-content-isi-alamat::-webkit-scrollbar-thumb {
-    background-color: #217283;
+    background-color: #4bace5;
     border-radius: 10px;
+    height:30px;
 }
