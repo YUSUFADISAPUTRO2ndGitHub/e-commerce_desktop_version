@@ -2,12 +2,21 @@
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
     if(dataParse != null || dataParse != undefined ){
+        if(dataParse.length > 9){
+            $('.cart-counter').css('top','30%')
+            $('.cart-counter').css('font-size','11px')
+            
+        }else if (dataParse.length > 99){
+            $('.cart-counter').css('top','30%')
+            $('.cart-counter').css('font-size','11px')
+            $('.cart-counter').val('99+')
+        }
         $('.cart-counter').css('display','block')
         $('.cart-counter').text(dataParse.length)
     }else {
         $('.cart-counter').css('display','none')
     }
-}, 1000);   
+}, 100000000);   
 var allData = []
 
 
@@ -1742,8 +1751,9 @@ const render_group_buy=(product_id)=>{
                                                     if(allPengiriman){
                                                         if(allPengiriman.service != undefined) {
                                                             allPengiriman.service.map((val,index)=>{
+                                                                var tarif = val.TARIFF * 1.2
                                                                 $('.pengiriman-home-gb').append(`
-                                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                                 `)
                                                             })
                                                         }
@@ -1873,8 +1883,9 @@ const render_group_buy=(product_id)=>{
                                                     if(allPengiriman){
                                                         if(allPengiriman.service != undefined) {
                                                             allPengiriman.service.map((val,index)=>{
+                                                                var tarif = val.TARIFF * 1.2
                                                                 $('.pengiriman-home-gb').append(`
-                                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                                 `)
                                                             })
                                                         }
@@ -2230,11 +2241,11 @@ const kurirMethodHome=(kurir,product_id)=>{
 
                         if(allPengiriman.service != undefined) {
                             allPengiriman.service.map((val,index)=>{
-                                
+                                var tarif = val.TARIFF * 1.2
                                 
                                 
                                 $('.pengiriman-home-gb').append(`
-                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                 `)
                             })
                         }
@@ -2429,11 +2440,11 @@ const kurirMethodHome=(kurir,product_id)=>{
     
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
-                                                
+                                                var tarif = val.TARIFF * 1.2
                                                 
                                                 
                                                 $('.pengiriman-home-gb').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                 `)
                                             })
                                         }
@@ -2649,11 +2660,11 @@ const provinceMethodHome=(product_id)=>{
     
                             if(allPengiriman.service != undefined) {
                                 allPengiriman.service.map((val,index)=>{
-                                    
+                                    var tarif = val.TARIFF * 1.2
                                     
                                     
                                     $('.pengiriman-home-gb').append(`
-                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                     `)
                                 })
                             }
@@ -2818,11 +2829,11 @@ const provinceMethodHome=(product_id)=>{
         
                                 if(allPengiriman.service != undefined) {
                                     allPengiriman.service.map((val,index)=>{
-                                        
+                                        var tarif = val.TARIFF * 1.2
                                         
                                         
                                         $('.pengiriman-home-gb').append(`
-                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                         `)
                                     })
                                 }
@@ -2991,11 +3002,11 @@ const provinceMethodHome=(product_id)=>{
         
                                             if(allPengiriman.service != undefined) {
                                                 allPengiriman.service.map((val,index)=>{
-                                                    
+                                                    var tarif = val.TARIFF * 1.2
                                                     
                                                     
                                                     $('.pengiriman-home-gb').append(`
-                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                     `)
                                                 })
                                             }
@@ -3200,9 +3211,9 @@ const kotaMethodHome=(product_id)=>{
                         if(allPengiriman){
                             if(allPengiriman.service != undefined) {
                                 allPengiriman.service.map((val,index)=>{
-                                    
+                                    var tarif = val.TARIFF * 1.2
                                     $('.pengiriman-home-gb').append(`
-                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                     `)
                                 })
                             }
@@ -3390,11 +3401,11 @@ const kotaMethodHome=(product_id)=>{
         
                                                 if(allPengiriman.service != undefined) {
                                                     allPengiriman.service.map((val,index)=>{
-                                                        
+                                                        var tarif = val.TARIFF * 1.2
                                                         
                                                         
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     })
                                                 }
@@ -3774,8 +3785,9 @@ const kecamatanMethodHome=(product_id)=>{
 
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 $('.pengiriman-home-gb').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                 `)
                                             })
                                         }
@@ -6653,8 +6665,9 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
                                     if(allPengiriman.service != undefined) {
                                         allPengiriman.service.map((val,index)=>{
+                                            var tarif = val.TARIFF * 1.2
                                             $('.pengiriman-home-gb').append(`
-                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                             `)
                                         })
                                     }
@@ -6840,11 +6853,11 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
                                 if(allPengiriman.service != undefined) {
                                     allPengiriman.service.map((val,index)=>{
-                                        
+                                        var tarif = val.TARIFF * 1.2
                                         
                                         
                                         $('.pengiriman-home-gb').append(`
-                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                         `)
                                     })
                                 }
@@ -6930,8 +6943,10 @@ const check_user_for_login=()=>{
                     
                     if(res.data){
                         $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                        $(`#img-profile-big`).attr(`src`, `${res.data}`);
                     }else {
                         $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
+                        $(`#img-profile-big`).attr(`src`, `./img/accounts.png`);
                     }
                 }).catch((err)=>{
                     
@@ -6941,17 +6956,16 @@ const check_user_for_login=()=>{
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)
                 var newReferralCode = data_customer.Customer_Code
-                
-                
-                $('#email_user').val(`${data_customer.Email}`)
-                $('.nama_user_profile').val(`${data_customer.First_Name}`)
-                $('#tahun_lahir_user').val(tahun)
-                $('#bulan_lahir_user').val(bulan)
-                $('#tanggal_lahir_user').val(hari)
-                $('#nama_depan_user').val(`${data_customer.First_Name}`)
-                $('#nama_belakang_user').val(`${data_customer.Last_Name}`)
-                $('#no_telp1_user').val(`${data_customer.Contact_Number_1}`)
-                $('#no_telp2_user').val(`${data_customer.Contact_Number_2}`)
+                var tanggal_lahir = hari + ' ' + bulan + ' ' + tahun
+                var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
+                console.log(nama_customer)
+                $('#ncp-email').html(`${data_customer.Email}`)
+                $('#ncp-name').html(`${data_customer.First_Name}`)
+                $('#ncp-lahir').html(tanggal_lahir)
+                $('#ncp-name').html(nama_customer)
+                $('#name-new-profile').html(nama_customer)
+                $('#ncp-hp-1').html(`${data_customer.Contact_Number_1}`)
+                $('#ncp-hp-2').html(`${data_customer.Contact_Number_2}`)
                 $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
                 $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
                 $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
@@ -6968,12 +6982,24 @@ const check_user_for_login=()=>{
                 $('#nik_supp_profile').val(data_customer.extra_column_5)
                 $('#ref_code_from').val(`${data_customer.referral_customer_code}`)
                 var a = $('#refer-profile').val()
+                $('.new-content-isi-alamat').empty()
 
 
                 if(data_customer.Address_1 == 'undefined'){
                     // 
                 }else{
-                    $('#alamat-new-profile').html(`${data_customer.Address_1}`)
+                    // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
+                    $('.new-content-isi-alamat').append(`
+                        <div class="new-box-alamat" id="alamat-active">
+                            <p>Alamat Pertama</p>
+                            <p>${nama_customer}</p>
+                            <p>${data_customer.Contact_Number_1}</p>
+                            <p>${data_customer.Address_1}</p>
+                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_1}',1)">
+                                Ubah Alamat                      
+                            </div>
+                        </div>
+                    `)
                     // $('.new-profile-box').append(`
                     //     <div class="login-name-3">
                     //         <div class="box-name">
@@ -6988,54 +7014,63 @@ const check_user_for_login=()=>{
                 if(data_customer.Address_2 == 'undefined'){
                     // 
                 }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
+                    $('.new-content-isi-alamat').append(`
+                        <div class="new-box-alamat">
+                            <p>Alamat Kedua</p>
+                            <p>${nama_customer}</p>
+                            <p>${data_customer.Contact_Number_1}</p>
+                            <p>${data_customer.Address_2}</p>
+                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer(,'${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_2}'2)">
+                                Ubah Alamat                      
+                            </div>
                         </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_2}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap2_user">
-                    </div> 
                     `)
                     // 
                 }
                 if(data_customer.Address_3 == 'undefined'){
                     // 
                 }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
+                    $('.new-content-isi-alamat').append(`
+                        <div class="new-box-alamat">
+                            <p>Alamat Pertama</p>
+                            <p>${nama_customer}</p>
+                            <p>${data_customer.Contact_Number_1}</p>
+                            <p>${data_customer.Address_3}</p>
+                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_3}',3)">
+                                Ubah Alamat                      
+                            </div>
                         </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_3}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap3_user">
-                    </div> 
                     `)
-                    // 
                 }
                 if(data_customer.Address_4 == 'undefined'){
                     // 
                 }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
+                    $('.new-content-isi-alamat').append(`
+                        <div class="new-box-alamat">
+                            <p>Alamat Pertama</p>
+                            <p>${nama_customer}</p>
+                            <p>${data_customer.Contact_Number_1}</p>
+                            <p>${data_customer.Address_4}</p>
+                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_4}',4)">
+                                Ubah Alamat                      
+                            </div>
                         </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_4}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap4_user">
-                    </div> 
                     `)
-                    // 
                 }
                 if(data_customer.Address_5 == 'undefined'){
                     // 
                 }else{
-                    $('.box-tambah-alamat').append(`
-                    <div class="login-name-3">
-                        <div class="box-name">
-                            <p>Alamat Lengkap</p>
+                    $('.new-content-isi-alamat').append(`
+                        <div class="new-box-alamat">
+                            <p>Alamat Pertama</p>
+                            <p>${nama_customer}</p>
+                            <p>${data_customer.Contact_Number_1}</p>
+                            <p>${data_customer.Address_5}</p>
+                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_5}',5)">
+                                Ubah Alamat                      
+                            </div>
                         </div>
-                        <input type="text" class="form-reg-nama" val="${data_customer.Address_5}" placeholder="Alamat Lengkap" minlength="4" maxlength="15" id="alamat_lengkap5_user">
-                    </div> 
                     `)
-                    // 
                 }
                 
                 $('#newProfileModal').modal('show')
@@ -8047,20 +8082,21 @@ async function addressMethod(address,item){
     
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length <2){
-                                                    harga_shipping = val.TARIFF
+                                                    
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                 }else {
                                                     if(index === 0 ){
-                                                        harga_shipping = val.TARIFF
+                                                        
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }else {
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }
                                                 }
@@ -10505,20 +10541,21 @@ async function check_qty(val){
                                         $('.packing-home-gb').empty()
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length <2){
-                                                    harga_shipping = val.TARIFF
+                                                    
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                 }else {
                                                     if(index === 0 ){
-                                                        harga_shipping = val.TARIFF
+                                                        
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }else {
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }
                                                 }
@@ -10612,20 +10649,19 @@ async function check_qty(val){
                                         $('.packing-home-gb').empty()
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length <2){
-                                                    harga_shipping = val.TARIFF
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                 }else {
-                                                    if(index === 0 ){
-                                                        harga_shipping = val.TARIFF
+                                                    if(index === 0 ){   
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }else {
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }
                                                 }
@@ -10731,20 +10767,21 @@ async function check_qty(val){
                                         $('.packing-home-gb').empty()
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length <2){
                                                     harga_shipping = val.TARIFF
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                 }else {
                                                     if(index === 0 ){
-                                                        harga_shipping = val.TARIFF
+                                                        harga_shipping = tarif
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }else {
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }
                                                 }
@@ -10850,20 +10887,21 @@ async function check_qty(val){
                                         $('.packing-home-gb').empty()
                                         if(allPengiriman.service != undefined) {
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length <2){
                                                     harga_shipping = val.TARIFF
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                 }else {
                                                     if(index === 0 ){
-                                                        harga_shipping = val.TARIFF
+                                                        harga_shipping = tarif
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }else {
                                                         $('.pengiriman-home-gb').append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} </option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} </option> 
                                                         `)
                                                     }
                                                 }

@@ -2343,6 +2343,24 @@ const replace_bo_to =(value,id)=>{
    const edit_alamat=(index)=>{
 
    }
+
+   const change_alamat_customer=(customer_name,nomor_hp,alamat,index)=>{
+       console.log(index)
+    //    $('#changeAddressCustomer').modal('show')
+        // $('#newProfileModal').modal('hide')
+       $('#changeAddressCustomer').modal('show')
+       $('#new_alamat_customer').val(alamat)
+       $('#new_nama_customer').val(customer_name)
+       $('#new_hp_customer').val(nomor_hp)
+       console.log($('#changeAddressCustomer'),'testing')
+       console.log(customer_name)
+       console.log(alamat)
+       console.log(nomor_hp)
+       console.log(index)
+   }
+   const cancel_ganti_alamat=()=>{
+       $('#changeAddressCustomer').modal('hide')
+   }
    
 
 //    $('.inp-prod-bo').on('keyup',function(){

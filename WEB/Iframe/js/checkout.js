@@ -527,6 +527,7 @@ const onSelectDeliveryFee=()=>{
 
                                 if(allPengiriman){
                                     if(allPengiriman.service != undefined){
+                                        
                                         allPengiriman.service.map((val,index)=>{
                                             $('.cart-pengiriman').append(`
                                                 <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
@@ -2389,14 +2390,15 @@ const checking_product_company=async()=>{
                                         // 
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,indexPengiriman)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
                                                     $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                     `)
                                                 }else {
                                                     if(indexPengiriman === 0 ){
                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                         `)
                                                         // $(`.ncac-price-${index_car}`).append(`
                                                         //     <div class="total_price_cc"> 
@@ -2408,7 +2410,7 @@ const checking_product_company=async()=>{
                                                         // `)
                                                     }else {
                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                         `)
                                                     }
                                                 }
@@ -2581,14 +2583,15 @@ const checking_product_company=async()=>{
                                                            
                                                         if(allPengiriman.service != undefined){
                                                             allPengiriman.service.map((val,indexPengiriman)=>{
+                                                                var tarif = val.TARIFF * 1.2
                                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
                                                                     $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                     `)
                                                                 }else {
                                                                     if(indexPengiriman === 0 ){
                                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                         `)
                                                                         // $(`.ncac-price-${index_car}`).append(`
                                                                         //     <div class="total_price_cc"> 
@@ -2600,7 +2603,7 @@ const checking_product_company=async()=>{
                                                                         // `)
                                                                     }else {
                                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                         `)
                                                                     }
                                                                 }
@@ -3274,8 +3277,9 @@ const render_select_option_kurir=async()=>{
                                     if(allPengiriman){
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 $('.cart-pengiriman').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                                 `)
                                             })
                                         }
@@ -3461,8 +3465,9 @@ const render_select_option_kurir=async()=>{
                                     if(allPengiriman){
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 $('.cart-pengiriman').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                                 `)
                                             })
                                         }
@@ -3823,26 +3828,27 @@ const re_render_select_option=async()=>{
                                 // 
                                 if(allPengiriman.service != undefined){
                                     allPengiriman.service.map((val,indexPengiriman)=>{
+                                        var tarif = val.TARIFF * 1.2
                                         if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
                                             $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                             `)
                                         }else {
                                             if(indexPengiriman === 0 ){
                                                 $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                    <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                    <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                 `)
                                                 // $(`.ncac-price-${index_car}`).append(`
                                                 //     <div class="total_price_cc"> 
                                                 //         <div class="box-ft-harga">
                                                 //             <p>Shipping Fee</p>
-                                                //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(val.TARIFF)}</p>
+                                                //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(tarif)}</p>
                                                 //         </div>  
                                                 //     </div>
                                                 // `)
                                             }else {
                                                 $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                 `)
                                             }
                                         }
@@ -4002,8 +4008,9 @@ const re_render_select_option=async()=>{
                                                    
                                                    if(allPengiriman.service != undefined){
                                                        allPengiriman.service.map((val,indexPengiriman)=>{
+                                                        var tarif = val.TARIFF * 1.2
                                                            $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                               <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                               <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                            `)
                                                        })
                                                    }
@@ -4345,26 +4352,27 @@ const re_render_select_option=async()=>{
                                 // 
                                 if(allPengiriman.service != undefined){
                                     allPengiriman.service.map((val,indexPengiriman)=>{
+                                        var tarif = val.TARIFF * 1.2
                                         if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
                                             $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                             `)
                                         }else {
                                             if(indexPengiriman === 0 ){
                                                 $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                    <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                    <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                 `)
                                                 // $(`.ncac-price-${index_car}`).append(`
                                                 //     <div class="total_price_cc"> 
                                                 //         <div class="box-ft-harga">
                                                 //             <p>Shipping Fee</p>
-                                                //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(val.TARIFF)}</p>
+                                                //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(tarif)}</p>
                                                 //         </div>  
                                                 //     </div>
                                                 // `)
                                             }else {
                                                 $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                 `)
                                             }
                                         }
@@ -4524,8 +4532,9 @@ const re_render_select_option=async()=>{
                                                     
                                                     if(allPengiriman.service != undefined){
                                                         allPengiriman.service.map((val,indexPengiriman)=>{
+                                                            var tarif = val.TARIFF * 1.2
                                                             $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                             `)
                                                         })
                                                     }
@@ -4752,8 +4761,9 @@ const provinceCheckout=(product_id)=>{
                     if(allPengiriman){
                         if(allPengiriman.service != undefined){
                             allPengiriman.service.map((val,index)=>{
+                                var tarif = val.TARIFF * 1.2
                                 $('.new-cart-pengiriman').append(`
-                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                 `)
                             })
                         }
@@ -4900,8 +4910,9 @@ const provinceCheckout=(product_id)=>{
                                         if(allPengiriman){
                                             if(allPengiriman.service != undefined){
                                                 allPengiriman.service.map((val,index)=>{
+                                                    var tarif = val.TARIFF * 1.2
                                                     $('.cart-pengiriman').append(`
-                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                                     `)
                                                 })
                                             }
@@ -5193,8 +5204,9 @@ const kotaCheckout=()=>{
                         if(allPengiriman){
                             if(allPengiriman.service != undefined){
                                 allPengiriman.service.map((val,index)=>{
+                                    var tarif = val.TARIFF * 1.2
                                     $('.new-cart-pengiriman').append(`
-                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                     `)
                                 })
                             }
@@ -5326,8 +5338,9 @@ const kotaCheckout=()=>{
                                     if(allPengiriman){
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 $('.new-cart-pengiriman').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                                 `)
                                             })
                                         }
@@ -5535,8 +5548,9 @@ const kecamatanCheckout=()=>{
                                     if(allPengiriman){
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,index)=>{
+                                                var tarif = val.TARIFF * 1.2
                                                 $('.new-cart-pengiriman').append(`
-                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION}</option> 
+                                                    <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION}</option> 
                                                 `)
                                             })
                                         }
@@ -5734,26 +5748,27 @@ const kelurahanCheckout=()=>{
                                     // 
                                     if(allPengiriman.service != undefined){
                                         allPengiriman.service.map((val,indexPengiriman)=>{
+                                            var tarif = val.TARIFF * 1.2
                                             if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
                                                 $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                    <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                    <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                 `)
                                             }else {
                                                 if(indexPengiriman === 0 ){
                                                     $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                     `)
                                                     // $(`.ncac-${index_car}`).append(`
                                                     //     <div class="total_price_cc"> 
                                                     //         <div class="box-ft-harga">
                                                     //             <p>Shipping Fee</p>
-                                                    //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(val.TARIFF)}</p>
+                                                    //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(tarif)}</p>
                                                     //         </div>  
                                                     //     </div>
                                                     // `)
                                                 }else {
                                                     $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                        <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                     `)
                                                 }
                                             }
@@ -5914,27 +5929,28 @@ const kelurahanCheckout=()=>{
                                                        
                                                         if(allPengiriman.service != undefined){
                                                             allPengiriman.service.map((val,indexPengiriman)=>{
+                                                                var tarif = val.TARIFF * 1.2
                                                                 if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
                                                                     $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                     `)
                                                                 }else {
                                                                     if(indexPengiriman === 0 ){
                                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                            <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                         `)
                                                                         // $(`.ncac-${index_car}`).append(`
                                                                              
                                                                         //     <div class="total_price_cc"> 
                                                                         //         <div class="box-ft-harga">
                                                                         //             <p>Shipping Fee</p>
-                                                                        //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(val.TARIFF)}</p>
+                                                                        //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(tarif)}</p>
                                                                         //         </div>  
                                                                         //     </div>
                                                                         // `)
                                                                     }else {
                                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${val.TARIFF} ${val.DESCRIPTION} " class="${val.TARIFF}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(val.TARIFF)} ${val.DESCRIPTION}</option> 
+                                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                         `)
                                                                     }
                                                                 }

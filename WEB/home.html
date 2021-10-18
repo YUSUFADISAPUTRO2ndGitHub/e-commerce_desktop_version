@@ -135,12 +135,12 @@
         } */
         .cart-counter{
             position: absolute;
-            top: 15px;
-            right: 20px;
-            background-color: whitesmoke;
-            color: teal;
-            border: solid 0.1px teal;
-            border-radius: 50%;
+            top: 25%;
+            right: 35%;;
+            background-color: transparent;
+            color: #f79520;
+            /* border: solid 0.1px teal; */
+            /* border-radius: 50%; */
             padding-top: 1px;
             padding-bottom: 1px;
             padding-left: 7px;
@@ -621,7 +621,7 @@
                     </div> -->
                     <div class="new-profile-box">
                         <div class="img-box-profile">
-                            <img src="./img/accounts.png" alt="">
+                            <img src="./img/accounts.png" alt=""  id="img-profile-id">
                         </div>
                         <div class="name-box-profile">
                             <p id="name-new-profile">BAYU DARMAWAN</p>
@@ -669,11 +669,11 @@
                                     <div class="ncb-left">
                                         <div class="ncb-profile">
                                             <div class="img-profile-box">
-                                                <img src="./img/bca_transfer_manual.png" alt="">
+                                                <img src="" id="img-profile-big" alt="">
                                             </div>
-                                            <div class="ncb-upload-profile">
-                                                Pilih Foto
-                                            </div>
+                                            <!-- <div class="ncb-upload-profile"> -->
+                                                <input type="file" id="inp-profile-img" name='Pilih Foto' title='Pilih Foto ya'>
+                                            <!-- </div> -->
                                             <div class="ncb-max-size">
                                                 Besar file maksimum 2MB. Ekstensi file yang diterima:
                                                 JPG,JPEG,PNG
@@ -687,30 +687,30 @@
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Nama</p>
-                                            <p id="name-new-profile ncp-name">BAYU DARMAWAN</p>
+                                            <p id="ncp-name" class="name-new-profile"></p>
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Tanggal Lahir</p>
-                                            <p id="name-new-profile ncp-lahir">2 Agustus 1996</p>
+                                            <p id="ncp-lahir"class="name-new-profile"></p>
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Jenis Kelamin</p>
-                                            <p id="name-new-profile ncp-kelamin">PRIA</p>
+                                            <p id="ncp-kelamin"class="name-new-profile">PRIA</p>
                                         </div>
-                                        <div class="ncb-ubah">
+                                        <div class="ncb-ubah"class="name-new-profile">
                                             Ubah Kontak
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Email</p>
-                                            <p id="name-new-profile ncp-email">darmawanbayu1@gmail.com</p>
+                                            <p id="ncp-email"class="name-new-profile"></p>
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Nomor HP</p>
-                                            <p id="name-new-profile ncp-hp-1">087785192296</p>
+                                            <p id="ncp-hp-1"class="name-new-profile"></p>
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Nomor HP</p>
-                                            <p id="name-new-profile ncp-hp-2">087785192299</p>
+                                            <p id="ncp-hp-2"class="name-new-profile"></p>
                                         </div>
     
                                     </div>
@@ -723,22 +723,15 @@
                                     </div>
                                 </div>
                                 <div class="new-content-isi-alamat">
-                                    <div class="new-box-alamat">
-
-                                    </div>
-                                    <div class="new-box-alamat">
-
-                                    </div>
-                                    <div class="new-box-alamat">
-
-                                    </div>
-                                    <div class="new-box-alamat">
-
-                                    </div>
-                                    <div class="new-box-alamat">
-
-                                    </div>
-                                    
+                                    <!-- <div class="new-box-alamat">
+                                        <p>Alamat Pertama</p>
+                                        <p>BAYU DARMAWAN</p>
+                                        <p>087785192296</p>
+                                        <p>Jalan Tumaritis nomor 131 RT 6 rw 3 kelapa dua kebon jeruk 11550</p>
+                                        <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer(1)">
+                                            Ubah Alamat                      
+                                        </div>
+                                    </div> -->
                                     
                                 </div>
 
@@ -753,6 +746,73 @@
     </div>
     <!-- NEW PROFILE MODALS -->
 
+    <!-- GANTI ALAMAT CUSTOMER -->
+    <div class="modal fade " id="changeAddressCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box-ganti-alamat ">
+            <div class="modal-content  modal-content-newlogin">
+                <div class="modal-body box-new-alamat-body">
+                    <div class="bnab-header">
+                        Ubah Alamat
+                    </div>
+                    <div class="label-alamat">
+                        <p>Alamat</p>
+                        <input type="text" placeholder="Tulis nama jalan" class="inp-new-alamat-cust" id="new_alamat_customer">
+                    </div>
+                    <div class="label-alamat">
+                        <p>Nama Penerima</p>
+                        <input type="text" placeholder="Tulis nama penerima" class="inp-new-alamat-cust" id="new_nama_customer">
+                    </div>
+                    <div class="label-alamat">
+                        <p>No Handphone</p>
+                        <input type="text" placeholder="Tulis no handphone" class="inp-new-alamat-cust" id="new_hp_customer">
+                    </div>
+                    <div class="label-alamat-2">
+                        <p>Kota Atau Kecamatan</p>
+                        <input type="text" placeholder="Tulis Kota Atau Kecamatan" class="inp-new-alamat-cust" id="new_kota_kecamatan_customer">
+                        <div class="render-kota-kec-alamat">
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Dki Jakarta,Jakarta BARAT Barat,Kebon Jeruk</p>
+                            </div>
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Dki Jakarta,Jakarta BARAT Barat,Kebon Jeruk</p>
+                            </div>
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Dki Jakarta,Jakarta BARAT Barat,Kebon Jeruk</p>
+                            </div>
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Dki Jakarta,Jakarta BARAT Barat,Kebon Jeruk</p>
+                            </div>
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Dki Jakarta,Jakarta BARAT Barat,Kebon Jeruk</p>
+                            </div>
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Dki Jakarta,Jakarta BARAT Barat,Kebon Jeruk</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="box-label-button">
+                        <div class="btn-save-ganti-alamat" onclick="cancel_ganti_alamat()">
+                            Batal
+                        </div>
+                        <div class="btn-save-ganti-alamat">
+                            Simpan
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GANTI ALAMAT CUSTOMER -->
+
 
 
     <!-- PROFILE MODALS -->
@@ -762,7 +822,7 @@
             <div class="modal-header box-login-profile">
                 <div class="div-left-profile">
                     <div class="profil-pic-div">
-                        <img src="./img/accounts.png" alt="" id="img-profile-id">
+                        <img src="./img/accounts.png" alt="">
                         <div class="upload-profile">
                             <input type="file" id="inp-profile-img">
                         </div>
@@ -1477,7 +1537,7 @@
                 <div class="option-3 " onclick="cart_requested(this)">
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
                     <p>Keranjang</p>
-                    <div class="cart-counter">2</div>
+                    <div class="cart-counter">99+</div>
                 </div>
                 <!-- data-bs-toggle="#loginModal"   -->
                 <!-- data-bs-toggle="#newloginModal" -->
@@ -2201,6 +2261,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
                             axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                             .then((res)=>{
                                 $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                                $(`#img-profile-big`).attr(`src`, `${res.data}`);
                             }).catch((err)=>{
                                 
                             })

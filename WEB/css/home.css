@@ -29,7 +29,8 @@ body {
 .main-about{
     width:100%;
     height:30px;
-    background-color: #D4DEE8;
+    /* background-color: #D4DEE8; */
+    background-color: #27aae1;
     display:flex;
     justify-content: space-between;
     padding-left:20px;
@@ -100,7 +101,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color:#535353;
+    color:white;
     font-size:12px;;
 }
 .ins_ma_left_2:hover{
@@ -108,14 +109,14 @@ body {
 }
 .p_about_ins{
     font-size: 12px;
-    color:#535353;
+    color:white;
     display: flex;
     justify-content: center;
     align-items: center;
     margin:0 !important;
 }
 .p_about_ins:hover {
-    color:#217384;
+    color:white;
 }
 .ins_ma_right_1{
     width:10%;
@@ -548,8 +549,8 @@ body {
 }
 
 .icon-opt {
-    width: 30px;
-    width: 30px;
+    width: 40px;
+    
 }
 
 /* BOX ADS */
@@ -1796,6 +1797,14 @@ display: flex;
     max-width: 900px !important;
     width: 900px;
     height: 500px;
+}
+.box-ganti-alamat {
+    max-width: 400px !important;
+    width: 400px;
+    height: 300px;
+    position: relative;
+    top:5%;
+    
 }
 
 .box-otp-register{
@@ -5613,7 +5622,20 @@ img{
 
 
 /* new login */
-
+.box-new-alamat-body {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    border-radius:10px;
+    border:1px solid #dedede;
+    
+    background-color: white !important;
+}
 
 
 .box-newlogin-body {
@@ -6991,6 +7013,9 @@ loading new
 .upload-profile input {
     background-color: transparent;
 }
+#inp-profile-img{
+    width:80%;
+}
 #inp-profile-img:hover {
     cursor: pointer;
   
@@ -7001,7 +7026,8 @@ loading new
 } */
 
 
-/* #sub-cart-option{
+/* #sub-
+option{
     display: none;
 }
 #sub-kota-option{
@@ -7150,7 +7176,7 @@ border-radius:20px;
     /* text-decoration:underline; */
 }
 .download-new-app:hover {
-    color:#217384;
+    color:white;
 }
 .nbc-category-name span{
     color:#e74c3c;
@@ -7428,6 +7454,7 @@ border-radius:20px !important;
 .img-box-profile img {
     width:100%;
     height:100%;
+    border-radius:50%;
 }
 .name-box-profile {
     width: 75%;
@@ -7440,7 +7467,7 @@ border-radius:20px !important;
     justify-content: center;
     
 }
-#name-new-profile {
+.name-new-profile {
     margin:0px;
     font-size:13px;
     font-weight:700;
@@ -7659,7 +7686,40 @@ border-radius:20px !important;
     flex-direction: column;
     margin-bottom:10px;
     border-radius:10px;
+    line-height:0.7;
+    padding:10px;
 }
+.new-box-alamat p:nth-child(1){
+    font-weight: 800;
+}
+.new-box-alamat p:nth-child(2){
+    font-weight: 500;
+}
+.new-box-alamat p:nth-child(3){
+    font-weight: 500;
+    font-size:12px;
+}
+.new-box-alamat p:nth-child(4){
+    font-weight: 500;
+    font-size:12px;
+}
+.btn-ubah-alamat {
+    width:150px;
+    height:40px;
+    /* border:1px solid #dedede; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:5px;
+    background-color: #4bace5;
+    color:white;
+    transition: 0.5;
+    font-size:12px;
+}
+.btn-ubah-alamat:hover {
+    cursor: pointer;
+}
+
 
 
 .new-content-isi-alamat::-webkit-scrollbar {
@@ -7670,4 +7730,118 @@ border-radius:20px !important;
     background-color: #4bace5;
     border-radius: 10px;
     height:30px;
+}
+
+.bnab-header{
+    width:100%;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.label-alamat{
+    height:70px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 0.1;
+}
+.label-alamat p{
+    color:#2d3436;
+}
+.label-alamat-2 p {
+    color:#2d3436;
+}
+.label-alamat-2{
+    height:200px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* border:1px solid black; */
+    line-height: 0.5;
+}
+.render-kota-kec-alamat{
+    width:100%;
+    height:100%;
+    /* background-color: red; */
+    /* border:1px solid red; */
+    overflow-x:scroll;
+    padding:10px;
+    display: none;
+}
+.box-label-button{
+    width:100%;
+    height:100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.btn-save-ganti-alamat{
+    width:120px;
+    height:30px;
+    border-radius:10px;
+    /* border:1px solid #dedede; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #27aae1;
+    transition: 0.5s;
+    color:white;
+}
+.btn-save-ganti-alamat:hover{
+    cursor: pointer;
+    background-color: #f7941d;
+}
+
+.inp-new-alamat-cust{
+    border-radius:5px;
+    border:1px solid #dedede;
+    height:30px;
+}
+
+.inp-new-alamat-cust:focus {
+    outline: 0;
+    color:#27aae1;
+}
+.inp-new-alamat-cust::placeholder{
+    color:lightgray;
+}
+
+.card-kot-kec-alamat{
+    height:50px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius:5px;
+    padding:5px;
+}
+.card-kot-kec-alamat:hover{
+    cursor: pointer;
+    background-color: #27aae1;
+}
+.card-kot-kec-alamat:hover p{
+    color:white;
+}
+.fa-map-marker-alt {
+    font-size:25px;
+    margin-right:10px;
+    color:gray;
+}
+.card-kot-kec-alamat p {
+    font-size:15px;
+    margin:0px !important;
+    text-align: left;
+    position: relative;
+    top:0px;
+    line-height: 1;
+}
+
+#alamat-active {
+    border:1px solid #dff9fb !important;
+    background-color: #dff9fb;
 }
