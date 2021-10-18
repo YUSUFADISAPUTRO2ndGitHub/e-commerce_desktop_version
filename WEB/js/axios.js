@@ -1,12 +1,14 @@
 
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+    var dataParse = 100
     if(dataParse != null || dataParse != undefined ){
         if(dataParse.length > 9){
             $('.cart-counter').css('top','30%')
             $('.cart-counter').css('font-size','11px')
             
         }else if (dataParse.length > 99){
+            alert('masuk ke else if')
             $('.cart-counter').css('top','30%')
             $('.cart-counter').css('font-size','11px')
             $('.cart-counter').val('99+')
@@ -16,7 +18,7 @@ setInterval(() => {
     }else {
         $('.cart-counter').css('display','none')
     }
-}, 100000000);   
+}, 1000);   
 var allData = []
 
 
