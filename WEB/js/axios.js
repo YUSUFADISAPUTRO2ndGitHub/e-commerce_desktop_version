@@ -1,20 +1,31 @@
 
 setInterval(() => {
     var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-    var dataParse = 100
+    // var dataParse = 8
     if(dataParse != null || dataParse != undefined ){
-        if(dataParse.length > 9){
+        if(dataParse > 9 && dataParse <99){
+            alert('masuk ke if')
+            $('.cart-counter').css('display','block')
             $('.cart-counter').css('top','30%')
+            $('.cart-counter').css('right','30%')
             $('.cart-counter').css('font-size','11px')
-            
-        }else if (dataParse.length > 99){
+            $('.cart-counter').text(dataParse.length)
+        }else if (dataParse > 99){
             alert('masuk ke else if')
+            $('.cart-counter').css('display','block')
             $('.cart-counter').css('top','30%')
-            $('.cart-counter').css('font-size','11px')
+            $('.cart-counter').css('right','28%')
+            $('.cart-counter').css('font-size','10px')
             $('.cart-counter').val('99+')
+            
+        }else {
+            // alert('masuk ke else')
+            $('.cart-counter').css('display','block')
+            console.log(dataParse.length)
+            $('.cart-counter').text(dataParse.length)
+
         }
-        $('.cart-counter').css('display','block')
-        $('.cart-counter').text(dataParse.length)
+        // $('.cart-counter').text(dataParse.length)
     }else {
         $('.cart-counter').css('display','none')
     }
