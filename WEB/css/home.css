@@ -1798,6 +1798,11 @@ display: flex;
     width: 900px;
     height: 500px;
 }
+.box-login-tokped {
+    max-width: 900px !important;
+    width: 100%;
+    height:100vh;
+}
 .box-ganti-alamat {
     max-width: 400px !important;
     width: 400px;
@@ -3256,7 +3261,7 @@ ul {
 
 .icon-logout {
     font-size: 30px;
-    color: white;
+    color: #f79520;
 }
 .icon-logout:hover {
     cursor: pointer;
@@ -5655,7 +5660,7 @@ img{
     width:30%;
     height:100%;
     /* background-color:#0652DD; */
-    background-color: #27aae1;
+    background-color: white;;
     display:flex;
     flex-direction:column;
     border-radius:10px;
@@ -5665,16 +5670,16 @@ img{
     width: 100%;
     height:70px;
     padding:5px;
-    padding-left:30px;
+    /* padding-left:30px; */
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     font-size:12px;
-    color:white;
+    color:#f79520;
     flex-direction:row;
 }
 .logo-sold-left img{
-    width:30px;
+    width:50%;
     height:30px;
     margin-right:5px;
 }
@@ -5694,13 +5699,21 @@ img{
     /* background:red; */
     width:90%;
     height:70px;
-    color:white;
+    /* color:white; */
+    color:#f79520;
     text-align: left;
     font-size:13px;
 }
 
 .modal-content-newlogin{
     background-color:transparent!important;
+}
+.modal-content-newlogintokped{
+    background-color:white!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
 }
 .newlogin-mid{
     width:1%;
@@ -5715,8 +5728,9 @@ img{
     justify-content: flex-start;
     align-items: center;
     flex-direction:column;
-    /* padding-top:10px; */
-    /* padding-left:10px; */
+    
+    padding-top:20px;
+    padding-left:20px;
     border-radius:10px;
     /* padding-bottom:20px; */
 }
@@ -7770,6 +7784,7 @@ border-radius:20px !important;
     overflow-x:scroll;
     padding:10px;
     display: none;
+    
 }
 .box-label-button{
     width:100%;
@@ -7815,7 +7830,7 @@ border-radius:20px !important;
     width:100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-radius:5px;
     padding:5px;
@@ -7844,4 +7859,249 @@ border-radius:20px !important;
 #alamat-active {
     border:1px solid #dff9fb !important;
     background-color: #dff9fb;
+}
+
+
+.box-tokped-body{
+    width:200px;
+    height:100px;
+    background-color: white;
+    border:1px solid #dedede;
+}
+.new-login-tokped {
+    width:100vw;
+    height:100vh;
+    background-color: white;
+    overflow: hidden;
+    overflow-y:hidden !important;
+}
+
+.modal-dialog-tokped {
+    height:100vh;
+    max-width:100vw !important;
+    width:100vw !important;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.modal-login-box-tokped {
+    width:100vw;
+    height:100vh;
+    /* border:1px solid #dedede; */
+    background-color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-tokped-border{
+    width:1300px;
+    height:600px;
+    /* border:1px solid #dedede; */
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    background: url('../img/background-tokped.png') center no-repeat;
+    background-size:contain;
+    
+}
+
+.logo-soldays-tokped{
+    width:100%;
+    height:100px;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-soldays-tokped img{
+    width:200px;
+    height:60px;
+}
+
+.tokped-border-login{
+    width:400px;
+    height:510px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    border: 1px solid #dedede;
+    border-radius:10px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+
+
+
+.tokped-border-register{
+    width:400px;
+    height:500px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    border-radius:10px;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+.status-tokped {
+    width:100%;
+    height:60px;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    /* background-color: red; */
+    padding-left:16px;
+    padding-right:16px;
+    padding-top:32px;
+    padding-bottom:16px;
+    
+    
+}
+.status-tokped p:nth-child(1){
+    font-size:20px;
+    color:#393d43;
+}
+.status-tokped p:nth-child(2){
+    font-size:14px;
+    color:#f79520;
+}
+.status-tokped p:nth-child(2):hover{
+    cursor: pointer;
+    
+}
+
+.login-content-tokped {
+    /* border:1px solid #dedede; */
+    width:100%;
+    height:100%;
+    padding:16px;
+}
+
+.lct-email-tokped {
+    width:100%;
+    height:90px;
+    /* border:1px solid black; */
+    display: flex;
+    flex-direction: column;
+}
+.email-input-tokped {
+    border:1px solid #e5e7e9;
+    height:40px;
+    min-height:40px;
+    border-radius:5px;
+}
+.email-input-tokped:focus{
+    outline: none !important;;
+    border:1px solid #f7941d;
+    color:#393d43;
+}
+.lct-email-tokped p:nth-child(1){
+    margin:0px !important;
+    color: #999c9f;
+}
+.lct-email-tokped p:nth-child(3){
+    margin:0px !important;
+    color: #999c9f;
+    font-size:13px;
+}
+
+.btn-login-tokped {
+    width:100%;
+    height:40px;
+    border-radius:10px;
+    background-color: #e5e7e9;
+    color:#878c94;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    font-weight:700;
+    cursor:not-allowed
+}
+
+.correct-email{
+    background-color: #f7941d;
+    cursor: pointer;
+    color:white;
+    font-weight:700;
+}
+
+.lct-forget-pass-tokped{
+    height:50px;
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color:#f7941d;
+    cursor: pointer;
+}
+.lct-forget-pass-tokped:hover{
+    cursor: pointer;
+}
+
+.lct-pembatas-tokped{
+    height:70px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.lctp-left{
+    height:2px;
+    width:30%;
+    border:1px solid #e5e7e9; 
+}
+.lctp-mid{
+    /* height:2px; */
+    width:40%;
+    /* border:1px solid #393d43; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:12px;
+    color: #878c94;
+}
+.lct-login-by-third {
+    width:100%;
+    height:40px;
+    border:1px solid #e5e7e9;
+    display: flex;
+    border-radius:5px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:10px;
+}
+.lct-login-by-third:hover {
+    cursor:not-allowed;
+}
+.lct-login-by-third img{
+    height:20px;
+    width:20px;
+}
+.lct-login-by-third p {
+    margin:0px !important;
+    width:90%;
+    min-width:90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#878c94;
+    font-weight:500;
+}
+.lct-daftar-lagi{
+    width:100%;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#878c94;
+}
+.lct-daftar-lagi span{
+    color:#f7941d;
 }

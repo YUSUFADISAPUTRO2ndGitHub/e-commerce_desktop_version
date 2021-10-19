@@ -167,7 +167,74 @@
 </head>
 <body >
 
-    
+    <!-- NEW LOGIN TOKPED MODALS -->
+    <div class="modal fade new-login-tokped" id="newloginTokpedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-tokped">
+            <div class=" modal-content modal-login-box-tokped">
+                <div class="logo-soldays-tokped">
+                    <img src="./img/newSoldLogo.png" alt="">
+                </div>
+                <div class="login-tokped-border">
+                    <!-- KHUSUS LOGIN -->
+                    
+                    <div class="tokped-border-login">
+                        <div class="status-tokped">
+                            <p>Masuk</p>
+                            <p>Daftar</p>
+                        </div>
+                        <div class="login-content-tokped">
+                            <div class="lct-email-tokped">
+                                <p>Email</p>
+                                <input type="text" class="email-input-tokped">
+                                <p>Contoh:email@soldays.com</p>
+                            </div>
+                            <div class="lct-forget-pass-tokped">
+                                Lupa Kata Sandi?
+                            </div>
+                            <div class="btn-login-tokped">
+                                Selanjutnya
+                            </div>
+                            <div class="lct-pembatas-tokped">
+                                <div class="lctp-left">
+
+                                </div>
+                                <div class="lctp-mid">
+                                    atau masuk dengan
+                                </div>
+                                <div class="lctp-left">
+                                    
+                                </div>
+                            </div>
+                            <div class="lct-login-by-third">
+                                <img src="./img/Google_Logo.svg" alt="">
+                                <p>Google</p>
+                                
+                            </div>
+                            <div class="lct-login-by-third">
+                                <img src="./img/facebook_logo.png" alt="">
+                                <p>Facebook</p>
+                            </div>
+                            <div class="lct-daftar-lagi">
+                                Belum punya akun Soldays? <span> Daftar</span>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    <!-- KHUSUS LOGIN -->
+                    <!-- KHUSUS REGISTER -->
+                    <div class="tokped-border-register">
+                        
+                    </div>
+                    <!-- KHUSUS REGISTER -->
+                </div>
+
+            
+
+            </div>
+        </div>
+    </div>
+    <!-- NEW LOGIN TOKPED MODALS -->
 
 
 
@@ -179,8 +246,8 @@
             <div class="modal-body box-newlogin-body">
                 <div class="newlogin-left">
                     <div class="logo-sold-left">
-                        <img src="./img/logo.png" alt="">
-                        SOLD.CO.ID
+                        <img src="./img/newSoldLogo.png" alt="">
+                        
                     </div>
                     <div class="desc-sold-left">
                         <div class="ins-desc-sold-left">
@@ -252,8 +319,8 @@
                 <div class="modal-body box-newlogin-body">
                     <div class="newlogin-left">
                         <div class="logo-sold-left">
-                            <img src="./img/logo.png" alt="">
-                            SOLD.CO.ID
+                            <img src="./img/newSoldLogo.png" alt="">
+                            SOLDAYS
                         </div>
                         <div class="desc-sold-left">
                             <div class="ins-desc-sold-left">
@@ -403,8 +470,8 @@
                     <div class="modal-body box-newlogin-body">
                         <div class="newlogin-left">
                             <div class="logo-sold-left">
-                                <img src="./img/logo.png" alt="">
-                                SOLD.CO.ID
+                                <img src="./img/newSoldLogo.png" alt="">
+                                <!-- SOLD.CO.ID -->
                             </div>
                             <div class="desc-sold-left">
                                 <div class="ins-desc-sold-left">
@@ -653,6 +720,7 @@
                     <div class="login-right-box">
                         <p>PROFILE</p>
                         <p id="name-new-profile">Hi! BAYU DARMAWAN</p>
+                        <i class="fas fa-sign-out-alt icon-logout" onclick="logoutProfile()"></i>
                     </div>
                     <div class="box-right-for-input">
                         <nav>
@@ -718,7 +786,7 @@
                             </div>
                             <div class="tab-pane fade" id="nav-content-alamat" role="tabpanel" aria-labelledby="nav-spec-tab">
                                 <div class="new-content-alamat">
-                                    <div class="new-btn-tambah-alamat">
+                                    <div class="new-btn-tambah-alamat" onclick="tambah_alamat_customer()">
                                         Tambah Alamat Baru
                                     </div>
                                 </div>
@@ -760,15 +828,15 @@
                     </div>
                     <div class="label-alamat">
                         <p>Nama Penerima</p>
-                        <input type="text" placeholder="Tulis nama penerima" class="inp-new-alamat-cust" id="new_nama_customer">
+                        <input type="text" placeholder="Tulis nama penerima" class="inp-new-alamat-cust" id="new_nama_customer" disabled>
                     </div>
                     <div class="label-alamat">
                         <p>No Handphone</p>
-                        <input type="text" placeholder="Tulis no handphone" class="inp-new-alamat-cust" id="new_hp_customer">
+                        <input type="text" placeholder="Tulis no handphone" class="inp-new-alamat-cust" id="new_hp_customer" disabled>
                     </div>
                     <div class="label-alamat-2">
-                        <p>Kota Atau Kecamatan</p>
-                        <input type="text" placeholder="Tulis Kota Atau Kecamatan" class="inp-new-alamat-cust" id="new_kota_kecamatan_customer">
+                        <p>Provinsi Atau Kota</p>
+                        <input type="text" placeholder="Tulis Provinsi Atau Kota" class="inp-new-alamat-cust" id="new_kota_prov_customer">
                         <div class="render-kota-kec-alamat">
                             <div class="card-kot-kec-alamat">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -810,7 +878,6 @@
             </div>
         </div>
     </div>
-
     <!-- GANTI ALAMAT CUSTOMER -->
 
 

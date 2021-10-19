@@ -2344,24 +2344,57 @@ const replace_bo_to =(value,id)=>{
 
    }
 
-   const change_alamat_customer=(customer_name,nomor_hp,alamat,index)=>{
+   const change_alamat_customer=(customer_name,nomor_hp,alamat,index,status)=>{
        console.log(index)
     //    $('#changeAddressCustomer').modal('show')
         // $('#newProfileModal').modal('hide')
-       $('#changeAddressCustomer').modal('show')
-       $('#new_alamat_customer').val(alamat)
-       $('#new_nama_customer').val(customer_name)
-       $('#new_hp_customer').val(nomor_hp)
-       console.log($('#changeAddressCustomer'),'testing')
-       console.log(customer_name)
-       console.log(alamat)
-       console.log(nomor_hp)
-       console.log(index)
+        if(status === 'new'){
+            console.log(status)
+            $('#changeAddressCustomer').modal('show')
+            $('#new_alamat_customer').val(alamat)
+            $('#new_nama_customer').val(customer_name)
+            $('#new_hp_customer').val(nomor_hp)
+            $('.bnab-header').text('Alamat Baru')
+            // console.log($('.ncb-ubah'),'testing')
+            console.log(customer_name)
+            console.log(alamat)
+            console.log(nomor_hp)
+            console.log(index)
+        }else {
+            $('#changeAddressCustomer').modal('show')
+            $('#new_alamat_customer').val(alamat)
+            $('#new_nama_customer').val(customer_name)
+            $('#new_hp_customer').val(nomor_hp)
+            console.log($('#changeAddressCustomer'),'testing')
+            console.log(customer_name)
+            console.log(alamat)
+            console.log(nomor_hp)
+            console.log(index)
+
+        }
    }
    const cancel_ganti_alamat=()=>{
        $('#changeAddressCustomer').modal('hide')
    }
+
+   const tambah_alamat_customer=()=>{
+       var token = localStorage.getItem('token')
+       axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+       .then((res)=>{
+           var nama_customer = res.data.First_Name + ' ' + res.data.Last_Name
+            var limit_alamat  = localStorage.getItem('limit_alamat')
+            if(limit_alamat>0 && limit_alamat <=5){
+                var next_limit = limit_alamat+1
+                change_alamat_customer(nama_customer,res.data.Contact_Number_1,'',next_limit,'new')
+            }
+           
+       }).catch((err)=>{
+           console.log(err)
+       })
+   }
    
+   
+
 
 //    $('.inp-prod-bo').on('keyup',function(){
 //        

@@ -1708,4 +1708,101 @@ const yourFunction=()=>{
 
 
 
+
+$('#new_kota_prov_customer').on('keyup',function(e){
+    // alert('jalan')
+    // console.log(e.target.value)
+    var item = e.target.value.toUpperCase()
+    // console.log(item.length, item)
+    var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+    var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+    var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+    if(item.length > 2 ){ // search item
+        // if(item.product_name.toUpperCase().includes(value.Name.toUpperCase())){
+            var array_filter_province =[]
+            var array_filter_city = []
+        if(province_storage !== undefined && city_storage !== undefined && district_storage !== undefined){
+            var filter_province = province_storage.filter((val,index)=>{
+                // console.log(val.Province.toUpperCase().includes(item), val)
+                if(val.Province.toUpperCase().includes(item)){
+                    array_filter_province.push(val.Province)
+                    
+                    return val
+                }
+            })
+            
+            city_storage.forEach((value,id)=>{
+                 filter_city = value.City.filter((val,index)=>{ 
+                    if(val.City.toUpperCase().includes(item)){
+                        // array_filter_province.push(value.Province)
+                        array_filter_city.push(val.City) 
+                        // console.log(val)
+                        // console.log(array_filter_province)        
+                    }
+                })
+            })
+            const final_province = array_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                if(!acc.includes(item)){
+                    acc.push(item);
+                }
+                return acc;
+            },[])
+            const final_city = array_filter_city.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                if(!acc.includes(item)){
+                    acc.push(item);
+                }
+                return acc;
+            },[])
+            
+            if(final_province.length >1){
+                console.log('masuk ke  if 1774')
+                console.log(final_province)
+                $('.render-kota-kec-alamat').css('display','block')
+                $('.render-kota-kec-alamat').empty()
+                final_province.forEach((value,index)=>{
+                    city_storage.forEach((val,id)=>{
+                        // console.log(value.toUpperCase() === val.Province.toUpperCase(), value, val.Province)
+                        if(value.toUpperCase() === val.Province.toUpperCase()){
+                            val.City.forEach((item,index_value)=>{
+                                $('.render-kota-kec-alamat').append(`
+                                    <div class="card-kot-kec-alamat">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p>${value}, ${item.City} </p>
+                                    </div>
+                                `)
+                            })
+                        }
+                    })
+                })
+            }else if(final_province.length === 1 && final_city.length >1){
+                console.log('masuk ke else if 1774')
+                console.log(final_province,'province')
+                console.log(final_city,'city')
+                $('.render-kota-kec-alamat').css('display','block')
+                $('.render-kota-kec-alamat').empty()
+                final_city.map((val,index)=>{
+                    $('.render-kota-kec-alamat').append(`
+                        <div class="card-kot-kec-alamat">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>${final_province}, ${val} </p>
+                        </div>
+                    `)
+                })
+            }else {
+
+            }
+        }else {
+        
+        }
+
+
+    }else if(item.length === 0 || item.length <0){
+        $('.render-kota-kec-alamat').css('display','none')
+    }else {
+
+    }
+
+   })
+
+
 })

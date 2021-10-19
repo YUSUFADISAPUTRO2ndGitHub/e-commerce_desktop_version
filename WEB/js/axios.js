@@ -21,7 +21,7 @@ setInterval(() => {
         }else {
             // alert('masuk ke else')
             $('.cart-counter').css('display','block')
-            console.log(dataParse.length)
+            // console.log(dataParse.length)
             $('.cart-counter').text(dataParse.length)
 
         }
@@ -7002,6 +7002,7 @@ const check_user_for_login=()=>{
                     // 
                 }else{
                     // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
+                    localStorage.setItem('limit_alamat',1)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat" id="alamat-active">
                             <p>Alamat Pertama</p>
@@ -7027,6 +7028,7 @@ const check_user_for_login=()=>{
                 if(data_customer.Address_2 == 'undefined'){
                     // 
                 }else{
+                    localStorage.setItem('limit_alamat',2)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
                             <p>Alamat Kedua</p>
@@ -7043,6 +7045,7 @@ const check_user_for_login=()=>{
                 if(data_customer.Address_3 == 'undefined'){
                     // 
                 }else{
+                    localStorage.setItem('limit_alamat',3)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
                             <p>Alamat Pertama</p>
@@ -7058,6 +7061,7 @@ const check_user_for_login=()=>{
                 if(data_customer.Address_4 == 'undefined'){
                     // 
                 }else{
+                    localStorage.setItem('limit_alamat',4)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
                             <p>Alamat Pertama</p>
@@ -7073,6 +7077,7 @@ const check_user_for_login=()=>{
                 if(data_customer.Address_5 == 'undefined'){
                     // 
                 }else{
+                    localStorage.setItem('limit_alamat',5)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
                             <p>Alamat Pertama</p>
@@ -7090,7 +7095,7 @@ const check_user_for_login=()=>{
             }else {
                 
                 // $('#loginModal').modal('show') // login lama
-                $('#newloginModal').modal('show') // login lama
+                $('#newloginTokpedModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
                 // $('#newProfileModal').modal('show')
             }
