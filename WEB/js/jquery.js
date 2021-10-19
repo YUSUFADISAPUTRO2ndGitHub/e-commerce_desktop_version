@@ -98,7 +98,7 @@ $(function(){
 
     $('.radio-group-delivery .radio-delivery-card').on('click',function(){
         // alert('function jalan')
-        alert('jalan')
+        // alert('jalan')
         $(this).parent().find('.radio-delivery-card').removeClass('selected');
         $(this).parent().find('.radio-delivery-card').removeClass('active_payment_method');
         $('.radio-delivery-card').removeClass('selected')
@@ -1581,7 +1581,7 @@ function resultAddress(item){
 }
 
 $('.card_flip_payment').on('mouseover',function(){
-    alert('jalan')
+    // alert('jalan')
     $('.card_flip_payment').toggleClass('is-flipped')
 })
 
@@ -1706,7 +1706,22 @@ const yourFunction=()=>{
     // $('.box-render-all').css('display','flex')
 }
 
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
+$('#checking_email_login').on('keyup',function(e){
+   var checking_email = validateEmail(e.target.value)
+   console.log(checking_email)
+   if(checking_email === true){
+       $('#btn-login-tokped-id').addClass('correct-email')
+       $('#btn-login-tokped-id').attr('onclick','checking_email_login()')
+   }else {
+    $('#btn-login-tokped-id').removeClass('correct-email')
+    $('#btn-login-tokped-id').removeAttr('onclick')
+   }
+})
 
 
 $('#new_kota_prov_customer').on('keyup',function(e){

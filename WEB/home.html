@@ -185,13 +185,13 @@
                         <div class="login-content-tokped">
                             <div class="lct-email-tokped">
                                 <p>Email</p>
-                                <input type="text" class="email-input-tokped">
+                                <input type="text" class="email-input-tokped" id="checking_email_login">
                                 <p>Contoh:email@soldays.com</p>
                             </div>
                             <div class="lct-forget-pass-tokped">
                                 Lupa Kata Sandi?
                             </div>
-                            <div class="btn-login-tokped">
+                            <div class="btn-login-tokped" id="btn-login-tokped-id"  >
                                 Selanjutnya
                             </div>
                             <div class="lct-pembatas-tokped">
@@ -217,14 +217,63 @@
                             <div class="lct-daftar-lagi">
                                 Belum punya akun Soldays? <span> Daftar</span>
                             </div>
-
                         </div>
-                        
                     </div>
                     <!-- KHUSUS LOGIN -->
+
                     <!-- KHUSUS REGISTER -->
                     <div class="tokped-border-register">
-                        
+                        <div class="status-tokped">
+                            <p>Masuk</p>
+                            <p>Daftar</p>
+                        </div>
+                        <div class="login-content-tokped">
+                            <div class="lct-email-tokped-2">
+                                <p>Email</p>
+                                <div class="ins-lct-email-tokped">
+                                    <input type="text" class="email-final-tokped" value="darmawanbayu1@gmail.com" id="checking_email_login" disabled>
+                                    <p onclick="ubah_alamat_back_to_login()">ubah</p>
+                                </div>   
+                            </div>
+                            <div class="lct-email-tokped">
+                                <p>Kata Sandi</p>
+                                <div class="kata_sandi_box">
+                                    <input type="password" class="password-input-tokped" id="checking_password_login">
+                                    <i class="fas fa-eye lihat_pass" onclick="encrypt_password()"></i>
+                                    <i class="fas fa-eye-slash encrypt_pass" onclick="lihat_password()"></i>
+                                </div>
+                                <p id="salah_password_tokped">Kata sandi harus diisi</p>
+                            </div>
+                            <div class="lct-forget-pass-tokped">
+                                Lupa Kata Sandi?
+                            </div>
+                            <div class="btn-login-tokped" id="btn-final-login-tokped"  >
+                                Masuk
+                            </div>
+                            <div class="lct-pembatas-tokped">
+                                <div class="lctp-left">
+
+                                </div>
+                                <div class="lctp-mid">
+                                    atau masuk dengan
+                                </div>
+                                <div class="lctp-left">
+                                    
+                                </div>
+                            </div>
+                            <div class="lct-login-by-third">
+                                <img src="./img/Google_Logo.svg" alt="">
+                                <p>Google</p>
+                                
+                            </div>
+                            <div class="lct-login-by-third">
+                                <img src="./img/facebook_logo.png" alt="">
+                                <p>Facebook</p>
+                            </div>
+                            <div class="lct-daftar-lagi">
+                                Belum punya akun Soldays? <span> Daftar</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- KHUSUS REGISTER -->
                 </div>

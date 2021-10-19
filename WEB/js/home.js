@@ -2393,7 +2393,41 @@ const replace_bo_to =(value,id)=>{
        })
    }
    
-   
+const checking_email_login=()=>{
+    // alert('checking email jalan')
+    var email = $('#checking_email_login').val()
+    if(email){
+        $('.tokped-border-login').fadeOut()
+        $('.tokped-border-login').css('display','none')
+    
+        $('.tokped-border-register').fadeToggle()
+        $('.tokped-border-register').css('display','flex')
+
+        $('.email-final-tokped').val(email)
+    }
+    // $('#newOtpRegister').modal('show')
+}
+const ubah_alamat_back_to_login=()=>{
+    $('.tokped-border-register').fadeOut()
+    $('.tokped-border-register').css('display','none')
+
+    $('.tokped-border-login').fadeToggle()
+    $('.tokped-border-login').css('display','flex')
+}
+const encrypt_password=()=>{
+    // alert('encrypt pass jalan')
+    $('.lihat_pass').css('visibility','hidden')
+    $('.encrypt_pass').css('visibility','visible')
+    $('.password-input-tokped').attr('type','password')
+}
+const lihat_password=()=>{
+    // alert('lihat pass jalan')
+    $('.lihat_pass').css('visibility','visible')
+    $('.encrypt_pass').css('visibility','hidden')
+    $('.lihat_pass').css('left','10px')
+    $('.password-input-tokped').attr('type','text')
+}
+
 
 
 //    $('.inp-prod-bo').on('keyup',function(){
