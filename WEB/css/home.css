@@ -1798,6 +1798,11 @@ display: flex;
     width: 900px;
     height: 500px;
 }
+.box-login-profile-new {
+    max-width: 900px !important;
+    width: 900px;
+    height: 600px;
+}
 .box-login-tokped {
     max-width: 900px !important;
     width: 100%;
@@ -5646,7 +5651,7 @@ img{
 
 .box-newlogin-body {
     width: 100%;
-    height: 650px;
+    height: 400px;
     display: flex;
     /* justify-content: center; */
     /* align-items: center; */
@@ -5708,6 +5713,7 @@ img{
 
 .modal-content-newlogin{
     background-color:transparent!important;
+    height:100%;
 }
 .modal-content-newlogintokped{
     background-color:white!important;
@@ -5737,12 +5743,13 @@ img{
 }
 .login-right-box{
     width: 100%;
-    height:50px;
+    height:40px;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
+    flex-direction:row;
+    justify-content:space-between;
     padding-left:10px;
     padding-top:10px;
+    padding-right:10px;
     /* align-items: center; */
     /* background:red; */
 }
@@ -5758,6 +5765,13 @@ img{
     margin:0px !important;
 }
 
+.nav-link {
+color:#535353 !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: #f7941d !important;
+}
 .box-right-for-input {
     width: 100%;
     height:100%;
@@ -5765,6 +5779,7 @@ img{
     display: flex;
     flex-direction:column;
     padding-top:30px;
+    padding-right:20px;
 }
 .box-right-for-input-2 {
     width: 100%;
@@ -7690,8 +7705,8 @@ border-radius:20px !important;
 }
 .new-content-isi-alamat{
     width:100%;
-    height:430px;
-    min-height:430px;
+    height:330px;
+    min-height:330px;
     display: block;
     justify-content: center;
     align-items: center;
@@ -7708,8 +7723,8 @@ border-radius:20px !important;
 }
 .new-box-alamat{
     width:100%;
-    height:140px;
-    min-height:140px;
+    height:170px;
+    min-height:170px;
     border:1px solid #dedede;
     display: flex;
     flex-direction: column;
@@ -7731,6 +7746,7 @@ border-radius:20px !important;
 .new-box-alamat p:nth-child(4){
     font-weight: 500;
     font-size:12px;
+    line-height:1;
 }
 .btn-ubah-alamat {
     width:150px;
@@ -7937,6 +7953,9 @@ border-radius:20px !important;
     width:200px;
     height:60px;
 }
+.logo-soldays-tokped img:hover{
+    cursor: pointer;
+}
 
 .tokped-border-login{
     width:400px;
@@ -7955,7 +7974,33 @@ border-radius:20px !important;
 
 
 
+.tokped-border-login-2{
+    width:400px;
+    height:510px;
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    border: 1px solid #dedede;
+    border-radius:10px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
 .tokped-border-register{
+    width:400px;
+    height:510px;
+    /* display: none; */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    border: 1px solid #dedede;
+    border-radius:10px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+.tokped-border-register-2{
     width:400px;
     height:510px;
     /* display: flex; */
@@ -8008,6 +8053,19 @@ border-radius:20px !important;
     /* border:1px solid black; */
     display: flex;
     flex-direction: column;
+}
+.lct-register-tokped {
+    width:100%;
+    height:70px;
+    /* border:1px solid black; */
+    display: flex;
+    flex-direction: column;
+}
+.lct-register-tokped p{
+    margin: 0 !important;
+}
+#btn-final-register-tokped {
+    margin-top:50px;
 }
 .lct-email-tokped-2 {
     width:100%;
@@ -8162,6 +8220,9 @@ border-radius:20px !important;
     justify-content: center;
     align-items: center;
     margin-bottom:10px;
+}
+#masuk_id_register{
+    color:#27aae1;
 }
 .lct-login-by-third:hover {
     cursor:not-allowed;

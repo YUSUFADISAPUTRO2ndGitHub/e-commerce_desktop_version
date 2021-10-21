@@ -172,15 +172,14 @@
         <div class="modal-dialog modal-dialog-tokped">
             <div class=" modal-content modal-login-box-tokped">
                 <div class="logo-soldays-tokped">
-                    <img src="./img/newSoldLogo.png" alt="">
+                    <img src="./img/newSoldLogo.png" alt="" onclick="back_to_home()">
                 </div>
                 <div class="login-tokped-border">
                     <!-- KHUSUS LOGIN -->
-                    
                     <div class="tokped-border-login">
                         <div class="status-tokped">
                             <p>Masuk</p>
-                            <p>Daftar</p>
+                            <p onclick="onclick_to_register()">Daftar</p>
                         </div>
                         <div class="login-content-tokped">
                             <div class="lct-email-tokped">
@@ -215,17 +214,15 @@
                                 <p>Facebook</p>
                             </div>
                             <div class="lct-daftar-lagi">
-                                Belum punya akun Soldays? <span> Daftar</span>
+                                Belum punya akun Soldays? <span onclick="onclick_to_register()"> Daftar</span>
                             </div>
                         </div>
                     </div>
-                    <!-- KHUSUS LOGIN -->
-
-                    <!-- KHUSUS REGISTER -->
-                    <div class="tokped-border-register">
+                    
+                    <div class="tokped-border-login-2">
                         <div class="status-tokped">
                             <p>Masuk</p>
-                            <p>Daftar</p>
+                            <p onclick="onclick_to_register()">Daftar</p>
                         </div>
                         <div class="login-content-tokped">
                             <div class="lct-email-tokped-2">
@@ -271,11 +268,113 @@
                                 <p>Facebook</p>
                             </div>
                             <div class="lct-daftar-lagi">
-                                Belum punya akun Soldays? <span> Daftar</span>
+                                Belum punya akun Soldays? <span onclick="onclick_to_register()"> Daftar</span>
                             </div>
                         </div>
                     </div>
+                    <!-- KHUSUS LOGIN = -->
+
                     <!-- KHUSUS REGISTER -->
+                   
+                    <div class="tokped-border-register">
+                        <div class="status-tokped">
+                            <p>Daftar</p>
+                            <p onclick="onclick_to_login()" id="masuk_id_register">Masuk</p>
+                        </div>
+                        <div class="login-content-tokped">
+                            <div class="lct-email-tokped">
+                                <p>Email</p>
+                                <input type="text" class="email-input-tokped" id="checking_email_register">
+                                <p>Contoh:email@soldays.com</p>
+                            </div>
+                            <!-- <div class="lct-forget-pass-tokped">
+                                Lupa Kata Sandi?
+                            </div> -->
+                            <div class="btn-login-tokped" id="btn-register-tokped-id"  >
+                                Selanjutnya
+                            </div>
+                            <div class="lct-pembatas-tokped">
+                                <div class="lctp-left">
+
+                                </div>
+                                <div class="lctp-mid">
+                                    atau daftar dengan
+                                </div>
+                                <div class="lctp-left">
+                                    
+                                </div>
+                            </div>
+                            <div class="lct-login-by-third">
+                                <img src="./img/Google_Logo.svg" alt="">
+                                <p>Google</p>
+                                
+                            </div>
+                            <div class="lct-login-by-third">
+                                <img src="./img/facebook_logo.png" alt="">
+                                <p>Facebook</p>
+                            </div>
+                            <div class="lct-daftar-lagi">
+                                Sudah punya akun Soldays? <span onclick="onclick_to_login()" id="masuk_id_register"> Masuk</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tokped-border-register-2">
+                        <div class="status-tokped">
+                            <p>Daftar</p>
+                            <p onclick="onclick_to_login()" id="masuk_id_register">Masuk</p>
+                        </div>
+                        <div class="login-content-tokped">
+                            <div class="lct-email-tokped-2">
+                                <p>Email</p>
+                                <div class="ins-lct-email-tokped">
+                                    <input type="text" class="email-final-tokped"  id="checking_email_register_2" disabled>
+                                    <p onclick="ubah_alamat_back_to_register()">ubah</p>
+                                </div>   
+                            </div>
+                            <div class="lct-register-tokped">
+                                <p>Nama</p>
+                                <div class="kata_sandi_box">
+                                    <input type="text" class="password-input-tokped" id="checking_nama_register">
+                                    <i class="fas fa-eye " onclick="encrypt_password()" style="visibility: hidden !important;"></i>
+                                    <i class="fas fa-eye-slash" onclick="lihat_password()" style="visibility: hidden !important;"></i>
+                                </div>
+                                <!-- <p id="salah_password_tokped">Kata sandi harus diisi</p> -->
+                            </div>
+                            <div class="lct-register-tokped">
+                                <p>Nomor HP</p>
+                                <div class="kata_sandi_box">
+                                    <input type="number" class="password-input-tokped" id="checking_nohp_register">
+                                    <i class="fas fa-eye " onclick="encrypt_password()" style="visibility: hidden !important;"></i>
+                                    <i class="fas fa-eye-slash " onclick="lihat_password()" style="visibility: hidden !important;"></i>
+                                </div>
+                                <!-- <p id="salah_password_tokped">Kata sandi harus diisi</p> -->
+                            </div>
+                            <div class="lct-register-tokped">
+                                <p>Kata Sandi</p>
+                                <div class="kata_sandi_box">
+                                    <input type="password" class="password-input-tokped" id="checking_password_register">
+                                    <i class="fas fa-eye lihat_pass" onclick="encrypt_password()"></i>
+                                    <i class="fas fa-eye-slash encrypt_pass" onclick="lihat_password()"></i>
+                                </div>
+                                <p id="salah_password_tokped">Kata sandi harus diisi</p>
+                            </div>
+                            <!-- <div class="lct-forget-pass-tokped">
+                                Lupa Kata Sandi?
+                            </div> -->
+                            <div class="btn-login-tokped" id="btn-final-register-tokped"  >
+                                Daftar
+                            </div>
+                            <div class="lct-daftar-lagi">
+                                Sudah punya akun Soldays? <span onclick="onclick_to_login()" id="masuk_id_register"> Masuk</span>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                    <!-- KHUSUS REGISTER -->
+
+
+
                 </div>
 
             
@@ -617,9 +716,9 @@
 
     <!--  NEW REGISTER SUPPLIERODALS -->
 
-    <!-- TOKEN  OTP REGISTER & SUPPLER -->
+    <!-- TOKEN  OTP LOGIN TOKPED -->
 
-    <div class="modal fade" id="newOtpRegister" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="newOtpLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-otp-register ">
             <div class="modal-content  modal-content-newlogin">
                 <div class="modal-body box-newlogin-body">
@@ -637,13 +736,13 @@
                             <input type="text" maxLength="1" size="1" id="otp_reg_6" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_7" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_8" /> -->
-                            <input type="text" maxLength="8" id="new_otp_tokped">
-                            <button class="btn btn-primary btn-embossed" onclick="verify_email_register()">Verify</button>
+                            <input type="text" maxLength="9" id="new_otp_tokped">
+                            <button class="btn btn-primary btn-embossed" onclick="verify_email_login()">Verify</button>
                           </div>
                           
                           <div class="resend-code-box">
                             Tidak menerima kode?<br />
-                            <a href="#" onclick="resend_otp_register()">Kirim Ulang OTP</a><br />
+                            <a href="#" onclick="resend_otp_login()">Kirim Ulang OTP</a><br />
                             
                           </div>
                            <!-- <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" /> -->
@@ -653,7 +752,7 @@
             </div>
         </div>
     </div>
-    <!-- TOKEN REGISTER -->
+    <!-- TOKEN OTP LOGIN TOKPED -->
 
         <!-- FORGOT PASSWORD MODALS -->
     <div class="modal fade " id="forgotModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -728,7 +827,7 @@
 
     <!-- NEW PROFILE MODALS -->
     <div class="modal fade " id="newProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog box-login ">
+        <div class="modal-dialog box-login-profile-new ">
         <div class="modal-content  modal-content-newlogin">
             <div class="modal-body box-newlogin-body">
                 <div class="newlogin-left">
@@ -769,7 +868,7 @@
                 <div class="newlogin-right">
                     <div class="login-right-box">
                         <p>PROFILE</p>
-                        <p id="name-new-profile">Hi! BAYU DARMAWAN</p>
+                        <!-- <p id="name-new-profile">Hi! BAYU DARMAWAN</p> -->
                         <i class="fas fa-sign-out-alt icon-logout" onclick="logoutProfile()"></i>
                     </div>
                     <div class="box-right-for-input">
@@ -1588,7 +1687,7 @@
             </div> -->
             <div class="box-logo-header">
                 <div class="logo-header" id="main-logo-home" onclick="close_all_open_window()">
-                    <img src="../WEB/img/newSoldLogo.png" alt="" class="icon-logo " onclick="back_to_home()">
+                    <img src="/WEB/img/newSoldLogo.png" alt="" class="icon-logo " onclick="back_to_home()">
                 </div>
             </div>
             <div class="card category-menu">

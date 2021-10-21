@@ -1420,6 +1420,7 @@ function back_to_home(){
     $(".force-close-all-command-2").css("display", "none");
     $('.main-body').css('display','block')
     $('.active_search').css('top','0px')
+    $('#newloginTokpedModal').modal('hide')
 }
 // const find_province_from_address= async ()=>{
 //     return new Promise(async (resolve, reject) => {
@@ -6968,13 +6969,14 @@ const check_user_for_login=()=>{
                 var tahun = data_customer.Birthday.slice(0,4)
                 var bulan = data_customer.Birthday.slice(5,7)
                 var hari = data_customer.Birthday.slice(8,10)
+                var new_tanggal_lahir = data_customer.Birthday
                 var newReferralCode = data_customer.Customer_Code
                 var tanggal_lahir = hari + ' ' + bulan + ' ' + tahun
                 var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
                 console.log(nama_customer)
                 $('#ncp-email').html(`${data_customer.Email}`)
                 $('#ncp-name').html(`${data_customer.First_Name}`)
-                $('#ncp-lahir').html(tanggal_lahir)
+                $('#ncp-lahir').html(new_tanggal_lahir)
                 $('#ncp-name').html(nama_customer)
                 $('#name-new-profile').html(nama_customer)
                 $('#ncp-hp-1').html(`${data_customer.Contact_Number_1}`)
@@ -6998,7 +7000,7 @@ const check_user_for_login=()=>{
                 $('.new-content-isi-alamat').empty()
 
 
-                if(data_customer.Address_1 == 'undefined'){
+                if(data_customer.Address_1 == ''){
                     // 
                 }else{
                     // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
@@ -7025,7 +7027,7 @@ const check_user_for_login=()=>{
                     // `)
                     // 
                 }
-                if(data_customer.Address_2 == 'undefined'){
+                if(data_customer.Address_2 == ''){
                     // 
                 }else{
                     localStorage.setItem('limit_alamat',2)
@@ -7042,7 +7044,7 @@ const check_user_for_login=()=>{
                     `)
                     // 
                 }
-                if(data_customer.Address_3 == 'undefined'){
+                if(data_customer.Address_3 == ''){
                     // 
                 }else{
                     localStorage.setItem('limit_alamat',3)
@@ -7058,7 +7060,7 @@ const check_user_for_login=()=>{
                         </div>
                     `)
                 }
-                if(data_customer.Address_4 == 'undefined'){
+                if(data_customer.Address_4 == ''){
                     // 
                 }else{
                     localStorage.setItem('limit_alamat',4)
@@ -7074,7 +7076,7 @@ const check_user_for_login=()=>{
                         </div>
                     `)
                 }
-                if(data_customer.Address_5 == 'undefined'){
+                if(data_customer.Address_5 == ''){
                     // 
                 }else{
                     localStorage.setItem('limit_alamat',5)
@@ -7097,6 +7099,13 @@ const check_user_for_login=()=>{
                 // $('#loginModal').modal('show') // login lama
                 $('#newloginTokpedModal').modal('show') // login lama
                 $('.box_information_login').css('display','flex')
+                $('#checking_email_login').empty()
+                $('#checking_password_login').empty()
+                $('#checking_email_register').empty()
+                $('#checking_email_register_2').empty()
+                $('#checking_password_register').empty()
+                $('#checking_nama_register').empty()
+                $('#checking_nohp_register').empty()
                 // $('#newProfileModal').modal('show')
             }
             // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL

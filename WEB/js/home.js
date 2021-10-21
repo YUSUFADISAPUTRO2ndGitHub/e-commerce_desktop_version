@@ -433,7 +433,7 @@ var data = [
 
  const logoutProfile=()=>{
     localStorage.removeItem("token");
-    $('#profileModal').modal('hide')
+    $('#NewProfileModal').modal('hide')
     // Swal.fire('You have logged out of your account', 'Good-Bye', 'success')
     Swal.fire({
         html:`
@@ -1085,22 +1085,22 @@ const send_otp_for_logout=()=>{
 }
 
 const send_otp_login=()=>{
-    var email = $('#email_login').val()
+    var email = $('#checking_email_login').val()
     if(email){
         axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
         .then((res)=>{
             if(res.data){
                 // Swal.fire('OTP Berhasil Dikirim', 'Good-Bye', 'success')
-                Swal.fire({
-                    html:`
-                    <div class="o-circle c-container__circle o-circle__sign--success">
-                        <div class="o-circle__sign"></div>  
-                    </div>   
-                    OTP Berhasil Dikirim
-                    `,
-                    timer:2000,
+                // Swal.fire({
+                //     html:`
+                //     <div class="o-circle c-container__circle o-circle__sign--success">
+                //         <div class="o-circle__sign"></div>  
+                //     </div>   
+                //     OTP Berhasil Dikirim
+                //     `,
+                //     timer:2000,
                     
-                })
+                // })
             }else {
                 // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
                 Swal.fire({
@@ -1686,9 +1686,57 @@ const close_tab_answer=(result,index)=>{
         })
 
     }
+    const verify_email_login=()=>{
+        var email = $('#checking_email_login').val()
+        var password = $('#checking_password_login').val()
+        var otp = $('#new_otp_tokped').val()
+        axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
+    .then((res)=>{
+        
+        axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+        ).then((res)=>{
+            
+            if(res.data){
+                // swal.fire("Login Berhasil", "", "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Login Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
+                localStorage.setItem('token',res.data)
+                $('#newloginTokpedModal').modal('hide')
+                $('#newOtpLogin').modal('hide')
+            }else {
+                // swal.fire("Login Gagal", "", "info");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Login Gagal`,
+                    timer:2000,
+                    
+                })
+            }
+        }).catch((err)=>{
+            
+        })
+    }).catch((err)=>{
+        
+    })
+        
+    }
 
     const resend_otp_register=()=>{
 
+    }
+    const resend_otp_login=()=>{
+        alert('function kirim ulang jalan')
     }
 //   $(function(){
 //     $(".btn-embossed").on('click',function(){
@@ -2400,24 +2448,65 @@ const checking_email_login=()=>{
         $('.tokped-border-login').fadeOut()
         $('.tokped-border-login').css('display','none')
     
-        $('.tokped-border-register').fadeToggle()
-        $('.tokped-border-register').css('display','flex')
+        $('.tokped-border-login-2').fadeToggle()
+        $('.tokped-border-login-2').css('display','flex')
 
         $('.email-final-tokped').val(email)
     }
     // $('#newOtpRegister').modal('show')
 }
 
+const checking_email_register=()=>{
+    var email = $('#checking_email_register').val()
+    if(email){
+        $('.tokped-border-register').fadeOut()
+        $('.tokped-border-register').css('display','none')
+    
+        $('.tokped-border-register-2').fadeToggle()
+        $('.tokped-border-register-2').css('display','flex')
+
+        $('#checking_email_register_2').val(email)
+    }
+}
+
 const checking_password_login=()=>{
+    send_otp_login()
     var email = $('#checking_email_login').val()
     var password = $('#checking_password_login').val()
     console.log(email)
     console.log(password)
-    $('#newOtpRegister').modal('show')
+    $('#newOtpLogin').modal('show')
 }
 const ubah_alamat_back_to_login=()=>{
+    $('.tokped-border-login-2').fadeOut()
+    $('.tokped-border-login-2').css('display','none')
+
+    $('.tokped-border-login').fadeToggle()
+    $('.tokped-border-login').css('display','flex')
+}
+const ubah_alamat_back_to_register=()=>{
+    $('.tokped-border-register-2').fadeOut()
+    $('.tokped-border-register-2').css('display','none')
+
+    $('.tokped-border-register').fadeToggle()
+    $('.tokped-border-register').css('display','flex')
+}
+const onclick_to_register=()=>{
+    $('.tokped-border-login').fadeOut()
+    $('.tokped-border-login').css('display','none')
+
+    $('.tokped-border-login-2').fadeOut()
+    $('.tokped-border-login-2').css('display','none')
+
+    $('.tokped-border-register').fadeToggle()
+    $('.tokped-border-register').css('display','flex')
+}
+const onclick_to_login=()=>{
     $('.tokped-border-register').fadeOut()
     $('.tokped-border-register').css('display','none')
+
+    $('.tokped-border-register-2').fadeOut()
+    $('.tokped-border-register-2').css('display','none')
 
     $('.tokped-border-login').fadeToggle()
     $('.tokped-border-login').css('display','flex')
@@ -2426,16 +2515,124 @@ const encrypt_password=()=>{
     // alert('encrypt pass jalan')
     $('.lihat_pass').css('visibility','hidden')
     $('.encrypt_pass').css('visibility','visible')
-    $('.password-input-tokped').attr('type','password')
+    $('#checking_password_register').attr('type','password')
 }
 const lihat_password=()=>{
     // alert('lihat pass jalan')
     $('.lihat_pass').css('visibility','visible')
     $('.encrypt_pass').css('visibility','hidden')
     $('.lihat_pass').css('left','10px')
-    $('.password-input-tokped').attr('type','text')
+    $('#checking_password_register').attr('type','text')
 }
 
+
+const final_register_customer=()=>{
+    var nama_customer = $('#checking_nama_register').val()
+    var email_customer = $('#checking_email_register_2').val()
+    var password = $('#checking_password_register').val()
+    var no_hp_customer = $('#checking_nohp_register').val()
+    var default_address = 'Jl. Dr. Susilo Raya No.C2 RT.1/RW.5 Grogol Kec. Grogol petamburan Kota Jakarta Barat DKI Jakarta'
+    var tanggal_lahir = '02/08/1996'
+    console.log(nama_customer,email_customer,no_hp_customer)
+
+    axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
+    .then((res)=>{
+        var final_pass = res.data
+                 
+            axios.post(`https://customers.sold.co.id/get-customer-code`)
+        .then((res)=>{
+            localStorage.setItem('token',res.data)
+            var data = {
+                customer_data : {
+                   Customer_Code : localStorage.getItem("token"),
+                   First_Name : nama_customer,
+                   Last_Name : '',
+                   User_Password :final_pass,
+                   Birthday : tanggal_lahir,
+                   Created_Date : "CURRENT_TIMESTAMP()",
+                   Last_Login : "CURRENT_TIMESTAMP()",
+                   Email : email_customer,
+                   Contact_Number_1 : no_hp_customer,
+                   Contact_Number_2 : '',
+                   Address_1 : default_address,
+                   Address_2 : '',
+                   Address_3 : '',
+                   Address_4 : '',
+                   Address_5 : '',
+                   Status : "pending",
+                   User_Type : "Customer",
+                   account_number: '',
+                   referral_customer_code: '',
+                   ktp:''
+               }
+           }
+            
+           console.log(data)
+        axios.post(`https://customers.sold.co.id/create-new-customer-direct-from-user`,data,{
+            headers:{
+                "Content-Type":'application/json'
+            },
+            "data":JSON.stringify({
+                "Customer_Code": data.customer_data.Customer_Code,
+                "First_Name": data.customer_data.First_Name,
+                "Last_Name": data.customer_data.Last_Name,
+                "User_Password": data.customer_data.User_Password,
+                "Birthday": data.customer_data.Birthday,
+                "Created_Date": data.customer_data.Created_Date,
+                "Last_Login": data.customer_data.Last_Login,
+                "Email": data.customer_data.Email,
+                "Contact_Number_1": data.customer_data.Contact_Number_1,
+                "Contact_Number_2": data.customer_data.Contact_Number_2,
+                "Address_1": data.customer_data.Address_1,
+                "Address_2": data.customer_data.Address_2,
+                "Address_3": data.customer_data.Address_3,
+                "Address_4": data.customer_data.Address_4,
+                "Address_5": data.customer_data.Address_5,
+                "Status": data.customer_data.Status,
+                "User_Type": data.customer_data.User_Type,
+                "ktp":data.customer_data.ktp
+            })
+        }).then((res)=>{
+            
+            
+            if(res.data === true){
+                
+                // swal.fire("Register Berhasil", "", "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Register Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
+                $('#newloginTokpedModal').modal('hide')
+            }else {
+                $('#newloginTokpedModal').modal('hide')
+
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Register Gagal`,
+                    timer:2000,
+                    
+                })
+            }
+        }).catch((err)=>{
+            
+        })
+
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
 
 
 //    $('.inp-prod-bo').on('keyup',function(){

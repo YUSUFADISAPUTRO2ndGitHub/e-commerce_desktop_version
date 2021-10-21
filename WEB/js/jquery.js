@@ -1385,7 +1385,7 @@ $(function(){
                         return val
                     }
                 })
-                console.log(all_product_filter)
+                // console.log(all_product_filter)
 
                 if(all_product_filter.length === 0){
                     $('.render-li-search').append(`
@@ -1393,15 +1393,15 @@ $(function(){
                     `)
                 }
                 all_product_filter.map((val,index)=>{
-                    console.log(val)
+                    // console.log(val)
                     if(val.length === 0){
-                        console.log('masuk ke if 1392')
+                        // console.log('masuk ke if 1392')
                         $('.render-li-search').append(`
                             <li  id="${val.Name}">${value} Tidak Ditemukan</li>
                         `)
 
                     }else {
-                        console.log('masuk ke if 1398')
+                        // console.log('masuk ke if 1398')
                         $('.render-li-search').append(`
                             <li onclick="replace_value_to(this)" id="${val.Name}">${val.Name}</li>
                         `)
@@ -1713,7 +1713,7 @@ function validateEmail(email) {
 
 $('#checking_email_login').on('keyup',function(e){
    var checking_email = validateEmail(e.target.value)
-   console.log(checking_email)
+//    console.log(checking_email)
    if(checking_email === true){
        $('#btn-login-tokped-id').addClass('correct-email')
        $('#btn-login-tokped-id').attr('onclick','checking_email_login()')
@@ -1735,101 +1735,182 @@ $('#checking_password_login').on('keyup',function(e){
     }
 })
 
+$('#checking_email_register').on('keyup',function(e){
+    var checking_email = validateEmail(e.target.value)
+    // console.log(checking_email)
+    if(checking_email === true){
+        $('#btn-register-tokped-id').addClass('correct-email')
+        $('#btn-register-tokped-id').attr('onclick','checking_email_register()')
+    }else {
+        $('#btn-register-tokped-id').removeClass('correct-email')
+        $('#btn-register-tokped-id').removeAttr('onclick')
+    }
+})
 
-$('#new_kota_prov_customer').on('keyup',function(e){
-    // alert('jalan')
-    // console.log(e.target.value)
-    var item = e.target.value.toUpperCase()
-    // console.log(item.length, item)
-    var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
-    var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
-    var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
-    if(item.length > 2 ){ // search item
-        // if(item.product_name.toUpperCase().includes(value.Name.toUpperCase())){
-            var array_filter_province =[]
-            var array_filter_city = []
-        if(province_storage !== undefined && city_storage !== undefined && district_storage !== undefined){
-            var filter_province = province_storage.filter((val,index)=>{
-                // console.log(val.Province.toUpperCase().includes(item), val)
-                if(val.Province.toUpperCase().includes(item)){
-                    array_filter_province.push(val.Province)
-                    
-                    return val
-                }
-            })
-            
-            city_storage.forEach((value,id)=>{
-                 filter_city = value.City.filter((val,index)=>{ 
-                    if(val.City.toUpperCase().includes(item)){
-                        // array_filter_province.push(value.Province)
-                        array_filter_city.push(val.City) 
-                        // console.log(val)
-                        // console.log(array_filter_province)        
-                    }
-                })
-            })
-            const final_province = array_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
-                if(!acc.includes(item)){
-                    acc.push(item);
-                }
-                return acc;
-            },[])
-            const final_city = array_filter_city.reduce((acc,item)=>{ // untuk ngapus data yg sama
-                if(!acc.includes(item)){
-                    acc.push(item);
-                }
-                return acc;
-            },[])
-            
-            if(final_province.length >1){
-                console.log('masuk ke  if 1774')
-                console.log(final_province)
-                $('.render-kota-kec-alamat').css('display','block')
-                $('.render-kota-kec-alamat').empty()
-                final_province.forEach((value,index)=>{
-                    city_storage.forEach((val,id)=>{
-                        // console.log(value.toUpperCase() === val.Province.toUpperCase(), value, val.Province)
-                        if(value.toUpperCase() === val.Province.toUpperCase()){
-                            val.City.forEach((item,index_value)=>{
+$('#checking_nohp_register').on('keyup',function(e){
+    var nama_customer = $('#checking_nama_register').val()
+    var nomor_hp = e.target.value
+    var password = $('#checking_password_register').val()
+    if(nama_customer.length > 2 && nomor_hp.length > 9  && password.length > 5){
+        $('#btn-final-register-tokped').addClass('correct-email')
+        $('#btn-final-register-tokped').attr('onclick','final_register_customer()')
+    }else {
+        $('#btn-final-register-tokped').removeClass('correct-email')
+        $('#btn-final-register-tokped').removeAttr('onclick')
+    }
+})
+$('#checking_nama_register').on('keyup',function(e){
+    var nama_customer = e.target.value
+    var nomor_hp = $('#checking_nohp_register').val()
+    var password = $('#checking_password_register').val()
+    if(nama_customer.length > 2 && nomor_hp.length > 9 && password.length > 5){
+        $('#btn-final-register-tokped').addClass('correct-email')
+        $('#btn-final-register-tokped').attr('onclick','final_register_customer()')
+    }else {
+        $('#btn-final-register-tokped').removeClass('correct-email')
+        $('#btn-final-register-tokped').removeAttr('onclick')
+    }
+})
+$('#checking_password_register').on('keyup',function(e){
+    var nama_customer = $('#checking_nama_register').val()
+    var nomor_hp = $('#checking_nohp_register').val()
+    var password = e.target.value
+    if(nama_customer.length > 2 && nomor_hp.length > 9  && password.length > 5){
+        $('#btn-final-register-tokped').addClass('correct-email')
+        $('#btn-final-register-tokped').attr('onclick','final_register_customer()')
+    }else {
+        $('#btn-final-register-tokped').removeClass('correct-email')
+        $('#btn-final-register-tokped').removeAttr('onclick')
+    }
+})
+
+
+   $('#new_kota_prov_customer').on('keyup',function(e){
+       // alert('jalan')
+       // console.log(e.target.value)
+       var item = e.target.value.toUpperCase()
+       // console.log(item.length, item)
+       var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+       var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+       var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+       if(item.length > 2 ){ // search item
+           // if(item.product_name.toUpperCase().includes(value.Name.toUpperCase())){
+               var array_filter_province =[]
+               var array_filter_city = []
+           if(province_storage !== undefined && city_storage !== undefined && district_storage !== undefined){
+               var filter_province = province_storage.filter((val,index)=>{
+                   // console.log(val.Province.toUpperCase().includes(item), val)
+                   if(val.Province.toUpperCase().includes(item)){
+                       array_filter_province.push(val.Province)
+                       return val
+                   }
+               })
+               const final_province = array_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                   if(!acc.includes(item)){
+                       acc.push(item);
+                   }
+                   return acc;
+               },[])
+               
+               
+               if(final_province.length > 0){ // final province lebih dari 1
+                // misal ada lebih dari 1 province, berarti nanti setiap province nge looping
+                // nyari setiap kota yg ada di province itu
+                   final_province.forEach((val,index)=>{
+                       city_storage.forEach((value,id)=>{
+                           if(val === value.Province){
+                            $('.render-kota-kec-alamat').css('display','block')
+                            $('.render-kota-kec-alamat').empty()
+                            value.City.map((res,index)=>{
                                 $('.render-kota-kec-alamat').append(`
                                     <div class="card-kot-kec-alamat">
                                         <i class="fas fa-map-marker-alt"></i>
-                                        <p>${value}, ${item.City} </p>
+                                        <p>${val}, ${res.City} </p>
                                     </div>
                                 `)
                             })
+                                
+                           }
+                       })
+                   })
+               }else { // final_province kosong
+                   // final province kosong, berarti data yg di cari itu adalah kota
+                   // jadi search by kota. kalo gaada di kota berarti gaada.
+                   // 
+                    city_storage.forEach((value,id)=>{
+                        filter_city = value.City.filter((val,index)=>{ 
+                        if(val.City.toUpperCase().includes(item)){
+                            array_filter_province.push(value.Province)
+                            array_filter_city.push(val.City)        
                         }
                     })
+                    const final_province_2 = array_filter_province.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                        if(!acc.includes(item)){
+                            acc.push(item);
+                        }
+                        return acc;
+                    },[])
+                    const final_city = array_filter_city.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                        if(!acc.includes(item)){
+                            acc.push(item);
+                        }
+                        return acc;
+                    },[])
+                    if(final_province_2.length >1){
+                        $('.render-kota-kec-alamat').css('display','block')
+                        $('.render-kota-kec-alamat').empty()
+                        final_province_2.forEach((value,index)=>{
+                            city_storage.forEach((val,id)=>{
+                                if(value.toUpperCase() === val.Province.toUpperCase()){
+                                    val.City.forEach((item,index_value)=>{
+                                        $('.render-kota-kec-alamat').append(`
+                                            <div class="card-kot-kec-alamat">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <p>${value}, ${item.City} </p>
+                                            </div>
+                                        `)
+                                    })
+                                }
+                            })
+                        })
+                    }else if(final_province_2.length === 1 && final_city.length >1){
+                        $('.render-kota-kec-alamat').css('display','block')
+                        $('.render-kota-kec-alamat').empty()
+                        final_city.map((val,index)=>{
+                            $('.render-kota-kec-alamat').append(`
+                                <div class="card-kot-kec-alamat">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <p>${final_province_2}, ${val} </p>
+                                </div>
+                            `)
+                        })
+                    }else if (final_province_2.length === 1 && final_city.length === 1){
+                        $('.render-kota-kec-alamat').css('display','block')
+                        $('.render-kota-kec-alamat').empty()
+                        $('.render-kota-kec-alamat').append(`
+                            <div class="card-kot-kec-alamat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>${final_province_2}, ${final_city} </p>
+                            </div>
+                        `)
+                    } 
                 })
-            }else if(final_province.length === 1 && final_city.length >1){
-                console.log('masuk ke else if 1774')
-                console.log(final_province,'province')
-                console.log(final_city,'city')
-                $('.render-kota-kec-alamat').css('display','block')
-                $('.render-kota-kec-alamat').empty()
-                final_city.map((val,index)=>{
-                    $('.render-kota-kec-alamat').append(`
-                        <div class="card-kot-kec-alamat">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>${final_province}, ${val} </p>
-                        </div>
-                    `)
-                })
-            }else {
 
-            }
-        }else {
-        
-        }
-
-
-    }else if(item.length === 0 || item.length <0){
-        $('.render-kota-kec-alamat').css('display','none')
-    }else {
-
-    }
-
-   })
-
-
+               }
+     
+              
+           }else {
+           
+           }
+   
+   
+       }else if(item.length === 0 || item.length <0){
+           $('.render-kota-kec-alamat').css('display','none')
+       }else {
+   
+       }
+   
 })
+})
+
+
