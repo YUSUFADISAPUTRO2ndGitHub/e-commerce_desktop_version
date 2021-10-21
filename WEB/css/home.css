@@ -1814,11 +1814,12 @@ display: flex;
 
 .box-otp-register{
     /* width:300px; */
-    height:500px;
+    height:650px;
+    min-height:650px;
     /* background-color: pink; */
     position: relative;
-    top:10%;
-    left:6%;
+    /* top:10%; */
+    left:1.9%;
     display: flex;
     justify-content:center;
     align-items: center;
@@ -6893,15 +6894,20 @@ loading new
     color: #333;
 }
 #wrapper #dialog{
-    border: solid 1px #ccc;
+    border: solid 1px #dedede;
     margin: 10px auto;
     padding: 20px 30px;
     display: inline-block;
     box-shadow: 0 0 4px #ccc;
-    background-color: #FAF8F8;
+    background-color: white;
     overflow: hidden;
     position: relative;
     max-width: 450px;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 #wrapper #dialog h3{
     margin: 0 0 10px;
@@ -7033,6 +7039,15 @@ loading new
 #inp-profile-img:hover {
     cursor: pointer;
   
+}
+#new_otp_tokped {
+    border:none !important;
+    box-shadow:none !important;
+    border-bottom:1px solid #dedede !important;
+    width:70% !important;
+}
+#new_otp_tokped:focus {
+    color:#f7941d;
 }
 
 /* #sub-delivery-option{

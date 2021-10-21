@@ -626,23 +626,24 @@
                     <div id="wrapper">
                         <div id="dialog">
                           <!-- <button class="close">×</button> -->
-                          <h3>Please enter the 8-digit verification code we sent via Email:</h3>
-                          <span>(we want to make sure it's you before we contact our movers)</span>
+                          <h3>Masukkan Kode Verifikasi</h3>
+                          <span>Kode verifikasi telah dikirim melalui Email</span>
                           <div id="form" class="get_all_otp_register">
-                            <input type="text" maxLength="1" size="1"  id="otp_reg_1"/>
+                            <!-- <input type="text" maxLength="1" size="1"  id="otp_reg_1"/>
                             <input type="text" maxLength="1" size="1"  id="otp_reg_2"/>
                             <input type="text" maxLength="1" size="1" id="otp_reg_3" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_4" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_5" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_6" />
                             <input type="text" maxLength="1" size="1" id="otp_reg_7" />
-                            <input type="text" maxLength="1" size="1" id="otp_reg_8" />
+                            <input type="text" maxLength="1" size="1" id="otp_reg_8" /> -->
+                            <input type="text" maxLength="8" id="new_otp_tokped">
                             <button class="btn btn-primary btn-embossed" onclick="verify_email_register()">Verify</button>
                           </div>
                           
                           <div class="resend-code-box">
-                            Didn't receive the code?<br />
-                            <a href="#" onclick="resend_otp_register()">Send code again</a><br />
+                            Tidak menerima kode?<br />
+                            <a href="#" onclick="resend_otp_register()">Kirim Ulang OTP</a><br />
                             
                           </div>
                            <!-- <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" /> -->

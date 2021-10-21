@@ -1723,6 +1723,18 @@ $('#checking_email_login').on('keyup',function(e){
    }
 })
 
+$('#checking_password_login').on('keyup',function(e){
+    var password = e.target.value
+
+    if( password.length > 5){
+        $('#btn-final-login-tokped').addClass('correct-email')
+        $('#btn-final-login-tokped').attr('onclick','checking_password_login()')
+    }else if (password.length === 0){
+        $('#btn-final-login-tokped').removeClass('correct-email')
+        $('#btn-final-login-tokped').removeAttr('onclick')
+    }
+})
+
 
 $('#new_kota_prov_customer').on('keyup',function(e){
     // alert('jalan')

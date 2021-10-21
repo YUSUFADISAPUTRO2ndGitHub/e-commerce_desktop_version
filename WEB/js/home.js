@@ -2407,6 +2407,14 @@ const checking_email_login=()=>{
     }
     // $('#newOtpRegister').modal('show')
 }
+
+const checking_password_login=()=>{
+    var email = $('#checking_email_login').val()
+    var password = $('#checking_password_login').val()
+    console.log(email)
+    console.log(password)
+    $('#newOtpRegister').modal('show')
+}
 const ubah_alamat_back_to_login=()=>{
     $('.tokped-border-register').fadeOut()
     $('.tokped-border-register').css('display','none')
