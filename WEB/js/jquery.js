@@ -1786,14 +1786,17 @@ $('#checking_password_register').on('keyup',function(e){
 
 
    $('#new_kota_prov_customer').on('keyup',function(e){
-       // alert('jalan')
-       // console.log(e.target.value)
+       $('#new_kel_kec_customer').attr('disabled',true)
+       
        var item = e.target.value.toUpperCase()
        // console.log(item.length, item)
        var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
        var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
        var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
-       if(item.length > 2 ){ // search item
+            // var province_storage= undefined
+            // var city_storage = undefined
+            // var district_storage = undefined
+       if(item.length > 3 ){ // search item
            // if(item.product_name.toUpperCase().includes(value.Name.toUpperCase())){
                var array_filter_province =[]
                var array_filter_city = []
@@ -1810,9 +1813,7 @@ $('#checking_password_register').on('keyup',function(e){
                        acc.push(item);
                    }
                    return acc;
-               },[])
-               
-               
+               },[])     
                if(final_province.length > 0){ // final province lebih dari 1
                 // misal ada lebih dari 1 province, berarti nanti setiap province nge looping
                 // nyari setiap kota yg ada di province itu
@@ -1823,13 +1824,12 @@ $('#checking_password_register').on('keyup',function(e){
                             $('.render-kota-kec-alamat').empty()
                             value.City.map((res,index)=>{
                                 $('.render-kota-kec-alamat').append(`
-                                    <div class="card-kot-kec-alamat">
+                                    <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${val}','${res.City}')">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <p>${val}, ${res.City} </p>
                                     </div>
                                 `)
-                            })
-                                
+                            })       
                            }
                        })
                    })
@@ -1864,7 +1864,7 @@ $('#checking_password_register').on('keyup',function(e){
                                 if(value.toUpperCase() === val.Province.toUpperCase()){
                                     val.City.forEach((item,index_value)=>{
                                         $('.render-kota-kec-alamat').append(`
-                                            <div class="card-kot-kec-alamat">
+                                            <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${value}','${item.City}')">
                                                 <i class="fas fa-map-marker-alt"></i>
                                                 <p>${value}, ${item.City} </p>
                                             </div>
@@ -1878,7 +1878,7 @@ $('#checking_password_register').on('keyup',function(e){
                         $('.render-kota-kec-alamat').empty()
                         final_city.map((val,index)=>{
                             $('.render-kota-kec-alamat').append(`
-                                <div class="card-kot-kec-alamat">
+                                <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${final_province_2}','${val}')">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <p>${final_province_2}, ${val} </p>
                                 </div>
@@ -1888,7 +1888,7 @@ $('#checking_password_register').on('keyup',function(e){
                         $('.render-kota-kec-alamat').css('display','block')
                         $('.render-kota-kec-alamat').empty()
                         $('.render-kota-kec-alamat').append(`
-                            <div class="card-kot-kec-alamat">
+                            <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${final_province_2}','${final_city}')">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <p>${final_province_2}, ${final_city} </p>
                             </div>
@@ -1897,9 +1897,90 @@ $('#checking_password_register').on('keyup',function(e){
                 })
 
                }
-     
-              
-           }else {
+           }else { // render data dari full API
+                var nama_kurir = 'tiki'
+                var kurir_kode = 'tiki'
+                var array_province = []
+                var all_province_from_api = []
+                get_all_province_from_courier(nama_kurir,kurir_kode).done(function(response){
+                    // console.log(response)
+                    all_province_from_api =response
+                    response.forEach((prov,id)=>{
+                        if(prov.Province.toUpperCase().includes(item)){
+                            array_province.push(prov.Province)
+                            // console.log(prov)
+                        }
+                    })
+                    console.log(array_province)
+                    if(array_province.length === 1){ // province hanya ada 1
+                        console.log('masuk ke if')
+                        
+                        get_all_city_from_courier(nama_kurir, kurir_kode, array_province[0]).done(function(response){
+                            console.log(response)
+                            $('.render-kota-kec-alamat').css('display','block')
+                            $('.render-kota-kec-alamat').empty()
+                            response.map((val,id)=>{
+                                $('.render-kota-kec-alamat').append(`
+                                    <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${array_province[0]}','${val.City}')">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <p>${array_province[0]}, ${val.City} </p>
+                                    </div>
+                                `)       
+                            })
+                        })
+                    }else if(array_province.length > 1) { // province lebih dari 1
+                        console.log('masuk ke else if 1934')
+                        $('.render-kota-kec-alamat').css('display','block')
+                        $('.render-kota-kec-alamat').empty()
+                        array_province.forEach((val,id)=>{
+                            
+                            get_all_city_from_courier(nama_kurir, kurir_kode,val).done(function(response){
+                                response.map((value,id)=>{
+                                    $('.render-kota-kec-alamat').append(`
+                                        <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${val}','${value.City}')">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <p>${val}, ${value.City} </p>
+                                        </div>
+                                    `)       
+                                })
+                            })
+                        })
+                    }else {
+                        // province array kosong
+                        console.log(',masuk ke else')
+                        $('.render-kota-kec-alamat').css('display','block')
+                        $('.render-kota-kec-alamat').empty()
+                        all_province_from_api.forEach((prov,id)=>{
+                            // console.log(prov)
+                            get_all_city_from_courier(nama_kurir, kurir_kode,prov.Province).done(function(response){
+                                // if(response.City.toUpperCase().includes(e.target.value)){
+                                //     console.log(response,'1957')
+                                // }
+                                
+                                response.forEach((resp,index)=>{
+                                    if(resp.City.toUpperCase().includes(item)){
+                                        console.log(resp,item)
+                                        $('.render-kota-kec-alamat').append(`
+                                            <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${prov.Province}','${resp.City}')">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <p>${prov.Province}, ${resp.City} </p>
+                                            </div>
+                                        `)   
+                                    }
+                                })
+                                
+                                // response.map((value,id)=>{
+                                //     $('.render-kota-kec-alamat').append(`
+                                //         <div class="card-kot-kec-alamat" onclick="onclick_kot_prov_tokped('${val}','${value.City}')">
+                                //             <i class="fas fa-map-marker-alt"></i>
+                                //             <p>${val}, ${value.City} </p>
+                                //         </div>
+                                //     `)       
+                                // })
+                            })
+                        })
+                    }
+                })            
            
            }
    
@@ -1911,6 +1992,100 @@ $('#checking_password_register').on('keyup',function(e){
        }
    
 })
+
+    $('#new_kel_kec_customer').on('keyup',function(e){
+        var item = e.target.value.toUpperCase()
+        var province_city = $('#new_kota_prov_customer').val()
+        var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+
+        var split_province = province_city.split(',')
+        var province_pilihan = split_province[0]
+        var city_pilihan = split_province[1]
+        var kurir_kode = 'tiki'
+        var nama_kurir = 'tiki'
+        console.log(province_pilihan)
+        console.log(city_pilihan)
+        console.log(item)
+
+        if(item.length > 3 ){ // search item kelurahan kecamatan
+            
+            if(district_storage !== undefined){ // render data dari local storage
+                var filter_district = district_storage.filter((val,index)=>{
+                    if(val.City === city_pilihan ){
+                        // console.log(val)
+                        val.District.forEach((respo,index)=>{
+                            if(respo.District.toUpperCase().includes(item)){
+                                // console.log(respo.District)
+                                get_all_subdistrict_from_courier(nama_kurir,kurir_kode,respo.District).done(function(response){
+                                    $('.render-kota-kec-alamat').css('display','block')
+                                    $('.render-kota-kec-alamat').empty()
+                                    response.map((respon,index_resp)=>{
+                                        $('.render-kota-kec-alamat').append(`
+                                            <div class="card-kot-kec-alamat" onclick="onclick_kel_kec_tokped('${respo.District}','${respon.Sub_District}')">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <p>${respo.District}, ${respon.Sub_District} </p>
+                                            </div>
+                                        `)
+                                    })
+                                })
+                            }else {
+                                $('.render-kota-kec-alamat').css('display','block')
+                                val.District.forEach((respo,index)=>{
+                                    get_all_subdistrict_from_courier(nama_kurir,kurir_kode,respo.District).done(function(response){
+                                        var all_sub_district = []
+                                        response.forEach((respon,id)=>{
+                                            if(respon.Sub_District.toUpperCase().includes(item)){
+                                                // console.log(respon)
+                                                // all_sub_district.push(respon.Sub_District)
+                                                
+                                                // $('.render-kota-kec-alamat').css('visibility','visible')
+                                                $('.render-kota-kec-alamat').empty()
+                                                $('.render-kota-kec-alamat').append(`
+                                                    <div class="card-kot-kec-alamat" onclick="onclick_kel_kec_tokped('${respo.District}','${respon.Sub_District}')">
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <p>${respo.District}, ${respon.Sub_District} </p>
+                                                    </div>
+                                                `)  
+                                            }
+                                        })
+                                        // const final_sub_district = all_sub_district.reduce((acc,item)=>{ // untuk ngapus data yg sama
+                                        //     if(!acc.includes(item)){
+                                        //         acc.push(item);
+                                        //     }
+                                        //     return acc;
+                                        // },[])    
+                                        // console.log(final_sub_district) 
+                                        // final_sub_district.map((respon,id)=>{
+                                        //     $('.render-kota-kec-alamat').css('display','block')
+                                        //     $('.render-kota-kec-alamat').empty()
+                                        //     $('.render-kota-kec-alamat').append(`
+                                        //         <div class="card-kot-kec-alamat" onclick="onclick_kel_kec_tokped('${respo.District}','${respon.Sub_District}')">
+                                        //             <i class="fas fa-map-marker-alt"></i>
+                                        //             <p>${respo.District}, ${respon.Sub_District} </p>
+                                        //         </div>
+                                        //     `)   
+                                        // })
+
+
+                                    })
+                                })
+                            }
+                        })
+                    }else { // ini kalo gak ketemu di kecamatan, berarti ada di kelurahan
+                        console.log('harusnya gak masuk sini. berarti semuanya beda')
+                    }
+                })
+            }else { // render data dari full API
+
+            }
+        }else if (item.length === 0 || item.length < 0 ){
+            $('.render-kota-kec-alamat').css('display','none')
+        }else {
+
+        }
+
+
+    })
 })
 
 

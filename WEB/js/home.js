@@ -2638,3 +2638,19 @@ const final_register_customer=()=>{
 //    $('.inp-prod-bo').on('keyup',function(){
 //        
 //    })
+
+
+const onclick_kot_prov_tokped=(province,city)=>{
+    console.log(province,city)
+    $('#new_kota_prov_customer').val(`${province},${city}`)
+    $('.render-kota-kec-alamat').css('display','none')
+    $('#new_kel_kec_customer').removeAttr('disabled')
+}
+
+const onclick_kel_kec_tokped=(district,sub_district)=>{
+    console.log(district,sub_district)
+    $('#new_kel_kec_customer').val(`${district},${sub_district}`)
+    $('.render-kota-kec-alamat').css('display','none')
+    // $('.render-kota-kec-alamat').css('visibility','hidden')
+    
+}
