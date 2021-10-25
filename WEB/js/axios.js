@@ -6975,12 +6975,12 @@ const check_user_for_login=()=>{
                 var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
                 console.log(nama_customer)
                 $('#ncp-email').html(`${data_customer.Email}`)
-                $('#ncp-name').html(`${data_customer.First_Name}`)
+                $('#ncp-name').val(`${data_customer.First_Name}`)
+                $('#ncp-name-belakang').val(`${data_customer.Last_Name}`)
                 $('#ncp-lahir').html(new_tanggal_lahir)
-                $('#ncp-name').html(nama_customer)
-                $('#name-new-profile').html(nama_customer)
-                $('#ncp-hp-1').html(`${data_customer.Contact_Number_1}`)
-                $('#ncp-hp-2').html(`${data_customer.Contact_Number_2}`)
+                $('#name-new-profile').val(nama_customer)
+                $('#ncp-hp-1').val(`${data_customer.Contact_Number_1}`)
+                $('#ncp-hp-2').val(`${data_customer.Contact_Number_2}`)
                 $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
                 $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
                 $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
@@ -7037,7 +7037,7 @@ const check_user_for_login=()=>{
                             <p>${nama_customer}</p>
                             <p>${data_customer.Contact_Number_1}</p>
                             <p>${data_customer.Address_2}</p>
-                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer(,'${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_2}'2)">
+                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_2}',2)">
                                 Ubah Alamat                      
                             </div>
                         </div>
@@ -7050,7 +7050,7 @@ const check_user_for_login=()=>{
                     localStorage.setItem('limit_alamat',3)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
-                            <p>Alamat Pertama</p>
+                            <p>Alamat Ketiga</p>
                             <p>${nama_customer}</p>
                             <p>${data_customer.Contact_Number_1}</p>
                             <p>${data_customer.Address_3}</p>
@@ -7066,7 +7066,7 @@ const check_user_for_login=()=>{
                     localStorage.setItem('limit_alamat',4)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
-                            <p>Alamat Pertama</p>
+                            <p>Alamat Keempat</p>
                             <p>${nama_customer}</p>
                             <p>${data_customer.Contact_Number_1}</p>
                             <p>${data_customer.Address_4}</p>
@@ -7082,7 +7082,7 @@ const check_user_for_login=()=>{
                     localStorage.setItem('limit_alamat',5)
                     $('.new-content-isi-alamat').append(`
                         <div class="new-box-alamat">
-                            <p>Alamat Pertama</p>
+                            <p>Alamat Kelima</p>
                             <p>${nama_customer}</p>
                             <p>${data_customer.Contact_Number_1}</p>
                             <p>${data_customer.Address_5}</p>

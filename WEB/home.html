@@ -889,7 +889,7 @@
                                                 <img src="" id="img-profile-big" alt="">
                                             </div>
                                             <!-- <div class="ncb-upload-profile"> -->
-                                                <input type="file" id="inp-profile-img" name='Pilih Foto' title='Pilih Foto ya'>
+                                            <input type="file" id="inp-profile-img" name='Pilih Foto' title='Pilih Foto ya'>
                                             <!-- </div> -->
                                             <div class="ncb-max-size">
                                                 Besar file maksimum 2MB. Ekstensi file yang diterima:
@@ -902,34 +902,45 @@
                                             Ubah Biodata Diri
                                         </div>
                                         <div class="ncb-biodata">
-                                            <p>Nama</p>
-                                            <p id="ncp-name" class="name-new-profile"></p>
+                                            <p>Nama Depan</p>
+                                            <input type="text" id="ncp-name" class="name-new-profile">
+                                            <!-- <p id="ncp-name" class="name-new-profile"></p> -->
+                                        </div>
+                                        <div class="ncb-biodata">
+                                            <p>Nama Belakang</p>
+                                            <input type="text" id="ncp-name-belakang" class="name-new-profile">
+                                            <!-- <p id="ncp-name" class="name-new-profile"></p> -->
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Tanggal Lahir</p>
-                                            <p id="ncp-lahir"class="name-new-profile"></p>
+                                            <!-- <input type="text" id="ncp-lahir" class="name-new-profile">/ -->
+                                            <p id="ncp-lahir"class="name-new-profile-2"></p>
                                         </div>
-                                        <div class="ncb-biodata">
+                                        <!-- <div class="ncb-biodata">
                                             <p>Jenis Kelamin</p>
-                                            <p id="ncp-kelamin"class="name-new-profile">PRIA</p>
-                                        </div>
+                                            <input type="text" id="ncp-kelamin" class="name-new-profile">
+                                           
+                                        </div> -->
                                         <div class="ncb-ubah"class="name-new-profile">
                                             Ubah Kontak
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Email</p>
-                                            <p id="ncp-email"class="name-new-profile"></p>
+                                            <!-- <input type="text" id="ncp-email" class="name-new-profile"> -->
+                                            <p id="ncp-email"class="name-new-profile-2"></p>
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Nomor HP</p>
-                                            <p id="ncp-hp-1"class="name-new-profile"></p>
+                                            <input type="text" id="ncp-hp-1" class="name-new-profile">
+                                            <!-- <p id="ncp-hp-1"class="name-new-profile"></p> -->
                                         </div>
                                         <div class="ncb-biodata">
                                             <p>Nomor HP</p>
-                                            <p id="ncp-hp-2"class="name-new-profile"></p>
+                                            <input type="text" id="ncp-hp-2" class="name-new-profile">
+                                            <!-- <p id="ncp-hp-2"class="name-new-profile"></p> -->
                                         </div>
 
-                                        <div class="simpan_profile_new">
+                                        <div class="simpan_profile_new" onclick="simpan_profile_new()">
                                             Simpan
                                         </div>
     
@@ -1000,7 +1011,7 @@
                         <div class="btn-save-ganti-alamat" onclick="cancel_ganti_alamat()">
                             Batal
                         </div>
-                        <div class="btn-save-ganti-alamat">
+                        <div class="btn-save-ganti-alamat" onclick="save_ganti_alamat_tokped()">
                             Simpan
                         </div>
                     </div>

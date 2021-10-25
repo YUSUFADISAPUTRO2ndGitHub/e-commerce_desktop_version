@@ -1036,7 +1036,7 @@ const send_otp=()=>{
             
         })
     }).catch((err)=>{
-        
+
     })
 }
 
@@ -2403,6 +2403,7 @@ const replace_bo_to =(value,id)=>{
             $('#new_nama_customer').val(customer_name)
             $('#new_hp_customer').val(nomor_hp)
             $('.bnab-header').text('Alamat Baru')
+            $('.btn-save-ganti-alamat').attr('id',index)
             // console.log($('.ncb-ubah'),'testing')
             console.log(customer_name)
             console.log(alamat)
@@ -2413,6 +2414,8 @@ const replace_bo_to =(value,id)=>{
             $('#new_alamat_customer').val(alamat)
             $('#new_nama_customer').val(customer_name)
             $('#new_hp_customer').val(nomor_hp)
+            $('.bnab-header').text('Ubah Alamat')
+            $('.btn-save-ganti-alamat').attr('id',index)
             console.log($('#changeAddressCustomer'),'testing')
             console.log(customer_name)
             console.log(alamat)
@@ -2430,10 +2433,22 @@ const replace_bo_to =(value,id)=>{
        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
        .then((res)=>{
            var nama_customer = res.data.First_Name + ' ' + res.data.Last_Name
-            var limit_alamat  = localStorage.getItem('limit_alamat')
-            if(limit_alamat>0 && limit_alamat <=5){
+            var limit_alamat  = parseInt(localStorage.getItem('limit_alamat'))
+            console.log(limit_alamat)
+            if(limit_alamat>0 && limit_alamat <5){
                 var next_limit = limit_alamat+1
+                console.log(next_limit)
                 change_alamat_customer(nama_customer,res.data.Contact_Number_1,'',next_limit,'new')
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Alamat Maksimal 5`,
+                    timer:2000,
+                    
+                })
             }
            
        }).catch((err)=>{

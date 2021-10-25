@@ -386,64 +386,64 @@ $(document).on('click',".save-user",function(){
        }
        
        axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
-        headers:{
-            "Content-Type":'application/json'
-        },
-        "data":JSON.stringify({
-            "Customer_Code": data.customer_data.Customer_Code,
-            "First_Name": data.customer_data.First_Name,
-            "Last_Name": data.customer_data.Last_Name,
-            "Birthday": data.customer_data.Birthday,
-            "Created_Date": data.customer_data.Created_Date,
-            "Last_Login": data.customer_data.Last_Login,
-            "Email": data.customer_data.Email,
-            "Contact_Number_1": data.customer_data.Contact_Number_1,
-            "Contact_Number_2": data.customer_data.Contact_Number_2,
-            "Address_1": data.customer_data.Address_1,
-            "Address_2": data.customer_data.Address_2,
-            "Address_3": data.customer_data.Address_3,
-            "Address_4": data.customer_data.Address_4,
-            "Address_5": data.customer_data.Address_5,
-            "Status": data.customer_data.Status,
-            "User_Type": data.customer_data.User_Type,
-            "ktp":data.customer_data.ktp,
-            "account_number":data.customer_data.account_number
-        })
-    }).then((res)=>{
-        if(res.data != false){
-            // swal.fire("Simpan Data Berhasil", "", "success");
-            Swal.fire({
-                html:`
-                <div class="o-circle c-container__circle o-circle__sign--success">
-                    <div class="o-circle__sign"></div>  
-                </div>   
-                Simpan Data Berhasil
-                `,
-                timer:2000,
-                
+            headers:{
+                "Content-Type":'application/json'
+            },
+            "data":JSON.stringify({
+                "Customer_Code": data.customer_data.Customer_Code,
+                "First_Name": data.customer_data.First_Name,
+                "Last_Name": data.customer_data.Last_Name,
+                "Birthday": data.customer_data.Birthday,
+                "Created_Date": data.customer_data.Created_Date,
+                "Last_Login": data.customer_data.Last_Login,
+                "Email": data.customer_data.Email,
+                "Contact_Number_1": data.customer_data.Contact_Number_1,
+                "Contact_Number_2": data.customer_data.Contact_Number_2,
+                "Address_1": data.customer_data.Address_1,
+                "Address_2": data.customer_data.Address_2,
+                "Address_3": data.customer_data.Address_3,
+                "Address_4": data.customer_data.Address_4,
+                "Address_5": data.customer_data.Address_5,
+                "Status": data.customer_data.Status,
+                "User_Type": data.customer_data.User_Type,
+                "ktp":data.customer_data.ktp,
+                "account_number":data.customer_data.account_number
             })
-            $('#profileModal').modal('hide')
-            // localStorage.setItem('token',res.data)
-            
+        }).then((res)=>{
+            if(res.data != false){
+                // swal.fire("Simpan Data Berhasil", "", "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Simpan Data Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
+                $('#profileModal').modal('hide')
+                // localStorage.setItem('token',res.data)
+                
 
-        }else {
-            // swal.fire("Simpan Data Gagal", "", "info");
-            Swal.fire({
-                html:`
-                <div class="o-circle c-container__circle o-circle__sign--failure">
-                    <div class="o-circle__sign"></div>  
-                </div> 
-                Simpan Data Gagal`,
-                timer:2000,
-                
-            })
-            $('#profileModal').modal('hide')
-        }
-        
-        
-    }).catch((err)=>{
-        
-    })
+            }else {
+                // swal.fire("Simpan Data Gagal", "", "info");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Simpan Data Gagal`,
+                    timer:2000,
+                    
+                })
+                $('#profileModal').modal('hide')
+            }
+            
+            
+        }).catch((err)=>{
+            
+        })
 
     }).catch((err)=>{
 
@@ -454,7 +454,340 @@ $(document).on('click',".save-user",function(){
 
 })
 
+//ganti alamat baru tokped
+const save_ganti_alamat_tokped=()=>{
+    var token = localStorage.getItem('token')
+    var nama_customer = $('#new_nama_customer').val()
+    var alamat_customer = $('#new_alamat_customer').val()
+    var nohp_customer = $('#new_hp_customer').val()
+    var prov_city = $('#new_kota_prov_customer').val()
+    var kec_kel = $('#new_kel_kec_customer').val()
+    var prov_city_split = prov_city.split(',')
+    var kec_kel_split = kec_kel.split(',')
+    var province_customer = prov_city_split[0]
+    var city_customer = prov_city_split[1]
+    var kelurahan_customer = kec_kel_split[0]
+    var kecamatan_customer = kec_kel_split[1]
+    var full_alamat = alamat_customer + ' ' + province_customer + ' ' + city_customer + ' ' + kelurahan_customer + ' ' + kecamatan_customer
+    if(alamat_customer == undefined || alamat_customer == '') {
+        alamat_customer = ''
+        full_alamat = ''
+    }
+    if(province_customer == undefined || province_customer == '') {
+        province_customer = ''
+        full_alamat = ''
+    }
+    if(city_customer == undefined || city_customer == '') {
+        city_customer = ''
+        full_alamat = ''
+    }
+    if(kelurahan_customer == undefined || kelurahan_customer == '') {
+        kelurahan_customer = ''
+        full_alamat = ''
+    }
+    if(kecamatan_customer == undefined || kecamatan_customer == '') {
+        kecamatan_customer = ''
+        full_alamat = ''
+    }
+    console.log(alamat_customer,'alamat cust')
+    console.log(province_customer,'province cust')
+    console.log(city_customer,'province cust')
+    console.log(kelurahan_customer,'province cust')
+    console.log(kecamatan_customer,'province cust')
+    
+    var index = parseInt($('.btn-save-ganti-alamat').attr('id'))
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        console.log(index,'ini index alamat yang dipake')
+        if(index === 1 ){
+            var data = {
+                customer_data : {
+                   Customer_Code : token,
+                   First_Name : nama_customer,
+                   Last_Name : res.data.Last_Name,
+                   Birthday : res.data.Birthday,
+                   Created_Date : "CURRENT_TIMESTAMP()",
+                   Last_Login : "CURRENT_TIMESTAMP()",
+                   Email : res.data.Email,
+                   Contact_Number_1 : nohp_customer,
+                   Contact_Number_2 : res.data.Contact_Number_2,
+                   Address_1 : full_alamat,
+                   Address_2 : res.data.Address_2,
+                   Address_3 : res.data.Address_3,
+                   Address_4 : res.data.Address_4,
+                   Address_5 : res.data.Address_5,
+                   Status : "pending",
+                   User_Type : res.data.User_Type,
+                   account_number: res.data.account_number,
+                   referral_customer_code: res.data.referral_customer_code,
+                   ktp:res.data.ktp
+               }
+           }
+        }else if ( index === 2 ){
+            console.log('masuk ke 527')
+            var data = {
+                customer_data : {
+                   Customer_Code : token,
+                   First_Name : nama_customer,
+                   Last_Name : res.data.Last_Name,
+                   Birthday : res.data.Birthday,
+                   Created_Date : "CURRENT_TIMESTAMP()",
+                   Last_Login : "CURRENT_TIMESTAMP()",
+                   Email : res.data.Email,
+                   Contact_Number_1 : nohp_customer,
+                   Contact_Number_2 : res.data.Contact_Number_2,
+                   Address_1 : res.data.Address_1,
+                   Address_2 : full_alamat,
+                   Address_3 : res.data.Address_3,
+                   Address_4 : res.data.Address_4,
+                   Address_5 : res.data.Address_5,
+                   Status : "pending",
+                   User_Type : res.data.User_Type,
+                   account_number: res.data.account_number,
+                   referral_customer_code: res.data.referral_customer_code,
+                   ktp:res.data.ktp
+               }
+           }
+        }else if ( index === 3){
+            var data = {
+                customer_data : {
+                   Customer_Code : token,
+                   First_Name : nama_customer,
+                   Last_Name : res.data.Last_Name,
+                   Birthday : res.data.Birthday,
+                   Created_Date : "CURRENT_TIMESTAMP()",
+                   Last_Login : "CURRENT_TIMESTAMP()",
+                   Email : res.data.Email,
+                   Contact_Number_1 : nohp_customer,
+                   Contact_Number_2 : res.data.Contact_Number_2,
+                   Address_1 : res.data.Address_1,
+                   Address_2 : res.data.Address_2,
+                   Address_3 : full_alamat,
+                   Address_4 : res.data.Address_4,
+                   Address_5 : res.data.Address_5,
+                   Status : "pending",
+                   User_Type : res.data.User_Type,
+                   account_number: res.data.account_number,
+                   referral_customer_code: res.data.referral_customer_code,
+                   ktp:res.data.ktp
+               }
+           }
+        }else if (index === 4) {
+            var data = {
+                customer_data : {
+                   Customer_Code : token,
+                   First_Name : nama_customer,
+                   Last_Name : res.data.Last_Name,
+                   Birthday : res.data.Birthday,
+                   Created_Date : "CURRENT_TIMESTAMP()",
+                   Last_Login : "CURRENT_TIMESTAMP()",
+                   Email : res.data.Email,
+                   Contact_Number_1 : nohp_customer,
+                   Contact_Number_2 : res.data.Contact_Number_2,
+                   Address_1 : res.data.Address_1,
+                   Address_2 : res.data.Address_2,
+                   Address_3 : res.data.Address_3,
+                   Address_4 : full_alamat,
+                   Address_5 : res.data.Address_5,
+                   Status : "pending",
+                   User_Type : res.data.User_Type,
+                   account_number: res.data.account_number,
+                   referral_customer_code: res.data.referral_customer_code,
+                   ktp:res.data.ktp
+               }
+           }
+        }else {
+            var data = {
+                customer_data : {
+                   Customer_Code : token,
+                   First_Name : nama_customer,
+                   Last_Name : res.data.Last_Name,
+                   Birthday : res.data.Birthday,
+                   Created_Date : "CURRENT_TIMESTAMP()",
+                   Last_Login : "CURRENT_TIMESTAMP()",
+                   Email : res.data.Email,
+                   Contact_Number_1 : nohp_customer,
+                   Contact_Number_2 : res.data.Contact_Number_2,
+                   Address_1 : res.data.Address_1,
+                   Address_2 : res.data.Address_2,
+                   Address_3 : res.data.Address_3,
+                   Address_4 : res.data.Address_4,
+                   Address_5 : full_alamat,
+                   Status : "pending",
+                   User_Type : res.data.User_Type,
+                   account_number: res.data.account_number,
+                   referral_customer_code: res.data.referral_customer_code,
+                   ktp:res.data.ktp
+               }
+           }
+        }
+       axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
+            headers:{
+                "Content-Type":'application/json'
+            },
+            "data":JSON.stringify({
+                "Customer_Code": data.customer_data.Customer_Code,
+                "First_Name": data.customer_data.First_Name,
+                "Last_Name": data.customer_data.Last_Name,
+                "Birthday": data.customer_data.Birthday,
+                "Created_Date": data.customer_data.Created_Date,
+                "Last_Login": data.customer_data.Last_Login,
+                "Email": data.customer_data.Email,
+                "Contact_Number_1": data.customer_data.Contact_Number_1,
+                "Contact_Number_2": data.customer_data.Contact_Number_2,
+                "Address_1": data.customer_data.Address_1,
+                "Address_2": data.customer_data.Address_2,
+                "Address_3": data.customer_data.Address_3,
+                "Address_4": data.customer_data.Address_4,
+                "Address_5": data.customer_data.Address_5,
+                "Status": data.customer_data.Status,
+                "User_Type": data.customer_data.User_Type,
+                "ktp":data.customer_data.ktp,
+                "account_number":data.customer_data.account_number
+            })
+        }).then((res)=>{
+            if(res.data != false){
+                // swal.fire("Simpan Data Berhasil", "", "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Simpan Data Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
+                $('#newProfileModal').modal('hide')
+                $('#changeAddressCustomer').modal('hide')
+                // localStorage.setItem('token',res.data)
+                
 
+            }else {
+                // swal.fire("Simpan Data Gagal", "", "info");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Simpan Data Gagal`,
+                    timer:2000,
+                    
+                })
+                $('#newProfileModal').modal('hide')
+                $('#changeAddressCustomer').modal('hide')
+            }      
+        }).catch((err)=>{
+            
+        })
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+    
+    
+}
+
+
+// simpan profile tokped  save profile tokped
+
+const simpan_profile_new=()=>{
+    var nama_depan = $('#ncp-name').val()
+    var nama_belakang = $('#ncp-name-belakang').val()
+    var email = $('#ncp-email').val()
+    var no_hp_1 = $('#ncp-hp-1').val()
+    var no_hp_2 = $('#ncp-hp-2').val()
+    var token = localStorage.getItem('token')
+
+    console.log(nama_depan, nama_belakang,email,no_hp_1,no_hp_2)
+    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+    .then((res)=>{
+        var data = {
+            customer_data : {
+               Customer_Code : token,
+               First_Name : nama_depan,
+               Last_Name : nama_belakang,
+               Birthday : res.data.Birthday,
+               Created_Date : "CURRENT_TIMESTAMP()",
+               Last_Login : "CURRENT_TIMESTAMP()",
+               Email : res.data.Email,
+               Contact_Number_1 : no_hp_1,
+               Contact_Number_2 : no_hp_2,
+               Address_1 : res.data.Address_1,
+               Address_2 : res.data.Address_2,
+               Address_3 : res.data.Address_3,
+               Address_4 : res.data.Address_4,
+               Address_5 : res.data.Address_5,
+               Status : res.data.Status,
+               User_Type : res.data.User_Type,
+               account_number: res.data.account_number,
+               referral_customer_code: res.data.referral_customer_code,
+               ktp:res.data.ktp
+           }
+       }
+       axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
+            headers:{
+                "Content-Type":'application/json'
+            },
+            "data":JSON.stringify({
+                "Customer_Code": data.customer_data.Customer_Code,
+                "First_Name": data.customer_data.First_Name,
+                "Last_Name": data.customer_data.Last_Name,
+                "Birthday": data.customer_data.Birthday,
+                "Created_Date": data.customer_data.Created_Date,
+                "Last_Login": data.customer_data.Last_Login,
+                "Email": data.customer_data.Email,
+                "Contact_Number_1": data.customer_data.Contact_Number_1,
+                "Contact_Number_2": data.customer_data.Contact_Number_2,
+                "Address_1": data.customer_data.Address_1,
+                "Address_2": data.customer_data.Address_2,
+                "Address_3": data.customer_data.Address_3,
+                "Address_4": data.customer_data.Address_4,
+                "Address_5": data.customer_data.Address_5,
+                "Status": data.customer_data.Status,
+                "User_Type": data.customer_data.User_Type,
+                "ktp":data.customer_data.ktp,
+                "account_number":data.customer_data.account_number
+            })
+        }).then((res)=>{
+            if(res.data != false){
+                // swal.fire("Simpan Data Berhasil", "", "success");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Simpan Data Berhasil
+                    `,
+                    timer:2000,
+                    
+                })
+                $('#newProfileModal').modal('hide')
+                $('#changeAddressCustomer').modal('hide')
+                // localStorage.setItem('token',res.data)
+                
+
+            }else {
+                // swal.fire("Simpan Data Gagal", "", "info");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Simpan Data Gagal`,
+                    timer:2000,
+                    
+                })
+                $('#newProfileModal').modal('hide')
+                $('#changeAddressCustomer').modal('hide')
+            }      
+        }).catch((err)=>{
+            
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
 
 //  end UPDATE DATA BY USER
 
