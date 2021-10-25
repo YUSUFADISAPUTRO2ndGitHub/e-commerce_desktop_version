@@ -2048,30 +2048,11 @@ $('#checking_password_register').on('keyup',function(e){
                                                 `)  
                                             }
                                         })
-                                        // const final_sub_district = all_sub_district.reduce((acc,item)=>{ // untuk ngapus data yg sama
-                                        //     if(!acc.includes(item)){
-                                        //         acc.push(item);
-                                        //     }
-                                        //     return acc;
-                                        // },[])    
-                                        // console.log(final_sub_district) 
-                                        // final_sub_district.map((respon,id)=>{
-                                        //     $('.render-kota-kec-alamat').css('display','block')
-                                        //     $('.render-kota-kec-alamat').empty()
-                                        //     $('.render-kota-kec-alamat').append(`
-                                        //         <div class="card-kot-kec-alamat" onclick="onclick_kel_kec_tokped('${respo.District}','${respon.Sub_District}')">
-                                        //             <i class="fas fa-map-marker-alt"></i>
-                                        //             <p>${respo.District}, ${respon.Sub_District} </p>
-                                        //         </div>
-                                        //     `)   
-                                        // })
-
-
                                     })
                                 })
                             }
                         })
-                    }else { // ini kalo gak ketemu di kecamatan, berarti ada di kelurahan
+                    }else { 
                         console.log('harusnya gak masuk sini. berarti semuanya beda')
                     }
                 })
