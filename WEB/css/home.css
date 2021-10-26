@@ -619,7 +619,7 @@ body {
     display: flex;
     flex-direction: row;
     /* background-color: red; */
-    justify-content: flex-end;
+    justify-content: flex-start;
     z-index: 30;
     position:fixed;
 }
@@ -628,8 +628,8 @@ body {
     background-color: white;
     width: 80px;
     height: 280px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     border-bottom: 10px;
     /* border:1px solid #217384; */
     display: flex;
@@ -2631,12 +2631,12 @@ input:focus {
     position: absolute;
     z-index: 100;
     /* top: 100px; */
-    top:14.9%;
+    /* top:14.9%; */
     /* left:327px; */
     /* left: 22.8%; */
-    left:33%;
-    height: 350px;
-    width: 480px;
+    left:0%;
+    height: 100%;
+    width: 100%;
     display: none;
     transition: 2s ease-out;
     /* border-radius: 10px; */
@@ -2646,7 +2646,8 @@ input:focus {
     /* box-shadow: 5px 5px 20px #217283; */
     /* box-shadow:rgb(0 0 0 / 20%) 0px 5px 10px 10px; */
     /* padding-left:100px; */
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: white;
 }
 
 .modals-search-result {
@@ -4710,12 +4711,18 @@ input::-webkit-input-placeholder {
     position: relative;
     top:5px;
     height:50px;
-    width:40px;
+    width:40px !important;
+    min-width:40px !important;
     /* top: 20%; */
     /* left: 50%; */
     /* margin-left: -10%; */
     transition: 1s;
     margin:5px;
+}
+.whatsapp-body{
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 .fa-phone-alt{
     display: table;
@@ -4758,6 +4765,10 @@ img{
     top:5px;
     height:50px;
     width:40px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    min-width:40px !important;
     /* top: 20%; */
     /* left: 50%; */
     /* margin-left: -10%; */
@@ -4779,6 +4790,10 @@ img{
     top:5px;
     height:50px;
     width:40px;
+    min-width:40px !important;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     /* top: 20%; */
     /* left: 50%; */
     /* margin-left: -10%; */
@@ -7153,6 +7168,7 @@ border-radius:20px;
     z-index:102;
     transition:2s;
     border-radius:20px;
+    display:none;
 }
 
 .fa-arrow-circle-right{
@@ -8381,4 +8397,22 @@ border-radius:20px !important;
         background-color: #dff9fb;
         color:black;
 	}
+}
+
+.livechat-box{
+    width:100%;
+    height:100px;
+    background-color: red;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    /* position: fixed; */
+}
+.btn-livechat-box{
+    width:50px;
+    height:50px;
+    border:1px solid black;
+    padding:5px;
+    position: fixed;
+    background-color: blue;
 }

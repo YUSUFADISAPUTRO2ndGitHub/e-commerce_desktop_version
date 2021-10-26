@@ -123,8 +123,10 @@ $(function(){
     $('.box-information').show(1000)
     // SEARCH ITEM BACK TO NORMAL
     $('.box-render-search').css('display','none')
-    $('.input-name').css('border-bottom-left-radius','10px')
     $('.input-name').css('border-bottom-right-radius','10px')
+    $('.input-name').css('border-bottom-right-radius','10px')
+    $('.box-customer').css('border-top-right-radius','0px')
+    $('.box-customer').css('border-bottom-right-radius','0px')
     $('.input-name').val(null)
     //    $('.box-customer').toggle('active')
    })

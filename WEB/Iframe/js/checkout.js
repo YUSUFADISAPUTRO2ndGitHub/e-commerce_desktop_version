@@ -828,7 +828,7 @@ const new_checking_payment =()=>{
                                         // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
                                         localStorage.setItem('limit_alamat',1)
                                         window.parent.$('.new-content-isi-alamat').append(`
-                                            <div class="new-box-alamat" id="alamat-active">
+                                            <div class="new-box-alamat scaleWarning" id="alamat-active">
                                                 <p>Alamat Pertama</p>
                                                 <p>${nama_customer}</p>
                                                 <p>${data_customer.Contact_Number_1}</p>
