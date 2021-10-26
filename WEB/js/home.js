@@ -2608,7 +2608,8 @@ const final_register_customer=()=>{
                 "ktp":data.customer_data.ktp
             })
         }).then((res)=>{
-            
+            console.log(res.data)
+            console.log(data)
             
             if(res.data === true){
                 
@@ -2632,7 +2633,7 @@ const final_register_customer=()=>{
                     <div class="o-circle c-container__circle o-circle__sign--failure">
                         <div class="o-circle__sign"></div>  
                     </div> 
-                    Register Gagal`,
+                    Register Gagal,Kemungkinan Email Sudah digunakan`,
                     timer:2000,
                     
                 })
@@ -2668,4 +2669,13 @@ const onclick_kel_kec_tokped=(district,sub_district)=>{
     $('.render-kota-kec-alamat').css('display','none')
     // $('.render-kota-kec-alamat').css('visibility','hidden')
     
+}
+
+const open_marketplace=()=>{
+    $(this).scrollTop('.modals-marketplace')
+    $('.close-button').css('display','block')
+    $('.modals-marketplace').css('display','block')
+    $('.modals-marketplace').attr('src',`../../WEB/marketplace/link_collection.html`)
+    // $('.new-box-category').toggle(500)
+    $('.new-box-category').css('display','none')
 }

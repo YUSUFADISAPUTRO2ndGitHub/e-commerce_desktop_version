@@ -2627,6 +2627,27 @@ input:focus {
     /* padding-left:100px; */
     background-color: white;
 }
+.modals-marketplace{
+    position: absolute;
+    z-index: 100;
+    /* top: 100px; */
+    top:14.9%;
+    /* left:327px; */
+    /* left: 22.8%; */
+    left:15.8%;
+    height: 400px;
+    width: 400px;
+    display: none;
+    transition: 2s ease-out;
+    /* border-radius: 10px; */
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    border-top:1px solid #dedede;
+    /* box-shadow: 5px 5px 20px #217283; */
+    /* box-shadow:rgb(0 0 0 / 20%) 0px 5px 10px 10px; */
+    /* padding-left:100px; */
+    background-color: white;
+}
 
 .modals-search-result {
     z-index: 99;
@@ -7519,7 +7540,7 @@ border-radius:20px !important;
 .name-new-profile-2 {
     margin:0px;
     
-    font-size:13px;
+    font-size:12px;
     font-weight:700;
     color:#636e72;
     /* border-radius:5px; */
@@ -7537,6 +7558,7 @@ border-radius:20px !important;
 }
 .name-new-profile:focus{
     outline: none;
+    color:#27aae1;
 }
 #name-new-verified {
     margin:0px;
@@ -7702,6 +7724,7 @@ border-radius:20px !important;
     font-size:11px;
     width:30%;
     color:black;
+    min-width: 30%;
 }
 .ncb-biodata #name-new-profile{
     font-size:11px;
@@ -7743,6 +7766,7 @@ border-radius:20px !important;
     flex-direction: column;
     /* padding:15px; */
     /* padding-top:30px; */
+    padding-top:10px;
     padding-left:15px;
     padding-right:15px;
 
@@ -7920,7 +7944,7 @@ border-radius:20px !important;
 }
 
 #alamat-active {
-    border:1px solid #dff9fb !important;
+    border:1px solid #dff9fb;
     background-color: #dff9fb;
 }
 
@@ -8328,3 +8352,33 @@ border-radius:20px !important;
     cursor: pointer;
 }
 
+
+/* alert effect testing */
+
+.scaleWarning {
+    animation: scaleWarning 1s infinite;
+    animation-iteration-count: 3;
+    border:1px solid #dff9fb !important;
+    background-color: #ffcccc;
+}
+
+
+@keyframes scaleWarning {
+	0% {
+		transform: scale(1);
+        background-color: #dff9fb;
+        color:black;
+	}
+	
+	50% {
+		transform: scale(1.04);
+        background-color: #ff7675;
+        color:white;
+	}
+	
+	100% {
+		transform: scale(1);
+        background-color: #dff9fb;
+        color:black;
+	}
+}

@@ -1,19 +1,19 @@
 $(document).ready(async function(){
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
         if(response != false){
-            if(response.Address_1 != "NULL" && response.Address_1 != null && response.Address_1 != "undefined"){
+            if(response.Address_1 != "NULL" && response.Address_1 != null && response.Address_1 != "undefined" && response.Address_1 != ''){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_1 + "\">" + response.Address_1 + "</option>");
             }
-            if(response.Address_2 != "NULL" && response.Address_2 != null && response.Address_2 != "undefined"){
+            if(response.Address_2 != "NULL" && response.Address_2 != null && response.Address_2 != "undefined" && response.Address_2 != ''){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_2 + "\">" + response.Address_2 + "</option>");
             }
-            if(response.Address_3 != "NULL" && response.Address_3 != null && response.Address_3 != "undefined"){
+            if(response.Address_3 != "NULL" && response.Address_3 != null && response.Address_3 != "undefined" && response.Address_3 != ''){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_3 + "\">" + response.Address_3 + "</option>");
             }
-            if(response.Address_4 != "NULL" && response.Address_4 != null && response.Address_4 != "undefined"){
+            if(response.Address_4 != "NULL" && response.Address_4 != null && response.Address_4 != "undefined" && response.Address_4 != ''){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_4 + "\">" + response.Address_4 + "</option>");
             }
-            if(response.Address_5 != "NULL" && response.Address_5 != null && response.Address_5 != "undefined"){
+            if(response.Address_5 != "NULL" && response.Address_5 != null && response.Address_5 != "undefined" && response.Address_5 != ''){
                 $("#sub-saved-address").append("<option value=\"" + response.Address_5 + "\">" + response.Address_5 + "</option>");
             }
         }
@@ -714,15 +714,256 @@ const new_checking_payment =()=>{
         
         
         var alamat = $('#address-selection option:selected').val()
+        var alamat_pilihan = $(`#sub-saved-address option:selected`).val()
         var province = localStorage.getItem('province_customer')
         var city = localStorage.getItem('city_customer')
         var district = localStorage.getItem('district_customer')
         var sub_district = localStorage.getItem('sub_district_customer')
+        var default_address = 'Jl. Dr. Susilo Raya No.C2 RT.1/RW.5 Grogol Kec. Grogol petamburan Kota Jakarta Barat DKI Jakarta'
+
 
         if(alamat == 'TO SAVED ADDRESS'){
             // requestToFinish()
             
-            newRequestToFinish()
+
+            if(alamat_pilihan == default_address){
+                // alert('alamat masih default')
+                Swal.fire({
+                    // title: 'Loading Your Request',
+                    html: `
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Mohon rubah alamat anda terlebih dahulu
+                    `,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                        const content = Swal.getContent()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            close_all_open_window()
+                            // $('#newProfileModal',window.parent.parent).modal('show')
+                            
+                            var token = localStorage.getItem('token')
+                            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                            .then((res)=>{ 
+                                var data_customer = res.data
+                                
+                                if(data_customer){
+                                    if(data_customer.User_Type === 'Customer'){
+                                        window.parent.$('.btn-status-barang').css('display','none')
+                                        window.parent.$('.sup_delete').css('display','flex')
+                                        window.parent.$('.box-kumpulkan-profile').css('top','70px')
+
+                                        window.parent.$('#prof_perusahaan_nama').css('display','none')
+                                        window.parent.$('#prof_npwp').css('display','none')
+                                        window.parent.$('#prof_nik').css('display','none')
+                                        
+                                        window.parent.$('#prof_thn').css('display','flex')
+                                        window.parent.$('#prof_bln').css('display','flex')
+                                        window.parent.$('#prof_tgl').css('display','flex')
+                                        window.parent.$('#id_ref_code').css('visibility','show')
+
+                                        // $('.sup_delete').css('left','20px')
+                                    }else {
+                                        window.parent.$('.btn-status-barang').css('display','block')
+                                        window.parent.$('.sup_delete').css('display','none')
+                                        window.parent.$('.box-kumpulkan-profile').css('top','0px')
+                                        window.parent.$('#id_ref_code').css('visibility','hidden')
+
+                                        window.parent.$('#prof_perusahaan_nama').css('display','flex')
+                                        window.parent.$('#prof_npwp').css('display','flex')
+                                        window.parent.$('#prof_nik').css('display','flex')
+                                        
+                                        window.parent.$('#prof_thn').css('display','none')
+                                        window.parent.$('#prof_bln').css('display','none')
+                                        window.parent.$('#prof_tgl').css('display','none')
+                                    }
+
+                                    axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                                    .then((res)=>{
+                                        
+                                        if(res.data){
+                                            window.parent.$(`#img-profile-id`).attr(`src`, `${res.data}`);
+                                            window.parent.$(`#img-profile-big`).attr(`src`, `${res.data}`);
+                                        }else {
+                                            window.parent.$(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
+                                            window.parent.$(`#img-profile-big`).attr(`src`, `./img/accounts.png`);
+                                        }
+                                    }).catch((err)=>{
+                                        
+                                    })
+                        
+                                    var tahun = data_customer.Birthday.slice(0,4)
+                                    var bulan = data_customer.Birthday.slice(5,7)
+                                    var hari = data_customer.Birthday.slice(8,10)
+                                    var new_tanggal_lahir = data_customer.Birthday
+                                    var newReferralCode = data_customer.Customer_Code
+                                    var tanggal_lahir = hari + ' ' + bulan + ' ' + tahun
+                                    var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
+                                    console.log(nama_customer)
+                                    window.parent.$('#ncp-email').html(`${data_customer.Email}`)
+                                    window.parent.$('#ncp-name').val(`${data_customer.First_Name}`)
+                                    window.parent.$('#ncp-name-belakang').val(`${data_customer.Last_Name}`)
+                                    window.parent.$('#ncp-lahir').html(new_tanggal_lahir)
+                                    window.parent.$('#name-new-profile').val(nama_customer)
+                                    window.parent.$('#ncp-hp-1').val(`${data_customer.Contact_Number_1}`)
+                                    window.parent.$('#ncp-hp-2').val(`${data_customer.Contact_Number_2}`)
+                                    window.parent.$('.new-content-isi-alamat').empty()
+
+
+                                    if(data_customer.Address_1 == ''){
+                                        // 
+                                    }else{
+                                        // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
+                                        localStorage.setItem('limit_alamat',1)
+                                        window.parent.$('.new-content-isi-alamat').append(`
+                                            <div class="new-box-alamat" id="alamat-active">
+                                                <p>Alamat Pertama</p>
+                                                <p>${nama_customer}</p>
+                                                <p>${data_customer.Contact_Number_1}</p>
+                                                <p>${data_customer.Address_1}</p>
+                                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_1}',1)">
+                                                    Ubah Alamat                      
+                                                </div>
+                                            </div>
+                                        `)
+                                        // $('.new-profile-box').append(`
+                                        //     <div class="login-name-3">
+                                        //         <div class="box-name">
+                                        //             <p>Alamat Lengkap</p>
+                                        //         </div>
+                                        //         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
+                                        //     </div> 
+                                        
+                                        // `)
+                                        // 
+                                    }
+                                    if(data_customer.Address_2 == ''){
+                                        // 
+                                    }else{
+                                        localStorage.setItem('limit_alamat',2)
+                                        window.parent.$('.new-content-isi-alamat').append(`
+                                            <div class="new-box-alamat">
+                                                <p>Alamat Kedua</p>
+                                                <p>${nama_customer}</p>
+                                                <p>${data_customer.Contact_Number_1}</p>
+                                                <p>${data_customer.Address_2}</p>
+                                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_2}',2)">
+                                                    Ubah Alamat                      
+                                                </div>
+                                            </div>
+                                        `)
+                                        // 
+                                    }
+                                    if(data_customer.Address_3 == ''){
+                                        // 
+                                    }else{
+                                        localStorage.setItem('limit_alamat',3)
+                                        window.parent.$('.new-content-isi-alamat').append(`
+                                            <div class="new-box-alamat">
+                                                <p>Alamat Ketiga</p>
+                                                <p>${nama_customer}</p>
+                                                <p>${data_customer.Contact_Number_1}</p>
+                                                <p>${data_customer.Address_3}</p>
+                                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_3}',3)">
+                                                    Ubah Alamat                      
+                                                </div>
+                                            </div>
+                                        `)
+                                    }
+                                    if(data_customer.Address_4 == ''){
+                                        // 
+                                    }else{
+                                        localStorage.setItem('limit_alamat',4)
+                                        window.parent.$('.new-content-isi-alamat').append(`
+                                            <div class="new-box-alamat">
+                                                <p>Alamat Keempat</p>
+                                                <p>${nama_customer}</p>
+                                                <p>${data_customer.Contact_Number_1}</p>
+                                                <p>${data_customer.Address_4}</p>
+                                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_4}',4)">
+                                                    Ubah Alamat                      
+                                                </div>
+                                            </div>
+                                        `)
+                                    }
+                                    if(data_customer.Address_5 == ''){
+                                        // 
+                                    }else{
+                                        localStorage.setItem('limit_alamat',5)
+                                        window.parent.$('.new-content-isi-alamat').append(`
+                                            <div class="new-box-alamat">
+                                                <p>Alamat Kelima</p>
+                                                <p>${nama_customer}</p>
+                                                <p>${data_customer.Contact_Number_1}</p>
+                                                <p>${data_customer.Address_5}</p>
+                                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_5}',5)">
+                                                    Ubah Alamat                      
+                                                </div>
+                                            </div>
+                                        `)
+                                    }
+                                    
+                                    $('#newProfileModal').modal('show')
+                                }else {
+                                    
+                                    // $('#loginModal').modal('show') // login lama
+                                    window.parent.$('#newloginTokpedModal').modal('show') // login lama
+                                    $('.box_information_login').css('display','flex')
+                                    $('#checking_email_login').empty()
+                                    $('#checking_password_login').empty()
+                                    $('#checking_email_register').empty()
+                                    $('#checking_email_register_2').empty()
+                                    $('#checking_password_register').empty()
+                                    $('#checking_nama_register').empty()
+                                    $('#checking_nohp_register').empty()
+                                    // $('#newProfileModal').modal('show')
+                                }
+                                // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL
+                                window.parent.$('.option-5').removeClass('background_grey')
+                                window.parent.$('.option-4').removeClass('background_grey')
+                                window.parent.$('.option-3').removeClass('background_grey')
+                                window.parent.$('.option-2').removeClass('background_grey')
+                                window.parent.$('.option-1').removeClass('background_grey')
+                                window.parent.$('.option-0').removeClass('background_grey')
+
+                                // NGAPUS CATEGORY PRODUCT
+                                $('.new-box-category').css('display','none')
+                            }).catch((err)=>{
+                                
+                            })
+                                $('.closeByLogin').css('display','none')
+                                $('.option-0').removeClass("background_grey")
+                                $('.option-1').removeClass("background_grey")
+                                $('.option-2').removeClass("background_grey")
+                                $('.option-3').removeClass("background_grey")
+                                // SEARCH ITEM BACK TO NORMAL
+                                $('.box-render-search').css('display','none')
+                                $('.input-name').css('border-bottom-left-radius','10px')
+                                $('.input-name').css('border-bottom-right-radius','10px')
+                                // $('.option-4').removeClass("background_grey")
+                            }
+                            window.parent.$('#newProfileModal').modal('show')
+                            })       
+                        }else {
+                            newRequestToFinish()
+                        }
+                        window.parent.$('#nav-alamat-tab').attr('class','nav-link active')
+                        window.parent.$('#nav-biodata-tab').attr('class','nav-link')
+                        window.parent.$('#nav-content-alamat').attr('class','tab-pane fade active show')
+                        window.parent.$('#nav-content-biodata').attr('class','tab-pane fade')
+                    
         }else {
             if(isSuccess){
                 // 
@@ -862,7 +1103,7 @@ const newPersonalDetailsWithCurrentAddress =()=>{
     var city_customer = localStorage.getItem('city_customer')
     var district_customer = localStorage.getItem('district_customer')
     var sub_district_customer = localStorage.getItem('sub_district_customer')
-
+    
     if(province_customer !== undefined && city_customer !== undefined && district_customer !== undefined &&
     sub_district_customer !== undefined
     ){ // check local storage kalo misal ada berarti ngambil data dr local storage
@@ -872,6 +1113,8 @@ const newPersonalDetailsWithCurrentAddress =()=>{
         sub_district_pilihan = sub_district_customer
     }
 
+    
+    
     getCustomersWithCustomerNo(localStorage.getItem("token")).done(function (response) {
         request = {
             customerId: localStorage.getItem("token"),
