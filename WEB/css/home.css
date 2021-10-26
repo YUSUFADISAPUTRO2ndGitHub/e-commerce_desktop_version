@@ -8406,13 +8406,84 @@ border-radius:20px !important;
     display: flex;
     justify-content: flex-end;
     align-content: center;
+    padding:10px;
+    
     /* position: fixed; */
 }
 .btn-livechat-box{
-    width:50px;
-    height:50px;
-    border:1px solid black;
-    padding:5px;
+    width:150px;
+    height:35px;
+    /* border:1px solid #dedede; */
+    /* padding:5px; */
     position: fixed;
-    background-color: blue;
+    /* background-color: blue; */
+    right:2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    /* border-radius:50%; */
+    border-radius:25px;
+    /* padding:10px; */
+    background-color: #0264c8;
+    z-index:80;
+    color:white;
+    bottom:2%;
+    transition:1s;
+
+}
+.btn-livechat-box:hover{
+    cursor: pointer;
+    color:white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+
+}
+/* .btn-livechat-box:hover .box-question-traveloka {
+    width:100%;
+} */
+#chat-us-livechat{
+    color:#f79622;
+    display: none;
+    overflow: hidden;
+    transition: 0.2s;
+}
+#need-help-livechat{
+    display: block;
+    color:white;
+    transition: 0.2s;
+    overflow: hidden;
+}
+.fa-question {
+    font-size:20px !important;
+}
+
+.btn-livechat-box img{
+    width:90%;
+    height:90%;
+    border-radius:50%;
+}
+.btn-livechat-box i {
+    font-size:20px;
+    /* background-color: white; */
+    color:#f79622;
+    position: relative;
+    top:9px;
+}
+.box-question-traveloka{
+    width:50px;
+    height:100%;
+    border-radius:35px;
+    background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-direction: row;
+    transition:2s;
+
+}
+.btn-livechat-box p {
+    margin:0px !important;
+    position: relative;
+    top:5px;
+    left:-7px;
 }

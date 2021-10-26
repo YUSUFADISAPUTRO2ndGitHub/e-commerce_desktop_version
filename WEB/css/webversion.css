@@ -1,10 +1,43 @@
 /* LINK COLLECTION MARKET PLACE */
-@media only screen and (max-width: 419px) {
+@media (max-width: 415px) {
     .link-group-area{
-        width:500px !important;
-        background-color: red;
+        width:100%;
+        /* height:50%; */
+        /* position: absolute; */
+        /* background-color: red; */
     }
+    .container-lc{
+        display: flex;
+        /* justify-content: center; */
+        align-content: center;
+        padding:10px;
+        position: relative;
+        left:15px;
+    }
+    
   }
-
+  @media (max-width: 365px) {
+    .link-group-area{
+        width:100%;
+        /* height:600px; */
+        position: absolute;
+        /* height:50%; */
+        /* position: absolute; */
+        /* background-color: red; */
+    }
+    .container-lc{
+        display: flex;
+        /* justify-content: center; */
+        align-content: center;
+        padding:10px;
+        position: relative;
+        left:35px;
+    }
+    .card-hotline{
+        position:relative;
+        left:12px;
+    }
+    
+  }
 
 /* LINK COLLECTION MARKET PLACE */

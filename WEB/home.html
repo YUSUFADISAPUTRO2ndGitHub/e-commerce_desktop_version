@@ -1966,11 +1966,16 @@
                     </div>
                 </div>
             </div>
-            <div class="livechat-box">
-                <div class="btn-livechat-box">
-
-                </div>
-            </div>
+            <!-- <div class="livechat-box"> -->
+                <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" class="btn-livechat-box" style="text-decoration: none;">
+                    <div class="box-question-traveloka">
+                        <i class="fas fa-question"></i>
+                        <p id="chat-us-livechat">Chat Us!</p>
+                    </div>
+                    <p id="need-help-livechat">Need help?</p>
+                </a>
+                
+            <!-- </div> -->
           
     
             <div class="small-ads">
@@ -2388,6 +2393,21 @@ document.addEventListener( 'DOMContentLoaded', function () {
 // 		height: '100vh',
 // 	} ).mount();
 // } );
+    $('.box-question-traveloka').mouseover(function(){
+        $('.box-question-traveloka').css('width','100%')
+        setTimeout(()=>{
+            $('#need-help-livechat').css('display','none')
+            $('#chat-us-livechat').css('display','block')
+        },200)
+    })
+    $('.box-question-traveloka').mouseout(function(){
+        $('.box-question-traveloka').css('width','50px')
+        setTimeout(()=>{
+            $('#chat-us-livechat').css('display','none')
+            $('#need-help-livechat').css('display','block')
+        },200)
+    })
+    
     $( ".whatsapp-border" ).mouseout(function() {
         $( ".fa-phone-alt" ).css("color", "rgba(0, 0, 0, 0.2");
     });

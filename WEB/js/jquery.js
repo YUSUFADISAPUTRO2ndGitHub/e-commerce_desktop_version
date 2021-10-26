@@ -3,6 +3,7 @@
 
 $(function(){
 
+    
 
 
 
@@ -2070,5 +2071,6 @@ $('#checking_password_register').on('keyup',function(e){
 
     })
 })
+
 
 
