@@ -105,7 +105,7 @@
             z-index: 100;
             /* right: 100px; */
             /* background-color: transparent; */
-            right:11%;
+            right:10.3%;
             top: 15%;
             width: 500px;
             height: 500px;
@@ -1621,15 +1621,19 @@
 
     <!-- loading page rencananyan -->
     <div class="loading-page-awal">
-        <div class="loader">
+        <!-- <div class="loader">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </div> -->
 
+        <section class="bg"></section>
+        <div class="loading-text">Loading 0% </div>
        
     </div>  
     <!-- loading page rencananyan -->
+
+    <!-- MAIN PAGE HOME -->
     <div class="main-structure">
         
         <div class="main-about">
@@ -1894,19 +1898,24 @@
                 <!-- </div> -->
                 <div class="ads-mixed" >
                     <div class="box-img-slider-header">
-                        <div id="image-slider" class="splide">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    <li class="splide__slide ">
-                                        <img src="./img/promo1.png" style="height:300px;border-radius:20px;" class="splide_img_1">
-                                    </li>
-                                    <li class="splide__slide">
-                                        <img src="./img/promo5.png" style="height:300px;border-radius:20px;" class="splide_img_1">
-                                    </li>
-                                    <li class="splide__slide">
-                                        <img src="./img/promo2.png" style="height:300px;border-radius:20px" class="splide_img_1">
-                                    </li>
-                                </ul>
+                        <div class="carousel-container">
+                            <div class="mySlides animate">
+                              <img src="./img/promo1.png" alt="slide" />
+                            </div>       
+                            <div class="mySlides animate">
+                              <img src="./img/promo5.png" alt="slide" />
+                            </div>
+                            <div class="mySlides animate">
+                              <img src="./img/promo3.png" alt="slide" />
+                            </div>                          
+                            <!-- Next and previous buttons -->
+                            <a class="prev" onclick="prevSlide()">&#10094;</a>
+                            <a class="next" onclick="nextSlide()">&#10095;</a>
+                            <!-- The dots/circles -->
+                            <div class="dots-container">
+                              <span class="dots" onclick="currentSlide(1)"></span>
+                              <span class="dots" onclick="currentSlide(2)"></span>
+                              <span class="dots" onclick="currentSlide(3)"></span>
                             </div>
                         </div>
                     </div>
@@ -1914,43 +1923,50 @@
                 </div>
                 <div class="ads-3 animated-background" id="expand-box">
                     <div class="ads-3-new-box">
-                        <div id="image-slider-2" class="splide">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    <li class="splide__slide">
-                                        <img src="./img/promo5.png" style="height:300px;border-radius:20px;" class="splide_img_1">
-                                    </li>
-                                    <li class="splide__slide ">
-                                        <img src="./img/promo1.png" style="height:300px;border-radius:20px;" class="splide_img_1">
-                                    </li>
-                                    <li class="splide__slide">
-                                        <img src="./img/promo2.png" style="height:300px;border-radius:20px" class="splide_img_1">
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="box-new-slider-tr">
+                            <div class="carousel-container-tr">
+                                <div class="mySlides-tr animate">
+                                    <img src="./img/promo5.png" alt="slide" />
+                                </div>       
+                                <div class="mySlides-tr animate">
+                                    <img src="./img/promo1.png" alt="slide" />
+                                </div>
+                                <div class="mySlides-tr animate">
+                                    <img src="./img/promo2.png" alt="slide" />
+                                </div>                          
+                                <!-- Next and previous buttons -->
+                                <a class="prev-tr" onclick="prevSlideTR()">&#10094;</a>
+                                <a class="next-tr" onclick="nextSlideTR()">&#10095;</a>
+                                <!-- The dots/circles -->
+                                <div class="dots-container-tr">
+                                    <span class="dots-tr" onclick="currentSlideTR(1)"></span>
+                                    <span class="dots-tr" onclick="currentSlideTR(2)"></span>
+                                    <span class="dots-tr" onclick="currentSlideTR(3)"></span>
+                                </div>
+                            </div>                        
                         </div>
-                        <div id="image-slider-3" class="splide">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    <li class="splide__slide">
-                                        <img src="./img/promo2.png" style="height:300px;border-radius:20px" class="splide_img_1">
-                                    </li>
-                                    <li class="splide__slide">
-                                        <img src="./img/promo5.png" style="height:300px;border-radius:20px;" class="splide_img_1">
-                                    </li>
-                                    <li class="splide__slide ">
-                                        <img src="./img/promo1.png" style="height:300px;border-radius:20px;" class="splide_img_1">
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="box-new-slider-br">
+                            <div class="carousel-container-br">
+                                <div class="mySlides-br animate">
+                                    <img src="./img/promo5.png" alt="slide" />
+                                </div>       
+                                <div class="mySlides-br animate">
+                                    <img src="./img/promo1.png" alt="slide" />
+                                </div>
+                                <div class="mySlides-br animate">
+                                    <img src="./img/promo2.png" alt="slide" />
+                                </div>                          
+                                <!-- Next and previous buttons -->
+                                <a class="prev-br" onclick="prevSlideBR()">&#10094;</a>
+                                <a class="next-br" onclick="nextSlideBR()">&#10095;</a>
+                                <!-- The dots/circles -->
+                                <div class="dots-container-br">
+                                    <span class="dots-br" onclick="currentSlideBR(1)"></span>
+                                    <span class="dots-br" onclick="currentSlideBR(2)"></span>
+                                    <span class="dots-br" onclick="currentSlideBR(3)"></span>
+                                </div>
+                            </div>                        
                         </div>
-                        
-                        <!-- <div class="img-ads-3-right">
-                            <img src="./img/promo1.png" alt="">
-                        </div> -->
-                        <!-- <div class="img-ads-3-right">
-                            <img src="./img/promo1.png" alt="">
-                        </div> -->
                     </div>
                     
                 </div>
@@ -1967,12 +1983,12 @@
                 </div>
             </div>
             <!-- <div class="livechat-box"> -->
-                <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" class="btn-livechat-box" style="text-decoration: none;">
+                <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" target="_blank"class="btn-livechat-box" style="text-decoration: none;">
                     <div class="box-question-traveloka">
                         <i class="fas fa-question"></i>
                         <p id="chat-us-livechat">Chat Us!</p>
                     </div>
-                    <p id="need-help-livechat">Need help?</p>
+                    <p id="need-help-livechat">Bantuan</p>
                 </a>
                 
             <!-- </div> -->
@@ -2329,62 +2345,62 @@
         </div> 
         <div class="copyright-box">
             <p>Copyright © PT SOLUSI DIGITAL INTERNUSA | Call Center: 0853 1580 1777</p>
-        </div>
-         
+        </div>   
     </div>
+    <!-- MAIN PAGE HOME -->
 </body>
 
 <script>
     AOS.init();
 
-    document.addEventListener( 'DOMContentLoaded', function () {
-	new Splide( '#image-slider', {
-        'cover'      : true,
-        type:'loop',
-        // heightRatio:'1',
-		height:'330px',
-        width:'100%',
-        borderRadius:'10px',
-        // autoWidth: true,
-        // autoWidth:true,
-        // autoplay:true,
-        interval:5000,
-        speed:1000
-        // resetProgress:true
-	} ).mount();
-} );
-document.addEventListener( 'DOMContentLoaded', function () {
-	new Splide( '#image-slider-2', {
-        'cover'      : true,
-        type:'loop',
-        // heightRatio:'1',
-		height:'150px',
-        width:'90%',
-        borderRadius:'10px',
-        // autoWidth: true,
-        // autoWidth:true,
-        autoplay:true,
-        interval:4000,
-        speed:1000
-        // resetProgress:true
-	} ).mount();
-} );
-document.addEventListener( 'DOMContentLoaded', function () {
-	new Splide( '#image-slider-3', {
-        'cover'      : true,
-        type:'loop',
-        // heightRatio:'1',
-		height:'150px',
-        width:'90%',
-        borderRadius:'10px',
-        // autoWidth: true,
-        // autoWidth:true,
-        autoplay:true,
-        interval:3000,
-        speed:1000
-        // resetProgress:true
-	} ).mount();
-} );
+//     document.addEventListener( 'DOMContentLoaded', function () {
+// 	new Splide( '#image-slider', {
+//         'cover'      : true,
+//         type:'loop',
+//         // heightRatio:'1',
+// 		height:'330px',
+//         width:'100%',
+//         borderRadius:'10px',
+//         // autoWidth: true,
+//         // autoWidth:true,
+//         // autoplay:true,
+//         interval:5000,
+//         speed:1000
+//         // resetProgress:true
+// 	} ).mount();
+// } );
+// document.addEventListener( 'DOMContentLoaded', function () {
+// 	new Splide( '#image-slider-2', {
+//         'cover'      : true,
+//         type:'loop',
+//         // heightRatio:'1',
+// 		height:'150px',
+//         width:'90%',
+//         borderRadius:'10px',
+//         // autoWidth: true,
+//         // autoWidth:true,
+//         autoplay:true,
+//         interval:4000,
+//         speed:1000
+//         // resetProgress:true
+// 	} ).mount();
+// } );
+// document.addEventListener( 'DOMContentLoaded', function () {
+// 	new Splide( '#image-slider-3', {
+//         'cover'      : true,
+//         type:'loop',
+//         // heightRatio:'1',
+// 		height:'150px',
+//         width:'90%',
+//         borderRadius:'10px',
+//         // autoWidth: true,
+//         // autoWidth:true,
+//         autoplay:true,
+//         interval:3000,
+//         speed:1000
+//         // resetProgress:true
+// 	} ).mount();
+// } );
 
 
 // document.addEventListener( 'DOMContentLoaded', function () {
@@ -2393,19 +2409,22 @@ document.addEventListener( 'DOMContentLoaded', function () {
 // 		height: '100vh',
 // 	} ).mount();
 // } );
-    $('.box-question-traveloka').mouseover(function(){
+    $('.btn-livechat-box').mouseover(function(){
         $('.box-question-traveloka').css('width','100%')
         setTimeout(()=>{
             $('#need-help-livechat').css('display','none')
             $('#chat-us-livechat').css('display','block')
-        },200)
+        },500)
     })
-    $('.box-question-traveloka').mouseout(function(){
+    $('.btn-livechat-box').mouseout(function(){
         $('.box-question-traveloka').css('width','50px')
+        
+        
+        
         setTimeout(()=>{
             $('#chat-us-livechat').css('display','none')
             $('#need-help-livechat').css('display','block')
-        },200)
+        },500)
     })
     
     $( ".whatsapp-border" ).mouseout(function() {
@@ -2450,6 +2469,8 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
  
 </script>
+
+
 
 <script>
     var token  = localStorage.getItem('token')
@@ -2585,6 +2606,227 @@ function dragElement(elmnt) {
 <script src="./css/splide-2.4.21/dist/js/splide.min.js"></script>
 <script src="./js/find_province_city.js"></script>
 <script type="text/javascript" src="./js/axios.js"></script>
+<!-- BLURRED LOADING -->
+<script>
+    // blurred loading
+
+    const bg = document.querySelector(".bg");
+    const loadText = document.querySelector(".loading-text");
+
+    let load = 0;
+    let int = setInterval(blurring,50);
+
+    function blurring(){
+    load++
+    if(load>99){
+        clearInterval(int);
+        $('.loading-page-awal').css('display','none').fadeOut()
+        // $('.main-structure').css('visibility','visible')
+        $('.main-structure').css('display','flex')
+    }
+    loadText.innerText = `${load}%`
+    loadText.style.opacity = scale(load, 0, 100, 1, 0)
+    bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`
+    }
+    const scale = (num, in_min, in_max, out_min, out_max) => {
+    return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+    }
+// Loading blurred
+</script>
+<!-- BLURRED LOADING -->
+<!-- SLIDER LEFT BIG -->
+<script>
+    let slideIndex = 0;
+showSlides();
+
+// Next-previous control
+function nextSlide() {
+  slideIndex++;
+  showSlides();
+  timer = _timer; // reset timer
+}
+
+function prevSlide() {
+  slideIndex--;
+  showSlides();
+  timer = _timer;
+}
+
+// Thumbnail image controlls
+function currentSlide(n) {
+  slideIndex = n - 1;
+  showSlides();
+  timer = _timer;
+}
+
+function showSlides() {
+  let slides = document.querySelectorAll(".mySlides");
+  let dots = document.querySelectorAll(".dots");
+
+  if (slideIndex > slides.length - 1) slideIndex = 0;
+  if (slideIndex < 0) slideIndex = slides.length - 1;
+  
+  // hide all slides
+  slides.forEach((slide) => {
+    slide.style.display = "none";
+  });
+  
+  // show one slide base on index number
+  slides[slideIndex].style.display = "block";
+  
+  dots.forEach((dot) => {
+    dot.classList.remove("active");
+  });
+  
+  dots[slideIndex].classList.add("active");
+}
+
+// autoplay slides --------
+let timer = 6; // sec
+const _timer = timer;
+
+// this function runs every 1 second
+setInterval(() => {
+  timer--;
+
+  if (timer < 1) {
+    nextSlide();
+    timer = _timer; // reset timer
+  }
+}, 1000); // 1sec
+
+
+</script>
+<!-- SLIDER LEFT BIG -->
+<!-- SLIDER RIGHT TOP -->
+<script>
+     let slideIndexTR = 0;
+showSlidesTR();
+
+// Next-previous control
+function nextSlideTR() {
+  slideIndexTR++;
+  showSlidesTR();
+  timerTR = _timerTR; // reset timer
+}
+
+function prevSlideTR() {
+  slideIndexTR--;
+  showSlidesTR();
+  timerTR = _timerTR;
+}
+
+// Thumbnail image controlls
+function currentSlideTR(n) {
+  slideIndexTR = n - 1;
+  showSlidesTR();
+  timerTR = _timerTR;
+}
+
+function showSlidesTR() {
+  let slidesTR = document.querySelectorAll(".mySlides-tr");
+  let dotsTR = document.querySelectorAll(".dots-tr");
+
+  if (slideIndexTR > slidesTR.length - 1) slideIndexTR = 0;
+  if (slideIndexTR < 0) slideIndexTR = slidesTR.length - 1;
+  
+  // hide all slides
+  slidesTR.forEach((slide) => {
+    slide.style.display = "none";
+  });
+  
+  // show one slide base on index number
+  slidesTR[slideIndexTR].style.display = "block";
+  
+  dotsTR.forEach((dot) => {
+    dot.classList.remove("active");
+  });
+  
+  dotsTR[slideIndexTR].classList.add("active");
+}
+
+// autoplay slides --------
+let timerTR = 3; // sec
+const _timerTR = timerTR;
+
+// this function runs every 1 second
+setInterval(() => {
+    timerTR--;
+
+  if (timerTR < 1) {
+    nextSlideTR();
+    timerTR = _timerTR; // reset timer
+  }
+}, 3000); // 1sec
+
+</script>
+<!-- SLIDER RIGHT TOP -->
+<!-- SLIDER BOTTOM RIGHT -->
+<script>
+    let slideIndexBR = 0;
+showSlidesBR();
+
+// Next-previous control
+function nextSlideBR() {
+ slideIndexBR++;
+ showSlidesBR();
+ timerBR = _timerBR; // reset timer
+}
+
+function prevSlideBR() {
+ slideIndexBR--;
+ showSlidesBR();
+ timerBR = _timerBR;
+}
+
+// Thumbnail image controlls
+function currentSlideBR(n) {
+ slideIndexBR = n - 1;
+ showSlidesBR();
+ timerBR = _timerBR;
+}
+
+function showSlidesBR() {
+ let slidesBR = document.querySelectorAll(".mySlides-br");
+ let dotsBR = document.querySelectorAll(".dots-br");
+
+ if (slideIndexBR > slidesBR.length - 1) slideIndexBR = 0;
+ if (slideIndexBR < 0) slideIndexBR = slidesBR.length - 1;
+ 
+ // hide all slides
+ slidesBR.forEach((slide) => {
+   slide.style.display = "none";
+ });
+ 
+ // show one slide base on index number
+ slidesBR[slideIndexBR].style.display = "block";
+ 
+ dotsBR.forEach((dot) => {
+   dot.classList.remove("active");
+ });
+ 
+ dotsBR[slideIndexBR].classList.add("active");
+}
+
+// autoplay slides --------
+let timerBR = 3; // sec
+const _timerBR = timerBR;
+
+// this function runs every 1 second
+setInterval(() => {
+   timerBR--;
+
+ if (timerBR < 1) {
+   nextSlideBR();
+   timerBR = _timerBR; // reset timer
+ }
+}, 3000); // 1sec
+
+</script>
+<!-- SLIDER BOTTOM RIGHT -->
+
+
+
 <!-- SPLIDE JS -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> -->
 <!-- SPLIDE JS -->

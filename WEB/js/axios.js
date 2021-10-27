@@ -700,7 +700,7 @@ const renderItemPromo=()=>{
                         // imgBase = base64Img
                         $('.box-render-promo').append(
                             ` 
-                                <div class="card-item hvr-float-shadow new_card_item" data-aos="zoom-in">
+                                <div class="card-item hvr-float-shadow new_card_item">
                                     <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                                     <div class="card-item-list">
                                         <p class="limited-text-short">${val.Name}</p>
@@ -771,7 +771,7 @@ const renderItemNew=()=>{
             
                 $('.box-render-new').append(
                     ` 
-                        <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                        <div class="card-item hvr-float-shadow " >
                             <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                             <div class="card-item-list">
                                 <p class="limited-text-short">${val.Name}</p>
@@ -838,7 +838,7 @@ const renderItemAll=()=>{
             // convertImgToBase64(val.Picture_1, function(base64Img){
                 $('.box-render-all').append(
                     ` 
-                        <div class="card-item hvr-float-shadow " data-aos="zoom-in">
+                        <div class="card-item hvr-float-shadow " >
                             <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
                             <div class="card-item-list">
                                 <p class="limited-text-short">${val.Name}</p>

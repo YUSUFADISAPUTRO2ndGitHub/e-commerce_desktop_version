@@ -1,10 +1,9 @@
 
 
-
+var index = 0
 $(function(){
-
-    
-
+    index = index +1
+    console.log('jquery jalan',index)
 
 
     setTimeout(()=>{

@@ -231,6 +231,7 @@ function cek_daftar_hutang(x){
     $('.option-2').removeClass('background_grey')
     $('.option-3').removeClass('background_grey')
     $('.option-1').removeClass('background_grey')
+    $('.option-5').removeClass('background_grey')
 
     // SEARCH ITEM BACK TO NORMAL
     $('.box-render-search').css('display','none')
@@ -2679,3 +2680,7 @@ const open_marketplace=()=>{
     // $('.new-box-category').toggle(500)
     $('.new-box-category').css('display','none')
 }
+
+
+// loading blurred js
+
