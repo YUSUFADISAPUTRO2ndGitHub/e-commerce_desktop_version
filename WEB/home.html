@@ -2620,9 +2620,9 @@ function dragElement(elmnt) {
     load++
     if(load>99){
         clearInterval(int);
-        // $('.loading-page-awal').css('display','none').fadeOut()
+        $('.loading-page-awal').css('display','none').fadeOut()
         // $('.main-structure').css('visibility','visible')
-        // $('.main-structure').css('display','flex')
+        $('.main-structure').css('display','flex')
     }
     loadText.innerText = `${load}%`
     loadText.style.opacity = scale(load, 0, 100, 1, 0)
