@@ -8777,7 +8777,7 @@ border-radius:20px !important;
   /* SLIDER BOTTOM RIGHT */
 
   /* Fading animation */
-  .animate {
+  /* .animate {
     -webkit-animation-name: animate;
     -webkit-animation-duration: 1s;
     animation-name: animate;
@@ -8791,7 +8791,7 @@ border-radius:20px !important;
     to {
       transform: scale(1) rotateY(0deg);
     }
-  }
+  } */
   
   
   
