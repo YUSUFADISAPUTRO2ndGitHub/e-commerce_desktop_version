@@ -8495,7 +8495,7 @@ border-radius:20px !important;
 /* loading blurred */
 
 .bg {
-    background: url("../../WEB/img/home-page.png")
+    background: url("/WEB/img/home-page.png")
       no-repeat center center/cover;
     position: absolute;
     /* top: -30px; */
