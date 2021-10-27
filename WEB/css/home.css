@@ -8495,7 +8495,7 @@ border-radius:20px !important;
 /* loading blurred */
 
 .bg {
-    background: url("../img/home-page.png")
+    background: url("../../WEB/img/home-page.png")
       no-repeat center center/cover;
     position: absolute;
     /* top: -30px; */
@@ -8506,7 +8506,6 @@ border-radius:20px !important;
     height:calc(100vh);
     z-index: -1;
     filter: blur(0px);
-    transition:0.5s;
   }
   
   .loading-text {
