@@ -2431,7 +2431,7 @@ const replace_bo_to =(value,id)=>{
 
    const tambah_alamat_customer=()=>{
        var token = localStorage.getItem('token')
-       axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+       axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
        .then((res)=>{
            var nama_customer = res.data.First_Name + ' ' + res.data.Last_Name
             var limit_alamat  = parseInt(localStorage.getItem('limit_alamat'))

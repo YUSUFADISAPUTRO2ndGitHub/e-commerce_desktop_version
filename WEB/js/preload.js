@@ -1,7 +1,49 @@
 console.log('ini jalan duluan preload')
+
+const loadImageBigScreen=()=>{
+    console.log(' load image big screen jalan')
+    // $('.shinny img').css('opacity','1')
+    $('.mySlides').removeClass('shinny')
+    $('.mySlides-tr').removeClass('shinny')
+    $('.mySlides-br').removeClass('shinny')
+
+    // PRODUCT HIGHLIGHT SKELETON DELETE
+    $('.cd-image-category').removeClass('shinny')
+    $('.card-new-category #highlight-product-skeleton').css('display','none')
+    $('.card-new-category #highlight-product').css('display','block')
+    // $('#highlight-product').css('display','block')
+    // $('#highlight-product-skeleton').css('display','none')
+
+    // product item delete skeleton
+
+    // $('.new_card_item .img-card').removeClass('shinny')
+
+    // iklan panjang skeleton .lg-ads-name
+    $('.small-ads .lg-ads-name').removeClass('shinny')
+
+
+    // iklan promo kiri .promo_card
+    $('.box-render-promo .promo_card').removeClass('shinny')
+
+
+    // .box-render-promo delete skeleton
+    $('.new_card_item .cr-promo-img').removeClass('shinny')
+    $('.new_card_item .card-item-list .limited-text-short-skeleton').css('display','none')
+    $('.new_card_item .card-item-list .limited-text-short').css('display','block')
+    $('.split-item .item-price-skeleton').css('display','none')
+    $('.split-item .item-price').css('display','block')
+    $('.split-item .buy-icon-skeleton').css('display','none')
+    $('.split-item .buy-icon').css('display','flex')
+
+    // box new delete skeleton
+
+    $('.card-item .cr-promo-img').removeClass('shinny')
+    
+
+}
 function get_all_couriers(){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Get_All_Couriers=true`,
+        "url": `https://products.sold.co.id/get-courier-data?Get_All_Couriers=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -11,8 +53,8 @@ function get_all_couriers(){
 // RENDER DATA HOME
 const renderItemPromo=()=>{
     $('.box-render-promo').append(`
-        <div class="promo_card">
-            <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')">
+        <div class="promo_card shinny">
+            <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')" onload="loadImageBigScreen()">
         </div>
     `)
     allData.map((val,index)=>{
@@ -39,14 +81,25 @@ const renderItemPromo=()=>{
                         // imgBase = base64Img
                         $('.box-render-promo').append(
                             ` 
-                                <div class="card-item hvr-float-shadow new_card_item">
-                                    <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                                <div class="card-item  hvr-float-shadow new_card_item">
+                                    <div class="cr-promo-img shinny"> 
+                                        <img src="${val.Picture_1}" alt="" class="img-card " onclick="get_product_detail_from_main_page('${val.Product_Code}')" onload="loadImageBigScreen()">   
+                                    </div>
                                     <div class="card-item-list">
+                                        <p class="limited-text-short-skeleton shinny"></p>
                                         <p class="limited-text-short">${val.Name}</p>
                                         <div class="split-item">
+                                            <div class="item-price-skeleton ">
+                                                <p class="shinny"></p>
+                                                <p class="shinny"></p>
+                                            </div>
                                             <div class="item-price">
                                                 <p>RP. ${commafy(hargaTotal)}</p>
                                                 <p>Rp. ${commafy(hargaAwal)}</p>
+                                            </div>
+                                            <div class="buy-icon-skeleton shinny" onclick="addToCart('${val.Product_Code}')">
+                                                <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                                <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
                                             </div>
                                             <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                                 <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -83,13 +136,24 @@ const renderItemNew=()=>{
                 $('.box-render-new').append(
                     ` 
                         <div class="card-item hvr-float-shadow " >
-                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            <div class="cr-promo-img shinny"> 
+                                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            </div>    
                             <div class="card-item-list">
+                                <p class="limited-text-short-skeleton shinny"></p>
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
+                                    <div class="item-price-skeleton ">
+                                        <p class="shinny"></p>
+                                        <p class="shinny"></p>
+                                    </div>
                                     <div class="item-price">
                                         <p>RP. ${commafy(hargaTotal)}</p>
                                         <p>Rp. ${commafy(hargaAwal)}</p>
+                                    </div>
+                                    <div class="buy-icon-skeleton shinny" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                        <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
                                     </div>
                                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -123,13 +187,24 @@ const renderItemAll=()=>{
                 $('.box-render-all').append(
                     ` 
                         <div class="card-item hvr-float-shadow " >
-                            <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            <div class="cr-promo-img shinny"> 
+                                <img src="${val.Picture_1}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                            </div>    
                             <div class="card-item-list">
+                                <p class="limited-text-short-skeleton shinny"></p>
                                 <p class="limited-text-short">${val.Name}</p>
                                 <div class="split-item">
+                                    <div class="item-price-skeleton ">
+                                        <p class="shinny"></p>
+                                        <p class="shinny"></p>
+                                    </div>
                                     <div class="item-price">
                                         <p>RP. ${commafy(hargaTotal)}</p>
                                         <p>Rp. ${commafy(hargaAwal)}</p>
+                                    </div>
+                                    <div class="buy-icon-skeleton shinny" onclick="addToCart('${val.Product_Code}')">
+                                        <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                        <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
                                     </div>
                                     <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                         <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -144,13 +219,24 @@ const renderItemAll=()=>{
             $('.box-render-all').append(
                 ` 
                     <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        <div class="cr-promo-img shinny"> 
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                        </div>    
                         <div class="card-item-list">
+                            <p class="limited-text-short-skeleton shinny"></p>
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
+                                <div class="item-price-skeleton ">
+                                    <p class="shinny"></p>
+                                    <p class="shinny"></p>
+                                </div>
                                 <div class="item-price">
                                     <p>RP. ${commafy(hargaTotal)}</p>
                                     <p>Rp. ${commafy(hargaAwal)}</p>
+                                </div>
+                                <div class="buy-icon-skeleton shinny" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
                                 </div>
                                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
                                     <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
@@ -165,7 +251,9 @@ const renderItemAll=()=>{
             $('.box-render-all').append(
             ` 
                 <div class="card-item hvr-float-shadow " data-aos="zoom-in">
-                    <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                    <div class="cr-promo-img shinny"> 
+                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card" onclick="get_product_detail_from_main_page('${val.Product_Code}')">   
+                    </div>    
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>
                         <div class="split-item">
@@ -413,10 +501,11 @@ const render_item_all_category=()=>{
                     // 
                     $('.box-render-new-category').append(`
                         <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
-                            <div class="cd-image-category">
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" class="cd-img-category">
+                            <div class="cd-image-category shinny">
+                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
                             </div>
-                            <p>${item.Subcategory}</p>
+                            <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
+                            <p  id="highlight-product" onload="loadImageBigScreen()">${item.Subcategory}</p>
                         </div>
                     `)
                 }
@@ -434,10 +523,11 @@ const render_item_all_category=()=>{
                     if(index<13){
                         $('.box-render-new-category').append(`
                         <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${val.Subcategory}')">
-                            <div class="cd-image-category">
-                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="cd-img-category">
+                            <div class="cd-image-category shinny">
+                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
                             </div>
-                            <p>${val.Subcategory}</p>
+                            <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
+                            <p  id="highlight-product" onload="loadImageBigScreen()">${val.Subcategory}</p>
                         </div>
                         `)
                     }

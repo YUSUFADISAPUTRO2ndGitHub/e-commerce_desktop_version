@@ -701,7 +701,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 
                 
                 product_price += val.Price_Based_On_Total_Quantity *1
-                axios.post(`http://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
+                axios.post(`htps://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
                     
                     

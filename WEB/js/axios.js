@@ -4889,7 +4889,7 @@ function commafy( num ) {
                                 `)
                                 }else if (comment_parse.length > 0 ) {
                                     comment_parse.map((val,index)=>{
-                                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
                                             if(res.data){
                                                 var link_gambar = res.data
@@ -5422,7 +5422,7 @@ function commafy( num ) {
                 `)
                 }else if (comment_parse.length > 0 ) {
                     comment_parse.map((val,index)=>{
-                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                         .then((res)=>{
                             if(res.data){
                                 var link_gambar = res.data
@@ -5916,7 +5916,7 @@ function commafy( num ) {
                                 `)
                                 }else if (comment_parse.length > 0 ) {
                                     comment_parse.map((val,index)=>{
-                                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
                                             if(res.data){
                                                 var link_gambar = res.data
@@ -6235,7 +6235,7 @@ const unpaid_payment=(link)=>{
 
 function get_product_detail_func(product_id){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?product_code=${product_id}`,
+        "url": `https://products.sold.co.id/get-product-details?product_code=${product_id}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6256,7 +6256,7 @@ function get_product_detail_func(product_id){
 // }
 function get_all_province_from_courier(Courier, Courier_Code){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Get_All_Province=true`,
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Get_All_Province=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6265,7 +6265,7 @@ function get_all_province_from_courier(Courier, Courier_Code){
 }
 function get_all_city_from_courier(Courier, Courier_Code, Province){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}`,
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6274,7 +6274,7 @@ function get_all_city_from_courier(Courier, Courier_Code, Province){
 }
 function get_all_district_from_courier(Courier, Courier_Code, City){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&City=${City}`,
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&City=${City}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6283,7 +6283,7 @@ function get_all_district_from_courier(Courier, Courier_Code, City){
 }
 function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
+        "url": `httsp://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6292,7 +6292,7 @@ function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
 }
 function get_shipping_cost_informations(Courier, Courier_Code, Province, City, District, Sub_District){
     var settings = {
-        "url": `http://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}`,
+        "url": `https://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6303,7 +6303,7 @@ function get_shipping_cost_informations(Courier, Courier_Code, Province, City, D
 }
 function get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_District, delivery_time_in_days, Courier_Price_Code){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}&delivery_time_in_days=${delivery_time_in_days}&Courier_Price_Code=${Courier_Price_Code}`,
+        "url": `https://products.sold.co.id/get-courier-data?Get_Shipping_Fee=true&Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}&City=${City}&District=${District}&Sub_District=${Sub_District}&delivery_time_in_days=${delivery_time_in_days}&Courier_Price_Code=${Courier_Price_Code}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6316,7 +6316,7 @@ function get_shipping_fee(Courier, Courier_Code, Province, City, District, Sub_D
 
 function new_get_shipping_cost_informations(Courier_Price_Code_orig , Courier_Price_Code_dest, packing_type, weight, length, width, height, paket_value){
     var settings = {
-        "url": `http://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&weight=${weight}&length=${length}&width=${width}&height=${height}&paket_value=${paket_value}&packing_type=${packing_type}`,
+        "url": `https://products.sold.co.id/get-shipping-option-data?Get_Shipping_Fee=true&Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&weight=${weight}&length=${length}&width=${width}&height=${height}&paket_value=${paket_value}&packing_type=${packing_type}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6328,7 +6328,7 @@ function new_get_shipping_cost_informations(Courier_Price_Code_orig , Courier_Pr
 }
 function new_get_shipping_fee(Courier_Price_Code_orig , Courier_Price_Code_dest, packing_type, weight, length, width, height, paket_value){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Get_Shipping_Fee=true&Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&weight=${weight}&length=${length}&width=${width}&height=${height}&paket_value=${paket_value}&packing_type=${packing_type}`,
+        "url": `https://products.sold.co.id/get-courier-data?Get_Shipping_Fee=true&Courier_Price_Code_orig=${Courier_Price_Code_orig}&Courier_Price_Code_dest=${Courier_Price_Code_dest}&weight=${weight}&length=${length}&width=${width}&height=${height}&paket_value=${paket_value}&packing_type=${packing_type}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -6722,7 +6722,7 @@ const check_user_for_login=()=>{
                     
                 }
 
-                axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                 .then((res)=>{
                     
                     if(res.data){

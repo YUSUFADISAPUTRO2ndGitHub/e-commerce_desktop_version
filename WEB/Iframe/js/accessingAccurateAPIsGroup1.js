@@ -8,7 +8,7 @@ var getCustomerDetails = {};
 
 function getToken(){
     var settings = {
-        "url": "http://147.139.168.202:8888/get-lastest-token-and-session",
+        "url": "https://147.139.168.202:8888/get-lastest-token-and-session",
         "method": "POST",
         "timeout": 10000,
     };
@@ -18,7 +18,7 @@ function getToken(){
 
 function getProfile(Customer_Code){
     var settings = {
-        "url": `http://customers.sold.co.id/get-customer-information?Customer_Code=${Customer_Code}`,
+        "url": `https://customers.sold.co.id/get-customer-information?Customer_Code=${Customer_Code}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -27,7 +27,7 @@ function getProfile(Customer_Code){
 
 function getUnpaidOrderPerProduct(Product_Code, Customer_Code){
     var settings = {
-        "url": `http://sales.sold.co.id/get-unpaid-group-buy-sales-order-per-customer?Group_Buy_Purchase_PC=${Product_Code}&Customer_Code=${Customer_Code}`,
+        "url": `https://sales.sold.co.id/get-unpaid-group-buy-sales-order-per-customer?Group_Buy_Purchase_PC=${Product_Code}&Customer_Code=${Customer_Code}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -36,7 +36,7 @@ function getUnpaidOrderPerProduct(Product_Code, Customer_Code){
 
 function getCustomersWithCustomerNo(customerNo){
     var settings = {
-        "url": `http://customers.sold.co.id/get-customer-information?Customer_Code=${customerNo}`,
+        "url": `https://customers.sold.co.id/get-customer-information?Customer_Code=${customerNo}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -46,7 +46,7 @@ function getCustomersWithCustomerNo(customerNo){
 
 function getAvailableReferralCodes(){
     var settings = {
-        "url": `http://customers.sold.co.id/get-available-referral-codes`,
+        "url": `https://customers.sold.co.id/get-available-referral-codes`,
         "method": "POST",
         "timeout": 0,
     };
@@ -56,7 +56,7 @@ function getAvailableReferralCodes(){
 
 function loginRequestAPI(Email, Password){
     var settings = {
-        "url": `http://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}`,
+        "url": `https://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -66,7 +66,7 @@ function loginRequestAPI(Email, Password){
 
 function createCustomerNo(){
     var settings = {
-        "url": `http://customers.sold.co.id/get-customer-code`,
+        "url": `https://customers.sold.co.id/get-customer-code`,
         "method": "POST",
         "timeout": 0,
     };
@@ -76,7 +76,7 @@ function createCustomerNo(){
 
 function createNewCustomer(access_token, session_id, data){
     var settings = {
-        "url": "http://customers.sold.co.id/create-new-customer-direct-from-user",
+        "url": "https://customers.sold.co.id/create-new-customer-direct-from-user",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -89,7 +89,7 @@ function createNewCustomer(access_token, session_id, data){
 
 function createNewCustomerSupplier(access_token, session_id, data){
     var settings = {
-        "url": "http://customers.sold.co.id/create-new-customer-supplier-direct-from-user",
+        "url": "https://customers.sold.co.id/create-new-customer-supplier-direct-from-user",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -102,7 +102,7 @@ function createNewCustomerSupplier(access_token, session_id, data){
 
 function updateCustomer(data){
     var settings = {
-        "url": "http://customers.sold.co.id/update-customer-data-by-user-themselves",
+        "url": "https://customers.sold.co.id/update-customer-data-by-user-themselves",
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -117,7 +117,7 @@ function updateCustomer(data){
 
 function get_upaid_order_from_product_code_and_customer_code(access_token, Product_Code){
     var settings = {
-        "url": "http://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=" + Product_Code + "&Customer_Code=" + access_token,
+        "url": "https://products.sold.co.id/get-unpaid-sales-order-specific-for-a-product?Product_Code=" + Product_Code + "&Customer_Code=" + access_token,
         "method": "POST",
         "timeout": 0,
     };
@@ -126,7 +126,7 @@ function get_upaid_order_from_product_code_and_customer_code(access_token, Produ
 
 function getAllProductsWithoutPagination(access_token, session_id){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?`,
+        "url": `https://products.sold.co.id/get-product-details?`,
         "method": "POST",
         "timeout": 0,
     };
@@ -136,7 +136,7 @@ function getAllProductsWithoutPagination(access_token, session_id){
 
 function getAllProductsBasedOnSubCategory(subcategory){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?subcategory=${subcategory}`,
+        "url": `https://products.sold.co.id/get-product-details?subcategory=${subcategory}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -145,7 +145,7 @@ function getAllProductsBasedOnSubCategory(subcategory){
 }
 function getAllProductsWithoutPaginationWithFilter(access_token, session_id, sortBy, sortDirection, itemName){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?product_name=${itemName}`,
+        "url": `https://products.sold.co.id/get-product-details?product_name=${itemName}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -155,7 +155,7 @@ function getAllProductsWithoutPaginationWithFilter(access_token, session_id, sor
 
 function getAllProductsInGroupBuy(access_token, session_id){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?GroupBuy_Purchase=true`,
+        "url": `https://products.sold.co.id/get-product-details?GroupBuy_Purchase=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -165,7 +165,7 @@ function getAllProductsInGroupBuy(access_token, session_id){
 
 function getAllProductsInNew(access_token, session_id){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?Categorize_NEW=true`,
+        "url": `https://products.sold.co.id/get-product-details?Categorize_NEW=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -175,7 +175,7 @@ function getAllProductsInNew(access_token, session_id){
 
 function getProductsWithProductNo(access_token, session_id, productNo){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?product_code=${productNo}`,
+        "url": `https://products.sold.co.id/get-product-details?product_code=${productNo}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -185,7 +185,7 @@ function getProductsWithProductNo(access_token, session_id, productNo){
 
 function getPaymentMethods(){
     var settings = {
-        "url": `http://paymntmthd.sold.co.id/get-all-payment-method`,
+        "url": `https://paymntmthd.sold.co.id/get-all-payment-method`,
         "method": "POST",
         "timeout": 0,
     };
@@ -196,13 +196,13 @@ function getPaymentMethods(){
 function getAllUnpaidOrdersForThisCustomer(Customer_Code, Order_Number){
     if(Order_Number == ""){
         var settings = {
-            "url": `http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${Customer_Code}`,
+            "url": `https://sales.sold.co.id/get-unpaid-sales-order-per-customer?Customer_Code=${Customer_Code}`,
             "method": "POST",
             "timeout": 0,
         };
     }else{
         var settings = {
-            "url": `http://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${Order_Number}`,
+            "url": `https://sales.sold.co.id/get-unpaid-sales-order-per-customer?Order_Number=${Order_Number}`,
             "method": "POST",
             "timeout": 0,
         };
@@ -212,13 +212,13 @@ function getAllUnpaidOrdersForThisCustomer(Customer_Code, Order_Number){
 function getAllOrdersForThisCustomer(Customer_Code, Order_Number){
     if(Order_Number == ""){
         var settings = {
-            "url": `http://sales.sold.co.id/get-sales-order-data-per-customer?Customer_Code=${Customer_Code}`,
+            "url": `https://sales.sold.co.id/get-sales-order-data-per-customer?Customer_Code=${Customer_Code}`,
             "method": "POST",
             "timeout": 0,
         };
     }else{
         var settings = {
-            "url": `http://sales.sold.co.id/get-sales-order-data-per-customer?Order_Number=${Order_Number}`,
+            "url": `https://sales.sold.co.id/get-sales-order-data-per-customer?Order_Number=${Order_Number}`,
             "method": "POST",
             "timeout": 0,
         };
@@ -230,7 +230,7 @@ function createNewSalesOrder(items, customerDetails, Email, otp, User_Password){
     // alert(User_Password);
     // alert(otp);
     var settings = {
-        "url": "http://sales.sold.co.id/create-new-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code + `&User_Password=${User_Password}&otp=${otp}&Email=${Email}`,
+        "url": "https://sales.sold.co.id/create-new-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code + `&User_Password=${User_Password}&otp=${otp}&Email=${Email}`,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -247,7 +247,7 @@ function createNewSalesOrder(items, customerDetails, Email, otp, User_Password){
 
 function get_otp_api(Email){
     var settings = {
-        "url": `http://customers.sold.co.id/get-otp?Email=${Email}`,
+        "url": `https://customers.sold.co.id/get-otp?Email=${Email}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -257,7 +257,7 @@ function get_otp_api(Email){
 
 function createNewSalesOrderWithGroupBuy(items, customerDetails){
     var settings = {
-        "url": "http://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
+        "url": "https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=" + customerDetails.Customer_Code,
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -274,7 +274,7 @@ function createNewSalesOrderWithGroupBuy(items, customerDetails){
 
 function createNewTempSalesOrder(items, customerDetails){
     var settings = {
-        "url": "http://sales.sold.co.id/save-temp-order-details-from-customer?customerNo=" + customerDetails.customerNo + "&address=" + customerDetails.address + "&paymentTermName=" + customerDetails.paymentTermName + "&transDate=" + customerDetails.transDate + "",
+        "url": "https://sales.sold.co.id/save-temp-order-details-from-customer?customerNo=" + customerDetails.customerNo + "&address=" + customerDetails.address + "&paymentTermName=" + customerDetails.paymentTermName + "&transDate=" + customerDetails.transDate + "",
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -289,7 +289,7 @@ function createNewTempSalesOrder(items, customerDetails){
 
 function cancelSalesOrder(Order_Number){
     var settings = {
-        "url": "http://sales.sold.co.id/update-sales-order-payment-status-to-cancelled?Order_Number=" + Order_Number,
+        "url": "https://sales.sold.co.id/update-sales-order-payment-status-to-cancelled?Order_Number=" + Order_Number,
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -302,7 +302,7 @@ function cancelSalesOrder(Order_Number){
 
 function getGroupBuyQuantitySoFarGross(product_code){
     var settings = {
-        "url": "http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=" + product_code,
+        "url": "https://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Group_Buy_Purchase_PC=" + product_code,
         "method": "POST",
         "timeout": 0,
     };
@@ -312,7 +312,7 @@ function getGroupBuyQuantitySoFarGross(product_code){
 
 function closeGroupBuyStatusOnProduct(product_code){
     var settings = {
-        "url": "http://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Product_Code=" + product_code,
+        "url": "https://sales.sold.co.id/check-group-buy-quantity-so-far-gross?Product_Code=" + product_code,
         "method": "POST",
         "timeout": 0,
     };
@@ -322,7 +322,7 @@ function closeGroupBuyStatusOnProduct(product_code){
 
 function getAllCategories(access_token, session_id){
     var settings = {
-        "url": `http://products.sold.co.id/get-product-details?Get_ALL_Category=true`,
+        "url": `https://products.sold.co.id/get-product-details?Get_ALL_Category=true`,
         "method": "POST",
         "timeout": 0,
     };
@@ -342,7 +342,7 @@ function getAllSubCategories(Get_ALL_Sub_Category_Based_On_Category){
 
 function getforgotpasswordrequest(Email, Birthday, PrimaryContactNumber, requestedNewPassword){
     var settings = {
-        "url": "http://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&Birthday=" + Birthday + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
+        "url": "https://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&Birthday=" + Birthday + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
         "method": "POST",
         "timeout": 10000,
     };
@@ -351,7 +351,7 @@ function getforgotpasswordrequest(Email, Birthday, PrimaryContactNumber, request
 }
 function encryptPassword(Password){
     var settings = {
-        "url": "http://customers.sold.co.id/password-generator?Password=" + Password,
+        "url": "https://customers.sold.co.id/password-generator?Password=" + Password,
         "method": "POST",
         "timeout": 10000,
     };
@@ -361,7 +361,7 @@ function encryptPassword(Password){
 
 function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
     var settings = {
-        "url": `http://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
         "method": "POST",
         "timeout": 0,
     };

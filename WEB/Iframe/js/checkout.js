@@ -790,7 +790,7 @@ const new_checking_payment =()=>{
                                         window.parent.$('#prof_tgl').css('display','none')
                                     }
 
-                                    axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                                    axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                                     .then((res)=>{
                                         
                                         if(res.data){
@@ -2726,7 +2726,7 @@ const checking_product_company=async()=>{
                             // GET DATA FROM API
                             // 
                             // 
-                            axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                            .then((res)=>{
                                // 
                                var alamat_pilihan = res.data.Address_1
@@ -3447,7 +3447,7 @@ const render_select_option_kurir=async()=>{
                     array_cart.push(response)
                     })
                 }
-                axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
                 // 
                 var alamat_pilihan = res.data.Address_1
@@ -4151,7 +4151,7 @@ const re_render_select_option=async()=>{
                     // GET DATA FROM API
                     
                     
-                    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                    .then((res)=>{
                        // 
                        var alamat_pilihan = res.data.Address_1
@@ -4675,7 +4675,7 @@ const re_render_select_option=async()=>{
                     // GET DATA FROM API
                     
                     
-                    axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                     .then((res)=>{
                         // 
                         var alamat_pilihan = res.data.Address_1
@@ -6071,7 +6071,7 @@ const kelurahanCheckout=()=>{
                         // GET DATA FROM API
                         
                         
-                        axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                        .then((res)=>{
                            // 
                            var alamat_pilihan = res.data.Address_1
