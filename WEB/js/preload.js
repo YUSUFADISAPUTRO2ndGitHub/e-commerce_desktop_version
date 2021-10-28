@@ -52,6 +52,7 @@ function get_all_couriers(){
 }
 // RENDER DATA HOME
 const renderItemPromo=()=>{
+    $('.box-render-promo').empty()
     $('.box-render-promo').append(`
         <div class="promo_card shinny">
             <img src="../WEB/img/new_ads.png" alt="" class="ads_samping" onclick="get_product_detail_from_main_page('6900005030114')" onload="loadImageBigScreen()">
@@ -119,6 +120,7 @@ const renderItemPromo=()=>{
     })
 }
 const renderItemNew=()=>{
+    $('.box-render-new').empty()
     allData.map((val,index)=>{
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
@@ -171,6 +173,7 @@ const renderItemNew=()=>{
     })
 }
 const renderItemAll=()=>{
+    $('.box-render-all').empty()
     allData.map((val,index)=>{
         // 
         var hargaAwal = parseInt(val.Sell_Price)
@@ -472,6 +475,7 @@ const new_find_province_from_address= async ()=>{
 }
 
 const render_item_all_category=()=>{
+    $('.box-render-new-category').empty()
     // http://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${Category}
 
     var data_atas = [
