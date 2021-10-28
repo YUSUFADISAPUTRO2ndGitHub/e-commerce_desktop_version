@@ -434,7 +434,7 @@ var data = [
 
  const logoutProfile=()=>{
     localStorage.removeItem("token");
-    $('#NewProfileModal').modal('hide')
+    $('#newProfileModal').modal('hide')
     // Swal.fire('You have logged out of your account', 'Good-Bye', 'success')
     Swal.fire({
         html:`

@@ -3124,14 +3124,14 @@ input:focus {
     width:30px;
     position: relative;
     top:-255px;
-    left:30px;
+    left:20%;
 }
 .img-badge-new{
     height:30px;
     width:30px;
     position: relative;
     top:-245px;
-    left:25px;
+    left:11px;
 }
 .item-all-price p:nth-child(1) {
     text-decoration: line-through;
