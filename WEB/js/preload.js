@@ -20,7 +20,7 @@ setInterval(()=>{
         getAllData()
     }else {
         // console.log('masuk ke else checking shinny')
-        console.log('done render)
+        console.log('done render')
     }
 },5000)
 
