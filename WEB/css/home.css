@@ -393,6 +393,7 @@ body {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border: 1px solid #dedede;
+    z-index:100;
     /* box-shadow: 3px 5px #0a3d62; */
 
 }
@@ -401,10 +402,27 @@ body {
     position: relative;
     transition: 0.2s ease-out;
     color:gray;
+    color:#f79622;
+    
 }
 .input-name::placeholder {
     color:gray;
     font-size:1em;
+}
+.input-name:focus {
+    /* border:1px solid #f79622; */
+    color:#f79622;
+}
+.input-name:focus .main-header-search .card {
+    border-left:1px solid #f79622 !important;
+    border-right:1px solid #f79622 !important;
+    border-bottom:1px solid #f79622 !important;
+}
+.main-header-search .card {
+    border-top:none !important;
+    border-left:1px solid #dedede !important;
+    border-right:1px solid #dedede !important;
+    border-bottom:1px solid #dedede !important;
 }
 */ input::-webkit-input-placeholder {
     transition: 0.2s ease-in;
@@ -3207,7 +3225,7 @@ input:focus {
 /* box render search */
 .box-render-search {
     /* height:300px; */
-    width: 665px;
+    width: 639px;
     height: auto;
     max-height: 400px;
     background-color: #ecf0f1;
@@ -3227,9 +3245,11 @@ input:focus {
     /* padding-left:10px; */
     /* padding-right:10px; */
     overflow: scroll !important;
+    border:1px solid #dedede !important;
     /* box-shadow: 3px 5px #0a3d62; */
 
 }
+
 
 .box-render-search .card-body ul li {
     /* color: red; */
@@ -3254,10 +3274,10 @@ input:focus {
     align-items: center;
 }
 .box-render-search .card-body ul li:hover {
-    background-color: #217283;
+    background-color: #efefef;
     border-radius: 5px;
     cursor: pointer;
-    color: white;
+    /* color: white; */
 }
 ul {
 

@@ -6283,7 +6283,7 @@ function get_all_district_from_courier(Courier, Courier_Code, City){
 }
 function get_all_subdistrict_from_courier(Courier, Courier_Code, District){
     var settings = {
-        "url": `httsp://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&District=${District}`,
         "method": "POST",
         "timeout": 0,
     };
