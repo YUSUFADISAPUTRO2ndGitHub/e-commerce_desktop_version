@@ -6676,6 +6676,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
 const check_user_for_login=()=>{
     back_to_home()
+    $(".force-close-all-command").css("display", "none");
     //clear form
     $('#checking_email_login').empty()
     $('#checking_password_login').empty()

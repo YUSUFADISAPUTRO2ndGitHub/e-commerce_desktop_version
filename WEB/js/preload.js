@@ -1,5 +1,8 @@
 console.log('ini jalan duluan preload')
 
+$(document).ready(function(){
+    $(window).scrollTop(0);
+});
 const loadImageBigScreen=()=>{
     console.log(' load image big screen jalan')
     // $('.shinny img').css('opacity','1')
