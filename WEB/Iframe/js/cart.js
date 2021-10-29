@@ -521,7 +521,34 @@ function checkingoutAll(){
     async function success(isSuccess){
         if(isSuccess){
                 var token = localStorage.getItem("token");
-                if((token != "" || token == null)){
+                console.log(token === null)
+                if(token === null){
+                    if(token === null){
+                        // swal.fire("Silahkan Login","","warning");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Silahkan Login`,
+                            timer:2000,
+                            
+                        })
+                        // $('#loginModal',window.parent.document).modal('show')
+                        // window.location.href = "./sign-in.html";
+                    }else {
+                        // swal.fire("Pilih barang di keranjang","","warning");
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Pilih Barang di Keranjang`,
+                            timer:2000,
+                            
+                        })
+                    }
+                }else{
                     var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
                     if(cartToJson.length != 0){
                         // 
@@ -588,32 +615,9 @@ function checkingoutAll(){
                     }else{
                         swal.fire("Something is missing","You do not have anything in Cart","warning");
                     }
-                }else{
-                    if(token == ""){
-                        // swal.fire("Silahkan Login","","warning");
-                        Swal.fire({
-                            html:`
-                            <div class="o-circle c-container__circle o-circle__sign--failure">
-                                <div class="o-circle__sign"></div>  
-                            </div> 
-                            Silahkan Login`,
-                            timer:2000,
-                            
-                        })
-                        // $('#loginModal',window.parent.document).modal('show')
-                        // window.location.href = "./sign-in.html";
-                    }else {
-                        // swal.fire("Pilih barang di keranjang","","warning");
-                        Swal.fire({
-                            html:`
-                            <div class="o-circle c-container__circle o-circle__sign--failure">
-                                <div class="o-circle__sign"></div>  
-                            </div> 
-                            Pilih Barang di Keranjang`,
-                            timer:2000,
-                            
-                        })
-                    }
+
+
+                    
                 }
             
         }else {

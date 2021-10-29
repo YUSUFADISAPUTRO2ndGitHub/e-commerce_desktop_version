@@ -1156,7 +1156,7 @@ font-size:13px;
     transition: 0.5s;
 }
 .box-btn-payment:hover {
-    background-color: #4bace5;
+    background-color: #f7941d;
     cursor: pointer;
     color:white;
 }

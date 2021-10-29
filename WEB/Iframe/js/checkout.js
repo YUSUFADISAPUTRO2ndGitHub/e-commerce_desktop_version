@@ -2305,7 +2305,7 @@ const checking_product_company=async()=>{
     // find_address_from_product_company()
     // var province_company = await find_province_from_product_company()
     // 
-    
+    console.log('render cart 2308 jalan')
     var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
     
   
@@ -2335,7 +2335,7 @@ const checking_product_company=async()=>{
     `,
     didOpen: async() => {
         Swal.showLoading()
-        // 
+        console.log('masuk ke loading 2338')
         $('.danger-error').css('display','none')
             var token = localStorage.getItem('token')
 
@@ -2345,12 +2345,14 @@ const checking_product_company=async()=>{
 
             if(province_pilihan != undefined && kota_pilihan != undefined &&
                 kecamatan_pilihan != undefined && kelurahan_pilihan !=undefined){ // ngecheck udh keisi apa blm
-                    
+                    console.log('masuk ke if 2348')
             }else {
+                
                     province_pilihan =  await find_province_from_address()
                     kota_pilihan = await find_city_from_address(province_pilihan)
                     kecamatan_pilihan = await find_district_from_address(kota_pilihan)
                     kelurahan_pilihan = await find_subDistrict_from_address(kecamatan_pilihan)
+                    console.log('masuk ke else await find province')
             }
             var allKota = []
             var allProduct = []
@@ -2486,7 +2488,7 @@ const checking_product_company=async()=>{
                     })
                 })
                 
-
+                console.log(checking_array_render)
                 // RENDER UNTUK SELECTED   
                 var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
                 var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
@@ -2502,6 +2504,7 @@ const checking_product_company=async()=>{
                 var allKelurahan = []
                 var berat_product = 0
                 get_all_couriers().done(function(response){
+                    console.log(response)
                     allKurir = response
                     checking_array_render.forEach((item,index_car,arr)=>{ 
                         
@@ -2930,13 +2933,10 @@ const checking_product_company=async()=>{
 
 
 
-                    // Swal.fire({
-                    //     title: 'Uploading Data',
-                    //     timer:100,
-                    // })
+                    
                 })
 
-
+                
                
                 // RENDER UNTUK SELECTED
 
@@ -7298,4 +7298,15 @@ function commafy( num ) {
         str[1] = str[1].replace(/(\d{3})/g, '$1 ');
     }
     return str.join('.');
+}
+
+
+function get_all_couriers(){
+    var settings = {
+        "url": `https://products.sold.co.id/get-courier-data?Get_All_Couriers=true`,
+        "method": "POST",
+        "timeout": 0,
+    };
+
+    return $.ajax(settings);
 }

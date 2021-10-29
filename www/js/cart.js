@@ -382,8 +382,9 @@ function checkingout(){
 
 function checkingoutAll(){
     var token = localStorage.getItem("token");
-    
-    if((token != "" || token == null)){
+    console.log(token)
+    if((token == null)){
+        console.log('masuk ke if')
         var cartToJson = JSON.parse(localStorage.getItem("itemsInCart"));
         if(cartToJson.length != 0){
             var array = [];
@@ -404,8 +405,8 @@ function checkingoutAll(){
                 localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
                 
             }
-            swal.fire("Final Step","","success");
-            window.location.href = "./checkout.html";
+            // swal.fire("Final Step","","success");
+            // window.location.href = "./checkout.html";
         }else{
             swal.fire("Something is missing","You do not have anything in Cart","warning");
         }

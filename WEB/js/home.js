@@ -26,7 +26,7 @@ function cart_requested(x){
     var cartToJson = JSON.parse(localStorage.getItem('itemsInCart'))
     var cartString = localStorage.getItem('itemsInCart')
     var token = localStorage.getItem('token')
-    
+    console.log(token)
     if(cartToJson != undefined){ // kalau data cart ada isinya
         if(cartToJson.length != 0){
             
@@ -1463,6 +1463,9 @@ const next_btn=()=>{
         }else if (img_3 == 'img-notfound' && img_4 == 'img-big'){
             $('#img-big-4').removeClass('img-big')
             $('#img-big-4').addClass('img-big-active')
+        }else {
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')
         }
         
     }else if (find_active == 'img-big-3'){
@@ -1477,6 +1480,9 @@ const next_btn=()=>{
         }else if (img_4_split[0] == 'img-notfound'){
             $('#img-big-1').removeClass('img-big')
             $('#img-big-1').addClass('img-big-active')
+        }else {
+            $('#img-big-1').removeClass('img-big')
+            $('#img-big-1').addClass('img-big-active')
         }
 
 
@@ -1485,6 +1491,9 @@ const next_btn=()=>{
     }else if (find_active == 'img-big-4'){
         $(`#${find_active}`).removeClass('img-big-active')
         $(`#${find_active}`).addClass('img-big')
+        $('#img-big-1').removeClass('img-big')
+        $('#img-big-1').addClass('img-big-active')
+    }else {
         $('#img-big-1').removeClass('img-big')
         $('#img-big-1').addClass('img-big-active')
     }

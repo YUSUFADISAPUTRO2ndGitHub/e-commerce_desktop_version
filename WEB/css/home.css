@@ -81,7 +81,7 @@ body {
     /* border:1px solid black; */
 }
 .card-body:hover .semua-kategori-name::placeholder{
-    color:#217384;;
+    color:rgba(49, 53, 59, 0.96);
 }
 .lg_home{
     position: relative;
@@ -393,7 +393,7 @@ body {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border: 1px solid #dedede;
-    z-index:100;
+    /* z-index:100; */
     /* box-shadow: 3px 5px #0a3d62; */
 
 }
@@ -2564,7 +2564,7 @@ input:focus {
 
 .active-cl {
     background-color: #dcdde1 !important;
-    color:#4bace5 !important;
+    color:#f7941d !important;
 }
 
 
@@ -3096,7 +3096,7 @@ input:focus {
 /* kategori item  */
 
 .card-all-item {
-    width: 196px;
+    width: 220px;
     height: 300px;
     padding: 5px;
     margin-left: 10px;
@@ -3257,6 +3257,7 @@ input:focus {
     margin: 3px;
     position: relative;
     left: -30px;
+    color:rgba(49, 53, 59, 0.96);
     /* background-color: red; */
 }
 .render-li-search {
@@ -3274,10 +3275,11 @@ input:focus {
     align-items: center;
 }
 .box-render-search .card-body ul li:hover {
-    background-color: #efefef;
+    background-color: rgb(243,243,243);
     border-radius: 5px;
     cursor: pointer;
-    /* color: white; */
+    color:rgba(49, 53, 59, 0.96);
+    /* color:rgb(3,172,14); */
 }
 ul {
 
