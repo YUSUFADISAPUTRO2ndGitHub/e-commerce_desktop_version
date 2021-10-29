@@ -3,6 +3,28 @@ console.log('ini jalan duluan preload')
 $(document).ready(function(){
     $(window).scrollTop(0);
 });
+
+setInterval(()=>{
+    var highlight_product = $('.box-render-new-category .card-new-category').hasClass('shinny')
+    var box_promo_product = $('.box-render-promo .promo_card').hasClass('shinny')
+    var box_render_new = $('.box-render-new .card-item .cr-promo-img').hasClass('shinny')
+    var box_render_all = $('.box-render-all .card-item .cr-promo-img').hasClass('shinny')
+    if(highlight_product === true) {
+        console.log('masuk ke line 12')
+        getAllData()
+    }else if (box_promo_product === true){
+        console.log('masuk ke else if ')
+    }else if (box_render_new === true){
+        getAllData()
+    }else if (box_render_all === true){
+        getAllData()
+    }else {
+        // console.log('masuk ke else checking shinny')
+        console.log('done render)
+    }
+},5000)
+
+
 const loadImageBigScreen=()=>{
     console.log(' load image big screen jalan')
     // $('.shinny img').css('opacity','1')
@@ -610,7 +632,7 @@ const get_all_cat_subCat_for_storage=()=>{
     })
 }
 const renderOptionSearch=()=>{
-
+    $('.header-search-option').empty()
     var token = localStorage.getItem('token')
         axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
         .then((res)=>{
