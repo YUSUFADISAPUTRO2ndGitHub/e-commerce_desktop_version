@@ -488,6 +488,7 @@ $('.modals-product-detail').css('display','block')
 $('.close-button').css('display','block')
 $('.box_iframe_groupbuy').css('display','block')
 $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
+// $('.modals-product-detail').attr('src',`/WEB/Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
 $('.new-box-category').css('display','none')
 // 
 }
@@ -7730,7 +7731,17 @@ function addToCart(product_id){
                 ]
                 var pushToStorage2 = JSON.stringify(cart)
                 
-                localStorage.setItem('itemsInCart',pushToStorage2)     
+                localStorage.setItem('itemsInCart',pushToStorage2) 
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--success">
+                        <div class="o-circle__sign"></div>  
+                    </div>   
+                    Berhasil Menambahkan ke Cart
+                    `,
+                    timer:2000,
+                    
+                })    
             }       
         }
     }).catch((err)=>{
