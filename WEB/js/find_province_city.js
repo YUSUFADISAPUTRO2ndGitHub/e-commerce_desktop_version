@@ -1,7 +1,7 @@
 const find_province_from_product_company=async(address)=>{
     console.log(address)
     return new Promise(async(resolve,reject)=>{
-        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        // var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
         var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
         var result_province = []
         var split_company = address.split(' ')
@@ -70,7 +70,7 @@ const find_province_from_product_company=async(address)=>{
 
 const find_city_from_product_company=async(province,address)=>{
     return new Promise(async(resolve,reject)=>{
-        var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
+        // var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
         var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
         var delete_coma = address.replace(/,/g, "");
         var split_company = delete_coma.split(' ')

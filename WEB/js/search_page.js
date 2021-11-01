@@ -96,7 +96,7 @@ const render_sort_price=(product_name,condition)=>{
                 <div class="card-item-list">
                     <p class="limited-text-short">${val.Name}</p>
                     <div class="split-item">
-                        <div class="item-price">
+                        <div class="new-item-price">
                             <p>RP. ${hargaTotal}</p>
                             <p>Rp. ${hargaAwal}</p>
                         </div>
@@ -227,7 +227,7 @@ function show_jenisproduct(jenis_product){
                         <div class="card-item-list">
                             <p class="limited-text-short">${val.Name}</p>
                             <div class="split-item">
-                                <div class="item-price">
+                                <div class="new-item-price">
                                     <p>RP. ${commafy(hargaTotal)}</p>
                                     <p>Rp. ${commafy(hargaAwal)}</p>
                                 </div>
@@ -398,7 +398,7 @@ const render_searching_page=(product_name)=>{
                     <div class="card-item-list">
                         <p class="limited-text-short">${val.Name}</p>
                         <div class="split-item">
-                            <div class="item-price">
+                            <div class="new-item-price">
                                 <p>RP. ${commafy(hargaTotal)}</p>
                                 <p>Rp. ${commafy(hargaAwal)}</p>
                             </div>
@@ -472,7 +472,7 @@ const render_searching_page=(product_name)=>{
                                     <div class="card-item-list">
                                         <p class="limited-text-short">${val.Name}</p>
                                         <div class="split-item">
-                                            <div class="item-price">
+                                            <div class="new-item-price">
                                                 <p>RP. ${commafy(hargaTotal)}</p>
                                                 <p>Rp. ${commafy(hargaAwal)}</p>
                                             </div>
@@ -502,7 +502,7 @@ const render_searching_page=(product_name)=>{
                                     <div class="card-item-list">
                                         <p class="limited-text-short">${val.Name}</p>
                                         <div class="split-item">
-                                            <div class="item-price">
+                                            <div class="new-item-price">
                                                 <p>RP. ${commafy(hargaTotal)}</p>
                                                 <p>Rp. ${commafy(hargaAwal)}</p>
                                             </div>
@@ -540,7 +540,7 @@ const render_searching_page=(product_name)=>{
                                 <div class="card-item-list">
                                     <p class="limited-text-short">${val.Name}</p>
                                     <div class="split-item">
-                                        <div class="item-price">
+                                        <div class="new-item-price">
                                             <p>RP. ${commafy(hargaTotal)}</p>
                                             <p>Rp. ${commafy(hargaAwal)}</p>
                                         </div>

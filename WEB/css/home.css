@@ -80,6 +80,7 @@ body {
     background-color: #dcdde1 !important;
     /* border:1px solid black; */
 }
+
 .card-body:hover .semua-kategori-name::placeholder{
     color:rgba(49, 53, 59, 0.96);
 }
@@ -1203,6 +1204,28 @@ body {
 .item-price p:nth-child(2) {
     font-size: 1em;
     color: #27aae1;
+}
+.new-item-price {
+    width: 50%;
+    height:50px;
+    display: flex;;
+    /* background-color: blue; */
+    line-height: 0.7;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+.new-item-price p:nth-child(1) {
+    text-decoration: line-through;
+    font-size: 1em;
+    color: #37ced5;
+    margin:0px !important;
+    margin-bottom:10px !important;
+}
+.new-item-price p:nth-child(2) {
+    font-size: 1em;
+    color: #27aae1;
+    margin:0px !important;
 }
 .icon-buy {
     width: 30px;
@@ -3127,7 +3150,7 @@ input:focus {
     flex-direction: column;
 }
 .card-all-item-list p {
-    font-size: 1em;
+    font-size: 1em !important;
 
 }
 

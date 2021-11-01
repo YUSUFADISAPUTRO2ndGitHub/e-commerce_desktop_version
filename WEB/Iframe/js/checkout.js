@@ -2375,6 +2375,7 @@ const checking_product_company=async()=>{
                     return (left === right) ? 0 : left > right ? 1 : -1;
                 });
 
+
                 var checking_array_render = []
                 var product_pertama = [product[0]]
                 checking_array_render.push(product_pertama)
@@ -2397,96 +2398,166 @@ const checking_product_company=async()=>{
                         }
                     }
                 })
-                
-                checking_array_render.forEach((value,index)=>{ 
-                    value.map((val,id,arr)=>{
-                        var qty_product_index = val.quantity
-                        var Courier_Price_Code_orig = val.courier_price_code
-                        var product_number_index = val.productNo
-                        var price_agreed_index = val.priceAgreed
-                        getProductsWithProductNo("","",val.productNo).done(function(response){
-                            var product_index = response
-                            var berat_barang = parseFloat(response.Weight_KG)
-                            var total_berat_barang = berat_barang  * val.quantity
-                            var fixed_total_berat_barang = total_berat_barang.toFixed(2)
-                            // if(product.length>4 ){
-                            //     $('.card-checkout-cc').css('height','300px')
-                            // }
 
-                            if(id === 0){
-                                $('.card-checkout-cc').append(`
-                                    <div class="box-new-card-checkout-cc-2"> 
-                                        <div class="new-card-checkout-cc">
-                                            <div class="new-card-product-cc">
-                                                <div class="card-item-checkout-cc">
-                                                    <div class="img-item-checkout-cc">
-                                                        <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
-                                                    </div>
-                                                    <div class="desc-item-checkout-cc">
-                                                        <p>${product_index.Name}</p>
-                                                        <div class="desc-item-2-checkout-cc">
-                                                            <p>Quantity : ${qty_product_index}</p>
-                                                            <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                            <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                if(product.length === 1){
+                    console.log('masuk ke if product length 1')
+                            var qty_product_index = product[0].quantity
+                            var Courier_Price_Code_orig = product[0].courier_price_code
+                            var product_number_index = product[0].productNo
+                            var price_agreed_index = product[0].priceAgreed
+                            console.log(product[0])
+                            console.log(product[0].productNo)
+                            getProductsWithProductNo("","",product[0].productNo).done(function(response){
+                            
+                                var product_index = response
+                                var berat_barang = parseFloat(response.Weight_KG)
+                                var total_berat_barang = berat_barang  * product[0].quantity
+                                var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+                                // if(product.length>4 ){
+                                //     $('.card-checkout-cc').css('height','300px')
+                                // 
+                                
+                                    $('.card-checkout-cc').append(`
+                                        <div class="box-new-card-checkout-cc-2"> 
+                                            <div class="new-card-checkout-cc">
+                                                <div class="new-card-product-cc">
+                                                    <div class="card-item-checkout-cc">
+                                                        <div class="img-item-checkout-cc">
+                                                            <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
                                                         </div>
-                                                        <div class="for_input_coupon"> 
-                                                            <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
-                                                            <div class="card-coupon-used" id="delete-${product_number_index}" >
-                                    
+                                                        <div class="desc-item-checkout-cc">
+                                                            <p>${product_index.Name}</p>
+                                                            <div class="desc-item-2-checkout-cc">
+                                                                <p>Quantity : ${qty_product_index}</p>
+                                                                <p>Berat  : ${fixed_total_berat_barang}</p>
+                                                                <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                            </div>
+                                                            <div class="for_input_coupon"> 
+                                                                <input type="text" class="input_coupon_checkout_${product[0].productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${product[0].productNo}')">
+                                                                <div class="card-coupon-used" id="delete-${product_number_index}" >
+                                        
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="new-card-option-cc">
+                                                    <select class="form-control sp_kelurahan_hover new-cart-pengiriman-1" id="sub-pengiriman-option-1" onchange="pengirimanCheckout(this,1)" >  
+                                                        <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
+                                                    </select>
+                                
+                                                    <select class="form-control sp_kelurahan_hover  new-asuransi-pengiriman-1" id="sub-asuransi-option-1" onchange="asuransiCheckout(this,1)" >  
+                                                        <option selected  class="co-asuransi">Insurance</option>           
+                                                    </select>
+                                                    <select class="form-control sp_kelurahan_hover new-packing-pengiriman-1" id="sub-packing-option-1" onchange="packingCheckout(this,1)" >  
+                                                        <option selected  class="co-packing">Packing</option>      
+                                                    </select>
+                                                </div>
+                                                <div class="new-company-address-cc ncac-1}"> 
+                                                    <p>Dikirim Dari ${product[0].province_company}</p>  
+                                                    <div class="ncac-price-1"> 
+    
+                                                    </div>
+                                                </div>
+                                             
+                                            </div>      
+                                        </div>
+                                    `)             
+                                
+                            }) 
+                }else {
+                    checking_array_render.forEach((value,index)=>{ 
+                        value.map((val,id,arr)=>{
+                            var qty_product_index = val.quantity
+                            var Courier_Price_Code_orig = val.courier_price_code
+                            var product_number_index = val.productNo
+                            var price_agreed_index = val.priceAgreed
+                            getProductsWithProductNo("","",val.productNo).done(function(response){
+                                var product_index = response
+                                var berat_barang = parseFloat(response.Weight_KG)
+                                var total_berat_barang = berat_barang  * val.quantity
+                                var fixed_total_berat_barang = total_berat_barang.toFixed(2)
+                                // if(product.length>4 ){
+                                //     $('.card-checkout-cc').css('height','300px')
+                                // }
+    
+                                if(id === 0){
+                                    $('.card-checkout-cc').append(`
+                                        <div class="box-new-card-checkout-cc-2"> 
+                                            <div class="new-card-checkout-cc">
+                                                <div class="new-card-product-cc">
+                                                    <div class="card-item-checkout-cc">
+                                                        <div class="img-item-checkout-cc">
+                                                            <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
+                                                        </div>
+                                                        <div class="desc-item-checkout-cc">
+                                                            <p>${product_index.Name}</p>
+                                                            <div class="desc-item-2-checkout-cc">
+                                                                <p>Quantity : ${qty_product_index}</p>
+                                                                <p>Berat  : ${fixed_total_berat_barang}</p>
+                                                                <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                            </div>
+                                                            <div class="for_input_coupon"> 
+                                                                <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                                                <div class="card-coupon-used" id="delete-${product_number_index}" >
+                                        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="new-card-option-cc">
+                                                    <select class="form-control sp_kelurahan_hover new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this,${index})" >  
+                                                        <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
+                                                    </select>
+                                
+                                                    <select class="form-control sp_kelurahan_hover  new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this,${index})" >  
+                                                        <option selected  class="co-asuransi">Insurance</option>           
+                                                    </select>
+                                                    <select class="form-control sp_kelurahan_hover new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this,${index})" >  
+                                                        <option selected  class="co-packing">Packing</option>      
+                                                    </select>
+                                                </div>
+                                                <div class="new-company-address-cc ncac-${index}"> 
+                                                    <p>Dikirim Dari ${val.province_company}</p>  
+                                                    <div class="ncac-price-${index}"> 
+    
+                                                    </div>
+                                                </div>
+                                             
+                                            </div>      
+                                        </div>
+                                    `)             
+                                }else {
+                                    
+                                    $('.new-card-product-cc').append(`
+                                        <div class="card-item-checkout-cc">
+                                            <div class="img-item-checkout-cc">
+                                                <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
                                             </div>
-                                            <div class="new-card-option-cc">
-                                                <select class="form-control sp_kelurahan_hover new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this,${index})" >  
-                                                    <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
-                                                </select>
+                                            <div class="desc-item-checkout-cc">
+                                                <p>${product_index.Name}</p>
+                                                <div class="desc-item-2-checkout-cc">
+                                                    <p>Quantity : ${qty_product_index}</p>
+                                                    <p>Berat  : ${fixed_total_berat_barang}</p>
+                                                    <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                </div>
+                                                <div class="for_input_coupon"> 
+                                                    <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
+                                                    <div class="card-coupon-used" id="delete-${product_number_index}" >
                             
-                                                <select class="form-control sp_kelurahan_hover  new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this,${index})" >  
-                                                    <option selected  class="co-asuransi">Insurance</option>           
-                                                </select>
-                                                <select class="form-control sp_kelurahan_hover new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this,${index})" >  
-                                                    <option selected  class="co-packing">Packing</option>      
-                                                </select>
-                                            </div>
-                                            <div class="new-company-address-cc ncac-${index}"> 
-                                                <p>Dikirim Dari ${val.province_company}</p>  
-                                                <div class="ncac-price-${index}"> 
-
+                                                    <div>
                                                 </div>
                                             </div>
-                                         
-                                        </div>      
-                                    </div>
-                                `)             
-                            }else {
-                                
-                                $('.new-card-product-cc').append(`
-                                    <div class="card-item-checkout-cc">
-                                        <div class="img-item-checkout-cc">
-                                            <img src="${replace_vtintl_to_sold_co_id(product_index.Picture_1)}" alt="">
                                         </div>
-                                        <div class="desc-item-checkout-cc">
-                                            <p>${product_index.Name}</p>
-                                            <div class="desc-item-2-checkout-cc">
-                                                <p>Quantity : ${qty_product_index}</p>
-                                                <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
-                                            </div>
-                                            <div class="for_input_coupon"> 
-                                                <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
-                                                <div class="card-coupon-used" id="delete-${product_number_index}" >
-                        
-                                                <div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `)  
-                            }
-                        })      
+                                    `)  
+                                }
+                            })      
+                        })
                     })
-                })
+
+                }
+                
                 
                 console.log(checking_array_render)
                 // RENDER UNTUK SELECTED   

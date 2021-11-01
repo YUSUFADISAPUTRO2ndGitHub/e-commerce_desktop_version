@@ -1157,7 +1157,7 @@ const renderItemBasedOnCategory=(Category)=>{
 
 
 function close_all_open_window(){
-    
+    $('.new-box-category .list-group .get-item').removeClass('active-cl')
     $(".force-close-all-command").css("display", "none");
     $('.option-0').removeClass("background_grey");
     $('.option-1').removeClass("background_grey");
@@ -1175,6 +1175,8 @@ function close_all_open_window(){
     $('.option-4',window.parent.parent.document).removeClass("background_grey");
     $('.option-5',window.parent.parent.document).removeClass("background_grey");
     $('.box-delete-success',window.parent.parent.document).css('display','none')
+    
+
     
 }
 
@@ -7016,76 +7018,139 @@ const open_checkout=(product_id)=>{
 }
 
 
-const buyNow=(product_id)=>{
-    addToCart(product_id)
-    
-    var array = []
-    localStorage.setItem('itemsToCheckout',array)
+const buyNow=async(product_id)=>{
+    // addToCart(product_id)
     axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    .then((res)=>{
-        if(res.data.Stock_Quantity > 1){
-            var productToBeAdded = {
-                productNo: product_id,
-                quantity: 1,
-                GroupCode: "NO COUPON",
-                priceAgreed: res.data.Sell_Price
+    .then(async(res)=>{
+        var product = res.data
+        var province_company = ''
+        var city_company = ''
+        var district_company = ''
+        var courier_price_code_company = ''
+        var token = localStorage.getItem('token')
+        if(token === null){
+            if(token === null){
+                // swal.fire("Silahkan Login","","warning");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                    
+                })
+                // $('#loginModal',window.parent.document).modal('show')
+                // window.location.href = "./sign-in.html";
+            }else {
+                // swal.fire("Pilih barang di keranjang","","warning");
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Ada Kesalahan pada barang`,
+                    timer:2000,
+                    
+                })
             }
-            array.push(productToBeAdded)
+        }else {
+            console.log(product)
+            province_company = await find_province_from_product_company(product.PIC_company_address)
+            city_company = await find_city_from_product_company(province_company,product.PIC_company_address)
+            district_company = await find_district_from_product_company(city_company,product.PIC_company_address)
+            courier_price_code_company = await find_courier_price_code_from_product_company(district_company,product.PIC_company_address)
+            var array = []
             
-            var productToBeAddedStringify = JSON.stringify(array);
-            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);            
-        // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
-    
-        $('.close-button',window.parent.parent.document).css('display','block')
-        
+            localStorage.setItem('itemsToCheckout',array)
+            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+            .then((res)=>{
+                console.log(res.data,'7065 setelah await')
+                console.log(province_company,' province company')
+                console.log(city_company,' province company')
+                console.log(district_company,' province company')
+                console.log(courier_price_code_company,' province company')
+                console.log(res.data.Sell_Price, ' sell price')
+                console.log(product.PIC_company_address)
+                console.log(product.Weight_KG)
+                if(res.data.Stock_Quantity > 1){
+                    console.log('masuk ke if 7067')
+                    var productToBeAdded = {
+                        productNo: product.Product_Code,
+                        quantity: 1,
+                        GroupCode: "NO COUPON",
+                        priceAgreed: res.data.Sell_Price,
+                        courier_price_code:courier_price_code_company,
+                        company_address:product.PIC_company_address,
+                        province_company:province_company,
+                        city_company:city_company,
+                        district_company:district_company.District,
+                        weight_kg:product.Weight_KG,
+                        berat_product:product.Weight_KG,
+                        product_name:product.Name
+                    }
 
-        $('.close',window.parent.parent.document).css('display','none')
+                    array.push(productToBeAdded)
+                    console.log(productToBeAdded)
+                    var productToBeAddedStringify = JSON.stringify(array);
+                    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);            
+                // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+            
+                $('.close-button',window.parent.parent.document).css('display','block')
+                
         
-        // $('.close').css('display','none')
+                $('.close',window.parent.parent.document).css('display','none')
+                
+                // $('.close').css('display','none')
+                
+                // $('.modals-product-detail',window.parent.document).css('display','none')
+                $('.modals-lk', window.parent.parent.document).css('display','none')
+                $(".iframe",window.parent.parent.document).toggle();
+                
+                if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
+                    $('.option-3',window.parent.parent.document).removeClass('background_grey')
+                }else {
+                    $('.option-3',window.parent.parent.document).addClass('background_grey')
+                }
+                
+                
+                // $('.main-body').css('display','none')
+                // $('.modals-search-result').css('display','block')
+                
+                // $('.iframe').css('display','block')
+                $('.modals-pengiriman',window.parent.parent.document).css("display",'none')
+                $('.modals-check-harga',window.parent.parent.document).css("display",'none')
+                $('.option-1',window.parent.parent.document).removeClass('background_grey')
+                $('.option-2',window.parent.parent.document).removeClass('background_grey')
+                $('.option-0',window.parent.parent.document).removeClass('background_grey')
+                $(".iframe",window.parent.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+                // $('.close-button',window.parent.document).css('display','none')
         
-        // $('.modals-product-detail',window.parent.document).css('display','none')
-        $('.modals-lk', window.parent.parent.document).css('display','none')
-        $(".iframe",window.parent.parent.document).toggle();
+                  // SEARCH ITEM BACK TO NORMAL
+                  $('.box-render-search',window.parent.document).css('display','none')
+                  $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
+                  $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
+                  $('.input-name',window.parent.document).val(null)
+                }else {
+                    // swal.fire("Barang Tidak Tersedia","","warning");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Barang Tidak Tersedia`,
+                        timer:2000,
+                        
+                    })
+                }
         
-        if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
-            $('.option-3',window.parent.parent.document).removeClass('background_grey')
-        }else {
-            $('.option-3',window.parent.parent.document).addClass('background_grey')
-        }
-        
-        
-        // $('.main-body').css('display','none')
-        // $('.modals-search-result').css('display','block')
-        
-        // $('.iframe').css('display','block')
-        $('.modals-pengiriman',window.parent.parent.document).css("display",'none')
-        $('.modals-check-harga',window.parent.parent.document).css("display",'none')
-        $('.option-1',window.parent.parent.document).removeClass('background_grey')
-        $('.option-2',window.parent.parent.document).removeClass('background_grey')
-        $('.option-0',window.parent.parent.document).removeClass('background_grey')
-        $(".iframe",window.parent.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
-        // $('.close-button',window.parent.document).css('display','none')
-
-          // SEARCH ITEM BACK TO NORMAL
-          $('.box-render-search',window.parent.document).css('display','none')
-          $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
-          $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
-          $('.input-name',window.parent.document).val(null)
-        }else {
-            // swal.fire("Barang Tidak Tersedia","","warning");
-            Swal.fire({
-                html:`
-                <div class="o-circle c-container__circle o-circle__sign--failure">
-                    <div class="o-circle__sign"></div>  
-                </div> 
-                Barang Tidak Tersedia`,
-                timer:2000,
+            }).catch((err)=>{
                 
             })
+    
         }
-
     }).catch((err)=>{
-        
+        console.log(err)
     })
 }
 
@@ -10988,6 +11053,7 @@ function calculateSize(img, maxWidth, maxHeight) {
     //   alert('jalan')
     back_to_home()
     $('.new-box-category').toggle(500)
+    
     $('.list-group-item').removeClass('active-cl')
     close_all_open_window()
     // 

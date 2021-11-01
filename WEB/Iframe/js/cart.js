@@ -558,9 +558,6 @@ function checkingoutAll(){
                         var city_company = ''
                         var district_company = ''
                         var courier_price_code_company = ''
-                        
-                        
-
 
                         // update baru
                         var array = [];
@@ -569,19 +566,12 @@ function checkingoutAll(){
                         var i = 0;
                         var product_number = ''
                         for(i; i < cartToJson.length; i ++){
-                            // 
-                            product_number = cartToJson[i].productNo               
-                                // 
+                                product_number = cartToJson[i].productNo               
                                 province_company = await find_province_from_product_company(cartToJson[i].company_address)
                                 city_company = await find_city_from_product_company(province_company,cartToJson[i].company_address)
                                 district_company = await find_district_from_product_company(city_company,cartToJson[i].company_address)
                                 courier_price_code_company = await find_courier_price_code_from_product_company(district_company,cartToJson[i].company_address)
-                                // 
-                                // 
-                                // 
-                                // 
                                 var berat_product = parseFloat(cartToJson[i].weight_kg) * parseInt($("#quantity" + product_number).val())
-                                // 
                                 var productToBeAdded = {
                                     productNo: product_number,
                                     quantity: parseInt($("#quantity" + product_number).val()),
