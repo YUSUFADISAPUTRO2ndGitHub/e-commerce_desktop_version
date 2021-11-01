@@ -299,8 +299,6 @@ $(document).on('click',".btn-login-product",function(){
             
             axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
             ).then((res)=>{
-                
-                
                 if(res.data){
                     // swal.fire("Login Berhasil", "", "success");
                     Swal.fire({

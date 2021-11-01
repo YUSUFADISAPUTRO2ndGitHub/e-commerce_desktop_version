@@ -38,7 +38,7 @@
     align-items: center;
     flex-direction: column;
     border-radius:10px;
-    /* box-shadow: 5px 5px 20px #217283 !important; */
+    /* box-shadow: 5px 5px 20px #27aae1 !important; */
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px !important;
 }
 
@@ -64,7 +64,7 @@
 }
 .card-lk:hover {
     cursor: pointer;
-    /* border: 2px solid #217283; */
+    /* border: 2px solid #27aae1; */
     /* transition-delay: 0.1s; */
     transition-timing-function: ease-in;
     transition-duration: 0.2s;

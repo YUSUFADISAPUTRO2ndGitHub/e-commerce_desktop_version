@@ -81,6 +81,7 @@ function cart_requested(x){
         $(x).addClass("background_grey");
         $('.new-box-category').css('display','none')
     }
+    
     $(".iframe").toggle();
     // $('.iframe').css('display','block')
     $('.modals-pengiriman').css("display",'none')
@@ -160,12 +161,22 @@ function pengiriman_requested(x){
 
 
 function bulk_order_home(x){
+    console.log('bulk order jalan')
     back_to_home()
     var token = localStorage.getItem('token')
     // var data_customer;
     // alert('jaalan')
     $('.close-button').css('display','block')
     $('.close').css('display','none') 
+    // if($('.option-5').hasClass('background_grey')){
+    //     $('.option-5').removeClass('background_grey')
+    //     // $('.modals-bulk-order').css('display','none')
+    //     $('.close-button').css('display','none')
+    // }else {
+    //     $('.option-5').addClass('background_grey')
+    //     // $('.modals-bulk-order').css('display','block')
+    //     $('.close-button').css('display','none')
+    // }
     if($(x).hasClass("background_grey")){
         $(x).removeClass("background_grey");
         $('.modals-bulk-order').css('display','none')
@@ -174,6 +185,8 @@ function bulk_order_home(x){
         $('.modals-bulk-order').css('display','block')
         $('.new-box-category').css('display','none')
     }
+
+   
     if($(x).hasClass('close-button')){
         // alert('masuk ke line 72')
         $('.close-button').css('display','none')
@@ -218,6 +231,7 @@ function cek_daftar_hutang(x){
         $('.modals-hutang-home').css('display','block')
         $('.new-box-category').css('display','none')
     }
+  
     if($(x).hasClass('close-button')){
         // alert('masuk ke line 72')
         $('.close-button').css('display','none')
@@ -991,8 +1005,13 @@ const login_for_product=()=>{
 }
 
 const login_for_commision=()=>{
-    $('#login_product').modal('show')
-    $('.box-option-login').attr('id','commision')
+    console.log('login for commision jalan')
+    $('#newOtpCommision').modal('show')
+    $('#newProfileModal').modal('hide')
+    $('#new_otp_commision').empty()
+    $('#new_otp_password').empty()
+    send_otp()
+    // $('.box-option-login').attr('id','commision')
 }
 
 // $('#search_prod').on('click',function(){
@@ -1040,6 +1059,8 @@ const send_otp=()=>{
 
     })
 }
+
+
 
 
 const send_otp_for_logout=()=>{
@@ -1742,11 +1763,67 @@ const close_tab_answer=(result,index)=>{
         
     }
 
+    const verify_login_commision=()=>{
+        var password = $('#new_otp_password').val()
+        var otp  = $('#new_otp_commision').val()
+        var token = localStorage.getItem('token')
+        axios.post(`https://customers.sold.co.id/password-generator?Password=${password}`)
+        .then((res)=>{
+
+            var token = localStorage.getItem('token')
+            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            .then((res)=>{  
+                var email = res.data.Email
+                axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+            ).then((res)=>{
+                if(res.data){
+                    // swal.fire("Login Berhasil", "", "success");
+                    // Swal.fire({
+                    //     html:`
+                    //     <div class="o-circle c-container__circle o-circle__sign--success">
+                    //         <div class="o-circle__sign"></div>  
+                    //     </div>   
+                    //     Login Berhasil
+                    //     `,
+                    //     timer:2000,
+                        
+                    // })
+                    // localStorage.setItem('token',res.data)
+                    // $('#newloginModal').modal('hide')
+                    // $('#login_product').modal('hide')
+                    // $('.box-option-login').removeClass('commision')
+                    commision_check()
+                }else {
+                    // swal.fire("Login Gagal", "", "info");
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                       Pengisian data ada yang salah`,
+                        timer:2000,
+                        
+                    })
+                    
+                    // $('.box-option-login').removeClass('commision')
+                }
+            }).catch((err)=>{
+                
+            })
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
     const resend_otp_register=()=>{
 
     }
     const resend_otp_login=()=>{
-        alert('function kirim ulang jalan')
+        // alert('function kirim ulang jalan')
+        send_otp()
     }
 //   $(function(){
 //     $(".btn-embossed").on('click',function(){
@@ -2691,5 +2768,42 @@ const open_marketplace=()=>{
 }
 
 
+const open_cart_from_profile=()=>{
+    $('#newProfileModal').modal('hide')
+    if($('.option-3').hasClass('background_grey')){
+        $('.option-3').removeClass('background_grey')
+        $('.close-button').css('display','none')
+    }else {
+        $('.option-3').addClass('background_grey')
+        $('.close-button').css('display','none')
+    }
+    cart_requested()
+}
+const open_bulkorder_from_profile=()=>{
+    $('#newProfileModal').modal('hide')
+    if($('.option-5').hasClass('background_grey')){
+        $('.option-5').removeClass('background_grey')
+        // $('.modals-bulk-order').css('display','none')
+        $('.close-button').css('display','none')
+    }else {
+        $('.option-5').addClass('background_grey')
+        // $('.modals-bulk-order').css('display','block')
+        $('.close-button').css('display','none')
+    }
+    bulk_order_home(this)
+}
+const open_orderlist_from_profile=()=>{
+    $('#newProfileModal').modal('hide')
+    if($('.option-0').hasClass('background_grey')){
+        $('.option-0').removeClass('background_grey')
+        
+        $('.close-button').css('display','none')
+    }else {
+        $('.option-0').addClass('background_grey')
+        
+        $('.close-button').css('display','none')
+    }
+    cek_daftar_hutang(this)
+}
 // loading blurred js
 

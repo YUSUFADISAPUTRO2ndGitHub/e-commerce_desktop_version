@@ -376,7 +376,7 @@
 }
 .rating-top p:nth-child(1){
     font-size: 20px;
-    color:#217283;
+    color:#27aae1;
 }
 .rating-top p:nth-child(2){
     font-size: 18px;
@@ -405,7 +405,7 @@
 .simpan-item{
     width:50%;
     height:50%;
-    background-color: #217283;
+    background-color: #27aae1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -816,7 +816,7 @@
     color:red;
 }
 .btn-back-right-id i {
-    color:#217283;
+    color:#27aae1;
     font-size:20px;
     margin-right:10px;
 }

@@ -52,9 +52,9 @@
             /* top:50%; */
             z-index: 100;
             /* border-right:1px solid #dedede; */
-            /* border: 1px solid #217283; */
+            /* border: 1px solid #27aae1; */
             /* box-shadow:  5px 8px #0a3d62; */
-            /* box-shadow: 5px 5px 20px #217283; */
+            /* box-shadow: 5px 5px 20px #27aae1; */
             
             /* border-radius:10px !important; */
         }
@@ -94,10 +94,10 @@
             display: none;
             border-radius:10px;
             /* box-shadow: 5px 8px #0a3d62; */
-            box-shadow: 5px 5px 20px #217283;
+            box-shadow: 5px 5px 20px #27aae1;
         }
         .background_grey{
-            box-shadow: 5px 5px 20px #217283;
+            box-shadow: 5px 5px 20px #27aae1;
             background-color: #dfe4ea;
             border-radius:10px;
             height:100px;
@@ -366,6 +366,40 @@
     </div>
     <!-- NEW LOGIN TOKPED MODALS -->
 
+    <!-- OTP FOR COMMISION -->
+    <div class="modal fade" id="newOtpCommision" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog box-otp-register ">
+            <div class="modal-content  modal-content-newlogin">
+                <div class="modal-body box-newlogin-body">
+                    <div id="wrapper">
+                        <div id="dialog">
+                          <!-- <button class="close">×</button> -->
+                          <h3>Masukkan Kode Verifikasi</h3>
+                          <span>Kode verifikasi telah dikirim melalui Email</span>
+                          <div id="form" class="get_all_otp_register">
+                            <div class="box-pass-commision">
+                                <p>otp</p>
+                                <input type="text" maxLength="9" id="new_otp_commision" class="inp-commision-otp">
+                            </div>
+                            <div class="box-pass-commision">
+                                <p>Password</p>
+                                <input type="password" maxLength="20" id="new_otp_password" >
+                            </div>
+                            <button class="btn btn-primary btn-embossed" onclick="verify_login_commision()">Verify</button>
+                          </div>
+                          <div class="resend-code-box">
+                            Tidak menerima kode?<br />
+                            <a href="#" onclick="resend_otp_login()">Kirim Ulang OTP</a><br />
+                            
+                          </div>
+                           <!-- <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" /> -->
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- OTP FOR COMMISION -->
 
 
 
@@ -710,18 +744,9 @@
                           <h3>Masukkan Kode Verifikasi</h3>
                           <span>Kode verifikasi telah dikirim melalui Email</span>
                           <div id="form" class="get_all_otp_register">
-                            <!-- <input type="text" maxLength="1" size="1"  id="otp_reg_1"/>
-                            <input type="text" maxLength="1" size="1"  id="otp_reg_2"/>
-                            <input type="text" maxLength="1" size="1" id="otp_reg_3" />
-                            <input type="text" maxLength="1" size="1" id="otp_reg_4" />
-                            <input type="text" maxLength="1" size="1" id="otp_reg_5" />
-                            <input type="text" maxLength="1" size="1" id="otp_reg_6" />
-                            <input type="text" maxLength="1" size="1" id="otp_reg_7" />
-                            <input type="text" maxLength="1" size="1" id="otp_reg_8" /> -->
                             <input type="text" maxLength="9" id="new_otp_tokped">
                             <button class="btn btn-primary btn-embossed" onclick="verify_email_login()">Verify</button>
                           </div>
-                          
                           <div class="resend-code-box">
                             Tidak menerima kode?<br />
                             <a href="#" onclick="resend_otp_login()">Kirim Ulang OTP</a><br />
@@ -813,10 +838,6 @@
         <div class="modal-content  modal-content-newlogin">
             <div class="modal-body box-newlogin-body">
                 <div class="newlogin-left">
-                    <!-- <div class="logo-sold-left">
-                        <img src="./img/bank.png" alt="">
-                        SOLD.CO.ID
-                    </div> -->
                     <div class="new-profile-box">
                         <div class="img-box-profile">
                             <img src="./img/accounts.png" alt=""  id="img-profile-id">
@@ -824,6 +845,30 @@
                         <div class="name-box-profile">
                             <p id="name-new-profile">BAYU DARMAWAN</p>
                             <p id="name-new-verified">Verified Account</p>
+                        </div>
+                    </div>
+                    <div class="new-option-box">
+                        <div class="box-option-profile-2">
+                            <i class="fas fa-chevron-circle-right" id="right-btn-profile"></i>
+                            <i class="fas fa-chevron-circle-left" id="left-btn-profile"></i>
+                        </div>
+                        <div class="box-option-profile" onclick="open_cart_from_profile()">
+                            <img src="../WEB/img/shopping-cart.png" alt="">
+                            <p class="detail-profile-left">Keranjang</p>
+                        </div>
+                        <div class="box-option-profile" onclick="open_bulkorder_from_profile()">
+                            <img src="../WEB/img/qr-scan-icon.png" alt="">
+                            
+                            <p class="detail-profile-left">Bulk Order</p>
+                        </div>
+                        <div class="box-option-profile" onclick="open_orderlist_from_profile()">
+                            <img src="../WEB/img/unpaid_list.png" alt="">
+                            <p class="detail-profile-left">Order List</p>
+                            
+                        </div>
+                        <div class="box-option-profile" onclick="login_for_commision()">
+                            <i class="fas fa-wallet"></i> 
+                            <p class="detail-profile-left" >Komisi</p>
                         </div>
                     </div>
                     <!-- <div class="new-profile-box">
@@ -2682,14 +2727,14 @@
     });
     $( ".whatsapp-border" ).mouseover(function() {
         // alert('mouse over')
-        $( ".fa-phone-alt" ).css("color", "#217283");
+        $( ".fa-phone-alt" ).css("color", "#27aae1");
     });
     $( ".headset-border-2" ).mouseout(function() {
         $( ".fa-headset" ).css("color", "rgba(0, 0, 0, 0.2");
     });
     $( ".headset-border-2" ).mouseover(function() {
         // alert('mouse over')
-        $( ".fa-headset" ).css("color", "#217283");
+        $( ".fa-headset" ).css("color", "#27aae1");
     });
     $( ".icon_close_info" ).mouseout(function() {
         $(this).css("color", "rgba(0, 0, 0, 0.2");
@@ -2697,7 +2742,7 @@
     $( ".icon_close_info" ).mouseover(function() {
         // alert('mouse over')
         $(this).css('cursor','pointer')
-        $(this).css("color", "#217283");
+        $(this).css("color", "#27aae1");
     });
     $( ".icon_plus_address" ).mouseout(function() {
         $(this).css("color", "rgba(0, 0, 0, 0.2");
@@ -2705,7 +2750,7 @@
     $( ".icon_plus_address" ).mouseover(function() {
         // alert('mouse over')
         $(this).css('cursor','pointer')
-        $(this).css("color", "#217283");
+        $(this).css("color", "#27aae1");
     });
 
     $( ".email-border" ).mouseout(function() {
@@ -2713,7 +2758,7 @@
     });
     $( ".email-border" ).mouseover(function() {
         // alert('mouse over')
-        $( ".fa-envelope" ).css("color", "#217283");
+        $( ".fa-envelope" ).css("color", "#27aae1");
     });
 
 

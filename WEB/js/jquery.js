@@ -3,6 +3,27 @@
 var index = 0
 $(function(){
 
+    $('#left-btn-profile').on('click',function(){
+        $('.newlogin-left').css('width','80px')
+        $('.detail-profile-left').css('display','none')
+        $('.name-box-profile').css('display','none')
+        $('#left-btn-profile').css('display','none')
+        $('#right-btn-profile').css('display','block')
+        setTimeout(()=>{
+            $('.img-box-profile').css('width','100%')
+        },1000)
+    })
+    $('#right-btn-profile').on('click',function(){
+        $('.newlogin-left').css('width','30%')
+        
+        $('#left-btn-profile').css('display','block')
+        $('#right-btn-profile').css('display','none')
+        setTimeout(()=>{
+            $('.detail-profile-left').css('display','flex')
+            $('.name-box-profile').css('display','flex')
+            $('.img-box-profile').css('width','25%')
+        },300)
+    })
 
 
     // index = index +1
