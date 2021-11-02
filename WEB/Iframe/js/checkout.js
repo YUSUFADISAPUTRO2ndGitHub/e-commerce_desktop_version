@@ -2983,57 +2983,53 @@ const checking_product_company=async()=>{
                         
                     })
 
-                    var final_total_harga_barang = 0
-                    checking_array_render.forEach((val,id,arr)=>{
-                        val.forEach((resp,index)=>{
-                            var harga = parseInt(removeComma(resp.priceAgreed))
-                            final_total_harga_barang += harga
-                        })
-                        if(id === arr.length -1 ){
-                            
 
-                            $('.final-total-harga').empty()
-                            $('.final-total-harga').append(`
-                                <div class="box-ft-harga">
-                                    <p> Harga Total</p>
-                                    <p id="final_total_harga_barang"> ${commafy(final_total_harga_barang)}</p>
-                                </div>  
-                            `)
-                        }
-                    })
+
+
+                    if(product.length === 1){
+                        console.log('masuk ke if')
+                        var harga = parseInt(removeComma(product[0].priceAgreed))
+                        var ongkos_kirim = $('#sub-pengiriman-option-1 option:selected').attr('class')
+                        console.log($('#sub-pengiriman-option-1 option:selected').val())
+                        console.log($('#sub-pengiriman-option-1 option:selected').attr('class'))
+                        console.log(ongkos_kirim)
+                        $('.final-total-harga').empty()
+                        $('.final-total-harga').append(`
+                            <div class="box-ft-harga">
+                                <p> Harga Total</p>
+                                <p id="final_total_harga_barang"> ${commafy(harga)}</p>
+                            </div>  
+                        `)
+                    }else {
+                        console.log('masuk ke else')
+                        var final_total_harga_barang = 0
+                        checking_array_render.forEach((val,id,arr)=>{
+                            val.forEach((resp,index)=>{
+                                var harga = parseInt(removeComma(resp.priceAgreed))
+                                console.log(harga)
+                                final_total_harga_barang += harga
+                            })
+                            if(id === arr.length -1 ){
+                                console.log(final_total_harga_barang)
+    
+                                $('.final-total-harga').empty()
+                                $('.final-total-harga').append(`
+                                    <div class="box-ft-harga">
+                                        <p> Harga Total</p>
+                                        <p id="final_total_harga_barang"> ${commafy(final_total_harga_barang)}</p>
+                                    </div>  
+                                `)
+                            }
+                        })
+                        console.log(final_total_harga_barang)
+
+                    }
 
 
 
                     
                 })
-
-                
-               
-                // RENDER UNTUK SELECTED
-
-
-                // RENDER UNTUK PRICE
-
-                // checking_array_render.forEach((value,index)=>{
-                //     var total_product_barang = 0
-                //     value.forEach((val,id,arr)=>{
-                //         
-                //         var harga_satuan = parseInt(removeComma(val.priceAgreed))
-                //         total_product_barang += harga_satuan
-                //         if(id == arr.length -1){
-                //             
-                //             $(`.new-total-price-cc-2`).append(`
-                //                 <div class="total_price_cc">
-                //                     <p>TOTAL PRICE:</p>
-                //                     <p>RP ${total_product_barang} </p>
-                //                 </div>
-                //             `)
-                                
-                //         }
-                //     })
-                // })
-  
-            // BATAS PENCARIAN PRODUCT COMPANY
+            
 
         timerInterval = setInterval(() => {
         const content = Swal.getHtmlContainer()
