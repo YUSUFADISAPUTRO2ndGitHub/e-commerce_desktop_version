@@ -191,6 +191,7 @@ body {
     /* height:70% */
     height: 100%;
     overflow: scroll;
+    /* display: flex; */
     display: flex;
     flex-direction: column;
 }
@@ -1866,7 +1867,7 @@ display: flex;
 .box-ganti-alamat {
     max-width: 400px !important;
     width: 400px;
-    height: 300px;
+    height: 550px;
     position: relative;
     top:5%;
     
@@ -2725,6 +2726,24 @@ input:focus {
     height: 600px;
     width: 1000px;
     display: none;
+}
+.modals-new-product-detail {
+    z-index: 20;
+    height: 100%;;
+    width: 100vw;
+    position: absolute;
+    top: 15%;
+    left:0%;
+    /* left: 22%; */
+    background-color: blue;
+    display: none;
+}
+.new-iframe-product-detail{
+    width:100vw;
+    height:100vh;
+    background-color: red;
+    position:absolute;
+    top:15%;
 }
 .modals-success {
     width:700px;
@@ -7940,6 +7959,22 @@ border-radius:20px;
     justify-content: center;
     align-items: center;
 }
+.mid-box-ganti-alamat{
+    height:auto;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: row;
+}
+.label-alamat-3 {
+    height:70px;
+    width:48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height:0.1;
+}
 .label-alamat{
     height:70px;
     width:100%;
@@ -7955,7 +7990,7 @@ border-radius:20px;
     color:#2d3436;
 }
 .label-alamat-2{
-    height:200px;
+    height:290px;
     width:100%;
     display: flex;
     flex-direction: column;

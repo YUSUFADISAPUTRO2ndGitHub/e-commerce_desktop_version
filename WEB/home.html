@@ -218,8 +218,8 @@
                                 <p>Kata Sandi</p>
                                 <div class="kata_sandi_box">
                                     <input type="password" class="password-input-tokped" id="checking_password_login">
-                                    <i class="fas fa-eye lihat_pass" onclick="encrypt_password()"></i>
-                                    <i class="fas fa-eye-slash encrypt_pass" onclick="lihat_password()"></i>
+                                    <i class="fas fa-eye lihat_pass" onclick="encrypt_password_login()"></i>
+                                    <i class="fas fa-eye-slash encrypt_pass" onclick="lihat_password_login()"></i>
                                 </div>
                                 <p id="salah_password_tokped">Kata sandi harus diisi</p>
                             </div>
@@ -941,7 +941,8 @@
                                         <div class="ncb-biodata">
                                             <p>Tanggal Lahir</p>
                                             <!-- <input type="text" id="ncp-lahir" class="name-new-profile">/ -->
-                                            <p id="ncp-lahir"class="name-new-profile-2"></p>
+                                            <input type="date"  id="ncp-lahir"min='1899-01-01' max='2005-12-30' class="name-new-profile">
+                                            <!-- <p id="ncp-lahir"class="name-new-profile-2"></p> -->
                                         </div>
                                         <!-- <div class="ncb-biodata">
                                             <p>Jenis Kelamin</p>
@@ -1016,13 +1017,16 @@
                         <p>Alamat</p>
                         <input type="text" placeholder="Tulis nama jalan" class="inp-new-alamat-cust" id="new_alamat_customer">
                     </div>
-                    <div class="label-alamat">
-                        <p>Nama Penerima</p>
-                        <input type="text" placeholder="Tulis nama penerima" class="inp-new-alamat-cust" id="new_nama_customer" disabled>
-                    </div>
-                    <div class="label-alamat">
-                        <p>No Handphone</p>
-                        <input type="text" placeholder="Tulis no handphone" class="inp-new-alamat-cust" id="new_hp_customer" disabled>
+
+                    <div class="mid-box-ganti-alamat">
+                        <div class="label-alamat-3">
+                            <p>Nama Penerima</p>
+                            <input type="text" placeholder="Tulis nama penerima" class="inp-new-alamat-cust" id="new_nama_customer" disabled>
+                        </div>
+                        <div class="label-alamat-3">
+                            <p>No Handphone</p>
+                            <input type="text" placeholder="Tulis no handphone" class="inp-new-alamat-cust" id="new_hp_customer" disabled>
+                        </div>
                     </div>
                     <div class="label-alamat-2">
                         <p>Provinsi Atau Kota</p>
@@ -1825,7 +1829,10 @@
                     
                 </div> -->
             </div>
+            <!-- NEW IFRAME PRODUCT DETAIL -->
             
+            <iframe class="force-close-all-command modals-new-product-detail close" src=""></iframe> 
+            <!-- NEW IFRAME PRODUCT DETAIL -->
             <iframe class="force-close-all-command modals-group-buy" src=""></iframe> <!-- Modals group buy detail  -->
             <iframe class="force-close-all-command-2 modals-search-result" src="./Iframe/searchingPage.html"></iframe>
             <iframe class="force-close-all-command modals-information-login" src=""></iframe>

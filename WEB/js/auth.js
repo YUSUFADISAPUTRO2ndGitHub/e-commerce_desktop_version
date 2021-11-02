@@ -695,6 +695,10 @@ const simpan_profile_new=()=>{
     var email = $('#ncp-email').val()
     var no_hp_1 = $('#ncp-hp-1').val()
     var no_hp_2 = $('#ncp-hp-2').val()
+    var birthday = $('#ncp-lahir').val()
+    var replace_birthday = birthday.split('-').join('/')
+    console.log(replace_birthday)
+    console.log(birthday)
     var token = localStorage.getItem('token')
 
     console.log(nama_depan, nama_belakang,email,no_hp_1,no_hp_2)
@@ -705,7 +709,7 @@ const simpan_profile_new=()=>{
                Customer_Code : token,
                First_Name : nama_depan,
                Last_Name : nama_belakang,
-               Birthday : res.data.Birthday,
+               Birthday : replace_birthday,
                Created_Date : "CURRENT_TIMESTAMP()",
                Last_Login : "CURRENT_TIMESTAMP()",
                Email : res.data.Email,

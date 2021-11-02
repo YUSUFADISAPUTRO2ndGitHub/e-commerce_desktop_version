@@ -921,9 +921,9 @@ const get_product_detail=(product_id)=>{
     $('.box-list-kategori').empty()
     $('.box-list-kategori').css('display','none')
     $('.box-list-kategori').css('display','none')
-    $('.modals-product-detail').css('display','block')
-    $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
-    // 
+    // $('.modals-product-detail').css('display','block')
+    // $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
+    
     // $('.modals-lk').remove()
     // 
     // render_get_product_detail(product_id)

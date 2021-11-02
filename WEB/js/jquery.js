@@ -9,6 +9,7 @@ $(function(){
         $('.name-box-profile').css('display','none')
         $('#left-btn-profile').css('display','none')
         $('#right-btn-profile').css('display','block')
+        $('.box-option-profile').css('justify-content','center')
         setTimeout(()=>{
             $('.img-box-profile').css('width','100%')
         },1000)
@@ -18,6 +19,7 @@ $(function(){
         
         $('#left-btn-profile').css('display','block')
         $('#right-btn-profile').css('display','none')
+        $('.box-option-profile').css('justify-content','flex-start')
         setTimeout(()=>{
             $('.detail-profile-left').css('display','flex')
             $('.name-box-profile').css('display','flex')
@@ -1387,6 +1389,7 @@ $(function(){
         $('.close-button').css('display','block')
         $('.close-button-2').css('display','block')
         $('.input-name').css('z-index','100')
+        $('.icon-search').css('z-index','100')
         $('.modals-search-result').contents().find('.close-button-2').css('display','block');
         var value = $(this).val()
         // $('.close').css('display','block')
@@ -1450,6 +1453,7 @@ $(function(){
                 $('.input-name').css('border-bottom-left-radius','10px')
                 $('.input-name').css('border-bottom-right-radius','10px')
                 $('.input-name').css('z-index','0')
+                $('.icon-search').css('z-index','0')
             }
              
 
@@ -1500,6 +1504,7 @@ $(function(){
                 $('.input-name').css('border-bottom-left-radius','10px')
                 $('.input-name').css('border-bottom-right-radius','10px')
                 $('.input-name').css('z-index','0')
+                $('.icon-search').css('z-index','0')
             }
         }
         

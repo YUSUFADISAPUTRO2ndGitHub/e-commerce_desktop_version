@@ -2619,12 +2619,25 @@ const encrypt_password=()=>{
     $('.encrypt_pass').css('visibility','visible')
     $('#checking_password_register').attr('type','password')
 }
+const encrypt_password_login=()=>{
+    // alert('encrypt pass jalan')
+    $('.lihat_pass').css('visibility','hidden')
+    $('.encrypt_pass').css('visibility','visible')
+    $('#checking_password_login').attr('type','password')
+}
 const lihat_password=()=>{
     // alert('lihat pass jalan')
     $('.lihat_pass').css('visibility','visible')
     $('.encrypt_pass').css('visibility','hidden')
     $('.lihat_pass').css('left','10px')
     $('#checking_password_register').attr('type','text')
+}
+const lihat_password_login=()=>{
+    // alert('lihat pass jalan')
+    $('.lihat_pass').css('visibility','visible')
+    $('.encrypt_pass').css('visibility','hidden')
+    $('.lihat_pass').css('left','10px')
+    $('#checking_password_login').attr('type','text')
 }
 
 
