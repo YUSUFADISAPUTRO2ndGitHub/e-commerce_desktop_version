@@ -7,12 +7,14 @@
         /* background-color: red; */
     }
     .container-lc{
+        width:415px !important;
         display: flex;
         /* justify-content: center; */
         align-content: center;
-        padding:10px;
+        /* justify-content: center; */
+        /* padding:10px; */
         position: relative;
-        left:15px;
+        /* left:15px; */
     }
     
   }
