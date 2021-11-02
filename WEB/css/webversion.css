@@ -5,10 +5,13 @@
         display: flex;
         align-content: center;
         position: relative;
-        left:15px;
-        background-color: red;
+        /* left:15px; */
+        background-color: transparent;
     }
-    .link-group-area{
+    .link-group-area-2{
+        width:100%;
+    }
+    .card-hotline-2 {
         width:100%;
     }
     
@@ -24,7 +27,27 @@
         align-content: center;
         padding:10px;
         position: relative;
-        left:35px;
+        left:0px;
+    }
+    .card-hotline{
+        position:relative;
+        /* left:12px; */
+    }
+    
+  }
+  @media (max-width: 305px) {
+    .link-group-area-2{
+        width:100%;
+        height:400px;
+        /* position: absolute; */
+    }
+    .container-lc{
+        display: flex;
+        align-content: center;
+        padding:10px;
+        position: relative;
+        left:0px;
+        /* left:35px; */
     }
     .card-hotline{
         position:relative;

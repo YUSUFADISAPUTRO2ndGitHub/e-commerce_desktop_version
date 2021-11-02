@@ -22,7 +22,8 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             /* width: 100%; */
             width:400px;
-            height: auto;
+            height: 500px;
+            /* height:auto; */
             transition: 1s;
             /* padding: 1%; */
             padding-left:1%;
@@ -43,8 +44,11 @@
             background-color: whitesmoke;
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            height: 40%;
+            height: 25%;
+            min-height:25%;
             width: 25%;
+            /* width:100px; */
+            /* height:100px; */
             float: left;
             margin: 1%;
             padding:5px;
@@ -52,7 +56,7 @@
         }
         .link-group-box:hover{
             width:27%;
-            height:41%;
+            height:27%;
         }
         img{
             max-width: 100%;
@@ -97,22 +101,25 @@
         }
         .new-link-group-area{
             width:100%;
-            height:100%;
+            height:90%;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
+            overflow:auto;
+            overflow-x:scroll;
             
         }
-        .card-hotline{
-            width:430px;
+        .card-hotline-2{
+            width:400px;
             height:150px;
+            /* display: none;; */
             /* border:1px solid black; */
             border-radius:10px;
             background-color: #2d3436;
             position: relative;
-            top:65%;
+            /* top:95%; */
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
         .logo-hotline{
@@ -177,12 +184,23 @@
             /* background-color: white; */
             
         }
+        /* new */
+        .link-group-area-2 {
+            width:400px;
+            height:500px;
+            background-color: #00cec9;
+            border-radius: 10px;
+            margin-bottom:20px;
+            padding-top:10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
     </style>
     <link rel="stylesheet" href="../css/webversion.css">
 </head>
 <body>
     <div class="container-lc">
-        <div class="link-group-area">
+        <div class="link-group-area-2">
             <div class="new-link-group-area">
                 <a class="link-group-box" href="https://shopee.co.id/soldays.id" target="_blank">
                     <img src="./shopee.png">
@@ -211,6 +229,9 @@
                 <a class="link-group-box" href="https://goo.gl/maps/ZSfWCPq3tigxwdkY8" target="_blank">
                     <img src="./gmaps.png">
                 </a>
+                <a class="link-group-box" href="http://soldays.id/company-profile" target="_blank">
+                    <img src="./gmaps.png">
+                </a>
             </div>
             <div class="clc-logo">
                 <!-- <div class="box-clc-logo">
@@ -223,7 +244,7 @@
                 </a>
             </div>
         </div>
-        <div class="card-hotline">
+        <div class="card-hotline-2">
             <div class="logo-hotline">
                 SOLUSI DIGITAL INTERNUSA
             </div>
