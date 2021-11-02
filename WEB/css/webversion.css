@@ -6,6 +6,7 @@
         align-content: center;
         position: relative;
         left:15px;
+        background-color: red;
     }
     .link-group-area{
         width:100%;
