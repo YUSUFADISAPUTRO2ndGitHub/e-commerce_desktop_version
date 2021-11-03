@@ -61,7 +61,9 @@ $( document ).ready(function() {
             
             renderItemBasedOnSubCategory(subcategory);
         }
-    }else if(item_category != undefined){
+    }
+    // bayu comment 4 november 2021
+    else if(item_category != undefined){
         
         
         if(render_from == 'home'){
@@ -71,7 +73,9 @@ $( document ).ready(function() {
             render_get_product_detail_searching_page(item_category)
 
         }
-    }else if (group_buy != undefined){
+    }
+    // bayu comment 4 november 2021
+    else if (group_buy != undefined){
         // 
         // alert(group_buy)
         render_group_buy(group_buy)
@@ -918,12 +922,20 @@ const re_render_register=()=>{
 
 
 const get_product_detail=(product_id)=>{
-    $('.box-list-kategori').empty()
-    $('.box-list-kategori').css('display','none')
-    $('.box-list-kategori').css('display','none')
+    // $('.box-list-kategori').empty()
+    // $('.box-list-kategori').css('display','none')
+    // $('.box-list-kategori').css('display','none')
     // $('.modals-product-detail').css('display','block')
     // $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
     
+    //close body
+    window.parent.$('.main-body').css('display','none')
+
+    window.parent.$('.close-button').css('display','none')
+    window.parent.$('.modals-lk').css('display','none')
+    window.parent.$('.modals-new-product-detail').css('display','block')
+    
+    window.parent.$('.modals-new-product-detail').attr('src',`../../WEB/Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
     // $('.modals-lk').remove()
     // 
     // render_get_product_detail(product_id)
@@ -3957,18 +3969,6 @@ function commafy( num ) {
             timer: 30000000,
             timerProgressBar: true,
             didOpen:()=>{
-               // close cart tab
-            //    if($('.option-3',window.parent.document).hasClass('background_grey')){
-            //         $('.option-3',window.parent.document).removeClass('background_grey')
-            //     }else {
-            //         $('.option-3',window.parent.document).addClass('background_grey')
-            //     }
-            //     $(".iframe",window.parent.document).toggle();
-                // close cart tab
-
-
-
-
                 var product_id_pilihan = product_id
                 let allDataProduct = []
                 var all_filter_product = []

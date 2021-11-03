@@ -54,6 +54,9 @@ body {
     justify-content: flex-end;
     /* background-color: green; */
 }
+.ma_right a {
+    margin-right:10px;
+}
 .ins_ma_left_1{
     width:20%;
     height:80%;
@@ -8618,6 +8621,7 @@ border-radius:20px;
 }
 #highlight-product {
     display:none;
+    text-align: center;
 }
 
 
