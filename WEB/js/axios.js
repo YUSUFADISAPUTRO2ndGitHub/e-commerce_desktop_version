@@ -339,71 +339,6 @@ async function loop_through_items(page, item_no){
 }
 
 
-// const getAllData=async()=>{
-
-//     var all_data = JSON.parse(localStorage.getItem('all_data_product'))
-//     var token = localStorage.getItem('token')
-//     allData = all_data
-   
-//    axios.post('https://products.sold.co.id/get-product-details')
-//    .then((res)=>{
-      
-//         if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
-//             // alert('masuk ke if')
-//                 allData = res.data
-//                 renderItemPromo()
-//                 renderItemNew()
-//                 renderItemAll()
-//                 renderCategory()
-//                 render_item_all_category()
-//                 renderOptionSearch()
-//                 // var all_data_with_blob = []
-//                 // res.data.forEach(async(val,index)=>{
-//                 //     var result = await  get_all_blob(val,index)
-//                 //     
-//                 //     all_data_with_blob.push(result)
-//                 //     
-//                 //     var stringify = JSON.stringify(result)
-//                 //     
-//                 //     localStorage.setItem('all_data_product',stringify   )
-//                 // })
-//                 var stringify = JSON.stringify(allData)
-//                 localStorage.setItem('all_data_product',stringify)
-            
-            
-//                 // renderSubCategory('ADHESIVE')
-//                 // renderItemBasedOnSubCategory('SEALANT')
-            
-//         }else {
-        
-            
-//             renderItemPromo()
-//             renderItemNew()
-//             renderItemAll()
-//             renderCategory()
-//             render_item_all_category()
-//             renderOptionSearch()
-//         }
-// }).catch((err)=>{
-            
-// })
-//     get_all_cat_subCat_for_storage()
-//     if(token !== null && token !== undefined && token.length>0) {
-        
-//         var province =  await new_find_province_from_address()
-//         var city =  await new_find_city_from_address(province)
-//         var district =  await new_find_district_from_address(city)
-//         var subdistrict =  await new_find_subDistrict_from_address(district)
-//         localStorage.setItem('bayu','testingbayu')
-//         localStorage.setItem('province_customer',province)
-//         localStorage.setItem('city_customer',city)
-//         localStorage.setItem('district_customer',district)
-//         localStorage.setItem('sub_district_customer',subdistrict)
-      
-//     }
-
-
-// }
 
 function loadXHR(url) {
 
@@ -488,13 +423,16 @@ const get_product_detail_from_main_page=(product_id)=>{
      var height = $('.box-render-new').position()
     
 $('.box-delete-success').css('display','block')
-$('.modals-product-detail').css('display','block')
-$('.close-button').css('display','block')
-$('.box_iframe_groupbuy').css('display','block')
-$('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
+// $('.modals-product-detail').css('display','block')
+// $('.close-button').css('display','block')
+// $('.box_iframe_groupbuy').css('display','block')
+$('.modals-new-product-detail').css('display','block')
+// $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
 // $('.modals-product-detail').attr('src',`/WEB/Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
+$('.main-body').css('display','none')
+$('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
 $('.new-box-category').css('display','none')
-// 
+
 }
 
 // // RENDER DATA HOME
@@ -1197,6 +1135,9 @@ function back_to_home(){
     $('.main-body').css('display','block')
     $('.active_search').css('top','0px')
     $('#newloginTokpedModal').modal('hide')
+    window.parent.$('.box-product').css('display','flex')
+    window.parent.$('.main-body').css('display','block')
+    window.parent.$('.force-close-all-command-2').css('display','none')
 }
 // const find_province_from_address= async ()=>{
 //     return new Promise(async (resolve, reject) => {
@@ -4122,7 +4063,6 @@ function commafy( num ) {
                                                             <div class="card-for-minus-plus-id">
                                                                 <div class="btn-minus-id" id="icon-minus-id-2">
                                                                     <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
-                                
                                                                 </div>
                                                                 <div class=" btn-plus-id" id="icon-plus-id-2"> 
                                                                     <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
@@ -7154,141 +7094,7 @@ const open_checkout=async(product_id)=>{
 }
 
 
-const buyNow=async(product_id)=>{
-    // addToCart(product_id)
-    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    .then(async(res)=>{
-        var product = res.data
-        var province_company = ''
-        var city_company = ''
-        var district_company = ''
-        var courier_price_code_company = ''
-        var token = localStorage.getItem('token')
-        if(token === null){
-            if(token === null){
-                // swal.fire("Silahkan Login","","warning");
-                Swal.fire({
-                    html:`
-                    <div class="o-circle c-container__circle o-circle__sign--failure">
-                        <div class="o-circle__sign"></div>  
-                    </div> 
-                    Silahkan Login`,
-                    timer:2000,
-                    
-                })
-                // $('#loginModal',window.parent.document).modal('show')
-                // window.location.href = "./sign-in.html";
-            }else {
-                // swal.fire("Pilih barang di keranjang","","warning");
-                Swal.fire({
-                    html:`
-                    <div class="o-circle c-container__circle o-circle__sign--failure">
-                        <div class="o-circle__sign"></div>  
-                    </div> 
-                    Ada Kesalahan pada barang`,
-                    timer:2000,
-                    
-                })
-            }
-        }else {
-            console.log(product)
-            province_company = await find_province_from_product_company(product.PIC_company_address)
-            city_company = await find_city_from_product_company(province_company,product.PIC_company_address)
-            district_company = await find_district_from_product_company(city_company,product.PIC_company_address)
-            courier_price_code_company = await find_courier_price_code_from_product_company(district_company,product.PIC_company_address)
-            var array = []
-            
-            localStorage.setItem('itemsToCheckout',array)
-            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-            .then((res)=>{
-                console.log(res.data,'7065 setelah await')
-                console.log(province_company,' province company')
-                console.log(city_company,' province company')
-                console.log(district_company,' province company')
-                console.log(courier_price_code_company,' province company')
-                console.log(res.data.Sell_Price, ' sell price')
-                console.log(product.PIC_company_address)
-                console.log(product.Weight_KG)
-                if(res.data.Stock_Quantity > 1){
-                    console.log('masuk ke if 7067')
-                    var productToBeAdded = {
-                        productNo: product.Product_Code,
-                        quantity: 1,
-                        GroupCode: "NO COUPON",
-                        priceAgreed: res.data.Sell_Price,
-                        courier_price_code:courier_price_code_company,
-                        company_address:product.PIC_company_address,
-                        province_company:province_company,
-                        city_company:city_company,
-                        district_company:district_company.District,
-                        weight_kg:product.Weight_KG,
-                        berat_product:product.Weight_KG,
-                        product_name:product.Name
-                    }
 
-                    array.push(productToBeAdded)
-                    console.log(productToBeAdded)
-                    var productToBeAddedStringify = JSON.stringify(array);
-                    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);            
-                // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
-            
-                $('.close-button',window.parent.parent.document).css('display','block')
-                
-        
-                $('.close',window.parent.parent.document).css('display','none')
-                
-                // $('.close').css('display','none')
-                
-                // $('.modals-product-detail',window.parent.document).css('display','none')
-                $('.modals-lk', window.parent.parent.document).css('display','none')
-                $(".iframe",window.parent.parent.document).toggle();
-                
-                if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
-                    $('.option-3',window.parent.parent.document).removeClass('background_grey')
-                }else {
-                    $('.option-3',window.parent.parent.document).addClass('background_grey')
-                }
-                
-                
-                // $('.main-body').css('display','none')
-                // $('.modals-search-result').css('display','block')
-                
-                // $('.iframe').css('display','block')
-                $('.modals-pengiriman',window.parent.parent.document).css("display",'none')
-                $('.modals-check-harga',window.parent.parent.document).css("display",'none')
-                $('.option-1',window.parent.parent.document).removeClass('background_grey')
-                $('.option-2',window.parent.parent.document).removeClass('background_grey')
-                $('.option-0',window.parent.parent.document).removeClass('background_grey')
-                $(".iframe",window.parent.parent.document).attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
-                // $('.close-button',window.parent.document).css('display','none')
-        
-                  // SEARCH ITEM BACK TO NORMAL
-                  $('.box-render-search',window.parent.document).css('display','none')
-                  $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
-                  $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
-                  $('.input-name',window.parent.document).val(null)
-                }else {
-                    // swal.fire("Barang Tidak Tersedia","","warning");
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Barang Tidak Tersedia`,
-                        timer:2000,
-                        
-                    })
-                }
-        
-            }).catch((err)=>{
-                
-            })
-    
-        }
-    }).catch((err)=>{
-        console.log(err)
-    })
-}
 
 function groupbuy(product_id){
     

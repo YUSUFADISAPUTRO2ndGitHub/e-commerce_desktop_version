@@ -91,6 +91,13 @@ body {
     /* margin-left:5px; */
     /* margin:10px; */
 }
+.small-product-img video {
+    width:100px;
+    height:60px;
+    border-radius:5px !important;
+    max-height:80px;
+    max-width:80px;
+}
 .small-product-img img{
     width:100%;
     height:100%;
