@@ -872,8 +872,8 @@ const get_product_detail=(product_id)=>{
     window.parent.$('.close-button').css('display','none')
     window.parent.$('.modals-lk').css('display','none')
     window.parent.$('.modals-new-product-detail').css('display','block')
+    window.parent.$('.modals-new-product-detail').attr('src',`../../WEB/Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
     
-    window.parent.$('.modals-new-product-detail').attr('src',`../Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
     // $('.modals-lk').remove()
     // 
     // render_get_product_detail(product_id)
