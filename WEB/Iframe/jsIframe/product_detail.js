@@ -73,7 +73,7 @@ const send_comment_cust_product=(product_id)=>{
 
 
                     comment_parse.map((val,index)=>{
-                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                         .then((item)=>{
                             var link_gambar = item.data
                             if(item.data !=='undefined'){
@@ -790,7 +790,7 @@ const render_product_detail_from_home=async(item_category)=>{
                                     }
                                     comment_parse.map((val,index)=>{
                                         console.log(val)
-                                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
                                         
                                             console.log(val,' ini val')

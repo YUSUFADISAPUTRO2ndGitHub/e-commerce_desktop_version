@@ -43,7 +43,7 @@ function cart_requested(x){
             })
         }else {  // get cart
             
-            axios.post(`http://customers.sold.co.id/get-saved-user-shopping?Customer_Code=${token}`)
+            axios.post(`https://customers.sold.co.id/get-saved-user-shopping?Customer_Code=${token}`)
             .then((res)=>{
                 
                 if(res.data != undefined){
@@ -1566,7 +1566,7 @@ const close_tab_answer=(result,index)=>{
                 }
             }
         if(result_comment.length>0){
-            // axios.post(`http://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
+            // axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
             //     headers:{
             //         "Content-Type":'application/json'
             //     },

@@ -2826,7 +2826,7 @@
                         })
                     }).then((res)=>{
                         if(res.data){
-                            axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                            axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
                             .then((res)=>{
                                 $(`#img-profile-id`).attr(`src`, `${res.data}`);
                                 $(`#img-profile-big`).attr(`src`, `${res.data}`);

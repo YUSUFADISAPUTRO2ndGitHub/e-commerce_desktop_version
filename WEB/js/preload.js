@@ -339,7 +339,7 @@ const new_find_subDistrict_from_address=async(district)=>{
         await get_all_couriers().done( async function(response){
             kurir_pilihan = response[0].Courier
             kurir_kode = response[0].Courier_Code
-            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async(res)=>{
                 alamat_pilihan = res.data.Address_1
                 if(subDistrict_from_storage != undefined && subDistrict_from_storage.length != 0 ){
@@ -379,7 +379,7 @@ const new_find_district_from_address=async(city)=>{
             kurir_pilihan = response[0].Courier
             kurir_kode = response[0].Courier_Code
     
-            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async(res)=>{
                 alamat_pilihan = res.data.Address_1
     
@@ -421,7 +421,7 @@ const new_find_city_from_address= async (province)=>{
         await get_all_couriers().done( async function(response){
             kurir_pilihan = response[0].Courier
             kurir_kode = response[0].Courier_Code
-            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then( async (res)=>{
                 alamat_pilihan  = res.data.Address_1
                 if(city_from_storage != undefined && city_from_storage.length != 0){
@@ -466,7 +466,7 @@ const new_find_province_from_address= async ()=>{
         await get_all_couriers().done(async function(response){
             kurir_pilihan = response[0].Courier
             kurir_kode = response[0].Courier_Code
-            await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+            await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async (res)=>{
                 
                 alamat_pilihan = res.data.Address_1

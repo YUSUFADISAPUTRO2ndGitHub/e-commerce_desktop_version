@@ -18,7 +18,7 @@ function getToken(){
 
 function getProfile(Customer_Code){
     var settings = {
-        "url": `http://customers.sold.co.id/get-customer-information?Customer_Code=${Customer_Code}`,
+        "url": `https://customers.sold.co.id/get-customer-information?Customer_Code=${Customer_Code}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -36,7 +36,7 @@ function getUnpaidOrderPerProduct(Product_Code, Customer_Code){
 
 function getCustomersWithCustomerNo(customerNo){
     var settings = {
-        "url": `http://customers.sold.co.id/get-customer-information?Customer_Code=${customerNo}`,
+        "url": `https://customers.sold.co.id/get-customer-information?Customer_Code=${customerNo}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -46,7 +46,7 @@ function getCustomersWithCustomerNo(customerNo){
 
 function loginRequestAPI(Email, Password){
     var settings = {
-        "url": `http://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}`,
+        "url": `https://customers.sold.co.id/customer-login-request?Email=${Email}&Password=${Password}`,
         "method": "POST",
         "timeout": 0,
     };
@@ -56,7 +56,7 @@ function loginRequestAPI(Email, Password){
 
 function createCustomerNo(){
     var settings = {
-        "url": `http://customers.sold.co.id/get-customer-code`,
+        "url": `https://customers.sold.co.id/get-customer-code`,
         "method": "POST",
         "timeout": 0,
     };
@@ -66,7 +66,7 @@ function createCustomerNo(){
 
 function createNewCustomer(access_token, session_id, data){
     var settings = {
-        "url": "http://customers.sold.co.id/create-new-customer-direct-from-user",
+        "url": "https://customers.sold.co.id/create-new-customer-direct-from-user",
         "method": "POST",
         "timeout": 0,
         "headers": {
@@ -99,7 +99,7 @@ function createNewCustomer(access_token, session_id, data){
 
 function updateCustomer(data){
     var settings = {
-        "url": "http://customers.sold.co.id/update-customer-data-by-user-themselves",
+        "url": "https://customers.sold.co.id/update-customer-data-by-user-themselves",
         "method": "POST",
         "timeout": 10000,
         "headers": {
@@ -348,7 +348,7 @@ function getAllSubCategories(Get_ALL_Sub_Category_Based_On_Category){
 
 function getforgotpasswordrequest(Email, Birthday, PrimaryContactNumber, requestedNewPassword){
     var settings = {
-        "url": "http://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&Birthday=" + Birthday + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
+        "url": "https://customers.sold.co.id/customer-forgot-password-request?Email=" + Email + "&Birthday=" + Birthday + "&PrimaryContactNumber=" + PrimaryContactNumber + "&requestedNewPassword=" + requestedNewPassword,
         "method": "POST",
         "timeout": 10000,
     };
@@ -357,7 +357,7 @@ function getforgotpasswordrequest(Email, Birthday, PrimaryContactNumber, request
 }
 function encryptPassword(Password){
     var settings = {
-        "url": "http://customers.sold.co.id/password-generator?Password=" + Password,
+        "url": "https://customers.sold.co.id/password-generator?Password=" + Password,
         "method": "POST",
         "timeout": 10000,
     };

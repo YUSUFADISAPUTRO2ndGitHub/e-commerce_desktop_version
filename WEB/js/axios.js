@@ -1150,7 +1150,7 @@ function back_to_home(){
 //         await get_all_couriers().done(async function(response){
 //             kurir_pilihan = response[0].Courier
 //             kurir_kode = response[0].Courier_Code
-//             await axios.post(`http://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+//             await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
 //             .then(async (res)=>{
 //                 alamat_pilihan = res.data.Address_1
 //                 if(province_from_storage != undefined &&  province_from_storage.length != 0){
@@ -4344,7 +4344,7 @@ function commafy( num ) {
                                 `)
                                 }else if (comment_parse.length > 0 ) {
                                     comment_parse.map((val,index)=>{
-                                        axios.post(`http://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
 
                                             if(res.data){
