@@ -3,7 +3,7 @@
     .container-lc{
         width:100vw;
         display: flex;
-        align-content: center;
+        /* align-items: center; */
         position: relative;
         /* left:15px; */
         background-color: transparent;
@@ -24,7 +24,7 @@
     }
     .container-lc{
         display: flex;
-        align-content: center;
+        /* align-content: center; */
         padding:10px;
         position: relative;
         left:0px;
@@ -43,7 +43,7 @@
     }
     .container-lc{
         display: flex;
-        align-content: center;
+        /* align-items: center; */
         /* padding:10px; */
         position: relative;
         left:0px;
