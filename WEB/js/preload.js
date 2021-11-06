@@ -26,7 +26,7 @@ setInterval(()=>{
 
 
 const loadImageBigScreen=()=>{
-    console.log(' load image big screen jalan')
+    // console.log(' load image big screen jalan')
     // $('.shinny img').css('opacity','1')
     $('.mySlides').removeClass('shinny')
     $('.mySlides-tr').removeClass('shinny')
@@ -650,7 +650,7 @@ const renderOptionSearch=()=>{
         })  
 }
 const getAllData=async()=>{
-    console.log('get all data jalan')
+    // console.log('get all data jalan')
     var all_data = JSON.parse(localStorage.getItem('all_data_product'))
     var token = localStorage.getItem('token')
     allData = all_data
