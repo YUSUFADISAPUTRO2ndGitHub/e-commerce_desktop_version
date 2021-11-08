@@ -1,26 +1,27 @@
-$(document).ready(function(){
+$(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const render_from = urlParams.get('render_from')
     const item_category = urlParams.get('product_id')
 
 
-    if(item_category != undefined){
-        if(render_from == 'home'){
+    if (item_category != undefined) {
+        if (render_from == 'home') {
             // render_get_product_detail(item_category)
             render_product_detail_from_home(item_category)
-        }else {
+        } else {
             render_product_detail_from_searching_page(item_category)
         }
     }
 })
 
-function replace_vtintl_to_sold_co_id(original_url){
+function replace_vtintl_to_sold_co_id(original_url) {
     var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
-return original_url;
+    return original_url;
 }
-function commafy( num ) {
-    if(num !=undefined){
+
+function commafy(num) {
+    if (num != undefined) {
         var str = num.toString().split('.');
         if (str[0].length >= 5) {
             str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
@@ -29,58 +30,57 @@ function commafy( num ) {
             str[1] = str[1].replace(/(\d{3})/g, '$1 ');
         }
         return str.join('.');
-    }else {
+    } else {
         return '0'
     }
 }
-const send_comment_cust_product=(product_id)=>{
+const send_comment_cust_product = (product_id) => {
     var result_comment = $('.input-ulasan-npd').val()
     var token = localStorage.getItem('token')
 
-        var data = {
-            User_Comments:
-            {
-                Customer_Code:token,
-                Comment:result_comment,
-                Product_Code:product_id
-            }
+    var data = {
+        User_Comments: {
+            Customer_Code: token,
+            Comment: result_comment,
+            Product_Code: product_id
         }
+    }
 
-    if(result_comment.length>0){
+    if (result_comment.length > 0) {
 
         axios.post(`http://products.sold.co.id/get-product-details?product_code=${product_id}`)
-        .then((res)=>{
-            var nama_company = res.data.PIC_company_name
-            axios.post(` https://products.sold.co.id/send_user_comment`,data,{
-                headers:{
-                    "Content-Type":'application/json'
-                },
-                "data":JSON.stringify({
-                    "Customer_Code":data.User_Comments.Customer_Code,
-                    "Comments":data.User_Comments.Comment,
-                    "Product_Code":data.User_Comments.Product_Code
-                })
-            }).then((res)=>{
-                axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
-                .then((res)=>{
-                    var cust_comment = res.data
-                    var comment_parse = JSON.parse(cust_comment.User_Comments)
-                    var total_comment = comment_parse.length
-                    $('.box-ulasan-detail').empty()
-                    $('.box-ulasan-detail').append(`
+            .then((res) => {
+                var nama_company = res.data.PIC_company_name
+                axios.post(` https://products.sold.co.id/send_user_comment`, data, {
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                    "data": JSON.stringify({
+                        "Customer_Code": data.User_Comments.Customer_Code,
+                        "Comments": data.User_Comments.Comment,
+                        "Product_Code": data.User_Comments.Product_Code
+                    })
+                }).then((res) => {
+                    axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                        .then((res) => {
+                            var cust_comment = res.data
+                            var comment_parse = JSON.parse(cust_comment.User_Comments)
+                            var total_comment = comment_parse.length
+                            $('.box-ulasan-detail').empty()
+                            $('.box-ulasan-detail').append(`
                         <p>SEMUA ULASAN(${total_comment})</p>
                     `)
 
 
-                    comment_parse.map((val,index)=>{
-                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
-                        .then((item)=>{
-                            var link_gambar = item.data
-                            if(item.data !=='undefined'){
-                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                .then((res)=>{
-                                    console.log(item)
-                                    $('.box-ulasan-detail').append(`
+                            comment_parse.map((val, index) => {
+                                axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                    .then((item) => {
+                                        var link_gambar = item.data
+                                        if (item.data !== 'undefined') {
+                                            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                .then((res) => {
+                                                    console.log(item)
+                                                    $('.box-ulasan-detail').append(`
                                         <div class="box-item-ulasan">
                                             <div class="biu-left">
                                                 <div class="biu-image">
@@ -109,14 +109,14 @@ const send_comment_cust_product=(product_id)=>{
                                             </div>
                                         </div> 
                                     `)
-                                }).catch((err)=>{
-                                    
-                                })
-                            }else {
-                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                .then((res)=>{
-                                    
-                                    $('.box-ulasan-detail').append(`
+                                                }).catch((err) => {
+
+                                                })
+                                        } else {
+                                            axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                .then((res) => {
+
+                                                    $('.box-ulasan-detail').append(`
                                         <div class="box-item-ulasan">
                                             <div class="biu-left">
                                                 <div class="biu-image">
@@ -145,145 +145,144 @@ const send_comment_cust_product=(product_id)=>{
                                             </div>
                                         </div> 
                                     `)
-                                }).catch((err)=>{
-                                    
-                                })
-                            }
+                                                }).catch((err) => {
 
-                        }).catch((err)=>{
-                            console.log(err)
+                                                })
+                                        }
+
+                                    }).catch((err) => {
+                                        console.log(err)
+                                    })
+
+                            })
+                            $('.input-ulasan-npd').val('')
+                        }).catch((err) => {
+
                         })
-    
-                    })
-                    $('.input-ulasan-npd').val('')
-                }).catch((err)=>{
-                    
+                }).catch((err) => {
+                    console.log(err)
                 })
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
-        }).catch((err)=>{
-            console.log(err)
-        })
 
     }
 }
-function addToCart(product_id,qty){
+
+function addToCart(product_id, qty) {
 
     axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    .then((res)=>{
-        
-        var quantity_product = parseInt(res.data.Stock_Quantity)
-        
+        .then((res) => {
 
-        if(quantity_product == 0 || quantity_product == '0' ||
-           quantity_product == undefined || quantity_product==null ||
-           isNaN(quantity_product) || quantity_product < 0
-        ){
-            // Swal.fire("Stock Tidak Tersedia", "Error", "error");
-            Swal.fire({
-                html:`
+            var quantity_product = parseInt(res.data.Stock_Quantity)
+
+
+            if (quantity_product == 0 || quantity_product == '0' ||
+                quantity_product == undefined || quantity_product == null ||
+                isNaN(quantity_product) || quantity_product < 0
+            ) {
+                // Swal.fire("Stock Tidak Tersedia", "Error", "error");
+                Swal.fire({
+                    html: `
                 <div class="o-circle c-container__circle o-circle__sign--failure">
                     <div class="o-circle__sign"></div>  
                 </div> 
                 Stock Tidak Tersedia`,
-                timer:2000,
-                
-            })
-        }else {
-            var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
-            
-            if(dataParse){
-                
-        
-                var filterdatakosong = dataParse.filter((filtering)=>{
-                    if(filtering.productNo === product_id){
-                        return filtering
-                    }
+                    timer: 2000,
+
                 })
-                if(filterdatakosong.length){         
-                    var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
-                    dataParse[objIndex].quantity = dataParse[objIndex].quantity +1
-                    $('.cart-counter').text(dataParse.length)
-                    // swal.fire("Berhasil Menambahkan Quantity", "", "success");
-                    Swal.fire({
-                        html:`
+            } else {
+                var dataParse = JSON.parse(localStorage.getItem("itemsInCart"))
+
+                if (dataParse) {
+
+
+                    var filterdatakosong = dataParse.filter((filtering) => {
+                        if (filtering.productNo === product_id) {
+                            return filtering
+                        }
+                    })
+                    if (filterdatakosong.length) {
+                        var objIndex = dataParse.findIndex((obj => obj.productNo == product_id));
+                        dataParse[objIndex].quantity = dataParse[objIndex].quantity + 1
+                        $('.cart-counter').text(dataParse.length)
+                        // swal.fire("Berhasil Menambahkan Quantity", "", "success");
+                        Swal.fire({
+                            html: `
                         <div class="o-circle c-container__circle o-circle__sign--success">
                             <div class="o-circle__sign"></div>  
                         </div>   
                         Berhasil Menambahkan Quantity
                         `,
-                        timer:2000,
-                        
-                    })
-                }else {
-                    
-                    var data = {
-                    "productNo":product_id,
-                    "quantity":qty,
-                    "company_address":res.data.PIC_company_address,
-                    "weight_kg":res.data.Weight_KG,
-                    "product_name":res.data.Name
-                    }
-                    dataParse.push(data)
-                    $('.cart-counter').text(dataParse.length)
-                    // swal.fire("Berhasil Menambahkan ke Cart", "", "success");
-                    Swal.fire({
-                        html:`
+                            timer: 2000,
+
+                        })
+                    } else {
+
+                        var data = {
+                            "productNo": product_id,
+                            "quantity": qty,
+                            "company_address": res.data.PIC_company_address,
+                            "weight_kg": res.data.Weight_KG,
+                            "product_name": res.data.Name
+                        }
+                        dataParse.push(data)
+                        $('.cart-counter').text(dataParse.length)
+                        // swal.fire("Berhasil Menambahkan ke Cart", "", "success");
+                        Swal.fire({
+                            html: `
                         <div class="o-circle c-container__circle o-circle__sign--success">
                             <div class="o-circle__sign"></div>  
                         </div>   
                         Berhasil Menambahkan ke Cart
                         `,
-                        timer:2000,
-                        
-                    })
-                }
-        
-                var pushToStorage = JSON.stringify(dataParse)
-                
-                
-                localStorage.setItem('itemsInCart',pushToStorage)
-        
-            }else {
-                
-                var cart = [
-                    {
-                    "productNo":product_id,
-                    "quantity":qty,
-                    "company_address":res.data.PIC_company_address,
-                    "weight_kg":res.data.Weight_KG,
-                    "product_name":res.data.Name
+                            timer: 2000,
+
+                        })
                     }
-                ]
-                var pushToStorage2 = JSON.stringify(cart)
-                
-                localStorage.setItem('itemsInCart',pushToStorage2) 
-                Swal.fire({
-                    html:`
+
+                    var pushToStorage = JSON.stringify(dataParse)
+
+
+                    localStorage.setItem('itemsInCart', pushToStorage)
+
+                } else {
+
+                    var cart = [{
+                        "productNo": product_id,
+                        "quantity": qty,
+                        "company_address": res.data.PIC_company_address,
+                        "weight_kg": res.data.Weight_KG,
+                        "product_name": res.data.Name
+                    }]
+                    var pushToStorage2 = JSON.stringify(cart)
+
+                    localStorage.setItem('itemsInCart', pushToStorage2)
+                    Swal.fire({
+                        html: `
                     <div class="o-circle c-container__circle o-circle__sign--success">
                         <div class="o-circle__sign"></div>  
                     </div>   
                     Berhasil Menambahkan ke Cart
                     `,
-                    timer:2000,
-                    
-                })    
-            }       
-        }
-    }).catch((err)=>{
-        
-    })
-      
+                        timer: 2000,
+
+                    })
+                }
+            }
+        }).catch((err) => {
+
+        })
+
 }
-const kurang_qty_product=(max_qty,price)=>{
+const kurang_qty_product = (max_qty, price) => {
     console.log(max_qty)
     var qty_now = $('.input-qty-product-detail').val()
-    
-    console.log(qty_now,' ini qty now')
-    if(qty_now === 0 || qty_now <0 || qty_now == -1 ){
 
-    }else if (qty_now >0) {
+    console.log(qty_now, ' ini qty now')
+    if (qty_now === 0 || qty_now < 0 || qty_now == -1) {
+
+    } else if (qty_now > 0) {
         console.log()
         var qty_minus = qty_now - 1
         $('.box_for_total').html(qty_minus)
@@ -298,21 +297,21 @@ const kurang_qty_product=(max_qty,price)=>{
 
 
 }
-const tambah_qty_product=(max_qty,price)=>{
+const tambah_qty_product = (max_qty, price) => {
     console.log(max_qty)
     var qty_now = parseInt($('.input-qty-product-detail').val())
-    
+
     // alert(harga)
     console.log(qty_now)
     var max_qty_product = parseInt(max_qty)
-    
-    if(qty_now > max_qty_product){
-        console.log(qty_now,'133')
+
+    if (qty_now > max_qty_product) {
+        console.log(qty_now, '133')
         $('.box_for_total').html(max_qty_product)
         $('.input-qty-product-detail').val(max_qty_product)
-    }else if ( qty_now > 0 && qty_now < max_qty_product){
+    } else if (qty_now > 0 && qty_now < max_qty_product) {
 
-        var qty_plus = qty_now +1
+        var qty_plus = qty_now + 1
         $('.box_for_total').html(qty_plus)
         $('.input-qty-product-detail').val(qty_plus)
         var harga = qty_plus * parseInt(price)
@@ -321,8 +320,8 @@ const tambah_qty_product=(max_qty,price)=>{
             <p>Subtotal</p>
             <p>${harga}</p>
         `)
-    }else if (qty_now === 0 ){
-        var qty_plus = qty_now +1
+    } else if (qty_now === 0) {
+        var qty_plus = qty_now + 1
         $('.box_for_total').html(qty_plus)
         $('.input-qty-product-detail').val(qty_plus)
         var harga = qty_plus * parseInt(price)
@@ -331,48 +330,47 @@ const tambah_qty_product=(max_qty,price)=>{
             <p>Subtotal</p>
             <p>${harga}</p>
         `)
-    }
-    else {
+    } else {
         console.log('masuk ke else')
     }
 }
 
 
-const hitung_biaya_product=(product_id,price,total_qty)=>{
-    console.log(product_id,price,total_qty)
+const hitung_biaya_product = (product_id, price, total_qty) => {
+    console.log(product_id, price, total_qty)
     var qty_from_customer = parseInt($('.input-qty-product-detail').val())
     console.log(qty_from_customer)
     var harga = parseInt(price) * parseInt(qty_from_customer)
     // console.log(parseInt(price),parseInt(total_qty))
-    
-    if(qty_from_customer <1){
+
+    if (qty_from_customer < 1) {
         $('.input-qty-product-detail').val(1)
         qty_from_customer = 1
         $('.box_for_total').html(qty_from_customer)
     }
-    
-    if(qty_from_customer =='' || qty_from_customer == 0){
-        $('.npd-right-box-qty').css('height','350px')
-        $('.total-qty-right').css('height','50px')
-        $('.tqr-bottom').css('display','none')
-        $('#total-harga-p').css('color','#d6dbe2')
-        $('.down-product-detail-2').css('color','#d6dbe2')
-        $('.down-product-detail-2').css('transform','rotate(180deg)')
-        $('#tambah-cart-product').prop('disabled',true)
+
+    if (qty_from_customer == '' || qty_from_customer == 0) {
+        $('.npd-right-box-qty').css('height', '350px')
+        $('.total-qty-right').css('height', '50px')
+        $('.tqr-bottom').css('display', 'none')
+        $('#total-harga-p').css('color', '#d6dbe2')
+        $('.down-product-detail-2').css('color', '#d6dbe2')
+        $('.down-product-detail-2').css('transform', 'rotate(180deg)')
+        $('#tambah-cart-product').prop('disabled', true)
         $('#tambah-cart-product').addClass('disabled-btn')
-        $('#beli-now-product').prop('disabled',true)
+        $('#beli-now-product').prop('disabled', true)
         $('#beli-now-product').addClass('disabled-btn')
-        $('#beli-groupbuy-product').prop('disabled',true)
+        $('#beli-groupbuy-product').prop('disabled', true)
         $('#beli-groupbuy-product').addClass('disabled-btn')
-    }else {
-        $('.npd-right-box-qty').css('height','500px')
-        $('.total-qty-right').css('height','200px')
-        $('.tqr-bottom').css('display','block')
-        $('#total-harga-p').css('color','black')
-        $('.down-product-detail-2').css('color','black')
-        $('.down-product-detail-2').css('transform','rotate(180deg)')
+    } else {
+        $('.npd-right-box-qty').css('height', '500px')
+        $('.total-qty-right').css('height', '200px')
+        $('.tqr-bottom').css('display', 'block')
+        $('#total-harga-p').css('color', 'black')
+        $('.down-product-detail-2').css('color', 'black')
+        $('.down-product-detail-2').css('transform', 'rotate(180deg)')
         $('.box_for_total').html(qty_from_customer)
-       
+
 
         $('#tambah-cart-product').removeAttr('disabled')
         $('#tambah-cart-product').removeClass('disabled-btn')
@@ -388,7 +386,7 @@ const hitung_biaya_product=(product_id,price,total_qty)=>{
         console.log($('.total-qty-right'))
     }
 }
-const render_product_detail_from_home=async(item_category)=>{
+const render_product_detail_from_home = async (item_category) => {
     var product_id = item_category
     Swal.fire({
         title: 'Please Wait',
@@ -406,37 +404,37 @@ const render_product_detail_from_home=async(item_category)=>{
         `,
         timer: 30000000,
         timerProgressBar: true,
-        didOpen:async()=>{
+        didOpen: async () => {
             axios.post(`https://products.sold.co.id/get-product-details?product_code=${item_category}`)
-            .then(async(res)=>{
-                var detail_product_item = res.data
-                var product_id_pilihan = product_id
-                let allDataProduct = []
-                var all_filter_product = []
-                var allData_storage = JSON.parse(localStorage.getItem('all_data_product'))
-                // alldata_storage != undefined, gue rubah jadi == biar masuk ke else
-                if(allData_storage !=undefined && allData_storage.length != 0 ){
-                    var data_for_render = allData_storage.filter((val,index)=>{
-                        if(val.Product_Code == product_id){
-                            return val
-                        }
-                    })
-                    // 
-                    var split_product = data_for_render[0].Name.split(' ')
+                .then(async (res) => {
+                    var detail_product_item = res.data
+                    var product_id_pilihan = product_id
+                    let allDataProduct = []
                     var all_filter_product = []
-                    
-                    split_product.forEach((val,index)=>{
-                        allData_storage.filter((item,index)=>{
-                            if(item.Name.includes(val)){
-                                
-                                all_filter_product.push(item)
+                    var allData_storage = JSON.parse(localStorage.getItem('all_data_product'))
+                    // alldata_storage != undefined, gue rubah jadi == biar masuk ke else
+                    if (allData_storage != undefined && allData_storage.length != 0) {
+                        var data_for_render = allData_storage.filter((val, index) => {
+                            if (val.Product_Code == product_id) {
+                                return val
                             }
                         })
-                    })
-                    var img_1 = ''
-                    var img_2 = ''
-                    var img_3 = ''
-    
+                        // 
+                        var split_product = data_for_render[0].Name.split(' ')
+                        var all_filter_product = []
+
+                        split_product.forEach((val, index) => {
+                            allData_storage.filter((item, index) => {
+                                if (item.Name.includes(val)) {
+
+                                    all_filter_product.push(item)
+                                }
+                            })
+                        })
+                        var img_1 = ''
+                        var img_2 = ''
+                        var img_3 = ''
+
                         var hargaAwal = parseInt(data_for_render[0].Sell_Price)
                         var discount = parseInt(data_for_render[0].Sell_Price * 0.1)
                         var hargaTotal = hargaAwal + discount
@@ -444,7 +442,7 @@ const render_product_detail_from_home=async(item_category)=>{
                         console.log(data_for_render[0])
                         var province_company_from_product = await find_province_from_product_company(detail_product_item.PIC_company_address)
                         console.log(province_company_from_product)
-                        if(data_for_render[0].GroupBuy_Purchase == "false"){
+                        if (data_for_render[0].GroupBuy_Purchase == "false") {
                             console.log('masuk ke if ')
                             $('.container-product').append( // render untuk bukan groupbuy
                                 `
@@ -586,8 +584,8 @@ const render_product_detail_from_home=async(item_category)=>{
                                 </div>
                                 `
                             )
-                        }else{ //render untuk groupbuy  
-                            console.log('masuk ke else')     
+                        } else { //render untuk groupbuy  
+                            console.log('masuk ke else')
                             $('.container-product').append(`
                                 <div class="new-product-detail-box">
                                     <div class="npd-left">
@@ -730,31 +728,31 @@ const render_product_detail_from_home=async(item_category)=>{
                                 </div>
                             `)
                         }
-                        
-                        if(data_for_render[0].Picture_2 == undefined || data_for_render[0].Picture_2 == null || data_for_render[0].Picture_2 == 'NULL' || data_for_render[0].Picture_2 == ''){
-                        
-                        }else{
+
+                        if (data_for_render[0].Picture_2 == undefined || data_for_render[0].Picture_2 == null || data_for_render[0].Picture_2 == 'NULL' || data_for_render[0].Picture_2 == '') {
+
+                        } else {
                             $('.new-product-small-img-box').append(`
                                 <div class="small-product-img" onclick="ganti_gambar_product('${data_for_render[0].Picture_2}')">
                                     <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_2)}" alt="">
                                 </div>
                             `)
                         }
-                        if(data_for_render[0].Picture_3 == undefined || data_for_render[0].Picture_3 == null || data_for_render[0].Picture_3 == 'NULL' || data_for_render[0].Picture_3 == ''){
-    
-                        
-                        }else{
+                        if (data_for_render[0].Picture_3 == undefined || data_for_render[0].Picture_3 == null || data_for_render[0].Picture_3 == 'NULL' || data_for_render[0].Picture_3 == '') {
+
+
+                        } else {
                             $('.new-product-small-img-box').append(`
                                 <div class="small-product-img" onclick="ganti_gambar_product('${data_for_render[0].Picture_3}')">
                                     <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_3)}" alt="">
                                 </div>
                             `)
                         }
-                        
-                        
-                        if(data_for_render[0].extra_column_1 == undefined || data_for_render[0].extra_column_1 == null || data_for_render[0].extra_column_1 == 'NULL' || data_for_render[0].extra_column_1 == ''){
-    
-                        }else{
+
+
+                        if (data_for_render[0].extra_column_1 == undefined || data_for_render[0].extra_column_1 == null || data_for_render[0].extra_column_1 == 'NULL' || data_for_render[0].extra_column_1 == '') {
+
+                        } else {
                             $('.new-product-small-img-box').append(`
                                 <div class="small-product-img" id="video-product" onclick="ganti_video_product('${data_for_render[0].extra_column_1}')"> 
                                     <video  autoplay muted loop class="img-big" id="img-big-4" >
@@ -765,46 +763,46 @@ const render_product_detail_from_home=async(item_category)=>{
                             `)
                         }
                         axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
-                        .then((res)=>{
-                            console.log('717 jalan')
-                            
+                            .then((res) => {
+                                console.log('717 jalan')
+
                                 var cust_comment = res.data
                                 var comment_parse = JSON.parse(cust_comment.User_Comments)
-                                console.log(comment_parse,'ini comment')
-                                
-                                if(comment_parse == 'null' || comment_parse == null){
+                                console.log(comment_parse, 'ini comment')
+
+                                if (comment_parse == 'null' || comment_parse == null) {
                                     console.log('masuk ke if')
-                                    $('.box-ulasan-detail').css('display','none')
+                                    $('.box-ulasan-detail').css('display', 'none')
                                     //comment kosong. 
-                                }else if (comment_parse.length > 0 ) {
+                                } else if (comment_parse.length > 0) {
                                     console.log('masuk ke else if  731')
                                     var total_comment = comment_parse.length
                                     console.log(total_comment)
-                                    $('.box-ulasan-detail').css('display','flex')
+                                    $('.box-ulasan-detail').css('display', 'flex')
                                     $('.box-ulasan-detail').append(`
                                         <p>SEMUA ULASAN(${total_comment}) </p>
                                     `)
-                                    if(total_comment == 1){
-                                        $('.box-ulasan-detail').css('height','300px')
-                                    }else if ( total_comment == 2){
-                                        $('.box-ulasan-detail').css('height','500px')
+                                    if (total_comment == 1) {
+                                        $('.box-ulasan-detail').css('height', '300px')
+                                    } else if (total_comment == 2) {
+                                        $('.box-ulasan-detail').css('height', '500px')
                                     }
-                                    comment_parse.map((val,index)=>{
+                                    comment_parse.map((val, index) => {
                                         console.log(val)
                                         axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
-                                        .then((res)=>{
-                                        
-                                            console.log(val,' ini val')
-                                            console.log(val.Comment)
-                                            var comment_customer = val.Comment
-                                            if(res.data !== 'undefined'){
-                                                console.log('masuk ke if 746')
-                                                var link_gambar = res.data
-                                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                                .then((res)=>{
-                                                    // res.data.map((val,index)=>{
-                                                        console.log(comment_customer)
-                                                        $('.box-ulasan-detail').append(`
+                                            .then((res) => {
+
+                                                console.log(val, ' ini val')
+                                                console.log(val.Comment)
+                                                var comment_customer = val.Comment
+                                                if (res.data !== 'undefined') {
+                                                    console.log('masuk ke if 746')
+                                                    var link_gambar = res.data
+                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                        .then((res) => {
+                                                            // res.data.map((val,index)=>{
+                                                            console.log(comment_customer)
+                                                            $('.box-ulasan-detail').append(`
                                                             <div class="box-item-ulasan">
                                                                 <div class="biu-left">
                                                                     <div class="biu-image">
@@ -833,18 +831,18 @@ const render_product_detail_from_home=async(item_category)=>{
                                                                 </div>
                                                             </div>
                                                         `)
-                                                    // })
-                                                }).catch((err)=>{
-                                                    
-                                                })
-                                            } else {
-                                                console.log('masuk ke else')
-                                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                                .then((res)=>{
-                                                    console.log(res.data)
-                                                    // res.data.map((val,index)=>{
-                                                        console.log(comment_customer)
-                                                        $('.box-ulasan-detail').append(`
+                                                            // })
+                                                        }).catch((err) => {
+
+                                                        })
+                                                } else {
+                                                    console.log('masuk ke else')
+                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                        .then((res) => {
+                                                            console.log(res.data)
+                                                            // res.data.map((val,index)=>{
+                                                            console.log(comment_customer)
+                                                            $('.box-ulasan-detail').append(`
                                                             <div class="box-item-ulasan">
                                                                 <div class="biu-left">
                                                                     <div class="biu-image">
@@ -873,64 +871,64 @@ const render_product_detail_from_home=async(item_category)=>{
                                                                 </div>
                                                             </div>
                                                         `)
-                                                    // })
-                                                }).catch((err)=>{
-                                                    
-                                                })
-                                            }
-                                        }).catch((err)=>{
-                                            console.log(err)
-                                        })
+                                                            // })
+                                                        }).catch((err) => {
+
+                                                        })
+                                                }
+                                            }).catch((err) => {
+                                                console.log(err)
+                                            })
                                     })
-                        
+
                                 }
-                                
-                                
-                            console.log('if else kelar')
-                            Swal.fire({
-                                title: 'Uploading Data',
-                                timer:100,
-                            })
-                            console.log('793 harusnya close ')
-                        }).catch((err)=>{
-                            
-                        })
-                    
-                }else { // by API
-    
-                    axios.post(`https://products.sold.co.id/get-product-details`)
-                    .then((res)=>{
-                        allDataProduct = res.data
-                        
-                        const querystring = $(location).attr('href');
-                        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                        .then((res)=>{
-                            
-                            item = res.data
-                            var split_product = res.data.Name.split(' ')
-                            console.log(split_product)
-                            var all_filter_product = []
-                            for(var i =0; i<split_product.length; i++){
-                                var filter_product = allDataProduct.filter((val)=>{
-                                    if(val.Name.includes(split_product[i])){
-                                        // 
-                                        all_filter_product.push(val)
-                                        return val
-                                    }
+
+
+                                console.log('if else kelar')
+                                Swal.fire({
+                                    title: 'Uploading Data',
+                                    timer: 100,
                                 })
-                            }
-                            console.log(all_filter_product,' ini all filter product')
-                            // console.log(item)
-                            // BATAS
-                            var hargaAwal = parseInt(item.Sell_Price)
-                            var discount = parseInt(item.Sell_Price * 0.1)
-                            var hargaTotal = hargaAwal + discount
-                            
-                            $('.container-product').empty()
-                            if(item.GroupBuy_Purchase == "false"){
-                                console.log('masuk ke api if false')
-                                $('.container-product').append( // render untuk bukan groupbuy
-                                `
+                                console.log('793 harusnya close ')
+                            }).catch((err) => {
+
+                            })
+
+                    } else { // by API
+
+                        axios.post(`https://products.sold.co.id/get-product-details`)
+                            .then((res) => {
+                                allDataProduct = res.data
+
+                                const querystring = $(location).attr('href');
+                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    .then((res) => {
+
+                                        item = res.data
+                                        var split_product = res.data.Name.split(' ')
+                                        console.log(split_product)
+                                        var all_filter_product = []
+                                        for (var i = 0; i < split_product.length; i++) {
+                                            var filter_product = allDataProduct.filter((val) => {
+                                                if (val.Name.includes(split_product[i])) {
+                                                    // 
+                                                    all_filter_product.push(val)
+                                                    return val
+                                                }
+                                            })
+                                        }
+                                        console.log(all_filter_product, ' ini all filter product')
+                                        // console.log(item)
+                                        // BATAS
+                                        var hargaAwal = parseInt(item.Sell_Price)
+                                        var discount = parseInt(item.Sell_Price * 0.1)
+                                        var hargaTotal = hargaAwal + discount
+
+                                        $('.container-product').empty()
+                                        if (item.GroupBuy_Purchase == "false") {
+                                            console.log('masuk ke api if false')
+                                            $('.container-product').append( // render untuk bukan groupbuy
+                                                `
                                 <div class="new-product-detail-box">
                                     <div class="npd-left">
                                         <div class="product-detail-isi">
@@ -1068,11 +1066,11 @@ const render_product_detail_from_home=async(item_category)=>{
                                     </div>
                                 </div>
                                 `
-                            )
-                            }else{ // render untuk groupbuy
-                                console.log('masuk ke api false') 
-                                $('.container-product').append( // render untuk bukan groupbuy
-                                    `
+                                            )
+                                        } else { // render untuk groupbuy
+                                            console.log('masuk ke api false')
+                                            $('.container-product').append( // render untuk bukan groupbuy
+                                                `
                                     <div class="new-product-detail-box">
                                         <div class="npd-left">
                                             <div class="product-detail-isi">
@@ -1213,35 +1211,35 @@ const render_product_detail_from_home=async(item_category)=>{
                                         </div>
                                     </div>
                                     `
-                                )
-                            }
-                    
-                        
-                            if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
-                            
-                            }else{
-                                $('.new-product-small-img-box').append(`
+                                            )
+                                        }
+
+
+                                        if (item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == '') {
+
+                                        } else {
+                                            $('.new-product-small-img-box').append(`
                                     <div class="small-product-img" onclick="ganti_gambar_product('${item.Picture_2}')">
                                         <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
                                     </div>
                                 `)
-                            }
-                            if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
-        
-                            
-                            }else{
-                                $('.new-product-small-img-box').append(`
+                                        }
+                                        if (item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == '') {
+
+
+                                        } else {
+                                            $('.new-product-small-img-box').append(`
                                     <div class="small-product-img" onclick="ganti_gambar_product('${item.Picture_3}')">
                                         <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
                                     </div>
                                 `)
-                            }
-                            
-                            
-                            if(item.extra_column_1 == undefined || item.extra_column_1 == null || item.extra_column_1 == 'NULL' || item.extra_column_1 == ''){
-        
-                            }else{
-                                $('.new-product-small-img-box').append(`
+                                        }
+
+
+                                        if (item.extra_column_1 == undefined || item.extra_column_1 == null || item.extra_column_1 == 'NULL' || item.extra_column_1 == '') {
+
+                                        } else {
+                                            $('.new-product-small-img-box').append(`
                                     <div class="small-product-img" id="video-product" onclick="ganti_video_product('${item.extra_column_1}')"> 
                                         <video  autoplay muted loop class="img-big" id="img-big-4" >
                                             <source src="${replace_vtintl_to_sold_co_id(item.extra_column_1)}" type="video/mp4">
@@ -1249,49 +1247,49 @@ const render_product_detail_from_home=async(item_category)=>{
                                         </video>
                                     </div>
                                 `)
-                            }
-                        
-                            axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
-                            .then((res)=>{
-                                console.log('717 jalan')
-                                
-                                    var cust_comment = res.data
-                                    var comment_parse = JSON.parse(cust_comment.User_Comments)
-                                    console.log(comment_parse,'ini comment')
-                                    
-                                    if(comment_parse == 'null' || comment_parse == null){
-                                        console.log('masuk ke if')
-                                        $('.box-ulasan-detail').css('display','none')
-                                        //comment kosong. 
-                                    }else if (comment_parse.length > 0 ) {
-                                        console.log('masuk ke else if  731')
-                                        var total_comment = comment_parse.length
-                                        console.log(total_comment)
-                                        $('.box-ulasan-detail').css('display','flex')
-                                        $('.box-ulasan-detail').append(`
+                                        }
+
+                                        axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
+                                            .then((res) => {
+                                                console.log('717 jalan')
+
+                                                var cust_comment = res.data
+                                                var comment_parse = JSON.parse(cust_comment.User_Comments)
+                                                console.log(comment_parse, 'ini comment')
+
+                                                if (comment_parse == 'null' || comment_parse == null) {
+                                                    console.log('masuk ke if')
+                                                    $('.box-ulasan-detail').css('display', 'none')
+                                                    //comment kosong. 
+                                                } else if (comment_parse.length > 0) {
+                                                    console.log('masuk ke else if  731')
+                                                    var total_comment = comment_parse.length
+                                                    console.log(total_comment)
+                                                    $('.box-ulasan-detail').css('display', 'flex')
+                                                    $('.box-ulasan-detail').append(`
                                             <p>SEMUA ULASAN(${total_comment}) </p>
                                         `)
-                                        if(total_comment == 1){
-                                            $('.box-ulasan-detail').css('height','300px')
-                                        }else if ( total_comment == 2){
-                                            $('.box-ulasan-detail').css('height','500px')
-                                        }
-                                        comment_parse.map((val,index)=>{
-                                            console.log(val)
-                                            axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
-                                            .then((res)=>{
-                                            
-                                                console.log(val,' ini val')
-                                                console.log(val.Comment)
-                                                var comment_customer = val.Comment
-                                                if(res.data !== 'undefined'){
-                                                    console.log('masuk ke if 746')
-                                                    var link_gambar = res.data
-                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                                    .then((res)=>{
-                                                        // res.data.map((val,index)=>{
-                                                            console.log(comment_customer)
-                                                            $('.box-ulasan-detail').append(`
+                                                    if (total_comment == 1) {
+                                                        $('.box-ulasan-detail').css('height', '300px')
+                                                    } else if (total_comment == 2) {
+                                                        $('.box-ulasan-detail').css('height', '500px')
+                                                    }
+                                                    comment_parse.map((val, index) => {
+                                                        console.log(val)
+                                                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                                            .then((res) => {
+
+                                                                console.log(val, ' ini val')
+                                                                console.log(val.Comment)
+                                                                var comment_customer = val.Comment
+                                                                if (res.data !== 'undefined') {
+                                                                    console.log('masuk ke if 746')
+                                                                    var link_gambar = res.data
+                                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                                        .then((res) => {
+                                                                            // res.data.map((val,index)=>{
+                                                                            console.log(comment_customer)
+                                                                            $('.box-ulasan-detail').append(`
                                                                 <div class="box-item-ulasan">
                                                                     <div class="biu-left">
                                                                         <div class="biu-image">
@@ -1320,18 +1318,18 @@ const render_product_detail_from_home=async(item_category)=>{
                                                                     </div>
                                                                 </div>
                                                             `)
-                                                        // })
-                                                    }).catch((err)=>{
-                                                        
-                                                    })
-                                                } else {
-                                                    console.log('masuk ke else')
-                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                                    .then((res)=>{
-                                                        console.log(res.data)
-                                                        // res.data.map((val,index)=>{
-                                                            console.log(comment_customer)
-                                                            $('.box-ulasan-detail').append(`
+                                                                            // })
+                                                                        }).catch((err) => {
+
+                                                                        })
+                                                                } else {
+                                                                    console.log('masuk ke else')
+                                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                                        .then((res) => {
+                                                                            console.log(res.data)
+                                                                            // res.data.map((val,index)=>{
+                                                                            console.log(comment_customer)
+                                                                            $('.box-ulasan-detail').append(`
                                                                 <div class="box-item-ulasan">
                                                                     <div class="biu-left">
                                                                         <div class="biu-image">
@@ -1360,203 +1358,203 @@ const render_product_detail_from_home=async(item_category)=>{
                                                                     </div>
                                                                 </div>
                                                             `)
-                                                        // })
-                                                    }).catch((err)=>{
-                                                        
+                                                                            // })
+                                                                        }).catch((err) => {
+
+                                                                        })
+                                                                }
+                                                            }).catch((err) => {
+                                                                console.log(err)
+                                                            })
                                                     })
+
                                                 }
-                                            }).catch((err)=>{
-                                                console.log(err)
+
+
+                                                console.log('if else kelar')
+                                                Swal.fire({
+                                                    title: 'Uploading Data',
+                                                    timer: 100,
+                                                })
+                                                console.log('793 harusnya close ')
+                                            }).catch((err) => {
+
                                             })
-                                        })
-                            
-                                    }
-                                    
-                                    
-                                console.log('if else kelar')
-                                Swal.fire({
-                                    title: 'Uploading Data',
-                                    timer:100,
-                                })
-                                console.log('793 harusnya close ')
-                            }).catch((err)=>{
-                                
+                                        //BATAS 
+                                    }).catch((err) => {
+
+                                    })
+                            }).catch((err) => {
+
                             })
-                            //BATAS 
-                        }).catch((err)=>{
-                            
-                        })
-                    }).catch((err)=>{
-                        
-                    })
-                }
-            }).catch((err)=>{
-                console.log(err)
-            })
+                    }
+                }).catch((err) => {
+                    console.log(err)
+                })
         }
     })
-    
+
 }
-const buyNow=async(product_id)=>{
+const buyNow = async (product_id) => {
     // addToCart(product_id)
     axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-    .then(async(res)=>{
-        var product = res.data
-        var province_company = ''
-        var city_company = ''
-        var district_company = ''
-        var courier_price_code_company = ''
-        var token = localStorage.getItem('token')
-        var final_qty = $('.input-qty-product-detail').val()
-        if(token === null){
-            if(token === null){
-                // swal.fire("Silahkan Login","","warning");
-                Swal.fire({
-                    html:`
+        .then(async (res) => {
+            var product = res.data
+            var province_company = ''
+            var city_company = ''
+            var district_company = ''
+            var courier_price_code_company = ''
+            var token = localStorage.getItem('token')
+            var final_qty = $('.input-qty-product-detail').val()
+            if (token === null) {
+                if (token === null) {
+                    // swal.fire("Silahkan Login","","warning");
+                    Swal.fire({
+                        html: `
                     <div class="o-circle c-container__circle o-circle__sign--failure">
                         <div class="o-circle__sign"></div>  
                     </div> 
                     Silahkan Login`,
-                    timer:2000,
-                    
-                })
-                // $('#loginModal',window.parent.document).modal('show')
-                // window.location.href = "./sign-in.html";
-            }else {
-                // swal.fire("Pilih barang di keranjang","","warning");
-                Swal.fire({
-                    html:`
+                        timer: 2000,
+
+                    })
+                    // $('#loginModal',window.parent.document).modal('show')
+                    // window.location.href = "./sign-in.html";
+                } else {
+                    // swal.fire("Pilih barang di keranjang","","warning");
+                    Swal.fire({
+                        html: `
                     <div class="o-circle c-container__circle o-circle__sign--failure">
                         <div class="o-circle__sign"></div>  
                     </div> 
                     Ada Kesalahan pada barang`,
-                    timer:2000,
-                    
-                })
-            }
-        }else {
-            console.log(product)
-            province_company = await find_province_from_product_company(product.PIC_company_address)
-            city_company = await find_city_from_product_company(province_company,product.PIC_company_address)
-            district_company = await find_district_from_product_company(city_company,product.PIC_company_address)
-            courier_price_code_company = await find_courier_price_code_from_product_company(district_company,product.PIC_company_address)
-            var array = []
-            
-            localStorage.setItem('itemsToCheckout',array)
-            axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-            .then((res)=>{
-                console.log(res.data,'7065 setelah await')
-                console.log(province_company,' province company')
-                console.log(city_company,' province company')
-                console.log(district_company,' province company')
-                console.log(courier_price_code_company,' province company')
-                console.log(res.data.Sell_Price, ' sell price')
-                console.log(product.PIC_company_address)
-                console.log(product.Weight_KG)
-                if(res.data.Stock_Quantity > 1){
-                    console.log('masuk ke if 7067')
-                    var productToBeAdded = {
-                        productNo: product.Product_Code,
-                        quantity: final_qty,
-                        GroupCode: "NO COUPON",
-                        priceAgreed: res.data.Sell_Price,
-                        courier_price_code:courier_price_code_company,
-                        company_address:product.PIC_company_address,
-                        province_company:province_company,
-                        city_company:city_company,
-                        district_company:district_company.District,
-                        weight_kg:product.Weight_KG,
-                        berat_product:product.Weight_KG,
-                        product_name:product.Name
-                    }
+                        timer: 2000,
 
-                    array.push(productToBeAdded)
-                    console.log(productToBeAdded)
-                    var productToBeAddedStringify = JSON.stringify(array);
-                    localStorage.setItem("itemsToCheckout", productToBeAddedStringify);            
-                // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
-            
-                $('.close-button',window.parent.parent.document).css('display','block')
-                
-        
-                $('.close',window.parent.parent.document).css('display','none')
-                
-                // $('.close').css('display','none')
-                
-                // $('.modals-product-detail',window.parent.document).css('display','none')
-                // $('.modals-lk', window.parent.parent.document).css('display','none')
-                $('.modals-new-product-detail', window.parent.parent.document).css('display','none')
-                // $(".iframe",window.parent.parent.document).toggle();
-                
-
-                if($('.option-3',window.parent.parent.document).hasClass('background_grey')){
-                    $('.option-3',window.parent.parent.document).removeClass('background_grey')
-                }else {
-                    $('.option-3',window.parent.parent.document).addClass('background_grey')
+                    })
                 }
-                
-                
-                // $('.main-body').css('display','none')
-                // $('.modals-search-result').css('display','block')
-                
-                // $('.iframe').css('display','block')
-                $('.modals-pengiriman',window.parent.parent.document).css("display",'none')
-                $('.modals-check-harga',window.parent.parent.document).css("display",'none')
-                $('.option-1',window.parent.parent.document).removeClass('background_grey')
-                $('.option-2',window.parent.parent.document).removeClass('background_grey')
-                $('.option-0',window.parent.parent.document).removeClass('background_grey')
-                console.log(window.parent.$('.iframe'))
-                window.parent.$('.iframe').css('display','block')
-                window.parent.$(".iframe").attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
-                // $('.close-button',window.parent.document).css('display','none')
-        
-                  // SEARCH ITEM BACK TO NORMAL
-                  $('.box-render-search',window.parent.document).css('display','none')
-                  $('.input-name',window.parent.document).css('border-bottom-left-radius','10px')
-                  $('.input-name',window.parent.document).css('border-bottom-right-radius','10px')
-                  $('.input-name',window.parent.document).val(null)
-                }else {
-                    // swal.fire("Barang Tidak Tersedia","","warning");
-                    Swal.fire({
-                        html:`
+            } else {
+                console.log(product)
+                province_company = await find_province_from_product_company(product.PIC_company_address)
+                city_company = await find_city_from_product_company(province_company, product.PIC_company_address)
+                district_company = await find_district_from_product_company(city_company, product.PIC_company_address)
+                courier_price_code_company = await find_courier_price_code_from_product_company(district_company, product.PIC_company_address)
+                var array = []
+
+                localStorage.setItem('itemsToCheckout', array)
+                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                    .then((res) => {
+                        console.log(res.data, '7065 setelah await')
+                        console.log(province_company, ' province company')
+                        console.log(city_company, ' province company')
+                        console.log(district_company, ' province company')
+                        console.log(courier_price_code_company, ' province company')
+                        console.log(res.data.Sell_Price, ' sell price')
+                        console.log(product.PIC_company_address)
+                        console.log(product.Weight_KG)
+                        if (res.data.Stock_Quantity > 1) {
+                            console.log('masuk ke if 7067')
+                            var productToBeAdded = {
+                                productNo: product.Product_Code,
+                                quantity: final_qty,
+                                GroupCode: "NO COUPON",
+                                priceAgreed: res.data.Sell_Price,
+                                courier_price_code: courier_price_code_company,
+                                company_address: product.PIC_company_address,
+                                province_company: province_company,
+                                city_company: city_company,
+                                district_company: district_company.District,
+                                weight_kg: product.Weight_KG,
+                                berat_product: product.Weight_KG,
+                                product_name: product.Name
+                            }
+
+                            array.push(productToBeAdded)
+                            console.log(productToBeAdded)
+                            var productToBeAddedStringify = JSON.stringify(array);
+                            localStorage.setItem("itemsToCheckout", productToBeAddedStringify);
+                            // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+
+                            $('.close-button', window.parent.parent.document).css('display', 'block')
+
+
+                            $('.close', window.parent.parent.document).css('display', 'none')
+
+                            // $('.close').css('display','none')
+
+                            // $('.modals-product-detail',window.parent.document).css('display','none')
+                            // $('.modals-lk', window.parent.parent.document).css('display','none')
+                            $('.modals-new-product-detail', window.parent.parent.document).css('display', 'none')
+                            // $(".iframe",window.parent.parent.document).toggle();
+
+
+                            if ($('.option-3', window.parent.parent.document).hasClass('background_grey')) {
+                                $('.option-3', window.parent.parent.document).removeClass('background_grey')
+                            } else {
+                                $('.option-3', window.parent.parent.document).addClass('background_grey')
+                            }
+
+
+                            // $('.main-body').css('display','none')
+                            // $('.modals-search-result').css('display','block')
+
+                            // $('.iframe').css('display','block')
+                            $('.modals-pengiriman', window.parent.parent.document).css("display", 'none')
+                            $('.modals-check-harga', window.parent.parent.document).css("display", 'none')
+                            $('.option-1', window.parent.parent.document).removeClass('background_grey')
+                            $('.option-2', window.parent.parent.document).removeClass('background_grey')
+                            $('.option-0', window.parent.parent.document).removeClass('background_grey')
+                            console.log(window.parent.$('.iframe'))
+                            window.parent.$('.iframe').css('display', 'block')
+                            window.parent.$(".iframe").attr("src", `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
+                            // $('.close-button',window.parent.document).css('display','none')
+
+                            // SEARCH ITEM BACK TO NORMAL
+                            $('.box-render-search', window.parent.document).css('display', 'none')
+                            $('.input-name', window.parent.document).css('border-bottom-left-radius', '10px')
+                            $('.input-name', window.parent.document).css('border-bottom-right-radius', '10px')
+                            $('.input-name', window.parent.document).val(null)
+                        } else {
+                            // swal.fire("Barang Tidak Tersedia","","warning");
+                            Swal.fire({
+                                html: `
                         <div class="o-circle c-container__circle o-circle__sign--failure">
                             <div class="o-circle__sign"></div>  
                         </div> 
                         Barang Tidak Tersedia`,
-                        timer:2000,
-                        
+                                timer: 2000,
+
+                            })
+                        }
+
+                    }).catch((err) => {
+
                     })
-                }
-        
-            }).catch((err)=>{
-                
-            })
-    
-        }
-    }).catch((err)=>{
-        console.log(err)
-    })
+
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
 }
-const render_product_detail_from_searching_page=(item_category)=>{
-    console.log(item_category,'render product detail from home jalan')
+const render_product_detail_from_searching_page = (item_category) => {
+    console.log(item_category, 'render product detail from home jalan')
 }
 
-const tambah_product_ke_cart=(product_id)=>{
+const tambah_product_ke_cart = (product_id) => {
     console.log('tambah product ke cart jalan')
     var final_qty = $('.input-qty-product-detail').val()
-    addToCart(product_id,final_qty)
+    addToCart(product_id, final_qty)
 }
-const beli_product_sekarang=(product_id)=>{
+const beli_product_sekarang = (product_id) => {
     console.log('beli_product_sekarang')
     buyNow(product_id)
 }
-const beli_groupbuy_sekarang=(product_id)=>{
+const beli_groupbuy_sekarang = (product_id) => {
     console.log('beli_groupbuy_sekarang')
 }
 
-const ganti_gambar_product=(id)=>{
-    console.log(id,' index ganti gambar jalan')
+const ganti_gambar_product = (id) => {
+    console.log(id, ' index ganti gambar jalan')
 }
-const ganti_video_product=(id)=>{
+const ganti_video_product = (id) => {
     console.log(id)
 }

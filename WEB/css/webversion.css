@@ -1,4 +1,187 @@
 /* LINK COLLECTION MARKET PLACE */
+@media only screen and (max-device-width:960px){
+   
+    .nbc-category {
+        width:100%;
+    }
+    .p_about_ins {
+        font-size:9px;
+    }
+    .header-search-option p {
+        font-size:10px;
+    }
+    .form-control {
+        font-size:0.9rem ;
+    }
+    .box-render-search{
+        width:418px ;
+        top:7.7% ;
+        left:25.4% ;
+    }
+    .modals-hutang-home {
+        top:11% ;
+        left:23.1% ;
+    }
+    .modals-bulk-order {
+        top:11% ;
+    }
+    .iframe {
+        right:9% !important;
+        top:11% !important;
+    }
+    .modals-lk {
+        left:9%;
+        width:800px;
+    }
+    .npd-left-product-name {
+        font-size:18px;
+        
+    }
+    .box-name-product4 p:nth-child(1) {
+        font-size:0.7em;
+        position: relative;
+        top:5px;
+    }
+    .box-name-product3 p:nth-child(1){
+        font-size:0.7em;
+    }
+    .box-name-product2 p:nth-child(1) {
+        font-size:0.7em;
+    }
+    .modals-search-result {
+        top:11.5%;
+        height:56vh;
+    }
+    .box-img-bp {
+        height:150px;
+        width:150px;
+    }
+    .box-name-product4 {
+        left:0%;
+    }
+    .box-list-kategori{
+        width:700px !important;
+    }
+    .card-all-item{
+        width:200px;
+    }
+}
+@media only screen and (max-device-width:767px){
+    .nbc-category {
+        width:100%;
+    }
+    .p_about_ins {
+        font-size:7px;
+    }
+    .ins_ma_left_2 {
+        font-size:9px
+    }
+    .option-0 p {
+        font-size:10px;
+    }
+    .option-1 p {
+        font-size:10px;
+    }
+    .option-2 p {
+        font-size:10px;
+    }
+    .option-3 p {
+        font-size:10px;
+    }
+    .option-4 p {
+        font-size:10px;
+    }
+    .option-5 p {
+        font-size:10px;
+    }
+
+    .header-search-option p {
+        font-size:8px;
+    }
+    .card-new-category {
+        width:20%;
+    }
+    .promo_card {
+        min-width:35%;
+    }
+    .form-control {
+        font-size:0.7rem !important ;
+    }
+    .box-ads{
+        height:250px;
+    }
+    .card-new-category p {
+        font-size:12px;
+    }
+    .cd-image-category {
+        min-height:60%;
+        min-width:80%;
+    }
+    .box-render-search{
+        width:418px ;
+        top:7.7% ;
+        left:25.4% ;
+    }
+    .modals-hutang-home {
+        top:16.5% ;
+        left:23.1% ;
+    }
+    .modals-bulk-order {
+        top:16.5% ;
+    }
+    .iframe {
+        right:9% !important;
+        top:16.5% !important;
+    }
+    .cart-counter {
+        top:30%;
+        right:30%;
+    }
+    .modals-lk {
+        left:9%;
+        width:800px;
+    }
+    .npd-left-product-name {
+        font-size:18px;
+        
+    }
+    .box-name-product4 p:nth-child(1) {
+        font-size:0.7em;
+        position: relative;
+        top:5px;
+    }
+    .box-name-product3 p:nth-child(1){
+        font-size:0.7em;
+    }
+    .box-name-product2 p:nth-child(1) {
+        font-size:0.7em;
+    }
+    .modals-search-result {
+        top:11.5%;
+        height:56vh;
+    }
+    .box-img-bp {
+        height:150px;
+        width:150px;
+    }
+    .box-name-product4 {
+        left:0%;
+    }
+    .box-list-kategori{
+        width:700px !important;
+    }
+    .card-all-item{
+        width:200px;
+    }
+    .img-dirjen {
+        width:100px;
+        height:100px;
+    }
+    .vst_dirjen_2 p {
+        font-size:0.6em !important;
+    }
+}
+
 @media only screen and (max-device-width: 480px){
     .container-lc{
         width:100vw;
@@ -17,7 +200,7 @@
     
     
   }
-  @media (max-width: 385px) {
+@media (max-width: 385px) {
     .link-group-area{
         width:100%;
         position: absolute;
@@ -35,7 +218,7 @@
     }
     
   }
-  @media (max-width: 305px) {
+@media (max-width: 305px) {
     .link-group-area-2{
         width:100%;
         height:400px;
@@ -56,9 +239,5 @@
     
   }
 
-  @media only screen and (max-device-width: 480px){
-
-    
-  }
 
 /* LINK COLLECTION MARKET PLACE */
