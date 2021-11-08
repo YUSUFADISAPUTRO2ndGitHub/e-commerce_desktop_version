@@ -337,7 +337,8 @@ const search_item=()=>{
     $('.main-body').css('display','none')
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
-    
+    $('.box-render-search').css('display','none')
+    $('.force-close-all-command').css('display','none')
     
 }
 
@@ -418,40 +419,7 @@ const render_searching_page=(product_name)=>{
                 </div>
                 `)   
             })
-            
-
-            var split_item = all_product_storage.filter((val)=>{
-
-            })
-           
-            var filter_product = all_product_storage.filter((val)=>{
-                // 
-                // 
-                // if(val.Name.toUpperCase().includes(product_name.toUpperCase())){
-                //     arr_filter_product.push(val)
-                //     
-                //     var hargaAwal = parseInt(val.Sell_Price)
-                //     var discount = parseInt(val.Sell_Price * 0.1)
-                //     var hargaTotal = hargaAwal + discount
-                //     $('.new-box-card').append(`
-                //     <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
-                //             <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
-                //         <div class="card-item-list">
-                //             <p class="limited-text-short">${val.Name}</p>
-                //             <div class="split-item">
-                //                 <div class="item-price">
-                //                     <p>RP. ${commafy(hargaTotal)}</p>
-                //                     <p>Rp. ${commafy(hargaAwal)}</p>
-                //                 </div>
-                //                 <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                //                     <img src="../img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     </div>
-                //     `)      
-                // }
-            })
+        
             
         }else {
             axios.post(`https://products.sold.co.id/get-product-details?product_name=${product_name}`)
@@ -536,12 +504,6 @@ const render_searching_page=(product_name)=>{
                         var hargaAwal = parseInt(val.Sell_Price)
                         var discount = parseInt(val.Sell_Price * 0.1)
                         var hargaTotal = hargaAwal + discount
-                        // if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
-                        // ){
-                        //     
-                        //     
-                        // }else {
-                            // 
                             $('.new-box-card').append(`
                             <div class="card-item card_sp hvr-float-shadow" data-aos="zoom-in">
                                     <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-card img_sp" onclick="get_product_detail_from_searching_page('${val.Product_Code}')">   
@@ -559,8 +521,6 @@ const render_searching_page=(product_name)=>{
                                 </div>
                             </div>
                             `)
-            
-                        // }
                     })
                     Swal.fire({
                         title: 'Uploading Data',

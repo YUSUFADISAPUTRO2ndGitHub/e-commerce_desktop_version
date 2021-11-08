@@ -2619,7 +2619,7 @@ input:focus {
     transition: 2s ease-out;
     z-index: 100;
     /* box-shadow:5px 8px #0a3d62; */
-    box-shadow: 5px 5px 20px #27aae1;
+    /* box-shadow: 5px 5px 20px #27aae1; */
 
 }
 
@@ -2641,7 +2641,7 @@ input:focus {
     transition: 2s ease-out;
     z-index: 100;
     /* box-shadow: 5px 8px #0a3d62; */
-    box-shadow: 5px 5px 20px #27aae1;
+    /* box-shadow: 5px 5px 20px #27aae1; */
 }
 
 /* modals check harga */
@@ -4907,7 +4907,7 @@ img{
     border-radius:10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 20px #27aae1;
+    /* box-shadow: 5px 5px 20px #27aae1; */
 }
 
 .judul_info{
@@ -5276,7 +5276,7 @@ img{
     display:none;
     transition: 1s; 
     z-index: 101;
-    box-shadow: 5px 5px 20px #27aae1;
+    /* box-shadow: 5px 5px 20px #27aae1; */
 
     /* -webkit-animation: fadein 1.5s linear forwards; */
     /* animation: fadein 1.5s linear forwards; */
@@ -5293,7 +5293,7 @@ img{
     display:none;
     transition: 1s; 
     z-index: 101;
-    box-shadow: 5px 5px 20px #27aae1;
+    /* box-shadow: 5px 5px 20px #27aae1; */
     background-color: white;;
 
     /* -webkit-animation: fadein 1.5s linear forwards; */

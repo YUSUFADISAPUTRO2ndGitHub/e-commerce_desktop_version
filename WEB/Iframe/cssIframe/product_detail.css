@@ -555,7 +555,7 @@ body {
 .btn-tambah-cart p {
     margin:0px !important;
     position: relative;
-    top:5px;
+    top:10px;
     font-weight:600;
     font-size:13px;
 }
@@ -590,7 +590,7 @@ cursor: pointer;
 .btn-beli-cart p {
     margin:0px !important;
     position: relative;
-    top:5px;
+    top:10px;
     font-weight:600;
     font-size:13px;
 }

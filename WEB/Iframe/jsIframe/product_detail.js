@@ -920,7 +920,7 @@ const render_product_detail_from_home=async(item_category)=>{
                                 })
                             }
                             console.log(all_filter_product,' ini all filter product')
-                            console.log(item)
+                            // console.log(item)
                             // BATAS
                             var hargaAwal = parseInt(item.Sell_Price)
                             var discount = parseInt(item.Sell_Price * 0.1)
@@ -928,7 +928,7 @@ const render_product_detail_from_home=async(item_category)=>{
                             
                             $('.container-product').empty()
                             if(item.GroupBuy_Purchase == "false"){
-                                console.log('masuk ke api false')
+                                console.log('masuk ke api if false')
                                 $('.container-product').append( // render untuk bukan groupbuy
                                 `
                                 <div class="new-product-detail-box">
@@ -939,7 +939,7 @@ const render_product_detail_from_home=async(item_category)=>{
                                                     <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
                                                 </div>
                                                 <div class="new-product-small-img-box">
-                                                    <div class="small-product-img active-small-img" onclick="ganti_gambar_product('${data_for_render.Picture_1}')">
+                                                    <div class="small-product-img active-small-img" onclick="ganti_gambar_product('${item.Picture_1}')">
                                                         <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
                                                     </div>
                                                 </div>
@@ -1021,7 +1021,7 @@ const render_product_detail_from_home=async(item_category)=>{
                                                 </div>
                                                 <i class="fas fa-chevron-down down-product-detail"></i>
                                             </div>
-                                            <input type="number" class="input-qty-product-detail" onchange="hitung_biaya_product('${product_id}','${data_for_render[0].Sell_Price}','${data_for_render[0].Stock_Quantity}')">
+                                            <input type="number" class="input-qty-product-detail" onchange="hitung_biaya_product('${product_id}','${item.Sell_Price}','${item.Stock_Quantity}')">
                                             <div class="total-qty-right">
                                                 <div class="tqr-top">
                                                     <p id="total-harga-p">Total Harga dan quantity</p>
@@ -1030,13 +1030,13 @@ const render_product_detail_from_home=async(item_category)=>{
                                                 <div class="tqr-bottom">
                                                     <div class="new-box-qty-top">
                                                         <div class="total-qty-cust">
-                                                            <i class="fas fa-minus" onclick="kurang_qty_product('${data_for_render[0].Stock_Quantity}','${parseInt(data_for_render[0].Sell_Price)}')"></i>
+                                                            <i class="fas fa-minus" onclick="kurang_qty_product('${item.Stock_Quantity}','${parseInt(item.Sell_Price)}')"></i>
                                                             <div class="box_for_total">
                                                                 1
                                                             </div>
-                                                            <i class="fas fa-plus" onclick="tambah_qty_product('${data_for_render[0].Stock_Quantity}','${parseInt(data_for_render[0].Sell_Price)}')"></i>
+                                                            <i class="fas fa-plus" onclick="tambah_qty_product('${item.Stock_Quantity}','${parseInt(item.Sell_Price)}')"></i>
                                                         </div>
-                                                        <p>Stok <span>${data_for_render[0].Stock_Quantity}</span> </p>
+                                                        <p>Stok <span>${item.Stock_Quantity}</span> </p>
                                                     </div>
                                                     <div class="sub-total-box-product">
                                                         <p>Subtotal</p>
@@ -1069,151 +1069,8 @@ const render_product_detail_from_home=async(item_category)=>{
                                 </div>
                                 `
                             )
-                            }else{       
+                            }else{ // render untuk groupbuy
                                 console.log('masuk ke api false') 
-                                $('.box-item-detail').append(
-                                    `
-                                    <div class="new-item-left">
-                                        <div class="item-left-img-box">
-                                          
-                                        </div>
-                                        <div class="img-option-left">
-                                            
-                                        </div>
-                                        <div class="box-button-next-back">
-                                            <div  class="box-btn-left" onclick="back_btn()">
-                                                <i class="fas fa-chevron-left"></i>
-                                            </div>
-                                            <div class="box-btn-right" onclick="next_btn()">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="new-item-right">    
-                                        <div class="box-back-right-id">
-                                            <div class="btn-back-right-id" onclick="close_product_detail()">
-                                                <i class="fas fa-arrow-left"></i>
-                                                Kembali
-                                            </div>
-                                        </div>  
-                                        <div class="box-description-right-id">
-                                            <div class="bd-right-id"> 
-                                                <p>${item.Category}</p>
-                                                <div class="qty-box-pd"> 
-                                                     Quantity : ${item.Stock_Quantity}
-                                                </div>
-                                            </div>
-                                            <p class="limited-text">${item.Name}</p>
-                                            <div class="rating-bottom-2">
-                                                <div class="star-box">
-                                                    <iframe class="star-iframe"  src="../Iframe/rating-stars/index.html?product_code=${product_id}"></iframe> 
-                                                </div>
-                                            </div>
-                                        </div>
-                    
-                                        <div class="box-price-right-id">
-                                            
-                                            <div class="box-small-price-2" onclick="addToCart('${item.Product_Code}')">
-                                                Tambah
-                                            </div>
-                                            <div class="box-small-price-2" onclick="buyNow('${item.Product_Code}')">
-                                                Beli Sekarang
-                                            </div>
-                                            <div class="box-small-price-2" onclick="groupbuy('${item.Product_Code}')">
-                                                Beli Harga Group
-                                            </div>
-                                        </div>
-                                        <div class="box-quality-right-id-2">
-                                            <div class="bsp-1">
-                                                <p> Normal Price : <span> RP.${commafy(item.Sell_Price)} </span> </p>
-                                                    
-                                                
-                                                <p> Group Buy  Price : <span>RP.${commafy(item.GroupBuy_SellPrice)} </span> </p>
-                                            </div>
-                                            
-                                        </div>
-                                     
-                                        <div class="box-quality-right-id">
-                                            Product Sejenis
-                                            <div class="card-quality-right-id">
-                                                                                          
-                                            </div>
-                                        </div>
-                                        <div class="box-option-right-id">
-                                            <nav>
-                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Deskripsi</button>
-                                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ulasan</button>
-                                                
-                                                <button class="nav-link" id="nav-faq-tab" data-bs-toggle="tab" data-bs-target="#nav-faq" type="button" role="tab" aria-controls="nav-faq" aria-selected="false">FAQ</button>
-                                                </div>
-                                            </nav>
-                                            <div class="tab-content" id="nav-tabContent">
-                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                    ${item.Description}
-                                                </div>
-                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                                    <div class="user-card-top-id">
-                                                        <img src="../img/liked.png" alt="">
-                                                        <div class="user-card-desc-top-id">
-                                                            Tambah Comment 
-                                                            <div class="card-for-comment">
-                                                                <input type="text" class="input_comment_cust">
-                                                                <div class="btn-send-comment " disabled onclick="send_comment_cust()">
-                                                                    SEND
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="tab-pane fade" id="nav-faq" role="tabpanel" aria-labelledby="nav-faq-tab">
-                                                    <div class="card-faq-id">
-                                                        <div class="card-question-id">
-                                                            Apakah Bisa Pre Order ?
-                                                            <div class="card-for-minus-plus-id">
-                                                                <div class="btn-minus-id" id="icon-minus-id-1">
-                                                                    <i class="far fa-minus-square "  onclick="close_tab_answer('answer-1-id',1)"></i>
-                    
-                                                                </div>
-                                                                <div class=" btn-plus-id" id="icon-plus-id-1"> 
-                                                                    <i class="far fa-plus-square"  onclick="open_tab_answer('answer-1-id',1)"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-answer-id" id="answer-1-id">
-                                                            TIDAK BISA
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-faq-id">
-                                                        <div class="card-question-id">
-                                                            Apakah Bisa Pre Order ?
-                                                            <div class="card-for-minus-plus-id">
-                                                                <div class="card-for-minus-plus-id">
-                                                                    <div class="btn-minus-id" id="icon-minus-id-2">
-                                                                        <i class="far fa-minus-square "  onclick="close_tab_answer('answer-2-id',2)"></i>
-                                    
-                                                                    </div>
-                                                                    <div class=" btn-plus-id" id="icon-plus-id-2"> 
-                                                                        <i class="far fa-plus-square"  onclick="open_tab_answer('answer-2-id',2)"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-answer-id" id="answer-2-id">
-                                                            TIDAK BISA
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    `
-                                )
-                            }
-                    
-                            if(data_for_render[0].GroupBuy_Purchase == "false"){
-                                console.log('masuk ke if ')
                                 $('.container-product').append( // render untuk bukan groupbuy
                                     `
                                     <div class="new-product-detail-box">
@@ -1221,20 +1078,20 @@ const render_product_detail_from_home=async(item_category)=>{
                                             <div class="product-detail-isi">
                                                 <div class="npdl-left">
                                                     <div class="new-product-img-box">
-                                                        <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="">
+                                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
                                                     </div>
                                                     <div class="new-product-small-img-box">
-                                                        <div class="small-product-img active-small-img" onclick="ganti_gambar_product('${data_for_render.Picture_1}')">
-                                                            <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="">
+                                                        <div class="small-product-img active-small-img" onclick="ganti_gambar_product('${item.Picture_1}')">
+                                                            <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" alt="">
                                                         </div>
                                                     </div>
                                                 </div>   
                                                 <div class="npdl-right">
                                                     <div class="npd-left-product-name">
-                                                        <p>${data_for_render[0].Name}</p>
+                                                        <p>${item.Name}</p>
                                                     </div>
                                                     <div class="npd-left-product-price">
-                                                        <p>RP.${commafy(data_for_render[0].Sell_Price)}</p>
+                                                        <p>RP.${commafy(item.Sell_Price)}</p>
                                                     </div>
                                                     <div class="npdl-right-detail-product">
                                                         <nav>
@@ -1246,11 +1103,11 @@ const render_product_detail_from_home=async(item_category)=>{
                                                         <div class="tab-content new-tab-content" id="nav-tabContent">
                                                             <div class="tab-pane fade show active" id="nav-content-detail" role="tabpanel" aria-labelledby="nav-home-tab">
                                                                 <p>Kondisi : <span>Baru</span> </p>
-                                                                <p>Berat : <span>${data_for_render[0].Weight_KG} KG</span> </p>
-                                                                <p>Kategori : <span id="kategori-product-detail-pd">${data_for_render[0].Category}</span></p>
+                                                                <p>Berat : <span>${item.Weight_KG} KG</span> </p>
+                                                                <p>Kategori : <span id="kategori-product-detail-pd">${item.Category}</span></p>
                                                                 <div class="deskripsi-new-product-detail">
-                                                                    ${data_for_render[0].Description}
-                                                                    ${data_for_render[0].Specification}     
+                                                                    ${item.Description}
+                                                                    ${item.Specification}     
                                                                 </div>
                                                             </div>
                                                             <div class="tab-pane fade" id="nav-content-info" role="tabpanel" aria-labelledby="nav-spec-tab">
@@ -1306,7 +1163,7 @@ const render_product_detail_from_home=async(item_category)=>{
                                                     </div>
                                                     <i class="fas fa-chevron-down down-product-detail"></i>
                                                 </div>
-                                                <input type="number" class="input-qty-product-detail" onchange="hitung_biaya_product('${product_id}','${data_for_render[0].Sell_Price}','${data_for_render[0].Stock_Quantity}')">
+                                                <input type="number" class="input-qty-product-detail" onchange="hitung_biaya_product('${product_id}','${item.Sell_Price}','${item.Stock_Quantity}')">
                                                 <div class="total-qty-right">
                                                     <div class="tqr-top">
                                                         <p id="total-harga-p">Total Harga dan quantity</p>
@@ -1315,154 +1172,13 @@ const render_product_detail_from_home=async(item_category)=>{
                                                     <div class="tqr-bottom">
                                                         <div class="new-box-qty-top">
                                                             <div class="total-qty-cust">
-                                                                <i class="fas fa-minus" onclick="kurang_qty_product('${data_for_render[0].Stock_Quantity}','${parseInt(data_for_render[0].Sell_Price)}')"></i>
+                                                                <i class="fas fa-minus" onclick="kurang_qty_product('${item.Stock_Quantity}','${parseInt(item.Sell_Price)}')"></i>
                                                                 <div class="box_for_total">
                                                                     1
                                                                 </div>
-                                                                <i class="fas fa-plus" onclick="tambah_qty_product('${data_for_render[0].Stock_Quantity}','${parseInt(data_for_render[0].Sell_Price)}')"></i>
+                                                                <i class="fas fa-plus" onclick="tambah_qty_product('${item.Stock_Quantity}','${parseInt(item.Sell_Price)}')"></i>
                                                             </div>
-                                                            <p>Stok <span>${data_for_render[0].Stock_Quantity}</span> </p>
-                                                        </div>
-                                                        <div class="sub-total-box-product">
-                                                            <p>Subtotal</p>
-                                                            <p>Rp10.000</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="btn-tambah-cart disabled-btn" id="tambah-cart-product" onclick="tambah_product_ke_cart('${product_id}')">
-                                                    <p>+ Keranjang</p>
-                                                </div>
-                                                <div class="btn-beli-cart disabled-btn" id="beli-now-product" onclick="beli_product_sekarang('${product_id}')">
-                                                    <p>Beli</p>
-                                                </div>
-                                                <div class="npd-contact">
-                                                    <div class="box-icon-product-contact">
-                                                        <i class="fas fa-comment-alt"></i>
-                                                        Chat
-                                                    </div>
-                                                    <div class="box-icon-product-contact">
-                                                        <i class="fas fa-heart"></i>
-                                                        Wishlist
-                                                    </div>
-                                                    <div class="box-icon-product-contact-2">
-                                                        <i class="fas fa-share-alt"></i>
-                                                        Share
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    `
-                                )
-                            }else{ //render untuk groupbuy  
-                                console.log('masuk ke else')     
-                                $('.container-product').append(`
-                                    <div class="new-product-detail-box">
-                                        <div class="npd-left">
-                                            <div class="product-detail-isi">
-                                                <div class="npdl-left">
-                                                    <div class="new-product-img-box">
-                                                        <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="">
-                                                    </div>
-                                                    <div class="new-product-small-img-box">
-                                                        <div class="small-product-img active-small-img" onclick="ganti_gambar_product('${data_for_render.Picture_1}')">
-                                                            <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>   
-                                                <div class="npdl-right">
-                                                    <div class="npd-left-product-name">
-                                                        <p>${data_for_render[0].Name}</p>
-                                                    </div>
-                                                    <div class="npd-left-product-price">
-                                                        <p>RP.${commafy(data_for_render[0].Sell_Price)}</p>
-                                                    </div>
-                                                    <div class="npdl-right-detail-product">
-                                                        <nav>
-                                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                                <button class="nav-link active" id="nav-detail-tab" data-bs-toggle="tab" data-bs-target="#nav-content-detail" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Detail</button>
-                                                                <button class="nav-link" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-content-info" type="button" role="tab" aria-controls="nav-spec" aria-selected="true">Info Penting</button>
-                                                            </div>
-                                                        </nav>
-                                                        <div class="tab-content new-tab-content" id="nav-tabContent">
-                                                            <div class="tab-pane fade show active" id="nav-content-detail" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                                <p>Kondisi : <span>Baru</span> </p>
-                                                                <p>Berat : <span>${data_for_render[0].Weight_KG} KG</span> </p>
-                                                                <p>Kategori : <span id="kategori-product-detail-pd">${data_for_render[0].Category}</span></p>
-                                                                <div class="deskripsi-new-product-detail">
-                                                                    ${data_for_render[0].Description}
-                                                                    ${data_for_render[0].Specification}     
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id="nav-content-info" role="tabpanel" aria-labelledby="nav-spec-tab">
-                                                                <div class="info-penting-box-pengembalian">
-                                                                    <p>Kebijakan Pengembalian Produk</p>
-                                                                    <p>Silahkan Hubungi Customer Service Soldays</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>  
-                                                </div>
-                                            </div>
-                                            <div class="box-company-detail">
-                                                <div class="bcd-left">
-                                                    <div class="ins-bcd-left">
-                                                        <div class="bcd-image">
-                                                            <img src="../img/vantsing_shipping_method.png" alt="">
-                                                        </div>
-                                                        <div class="bcd-name">
-                                                            <i class="fas fa-check-circle"></i>
-                                                            <p>${detail_product_item.PIC_company_name}</p>
-                                                        </div>
-                                                    </div>   
-                                                </div>
-                                                <div class="bcd-right">
-                                                    <div class="ins-detail-left">
-                                                        <p>Pengiriman</p>
-                                                        <div class="dikirim-dari">
-                                                            <i class="fas fa-map-marker-alt"></i>
-                                                            <p>Dikirim dari <span>${province_company_from_product}</span></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-ulasan-detail">
-                                                
-                                            </div>
-                                            <div class="box-input-ulasan">
-                                                <p>Masukan Ulasan</p>
-                                                <input type="text" maxlength="100" class="input-ulasan-npd">
-                                                <div class="btn-upload-ulasan" onclick="send_comment_cust_product('${product_id}')">
-                                                    Masukan
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="npd-right">
-                                            <div class="npd-right-box-qty">
-                                                <div class="qty-top-right">
-                                                    <div class="box-qty-right-pd">
-                                                        <p>Masukan Quantity</p>
-                                                        <p>Quantity:1 Pcs</p>
-                                                    </div>
-                                                    <i class="fas fa-chevron-down down-product-detail"></i>
-                                                </div>
-                                                <input type="number" class="input-qty-product-detail" onchange="hitung_biaya_product('${product_id}','${data_for_render[0].Sell_Price}','${data_for_render[0].Stock_Quantity}')">
-                                                <div class="total-qty-right">
-                                                    <div class="tqr-top">
-                                                        <p id="total-harga-p">Total Harga dan quantity</p>
-                                                        <i class="fas fa-chevron-down down-product-detail-2" ></i>
-                                                    </div>
-                                                    <div class="tqr-bottom">
-                                                        <div class="new-box-qty-top">
-                                                            <div class="total-qty-cust">
-                                                                <i class="fas fa-minus" onclick="kurang_qty_product('${data_for_render[0].Stock_Quantity}','${parseInt(data_for_render[0].Sell_Price)}')"></i>
-                                                                <div class="box_for_total">
-                                                                    1
-                                                                </div>
-                                                                <i class="fas fa-plus" onclick="tambah_qty_product('${data_for_render[0].Stock_Quantity}','${parseInt(data_for_render[0].Sell_Price)}')"></i>
-                                                            </div>
-                                                            <p>Stok <span>${data_for_render[0].Stock_Quantity}</span> </p>
+                                                            <p>Stok <span>${item.Stock_Quantity}</span> </p>
                                                         </div>
                                                         <div class="sub-total-box-product">
                                                             <p>Subtotal</p>
@@ -1496,38 +1212,40 @@ const render_product_detail_from_home=async(item_category)=>{
                                             </div>
                                         </div>
                                     </div>
-                                `)
+                                    `
+                                )
                             }
-                            
-                            if(data_for_render[0].Picture_2 == undefined || data_for_render[0].Picture_2 == null || data_for_render[0].Picture_2 == 'NULL' || data_for_render[0].Picture_2 == ''){
+                    
+                        
+                            if(item.Picture_2 == undefined || item.Picture_2 == null || item.Picture_2 == 'NULL' || item.Picture_2 == ''){
                             
                             }else{
                                 $('.new-product-small-img-box').append(`
-                                    <div class="small-product-img" onclick="ganti_gambar_product('${data_for_render[0].Picture_2}')">
-                                        <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_2)}" alt="">
+                                    <div class="small-product-img" onclick="ganti_gambar_product('${item.Picture_2}')">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_2)}" alt="">
                                     </div>
                                 `)
                             }
-                            if(data_for_render[0].Picture_3 == undefined || data_for_render[0].Picture_3 == null || data_for_render[0].Picture_3 == 'NULL' || data_for_render[0].Picture_3 == ''){
+                            if(item.Picture_3 == undefined || item.Picture_3 == null || item.Picture_3 == 'NULL' || item.Picture_3 == ''){
         
                             
                             }else{
                                 $('.new-product-small-img-box').append(`
-                                    <div class="small-product-img" onclick="ganti_gambar_product('${data_for_render[0].Picture_3}')">
-                                        <img src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_3)}" alt="">
+                                    <div class="small-product-img" onclick="ganti_gambar_product('${item.Picture_3}')">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_3)}" alt="">
                                     </div>
                                 `)
                             }
                             
                             
-                            if(data_for_render[0].extra_column_1 == undefined || data_for_render[0].extra_column_1 == null || data_for_render[0].extra_column_1 == 'NULL' || data_for_render[0].extra_column_1 == ''){
+                            if(item.extra_column_1 == undefined || item.extra_column_1 == null || item.extra_column_1 == 'NULL' || item.extra_column_1 == ''){
         
                             }else{
                                 $('.new-product-small-img-box').append(`
-                                    <div class="small-product-img" id="video-product" onclick="ganti_video_product('${data_for_render[0].extra_column_1}')"> 
+                                    <div class="small-product-img" id="video-product" onclick="ganti_video_product('${item.extra_column_1}')"> 
                                         <video  autoplay muted loop class="img-big" id="img-big-4" >
-                                            <source src="${replace_vtintl_to_sold_co_id(data_for_render[0].extra_column_1)}" type="video/mp4">
-                                            <source src="${replace_vtintl_to_sold_co_id(data_for_render[0].extra_column_1)}" type="video/ogg">
+                                            <source src="${replace_vtintl_to_sold_co_id(item.extra_column_1)}" type="video/mp4">
+                                            <source src="${replace_vtintl_to_sold_co_id(item.extra_column_1)}" type="video/ogg">
                                         </video>
                                     </div>
                                 `)
@@ -1535,110 +1253,132 @@ const render_product_detail_from_home=async(item_category)=>{
                         
                             axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                             .then((res)=>{
-                                var cust_comment = res.data
-                                allDataProduct.map((val,index)=>{
-                                    if(val.Product_Code == product_id_pilihan){
-                                        $('.card-quality-right-id').append(`
-                                        <div class="card-sejenis-id active_product">
-                                            <div class="card-sejenis-img-id">
-                                                <img src="${val.Picture_1}" alt="">
-                                            </div>
-                                            <div class="card-sejenis-desc-id">
-                                                <p class="limited-text-commision">${val.Name}</p>
-                                                <p>RP.${commafy(val.Sell_Price)}</p>
-                                                
-                                            </div>
-                                        </div>
-                                        `)
-                        
-                                    }else {
-                                        $('.card-quality-right-id').append(`
-                                        <div class="card-sejenis-id" onclick="change_product_to('${val.Product_Code}')">
-                                            <div class="card-sejenis-img-id">
-                                                <img src="${val.Picture_1}" alt="">
-                                            </div>
-                                            <div class="card-sejenis-desc-id">
-                                                <p class="limited-text-commision">${val.Name}</p>
-                                                <p>RP.${commafy(val.Sell_Price)}</p>
-                                                
-                                            </div>
-                                        </div>
-                                        `)
-                                    }
-                                })
-    
-                                var comment_parse = JSON.parse(cust_comment.User_Comments)
-                                $('#nav-profile').empty()
-                                if(comment_parse == 'null' || comment_parse == null){
-                                    $('#nav-profile').append(`
-                                    <div class="user-card-top-id">
-                                        <img src="../img/accounts.png" alt="">
-                                        <div class="user-card-desc-top-id">
-                                            Tambah Comment 
-                                            <div class="card-for-comment">
-                                                <input type="text" class="input_comment_cust" >
-                                                <div class="btn-send-comment active_send_comment" onclick="send_comment_cust('${product_id}')">
-                                                    SEND
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `)
-                                }else if (comment_parse.length > 0 ) {
-                                    comment_parse.map((val,index)=>{
-                                        axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
-                                        .then((res)=>{
-                                            if(res.data){
-                                                var link_gambar = res.data
-                                                axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
-                                                .then((res)=>{                                                    
-                                                    // res.data.map((val,index)=>{
-                                                        $('#nav-profile').append(`
-                                                        <div class="user-card-id">
-                                                            <div class="user-card-top-id">
-                                                                <img src="${link_gambar}" alt="">
-                                                                <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-card-bot-id">
-                                                                <p>${val.Comment}</p>
-                                                            </div>
-                                                        </div>
-                                                        `)
-                                                    // })
-                                                }).catch((err)=>{
-                                                    
-                                                })
-                                            } else {
-                                                $('#nav-profile').append(`
-                                                        <div class="user-card-id">
-                                                            <div class="user-card-top-id">
-                                                                <img src="../img/accounts.png" alt="">
-                                                                <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                                    <p>*****</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-card-bot-id">
-                                                                <p>${val.Comment}</p>
-                                                            </div>
-                                                        </div>
-                                                        `)
-                                            }
-                                        }).catch((err)=>{
-                                            
-                                        })
-                                    })
-                        
-                                }
+                                console.log('717 jalan')
                                 
+                                    var cust_comment = res.data
+                                    var comment_parse = JSON.parse(cust_comment.User_Comments)
+                                    console.log(comment_parse,'ini comment')
+                                    
+                                    if(comment_parse == 'null' || comment_parse == null){
+                                        console.log('masuk ke if')
+                                        $('.box-ulasan-detail').css('display','none')
+                                        //comment kosong. 
+                                    }else if (comment_parse.length > 0 ) {
+                                        console.log('masuk ke else if  731')
+                                        var total_comment = comment_parse.length
+                                        console.log(total_comment)
+                                        $('.box-ulasan-detail').css('display','flex')
+                                        $('.box-ulasan-detail').append(`
+                                            <p>SEMUA ULASAN(${total_comment}) </p>
+                                        `)
+                                        if(total_comment == 1){
+                                            $('.box-ulasan-detail').css('height','300px')
+                                        }else if ( total_comment == 2){
+                                            $('.box-ulasan-detail').css('height','500px')
+                                        }
+                                        comment_parse.map((val,index)=>{
+                                            console.log(val)
+                                            axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
+                                            .then((res)=>{
+                                            
+                                                console.log(val,' ini val')
+                                                console.log(val.Comment)
+                                                var comment_customer = val.Comment
+                                                if(res.data !== 'undefined'){
+                                                    console.log('masuk ke if 746')
+                                                    var link_gambar = res.data
+                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                    .then((res)=>{
+                                                        // res.data.map((val,index)=>{
+                                                            console.log(comment_customer)
+                                                            $('.box-ulasan-detail').append(`
+                                                                <div class="box-item-ulasan">
+                                                                    <div class="biu-left">
+                                                                        <div class="biu-image">
+                                                                            <img src="${link_gambar}" alt="">
+                                                                        </div>
+                                                                        <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                    </div>
+                                                                    <div class="biu-right">
+                                                                        <p>${comment_customer}</p>
+                                                                        <div class="company-comment-box">
+                                                                            <div class="ccb-image">
+                                                                                <img src="../img/vantsing_shipping_method.png" alt="">
+                                                                            </div>
+                                                                            <div class="ccb-isi-comment">
+                                                                                <div class="ccb-isi-comment-name">
+                                                                                    <p>${detail_product_item.PIC_company_name}</p>
+                                                                                    <div class="btn-penjual-ccb">
+                                                                                        Penjual
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ccb-thankyou">
+                                                                                    Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            `)
+                                                        // })
+                                                    }).catch((err)=>{
+                                                        
+                                                    })
+                                                } else {
+                                                    console.log('masuk ke else')
+                                                    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
+                                                    .then((res)=>{
+                                                        console.log(res.data)
+                                                        // res.data.map((val,index)=>{
+                                                            console.log(comment_customer)
+                                                            $('.box-ulasan-detail').append(`
+                                                                <div class="box-item-ulasan">
+                                                                    <div class="biu-left">
+                                                                        <div class="biu-image">
+                                                                            <img src="../img/accounts.png" alt="">
+                                                                        </div>
+                                                                        <p>Anonymous</p>
+                                                                    </div>
+                                                                    <div class="biu-right">
+                                                                        <p>${comment_customer}</p>
+                                                                        <div class="company-comment-box">
+                                                                            <div class="ccb-image">
+                                                                                <img src="../img/vantsing_shipping_method.png" alt="">
+                                                                            </div>
+                                                                            <div class="ccb-isi-comment">
+                                                                                <div class="ccb-isi-comment-name">
+                                                                                    <p>${detail_product_item.PIC_company_name}</p>
+                                                                                    <div class="btn-penjual-ccb">
+                                                                                        Penjual
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ccb-thankyou">
+                                                                                    Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            `)
+                                                        // })
+                                                    }).catch((err)=>{
+                                                        
+                                                    })
+                                                }
+                                            }).catch((err)=>{
+                                                console.log(err)
+                                            })
+                                        })
+                            
+                                    }
+                                    
+                                    
+                                console.log('if else kelar')
                                 Swal.fire({
                                     title: 'Uploading Data',
                                     timer:100,
                                 })
-                               
+                                console.log('793 harusnya close ')
                             }).catch((err)=>{
                                 
                             })
