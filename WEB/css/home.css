@@ -128,7 +128,8 @@ body {
 }
 
 .p_about_ins {
-    font-size: 12px;
+    /* font-size: 12px; */
+    font-size:1em;
     color: white;
     display: flex;
     justify-content: center;
