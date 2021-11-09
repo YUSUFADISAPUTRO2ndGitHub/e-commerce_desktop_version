@@ -2,6 +2,7 @@
 
 var index = 0
 $(function(){
+    $('.dropdown-toggle').dropdown()
 
     $('#left-btn-profile').on('click',function(){
         $('.newlogin-left').css('width','80px')

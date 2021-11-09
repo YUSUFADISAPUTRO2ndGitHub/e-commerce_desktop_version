@@ -12,6 +12,9 @@ $(document).ready(function () {
       render_product_detail_from_searching_page(item_category);
     }
   }
+
+  console.log($('#gambar_zoom',' ini gambar zoom'))
+  console.log($('.new-product-img-box'))
   $(".new-product-img-box")
   // tile mouse actions
   .on("mouseover", function() {
@@ -490,10 +493,7 @@ const render_product_detail_from_home = async (item_category) => {
                             <div class="product-detail-isi">
                                 <div class="npdl-left">
                                     <div class="new-product-img-box" data-scale="1.6">
-                                        <img id="gambar_zoom" src="${replace_vtintl_to_sold_co_id(
-                                            data_for_render[0]
-                                            .Picture_1
-                                        )}" alt="">
+                                        <img id="gambar_zoom" src="${replace_vtintl_to_sold_co_id(data_for_render[0].Picture_1)}" alt="">
                                     </div>
                                     <div class="new-product-video-box">
                                     </div>
@@ -510,10 +510,7 @@ const render_product_detail_from_home = async (item_category) => {
                                         }</p>
                                     </div>
                                     <div class="npd-left-product-price">
-                                        <p>RP.${commafy(
-                                            data_for_render[0]
-                                            .Sell_Price
-                                        )}</p>
+                                        <p>RP.${commafy(data_for_render[0].Sell_Price)}</p>
                                     </div>
                                     <div class="npdl-right-detail-product">
                                         <nav>
@@ -525,23 +522,11 @@ const render_product_detail_from_home = async (item_category) => {
                                         <div class="tab-content new-tab-content" id="nav-tabContent">
                                             <div class="tab-pane fade show active" id="nav-content-detail" role="tabpanel" aria-labelledby="nav-home-tab">
                                                 <p>Kondisi : <span>Baru</span> </p>
-                                                <p>Berat : <span>${
-                                                    data_for_render[0]
-                                                    .Weight_KG
-                                                } KG</span> </p>
-                                                <p>Kategori : <span id="kategori-product-detail-pd">${
-                                                    data_for_render[0]
-                                                    .Category
-                                                }</span></p>
+                                                <p>Berat : <span>${data_for_render[0].Weight_KG} KG</span> </p>
+                                                <p>Kategori : <span id="kategori-product-detail-pd">${data_for_render[0].Category}</span></p>
                                                 <div class="deskripsi-new-product-detail">
-                                                    ${
-                                                        data_for_render[0]
-                                                        .Description
-                                                    }
-                                                    ${
-                                                        data_for_render[0]
-                                                        .Specification
-                                                    }     
+                                                    ${data_for_render[0].Description}
+                                                    ${data_for_render[0].Specification}     
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="nav-content-info" role="tabpanel" aria-labelledby="nav-spec-tab">
@@ -838,7 +823,7 @@ const render_product_detail_from_home = async (item_category) => {
                 </div>
             `);
             }
-
+            console.log('render selesai')
             if (
               data_for_render[0].Picture_2 == undefined ||
               data_for_render[0].Picture_2 == null ||
@@ -892,45 +877,38 @@ const render_product_detail_from_home = async (item_category) => {
 
                 var cust_comment = res.data;
                 var comment_parse = JSON.parse(cust_comment.User_Comments);
-                console.log(comment_parse, "ini comment");
+                // console.log(comment_parse, "ini comment");
 
                 if (comment_parse == "null" || comment_parse == null) {
-                  console.log("masuk ke if");
+                //   console.log("masuk ke if");
                   $(".box-ulasan-detail").css("display", "none");
                   //comment kosong.
                 } else if (comment_parse.length > 0) {
-                  console.log("masuk ke else if  731");
-                  var total_comment = comment_parse.length;
-                  console.log(total_comment);
+                    var total_comment = comment_parse.length;
                   $(".box-ulasan-detail").css("display", "flex");
                   $(".box-ulasan-detail").append(`
-                                        <p>SEMUA ULASAN(${total_comment}) </p>
-                                    `);
+                        <p>SEMUA ULASAN(${total_comment}) </p>
+                    `);
                   if (total_comment == 1) {
                     $(".box-ulasan-detail").css("height", "300px");
                   } else if (total_comment == 2) {
                     $(".box-ulasan-detail").css("height", "500px");
                   }
+                //   console.log(comment_parse)
                   comment_parse.map((val, index) => {
-                    console.log(val);
-                    axios
-                      .post(
-                        `https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`
-                      )
+                    // console.log(val);
+                    axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                       .then((res) => {
                         console.log(val, " ini val");
-                        console.log(val.Comment);
+                        // console.log(val.Comment);
                         var comment_customer = val.Comment;
                         if (res.data !== "undefined") {
-                          console.log("masuk ke if 746");
+                        //   console.log("masuk ke if 746");
                           var link_gambar = res.data;
-                          axios
-                            .post(
-                              `https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`
-                            )
+                          axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                             .then((res) => {
                               // res.data.map((val,index)=>{
-                              console.log(comment_customer);
+                            //   console.log(comment_customer);
                               $(".box-ulasan-detail").append(`
                                     <div class="box-item-ulasan">
                                         <div class="biu-left">
@@ -964,15 +942,12 @@ const render_product_detail_from_home = async (item_category) => {
                             })
                             .catch((err) => {});
                         } else {
-                          console.log("masuk ke else");
-                          axios
-                            .post(
-                              `https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`
-                            )
+                        //   console.log("masuk ke else");
+                          axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                             .then((res) => {
-                              console.log(res.data);
+                            //   console.log(res.data);
                               // res.data.map((val,index)=>{
-                              console.log(comment_customer);
+                            //   console.log(comment_customer);
                               $(".box-ulasan-detail").append(`
                                     <div class="box-item-ulasan">
                                         <div class="biu-left">
@@ -1012,7 +987,7 @@ const render_product_detail_from_home = async (item_category) => {
                       });
                   });
                 }
-
+                console.log($('.new-product-img-box'))
                 console.log("if else kelar");
                 Swal.fire({
                   title: "Uploading Data",
@@ -1616,6 +1591,8 @@ const render_product_detail_from_home = async (item_category) => {
               })
               .catch((err) => {});
           }
+
+        //   console.log($('.new-product-img-box', ' new product img box'))
         })
         .catch((err) => {
           console.log(err);
