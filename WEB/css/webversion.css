@@ -1,6 +1,8 @@
 /* LINK COLLECTION MARKET PLACE */
 @media only screen and (max-device-width:960px){
-   
+   .promo_card {
+       min-width:30%;
+   }
     .nbc-category {
         width:100%;
     }
@@ -11,7 +13,7 @@
         font-size:10px;
     }
     .form-control {
-        font-size:0.9rem ;
+        font-size:0.9rem !important;
     }
     .box-render-search{
         width:418px ;
@@ -64,6 +66,21 @@
     }
     .card-all-item{
         width:200px;
+    }
+    .icon-opt {
+        width:35px;
+    }
+    .ccb-thankyou{
+        font-size:10px;
+    }
+    .ccb-isi-comment-name p {
+        font-size:13px;
+    }
+    .img-dirjen {
+        display: none;
+    }
+    .copyright-box p {
+        display: none;
     }
 }
 @media only screen and (max-device-width:767px){
