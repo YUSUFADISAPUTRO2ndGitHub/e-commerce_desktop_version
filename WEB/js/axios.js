@@ -415,20 +415,10 @@ function convertImgToBase64(url, callback, outputFormat){
 // }
 
 const get_product_detail_from_main_page=(product_id)=>{
-
-    $('.new-box-category').toggle(500)
     
-    // render_get_product_detail(product_id)  
-    // $(this).scrollTop('.modals-product-detail')
-     var height = $('.box-render-new').position()
-    
+$('.new-box-category').toggle(500)
 $('.box-delete-success').css('display','block')
-// $('.modals-product-detail').css('display','block')
-// $('.close-button').css('display','block')
-// $('.box_iframe_groupbuy').css('display','block')
 $('.modals-new-product-detail').css('display','block')
-// $('.modals-product-detail').attr('src',`./Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
-// $('.modals-product-detail').attr('src',`/WEB/Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
 $('.main-body').css('display','none')
 $('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
 $('.new-box-category').css('display','none')
@@ -911,33 +901,30 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
         if(allData_storage != undefined && allData_storage.length !=0){
             allData_storage.forEach((val,index)=>{ 
                 if(val.Subcategory == subCategory){
-                    
+                    console.log(val.Product_Code)
                     allDataProduct.push(val)
                     var hargaAwal = parseInt(val.Sell_Price)
                     var discount = parseInt(val.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
                     $('.box-list-kategori').append(
                         `
-                            <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
-                                <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
-                                <div class="card-all-item-list">
-                                    <p class="limited-text-short">${val.Name}</p>
-                                    <div class="split-all-item">
-                                        <div class="item-all-price">
-                                            <p>RP. ${commafy(hargaTotal)}</p>
-                                            <p>Rp. ${commafy(hargaAwal)}</p>
-                                        </div>
+                        <div class="card-all-item hvr-float-shadow" id="${val.Product_Code}" onclick="get_product_detail('${val.Product_Code}')">
+                            <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
+                            <div class="card-all-item-list">
+                                <p class="limited-text-short">${val.Name}</p>
+                                <div class="split-all-item">
+                                    <div class="item-all-price">
+                                        <p>RP. ${commafy(hargaTotal)}</p>
+                                        <p>Rp. ${commafy(hargaAwal)}</p>
                                     </div>
                                 </div>
                             </div>
-                            `
-                            )
+                        </div>
+                        `
+                    );
                 }
             })
-            // 
-            // 
-            // 
-          
+
             $('.modals-lk').addClass('melihat') // ini bisa hampir
             $('.modals-lk').css('display','block')
             Swal.fire({
@@ -953,9 +940,10 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
                     var hargaAwal = parseInt(val.Sell_Price)
                     var discount = parseInt(val.Sell_Price * 0.1)
                     var hargaTotal = hargaAwal + discount
+                    console.log(val.Product_Code)
                     $('.box-list-kategori').append(
                     `
-                        <div class="card-all-item hvr-float-shadow" id="${val.Product_code}" onclick="get_product_detail('${val.Product_Code}')">
+                        <div class="card-all-item hvr-float-shadow" id="${val.Product_Code}" onclick="get_product_detail('${val.Product_Code}')">
                             <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" alt="" class="img-all-card">   
                             <div class="card-all-item-list">
                                 <p class="limited-text-short">${val.Name}</p>
