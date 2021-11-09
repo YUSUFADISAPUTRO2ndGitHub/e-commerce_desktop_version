@@ -383,7 +383,8 @@ body {
 
 .header-search-option p {
     color: gray;
-    font-size: 12px;
+    /* font-size: 12px; */
+    font-size:0.8em;
 }
 
 .input-search {

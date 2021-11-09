@@ -204,6 +204,7 @@
         display: flex;
         /* align-items: center; */
         position: relative;
+        align-items:none;
         /* left:15px; */
         background-color: transparent;
     }
@@ -224,6 +225,7 @@
     .container-lc{
         display: flex;
         /* align-content: center; */
+        align-items:none;
         padding:10px;
         position: relative;
         left:0px;
@@ -244,6 +246,7 @@
         display: flex;
         /* align-items: center; */
         /* padding:10px; */
+        align-items:none;
         position: relative;
         left:0px;
         /* left:35px; */
