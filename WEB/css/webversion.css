@@ -23,6 +23,27 @@
     .modals-hutang-home {
         top:11% ;
         left:23.1% ;
+        width:65%;
+    }
+    .address-detail-card-item-bd {
+        font-size:10px;
+    }
+    .btn-card-detail-item-bd {
+        width:120px;
+        font-size:10px;
+    }
+    .card-desc {
+        font-size:9px;
+    }
+    .hr-qty {
+        font-size:10px;
+    }
+    .searching-cb-header-2 {
+        width:140px !important;
+    }
+    .box-btn-payment{
+        width:80px;
+        font-size:10px;
     }
     .modals-bulk-order {
         top:11% ;

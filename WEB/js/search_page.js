@@ -717,8 +717,14 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
             </div>
             <div class="img-description-ul">
                 <div class="desc-1-ul" >
-                ${arrListHutang[0].Primary_Recipient_Name}
-                
+                    <p>${arrListHutang[0].Primary_Recipient_Name}</p>
+                    <div class="img-status-ul">
+                        <div class="confirmed"  value="Gorilla Workout"  >
+                            <p> ${arrListHutang[0].Creator} </p>
+                        
+                            <input type="text" value="Gorilla Workout" readonly class="easteregg" id="copyClipboardul" onclick="gorillaworkout('GorillaWorkout')" >
+                        </div>
+                    </div>
                 </div>
                 <div class="desc-2-ul">
                 ${arrListHutang[0].Shipping_Address}
@@ -727,13 +733,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 ${arrListHutang[0].Shipping_Contact_Number}
                 </div>
             </div>
-            <div class="img-status-ul">
-                <div class="confirmed"  value="Gorilla Workout"  >
-                    <p> ${arrListHutang[0].Creator} </p>
-                
-                    <input type="text" value="Gorilla Workout" readonly class="easteregg" id="copyClipboardul" onclick="gorillaworkout('GorillaWorkout')" >
-                </div>
-            </div>
+           
         `)
 
         $('.cb-right').append(`
