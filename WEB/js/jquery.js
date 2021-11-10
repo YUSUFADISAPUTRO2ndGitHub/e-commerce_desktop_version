@@ -1279,7 +1279,7 @@ $(function(){
                                 <div class="status-card-item-bd">
                                     ${val.Status}
                                 </div>
-                                <div class="status-card-item-bd">
+                                <div class="status-card-item-bd" id="payment_method_p_bd">
                                     ${val.Payment_Method}
                                 </div>
                                 <div class="order-card-item-bd">
@@ -1327,7 +1327,7 @@ $(function(){
                                     <div class="status-card-item-bd">
                                         ${val.Status}
                                     </div>
-                                    <div class="status-card-item-bd">
+                                    <div class="status-card-item-bd" id="payment_method_p_bd">
                                         ${val.Payment_Method}
                                     </div>
                                     <div class="order-card-item-bd">

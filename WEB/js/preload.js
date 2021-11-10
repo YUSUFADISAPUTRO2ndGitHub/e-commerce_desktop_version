@@ -23,7 +23,34 @@ setInterval(()=>{
         console.log('done render')
     }
 },5000)
-
+// API 
+function get_all_province_from_courier(Courier, Courier_Code){
+    var settings = {
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Get_All_Province=true`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_city_from_courier(Courier, Courier_Code, Province){
+    var settings = {
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&Province=${Province}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
+function get_all_district_from_courier(Courier, Courier_Code, City){
+    var settings = {
+        "url": `https://products.sold.co.id/get-courier-data?Courier=${Courier}&Courier_Code=${Courier_Code}&City=${City}`,
+        "method": "POST",
+        "timeout": 0,
+    };
+    
+    return $.ajax(settings);
+}
 
 const loadImageBigScreen=()=>{
     // console.log(' load image big screen jalan')
@@ -84,61 +111,46 @@ const renderItemPromo=()=>{
         </div>
     `)
     allData.map((val,index)=>{
-        // 
         var hargaAwal = parseInt(val.Sell_Price)
         var discount = parseInt(val.Sell_Price * 0.1)
         var hargaTotal = hargaAwal + discount
-        // 
-
-        var a = 'ASDASDASDASD'
-        var b = parseInt(a)
-        var c = isNaN(b)
-
         if(val == false || val.Sell_Price == 'NULL' || val.Sell_Price == undefined  || val.Sell_Price == null || isNaN(hargaAwal)
         ){
-          
         }else {
             if(val.GroupBuy_Purchase == 'true' || val.GroupBuy_Purchase == true || val.GroupBuy_Purchase == 'yes'){
-
                 var imgBase = ''
-                    // convertImgToBase64(val.Picture_1, function(base64Img){
-                        // 
-                        // all_array.push([`{"base64":${base64Img}}`,`{"Product_Code":${val.Product_Code}}`,val])
-                        // imgBase = base64Img
-                        $('.box-render-promo').append(
-                            ` 
-                                <div class="card-item  hvr-float-shadow new_card_item">
-                                    <div class="cr-promo-img shinny"> 
-                                        <img src="${val.Picture_1}" alt="" class="img-card " onclick="get_product_detail_from_main_page('${val.Product_Code}')" onload="loadImageBigScreen()">   
-                                    </div>
-                                    <div class="card-item-list">
-                                        <p class="limited-text-short-skeleton shinny"></p>
-                                        <p class="limited-text-short">${val.Name}</p>
-                                        <div class="split-item">
-                                            <div class="item-price-skeleton ">
-                                                <p class="shinny"></p>
-                                                <p class="shinny"></p>
-                                            </div>
-                                            <div class="item-price">
-                                                <p>RP. ${commafy(hargaTotal)}</p>
-                                                <p>Rp. ${commafy(hargaAwal)}</p>
-                                            </div>
-                                            <div class="buy-icon-skeleton shinny" onclick="addToCart('${val.Product_Code}')">
-                                                <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                                <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
-                                            </div>
-                                            <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
-                                                <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
-                                                <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
-                                            </div>
+                    $('.box-render-promo').append(
+                        ` 
+                            <div class="card-item  hvr-float-shadow new_card_item">
+                                <div class="cr-promo-img shinny"> 
+                                    <img src="${val.Picture_1}" alt="" class="img-card " onclick="get_product_detail_from_main_page('${val.Product_Code}')" onload="loadImageBigScreen()">   
+                                </div>
+                                <div class="card-item-list">
+                                    <p class="limited-text-short-skeleton shinny"></p>
+                                    <p class="limited-text-short">${val.Name}</p>
+                                    <div class="split-item">
+                                        <div class="item-price-skeleton ">
+                                            <p class="shinny"></p>
+                                            <p class="shinny"></p>
+                                        </div>
+                                        <div class="item-price">
+                                            <p>RP. ${commafy(hargaTotal)}</p>
+                                            <p>Rp. ${commafy(hargaAwal)}</p>
+                                        </div>
+                                        <div class="buy-icon-skeleton shinny" onclick="addToCart('${val.Product_Code}')">
+                                            <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                            <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
+                                        </div>
+                                        <div class="buy-icon" onclick="addToCart('${val.Product_Code}')">
+                                            <img src="./img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                            <img src="./img/badge_groupbuy.png" alt="" class="img-badge-best">
                                         </div>
                                     </div>
                                 </div>
-                                `
-                            )
-                            // 
-                    // });
-                  }
+                            </div>
+                            `
+                        )
+                }
 
 
             }        
@@ -157,7 +169,7 @@ const renderItemNew=()=>{
     }else {
 
         if(val.GroupBuy_Purchase == 'true'){
-
+            // misal mau dibikin promo yg groupbuy
         }else if (val.Categorize_NEW == 'true'){
 
                 $('.box-render-new').append(
@@ -541,12 +553,9 @@ const render_item_all_category=()=>{
             })
         })
     }else {
-        for(var i=0; i<data_atas.length; i++){
-            
+        for(var i=0; i<data_atas.length; i++){    
             axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_atas[i]}`)
             .then((res)=>{
-                // 
-                // 
              $('.box-render-new-category').empty()
                 res.data.map((val,index)=>{
                     if(index<13){
@@ -560,12 +569,6 @@ const render_item_all_category=()=>{
                         </div>
                         `)
                     }
-                    // $('.top-all-category').append(`
-                    //     <div class="card card-small-category " onclick="getAllItem_fromAllSubCat('${val.Subcategory}')">
-                    //         <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="card-img-top">
-                    //         <h3 class="card-title">${val.Subcategory}</h3>
-                    //     </div>
-                    // `)
                 })
             }).catch((err)=>{
                 
@@ -604,13 +607,9 @@ const get_all_cat_subCat_for_storage=()=>{
     
     var allData_category = []
     axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
-    .then((res)=>{
-        // 
+    .then((res)=>{ 
         var cat_stringify = JSON.stringify(res.data)
-        localStorage.setItem('all_category',cat_stringify)
-
-
-        
+        localStorage.setItem('all_category',cat_stringify)   
         var allData_subcat = []
         var detail_allCategory = []
         res.data.forEach((val,index)=>{
@@ -657,34 +656,33 @@ const getAllData=async()=>{
    
    axios.post('https://products.sold.co.id/get-product-details')
    .then((res)=>{
-      
-        if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
-            // alert('masuk ke if')
-                allData = res.data
-                renderItemPromo()
-                renderItemNew()
-                renderItemAll()
-                renderCategory()
-                render_item_all_category()
-                renderOptionSearch()
+       if(all_data == undefined || all_data ==null || all_data.length == 0 || allData.length !== res.data.length){
+           // alert('masuk ke if')
+               allData = res.data
+               renderItemPromo()
+               renderItemNew()
+               renderItemAll()
+               renderCategory()
+               render_item_all_category()
+               renderOptionSearch()
 
-                var stringify = JSON.stringify(allData)
-                localStorage.setItem('all_data_product',stringify)
-            
-        }else {
-        
-            
-            renderItemPromo()
-            renderItemNew()
-            renderItemAll()
-            renderCategory()
-            render_item_all_category()
-            renderOptionSearch()
-        }
-}).catch((err)=>{
-            
-})
+               var stringify = JSON.stringify(allData)
+               localStorage.setItem('all_data_product',stringify)
+           
+       }else {
+           renderItemPromo()
+           renderItemNew()
+           renderItemAll()
+           renderCategory()
+           render_item_all_category()
+           renderOptionSearch()
+       }
+      
+    }).catch((err)=>{
+          console.log(err)      
+    })
     get_all_cat_subCat_for_storage()
+    // NYARI PROVINCE DLL DARI ALAMAT CUSTOMER
     if(token !== null && token !== undefined && token.length>0) {
         
         var province =  await new_find_province_from_address()
@@ -697,6 +695,151 @@ const getAllData=async()=>{
         localStorage.setItem('district_customer',district)
         localStorage.setItem('sub_district_customer',subdistrict) 
     }
+
+
 }
 
+
+// CHECKING STORAGE PROVINCE DLL
+
+async function save_locally_province_tiki(){
+        
+   
+    await get_all_province_from_courier("tiki", "tiki").done(async function(response){
+        localStorage.setItem("all_province_tiki", JSON.stringify(response));
+        var total_province = response.length
+        var i = 0;
+        var all_city_tiki = [];
+        for(i = 0; i < response.length; i++){
+            all_city_tiki.push({
+                Province: response[i].Province,
+                City: await save_locally_city_tiki(response[i].Province)
+            });
+        }
+        var test = JSON.parse(localStorage.getItem('all_province_tiki'))
+        
+        await localStorage.setItem("all_city_tiki", JSON.stringify(all_city_tiki));
+        var all_district_tiki = [];
+        
+        for(i = 0; i < all_city_tiki.length; i++){
+            for(z = 0; z < all_city_tiki[i].City.length; z++){
+                if((all_city_tiki[i].City[z] != undefined)){
+                    all_district_tiki.push({
+                        City: all_city_tiki[i].City[z].City,
+                        District: await save_locally_district_tiki(all_city_tiki[i].City[z].City)
+                    });   
+                }
+            }
+            
+        }
+        await localStorage.setItem("all_district_tiki", JSON.stringify(all_district_tiki));
+        // var all_subdistrict_tiki = [];
+        // for(i = 0; i < all_district_tiki.length; i++){
+        //     for(z = 0; z < all_district_tiki[i].District.length; z++){
+        //         if((all_district_tiki[i].District[z] != undefined)){
+        //             // 
+        //             all_subdistrict_tiki.push({
+        //                 District: all_district_tiki[i].District[z].District,
+        //                 SubDistrict: await save_locally_subdistrict_tiki(all_district_tiki[i].District[z].District)
+        //             });  
+        //         }
+        //     }
+
+           
+            
+        // }
+        
+        // await localStorage.setItem("all_subdistrict_tiki", JSON.stringify(all_subdistrict_tiki));
+        
+        var total_city = all_city_tiki.length
+        var total_district = all_district_tiki.length
+        var all_total = [total_province,total_city,total_district]
+        
+        await localStorage.setItem('total_province_city_district',JSON.stringify(all_total))
+        await console.log(total_province)
+        await console.log(total_city)
+        await console.log(total_district)
+
+        
+    })
+}
+async function save_locally_city_tiki(Province){
+    return new Promise(async (resolve, reject) => {
+        await get_all_city_from_courier("tiki", "tiki", Province).done(async function(response){
+            resolve(response);
+        })
+    })
+}
+async function save_locally_district_tiki(City){
+    return new Promise(async (resolve, reject) => {
+        await get_all_district_from_courier("tiki", "tiki", City).done(async function(response){
+            resolve(response);
+        })
+    })
+}
+// async function save_locally_subdistrict_tiki(District){
+//     return new Promise(async (resolve, reject) => {
+//         await get_all_subdistrict_from_courier("tiki", "tiki", District).done(async function(response){
+//             resolve(response);
+//         })
+//     })
+// }
+
+
+   
+var all_total_province = JSON.parse(localStorage.getItem('total_province_city_district'))
+var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
+var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
+
+if(province_storage === null){
+    province_storage = 0
+}
+if(city_storage === null){
+    city_storage = 0
+}
+if(district_storage === null){
+    district_storage = 0
+}
+var total_province = province_storage.length
+var total_city = city_storage.length
+var total_district = district_storage.length
+console.log(total_province, total_city,total_district)
+
+console.log(total_province != null , total_city != null, total_district != null)
+if(total_province != null && total_city != null && total_district != null){
+    if(all_total_province[0] === total_province && all_total_province[1] === total_city && 
+        all_total_province[2] === total_district){
+            console.log('semua data ssama')
+    }else {
+        console.log('masuk ke else')
+        console.log(all_total_province)
+        console.log(province_storage)
+        console.log(city_storage)
+        console.log(district_storage)
+        save_locally_province_tiki()
+    }
+}else {
+    console.log('masuk ke else. save locally province jalan, searching all province dll')
+    save_locally_province_tiki()
+}
+
+
+
+setInterval(() => {
+// save_locally_province_tiki()
+if(total_province != null && total_city != null && total_district != null){
+    if(all_total_province[0] === total_province && all_total_province[1] === total_city && 
+        all_total_province[2] === total_district){
+            console.log('semua data ssama')
+    }else {
+        console.log('masuk ke else')
+        save_locally_province_tiki()
+    }
+}else {
+    console.log('masuk ke else. save locally province jalan, searching all province dll')
+    save_locally_province_tiki()
+}
+
+}, 3600000);  
 getAllData()

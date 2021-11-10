@@ -669,7 +669,7 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
                 
                 
                 product_price += val.Price_Based_On_Total_Quantity *1
-                axios.post(`htps://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
+                axios.post(`https://products.sold.co.id/get-product-details?product_code=${val.Product_Code}`)
                 .then((res)=>{
                     
                     
@@ -794,8 +794,10 @@ const detail_hutang_home=(order_number)=>{ // detail utang di home header
             </div>   
         `)
        
-        if(arrListHutang[0].Payment_Method == 'transfer'){
-            $('accounts-ul').empty()
+        console.log(arrListHutang[0].Payment_Method)
+        if(arrListHutang[0].Payment_Method == 'BNI VA TRANSFER'){
+            console.log($('.accounts-ul'))
+            $('.accounts-ul').empty()
             $('.accounts-ul').append(`
                 <img src="../img/card2.png" alt="" class="acc-ul">
             `)

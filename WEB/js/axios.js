@@ -92,98 +92,10 @@ $( document ).ready(function() {
    
 
 
-    async function save_locally_province_tiki(){
-        
    
-        await get_all_province_from_courier("tiki", "tiki").done(async function(response){
-            localStorage.setItem("all_province_tiki", JSON.stringify(response));
-            
-            var i = 0;
-            var all_city_tiki = [];
-            for(i = 0; i < response.length; i++){
-                all_city_tiki.push({
-                    Province: response[i].Province,
-                    City: await save_locally_city_tiki(response[i].Province)
-                });
-            }
-            var test = JSON.parse(localStorage.getItem('all_province_tiki'))
-            
-            await localStorage.setItem("all_city_tiki", JSON.stringify(all_city_tiki));
-            var all_district_tiki = [];
-            
-            for(i = 0; i < all_city_tiki.length; i++){
-                for(z = 0; z < all_city_tiki[i].City.length; z++){
-                    if((all_city_tiki[i].City[z] != undefined)){
-                        all_district_tiki.push({
-                            City: all_city_tiki[i].City[z].City,
-                            District: await save_locally_district_tiki(all_city_tiki[i].City[z].City)
-                        });   
-                    }
-                }
-                
-            }
-            await localStorage.setItem("all_district_tiki", JSON.stringify(all_district_tiki));
-            var all_subdistrict_tiki = [];
-            for(i = 0; i < all_district_tiki.length; i++){
-                for(z = 0; z < all_district_tiki[i].District.length; z++){
-                    if((all_district_tiki[i].District[z] != undefined)){
-                        // 
-                        all_subdistrict_tiki.push({
-                            District: all_district_tiki[i].District[z].District,
-                            SubDistrict: await save_locally_subdistrict_tiki(all_district_tiki[i].District[z].District)
-                        });  
-                    }
-                }
-
-               
-                
-            }
-            await localStorage.setItem("all_subdistrict_tiki", JSON.stringify(all_subdistrict_tiki));
-            
-        })
-    }
-    async function save_locally_city_tiki(Province){
-        return new Promise(async (resolve, reject) => {
-            await get_all_city_from_courier("tiki", "tiki", Province).done(async function(response){
-                resolve(response);
-            })
-        })
-    }
-    async function save_locally_district_tiki(City){
-        return new Promise(async (resolve, reject) => {
-            await get_all_district_from_courier("tiki", "tiki", City).done(async function(response){
-                resolve(response);
-            })
-        })
-    }
-    async function save_locally_subdistrict_tiki(District){
-        return new Promise(async (resolve, reject) => {
-            await get_all_subdistrict_from_courier("tiki", "tiki", District).done(async function(response){
-                resolve(response);
-            })
-        })
-    }
-
-    
-       
-    
-    var province_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
-    var city_storage = JSON.parse(localStorage.getItem('all_city_tiki'))
-    var district_storage = JSON.parse(localStorage.getItem('all_district_tiki'))
-    var subdistrict_storage = JSON.parse(localStorage.getItem('all_subdistrict_tiki'))
-
-if(province_storage != null && city_storage != null && district_storage != null && subdistrict_storage != null){
-        
-    }else {
-        save_locally_province_tiki()
-    }
 
 });
 
-setInterval(() => {
-    save_locally_province_tiki()
-
-}, 3600000);  
 
 
 // const get_all_cat_subCat_for_storage=()=>{
@@ -6005,7 +5917,7 @@ const newRender_list_hutang=(customer_code)=>{
                     <div class="status-card-item-bd">
                         ${val.Status}
                     </div>
-                    <div class="status-card-item-bd">
+                    <div class="status-card-item-bd" id="payment_method_p_bd">
                         ${val.Payment_Method}
                     </div>
                     <div class="order-card-item-bd">

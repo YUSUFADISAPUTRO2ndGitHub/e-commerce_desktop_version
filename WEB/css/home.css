@@ -658,8 +658,10 @@ body {
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
-    height:130px !important;
+    height:80px !important;
     box-shadow:none !important;
+    /* position: relative !important; */
+    /* top:-5% !important; */
     border:none !important;
     border-color:transparent !important;
 
@@ -675,6 +677,23 @@ body {
     display:flex !important;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    width:50%;
+    position:relative;
+    top:-5%;
+    /* border:1px solid #dedede !important; */
+}
+
+.dropdown-menu {
+    padding:0px !important;
+}
+.fa-android {
+    font-size:40px;
+    color:#a4c639;
+}
+.fa-apple {
+    font-size:40px;
+    color:#555555;
 }
 
 
@@ -5754,13 +5773,15 @@ img {
     /* border:2px solid #27aae1; */
     color: #27aae1;
 }
-
+#payment_method_p_bd{
+    font-size:0.4em;
+}
 
 .modals-hutang-home {
     position: absolute;
     top: 15%;
     border-radius: 10px;
-    left: 24.5%;
+    left: 23.2%;
     height: 61vh;
     width: 54%;
     display: none;
