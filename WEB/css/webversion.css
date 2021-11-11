@@ -1,5 +1,12 @@
 /* LINK COLLECTION MARKET PLACE */
 @media only screen and (max-device-width:960px){
+    .card-item {
+        min-width:25%;
+    }
+    .cart-counter {
+        top:25% !important ;
+        right:33% !important ;
+    }
    .promo_card {
        min-width:30%;
    }
@@ -83,6 +90,9 @@
         left:0%;
     }
     .box-list-kategori{
+        width:700px !important;
+    }
+    .box-list-subcategory {
         width:700px !important;
     }
     .card-all-item{

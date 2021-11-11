@@ -838,7 +838,7 @@ function loadingMessage(){
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">

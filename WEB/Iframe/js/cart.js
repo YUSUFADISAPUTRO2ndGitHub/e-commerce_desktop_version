@@ -4,6 +4,7 @@ $(document).ready(async function(){
     var i = 0;
     if(cartToJson.length != 0){
         loadingMessage(cartToJson.length);
+        // loadingMessage(10000);
     }else{
         loadingMessage(1);
     }
@@ -414,27 +415,39 @@ function reduceQuantity(id){
 
 function loadingMessage(interval){
     let timerInterval
+   
     Swal.fire({
-    title: 'Loading Your Request',
-    html: '',
-    timer: interval*500,
-    timerProgressBar: true,
-    allowOutsideClick: false,
-    didOpen: () => {
-        Swal.showLoading()
-        timerInterval = setInterval(() => {
-        const content = Swal.getContent()
-        }, 100)
-    },
-    willClose: () => {
-        clearInterval(timerInterval)
-    }
-    }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-            
+        // title: 'Loading Your Request',
+        html: `
+        <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLDAYS 
+            </div>
+                
+            <div class="box2">
+            </div>
+        </div>
+        `,
+        timer: interval*1000,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+            const content = Swal.getContent()
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
         }
-    })
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                
+            }
+        })
 }
 
 function checkingout(){
@@ -480,14 +493,14 @@ function checkingout(){
 
 function checkingoutAll(){
     Swal.fire({
-        title: 'Uploading Data',
+        // title: 'Uploading Data',
         timer:300000000,
         html: ` 
         <div class="boxcon">
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS
             </div>
                 
             <div class="box2">

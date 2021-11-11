@@ -130,7 +130,7 @@ function show_subcategory(choosen_parent_category){
        <div class="box1">
        </div>
        <div id="sold-id-loading">
-       SOLD 
+       SOLDAYS 
        </div>
            
        <div class="box2">
@@ -203,7 +203,7 @@ function show_jenisproduct(jenis_product){
        <div class="box1">
        </div>
        <div id="sold-id-loading">
-       SOLD 
+       SOLDAYS 
        </div>
            
        <div class="box2">
@@ -355,7 +355,7 @@ const render_searching_page=(product_name)=>{
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">

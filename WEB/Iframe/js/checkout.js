@@ -2307,11 +2307,7 @@ const checking_product_company=async()=>{
     // 
     console.log('render cart 2308 jalan')
     var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
-    
-  
-   
-
-    
+        
     var province_pilihan = localStorage.getItem('province_customer')
     var kota_pilihan = localStorage.getItem('city_customer')
     var kecamatan_pilihan = localStorage.getItem('district_customer')
@@ -2326,7 +2322,7 @@ const checking_product_company=async()=>{
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">
@@ -2340,8 +2336,6 @@ const checking_product_company=async()=>{
             var token = localStorage.getItem('token')
 
             // var checking_product_company =  await checking_product_company()
-            // 
-
 
             if(province_pilihan != undefined && kota_pilihan != undefined &&
                 kecamatan_pilihan != undefined && kelurahan_pilihan !=undefined){ // ngecheck udh keisi apa blm
@@ -2354,6 +2348,7 @@ const checking_product_company=async()=>{
                     kelurahan_pilihan = await find_subDistrict_from_address(kecamatan_pilihan)
                     console.log('masuk ke else await find province')
             }
+
             var allKota = []
             var allProduct = []
             var berat_product = 0
@@ -2363,7 +2358,6 @@ const checking_product_company=async()=>{
             var allKelurahan = []
             var allPengiriman = []
             var allKurir = []
-            // 
             $('.card-checkout-cc').empty()
             $('.new-card-product-cc').empty()
             // $('.new-company-address-cc').empty()
@@ -2416,7 +2410,6 @@ const checking_product_company=async()=>{
                                 // if(product.length>4 ){
                                 //     $('.card-checkout-cc').css('height','300px')
                                 // 
-                                
                                     $('.card-checkout-cc').append(`
                                         <div class="box-new-card-checkout-cc-2"> 
                                             <div class="new-card-checkout-cc">
@@ -2430,7 +2423,7 @@ const checking_product_company=async()=>{
                                                             <div class="desc-item-2-checkout-cc">
                                                                 <p>Quantity : ${qty_product_index}</p>
                                                                 <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                                <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                                <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                                             </div>
                                                             <div class="for_input_coupon"> 
                                                                 <input type="text" class="input_coupon_checkout_${product[0].productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${product[0].productNo}')">
@@ -2442,14 +2435,14 @@ const checking_product_company=async()=>{
                                                     </div>
                                                 </div>
                                                 <div class="new-card-option-cc">
-                                                    <select class="form-control sp_kelurahan_hover new-cart-pengiriman-1" id="sub-pengiriman-option-1" onchange="pengirimanCheckout(this,1)" >  
+                                                    <select class="form-control sp_kelurahan_hover shipping_price_sp new-cart-pengiriman-1" id="sub-pengiriman-option-1" onchange="pengirimanCheckout(this,1)" >  
                                                         <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
                                                     </select>
                                 
-                                                    <select class="form-control sp_kelurahan_hover  new-asuransi-pengiriman-1" id="sub-asuransi-option-1" onchange="asuransiCheckout(this,1)" >  
+                                                    <select class="form-control sp_kelurahan_hover insurance_price_sp new-asuransi-pengiriman-1" id="sub-asuransi-option-1" onchange="asuransiCheckout(this,1)" >  
                                                         <option selected  class="co-asuransi">Insurance</option>           
                                                     </select>
-                                                    <select class="form-control sp_kelurahan_hover new-packing-pengiriman-1" id="sub-packing-option-1" onchange="packingCheckout(this,1)" >  
+                                                    <select class="form-control sp_kelurahan_hover packing_price_sp new-packing-pengiriman-1" id="sub-packing-option-1" onchange="packingCheckout(this,1)" >  
                                                         <option selected  class="co-packing">Packing</option>      
                                                     </select>
                                                 </div>
@@ -2495,7 +2488,7 @@ const checking_product_company=async()=>{
                                                             <div class="desc-item-2-checkout-cc">
                                                                 <p>Quantity : ${qty_product_index}</p>
                                                                 <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                                <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                                <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                                             </div>
                                                             <div class="for_input_coupon"> 
                                                                 <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -2507,14 +2500,14 @@ const checking_product_company=async()=>{
                                                     </div>
                                                 </div>
                                                 <div class="new-card-option-cc">
-                                                    <select class="form-control sp_kelurahan_hover new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this,${index})" >  
+                                                    <select class="form-control sp_kelurahan_hover shipping_price_sp new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this,${index})" >  
                                                         <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
                                                     </select>
                                 
-                                                    <select class="form-control sp_kelurahan_hover  new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this,${index})" >  
+                                                    <select class="form-control sp_kelurahan_hover  insurance_price_sp new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this,${index})" >  
                                                         <option selected  class="co-asuransi">Insurance</option>           
                                                     </select>
-                                                    <select class="form-control sp_kelurahan_hover new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this,${index})" >  
+                                                    <select class="form-control sp_kelurahan_hover packing_price_sp new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this,${index})" >  
                                                         <option selected  class="co-packing">Packing</option>      
                                                     </select>
                                                 </div>
@@ -2540,7 +2533,7 @@ const checking_product_company=async()=>{
                                                 <div class="desc-item-2-checkout-cc">
                                                     <p>Quantity : ${qty_product_index}</p>
                                                     <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                    <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                    <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                                 </div>
                                                 <div class="for_input_coupon"> 
                                                     <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -2574,11 +2567,15 @@ const checking_product_company=async()=>{
                 var allKecamatan = []
                 var allKelurahan = []
                 var berat_product = 0
+                var Courier_Price_Code_orig = ''
                 get_all_couriers().done(function(response){
                     console.log(response)
                     allKurir = response
-                    checking_array_render.forEach((item,index_car,arr)=>{ 
-                        
+                    var new_total_shipping= 0
+                    var final_total_harga_barang = 0
+                     checking_array_render.forEach((item,index_car,arr_api)=>{ 
+                        var detail_product = item[0]
+                        console.log(detail_product.priceAgreed)
                         paket_value=0
                         if(province_storage != undefined && city_storage !=undefined && district_storage != undefined){
                             city_storage.forEach((val,index)=>{
@@ -2593,8 +2590,7 @@ const checking_product_company=async()=>{
                             })
                             get_all_subdistrict_from_courier('tiki','tiki',district_customer).done(function(response){
                                 allKelurahan = response
-                                allProvince = province_storage
-                                var Courier_Price_Code_orig = ''
+                                allProvince = province_storage 
                                 Courier_Price_Code_orig = item[0].courier_price_code
                                 berat_product =item[0].berat_product
                                 if(berat_product <= 0 || berat_product == null || berat_product == undefined || Number.isNaN(berat_product)){
@@ -2616,10 +2612,47 @@ const checking_product_company=async()=>{
                                 var  height = ''
                                 var packing_type = ''
                                 // 
-                                // 
+                               
                                 new_get_shipping_cost_informations(Courier_Price_Code_orig,allKelurahan[0].Courier_Price_Code,packing_type,berat_product,length,width,height,paket_value).done(function(response){
-
                                     allPengiriman = response
+                                    console.log(allPengiriman.service[0].TARIFF * 1.2,' ini tarif', index_car)
+                                    var harga_satuan_shipping = parseInt(allPengiriman.service[0].TARIFF) * 1.2
+                                    var harga = parseInt(removeComma(detail_product.priceAgreed))
+                                    console.log(harga,' ini harga satuan barang ', index_car)
+                                    new_total_shipping += harga_satuan_shipping
+                                    final_total_harga_barang += harga
+                                    
+                                // NGITUNG TOTAL HARGA
+                                if(product.length === 1){
+                                    var harga = parseInt(removeComma(product[0].priceAgreed))
+                                    var ongkos_kirim = parseInt(allPengiriman.service[0].TARIFF) * 1.2
+                                    var harga_total = ongkos_kirim + harga
+                                    $('.final-total-harga').empty()
+                                    $('.final-total-harga').append(`
+                                        <div class="box-ft-harga">
+                                            <p> Harga Total</p>
+                                            <p id="final_total_harga_barang"> ${commafy(harga_total)}</p>
+                                        </div>  
+                                    `)
+                                }else {
+                                    // checking_array_render.forEach((val,id,arr)=>{
+                                        if(index_car === arr_api.length-1){
+                                            
+                                            var new_final_total_barang = new_total_shipping + final_total_harga_barang
+                                            console.log(new_total_shipping)
+                                            console.log(final_total_harga_barang)
+                                            console.log(new_final_total_barang)
+    
+                                                $('.final-total-harga').empty()
+                                                $('.final-total-harga').append(`
+                                                    <div class="box-ft-harga">
+                                                        <p> Harga Total</p>
+                                                        <p id="final_total_harga_barang"> ${commafy(new_final_total_barang)}</p>
+                                                    </div>  
+                                                `)
+                                        }
+                                }
+                                                                    
                                     // $(`.ncac-${index_car}`).append(`
                                     //     <div class="total_price_cc">
                                     //         <p>TOTAL HARGA BARANG:</p>
@@ -2704,34 +2737,33 @@ const checking_product_company=async()=>{
                                         `)
                                     })
                                     if(allPengiriman){
-                                        // 
+                                        // console.log(allPengiriman,'2701 detail pengiriman')
+                                        
+                                        var harga_shipping_barang = 0
                                         if(allPengiriman.service != undefined){
                                             allPengiriman.service.map((val,indexPengiriman)=>{
                                                 var tarif = val.TARIFF * 1.2
-                                                if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
+                                                if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){            
+                                                    // console.log('masuk id if 2707')
                                                     $(`.new-cart-pengiriman-${index_car}`).append(`
                                                         <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                     `)
                                                 }else {
                                                     if(indexPengiriman === 0 ){
+                                                        // total_harga_kirim +=tarif
                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
                                                             <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                         `)
-                                                        // $(`.ncac-price-${index_car}`).append(`
-                                                        //     <div class="total_price_cc"> 
-                                                        //         <div class="box-ft-harga">
-                                                        //             <p>Shipping Fee</p>
-                                                        //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(val.TARIFF)}</p>
-                                                        //         </div>  
-                                                        //     </div>
-                                                        // `)
                                                     }else {
                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
                                                             <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                         `)
                                                     }
                                                 }
+                                                
                                             })
+                                           
+
                                         }
                                         
                                         if(allPengiriman.insurance != undefined){
@@ -2785,6 +2817,8 @@ const checking_product_company=async()=>{
                                         $('#sub-kelurahan-option').css('display','none')
                                         $('#sub-province-option').css('display','none')
     
+
+                                        
                                         Swal.fire({
                                             title: 'Uploading Data',
                                             timer:100,
@@ -2804,6 +2838,10 @@ const checking_product_company=async()=>{
                            .then((res)=>{
                                // 
                                var alamat_pilihan = res.data.Address_1
+                               var allProvince = []
+                                var allKota = []
+                                var allKecamatan = []
+                                var allKelurahan = []
                                get_all_couriers().done(function(response){
                                    allKurir = response
                                    get_all_province_from_courier('tiki','tiki').done(function(response){
@@ -2833,27 +2871,61 @@ const checking_product_company=async()=>{
                                                    var paket_value = '' 
                                                    new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, berat_product, length, width, height, paket_value).done(function(response){
                                                        allPengiriman = response
-                                                       $('.cart-provinsi').empty()
-                                                       $('.cart-kota').empty()
-                                                       $('.cart-kecamatan').empty()
-                                                       $('.cart-kelurahan').empty()
-                                                       $('.cart-kodepos').empty()
-                                                       $(`.new-cart-pengiriman-${index_car}`).empty()
-                                                       $(`.new-asuransi-pengiriman-${index_car}`).empty()
-                                                       $(`.new-packing-pengiriman-${index_car}`).empty()
-                                                       $('#sub-delivery-option').empty()
-                                                       $('.cart-provinsi').append(`
-                                                           <option selected  class="co-provinsi">Provinsi</option>      
-                                                       `)
-                                                       $('.cart-kota').append(`
-                                                           <option selected  class="co-kota">Kota</option>      
-                                                       `)
-                                                       $('.cart-kecamatan').append(`
-                                                           <option selected  class="co-kecamatan">Kecamatan</option>      
-                                                       `)
-                                                       $('.cart-kelurahan').append(`
-                                                           <option selected  class="co-kelurahan">Kelurahan</option>      
-                                                       `)
+                                                       
+                                                        console.log(allPengiriman.service[0].TARIFF * 1.2,' ini tarif', index_car)
+                                                        var harga_satuan_shipping = parseInt(allPengiriman.service[0].TARIFF) * 1.2
+                                                        var harga = parseInt(removeComma(detail_product.priceAgreed))
+                                                        console.log(harga,' ini harga satuan barang ', index_car)
+                                                        new_total_shipping += harga_satuan_shipping
+                                                        final_total_harga_barang += harga
+                                                        
+                                                    // NGITUNG TOTAL HARGA
+                                                    if(product.length === 1){
+                                                        var harga = parseInt(removeComma(product[0].priceAgreed))
+                                                        var ongkos_kirim = parseInt(allPengiriman.service[0].TARIFF) * 1.2
+                                                        var harga_total = ongkos_kirim + harga
+                                                        $('.final-total-harga').empty()
+                                                        $('.final-total-harga').append(`
+                                                            <div class="box-ft-harga">
+                                                                <p> Harga Total</p>
+                                                                <p id="final_total_harga_barang"> ${commafy(harga_total)}</p>
+                                                            </div>  
+                                                        `)
+                                                    }else {
+                                                        // checking_array_render.forEach((val,id,arr)=>{
+                                                            if(index_car === arr_api.length-1){
+                                                                var new_final_total_barang = new_total_shipping + final_total_harga_barang
+                                                                console.log(new_final_total_barang)
+                                                                $('.final-total-harga').empty()
+                                                                $('.final-total-harga').append(`
+                                                                    <div class="box-ft-harga">
+                                                                        <p> Harga Total</p>
+                                                                        <p id="final_total_harga_barang"> ${commafy(new_final_total_barang)}</p>
+                                                                    </div>  
+                                                                `)
+                                                            }
+                                                    }
+                                                    $('#sub-delivery-option').empty()
+                                                    $('#sub-province-option').empty()
+                                                    $('#sub-kota-option').empty()
+                                                    $('#sub-kecamatan-option').empty()
+                                                    $('#sub-kelurahan-option').empty()
+                                                    $('#sub-kodepos-option').empty()
+                                                    $(`.new-cart-pengiriman-${index_car}`).empty()
+                                                    $(`.new-asuransi-pengiriman-${index_car}`).empty()
+                                                    $(`.new-packing-pengiriman-${index_car}`).empty()
+                                                    $('.new-cart-provinsi').append(`
+                                                        <option selected  class="co-provinsi">Provinsi</option>      
+                                                    `)
+                                                    $('#sub-kota-option').append(`
+                                                        <option selected  class="co-kota">Kota</option>      
+                                                    `)
+                                                    $('#sub-kecamatan-option').append(`
+                                                        <option selected  class="co-kecamatan">Kecamatan</option>      
+                                                    `)
+                                                    $('#sub-kelurahan-option').append(`
+                                                        <option selected  class="co-kelurahan">Kelurahan</option>      
+                                                    `)
                        
                                                        // $('.cart-pengiriman').append(`
                                                        //         <option selected  class="co-pengiriman"> Pengiriman</option>      
@@ -2864,111 +2936,142 @@ const checking_product_company=async()=>{
                                                        // $('.cart-packing').append(`
                                                        //         <option selected  class="co-packing"> Packing</option>      
                                                        //     `)
-                                                       $('.cart-kodepos').append(`
-                                                           <option selected  class="co-kodepos"> Kode Pos</option>      
-                                                       `)
-                       
-                                                       allKurir.map((val,index)=>{
-                                                           $('#sub-delivery-option').append(`
-                                                               <option  value="${val.Courier_Code}" class="co-kurir">${val.Courier}</option> 
-                                                           `)
-                                                       })
-                                                       allProvince.map((val,index)=>{
-                                                           $('.cart-provinsi').append(`
-                                                               <option  value="${val.Province}" class="co-provinsi">${val.Province}</option> 
-                                                           `)
-                                                       })
-                                                       allKota.map((val,index)=>{
-                                                           $('.cart-kota').append(`
-                                                               <option  value="${val.City}" class="co-kota">${val.City}</option> 
-                                                           `)
-                                                       })
-                                                       allKecamatan.map((val,index)=>{
-                                                           $('.cart-kecamatan').append(`
-                                                               <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
-                                                           `)
-                                                       })
-                                                       allKelurahan.map((val,index)=>{
-                                                           $('.cart-kelurahan').append(`
-                                                               <option  value="${val.Sub_District}" class="co-kelurahan">${val.Sub_District}</option> 
-                                                           `)
-                                                           $('.cart-kodepos').append(`
-                                                               <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
-                                                           `)
-                                                       })
-                                                       if(allPengiriman){
-                                                           
-                                                        if(allPengiriman.service != undefined){
-                                                            allPengiriman.service.map((val,indexPengiriman)=>{
-                                                                var tarif = val.TARIFF * 1.2
-                                                                if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){
-                                                                    $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                        <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
+                                                       $('#sub-kodepos-option').append(`
+                                                            <option selected  class="co-kodepos"> Kode Pos</option>      
+                                                        `)
+                                                        allKurir.map((val,index)=>{
+                                                            if(allKurir.length > 0 && allKurir.length <2 ){
+                                                                $('#sub-delivery-option').append(`
+                                                                    <option  selected value="${val.Courier_Code}" class="co-kurir">${val.Courier}</option> 
+                                                                `)
+                                                            }else {
+                                                                $('#sub-delivery-option').append(`
+                                                                    <option  value="${val.Courier_Code}" class="co-kurir">${val.Courier}</option> 
+                                                                `)
+                                                            }
+                                                        })
+                                                        allProvince.map((val,index)=>{
+                                                            $('#sub-province-option').append(`
+                                                                <option  value="${val.Province}" class="co-provinsi">${val.Province}</option> 
+                                                            `)
+                                                        })
+                                                        console.log(allKota)
+                                                        console.log(allKecamatan)
+                                                        allKota.map((val,index)=>{
+                                                            // value.map((val,id)=>{
+                                                              if(index===0){
+                                                                  $('#sub-kota-option').append(`
+                                                                      <option  value="${val.City}" class="co-kota">${val.City}</option> 
+                                                                  `)
+                                                              }
+                                                            // })
+                                                        })
+                                                        allKecamatan.map((val,index)=>{
+                                                            // value.map((val,id)=>{
+                                                                if(index === 0){
+                                                                    $('#sub-kecamatan-option').append(`
+                                                                        <option  value="${val.District}" class="co-kecamatan">${val.District}</option> 
                                                                     `)
-                                                                }else {
-                                                                    if(indexPengiriman === 0 ){
+                                                                }
+                                                            // })
+                                                        })
+                                                        allKelurahan.map((val,index)=>{
+                                                            $('#sub-kelurahan-option').append(`
+                                                                <option  value="${val.Sub_District}" class="co-kelurahan">${val.Sub_District}</option> 
+                                                            `)
+                                                            $('#sub-kodepos-option').append(`
+                                                                <option  value="${val.Zipcode}" class="co-kodepos">${val.Zipcode}</option> 
+                                                            `)
+                                                        })
+                                                        if(allPengiriman){
+                                                            // console.log(allPengiriman,'2701 detail pengiriman')
+                                                            
+                                                            var harga_shipping_barang = 0
+                                                            if(allPengiriman.service != undefined){
+                                                                allPengiriman.service.map((val,indexPengiriman)=>{
+                                                                    var tarif = val.TARIFF * 1.2
+                                                                    if(allPengiriman.service.length > 0 && allPengiriman.service.length < 2 ){            
+                                                                        // console.log('masuk id if 2707')
                                                                         $(`.new-cart-pengiriman-${index_car}`).append(`
                                                                             <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
                                                                         `)
-                                                                        // $(`.ncac-price-${index_car}`).append(`
-                                                                        //     <div class="total_price_cc"> 
-                                                                        //         <div class="box-ft-harga">
-                                                                        //             <p>Shipping Fee</p>
-                                                                        //             <p id="final_total_harga_pengiriman-${index_car}"> ${commafy(val.TARIFF)}</p>
-                                                                        //         </div>  
-                                                                        //     </div>
-                                                                        // `)
                                                                     }else {
-                                                                        $(`.new-cart-pengiriman-${index_car}`).append(`
-                                                                            <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
-                                                                        `)
+                                                                        if(indexPengiriman === 0 ){
+                                                                            // total_harga_kirim +=tarif
+                                                                            $(`.new-cart-pengiriman-${index_car}`).append(`
+                                                                                <option selected value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
+                                                                            `)
+                                                                        }else {
+                                                                            $(`.new-cart-pengiriman-${index_car}`).append(`
+                                                                                <option  value="${val.EST_DAY}days ${val.SERVICE} ${tarif} ${val.DESCRIPTION} " class="${tarif}">${val.EST_DAY}days ${val.SERVICE}  ${commafy(tarif)} ${val.DESCRIPTION}</option> 
+                                                                            `)
+                                                                        }
                                                                     }
+                                                                    
+                                                                })
+                                                               
+                    
+                                                            }
+                                                            
+                                                            if(allPengiriman.insurance != undefined){
+                                                                if(allPengiriman.insurance.length>0){
+                                                                    
+                                                                    allPengiriman.insurance.map((val,indexPengiriman)=>{
+                                                                        if(indexPengiriman === 0){
+                                                                            $(`.new-asuransi-pengiriman-${index_car}`).append(`
+                                                                                <option selected value="type 0 tidak berasuransi" class="tidak berasuransi">Tidak Menggunakan Asuransi</option> 
+                                                                            `)
+                                                                            $(`.new-asuransi-pengiriman-${index_car}`).append(`
+                                                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                                            `)
+                                                                        }else {
+                                                                            $(`.new-asuransi-pengiriman-${index_car}`).append(`
+                                                                                <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+                                                                            `)
+                    
+                                                                        }
+                                                                    })
+                                                                }else {
+                                                                    $(`.new-asuransi-pengiriman-${index_car}`).css('display','none')
                                                                 }
-                                                            })
-                                                        }
-                                                           if(allPengiriman.insurance != undefined){
-                                                               if(allPengiriman.insurance.length>0){
-                                                                   
-                                                                   allPengiriman.insurance.map((val,indexPengiriman)=>{
-                                                                       if(indexPengiriman === 0){
-                                                                           $(`.new-asuransi-pengiriman-${index_car}`).append(`
-                                                                               <option  value="type 0 tidak berasuransi" class="tidak berasuransi">Tidak Menggunakan Asuransi</option> 
-                                                                           `)
-                                                                           $(`.new-asuransi-pengiriman-${index_car}`).append(`
-                                                                               <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                                                           `)
-                                                                       }else {
-                                                                           $(`.new-asuransi-pengiriman-${index_car}`).append(`
-                                                                               <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                                                           `)
-                   
-                                                                       }
-                                                                   })
-                                                               }else {
-                                                                   $(`.new-asuransi-pengiriman-${index_car}`).css('display','none')
-                                                               }
-                                                           }
-                                                           if(allPengiriman.packing != undefined) {
-                                                               if(allPengiriman.packing.length>0){
-                                                                   allPengiriman.packing.map((val,indexPengiriman)=>{
-                                                                       $(`.new-packing-pengiriman-${index_car}`).append(`
-                                                                           <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                                                       `)
-                                                                   })
-                                                               }else {
-                                                                   $(`.new-packing-pengiriman-${index_car}`).css('display','none')
-                                                               }
-                                                           }
-                                                           $('#sub-cart-option').css('display','none')
-                                                           $('#sub-kota-option').css('display','none')
-                                                           $('#sub-kecamatan-option').css('display','none')
-                                                           $('#sub-kelurahan-option').css('display','none')
-                       
-                                                           Swal.fire({
-                                                               title: 'Uploading Data',
-                                                               timer:100,
-                                                           })
-                                                       }
+                                                            }
+                                                            if(allPengiriman.packing != undefined) {
+                                                                if(allPengiriman.packing.length>0){
+                                                                    allPengiriman.packing.map((val,indexPengiriman)=>{
+                                                                        if(allPengiriman.packing.length > 0 && allPengiriman.packing.length < 2){
+                                                                            $(`.new-packing-pengiriman-${index_car}`).append(`
+                                                                                <option selected  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                                            `)
+                                                                        }else if (allPengiriman.length >2) {
+                                                                            if(indexPengiriman === 0 ){
+                                                                                $(`.new-packing-pengiriman-${index_car}`).append(`
+                                                                                    <option selected  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                                                `)
+                                                                            }else {
+                                                                                $(`.new-packing-pengiriman-${index_car}`).append(`
+                                                                                    <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+                                                                                `)
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                }else {
+                                                                    $(`.new-packing-pengiriman-${index_car}`).css('display','none')
+                                                                }
+                                                            }
+                                                                $('#sub-cart-option').css('display','none')
+                                                                $('#sub-kota-option').css('display','none')
+                                                                $('#sub-kecamatan-option').css('display','none')
+                                                                $('#sub-kelurahan-option').css('display','none')
+                                                                $('#sub-province-option').css('display','none')
+                            
+                        
+                                                                
+                                                                Swal.fire({
+                                                                    title: 'Uploading Data',
+                                                                    timer:100,
+                                                                })
+                                                            }
+                                                       
                                                    })
                                                })
                                            })
@@ -2985,45 +3088,8 @@ const checking_product_company=async()=>{
 
 
 
-
-                    if(product.length === 1){
-                        console.log('masuk ke if')
-                        var harga = parseInt(removeComma(product[0].priceAgreed))
-                        var ongkos_kirim = $('#sub-pengiriman-option-1 option:selected').attr('class')
-                        console.log($('#sub-pengiriman-option-1 option:selected').val())
-                        console.log($('#sub-pengiriman-option-1 option:selected').attr('class'))
-                        console.log(ongkos_kirim)
-                        $('.final-total-harga').empty()
-                        $('.final-total-harga').append(`
-                            <div class="box-ft-harga">
-                                <p> Harga Total</p>
-                                <p id="final_total_harga_barang"> ${commafy(harga)}</p>
-                            </div>  
-                        `)
-                    }else {
-                        console.log('masuk ke else')
-                        var final_total_harga_barang = 0
-                        checking_array_render.forEach((val,id,arr)=>{
-                            val.forEach((resp,index)=>{
-                                var harga = parseInt(removeComma(resp.priceAgreed))
-                                console.log(harga)
-                                final_total_harga_barang += harga
-                            })
-                            if(id === arr.length -1 ){
-                                console.log(final_total_harga_barang)
-    
-                                $('.final-total-harga').empty()
-                                $('.final-total-harga').append(`
-                                    <div class="box-ft-harga">
-                                        <p> Harga Total</p>
-                                        <p id="final_total_harga_barang"> ${commafy(final_total_harga_barang)}</p>
-                                    </div>  
-                                `)
-                            }
-                        })
-                        console.log(final_total_harga_barang)
-
-                    }
+                    
+                    
 
 
 
@@ -3648,7 +3714,7 @@ const render_select_option_kurir=async()=>{
                                 <div class="desc-item-2-checkout-cc">
                                     <p>Quantity : ${val.quantity}</p>
                                     <p>Berat  : ${fixed_total_berat_barang}</p>
-                                    <p id="id_harga_barang-${val.productNo}">Harga : ${val.priceAgreed}</p>
+                                    <p id="id_harga_barang-${val.productNo}" class="class_harga_barang">Harga : ${val.priceAgreed}</p>
                                 </div>
                                 <div class="for_input_coupon"> 
                                     <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -3815,7 +3881,7 @@ const re_render_select_option=async()=>{
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">
@@ -3937,7 +4003,7 @@ const re_render_select_option=async()=>{
                                                 <div class="desc-item-2-checkout-cc">
                                                     <p>Quantity : ${qty_product_index}</p>
                                                     <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                    <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                    <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                                 </div>
                                                 <div class="for_input_coupon"> 
                                                     <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -3949,14 +4015,14 @@ const re_render_select_option=async()=>{
                                         </div>
                                     </div>
                                     <div class="new-card-option-cc">
-                                        <select class="form-control sp_kelurahan_hover new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this,${index})" >  
+                                        <select class="form-control sp_kelurahan_hover shipping_price_sp new-cart-pengiriman-${index}" id="sub-pengiriman-option-${index}" onchange="pengirimanCheckout(this,${index})" >  
                                             <option selected  class="co-pengiriman">Waktu Pengiriman</option>      
                                         </select>
                     
-                                        <select class="form-control sp_kelurahan_hover  new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this,${index})" >  
+                                        <select class="form-control sp_kelurahan_hover insurance_price_sp  new-asuransi-pengiriman-${index}" id="sub-asuransi-option-${index}" onchange="asuransiCheckout(this,${index})" >  
                                             <option selected  class="co-asuransi">Insurance</option>           
                                         </select>
-                                        <select class="form-control sp_kelurahan_hover new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this,${index})" >  
+                                        <select class="form-control sp_kelurahan_hover packing_price_sp new-packing-pengiriman-${index}" id="sub-packing-option-${index}" onchange="packingCheckout(this,${index})" >  
                                             <option selected  class="co-packing">Packing</option>      
                                         </select>
                                     </div>
@@ -3981,7 +4047,7 @@ const re_render_select_option=async()=>{
                                     <div class="desc-item-2-checkout-cc">
                                         <p>Quantity : ${qty_product_index}</p>
                                         <p>Berat  : ${fixed_total_berat_barang}</p>
-                                        <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                        <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                     </div>
                                     <div class="for_input_coupon"> 
                                         <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -4472,7 +4538,7 @@ const re_render_select_option=async()=>{
                                                 <div class="desc-item-2-checkout-cc">
                                                     <p>Quantity : ${qty_product_index}</p>
                                                     <p>Berat  : ${fixed_total_berat_barang}</p>
-                                                    <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                                    <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                                 </div>
                                                 <div class="for_input_coupon"> 
                                                     <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -4516,7 +4582,7 @@ const re_render_select_option=async()=>{
                                     <div class="desc-item-2-checkout-cc">
                                         <p>Quantity : ${qty_product_index}</p>
                                         <p>Berat  : ${fixed_total_berat_barang}</p>
-                                        <p id="id_harga_barang-${product_number_index}">Harga : ${price_agreed_index}</p>
+                                        <p id="id_harga_barang-${product_number_index}" class="class_harga_barang">Harga : ${price_agreed_index}</p>
                                     </div>
                                     <div class="for_input_coupon"> 
                                         <input type="text" class="input_coupon_checkout_${val.productNo} input_checkout" placeholder="Masukan Coupon" onchange="onInputCoupon('${val.productNo}')">
@@ -5782,7 +5848,7 @@ const kelurahanCheckout=()=>{
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">
@@ -6220,144 +6286,55 @@ const kodeposCheckout=()=>{
     
 }
 const pengirimanCheckout=async(item,id)=>{
-
+    console.log(item,id)
     var alamat = $('#address-selection option:selected').val()
     var alamat_pilihan = $('#sub-saved-address option:selected').val()
     if(alamat == 'TO SAVED ADDRESS'){
+        var price_className = $('.shipping_price_sp option:selected')
+        var harga_barang_className= $('.class_harga_barang')
+        console.log(harga_barang_className)
+        var total_harga_shipping = 0
+        var total_harga_barang = 0 
+        for(var index=0;index < price_className.length;index++){
+            // console.log(price_className[index].innerHTML);
+            var item = price_className[index].innerHTML
+            
+            var split_item = item.split(' ')
+            // console.log(split_item)
+            // console.log(split_item[3].replace(/,/g,''))
+            total_harga_shipping += parseInt(split_item[3].replace(/,/g,''))
+            // console.log(total_harga_shipping)
+         }
+      
+
+        for(var i=0; i<harga_barang_className.length; i++){
+            var item = harga_barang_className[i].innerHTML
+            console.log(item,i)
+            var split_item = item.split(' ')
+            console.log(split_item)
+            console.log(parseInt(split_item[2].replace(/,/g,'')))
+            total_harga_barang += parseInt(split_item[2].replace(/,/g,''))
+            
+        }
+        console.log(total_harga_barang)
+        console.log(total_harga_shipping)
+        var new_harga_total = total_harga_barang + total_harga_shipping
+        $('.final-total-harga').empty()
+        $('.final-total-harga').append(`
+            <div class="box-ft-harga">
+                <p> Harga Total</p>
+                <p id="final_total_harga_barang"> ${commafy(new_harga_total)}</p>
+            </div>  
+        `)
+
+        
 
         var harga_shipping = parseInt($(`.new-cart-pengiriman-${id} option:selected`).attr('class'))
         $(`#final_total_harga_pengiriman-${id}`).html(commafy(harga_shipping))
 
-        var token = localStorage.getItem('token')
-        var province_pilihan =  await find_province_from_address()
-        var kota_pilihan = await find_city_from_address(province_pilihan)
-        var district_pilihan = await find_district_from_address(kota_pilihan)
-        var sub_district_pilihan = await find_subDistrict_from_address(district_pilihan)
+       
 
-        var array_cart = localStorage.getItem('itemsToCheckout')
-        var json_array_cart = JSON.parse(array_cart)
-        var harga_barang = 0
-        var allKelurahan = []
-        var allPengiriman = []
-        console.log(harga_shipping,'5941')
-        for(var i=0; i<json_array_cart.length; i++){
-            var harga_per_item = parseInt(removeComma(json_array_cart[i].priceAgreed))
-            harga_barang += json_array_cart[i].quantity * harga_per_item
-        }
-        var harga_barang_with_shipping =  harga_barang + harga_shipping
-        var new_kurir_pilihan = ''
-        var kurir_kode = ''
-        get_all_couriers().done(function(response){
-            new_kurir_pilihan = response[0].Courier
-            kurir_kode = response[0].Courier_Code
-            $('.danger-error').css('display','none')
-            var cart_local = localStorage.getItem('itemsToCheckout')
-            var parse_cart = JSON.parse(cart_local)
-            var array_cart =[]
-            for(var i =0; i<parse_cart.length; i++){   
-                getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-                    array_cart.push(response)
-                })
-            }
-            get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
-                allKelurahan = response
-                var total_berat_product=0
-                var Courier_Price_Code_orig = 'CGK01.00'
-                var packing_type = ''
-                var length = ''
-                var  width = '' 
-                var  height = ''
-                var paket_value = '' 
-                for(var i =0; i<array_cart.length; i++){
-                    var berat_parse = array_cart[i].Weight_KG *1
-                    if(berat_parse <= 0 || berat_parse == null || berat_parse == undefined || Number.isNaN(berat_parse)){
-                        berat_parse = 0.1*1.5;
-                    }else{
-                        berat_parse = berat_parse*1*1.5;
-                    }
-                    total_berat_product += berat_parse
-                }
-
-                new_get_shipping_cost_informations(Courier_Price_Code_orig , allKelurahan[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
-                    allPengiriman = response
-                    // $('.cart-asuransi').empty()
-                    // $('.cart-packing').empty()
-                    
-                 
-                    // $('.cart-asuransi').append(`
-                    //     <option selected  value="0" class="co-asuransi"> asuransi</option>      
-                    // `)
-                    // $('.cart-packing').append(`
-                    //     <option selected value="0" class="co-packing"> packing</option>      
-                    // `)
-                    
-                    // if(allPengiriman.insurance != undefined){
-                    //     allPengiriman.insurance.map((val,index)=>{
-                    //         $('.new-cart-asuransi').append(`
-                    //             <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                    //         `)
-                    //     })
-                    // }
-                    // if(allPengiriman.packing != undefined){
-                    //     allPengiriman.packing.map((val,index)=>{
-                    //         $('.new-cart-packing').append(`
-                    //             <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                    //         `)
-                    //     })
-                    // }
-                    
-                    // $('.new-total-price-cc').css('display','flex')
-                    // $('.new-total-price-cc').empty()
-                    // $('.new-total-price-cc').append(`
-                    //     <div class="total_price_cc">
-                    //         <p>TOTAL PRICE:</p>
-                    //         <p>RP ${harga_barang_with_shipping} </p>
-                    //     </div>
-                    // `)
-                    // $(`'.final_total_harga_pengiriman-${}`)
-                    // $('.new-card-kurir-cc').empty()
-                    // if(new_kurir_pilihan == 'pengiriman' || new_kurir_pilihan == 'Pengiriman'){
-                    //     $('.new-card-kurir-cc kurir-cc').remove()
-                    //     $('.new-card-kurir-cc').css('display','none')
-                    // }else {
-                    //     $('.new-card-kurir-cc').css('display','flex')
-                    //     if(kurir_kode == 'tiki'){
-                    //         $('.new-card-kurir-cc').append(`
-                    //             <div class="card-item-checkout-cc kurir-cc">
-                    //                 <div class="img-item-checkout-cc">
-                    //                     <img src="../img/tiki_shipping_method.png" alt="">
-                    //                 </div>
-                    //                 <div class="desc-item-checkout-cc">
-                    //                     <p>${new_kurir_pilihan}</p>
-                    //                     <div class="desc-item-2-checkout-cc">
-                                            
-                    //                         <p>Harga : ${harga_shipping}</p>
-                    //                     </div>
-                
-                    //                 </div>
-                    //             </div>       
-                    //         `)
-                    //     }else {
-                    //         $('.new-card-kurir-cc').append(`
-                    //             <div class="card-item-checkout-cc kurir-cc">
-                    //                 <div class="img-item-checkout-cc">
-                    //                     <img src="../img/vantsing_shipping_method.png" alt="">
-                    //                 </div>
-                    //                 <div class="desc-item-checkout-cc">
-                    //                     <p>${new_kurir_pilihan}</p>
-                    //                     <div class="desc-item-2-checkout-cc">
-                    //                         <p>Harga : ${harga_shipping}</p>
-                    //                     </div>
-                    //                 </div>
-                    //             </div>       
-                    //         `)
-                    //     }
-                    // }   
-                })
-            })
-        })
-
-    }else {
+    }else { // alamat lain
         // loadingMessage(2)
         var province_pilihan=$('.new-cart-provinsi option:selected').val()
         var new_kurir_pilihan = $('#sub-delivery-option option:selected').val()

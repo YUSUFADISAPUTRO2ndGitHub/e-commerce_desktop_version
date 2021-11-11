@@ -429,7 +429,7 @@ const render_product_detail_from_home = async (item_category) => {
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">

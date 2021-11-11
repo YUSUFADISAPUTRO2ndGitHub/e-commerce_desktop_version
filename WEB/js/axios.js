@@ -555,13 +555,56 @@ const getAllItem_fromAllSubCat=(item)=>{
     // 
 
     // $('.new-box-category').toggle(500) // buat close category header
+    let timerInterval
+    Swal.fire({
+    // title: 'Loading Your Request',
+    html: `
+    <div class="boxcon">
+        <div class="box1">
+        </div>
+        <div id="sold-id-loading">
+        SOLDAYS 
+        </div>
+            
+        <div class="box2">
+        </div>
+    </div>
+    `,
+    timer: 300000,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+    didOpen: () => {
+        Swal.showLoading()
+        $(this).scrollTop('.modals-lk')
+        $('.close-button').css('display','block')
+        $('.modals-lk').css('display','block')
+        $('.modals-lk').attr('src',`./Iframe/listkategori.html?subcategory=${item}`)
+        // $('.new-box-category').toggle(500)
+        $('.new-box-category').css('display','none')
 
-    $(this).scrollTop('.modals-lk')
-    $('.close-button').css('display','block')
-    $('.modals-lk').css('display','block')
-    $('.modals-lk').attr('src',`./Iframe/listkategori.html?subcategory=${item}`)
-    // $('.new-box-category').toggle(500)
-    $('.new-box-category').css('display','none')
+        Swal.fire({
+            html:`
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>  
+            </div> 
+            `,
+            timer:100,
+            
+        })
+        timerInterval = setInterval(() => {
+        const content = Swal.getContent()
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+           
+            
+        }
+    })
 }
 const getAllItem=(item)=>{
     // 
@@ -794,7 +837,7 @@ const renderItemBasedOnSubCategory=(subCategory)=>{
        <div class="box1">
        </div>
        <div id="sold-id-loading">
-       SOLD 
+       SOLDAYS 
        </div>
            
        <div class="box2">
@@ -912,7 +955,7 @@ const renderItemBasedOnCategory=(Category)=>{
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">
@@ -1087,7 +1130,7 @@ const render_group_buy=(product_id)=>{
             <div class="box1">
             </div>
             <div id="sold-id-loading">
-            SOLD 
+            SOLDAYS 
             </div>
                 
             <div class="box2">
@@ -3800,7 +3843,7 @@ function commafy( num ) {
                 <div class="box1">
                 </div>
                 <div id="sold-id-loading">
-                SOLD 
+                SOLDAYS 
                 </div>
                     
                 <div class="box2">
@@ -4810,7 +4853,7 @@ function commafy( num ) {
         <div class="box1">
         </div>
         <div id="sold-id-loading">
-        SOLD 
+        SOLDAYS 
         </div>
             
         <div class="box2">
@@ -7574,7 +7617,7 @@ async function addressMethod(address,item){
                 <div class="box1">
                 </div>
                 <div id="sold-id-loading">
-                SOLD 
+                SOLDAYS 
                 </div>
                     
                 <div class="box2">
@@ -7819,7 +7862,7 @@ async function addressMethod(address,item){
                 <div class="box1">
                 </div>
                 <div id="sold-id-loading">
-                SOLD 
+                SOLDAYS 
                 </div>
                     
                 <div class="box2">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Iframe/cssIframe/unpaidList.css">
-    <!-- <link rel="stylesheet" href="./css/home.css"> -->
+    <link rel="stylesheet" href="./css/home.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -141,6 +141,21 @@
         justify-content: space-around;
         align-items: center;
     }
+    /* 
+
+
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* batas new loading */
 </style>
 
 <body>
@@ -158,49 +173,6 @@
         </div>
 
     </div>
-
-    <!-- <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-            </tr>
-        </thead>
-        <tbody id="cart-list">
-            
-                <div class="new-card-cart">
-                    <div class="cart-img">
-                        <img src="./img/liked.png" alt="">
-                    </div>
-                    <div class="cart-desc">
-                        <div class="cd-1">  
-                            <div class="form-check" id ="containerCheck">
-                                <input class="form-check-input" id="checklist" type="checkbox" value="productNo" onchange="selectedCart(this)">    
-                            </div>
-                            <p>Sealant Asam  Asam</p>
-                        </div>
-                        <div class="cd-2">
-                            Harga
-                            <input type="number" value="30000">
-                        </div>
-                        <div class="cd-3">
-                            <div class="cd-3-left">
-                                Kuantitas Permintaan
-                            <input type="number" value="30000">
-                            </div>
-                            <div class="cd-3-left">
-                                Stock Tersedia
-                            <input type="number" value="30000" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-            
-        </tbody>
-    </table> -->
 
     <div class="alert-cart-over">
         <div class="alert alert-danger d-flex align-items-center box-alert-over" role="alert">
@@ -241,34 +213,17 @@
         </div>
     </div>
 
-    <!-- <table>
-        <thead>
-            <tr>
-                <th>
-                    <div class="button-checkout" onclick="checkingout(this)">
-                        Pesan barang Tercentang
-                    </div>
-                </th>
-                <th>
-                    <div class="button-checkout-all" onclick="checkingoutAll(this)">
-                        Pesan semua barang
-                    </div>
-                </th>
-                <th>
-                    <div id="button-checkout-in-store" class="button-checkout-all" onclick="checkingoutAllInStore()">
-                        Pesan semua di Toko
-                    </div>
-                </th>
-            </tr>
-        </thead>
-    </table> -->
-
     <div class="button-checkout" onclick="checkingout(this)">
         Pesan barang Tercentang
     </div>
     <div class="button-checkout-all" onclick="checkingoutAll(this)">
         Pesan semua barang
     </div>
+    <!-- <th>
+        <div id="button-checkout-in-store" class="button-checkout-all" onclick="checkingoutAllInStore()">
+            Pesan semua di Toko
+        </div>
+    </th> -->
 
 </body>
 </html>

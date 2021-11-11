@@ -1279,9 +1279,11 @@ body {
 
 .card-item {
 
-    width: 250px;
+    /* width: 250px;  */
+    /* width:25%; */
+    min-width:20%;
     height: 300px;
-    min-width: 250px;
+    
     min-height: 280px;
     background: white;
     border: 1px solid #D4DEE8;
@@ -7091,7 +7093,6 @@ loading new
 .boxcon {
     position: absolute;
     top: -150px;
-    ;
     right: 0;
     bottom: 0;
     left: 0;
@@ -7149,7 +7150,7 @@ loading new
 #sold-id-loading {
     color: #27aae1;
     position: absolute;
-    font-size: 2.5em;
+    font-size: 2em;
     height: 50px;
     width: 100%;
     top: 0;
@@ -7173,6 +7174,8 @@ loading new
         opacity: 1;
     }
 }
+
+/* batas new loading */
 
 
 .container {
