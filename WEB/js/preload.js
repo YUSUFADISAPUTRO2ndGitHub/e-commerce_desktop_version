@@ -814,22 +814,30 @@ if(city_storage === null){
 if(district_storage === null){
     district_storage = 0
 }
+if(all_total_province === null){
+    all_total_province = undefined
+}
 var total_province = province_storage.length
 var total_city = city_storage.length
 var total_district = district_storage.length
-console.log(total_province, total_city,total_district)
+console.log(all_total_province,' ini all total Province')
+console.log(total_province, total_city,total_district, total_province)
 
 console.log(total_province != null , total_city != null, total_district != null)
 if(total_province != null && total_city != null && total_district != null){
-    if(all_total_province[0] === total_province && all_total_province[1] === total_city && 
-        all_total_province[2] === total_district){
-            console.log('semua data ssama')
+    if(all_total_province != undefined){
+        if(all_total_province[0] === total_province && all_total_province[1] === total_city && 
+            all_total_province[2] === total_district){
+                console.log('semua data ssama')
+        }else {
+            console.log('masuk ke else')
+            console.log(all_total_province)
+            console.log(province_storage)
+            console.log(city_storage)
+            console.log(district_storage)
+            save_locally_province_tiki()
+        }
     }else {
-        console.log('masuk ke else')
-        console.log(all_total_province)
-        console.log(province_storage)
-        console.log(city_storage)
-        console.log(district_storage)
         save_locally_province_tiki()
     }
 }else {
