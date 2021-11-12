@@ -1074,6 +1074,7 @@ function close_all_open_window(){
 }
 
 function back_to_home(){
+    $('.box-product').css('display','flex')
     $(".force-close-all-command-2").css("display", "none");
     $('.main-body').css('display','block')
     $('.active_search').css('top','0px')
@@ -10779,6 +10780,7 @@ function replace_value_to(x){
     $('.input-name').css('border-bottom-left-radius','10px')
     $('.input-name').css('border-bottom-right-radius','10px')
 
+    $('.box-product').css('display','none')
 
     var item_search = $('#search_item').val()
     

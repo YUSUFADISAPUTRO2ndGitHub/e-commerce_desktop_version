@@ -339,7 +339,7 @@ const search_item=()=>{
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
     $('.box-render-search').css('display','none')
     $('.force-close-all-command').css('display','none')
-    
+    $('.box-product').css('display','none')
 }
 
 

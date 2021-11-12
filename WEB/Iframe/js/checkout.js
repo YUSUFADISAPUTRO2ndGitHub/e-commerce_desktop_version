@@ -6289,21 +6289,17 @@ const pengirimanCheckout=async(item,id)=>{
     console.log(item,id)
     var alamat = $('#address-selection option:selected').val()
     var alamat_pilihan = $('#sub-saved-address option:selected').val()
-    if(alamat == 'TO SAVED ADDRESS'){
+    // if(alamat == 'TO SAVED ADDRESS'){
         var price_className = $('.shipping_price_sp option:selected')
         var harga_barang_className= $('.class_harga_barang')
         console.log(harga_barang_className)
         var total_harga_shipping = 0
         var total_harga_barang = 0 
         for(var index=0;index < price_className.length;index++){
-            // console.log(price_className[index].innerHTML);
             var item = price_className[index].innerHTML
-            
             var split_item = item.split(' ')
-            // console.log(split_item)
-            // console.log(split_item[3].replace(/,/g,''))
             total_harga_shipping += parseInt(split_item[3].replace(/,/g,''))
-            // console.log(total_harga_shipping)
+
          }
       
 
@@ -6334,229 +6330,229 @@ const pengirimanCheckout=async(item,id)=>{
 
        
 
-    }else { // alamat lain
-        // loadingMessage(2)
-        var province_pilihan=$('.new-cart-provinsi option:selected').val()
-        var new_kurir_pilihan = $('#sub-delivery-option option:selected').val()
-        var kota_pilihan = $('.new-cart-kota option:selected').val()
-        var district_pilihan = $('.new-cart-kecamatan option:selected').val()
-        var sub_district_pilihan = $('.new-cart-kelurahan option:selected').val()
-        var pengiriman_pilihan = $('.new-cart-kurir option:selected').val()
+    // }else { // alamat lain
+        
+        // var province_pilihan=$('.new-cart-provinsi option:selected').val()
+        // var new_kurir_pilihan = $('#sub-delivery-option option:selected').val()
+        // var kota_pilihan = $('.new-cart-kota option:selected').val()
+        // var district_pilihan = $('.new-cart-kecamatan option:selected').val()
+        // var sub_district_pilihan = $('.new-cart-kelurahan option:selected').val()
+        // var pengiriman_pilihan = $('.new-cart-kurir option:selected').val()
     
-        var harga_shipping = parseInt($(`.new-cart-pengiriman-${id} option:selected`).attr('class'))
-        var array_cart = localStorage.getItem('itemsToCheckout')
-        var json_array_cart = JSON.parse(array_cart)
+        // var harga_shipping = parseInt($(`.new-cart-pengiriman-${id} option:selected`).attr('class'))
+        // var array_cart = localStorage.getItem('itemsToCheckout')
+        // var json_array_cart = JSON.parse(array_cart)
      
         
-        var harga_barang = 0
-        for(var i=0; i<json_array_cart.length; i++){
-            var harga_per_item = parseInt(removeComma(json_array_cart[i].priceAgreed))
+        // var harga_barang = 0
+        // for(var i=0; i<json_array_cart.length; i++){
+        //     var harga_per_item = parseInt(removeComma(json_array_cart[i].priceAgreed))
             
             
-            harga_barang += json_array_cart[i].quantity * harga_per_item
-        }
-        var harga_barang_with_shipping =  harga_barang + harga_shipping
+        //     harga_barang += json_array_cart[i].quantity * harga_per_item
+        // }
+        // var harga_barang_with_shipping =  harga_barang + harga_shipping
     
-        var allKota =[]
-        var allDistrict = []
-        var allSub_District =[]
-        var allPengiriman = []
-        var allKurir = []
+        // var allKota =[]
+        // var allDistrict = []
+        // var allSub_District =[]
+        // var allPengiriman = []
+        // var allKurir = []
         
-        var province =[]
-        var kota =[]
-        var district = []
-        var sub_district = []
+        // var province =[]
+        // var kota =[]
+        // var district = []
+        // var sub_district = []
         
         
-        var isKurir_pilihan = false
-        var isProvince_pilihan = false
-        var isKota_pilihan = false
-        var isDistrict_pilihan = false
-        var isSub_District_pilihan = false
-        var isPengiriman_pilihan = false
+        // var isKurir_pilihan = false
+        // var isProvince_pilihan = false
+        // var isKota_pilihan = false
+        // var isDistrict_pilihan = false
+        // var isSub_District_pilihan = false
+        // var isPengiriman_pilihan = false
     
     
     
     
-        if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
-            isKurir_pilihan = false
-        }else {
-            isKurir_pilihan = true
-        }
-        if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
-            isProvince_pilihan = false
-        }else {
-            isProvince_pilihan = true
-        }
-        if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
-            isKota_pilihan = false
-        }else {
-            isKota_pilihan = true
-        }
-        if(district_pilihan == undefined || district_pilihan == 'undefined' || district_pilihan == null || district_pilihan.length == 0 || district_pilihan == 'Kecamatan'){
-            isDistrict_pilihan = false
-        }else {
-            isDistrict_pilihan = true
-        }
-        if(sub_district_pilihan == undefined || sub_district_pilihan == 'undefined' || sub_district_pilihan == null || sub_district_pilihan.length == 0 || sub_district_pilihan == 'Kelurahan'){
-            isSub_District_pilihan = false
-        }else {
-            isSub_District_pilihan = true
-        }
-        if(pengiriman_pilihan == undefined || pengiriman_pilihan == 'undefined' || pengiriman_pilihan == null || pengiriman_pilihan.length == 0 || pengiriman_pilihan == 'pengiriman'){
-            isPengiriman_pilihan = false
-        }else {
-            isPengiriman_pilihan = true
-        }
-        console.log(isKurir_pilihan)
-        console.log(isProvince_pilihan)
-        console.log(isKota_pilihan)
-        console.log(isDistrict_pilihan ,isSub_District_pilihan ,isPengiriman_pilihan)
-        if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan && isDistrict_pilihan && isSub_District_pilihan && isPengiriman_pilihan){
-            $(`#final_total_harga_pengiriman-${id}`).html(commafy(harga_shipping))
-            $('.danger-error').css('display','none')
-            var cart_local = localStorage.getItem('itemsToCheckout')
-            var parse_cart = JSON.parse(cart_local)
-            var array_cart =[]
-            for(var i =0; i<parse_cart.length; i++){   
-                getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
-                    array_cart.push(response)
-                })
-            }
+        // if(new_kurir_pilihan == undefined || new_kurir_pilihan == 'undefined' || new_kurir_pilihan == null || new_kurir_pilihan.length == 0 || new_kurir_pilihan == 'Kurir'){
+        //     isKurir_pilihan = false
+        // }else {
+        //     isKurir_pilihan = true
+        // }
+        // if(province_pilihan == undefined || province_pilihan == 'undefined' || province_pilihan == null || province_pilihan.length == 0 || province_pilihan == 'Provinsi'){
+        //     isProvince_pilihan = false
+        // }else {
+        //     isProvince_pilihan = true
+        // }
+        // if(kota_pilihan == undefined || kota_pilihan == 'undefined' || kota_pilihan == null || kota_pilihan.length == 0 || kota_pilihan == 'Kota'){
+        //     isKota_pilihan = false
+        // }else {
+        //     isKota_pilihan = true
+        // }
+        // if(district_pilihan == undefined || district_pilihan == 'undefined' || district_pilihan == null || district_pilihan.length == 0 || district_pilihan == 'Kecamatan'){
+        //     isDistrict_pilihan = false
+        // }else {
+        //     isDistrict_pilihan = true
+        // }
+        // if(sub_district_pilihan == undefined || sub_district_pilihan == 'undefined' || sub_district_pilihan == null || sub_district_pilihan.length == 0 || sub_district_pilihan == 'Kelurahan'){
+        //     isSub_District_pilihan = false
+        // }else {
+        //     isSub_District_pilihan = true
+        // }
+        // if(pengiriman_pilihan == undefined || pengiriman_pilihan == 'undefined' || pengiriman_pilihan == null || pengiriman_pilihan.length == 0 || pengiriman_pilihan == 'pengiriman'){
+        //     isPengiriman_pilihan = false
+        // }else {
+        //     isPengiriman_pilihan = true
+        // }
+        // console.log(isKurir_pilihan)
+        // console.log(isProvince_pilihan)
+        // console.log(isKota_pilihan)
+        // console.log(isDistrict_pilihan ,isSub_District_pilihan ,isPengiriman_pilihan)
+        // if(isKurir_pilihan && isProvince_pilihan && isKota_pilihan && isDistrict_pilihan && isSub_District_pilihan && isPengiriman_pilihan){
+        //     $(`#final_total_harga_pengiriman-${id}`).html(commafy(harga_shipping))
+        //     $('.danger-error').css('display','none')
+        //     var cart_local = localStorage.getItem('itemsToCheckout')
+        //     var parse_cart = JSON.parse(cart_local)
+        //     var array_cart =[]
+        //     for(var i =0; i<parse_cart.length; i++){   
+        //         getProductsWithProductNo("", "", parse_cart[i].productNo).done(function (response) {
+        //             array_cart.push(response)
+        //         })
+        //     }
     
-            get_all_couriers().done(function(response){
-                var dataAllKurir = response
-                allKurir = response
-                var kurir_kode =''
-                for(var i=0; i<dataAllKurir.length; i++){
-                    if(dataAllKurir[i].Courier == new_kurir_pilihan){
-                        kurir_kode = dataAllKurir[i].Courier_Code
-                    }
-                }
-                get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
-                    province =response[0]
-                    allProvince = response
+        //     get_all_couriers().done(function(response){
+        //         var dataAllKurir = response
+        //         allKurir = response
+        //         var kurir_kode =''
+        //         for(var i=0; i<dataAllKurir.length; i++){
+        //             if(dataAllKurir[i].Courier == new_kurir_pilihan){
+        //                 kurir_kode = dataAllKurir[i].Courier_Code
+        //             }
+        //         }
+        //         get_all_province_from_courier(new_kurir_pilihan,kurir_kode).done(function(response){
+        //             province =response[0]
+        //             allProvince = response
                     
-                    get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
-                        kota = response[0]
-                        allKota = response
+        //             get_all_city_from_courier(new_kurir_pilihan,kurir_kode,province_pilihan).done(function(response){
+        //                 kota = response[0]
+        //                 allKota = response
                         
-                        get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
-                            district = response[0]
-                            allDistrict = response
+        //                 get_all_district_from_courier(new_kurir_pilihan,kurir_kode,kota_pilihan).done(function(response){
+        //                     district = response[0]
+        //                     allDistrict = response
                             
-                            get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
-                                allSub_District = response
+        //                     get_all_subdistrict_from_courier(new_kurir_pilihan,kurir_kode,district_pilihan).done(function(response){
+        //                         allSub_District = response
                                 
-                                var total_berat_product=0
-                                var Courier_Price_Code_orig = 'CGK01.00'
-                                var packing_type = ''
-                                var length = ''
-                                var  width = '' 
-                                var  height = ''
-                                var paket_value = '' 
-                                for(var i =0; i<array_cart.length; i++){
-                                    var berat_parse = array_cart[i].Weight_KG *1
-                                    if(berat_parse <= 0 || berat_parse == null || berat_parse == undefined || Number.isNaN(berat_parse)){
-                                        berat_parse = 0.1*1.5;
-                                    }else{
-                                        berat_parse = berat_parse*1*1.5;
-                                    }
+        //                         var total_berat_product=0
+        //                         var Courier_Price_Code_orig = 'CGK01.00'
+        //                         var packing_type = ''
+        //                         var length = ''
+        //                         var  width = '' 
+        //                         var  height = ''
+        //                         var paket_value = '' 
+        //                         for(var i =0; i<array_cart.length; i++){
+        //                             var berat_parse = array_cart[i].Weight_KG *1
+        //                             if(berat_parse <= 0 || berat_parse == null || berat_parse == undefined || Number.isNaN(berat_parse)){
+        //                                 berat_parse = 0.1*1.5;
+        //                             }else{
+        //                                 berat_parse = berat_parse*1*1.5;
+        //                             }
                                     
-                                    total_berat_product += berat_parse
+        //                             total_berat_product += berat_parse
                                     
-                                }
-                                new_get_shipping_cost_informations(Courier_Price_Code_orig , allSub_District[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
-                                    allPengiriman = response
-                                    
-                                 
-                                    // $('.cart-asuransi').empty()
-                                    // $('.cart-packing').empty()
+        //                         }
+        //                         new_get_shipping_cost_informations(Courier_Price_Code_orig , allSub_District[0].Courier_Price_Code, packing_type, total_berat_product, length, width, height, paket_value).done(function(response){
+        //                             allPengiriman = response
                                     
                                  
-                                    // $('.cart-asuransi').append(`
-                                    //     <option selected  value="0" class="co-asuransi"> asuransi</option>      
-                                    // `)
-                                    // $('.cart-packing').append(`
-                                    //     <option selected value="0" class="co-packing"> packing</option>      
-                                    // `)
+        //                             // $('.cart-asuransi').empty()
+        //                             // $('.cart-packing').empty()
                                     
-                                    // if(allPengiriman.insurance != undefined){
-                                    //     allPengiriman.insurance.map((val,index)=>{
-                                    //         $('.cart-asuransi').append(`
-                                    //             <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
-                                    //         `)
-                                    //     })
-                                    // }
-                                    // if(allPengiriman.packing != undefined){
-                                    //     allPengiriman.packing.map((val,index)=>{
-                                    //         $('.cart-packing').append(`
-                                    //             <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
-                                    //         `)
-                                    //     })
-                                    // }
+                                 
+        //                             // $('.cart-asuransi').append(`
+        //                             //     <option selected  value="0" class="co-asuransi"> asuransi</option>      
+        //                             // `)
+        //                             // $('.cart-packing').append(`
+        //                             //     <option selected value="0" class="co-packing"> packing</option>      
+        //                             // `)
+                                    
+        //                             // if(allPengiriman.insurance != undefined){
+        //                             //     allPengiriman.insurance.map((val,index)=>{
+        //                             //         $('.cart-asuransi').append(`
+        //                             //             <option  value="type ${val.INSURANCE_TYPE} ${val.INSURANCE_NAME} ${val.INSURANCE_COST}" class="${val.INSURANCE_COST}">${val.INSURANCE_NAME} - RP ${val.INSURANCE_COST} </option> 
+        //                             //         `)
+        //                             //     })
+        //                             // }
+        //                             // if(allPengiriman.packing != undefined){
+        //                             //     allPengiriman.packing.map((val,index)=>{
+        //                             //         $('.cart-packing').append(`
+        //                             //             <option  value="${val.PACKING_TYPE}" class="${val.PACKING_FEE}">${val.PACKING_TYPE} - RP ${val.PACKING_FEE} </option> 
+        //                             //         `)
+        //                             //     })
+        //                             // }
 
                                     
-                                    // $('.new-total-price-cc').css('display','flex')
-                                    // $('.new-total-price-cc').empty()
-                                    // $('.new-total-price-cc').append(`
-                                    //  <div class="total_price_cc">
-                                    //      <p>TOTAL PRICE:</p>
-                                    //      <p>RP ${harga_barang_with_shipping} </p>
-                                    //  </div>
-                                    // `)
-                                    // $('.new-card-kurir-cc').empty()
-                                    // if(new_kurir_pilihan == 'pengiriman' || new_kurir_pilihan == 'Pengiriman'){
-                                    //     $('.new-card-kurir-cc kurir-cc').remove()
-                                    //     $('.new-card-kurir-cc').css('display','none')
-                                    // }else {
-                                    //     $('.new-card-kurir-cc').css('display','flex')
-                                    //     if(kurir_kode == 'tiki'){
-                                    //         $('.new-card-kurir-cc').append(`
-                                    //             <div class="card-item-checkout-cc kurir-cc">
-                                    //                 <div class="img-item-checkout-cc">
-                                    //                     <img src="../img/tiki_shipping_method.png" alt="">
-                                    //                 </div>
-                                    //                 <div class="desc-item-checkout-cc">
-                                    //                     <p>${new_kurir_pilihan}</p>
-                                    //                     <div class="desc-item-2-checkout-cc">
+        //                             // $('.new-total-price-cc').css('display','flex')
+        //                             // $('.new-total-price-cc').empty()
+        //                             // $('.new-total-price-cc').append(`
+        //                             //  <div class="total_price_cc">
+        //                             //      <p>TOTAL PRICE:</p>
+        //                             //      <p>RP ${harga_barang_with_shipping} </p>
+        //                             //  </div>
+        //                             // `)
+        //                             // $('.new-card-kurir-cc').empty()
+        //                             // if(new_kurir_pilihan == 'pengiriman' || new_kurir_pilihan == 'Pengiriman'){
+        //                             //     $('.new-card-kurir-cc kurir-cc').remove()
+        //                             //     $('.new-card-kurir-cc').css('display','none')
+        //                             // }else {
+        //                             //     $('.new-card-kurir-cc').css('display','flex')
+        //                             //     if(kurir_kode == 'tiki'){
+        //                             //         $('.new-card-kurir-cc').append(`
+        //                             //             <div class="card-item-checkout-cc kurir-cc">
+        //                             //                 <div class="img-item-checkout-cc">
+        //                             //                     <img src="../img/tiki_shipping_method.png" alt="">
+        //                             //                 </div>
+        //                             //                 <div class="desc-item-checkout-cc">
+        //                             //                     <p>${new_kurir_pilihan}</p>
+        //                             //                     <div class="desc-item-2-checkout-cc">
                                                             
-                                    //                         <p>Harga : ${harga_shipping}</p>
-                                    //                     </div>
+        //                             //                         <p>Harga : ${harga_shipping}</p>
+        //                             //                     </div>
                                 
-                                    //                 </div>
-                                    //             </div>       
-                                    //         `)
-                                    //     }else {
-                                    //         $('.new-card-kurir-cc').append(`
-                                    //             <div class="card-item-checkout-cc kurir-cc">
-                                    //                 <div class="img-item-checkout-cc">
-                                    //                     <img src="../img/vantsing_shipping_method.png" alt="">
-                                    //                 </div>
-                                    //                 <div class="desc-item-checkout-cc">
-                                    //                     <p>${new_kurir_pilihan}</p>
-                                    //                     <div class="desc-item-2-checkout-cc">
-                                    //                         <p>Harga : ${harga_shipping}</p>
-                                    //                     </div>
-                                    //                 </div>
-                                    //             </div>       
-                                    //         `)
-                                    //     }
-                                    // }       
-                                })
-                            })
-                        })
-                    })
-                })
-            })
+        //                             //                 </div>
+        //                             //             </div>       
+        //                             //         `)
+        //                             //     }else {
+        //                             //         $('.new-card-kurir-cc').append(`
+        //                             //             <div class="card-item-checkout-cc kurir-cc">
+        //                             //                 <div class="img-item-checkout-cc">
+        //                             //                     <img src="../img/vantsing_shipping_method.png" alt="">
+        //                             //                 </div>
+        //                             //                 <div class="desc-item-checkout-cc">
+        //                             //                     <p>${new_kurir_pilihan}</p>
+        //                             //                     <div class="desc-item-2-checkout-cc">
+        //                             //                         <p>Harga : ${harga_shipping}</p>
+        //                             //                     </div>
+        //                             //                 </div>
+        //                             //             </div>       
+        //                             //         `)
+        //                             //     }
+        //                             // }       
+        //                         })
+        //                     })
+        //                 })
+        //             })
+        //         })
+        //     })
     
-        }else {
-            $('.danger-error').css('display','flex')
-            re_render_select_option()  
-        }
+        // }else {
+        //     $('.danger-error').css('display','flex')
+        //     re_render_select_option()  
+        // }
 
-    }
+    // }
 }
 const asuransiCheckout=async()=>{
     loadingMessage(2)

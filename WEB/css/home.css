@@ -1746,9 +1746,10 @@ body {
     width: 100%;
     /* height:450px; */
     /* height: 200px; */
-    height: 3%;
+    /* height: 3%; */
+    height:400px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: row;
     /* paddi4ng:50px; */
@@ -1756,10 +1757,101 @@ body {
     border-top: 3px solid gray;
     margin-top: 5px;
     /* padding-left: 100px; */
-    padding-right: 100px;
+    /* padding-right: 100px; */
     /* background-color: red; */
 }
-
+.solped-footer-right {
+    width:40%;
+    height:100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:20px;
+    /* justify-content: center; */
+}
+.solped-footer-right img{
+    width: 80%;
+    height:65%;
+}
+.solped-footer-1 {
+    height: 240px;
+    width:15%;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    /* border:1px solid black; */
+    padding:10px;
+}
+.logo-box-footer {
+    width:100%;
+    height:200px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left:-15px;
+}
+.logo-box-left-footer {
+    padding-top:10px;
+    width:50%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.logo-small-icon-footer {
+    width:70px;
+    height:18px;
+    /* border:1px solid black; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom:10px;
+}
+.logo-small-icon-footer img {
+    width:90%;
+    height:95%;
+}
+.head-footer-name {
+    font-weight:800;
+    font-size:16px;
+    font-family: "Nunito Sans", -apple-system, sans-serif;
+    margin:0px !important;
+}
+.footer-name-fn {
+    font-size:14px;
+    line-height:2;
+    margin:0px !important;
+    transition:0.5s;
+}
+.footer-name-fn:hover{
+    color:#27aae1;
+    cursor:pointer;
+}
+.download-footer-app {
+    width:100%;
+    height:60px;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.download-footer-app a {
+    text-decoration: none;;
+}
+.download-footer-app a img {
+    width:100px;
+    height:30px;
+    margin-right:5px;
+    margin-left:5px;
+}
+.footer-name{
+    font-size:14px;
+    font-family: "Nunito Sans", -apple-system, sans-serif;
+    margin:0px !important;
+}
 .box-img-bp {
     /* background-color: blue; */
     position: relative;
@@ -1802,12 +1894,9 @@ body {
 
 .product-socmed {
     /* background-color:red; */
-
     padding-top: 10px;
     padding-bottom: 10px;
-    /* padding-right:50px; */
-    /* padding-left:50px; */
-    width: 20%;
+    width: 15%;
     height: 70%;
     display: flex;
     flex-direction: column;
@@ -3036,7 +3125,7 @@ input:focus {
     left: 0%;
     width: 100%;
     /* height: 80%; */
-    height: 80vh;
+    height: 85vh;
     display: none;
 }
 

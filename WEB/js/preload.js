@@ -51,7 +51,20 @@ function get_all_district_from_courier(Courier, Courier_Code, City){
     
     return $.ajax(settings);
 }
-
+function commafy( num ) {
+    if(num !=undefined){
+        var str = num.toString().split('.');
+        if (str[0].length >= 5) {
+            str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+        }
+        if (str[1] && str[1].length >= 5) {
+            str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+        }
+        return str.join('.');
+    }else {
+        return '0'
+    }
+}
 const loadImageBigScreen=()=>{
     // console.log(' load image big screen jalan')
     // $('.shinny img').css('opacity','1')
