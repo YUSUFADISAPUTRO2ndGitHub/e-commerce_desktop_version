@@ -1397,10 +1397,7 @@
                 <input type="text" disabled  id="refer-profile" class="ref-profile">
               </div>
             </div>
-            <div class="modal-body box-login-body">
-                
-                
-
+            <div class="modal-body box-login-body">        
                  <div class="commision-form">     
                     <div class="detail_form_top">
                         <p>DETAIL PURCHASE PRODUCT</p>          
@@ -1601,8 +1598,6 @@
         </div>
     </div>
     <!--ABOUT US  MODALS -->
-
-
        <!--OTP LOGIN PRODUCT -->
     <div class="modal  fade " id="login_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  ">
@@ -1771,9 +1766,6 @@
                 </div>
 
                 <!-- box for searching item -->
-
-
-                
                 <div class="box-render-search card box-search-menu force-close-all-command  " style="display: none;" onclick="close_all_open_window()">
                     <div class="card-body ">
                         <ul class="render-li-search">
@@ -2477,11 +2469,8 @@
                         <i class="fas fa-chevron-right icon-prev icon-next" ></i>
                     </div>
                 </div>
-            </div>
-         
-            
+            </div>   
             <!-- RENDER  NEW ITEM -->
-    
             <div class="small-ads">
                 <div class="sm-ads-name">
                     <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-ads">
@@ -2491,7 +2480,6 @@
                     <img src="./img/ads_panjang3.png" alt="" class="ads_panjang" >
                 </div>
             </div>
-    
             <!-- RENDER  ALL ITEM -->
             <div class="box-card">
                 <div class="box-back-detail" id="all" onclick="backItem('all')">
@@ -2633,21 +2621,28 @@
             </div>
             <div class="solped-footer-1">
                 <p class="head-footer-name">SOLDAYS</p>
-                <p class="footer-name-fn">Tentang Soldays</p>
+                <p class="footer-name-fn" onclick="about_us()">Tentang Soldays</p>
                 <p class="footer-name-fn">Hak Kekayaaan Intelektual</p>
-                <p class="footer-name-fn">Karir</p>
-                <p class="footer-name-fn">Blog</p>
-                <p class="footer-name-fn">Soldays Parents</p>
-                <p class="footer-name-fn">Mitra Blog</p>
-                <p class="footer-name-fn">Soldays Affiliate Program</p>
+                <a href="/WEB/Karir.html" target="_blank" style="text-decoration: none;">
+                    <p class="footer-name-fn" >Karir</p>
+                </a>
+                
+                <p class="footer-name-fn" disabled>Blog</p>
+                <a href="https://www.vtintl.id/Indonesia" target="_blank" style="text-decoration: none;">
+                    <p class="footer-name-fn">Soldays Parents</p>
+                </a>
+                <a href="/WEB/mitra_blog.html" target="_blank" style="text-decoration: none;">
+                    <p class="footer-name-fn">Mitra Blog</p>
+                </a>
+                <!-- <p class="footer-name-fn">Soldays Affiliate Program</p> -->
             </div>
             <div class="solped-footer-1">
                 <p class="head-footer-name">Bantuan dan Panduan</p>
-                <p class="footer-name-fn">Soldays Care</p>
+                <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" target="_blank" style="text-decoration: none;">
+                    <p class="footer-name-fn">Soldays Care</p>
+                </a>
                 <p class="footer-name-fn">Syarat dan Ketentuan</p>
-                <p class="footer-name-fn">Kebijakan Privasi</p>
-               
-
+                <p class="footer-name-fn">Kebijakan Privasi</p>               
             </div>
             <div class="solped-footer-1">
                 <p class="head-footer-name">Pembayaran</p>
@@ -2698,7 +2693,7 @@
                     <a href="https://play.google.com/store/apps/details?id=sold.co.id.ecommerce" target="_blank">
                         <img src="./img/android.svg" alt="">
                     </a>
-                    <a href="">
+                    <a href="#" style="display: none;">
                         <img src="./img/ios.svg" alt="" target="_blank">
                     </a>
                 </div>
@@ -2706,66 +2701,6 @@
                     <p>© 2021, PT. SOLUSI DIGITAL INTERNUSA.</p>
                 </div> 
             </div>
-            
-            <!-- <div class="product-item">
-                <div class="box-img-bp">
-                    <img src="../web/img/produk.png" alt="" class="img-produk" onclick="about_us()">
-                </div>
-                <div class="box-name-product">
-                    <p>Produk Lengkap</p>
-                    <p>Produk lengkap dari berbagai macam Brand</p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="box-img-bp">
-                    <img src="../web/img/time.png" alt="" class="img-produk-lengkap" onclick="about_us()">
-                </div>
-                <div class="box-name-product2">
-                    <p>Hemat Uang + Waktu</p>
-                    <p>Harga terjangkau dan
-                        menghemat waktu tanpa
-                        harus datang ke lokasi</p>
-                        
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="box-img-bp">
-                    <img src="../web/img/metode-pembayaran.png" alt="" class="img-pembayaran" onclick="about_us()">
-                </div>
-                <div class="box-name-product3">
-                    <p>Metode Pembayaran</p>
-                    <p>Menyediakan berbagai
-                        macam metode pembayaran
-                        sampai COD dan Tempo.</p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="box-img-bp">
-                    <img src="../web/img/delivery.png" alt="" class="img-delivery" onclick="about_us()">
-                </div>
-                <div class="box-name-product4">
-                    <p>Pengiriman Cepat</p>
-                    <p>Pengiriman barang
-                        yang cepat dan Aman</p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="box-img-bp">
-                    <a href="https://www.kemendag.go.id/id/contact-us" style="text-decoration: none;" target="_blank">
-                        <img src="../web/img/dirjen.png" alt="" class="img-dirjen" >
-                    </a>
-                </div>
-                <div class="box-name-product4">
-                    <p>DIRJEN PKTN KEMENTERIAN PERDAGANGAN RI     
-                    </p>
-                    <a href="mailto:contact.us@kemendag.go.id" target="_blank">contact.us@kemendag.go.id</a>
-                    <a href="https://www.kemendag.go.id/id/contact-us" style="text-decoration: none;" target="_blank">
-                        <div class="vst_dirjen_2 hvr-grow">
-                            <p>Visit Dirjen</p>
-                        </div>
-                    </a>
-                </div>
-            </div> -->
         </div> 
          
     </div>
