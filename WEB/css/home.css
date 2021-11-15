@@ -678,7 +678,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width:50%;
+    width:100%;
     position:relative;
     top:-5%;
     /* border:1px solid #dedede !important; */

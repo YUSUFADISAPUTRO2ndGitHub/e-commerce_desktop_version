@@ -51,6 +51,10 @@ function get_all_district_from_courier(Courier, Courier_Code, City){
     
     return $.ajax(settings);
 }
+function replace_vtintl_to_sold_co_id(original_url){
+    var original_url = original_url.split("http://image.vtintl.id/").join("https://image.sold.co.id/");
+return original_url;
+}
 function commafy( num ) {
     if(num !=undefined){
         var str = num.toString().split('.');

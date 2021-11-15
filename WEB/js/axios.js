@@ -584,9 +584,7 @@ const getAllItem_fromAllSubCat=(item)=>{
 
         Swal.fire({
             html:`
-            <div class="o-circle c-container__circle o-circle__sign--failure">
-                <div class="o-circle__sign"></div>  
-            </div> 
+           
             `,
             timer:100,
             
@@ -607,9 +605,6 @@ const getAllItem_fromAllSubCat=(item)=>{
     })
 }
 const getAllItem=(item)=>{
-    // 
-    // 
-    // 
     // $('.modals-lk').attr('src',`../WEB/Iframe/listkategori.html?subcategory=${item}`)
     location.replace(`./listkategori.html?subcategory=${item}`)
     
@@ -682,7 +677,6 @@ function sign_up_request(){
         var district =[]
         var sub_district=[]
         get_all_couriers().done(function(response){
-            // 
 
             get_all_province_from_courier('tiki','tiki').done(function(response){
                 province = response[0]

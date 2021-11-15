@@ -64,6 +64,15 @@ function commafy(num) {
     return "0";
   }
 }
+function get_product_detail_func(product_id){
+  var settings = {
+      "url": `https://products.sold.co.id/get-product-details?product_code=${product_id}`,
+      "method": "POST",
+      "timeout": 0,
+  };
+  
+  return $.ajax(settings);
+}
 const send_comment_cust_product = (product_id) => {
   var result_comment = $(".input-ulasan-npd").val();
   var token = localStorage.getItem("token");
@@ -327,7 +336,7 @@ const kurang_qty_product = (max_qty, price) => {
     $(".sub-total-box-product").empty();
     $(".sub-total-box-product").append(`
             <p>Subtotal</p>
-            <p>${harga}</p>
+            <p>${commafy(harga)}</p>
         `);
   }
 };
@@ -351,7 +360,7 @@ const tambah_qty_product = (max_qty, price) => {
     $(".sub-total-box-product").empty();
     $(".sub-total-box-product").append(`
             <p>Subtotal</p>
-            <p>${harga}</p>
+            <p>${commafy(harga)}</p>
         `);
   } else if (qty_now === 0) {
     var qty_plus = qty_now + 1;
@@ -361,7 +370,7 @@ const tambah_qty_product = (max_qty, price) => {
     $(".sub-total-box-product").empty();
     $(".sub-total-box-product").append(`
             <p>Subtotal</p>
-            <p>${harga}</p>
+            <p>${commafy(harga)}</p>
         `);
   } else {
     console.log("masuk ke else");
@@ -415,7 +424,7 @@ const hitung_biaya_product = (product_id, price, total_qty) => {
     $(".sub-total-box-product").empty();
     $(".sub-total-box-product").append(`
             <p>Subtotal</p>
-            <p>${harga}</p>
+            <p>${commafy(harga)}</p>
         `);
     console.log($(".total-qty-right"));
   }
@@ -439,12 +448,12 @@ const render_product_detail_from_home = async (item_category) => {
     timer: 30000000,
     timerProgressBar: true,
     didOpen: async () => {
-      axios
-        .post(
-          `https://products.sold.co.id/get-product-details?product_code=${item_category}`
-        )
-        .then(async (res) => {
+      axios.post(`https://products.sold.co.id/get-product-details?product_code=${item_category}`)
+      .then(async (res) => {
+          console.log(res.data)
+          console.log(item_category)
           var detail_product_item = res.data;
+          console.log(detail_product_item)
           var product_id_pilihan = product_id;
           let allDataProduct = [];
           var all_filter_product = [];
@@ -477,11 +486,8 @@ const render_product_detail_from_home = async (item_category) => {
             var discount = parseInt(data_for_render[0].Sell_Price * 0.1);
             var hargaTotal = hargaAwal + discount;
             $(".container-product").empty();
-            console.log(data_for_render[0]);
-            var province_company_from_product =
-              await find_province_from_product_company(
-                detail_product_item.PIC_company_address
-              );
+            console.log(detail_product_item.PIC_company_address)
+            var province_company_from_product =await find_province_from_product_company(detail_product_item.PIC_company_address);
             console.log(province_company_from_product);
             if (data_for_render[0].GroupBuy_Purchase == "false") {
               console.log("masuk ke if ");
@@ -1445,10 +1451,7 @@ const render_product_detail_from_home = async (item_category) => {
                     `);
                     }
 
-                    axios
-                      .post(
-                        `https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`
-                      )
+                    axios.post(`https://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
                       .then((res) => {
                         console.log("717 jalan");
 
@@ -1468,8 +1471,8 @@ const render_product_detail_from_home = async (item_category) => {
                           console.log(total_comment);
                           $(".box-ulasan-detail").css("display", "flex");
                           $(".box-ulasan-detail").append(`
-                                            <p>SEMUA ULASAN(${total_comment}) </p>
-                                        `);
+                              <p>SEMUA ULASAN(${total_comment}) </p>
+                          `);
                           if (total_comment == 1) {
                             $(".box-ulasan-detail").css("height", "300px");
                           } else if (total_comment == 2) {
@@ -1799,8 +1802,25 @@ const render_product_detail_from_searching_page = (item_category) => {
 
 const tambah_product_ke_cart = (product_id) => {
   console.log("tambah product ke cart jalan");
-  var final_qty = $(".input-qty-product-detail").val();
-  addToCart(product_id, final_qty);
+
+  get_product_detail_func(product_id).done(function(response){
+    var max_qty = response.Stock_Quantity
+    var final_qty = $(".input-qty-product-detail").val();
+    if(max_qty >final_qty){
+      addToCart(product_id, final_qty);
+    }else {
+      Swal.fire({
+        html:`
+        <div class="o-circle c-container__circle o-circle__sign--failure">
+            <div class="o-circle__sign"></div>  
+        </div> 
+        Gagal Penambahan ke cart`,
+        timer:2000,
+        
+    })
+    }
+  })
+
 };
 const beli_product_sekarang = (product_id) => {
   console.log("beli_product_sekarang");

@@ -69,6 +69,7 @@ const find_province_from_product_company=async(address)=>{
 }
 
 const find_city_from_product_company=async(province,address)=>{
+    console.log(province,address)
     return new Promise(async(resolve,reject)=>{
         // var itemsToCheckout = JSON.parse(localStorage.getItem('itemsToCheckout'))
         var all_city_from_storage = JSON.parse(localStorage.getItem('all_city_tiki'))

@@ -268,22 +268,35 @@ function show_jenisproduct(jenis_product){
 
 const get_product_detail_from_searching_page=(product_id)=>{
     
-    // $('.item_detail_sp').empty()
-    // $(this).scrollTop('.item_detail_sp')
-    $('.box-list-subcategory').css('display','none')
-    // $('.item_detail_sp').css('display','flex')
-    // $('.close-button').css('display','block')
-    // $('.groupbuy_sp_iframe').css('display','block')
-    // $('.groupbuy_sp_iframe').attr('src',`./itemDetail.html?product_id=${product_id}`)
-    back_to_home()
-    console.log(('.modals-new-product-detail'))
+    Swal.fire({
+        // title: 'Uploading Data',
+        timer:300000000,
+        html: ` 
+        <div class="boxcon">
+            <div class="box1">
+            </div>
+            <div id="sold-id-loading">
+            SOLDAYS 
+            </div>
+            <div class="box2">
+            </div>
+        </div>
+        `,didOpen:async()=>{
+            // $('.item_detail_sp').empty()
+            // $(this).scrollTop('.item_detail_sp')
+            $('.box-list-subcategory').css('display','none')
+            // $('.item_detail_sp').css('display','flex')
+            // $('.close-button').css('display','block')
+            // $('.groupbuy_sp_iframe').css('display','block')
+            // $('.groupbuy_sp_iframe').attr('src',`./itemDetail.html?product_id=${product_id}`)
+            back_to_home()
+            window.parent.$('.main-body').css('display','none')
+            window.parent.$('.box-product').css('display','none')
+            window.parent.$('.modals-new-product-detail').css('display','block')
+            window.parent.$('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
 
-    
-    console.log(window.parent.$('.modals-new-product-detail'))
-    window.parent.$('.main-body').css('display','none')
-    window.parent.$('.box-product').css('display','none')
-    window.parent.$('.modals-new-product-detail').css('display','block')
-    window.parent.$('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
+        }
+    })
 }
 
 
