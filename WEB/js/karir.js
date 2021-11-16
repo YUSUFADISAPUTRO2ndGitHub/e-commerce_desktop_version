@@ -22,7 +22,7 @@ const send_career=()=>{
         "title":title
     }
     var parse_array = JSON.stringify(new_array_career)
-    axios.get(`http://147.139.168.202:3015/send/email?data_customer=${parse_array}`)
+    axios.get(`https://147.139.168.202:3015/send/email?data_customer=${parse_array}`)
     .then((res)=>{
         console.log($('#career_first_name'))
         $('#career_first_name').val('')
@@ -87,7 +87,7 @@ const send_mitra=()=>{
     $('#mitra_primary_number').val('')
     $('#mitra_secondary_number').val('')
     $('#mitra_quotation').val()
-    axios.get(`http://147.139.168.202:3015/send/email/mitra?data_customer=${parseArray}`)
+    axios.get(`https://147.139.168.202:3015/send/email/mitra?data_customer=${parseArray}`)
     .then((res)=>{
         if(res.data.msg !== false){
             Swal.fire({
