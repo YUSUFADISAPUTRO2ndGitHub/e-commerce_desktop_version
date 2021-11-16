@@ -1021,43 +1021,79 @@ const login_for_commision=()=>{
 // SEND OTP
 
 const send_otp=()=>{
-    // alert('kirim otw')
+    // alert('kirim otp 1024')
     var token = localStorage.getItem('token')
-    axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-    .then((res)=>{  
-        
-        axios.post(`https://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
-        .then((res)=>{
-            if(res.data){
-                Swal.fire({
-                    html:`
-                    <div class="o-circle c-container__circle o-circle__sign--success">
-                        <div class="o-circle__sign"></div>  
-                    </div>   
-                    OTP Berhasil Dikirim
-                    `,
-                    timer:2000,
-                    
-                })
-            }else {
-                // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
-                Swal.fire({
-                    html:`
-                    <div class="o-circle c-container__circle o-circle__sign--failure">
-                        <div class="o-circle__sign"></div>  
-                    </div> 
-                    OTP Gagal Terikirim`,
-                    timer:2000,
-                    
-                })
-            }
+    console.log(token)
+    if(token === null ){
+        var email = $('#checking_email_login').val()
+        console.log(email)
+        axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
+            .then((res)=>{
+                if(res.data){
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        OTP Berhasil Dikirim
+                        `,
+                        timer:2000,
+                        
+                    })
+                }else {
+                    // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        OTP Gagal Terikirim`,
+                        timer:2000,
+                        
+                    })
+                }
+                
+            }).catch((err)=>{
+                
+            })
+    }else {
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{  
             
+            axios.post(`https://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
+            .then((res)=>{
+                if(res.data){
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--success">
+                            <div class="o-circle__sign"></div>  
+                        </div>   
+                        OTP Berhasil Dikirim
+                        `,
+                        timer:2000,
+                        
+                    })
+                }else {
+                    // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        OTP Gagal Terikirim`,
+                        timer:2000,
+                        
+                    })
+                }
+                
+            }).catch((err)=>{
+                
+            })
         }).catch((err)=>{
-            
+    
         })
-    }).catch((err)=>{
 
-    })
+    }
 }
 
 

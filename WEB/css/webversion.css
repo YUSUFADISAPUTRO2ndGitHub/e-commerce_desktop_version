@@ -80,7 +80,8 @@
     }
     .modals-search-result {
         top:11.5%;
-        height:56vh;
+        /* height:56vh; */
+        height:100vh;
     }
     .box-img-bp {
         height:150px;

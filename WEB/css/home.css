@@ -3422,14 +3422,21 @@ input:focus {
     display: none;
 }
 
-.limited-text-short {
+/* .limited-text-short {
     white-space: nowrap;
     display: flex;
     width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
     height: 30px;
-    /* margin-bottom:50px; */
+} */
+.limited-text-short {
+    width: 100%;
+    min-width:100%;
+    height:70px;
+    white-space:nowrap;
+    overflow:auto;
+    margin:0px !important;
     /* background-color: red; */
 }
 
