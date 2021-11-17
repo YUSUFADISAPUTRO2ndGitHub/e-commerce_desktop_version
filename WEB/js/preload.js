@@ -595,28 +595,6 @@ const render_item_all_category=()=>{
 
     }
     
-
-        
-    // for(var i=0; i<data_bawah.length; i++){
-    //     // 
-        
-    //     axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${data_bawah[i]}`)
-    //     .then((res)=>{
-    //         // 
-    //         res.data.map((val,index)=>{
-    //             // 
-    //             $('.bot-all-category').append(`
-    //                 <div class="card card-small-category" onclick="getAllItem_fromAllSubCat('${val.Subcategory}')">
-    //                     <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="card-img-top">
-    //                     <h3 class="card-title">${val.Subcategory}</h3>
-    //                 </div>
-    //             `)
-    //         })
-    //     }).catch((err)=>{
-            
-    //     })
-        
-    // }
 }
 
 const get_all_cat_subCat_for_storage=()=>{
@@ -678,7 +656,7 @@ const getAllData=async()=>{
                allData = res.data
                renderItemPromo()
                renderItemNew()
-               renderItemAll()
+            //    renderItemAll()
                renderCategory()
                render_item_all_category()
                renderOptionSearch()
@@ -689,7 +667,7 @@ const getAllData=async()=>{
        }else {
            renderItemPromo()
            renderItemNew()
-           renderItemAll()
+        //    renderItemAll()
            renderCategory()
            render_item_all_category()
            renderOptionSearch()
@@ -699,6 +677,7 @@ const getAllData=async()=>{
           console.log(err)      
     })
     get_all_cat_subCat_for_storage()
+
     // NYARI PROVINCE DLL DARI ALAMAT CUSTOMER
     if(token !== null && token !== undefined && token.length>0) {
         
@@ -842,11 +821,15 @@ if(total_province != null && total_city != null && total_district != null){
             save_locally_province_tiki()
         }
     }else {
-        save_locally_province_tiki()
+        setTimeout(()=>{
+            save_locally_province_tiki()
+        },30000)
     }
 }else {
     console.log('masuk ke else. save locally province jalan, searching all province dll')
-    save_locally_province_tiki()
+    setTimeout(()=>{
+        save_locally_province_tiki()
+    },30000)
 }
 
 
@@ -859,11 +842,15 @@ if(total_province != null && total_city != null && total_district != null){
             console.log('semua data ssama')
     }else {
         console.log('masuk ke else')
-        save_locally_province_tiki()
+        setTimeout(()=>{
+            save_locally_province_tiki()
+        },30000)
     }
 }else {
     console.log('masuk ke else. save locally province jalan, searching all province dll')
-    save_locally_province_tiki()
+    setTimeout(()=>{
+        save_locally_province_tiki()
+    },30000)
 }
 
 }, 3600000);  
