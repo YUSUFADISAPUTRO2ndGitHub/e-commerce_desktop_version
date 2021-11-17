@@ -2856,3 +2856,8 @@ const open_orderlist_from_profile=()=>{
 }
 // loading blurred js
 
+
+const open_modal_bantuan=()=>{
+    // alert('jalan')
+    $('#modal_bantuan').modal('show')
+}

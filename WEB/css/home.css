@@ -5152,6 +5152,76 @@ input::-webkit-input-placeholder {
     justify-content: center;
     align-items: center;
 }
+.box_bantuan_customer {
+    /* width:200px; */
+    /* height:200px; */
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.bantuan_1_box {
+    width: 30%;
+    height:60%;
+    /* border:1px solid black; */
+    background-color: #f3f3f4;
+    border-radius:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:0.5s;
+}
+.bantuan_1_box:hover{
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.bantuan_1_box:hover img {
+    animation: bellshake .5s cubic-bezier(.36,.07,.19,.97) both;
+    backface-visibility: hidden;
+    transform-origin: top right;
+}
+@keyframes bellshake {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(5deg); }
+    30% { transform: rotate(-5deg); }
+    45% { transform: rotate(4deg); }
+    60% { transform: rotate(-4deg); }
+    75% { transform: rotate(2deg); }
+    85% { transform: rotate(-2deg); }
+    92% { transform: rotate(1deg); }
+    100% { transform: rotate(0); }
+  }
+.bantuan_1_box img{
+    width:70%;
+    height:70%;
+    transition:0.3s;
+}
+.bantuan_2_box {
+    width: 30%;
+    height:60%;
+    /* border:1px solid black; */
+    background-color: #f3f3f4;
+    border-radius:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:0.5s;
+}
+.bantuan_2_box:hover{
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.bantuan_2_box:hover img {
+    animation: bellshake .5s cubic-bezier(.36,.07,.19,.97) both;
+    backface-visibility: hidden;
+    transform-origin: top right;
+}
+.bantuan_2_box img{
+    width:70%;
+    height:70%;
+    transition:0.5s;
+}
 
 .box-content-product {
     width: 350px !important;
@@ -5201,6 +5271,23 @@ input::-webkit-input-placeholder {
     background-color: #27aae1;
     height: 50px;
 
+}
+.header-prod-bantuan {
+    background-color: #27aae1;
+    height: 50px;
+    width:100%;
+    color:white;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+}
+.header-prod-bantuan p {
+    margin:0px !important;
+    font-family: MuseoSans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    /* width:200px; */
+    font-weight:700;
+    font-size:20px;
 }
 
 .icon-opt:hover {

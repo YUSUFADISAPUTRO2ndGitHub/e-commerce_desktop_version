@@ -556,7 +556,6 @@ const render_item_all_category=()=>{
             val[1].map((item,id)=>{
                 if(index_for_render <=11){
                     index_for_render +=1
-                    // 
                     $('.box-render-new-category').append(`
                         <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
                             <div class="cd-image-category shinny">

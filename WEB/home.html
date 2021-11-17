@@ -627,7 +627,6 @@
             </div>
         </div>
     </div>
-
     <!-- NEW REGISTER  CUSTOMER MODALS -->
 
 
@@ -733,7 +732,6 @@
             </div>
         </div>
     </div>
-
     <!--  NEW REGISTER SUPPLIERODALS -->
 
     <!-- TOKEN  OTP LOGIN TOKPED -->
@@ -1384,7 +1382,7 @@
     </div>
     <!-- PRODUCT MODALS -->
 
-       <!--DETAIL PRODUCT MODALS -->
+    <!--DETAIL PRODUCT MODALS -->
     <div class="modal  fade " id="detailProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog box-login ">
           <div class="modal-content">
@@ -1647,6 +1645,28 @@
         </div>
     </div>
     <!---OTP LOGIN PRODUCT -->
+
+    <!-- MODAL BANTUAN -->
+    <div class="modal  fade " id="modal_bantuan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  ">
+            <div class="modal-content box-otp-product">
+                <div class="modal-header header-prod-bantuan">
+                    <p>SOLDAYS HELP CENTER</p>
+                </div>
+                
+                <div class="modal-body  box_bantuan_customer">
+                    <a href="https://wa.me/+6281393736797/?text=Saya ingin konsultasi" class="bantuan_1_box" style="text-decoration: none;" target="_blank">
+                        <img src="/WEB/img/whatsapp.png" alt="">
+                    </a>
+                    <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" class="bantuan_2_box" style="text-decoration: none;" target="_blank">
+                        <img src="/WEB/img/customer-service.png" alt="">
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    <!-- MODAL BANTUAN -->
     
 
     <!-- loading page rencananyan -->
@@ -2029,13 +2049,14 @@
                     </div>
                 </div>
             </div>
-                <a href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" target="_blank"class="btn-livechat-box" style="text-decoration: none;">
+            <!-- href="https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8" -->
+                <div class="btn-livechat-box" style="text-decoration: none;" onclick="open_modal_bantuan()">
                     <div class="box-question-traveloka">
                         <i class="fas fa-question"></i>
                         <p id="chat-us-livechat">Chat Us!</p>
                     </div>
                     <p id="need-help-livechat">Bantuan</p>
-                </a>
+                </div>
             <div class="small-ads">
                 <div class="sm-ads-name">
                     <img src="../WEB/img/sale.png" alt="error" class="icon-ads">
