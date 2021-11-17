@@ -1,5 +1,11 @@
 /* LINK COLLECTION MARKET PLACE */
 @media only screen and (max-device-width:960px){
+    .card-new-category p {
+        font-size:12px;
+    }
+    .card-new-category {
+        width:18.5%;
+    }
     .card-item {
         min-width:25%;
     }
@@ -115,6 +121,97 @@
     }
 }
 @media only screen and (max-device-width:767px){
+    
+    .searching-left{
+        padding-left:10px;
+    }
+    .option-0 {
+        top:-10px
+    }
+    .option-1 {
+        top:-10px
+    }
+    .option-2 {
+        top:-10px
+    }
+    .option-3 {
+        top:-10px
+    }
+    .option-4 {
+        top:-10px
+    }
+    .option-5 {
+        top:-10px
+    }
+    .box-render-search .card-body ul li{
+        font-size:12px;
+    }
+    .card-item {
+        min-width:30%;
+    }
+    .box_for_socmed-1:hover {
+        width:110px;
+    }
+    .logo-small-icon-footer{
+        height:20px;
+        width:50px;
+    }
+    .box_for_socmed-2:hover{
+        width:110px;
+    }
+    .box_for_socmed-3:hover{
+        width:110px;
+    }
+    .box_for_socmed-4:hover{
+        width:110px;
+    }
+    #soc_fb {
+        font-size:0.8em;
+        top:12px;
+    }
+    #soc_instagram {
+        font-size:0.8em;
+        top:12px;
+    }
+    #soc_twitter {
+        font-size:0.8em;
+        top:12px;
+    }
+    #soc_youtube {
+        font-size:0.8em;
+        top:12px;
+    }
+    .solped-footer-1 {
+        width:20%;
+    }
+    .solped-footer-right {
+        justify-content: center;
+        
+    }
+    .solped-footer-right img {
+        height:50%;
+    }
+    .main-header-search{
+        width:45%;
+    }
+    .header-option{
+        width:35%;
+    }
+    .main-about {
+        padding-left:40px;
+    }
+    .logo-header {
+        height:50px;
+    }
+    .icon-search {
+        font-size:15px;
+    }
+    .input-name::placeholder{
+        font-size:12px;
+    }
+    .ma_right {
+        width:70%;
+    }
     .nbc-category {
         width:100%;
     }
@@ -166,9 +263,9 @@
         min-width:80%;
     }
     .box-render-search{
-        width:418px ;
-        top:7.7% ;
-        left:25.4% ;
+        width:304px ;
+        top:11.2% ;
+        left:25.7% ;
     }
     .modals-hutang-home {
         top:16.5% ;
@@ -205,8 +302,9 @@
         font-size:0.7em;
     }
     .modals-search-result {
-        top:11.5%;
-        height:56vh;
+        top:16.5%;
+        /* top:0%; */
+        height:100vh;
     }
     .box-img-bp {
         height:150px;
@@ -216,7 +314,7 @@
         left:0%;
     }
     .box-list-kategori{
-        width:700px !important;
+        width:570px !important;
     }
     .card-all-item{
         width:200px;
