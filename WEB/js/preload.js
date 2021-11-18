@@ -581,7 +581,7 @@ const render_item_all_category=()=>{
                                 <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
                             </div>
                             <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
-                            <p  id="highlight-product" onload="loadImageBigScreen()">${val.Subcategory}</p>
+                            <p  id="highlight-product " onload="loadImageBigScreen()">${val.Subcategory}</p>
                         </div>
                         `)
                     }

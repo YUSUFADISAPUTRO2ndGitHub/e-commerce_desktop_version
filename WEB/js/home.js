@@ -23,6 +23,8 @@ function forgot_modal_request(){
 }
 function cart_requested(x){
     back_to_home()
+    $('.dropdown_menu_mobile').removeClass('show')
+    $('.dropdown-toggle').removeClass('show')
     var cartToJson = JSON.parse(localStorage.getItem('itemsInCart'))
     var cartString = localStorage.getItem('itemsInCart')
     var token = localStorage.getItem('token')
@@ -162,6 +164,8 @@ function pengiriman_requested(x){
 
 function bulk_order_home(x){
     console.log('bulk order jalan')
+    $('.dropdown_menu_mobile').removeClass('show')
+    $('.dropdown-toggle').removeClass('show')
     back_to_home()
     var token = localStorage.getItem('token')
     // var data_customer;
@@ -239,7 +243,8 @@ function cek_daftar_hutang(x){
     
     // $(".modals-hutang-home").toggle();
     $(".modals-hutang-home").attr("src", `./Iframe/unpaidList.html?list_hutang=${token}`);
-
+    $('.dropdown_menu_mobile').removeClass('show')
+    $('.dropdown-toggle').removeClass('show')
 
     // ngilangin block abu abu pas di klik
     $('.option-2').removeClass('background_grey')

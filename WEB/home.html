@@ -1746,6 +1746,7 @@
                 </div>
 
             </div>
+            
         </div>
         <div class="main-header">
             <!-- <div class="header-cat">
@@ -1828,6 +1829,33 @@
                     <i class="far fa-times-circle icon_close_lc" onclick="close_live_chat()"></i>
                     <!-- <p>Close</p> -->
                 </div>
+                
+            </div>
+            <div class="box_bar_mobile">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars icon_bar_mobile" ></i>
+                    </button>
+                    <div class="dropdown-menu dropdown_menu_mobile" aria-labelledby="dropdownMenuButton" >
+                        <a class="dropdown-item item_drop_mobile" href="#" onclick="check_user_for_login()">
+                            <img src="../WEB/img/login.png" alt="error" class="icon-opt" id="icon_login_mobile">
+                            <p>Log in</p>
+                        </a>
+                        <a class="dropdown-item item_drop_mobile" href="#" onclick="cek_daftar_hutang(this)">
+                            <img src="../WEB/img/unpaid_list.png" alt="error" class="icon-opt ">
+                            <p>Order List</p>
+                        </a>
+                        <a class="dropdown-item item_drop_mobile" href="#" onclick="bulk_order_home(this)"id="bulk_order">
+                            <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
+                            <p>Bulk Order</p>
+                        </a>
+                        <a class="dropdown-item item_drop_mobile" href="#" onclick="cart_requested(this)">
+                            <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt">
+                            <p>Keranjang</p>
+                        </a>
+                    </div>
+                  </div>
+                  
                 
             </div>
 
@@ -1965,8 +1993,7 @@
                             <div class="cd-image-category shinny">
                                 <img src=""  alt="  " class="cd-img-category" >
                             </div>
-                            <p  id="highlight-product-skeleton" class="shinny" ></p>
-                            
+                            <p  id="highlight-product-skeleton" class="shinny" ></p>          
                         </div>
                         <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
                             <div class="cd-image-category shinny">
@@ -2510,6 +2537,7 @@
             <!-- RENDER  ALL ITEM -->
         </div>
         <!-- Begin Mailchimp Signup Form -->
+
             <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7_dtp.css" rel="stylesheet" type="text/css">
             <style type="text/css">
             #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
@@ -2537,7 +2565,7 @@
             </form>
             </div>
 
-<!--End mc_embed_signup-->
+    <!--End mc_embed_signup-->
 
         <div class="box-product active_search">
             <div class="product-socmed">
