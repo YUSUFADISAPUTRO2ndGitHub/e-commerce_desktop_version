@@ -122,10 +122,17 @@
 }
 @media only screen and (max-device-width:767px){
     
+    .modal-content {
+
+    }
+    .box-about-us {
+        width:600px !important;
+        left:-10%;
+    }
     .searching-left{
         padding-left:10px;
     }
-    .option-0 {
+    /* .option-0 {
         top:-10px
     }
     .option-1 {
@@ -142,7 +149,221 @@
     }
     .option-5 {
         top:-10px
+    } */
+    .box-render-search .card-body ul li{
+        font-size:12px;
     }
+    .card-item {
+        min-width:30%;
+    }
+    .box_for_socmed-1:hover {
+        width:110px;
+    }
+    .logo-small-icon-footer{
+        height:20px;
+        width:50px;
+    }
+    .box_for_socmed-2:hover{
+        width:110px;
+    }
+    .box_for_socmed-3:hover{
+        width:110px;
+    }
+    .box_for_socmed-4:hover{
+        width:110px;
+    }
+    #soc_fb {
+        font-size:0.8em;
+        top:12px;
+    }
+    #soc_instagram {
+        font-size:0.8em;
+        top:12px;
+    }
+    #soc_twitter {
+        font-size:0.8em;
+        top:12px;
+    }
+    #soc_youtube {
+        font-size:0.8em;
+        top:12px;
+    }
+    .solped-footer-1 {
+        width:20%;
+    }
+    .solped-footer-right {
+        justify-content: center;
+        
+    }
+    .solped-footer-right img {
+        height:50%;
+    }
+    .main-header-search{
+        width:45%;
+    }
+    .header-option{
+        width:35%;
+    }
+    .main-about {
+        padding-left:40px;
+    }
+    .logo-header {
+        height:50px;
+    }
+    .icon-search {
+        font-size:15px;
+    }
+    .input-name::placeholder{
+        font-size:12px;
+    }
+    .ma_right {
+        width:70%;
+    }
+    .nbc-category {
+        width:100%;
+    }
+    .p_about_ins {
+        font-size:0.6em;
+    }
+    .ins_ma_left_2 {
+        font-size:9px
+    }
+    .option-0 p {
+        font-size:10px;
+    }
+    .option-1 p {
+        font-size:10px;
+    }
+    .option-2 p {
+        font-size:10px;
+    }
+    .option-3 p {
+        font-size:10px;
+    }
+    .option-4 p {
+        font-size:10px;
+    }
+    .option-5 p {
+        font-size:10px;
+    }
+
+    .header-search-option p {
+        font-size:8px;
+    }
+    .card-new-category {
+        width:20%;
+    }
+    .promo_card {
+        min-width:35%;
+    }
+    .form-control {
+        font-size:0.7rem !important ;
+    }
+    .box-ads{
+        height:250px;
+    }
+    .card-new-category p {
+        font-size:12px;
+    }
+    .cd-image-category {
+        min-height:60%;
+        min-width:80%;
+    }
+    .box-render-search{
+        width:304px ;
+        top:11.2% ;
+        left:25.7% ;
+    }
+    .modals-hutang-home {
+        top:16.5% ;
+        left:23.1% ;
+    }
+    .modals-bulk-order {
+        top:16.5% ;
+    }
+    .iframe {
+        right:9% !important;
+        top:16.5% !important;
+    }
+    .cart-counter {
+        top:30%;
+        right:30%;
+    }
+    .modals-lk {
+        left:9%;
+        width:800px;
+    }
+    .npd-left-product-name {
+        font-size:18px;
+        
+    }
+    .box-name-product4 p:nth-child(1) {
+        font-size:0.7em;
+        position: relative;
+        top:5px;
+    }
+    .box-name-product3 p:nth-child(1){
+        font-size:0.7em;
+    }
+    .box-name-product2 p:nth-child(1) {
+        font-size:0.7em;
+    }
+    .modals-search-result {
+        top:16.5%;
+        /* top:0%; */
+        height:100vh;
+    }
+    .box-img-bp {
+        height:150px;
+        width:150px;
+    }
+    .box-name-product4 {
+        left:0%;
+    }
+    .box-list-kategori{
+        width:570px !important;
+    }
+    .card-all-item{
+        width:200px;
+    }
+    .img-dirjen {
+        width:100px;
+        height:100px;
+    }
+    .vst_dirjen_2 p {
+        font-size:0.6em !important;
+    }
+}
+@media only screen and (max-device-width:640px){
+    
+    .modal-content {
+
+    }
+    .box-about-us {
+        width:600px !important;
+        left:-10%;
+    }
+    .searching-left{
+        padding-left:10px;
+    }
+    /* .option-0 {
+        top:-10px
+    }
+    .option-1 {
+        top:-10px
+    }
+    .option-2 {
+        top:-10px
+    }
+    .option-3 {
+        top:-10px
+    }
+    .option-4 {
+        top:-10px
+    }
+    .option-5 {
+        top:-10px
+    } */
     .box-render-search .card-body ul li{
         font-size:12px;
     }
