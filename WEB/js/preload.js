@@ -550,23 +550,65 @@ const render_item_all_category=()=>{
     // 
 
     var all_subcategory_storage = JSON.parse(localStorage.getItem('all_subCategory'))
+    console.log(all_subcategory_storage)
     var index_for_render = 0 // kalo udah 12 stop looping
     if(all_subcategory_storage != null || all_subcategory_storage.length > 0 ){
+
         all_subcategory_storage.map((val,index)=>{
-            val[1].map((item,id)=>{
-                if(index_for_render <=11){
-                    index_for_render +=1
-                    $('.box-render-new-category').append(`
-                        <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
-                            <div class="cd-image-category shinny">
-                                <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
-                            </div>
-                            <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
-                            <p  id="highlight-product" onload="loadImageBigScreen()">${item.Subcategory}</p>
+            // console.log(val)
+            // console.log(val[1].length , val[1],index, val[0].Category)
+            if(val[1].length === 1){
+                // console.log(val[1][0])
+                $('.box-render-new-category').append(`
+                    <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${val[1][0].Subcategory}')">
+                        <div class="cd-image-category shinny">
+                            <img src="${replace_vtintl_to_sold_co_id(val[1][0].Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
                         </div>
-                    `)
+                        <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
+                        <p  id="highlight-product" onload="loadImageBigScreen()">${val[1][0].Subcategory}</p>
+                    </div>
+                `)
+            }else {
+                // console.log(val[1])
+                if(val[1] === undefined || val[1] === null || val[1] === false){
+                    // console.log('masuk ke if 574')
+                    // console.log(val[0].Category)
+                    axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${val[0].Category}`)
+                    .then((res)=>{
+                        // console.log(res.data)
+                        res.data.map((val,index)=>{
+                            $('.box-render-new-category').append(`
+                                <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${val.Subcategory}')">
+                                    <div class="cd-image-category shinny">
+                                        <img src="${replace_vtintl_to_sold_co_id(val.Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
+                                    </div>
+                                    <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
+                                    <p  id="highlight-product " onload="loadImageBigScreen()">${val.Subcategory}</p>
+                                </div>
+                                `)
+                            })
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                }else {
+                    val[1].map((item,id)=>{
+                        if(index_for_render <=11){
+                            index_for_render +=1
+                            $('.box-render-new-category').append(`
+                                <div class="card-new-category" onclick="getAllItem_fromAllSubCat('${item.Subcategory}')">
+                                    <div class="cd-image-category shinny">
+                                        <img src="${replace_vtintl_to_sold_co_id(item.Picture_1)}" class="cd-img-category" onload="loadImageBigScreen()">
+                                    </div>
+                                    <p  id="highlight-product-skeleton" class="shinny" onload="loadImageBigScreen()"></p>
+                                    <p  id="highlight-product" onload="loadImageBigScreen()">${item.Subcategory}</p>
+                                </div>
+                            `)
+                        }
+                    })
+
                 }
-            })
+
+            }
         })
     }else {
         for(var i=0; i<data_atas.length; i++){    
