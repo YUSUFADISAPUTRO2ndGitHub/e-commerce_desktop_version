@@ -582,6 +582,7 @@ const getAllItem_fromAllSubCat=(item)=>{
         $('.modals-lk').attr('src',`./Iframe/listkategori.html?subcategory=${item}`)
         // $('.new-box-category').toggle(500)
         $('.new-box-category').css('display','none')
+        $('.box_mail_chimp').css('display','none')
 
         Swal.fire({
             html:`

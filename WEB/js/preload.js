@@ -552,7 +552,7 @@ const render_item_all_category=()=>{
     var all_subcategory_storage = JSON.parse(localStorage.getItem('all_subCategory'))
     console.log(all_subcategory_storage)
     var index_for_render = 0 // kalo udah 12 stop looping
-    if(all_subcategory_storage != null || all_subcategory_storage.length > 0 ){
+    if(all_subcategory_storage != null){
 
         all_subcategory_storage.map((val,index)=>{
             // console.log(val)

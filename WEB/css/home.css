@@ -9082,7 +9082,7 @@ option{
     height: 100vh;
     max-width: 100vw !important;
     width: 100vw !important;
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;
