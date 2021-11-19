@@ -334,6 +334,7 @@ $('.modals-new-product-detail').css('display','block')
 $('.main-body').css('display','none')
 $('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
 $('.new-box-category').css('display','none')
+$('.box_mail_chimp').css('display','none')
 
 }
 
@@ -1071,11 +1072,14 @@ function back_to_home(){
     $('.box-product').css('display','flex')
     $(".force-close-all-command-2").css("display", "none");
     $('.main-body').css('display','block')
+    $('.box_mail_chimp').css('display','block')
     $('.active_search').css('top','0px')
     $('#newloginTokpedModal').modal('hide')
     window.parent.$('.box-product').css('display','flex')
     window.parent.$('.main-body').css('display','block')
+    window.parent.$('.box_mail_chimp').css('display','block')
     window.parent.$('.force-close-all-command-2').css('display','none')
+
 }
 // const find_province_from_address= async ()=>{
 //     return new Promise(async (resolve, reject) => {
@@ -10775,6 +10779,7 @@ function replace_value_to(x){
     $('.box-render-search').css('display','none')
     $('.input-name').css('border-bottom-left-radius','10px')
     $('.input-name').css('border-bottom-right-radius','10px')
+    $('.box_mail_chimp').css('display','none')
 
     $('.box-product').css('display','none')
 

@@ -291,6 +291,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
             // $('.groupbuy_sp_iframe').attr('src',`./itemDetail.html?product_id=${product_id}`)
             back_to_home()
             window.parent.$('.main-body').css('display','none')
+            window.parent.$('.box_mail_chimp').css('display','none')
             window.parent.$('.box-product').css('display','none')
             window.parent.$('.modals-new-product-detail').css('display','block')
             window.parent.$('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
@@ -348,6 +349,7 @@ const search_item=()=>{
     
     $('.active_search').css('top','575px')
     $('.main-body').css('display','none')
+    $('.box_mail_chimp').css('display','none')
     $('.modals-search-result').css('display','block')
     $('.modals-search-result').attr('src',`./Iframe/searchingPage.html?searching=${item_search}`)
     $('.box-render-search').css('display','none')
