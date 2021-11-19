@@ -3734,8 +3734,9 @@ input:focus {
     border-left: 1px solid #dedede;
     border-bottom: 1px solid #dedede;
     position: absolute;
-    top: 10%;
-    margin-left: 1px;
+    top: 90%;
+    left:0%;
+    /* margin-left: 1px; */
     /* left:35.9%; */
     /* left:10px; */
     z-index: 100;
