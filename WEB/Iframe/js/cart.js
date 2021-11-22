@@ -631,6 +631,7 @@ function checkingoutAll(){
                                     // 
     
                                     if(i === cartToJson.length -1 ){
+                                        console.log('masuk ke 634 harusnya pindah page')
                                          window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
                                     }
                                 

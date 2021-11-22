@@ -1266,6 +1266,9 @@
 }
 
 @media only screen and (max-device-width:414px){
+    .new-card-cart {
+        height:200px !important;
+    }
     .box-render-promo {
         flex-wrap: wrap;
         overflow: scroll;
@@ -1854,7 +1857,9 @@
     }
 }
 @media only screen and (max-device-width:380px){
-
+    .new-card-cart {
+        height:200px !important;
+    }
     .box-render-promo {
         flex-wrap: wrap;
         justify-content: flex-start;

@@ -370,7 +370,14 @@ const new_find_subDistrict_from_address=async(district)=>{
             kurir_kode = response[0].Courier_Code
             await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async(res)=>{
-                alamat_pilihan = res.data.Address_1
+                alamat_pilihan = ''
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    alamat_pilihan = res.data[0].Address_1
+                }else {
+                    alamat_pilihan = res.data.Address_1
+
+                }
                 if(subDistrict_from_storage != undefined && subDistrict_from_storage.length != 0 ){
                     
                 }else {
@@ -410,7 +417,14 @@ const new_find_district_from_address=async(city)=>{
     
             await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async(res)=>{
-                alamat_pilihan = res.data.Address_1
+                
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    alamat_pilihan = res.data[0].Address_1
+                }else {
+                    alamat_pilihan = res.data.Address_1
+
+                }
     
                 await get_all_district_from_courier(kurir_pilihan,kurir_kode,city).done(function(response){
                     // 
@@ -452,7 +466,15 @@ const new_find_city_from_address= async (province)=>{
             kurir_kode = response[0].Courier_Code
             await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then( async (res)=>{
-                alamat_pilihan  = res.data.Address_1
+                
+                alamat_pilihan = ''
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    alamat_pilihan = res.data[0].Address_1
+                }else {
+                    alamat_pilihan = res.data.Address_1
+
+                }
                 if(city_from_storage != undefined && city_from_storage.length != 0){
                     city_from_storage.forEach((val,index)=>{
                         if(val.Province == province){
@@ -498,7 +520,14 @@ const new_find_province_from_address= async ()=>{
             await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then(async (res)=>{
                 
-                alamat_pilihan = res.data.Address_1
+                alamat_pilihan = ''
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    alamat_pilihan = res.data[0].Address_1
+                }else {
+                    alamat_pilihan = res.data.Address_1
+
+                }
                 if(province_from_storage != undefined &&  province_from_storage.length != 0){
                     province_from_storage.forEach((val,index)=>{
                         if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
