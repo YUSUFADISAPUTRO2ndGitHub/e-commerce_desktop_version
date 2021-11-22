@@ -3622,7 +3622,7 @@ input:focus {
 }
 
 .card-all-item-list p {
-    font-size: 1em !important;
+    font-size: 1em;
 
 }
 

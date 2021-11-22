@@ -1734,6 +1734,36 @@
     }
 }
 @media only screen and (max-device-width:380px){
+    .searching-cb-header-2 {
+        min-width:140px !important;
+    }
+    .lctp-mid {
+        font-size:10px;
+    }
+    .login-tokped-border{
+        width:80%;
+        
+    }
+    .tokped-border-login {
+        height:460px !important;
+        top:10% !important;
+    }
+    .tokped-border-login-2 {
+        height:460px !important;
+        top:5% !important;
+    }
+    .ccb-isi-comment-name p {
+        font-size:7px;
+    }
+    .box-input-ulasan {
+        width:100%;
+    }
+    .input-ulasan-npd {
+        width:100% !important;
+    }
+    .card-all-item-list p {
+        font-size:0.7em !important;
+    }
     .list-item {
         font-size:13px;
     }
@@ -1755,8 +1785,10 @@
         margin-left:0px !important;
     }
     .ccb-image {
-        min-width:25px;
-        min-height:25px;
+        height:20px !important;
+        width:20px !important;
+        min-width:20px !important;
+        min-height:20px !important;
     }
     .new-tab-content {
         min-height:300px !important;
@@ -1976,12 +2008,16 @@
         margin-right :10px !important;
         width:55%;
     }
+    .render-item-sub .card-item {
+        min-width:80% !important;
+        justify-content: center !important;
+    }
     .render-item-sub {
         justify-content: space-between !important;
     }
     .card-item {
         width:50% !important;
-         min-width:100% !important;
+         min-width:65% !important;
          margin:0px !important;
          margin-bottom:5px !important;
          height:330px !important;
@@ -2218,7 +2254,7 @@
     }
     .modals-lk {
         left:0%;
-        width:414px;
+        width:100% !important;
     }
     .npd-left-product-name {
         font-size:18px;
