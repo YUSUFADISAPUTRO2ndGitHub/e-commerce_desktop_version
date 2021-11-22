@@ -2451,7 +2451,9 @@ body {
     line-height: 0.5;
     align-items: center;
 }
-
+.order-card-item-bd {
+    display: none;
+}
 .box-name {
     width: 250px;
     height: 40px;

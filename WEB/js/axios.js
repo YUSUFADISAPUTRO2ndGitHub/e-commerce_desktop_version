@@ -5987,8 +5987,10 @@ const newRender_list_hutang=(customer_code)=>{
                             BAYAR
                         </div>
                     </div>
-                    <div class="btn-card-detail-item-bd hvr-grow" onclick="open_detail_hutang_home('${val.Order_Number}')">
-                        Lihat Detail Transaksi
+                    <div class="address-detail-transaksi-payment"> 
+                        <div class="btn-card-detail-item-bd hvr-grow" onclick="open_detail_hutang_home('${val.Order_Number}')">
+                            Lihat Detail Transaksi
+                        </div>      
                     </div>
                 </div>
             </div>

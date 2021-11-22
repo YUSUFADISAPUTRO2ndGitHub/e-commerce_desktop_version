@@ -2866,3 +2866,8 @@ const open_modal_bantuan=()=>{
     // alert('jalan')
     $('#modal_bantuan').modal('show')
 }
+
+const open_dropdown_menu=()=>{
+
+    $('.dropdown_menu_mobile .item_drop_mobile').removeClass('background_grey')
+}
