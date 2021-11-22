@@ -6561,6 +6561,7 @@ const render_all_kurir_before_choosing=(product_id)=>{
 
 
 const check_user_for_login=()=>{
+    console.log('6564 check user login jalan')
     back_to_home()
     $(".force-close-all-command").css("display", "none");
     $('.dropdown_menu_mobile').removeClass('show')
@@ -6575,12 +6576,24 @@ const check_user_for_login=()=>{
     $('#checking_password_register').empty()
     //clear form
     var token = localStorage.getItem('token')
+    if(token === null ){
+        $('#newloginTokpedModal').modal('show') // login baru
+        $('.box_information_login').css('display','flex')
+        $('#checking_email_login').empty()
+        $('#checking_password_login').empty()
+        $('#checking_email_register').empty()
+        $('#checking_email_register_2').empty()
+        $('#checking_password_register').empty()
+        $('#checking_nama_register').empty()
+        $('#checking_nohp_register').empty()
+    }else {
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{ 
             var data_customer = res.data
             
             if(data_customer){
                 if(data_customer.User_Type === 'Customer'){
+                    console.log('masuk ke if')
                     $('.btn-status-barang').css('display','none')
                     $('.sup_delete').css('display','flex')
                     $('.box-kumpulkan-profile').css('top','70px')
@@ -6596,6 +6609,7 @@ const check_user_for_login=()=>{
 
                     // $('.sup_delete').css('left','20px')
                 }else {
+                    console.log('masuk ke else')
                     $('.btn-status-barang').css('display','block')
                     $('.sup_delete').css('display','none')
                     $('.box-kumpulkan-profile').css('top','0px')
@@ -6754,9 +6768,9 @@ const check_user_for_login=()=>{
                 
                 $('#newProfileModal').modal('show')
             }else {
-                
+                console.log('6760 else')
                 // $('#loginModal').modal('show') // login lama
-                $('#newloginTokpedModal').modal('show') // login lama
+                $('#newloginTokpedModal').modal('show') // login baru
                 $('.box_information_login').css('display','flex')
                 $('#checking_email_login').empty()
                 $('#checking_password_login').empty()
@@ -6778,8 +6792,10 @@ const check_user_for_login=()=>{
             // NGAPUS CATEGORY PRODUCT
             $('.new-box-category').css('display','none')
         }).catch((err)=>{
-            
+            console.log(err)
         })
+
+    }
 
         $('.closeByLogin').css('display','none')
         $('.option-0').removeClass("background_grey")

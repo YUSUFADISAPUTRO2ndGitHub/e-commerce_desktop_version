@@ -36,9 +36,10 @@
     }
     .box-render-search{
         width:418px ;
-        top:7.7% ;
-        left:25.4% ;
+        top:90% ;
+        left:0% ;
     }
+   
     .modals-hutang-home {
         top:11% ;
         left:23.1% ;
@@ -282,8 +283,8 @@
     }
     .box-render-search{
         width:304px ;
-        top:11.2% ;
-        left:25.7% ;
+        top:90% ;
+        left:0% ;
     }
     .modals-hutang-home {
         top:16.5% ;
@@ -449,7 +450,7 @@
         font-size:12px;
     }
     .ma_right {
-        width:70%;
+        display: none;
     }
     .nbc-category {
         width:100%;
@@ -503,8 +504,8 @@
     }
     .box-render-search{
         width:304px ;
-        top:11.2% ;
-        left:25.7% ;
+        top:90% ;
+        left:0% ;
     }
     .modals-hutang-home {
         top:16.5% ;
@@ -993,8 +994,8 @@
     }
     .box-render-search{
         width:266px ;
-        top:13.6% ;
-        left:23.7% ;
+        top:90% ;
+        left:0% ;
     }
     .modals-hutang-home {
         top:16.5% ;
