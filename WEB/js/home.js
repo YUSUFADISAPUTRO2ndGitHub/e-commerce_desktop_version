@@ -1083,7 +1083,7 @@ const send_otp=()=>{
     // alert('kirim otp 1024')
     var token = localStorage.getItem('token')
     console.log(token)
-    if(token === null ){
+    if(token === null || token === false || token === 'false' ){
         var email = $('#checking_email_login').val()
         console.log(email)
         axios.post(`https://customers.sold.co.id/get-otp?Email=${email}`)
