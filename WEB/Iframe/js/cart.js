@@ -638,8 +638,8 @@ function checkingoutAll(){
                             }
     
                             
-                            // swal.fire("Final Step","","success");
-                            // window.location.href = `/WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`;
+                            
+                            
                         }else{
                             swal.fire("Something is missing","You do not have anything in Cart","warning");
                         }

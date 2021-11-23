@@ -714,6 +714,13 @@
 }
 
 @media only screen and (max-device-width:450px){
+    .new-item-price {
+        width:70%;
+
+    }
+    .buy-icon {
+        width:20% !important;
+    }
     .box-render-promo {
         flex-wrap: wrap;
         overflow: scroll;
@@ -962,6 +969,7 @@
        width:100%;
    }
    .npd-right{
+       padding-left:0px !important;
        width:100%;
    }
     .box-product {
@@ -1073,11 +1081,16 @@
     .searching-left{
         padding-left:10px;
         width:35%;
+        display: none;
     }
     .searching-right {
-        width:65%;
+        width:100%;
     }
+    .new-box-card .card_sp {
+        min-width:50% !important;
+        width:50% !important;
 
+    }
     .box-render-search .card-body ul li{
         font-size:12px;
     }
@@ -1551,6 +1564,7 @@
    }
    .npd-right{
        width:100%;
+       padding-left:0px !important;
    }
     .box-product {
         padding-left:15px;
@@ -1591,9 +1605,7 @@
     .new-box-card {
         padding:5px;
     }
-    .new-box-card .card_sp {
-        width: 100% !important;
-    }
+  
     .box-render-promo {
         margin-top:15px;
     }
@@ -1664,9 +1676,15 @@
     .searching-left{
         padding-left:10px;
         width:35%;
+        display: none;
     }
     .searching-right {
-        width:65%;
+        width:100%;
+    }
+    .new-box-card .card_sp {
+        min-width:50% !important;
+        width:50% !important;
+
     }
 
     .box-render-search .card-body ul li{
@@ -2182,6 +2200,7 @@
    }
    .npd-right{
        width:100%;
+       padding-left:0px !important;
    }
     .box-product {
         padding-left:15px;
@@ -2226,9 +2245,7 @@
     .new-box-card {
         padding:5px;
     }
-    .new-box-card .card_sp {
-        width: 100% !important;
-    }
+   
     .box-render-promo {
         margin-top:15px;
     }
@@ -2300,9 +2317,15 @@
     .searching-left{
         padding-left:10px;
         width:35%;
+        display: none;
     }
     .searching-right {
-        width:65%;
+        width:100%;
+    }
+    .new-box-card .card_sp {
+        min-width:50% !important;
+        width:50% !important;
+
     }
 
     .box-render-search .card-body ul li{

@@ -103,100 +103,141 @@ const send_comment_cust_product = (product_id) => {
               Product_Code: data.User_Comments.Product_Code,
             }),
           })
-          .then((res) => {
-            axios
-              .post(
-                `http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`
-              )
+          .then((res) => {axios.post(`http://products.sold.co.id/get_user_comment?Product_Code=${product_id}`)
               .then((res) => {
                 var cust_comment = res.data;
                 var comment_parse = JSON.parse(cust_comment.User_Comments);
                 var total_comment = comment_parse.length;
                 $(".box-ulasan-detail").empty();
                 $(".box-ulasan-detail").append(`
-                        <p>SEMUA ULASAN(${total_comment})</p>
-                    `);
+                    <p>SEMUA ULASAN(${total_comment})</p>
+                `);
 
                 comment_parse.map((val, index) => {
-                  axios
-                    .post(
-                      `https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`
-                    )
+                  axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                     .then((item) => {
                       var link_gambar = item.data;
                       if (item.data !== "undefined") {
-                        axios
-                          .post(
-                            `https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`
-                          )
+                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                           .then((res) => {
                             console.log(item);
-                            $(".box-ulasan-detail").append(`
-                                <div class="box-item-ulasan">
-                                    <div class="biu-left">
-                                        <div class="biu-image">
-                                            <img src="${link_gambar}" alt="">
-                                        </div>
-                                        <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                    </div>
-                                    <div class="biu-right">
-                                        <p>${val.Comment}</p>
-                                        <div class="company-comment-box">
-                                            <div class="ccb-image">
-                                                <img src="../img/vantsing_shipping_method.png" alt="">
-                                            </div>
-                                            <div class="ccb-isi-comment">
-                                                <div class="ccb-isi-comment-name">
-                                                    <p>${nama_company}</p>
-                                                    <div class="btn-penjual-ccb">
-                                                        Penjual
-                                                    </div>
-                                                </div>
-                                                <div class="ccb-thankyou">
-                                                    Terima kasih telah berbelanja di ${res.data.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            `);
+                            if(res.data){
+                              var data_for_render
+                              var isCustomer_information = Array.isArray(res.data)
+                              if(isCustomer_information) {
+                                data_for_render = res.data[0]
+                              }else {
+                                data_for_render = res.data
+              
+                              }
+                              $(".box-ulasan-detail").append(`
+                                  <div class="box-item-ulasan">
+                                      <div class="biu-left">
+                                          <div class="biu-image">
+                                              <img src="${link_gambar}" alt="">
+                                          </div>
+                                          <p>${data_for_render.First_Name} ${data_for_render.Last_Name}</p>
+                                      </div>
+                                      <div class="biu-right">
+                                          <p>${val.Comment}</p>
+                                          <div class="company-comment-box">
+                                              <div class="ccb-image">
+                                                  <img src="../img/vantsing_shipping_method.png" alt="">
+                                              </div>
+                                              <div class="ccb-isi-comment">
+                                                  <div class="ccb-isi-comment-name">
+                                                      <p>${nama_company}</p>
+                                                      <div class="btn-penjual-ccb">
+                                                          Penjual
+                                                      </div>
+                                                  </div>
+                                                  <div class="ccb-thankyou">
+                                                      Terima kasih telah berbelanja di ${data_for_render.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div> 
+                              `);
+                            }else {
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Silahkan Login`,
+                                    timer:2000,
+                                })
+                                setTimeout(()=>{
+                                  window.parent.location.reload()
+                                    // window.parent.$('.iframe').css('display','none')
+                                    // window.parent.$('.force-close-all-command').css('display','none')
+                                },1500)
+                                
+                            }
+
+
                           })
                           .catch((err) => {});
                       } else {
-                        axios
-                          .post(
-                            `https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`
-                          )
+                        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                           .then((res) => {
-                            $(".box-ulasan-detail").append(`
-                                <div class="box-item-ulasan">
-                                    <div class="biu-left">
-                                        <div class="biu-image">
-                                            <img src="../img/accounts.png" alt="">
-                                        </div>
-                                        <p>Anonymous</p>
-                                    </div>
-                                    <div class="biu-right">
-                                        <p>${val.Comment}</p>
-                                        <div class="company-comment-box">
-                                            <div class="ccb-image">
-                                                <img src="../img/vantsing_shipping_method.png" alt="">
-                                            </div>
-                                            <div class="ccb-isi-comment">
-                                                <div class="ccb-isi-comment-name">
-                                                    <p>${nama_company}</p>
-                                                    <div class="btn-penjual-ccb">
-                                                        Penjual
-                                                    </div>
-                                                </div>
-                                                <div class="ccb-thankyou">
-                                                    Terima kasih telah berbelanja di ${res.data.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            `);
+                            if(res.data){
+                              var data_for_render
+                              var isCustomer_information = Array.isArray(res.data)
+                              if(isCustomer_information) {
+                                data_for_render = res.data[0]
+                              }else {
+                                data_for_render = res.data
+              
+                              }
+                              $(".box-ulasan-detail").append(`
+                                  <div class="box-item-ulasan">
+                                      <div class="biu-left">
+                                          <div class="biu-image">
+                                              <img src="../img/accounts.png" alt="">
+                                          </div>
+                                          <p>Anonymous</p>
+                                      </div>
+                                      <div class="biu-right">
+                                          <p>${val.Comment}</p>
+                                          <div class="company-comment-box">
+                                              <div class="ccb-image">
+                                                  <img src="../img/vantsing_shipping_method.png" alt="">
+                                              </div>
+                                              <div class="ccb-isi-comment">
+                                                  <div class="ccb-isi-comment-name">
+                                                      <p>${nama_company}</p>
+                                                      <div class="btn-penjual-ccb">
+                                                          Penjual
+                                                      </div>
+                                                  </div>
+                                                  <div class="ccb-thankyou">
+                                                      Terima kasih telah berbelanja di ${data_for_render.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div> 
+                              `);
+                           
+                          }else {
+                              Swal.fire({
+                                  html:`
+                                  <div class="o-circle c-container__circle o-circle__sign--failure">
+                                      <div class="o-circle__sign"></div>  
+                                  </div> 
+                                  Silahkan Login`,
+                                  timer:2000,
+                              })
+                              setTimeout(()=>{
+                                window.parent.location.reload()
+                                  // window.parent.$('.iframe').css('display','none')
+                                  // window.parent.$('.force-close-all-command').css('display','none')
+                              },1500)
+                              
+                          }
+
                           })
                           .catch((err) => {});
                       }
@@ -450,10 +491,10 @@ const render_product_detail_from_home = async (item_category) => {
     didOpen: async () => {
       axios.post(`https://products.sold.co.id/get-product-details?product_code=${item_category}`)
       .then(async (res) => {
-          console.log(res.data)
-          console.log(item_category)
+          
+          
           var detail_product_item = res.data;
-          console.log(detail_product_item)
+          
           var product_id_pilihan = product_id;
           let allDataProduct = [];
           var all_filter_product = [];
@@ -900,89 +941,104 @@ const render_product_detail_from_home = async (item_category) => {
                   } else if (total_comment == 2) {
                     $(".box-ulasan-detail").css("height", "500px");
                   }
-                //   console.log(comment_parse)
+                
                   comment_parse.map((val, index) => {
-                    // console.log(val);
+                    
                     axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                       .then((res) => {
                         console.log(val, " ini val");
-                        // console.log(val.Comment);
+                        
                         var comment_customer = val.Comment;
                         if (res.data !== "undefined") {
-                        //   console.log("masuk ke if 746");
+                        
                           var link_gambar = res.data;
                           axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                             .then((res) => {
-                              // res.data.map((val,index)=>{
-                            //   console.log(comment_customer);
-                              $(".box-ulasan-detail").append(`
-                                    <div class="box-item-ulasan">
-                                        <div class="biu-left">
-                                            <div class="biu-image">
-                                                <img src="${link_gambar}" alt="">
-                                            </div>
-                                            <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                        </div>
-                                        <div class="biu-right">
-                                            <p>${comment_customer}</p>
-                                            <div class="company-comment-box">
-                                                <div class="ccb-image">
-                                                    <img src="../img/vantsing_shipping_method.png" alt="">
-                                                </div>
-                                                <div class="ccb-isi-comment">
-                                                    <div class="ccb-isi-comment-name">
-                                                        <p>${detail_product_item.PIC_company_name}</p>
-                                                        <div class="btn-penjual-ccb">
-                                                            Penjual
-                                                        </div>
-                                                    </div>
-                                                    <div class="ccb-thankyou">
-                                                        Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `);
-                              // })
+                              
+                                var data_render;
+                                var isCustomer_information = Array.isArray(res.data)
+                                if(isCustomer_information) {
+                                    data_render = res.data[0]
+                                }else {
+                                    data_render = res.data
+                
+                                }
+                                $(".box-ulasan-detail").append(`
+                                      <div class="box-item-ulasan">
+                                          <div class="biu-left">
+                                              <div class="biu-image">
+                                                  <img src="${link_gambar}" alt="">
+                                              </div>
+                                              <p>${data_render.First_Name} ${data_render.Last_Name}</p>
+                                          </div>
+                                          <div class="biu-right">
+                                              <p>${comment_customer}</p>
+                                              <div class="company-comment-box">
+                                                  <div class="ccb-image">
+                                                      <img src="../img/vantsing_shipping_method.png" alt="">
+                                                  </div>
+                                                  <div class="ccb-isi-comment">
+                                                      <div class="ccb-isi-comment-name">
+                                                          <p>${detail_product_item.PIC_company_name}</p>
+                                                          <div class="btn-penjual-ccb">
+                                                              Penjual
+                                                          </div>
+                                                      </div>
+                                                      <div class="ccb-thankyou">
+                                                          Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  `);
+
+
+                              
                             })
                             .catch((err) => {});
                         } else {
-                        //   console.log("masuk ke else");
                           axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                             .then((res) => {
-                            //   console.log(res.data);
-                              // res.data.map((val,index)=>{
-                            //   console.log(comment_customer);
-                              $(".box-ulasan-detail").append(`
-                                    <div class="box-item-ulasan">
-                                        <div class="biu-left">
-                                            <div class="biu-image">
-                                                <img src="../img/accounts.png" alt="">
-                                            </div>
-                                            <p>Anonymous</p>
-                                        </div>
-                                        <div class="biu-right">
-                                            <p>${comment_customer}</p>
-                                            <div class="company-comment-box">
-                                                <div class="ccb-image">
-                                                    <img src="../img/vantsing_shipping_method.png" alt="">
+                              
+                                var data_render;
+                                var isCustomer_information = Array.isArray(res.data)
+                                if(isCustomer_information) {
+                                    data_render = res.data[0]
+                                }else {
+                                    data_render = res.data
+                                    
+                                }
+                                  $(".box-ulasan-detail").append(`
+                                        <div class="box-item-ulasan">
+                                            <div class="biu-left">
+                                                <div class="biu-image">
+                                                    <img src="../img/accounts.png" alt="">
                                                 </div>
-                                                <div class="ccb-isi-comment">
-                                                    <div class="ccb-isi-comment-name">
-                                                        <p>${detail_product_item.PIC_company_name}</p>
-                                                        <div class="btn-penjual-ccb">
-                                                            Penjual
+                                                <p>Anonymous</p>
+                                            </div>
+                                            <div class="biu-right">
+                                                <p>${comment_customer}</p>
+                                                <div class="company-comment-box">
+                                                    <div class="ccb-image">
+                                                        <img src="../img/vantsing_shipping_method.png" alt="">
+                                                    </div>
+                                                    <div class="ccb-isi-comment">
+                                                        <div class="ccb-isi-comment-name">
+                                                            <p>${detail_product_item.PIC_company_name}</p>
+                                                            <div class="btn-penjual-ccb">
+                                                                Penjual
+                                                            </div>
+                                                        </div>
+                                                        <div class="ccb-thankyou">
+                                                            Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
                                                         </div>
                                                     </div>
-                                                    <div class="ccb-thankyou">
-                                                        Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                `);
+                                    `);
+                       
                               // })
                             })
                             .catch((err) => {});
@@ -993,8 +1049,6 @@ const render_product_detail_from_home = async (item_category) => {
                       });
                   });
                 }
-                console.log($('.new-product-img-box'))
-                console.log("if else kelar");
                 Swal.fire({
                   title: "Uploading Data",
                   timer: 100,
@@ -1005,32 +1059,28 @@ const render_product_detail_from_home = async (item_category) => {
           } else {
             // by API
 
-            axios
-              .post(`https://products.sold.co.id/get-product-details`)
+            axios.post(`https://products.sold.co.id/get-product-details`)
               .then((res) => {
                 allDataProduct = res.data;
 
                 const querystring = $(location).attr("href");
-                axios
-                  .post(
-                    `https://products.sold.co.id/get-product-details?product_code=${product_id}`
-                  )
+                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                   .then((res) => {
                     item = res.data;
                     var split_product = res.data.Name.split(" ");
-                    console.log(split_product);
+                    
                     var all_filter_product = [];
                     for (var i = 0; i < split_product.length; i++) {
                       var filter_product = allDataProduct.filter((val) => {
                         if (val.Name.includes(split_product[i])) {
-                          //
+                          
                           all_filter_product.push(val);
                           return val;
                         }
                       });
                     }
                     console.log(all_filter_product, " ini all filter product");
-                    // console.log(item)
+                    
                     // BATAS
                     var hargaAwal = parseInt(item.Sell_Price);
                     var discount = parseInt(item.Sell_Price * 0.1);
@@ -1491,85 +1541,128 @@ const render_product_detail_from_home = async (item_category) => {
                                 if (res.data !== "undefined") {
                                   console.log("masuk ke if 746");
                                   var link_gambar = res.data;
-                                  axios
-                                    .post(
-                                      `https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`
-                                    )
+                                  axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                     .then((res) => {
-                                      // res.data.map((val,index)=>{
-                                      console.log(comment_customer);
-                                      $(".box-ulasan-detail").append(`
-                                        <div class="box-item-ulasan">
-                                            <div class="biu-left">
-                                                <div class="biu-image">
-                                                    <img src="${link_gambar}" alt="">
-                                                </div>
-                                                <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                            </div>
-                                            <div class="biu-right">
-                                                <p>${comment_customer}</p>
-                                                <div class="company-comment-box">
-                                                    <div class="ccb-image">
-                                                        <img src="../img/vantsing_shipping_method.png" alt="">
-                                                    </div>
-                                                    <div class="ccb-isi-comment">
-                                                        <div class="ccb-isi-comment-name">
-                                                            <p>${detail_product_item.PIC_company_name}</p>
-                                                            <div class="btn-penjual-ccb">
-                                                                Penjual
-                                                            </div>
-                                                        </div>
-                                                        <div class="ccb-thankyou">
-                                                            Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `);
+                                      if(res.data){
+                                        console.log(res.data)
+                                        var data_render
+                                        var isCustomer_information = Array.isArray(res.data)
+                                        if(isCustomer_information) {
+                                            data_render = res.data[0]
+                                        }else {
+                                            data_render = res.data
+                        
+                                        }
+                                        console.log(comment_customer);
+                                        $(".box-ulasan-detail").append(`
+                                          <div class="box-item-ulasan">
+                                              <div class="biu-left">
+                                                  <div class="biu-image">
+                                                      <img src="${link_gambar}" alt="">
+                                                  </div>
+                                                  <p>${data_render.First_Name} ${data_render.Last_Name}</p>
+                                              </div>
+                                              <div class="biu-right">
+                                                  <p>${comment_customer}</p>
+                                                  <div class="company-comment-box">
+                                                      <div class="ccb-image">
+                                                          <img src="../img/vantsing_shipping_method.png" alt="">
+                                                      </div>
+                                                      <div class="ccb-isi-comment">
+                                                          <div class="ccb-isi-comment-name">
+                                                              <p>${detail_product_item.PIC_company_name}</p>
+                                                              <div class="btn-penjual-ccb">
+                                                                  Penjual
+                                                              </div>
+                                                          </div>
+                                                          <div class="ccb-thankyou">
+                                                              Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      `);
+                                        
+                                    }else {
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Silahkan Login`,
+                                            timer:2000,
+                                        })
+                                        setTimeout(()=>{
+                                          window.parent.location.reload()
+                                            window.parent.$('.iframe').css('display','none')
+                                            window.parent.$('.force-close-all-command').css('display','none')
+                                        },1500)
+                                        
+                                    }
+                                      
                                       // })
                                     })
                                     .catch((err) => {});
                                 } else {
                                   console.log("masuk ke else");
-                                  axios
-                                    .post(
-                                      `https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`
-                                    )
+                                  axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                     .then((res) => {
-                                      console.log(res.data);
-                                      // res.data.map((val,index)=>{
-                                      console.log(comment_customer);
-                                      $(".box-ulasan-detail").append(`
-                                                                <div class="box-item-ulasan">
-                                                                    <div class="biu-left">
-                                                                        <div class="biu-image">
-                                                                            <img src="../img/accounts.png" alt="">
-                                                                        </div>
-                                                                        <p>Anonymous</p>
-                                                                    </div>
-                                                                    <div class="biu-right">
-                                                                        <p>${comment_customer}</p>
-                                                                        <div class="company-comment-box">
-                                                                            <div class="ccb-image">
-                                                                                <img src="../img/vantsing_shipping_method.png" alt="">
-                                                                            </div>
-                                                                            <div class="ccb-isi-comment">
-                                                                                <div class="ccb-isi-comment-name">
-                                                                                    <p>${detail_product_item.PIC_company_name}</p>
-                                                                                    <div class="btn-penjual-ccb">
-                                                                                        Penjual
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="ccb-thankyou">
-                                                                                    Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                      if(res.data){
+                                        console.log(res.data)
+                                        var isCustomer_information = Array.isArray(res.data)
+                                        if(isCustomer_information) {
+                                            alamat_pilihan = res.data[0].Address_1
+                                        }else {
+                                            alamat_pilihan = res.data.Address_1
+                        
+                                        }
+                                        $(".box-ulasan-detail").append(`
+                                            <div class="box-item-ulasan">
+                                                <div class="biu-left">
+                                                    <div class="biu-image">
+                                                        <img src="../img/accounts.png" alt="">
+                                                    </div>
+                                                    <p>Anonymous</p>
+                                                </div>
+                                                <div class="biu-right">
+                                                    <p>${comment_customer}</p>
+                                                    <div class="company-comment-box">
+                                                        <div class="ccb-image">
+                                                            <img src="../img/vantsing_shipping_method.png" alt="">
+                                                        </div>
+                                                        <div class="ccb-isi-comment">
+                                                            <div class="ccb-isi-comment-name">
+                                                                <p>${detail_product_item.PIC_company_name}</p>
+                                                                <div class="btn-penjual-ccb">
+                                                                    Penjual
                                                                 </div>
-                                                            `);
-                                      // })
+                                                            </div>
+                                                            <div class="ccb-thankyou">
+                                                                Terima kasih telah berbelanja di ${detail_product_item.PIC_company_name}. Bagikan link toko kami https://www.soldays.id kepada teman-teman Anda dan favoritkan Toko kami untuk terus update mengenai stok dan produk terbaru
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `);
+                                      
+                                    }else {
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Silahkan Login`,
+                                            timer:2000,
+                                        })
+                                        setTimeout(()=>{
+                                            window.parent.location.reload()
+                                            window.parent.$('.iframe').css('display','none')
+                                            window.parent.$('.force-close-all-command').css('display','none')
+                                        },1500)
+                                        
+                                    }
                                     })
                                     .catch((err) => {});
                                 }
@@ -1579,8 +1672,6 @@ const render_product_detail_from_home = async (item_category) => {
                               });
                           });
                         }
-
-                        console.log("if else kelar");
                         Swal.fire({
                           title: "Uploading Data",
                           timer: 100,
@@ -1605,10 +1696,7 @@ const render_product_detail_from_home = async (item_category) => {
 };
 const buyNow = async (product_id) => {
   // addToCart(product_id)
-  axios
-    .post(
-      `https://products.sold.co.id/get-product-details?product_code=${product_id}`
-    )
+  axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then(async (res) => {
       var product = res.data;
       var province_company = "";
@@ -1616,7 +1704,7 @@ const buyNow = async (product_id) => {
       var district_company = "";
       var courier_price_code_company = "";
       var token = localStorage.getItem("token");
-      var final_qty = $(".input-qty-product-detail").val();
+      var final_qty = $(".input-qty-product-detail").val(); 
       if (token === null) {
         if (token === null) {
           // swal.fire("Silahkan Login","","warning");
@@ -1662,19 +1750,9 @@ const buyNow = async (product_id) => {
         var array = [];
 
         localStorage.setItem("itemsToCheckout", array);
-        axios
-          .post(
-            `https://products.sold.co.id/get-product-details?product_code=${product_id}`
-          )
+        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
           .then((res) => {
-            console.log(res.data, "7065 setelah await");
-            console.log(province_company, " province company");
-            console.log(city_company, " province company");
-            console.log(district_company, " province company");
-            console.log(courier_price_code_company, " province company");
-            console.log(res.data.Sell_Price, " sell price");
-            console.log(product.PIC_company_address);
-            console.log(product.Weight_KG);
+
             if (res.data.Stock_Quantity > 1) {
               console.log("masuk ke if 7067");
               var productToBeAdded = {
@@ -1699,7 +1777,7 @@ const buyNow = async (product_id) => {
                 "itemsToCheckout",
                 productToBeAddedStringify
               );
-              // $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+              
 
               $(".close-button", window.parent.parent.document).css(
                 "display",
@@ -1707,17 +1785,7 @@ const buyNow = async (product_id) => {
               );
 
               $(".close", window.parent.parent.document).css("display", "none");
-
-              // $('.close').css('display','none')
-
-              // $('.modals-product-detail',window.parent.document).css('display','none')
-              // $('.modals-lk', window.parent.parent.document).css('display','none')
-              $(
-                ".modals-new-product-detail",
-                window.parent.parent.document
-              ).css("display", "none");
-              // $(".iframe",window.parent.parent.document).toggle();
-
+              $(".modals-new-product-detail",window.parent.parent.document).css("display", "none");
               if (
                 $(".option-3", window.parent.parent.document).hasClass(
                   "background_grey"
@@ -1755,12 +1823,7 @@ const buyNow = async (product_id) => {
               );
               console.log(window.parent.$(".iframe"));
               window.parent.$(".iframe").css("display", "block");
-              window.parent
-                .$(".iframe")
-                .attr(
-                  "src",
-                  `../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`
-                );
+              window.parent.$(".iframe").attr("src",`../WEB/Iframe/checkout.html?checkout_array=${productToBeAddedStringify}`);
               // $('.close-button',window.parent.document).css('display','none')
 
               // SEARCH ITEM BACK TO NORMAL

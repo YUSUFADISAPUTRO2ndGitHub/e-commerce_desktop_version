@@ -355,10 +355,16 @@ $(document).on('click',".save-user",function(){
     
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
 
-        // var dataPassword = $('#password_user').val()
-
+            }
+            
         var data = {
             customer_data : {
                Customer_Code : localStorage.getItem("token"),
@@ -376,12 +382,31 @@ $(document).on('click',".save-user",function(){
                Address_4 : $("#alamat_lengkap4_user").val(),
                Address_5 : $("#alamat_lengkap5_user").val(),
                Status : "pending",
-               User_Type : res.data.User_Type,
+               User_Type : data_customer.User_Type,
                account_number: $("#rekening_user").val(),
                referral_customer_code: $("#referral-profile").val(),
                ktp:$('#no_ktp_user').val()
            }
        }
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.location.reload()
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)
+            
+        }
+
+        
+
        
        axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
             headers:{
@@ -496,129 +521,156 @@ const save_ganti_alamat_tokped=()=>{
     var index = parseInt($('.btn-save-ganti-alamat').attr('id'))
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        console.log(index,'ini index alamat yang dipake')
-        if(index === 1 ){
-            var data = {
-                customer_data : {
-                   Customer_Code : token,
-                   First_Name : nama_customer,
-                   Last_Name : res.data.Last_Name,
-                   Birthday : res.data.Birthday,
-                   Created_Date : "CURRENT_TIMESTAMP()",
-                   Last_Login : "CURRENT_TIMESTAMP()",
-                   Email : res.data.Email,
-                   Contact_Number_1 : nohp_customer,
-                   Contact_Number_2 : res.data.Contact_Number_2,
-                   Address_1 : full_alamat,
-                   Address_2 : res.data.Address_2,
-                   Address_3 : res.data.Address_3,
-                   Address_4 : res.data.Address_4,
-                   Address_5 : res.data.Address_5,
-                   Status : "pending",
-                   User_Type : res.data.User_Type,
-                   account_number: res.data.account_number,
-                   referral_customer_code: res.data.referral_customer_code,
-                   ktp:res.data.ktp
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
+
+            }
+            if(index === 1 ){
+                var data = {
+                    customer_data : {
+                       Customer_Code : token,
+                       First_Name : nama_customer,
+                       Last_Name : data_customer.Last_Name,
+                       Birthday : data_customer.Birthday,
+                       Created_Date : "CURRENT_TIMESTAMP()",
+                       Last_Login : "CURRENT_TIMESTAMP()",
+                       Email : data_customer.Email,
+                       Contact_Number_1 : nohp_customer,
+                       Contact_Number_2 : data_customer.Contact_Number_2,
+                       Address_1 : full_alamat,
+                       Address_2 : data_customer.Address_2,
+                       Address_3 : data_customer.Address_3,
+                       Address_4 : data_customer.Address_4,
+                       Address_5 : data_customer.Address_5,
+                       Status : "pending",
+                       User_Type : data_customer.User_Type,
+                       account_number: data_customer.account_number,
+                       referral_customer_code: data_customer.referral_customer_code,
+                       ktp:data_customer.ktp
+                   }
                }
-           }
-        }else if ( index === 2 ){
-            console.log('masuk ke 527')
-            var data = {
-                customer_data : {
-                   Customer_Code : token,
-                   First_Name : nama_customer,
-                   Last_Name : res.data.Last_Name,
-                   Birthday : res.data.Birthday,
-                   Created_Date : "CURRENT_TIMESTAMP()",
-                   Last_Login : "CURRENT_TIMESTAMP()",
-                   Email : res.data.Email,
-                   Contact_Number_1 : nohp_customer,
-                   Contact_Number_2 : res.data.Contact_Number_2,
-                   Address_1 : res.data.Address_1,
-                   Address_2 : full_alamat,
-                   Address_3 : res.data.Address_3,
-                   Address_4 : res.data.Address_4,
-                   Address_5 : res.data.Address_5,
-                   Status : "pending",
-                   User_Type : res.data.User_Type,
-                   account_number: res.data.account_number,
-                   referral_customer_code: res.data.referral_customer_code,
-                   ktp:res.data.ktp
+            }else if ( index === 2 ){
+                console.log('masuk ke 527')
+                var data = {
+                    customer_data : {
+                       Customer_Code : token,
+                       First_Name : nama_customer,
+                       Last_Name : data_customer.Last_Name,
+                       Birthday : data_customer.Birthday,
+                       Created_Date : "CURRENT_TIMESTAMP()",
+                       Last_Login : "CURRENT_TIMESTAMP()",
+                       Email : data_customer.Email,
+                       Contact_Number_1 : nohp_customer,
+                       Contact_Number_2 : data_customer.Contact_Number_2,
+                       Address_1 : data_customer.Address_1,
+                       Address_2 : full_alamat,
+                       Address_3 : data_customer.Address_3,
+                       Address_4 : data_customer.Address_4,
+                       Address_5 : data_customer.Address_5,
+                       Status : "pending",
+                       User_Type : data_customer.User_Type,
+                       account_number: data_customer.account_number,
+                       referral_customer_code: data_customer.referral_customer_code,
+                       ktp:data_customer.ktp
+                   }
                }
-           }
-        }else if ( index === 3){
-            var data = {
-                customer_data : {
-                   Customer_Code : token,
-                   First_Name : nama_customer,
-                   Last_Name : res.data.Last_Name,
-                   Birthday : res.data.Birthday,
-                   Created_Date : "CURRENT_TIMESTAMP()",
-                   Last_Login : "CURRENT_TIMESTAMP()",
-                   Email : res.data.Email,
-                   Contact_Number_1 : nohp_customer,
-                   Contact_Number_2 : res.data.Contact_Number_2,
-                   Address_1 : res.data.Address_1,
-                   Address_2 : res.data.Address_2,
-                   Address_3 : full_alamat,
-                   Address_4 : res.data.Address_4,
-                   Address_5 : res.data.Address_5,
-                   Status : "pending",
-                   User_Type : res.data.User_Type,
-                   account_number: res.data.account_number,
-                   referral_customer_code: res.data.referral_customer_code,
-                   ktp:res.data.ktp
+            }else if ( index === 3){
+                var data = {
+                    customer_data : {
+                       Customer_Code : token,
+                       First_Name : nama_customer,
+                       Last_Name : data_customer.Last_Name,
+                       Birthday : data_customer.Birthday,
+                       Created_Date : "CURRENT_TIMESTAMP()",
+                       Last_Login : "CURRENT_TIMESTAMP()",
+                       Email : data_customer.Email,
+                       Contact_Number_1 : nohp_customer,
+                       Contact_Number_2 : data_customer.Contact_Number_2,
+                       Address_1 : data_customer.Address_1,
+                       Address_2 : data_customer.Address_2,
+                       Address_3 : full_alamat,
+                       Address_4 : data_customer.Address_4,
+                       Address_5 : data_customer.Address_5,
+                       Status : "pending",
+                       User_Type : data_customer.User_Type,
+                       account_number: data_customer.account_number,
+                       referral_customer_code: data_customer.referral_customer_code,
+                       ktp:data_customer.ktp
+                   }
                }
-           }
-        }else if (index === 4) {
-            var data = {
-                customer_data : {
-                   Customer_Code : token,
-                   First_Name : nama_customer,
-                   Last_Name : res.data.Last_Name,
-                   Birthday : res.data.Birthday,
-                   Created_Date : "CURRENT_TIMESTAMP()",
-                   Last_Login : "CURRENT_TIMESTAMP()",
-                   Email : res.data.Email,
-                   Contact_Number_1 : nohp_customer,
-                   Contact_Number_2 : res.data.Contact_Number_2,
-                   Address_1 : res.data.Address_1,
-                   Address_2 : res.data.Address_2,
-                   Address_3 : res.data.Address_3,
-                   Address_4 : full_alamat,
-                   Address_5 : res.data.Address_5,
-                   Status : "pending",
-                   User_Type : res.data.User_Type,
-                   account_number: res.data.account_number,
-                   referral_customer_code: res.data.referral_customer_code,
-                   ktp:res.data.ktp
+            }else if (index === 4) {
+                var data = {
+                    customer_data : {
+                       Customer_Code : token,
+                       First_Name : nama_customer,
+                       Last_Name : data_customer.Last_Name,
+                       Birthday : data_customer.Birthday,
+                       Created_Date : "CURRENT_TIMESTAMP()",
+                       Last_Login : "CURRENT_TIMESTAMP()",
+                       Email : data_customer.Email,
+                       Contact_Number_1 : nohp_customer,
+                       Contact_Number_2 : data_customer.Contact_Number_2,
+                       Address_1 : data_customer.Address_1,
+                       Address_2 : data_customer.Address_2,
+                       Address_3 : data_customer.Address_3,
+                       Address_4 : full_alamat,
+                       Address_5 : data_customer.Address_5,
+                       Status : "pending",
+                       User_Type : data_customer.User_Type,
+                       account_number: data_customer.account_number,
+                       referral_customer_code: data_customer.referral_customer_code,
+                       ktp:data_customer.ktp
+                   }
                }
-           }
+            }else {
+                var data = {
+                    customer_data : {
+                       Customer_Code : token,
+                       First_Name : nama_customer,
+                       Last_Name : data_customer.Last_Name,
+                       Birthday : data_customer.Birthday,
+                       Created_Date : "CURRENT_TIMESTAMP()",
+                       Last_Login : "CURRENT_TIMESTAMP()",
+                       Email : data_customer.Email,
+                       Contact_Number_1 : nohp_customer,
+                       Contact_Number_2 : data_customer.Contact_Number_2,
+                       Address_1 : data_customer.Address_1,
+                       Address_2 : data_customer.Address_2,
+                       Address_3 : data_customer.Address_3,
+                       Address_4 : data_customer.Address_4,
+                       Address_5 : full_alamat,
+                       Status : "pending",
+                       User_Type : data_customer.User_Type,
+                       account_number: data_customer.account_number,
+                       referral_customer_code: data_customer.referral_customer_code,
+                       ktp:data_customer.ktp
+                   }
+               }
+            }
+         
         }else {
-            var data = {
-                customer_data : {
-                   Customer_Code : token,
-                   First_Name : nama_customer,
-                   Last_Name : res.data.Last_Name,
-                   Birthday : res.data.Birthday,
-                   Created_Date : "CURRENT_TIMESTAMP()",
-                   Last_Login : "CURRENT_TIMESTAMP()",
-                   Email : res.data.Email,
-                   Contact_Number_1 : nohp_customer,
-                   Contact_Number_2 : res.data.Contact_Number_2,
-                   Address_1 : res.data.Address_1,
-                   Address_2 : res.data.Address_2,
-                   Address_3 : res.data.Address_3,
-                   Address_4 : res.data.Address_4,
-                   Address_5 : full_alamat,
-                   Status : "pending",
-                   User_Type : res.data.User_Type,
-                   account_number: res.data.account_number,
-                   referral_customer_code: res.data.referral_customer_code,
-                   ktp:res.data.ktp
-               }
-           }
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.location.reload()
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)
+            
         }
+
+    
        axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
             headers:{
                 "Content-Type":'application/json'
@@ -704,6 +756,16 @@ const simpan_profile_new=()=>{
     console.log(nama_depan, nama_belakang,email,no_hp_1,no_hp_2)
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
+
+            }
+
         var data = {
             customer_data : {
                Customer_Code : token,
@@ -712,21 +774,41 @@ const simpan_profile_new=()=>{
                Birthday : replace_birthday,
                Created_Date : "CURRENT_TIMESTAMP()",
                Last_Login : "CURRENT_TIMESTAMP()",
-               Email : res.data.Email,
+               Email : data_customer.Email,
                Contact_Number_1 : no_hp_1,
                Contact_Number_2 : no_hp_2,
-               Address_1 : res.data.Address_1,
-               Address_2 : res.data.Address_2,
-               Address_3 : res.data.Address_3,
-               Address_4 : res.data.Address_4,
-               Address_5 : res.data.Address_5,
-               Status : res.data.Status,
-               User_Type : res.data.User_Type,
-               account_number: res.data.account_number,
-               referral_customer_code: res.data.referral_customer_code,
-               ktp:res.data.ktp
+               Address_1 : data_customer.Address_1,
+               Address_2 : data_customer.Address_2,
+               Address_3 : data_customer.Address_3,
+               Address_4 : data_customer.Address_4,
+               Address_5 : data_customer.Address_5,
+               Status : data_customer.Status,
+               User_Type : data_customer.User_Type,
+               account_number: data_customer.account_number,
+               referral_customer_code: data_customer.referral_customer_code,
+               ktp:data_customer.ktp
            }
        }
+        
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.location.reload()
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)
+            
+        }
+
+
+
        axios.post(`https://customers.sold.co.id/update-customer-data-by-user-themselves`,data,{
             headers:{
                 "Content-Type":'application/json'

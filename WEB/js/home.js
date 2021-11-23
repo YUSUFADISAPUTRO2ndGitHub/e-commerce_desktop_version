@@ -112,11 +112,34 @@ function live_chat(){
     var token = localStorage.getItem('token')
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        
         if(res.data){
-            $(".modals-live-chat").attr("src", `http://147.139.168.202:3045/?user_name=${res.data.First_Name}`);
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
+
+            }
+            if(data_customer){
+                $(".modals-live-chat").attr("src", `http://147.139.168.202:3045/?user_name=${data_customer.First_Name}`);
+            }else {
+                $(".modals-live-chat").attr("src", `http://147.139.168.202:3045`);
+            }
+       
         }else {
-            $(".modals-live-chat").attr("src", `http://147.139.168.202:3045`);
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)      
         }
         // $('.modals-live-chat').attr('src','https://tawk.to/chat/60f103efd6e7610a49ab8521/1famneoj8')
     }).catch((err)=>{
@@ -344,89 +367,97 @@ const commision_check=()=>{
     // CUSTOMER INFORMATION  FOR TOTAL COMMISION
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        
-        var tanggalAwalBuat = res.data.Created_Date
-        
-        if(res.data.extra_column_3 === '3%'){
-            percent = 0.03
-            total_percent = '3%'
-        }else if ( res.data.extra_column_3 === '7.5%'){
-            percent = 0.075
-            total_percent = '7.5%'
-        }
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
 
-         // CUSTOMER TOTAL COMMISION THIS MONTH
-        axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
-        .then((res)=>{
+            }
+            var tanggalAwalBuat = data_customer.Created_Date
             
-            
-            
-            
-            // if(res.data.length === 1){
-            //     var total_commision = res.data[0].Total_Price * percent
-            //     $('.commision_this_month').val(total_commision)
-
-            // }else {
-
-            // }
-            var total_commision=0
-            res.data.map((val,index)=>{
-                var tot_price = parseInt(val.Total_Price)
+            if(data_customer.extra_column_3 === '3%'){
+                percent = 0.03
+                total_percent = '3%'
+            }else if ( data_customer.extra_column_3 === '7.5%'){
+                percent = 0.075
+                total_percent = '7.5%'
+            }
+    
+             // CUSTOMER TOTAL COMMISION THIS MONTH
+            axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${thismonth}`)
+            .then((res)=>{
+    
+                var total_commision=0
+                res.data.map((val,index)=>{
+                    var tot_price = parseInt(val.Total_Price)
+                    
+                    total_commision +=tot_price * percent
+                })
+                    $('.commision_this_month').val(total_commision)
                 
-                total_commision +=tot_price * percent
+                // Total_Price
+            }).catch((err)=>{
+                
             })
-                $('.commision_this_month').val(total_commision)
-            
-            // Total_Price
-        }).catch((err)=>{
-            
-        })
-
-        axios.post(`https://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
-        .then((res)=>{
-            
-            
-            var total_commision = parseInt(res.data[0].Total_Price) * percent
-            $('.total_commision').val(total_commision)
-        }).catch((err)=>{
-            
-        })
-
-          // DATA UNTUK RENDER TABLE
-
-          axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
-          .then((res)=>{
-              
-              
-              
-              
-              $('.date-commision').val(newdate)
-              // var a = $('.date-commision').val()
-              res.data.map((val,index)=>{
+    
+            axios.post(`https://customers.sold.co.id/get-total-commission-of-all-months-gross?Customer_Code=${token}`)
+            .then((res)=>{
+                var total_commision = parseInt(res.data[0].Total_Price) * percent
+                $('.total_commision').val(total_commision)
+            }).catch((err)=>{
+                
+            })
+    
+              // DATA UNTUK RENDER TABLE
+    
+              axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${newdate}`)
+              .then((res)=>{
+    
+                  $('.date-commision').val(newdate)
+                  // var a = $('.date-commision').val()
+                  res.data.map((val,index)=>{
+                      
+                      var untung = percent * val.Total_Price  
+                      
+                      
+                      $('.tbody_commision').append(`
+                        <tr>
+                            <td>
+                                <div class="wrapper">
+                                    <div class="marquee">
+                                        <p class="on_commision">${val.Order_Number}</p> 
+                                    </div>
+                                </div>   
+                            </td>
+                            <td class="tq_commision">${val.Total_Quantity}</td>
+                            <td class="tp_commision">${val.Total_Price}</td>
+                            <td class="percent_commision">${total_percent}</td>
+                            <td class="untung_commision">${untung}</td>
+                            
+                        </tr>
+                      `)
+                  })
+              }).catch((err)=>{
                   
-                  var untung = percent * val.Total_Price  
-                  
-                  
-                  $('.tbody_commision').append(`
-                    <tr>
-                        <td>
-                            <div class="wrapper">
-                                <div class="marquee">
-                                    <p class="on_commision">${val.Order_Number}</p> 
-                                </div>
-                            </div>   
-                        </td>
-                        <td class="tq_commision">${val.Total_Quantity}</td>
-                        <td class="tp_commision">${val.Total_Price}</td>
-                        <td class="percent_commision">${total_percent}</td>
-                        <td class="untung_commision">${untung}</td>
-                        
-                    </tr>
-                  `)
               })
-          }).catch((err)=>{
-              
-          })
+       
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)      
+        }
 
 
 
@@ -688,45 +719,68 @@ const date_commision=()=>{
     var total_percent;
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
 
-        
-        var tanggalAwalBuat = res.data.Created_Date
-        
-        if(res.data.extra_column_3 === '3%'){
-            percent = 0.03
-            total_percent = '3%'
-        }else if ( res.data.extra_column_3 === '7.5%'){
-            percent = 0.075
-            total_percent = '7.5%'
-        }
-
-        axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggal}`)
-    .then((res)=>{
-        
-        
-        
-        
-        $('.date-commision').val(tanggal)
-        // var a = $('.date-commision').val()
-        res.data.map((val,index)=>{
+            }
+            var tanggalAwalBuat = data_customer.Created_Date
             
-            var untung = percent * val.Total_Price
-            $('.tbody_commision').append(`
-            <tr>
-                <td> <p  class="limited-text on_commision"> ${val.Order_Number}</p>
-                </td>
-                <td class="tq_commision">${val.Total_Quantity}</td>
-                <td class="tp_commision">${val.Total_Price}</td>
-                <td class="percent_commision">${total_percent}</td>
-                <td class="untung_commision">${untung}</td>
+            if(data_customer.extra_column_3 === '3%'){
+                percent = 0.03
+                total_percent = '3%'
+            }else if ( data_customer.extra_column_3 === '7.5%'){
+                percent = 0.075
+                total_percent = '7.5%'
+            }
+    
+            axios.post(`https://customers.sold.co.id/get-sales-order-which-referral-code-customer?referral_customer_code=${token}&&given_date=${tanggal}`)
+            .then((res)=>{
                 
-            </tr>
-          `)  
-
-        })
-    }).catch((err)=>{
+                
+                
+                
+                $('.date-commision').val(tanggal)
+                // var a = $('.date-commision').val()
+                res.data.map((val,index)=>{
+                    
+                    var untung = percent * val.Total_Price
+                    $('.tbody_commision').append(`
+                    <tr>
+                        <td> <p  class="limited-text on_commision"> ${val.Order_Number}</p>
+                        </td>
+                        <td class="tq_commision">${val.Total_Quantity}</td>
+                        <td class="tp_commision">${val.Total_Price}</td>
+                        <td class="percent_commision">${total_percent}</td>
+                        <td class="untung_commision">${untung}</td>
+                        
+                    </tr>
+                `)  
         
-    })
+                })
+            }).catch((err)=>{
+                
+            })
+       
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)      
+        }
+        
          
     }).catch((err)=>{
         
@@ -1064,36 +1118,60 @@ const send_otp=()=>{
     }else {
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{  
-            
-            axios.post(`https://customers.sold.co.id/get-otp?Email=${res.data.Email}`)
-            .then((res)=>{
-                if(res.data){
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--success">
-                            <div class="o-circle__sign"></div>  
-                        </div>   
-                        OTP Berhasil Dikirim
-                        `,
-                        timer:2000,
-                        
-                    })
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
                 }else {
-                    // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        OTP Gagal Terikirim`,
-                        timer:2000,
-                        
-                    })
+                    data_customer = res.data
+
                 }
-                
-            }).catch((err)=>{
-                
-            })
+                axios.post(`https://customers.sold.co.id/get-otp?Email=${data_customer.Email}`)
+                .then((res)=>{
+                    if(res.data){
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                <div class="o-circle__sign"></div>  
+                            </div>   
+                            OTP Berhasil Dikirim
+                            `,
+                            timer:2000,
+                            
+                        })
+                    }else {
+                        // Swal.fire('OTP Gagal Terkirim', 'Good-Bye', 'error')
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            OTP Gagal Terikirim`,
+                            timer:2000,
+                            
+                        })
+                    }
+                    
+                }).catch((err)=>{
+                    
+                })
+           
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    window.parent.$('.iframe').css('display','none')
+                    window.parent.$('.force-close-all-command').css('display','none')
+                },1500)      
+            }
+            
         }).catch((err)=>{
     
         })
@@ -1628,20 +1706,44 @@ const close_tab_answer=(result,index)=>{
                     comment_parse.map((val,index)=>{
                         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                         .then((res)=>{
-                            $('#nav-profile').append(`
-                            <div class="user-card-id">
-                                <div class="user-card-top-id">
-                                    <img src="../img/accounts.png" alt="">
-                                    <div class="user-card-desc-top-id">
-                                        <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                        <p>*****</p>
+                            if(res.data){
+                                var data_customer
+                                var isCustomer_information = Array.isArray(res.data)
+                                if(isCustomer_information) {
+                                    data_customer = res.data[0]
+                                }else {
+                                    data_customer = res.data
+                
+                                }
+                                $('#nav-profile').append(`
+                                    <div class="user-card-id">
+                                        <div class="user-card-top-id">
+                                            <img src="../img/accounts.png" alt="">
+                                            <div class="user-card-desc-top-id">
+                                                <p>${data_customer.First_Name} ${data_customer.Last_Name}</p>
+                                                <p>*****</p>
+                                            </div>
+                                        </div>
+                                        <div class="user-card-bot-id">
+                                            <p>${val.Comment}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="user-card-bot-id">
-                                    <p>${val.Comment}</p>
-                                </div>
-                            </div>
-                            `)
+                                `)
+                           
+                            }else {
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Silahkan Login`,
+                                    timer:2000,
+                                })
+                                setTimeout(()=>{
+                                    window.parent.$('.iframe').css('display','none')
+                                    window.parent.$('.force-close-all-command').css('display','none')
+                                },1500)      
+                            }
                         }).catch((err)=>{
                             
                         })
@@ -1814,43 +1916,53 @@ const close_tab_answer=(result,index)=>{
             var token = localStorage.getItem('token')
             axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{  
-                var email = res.data.Email
-                axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
-            ).then((res)=>{
                 if(res.data){
-                    // swal.fire("Login Berhasil", "", "success");
-                    // Swal.fire({
-                    //     html:`
-                    //     <div class="o-circle c-container__circle o-circle__sign--success">
-                    //         <div class="o-circle__sign"></div>  
-                    //     </div>   
-                    //     Login Berhasil
-                    //     `,
-                    //     timer:2000,
+                    var data_customer
+                    var isCustomer_information = Array.isArray(res.data)
+                    if(isCustomer_information) {
+                        data_customer = res.data[0]
+                    }else {
+                        data_customer = res.data
+    
+                    }
+                    var email = data_customer.Email
+                    axios.post(`https://customers.sold.co.id/customer-login-request?Email=${email}&Password=${password}&otp=${otp}`
+                    ).then((res)=>{
+                        if(res.data){
+
+                            commision_check()
+                        }else {
+                            // swal.fire("Login Gagal", "", "info");
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                            Pengisian data ada yang salah`,
+                                timer:2000,
+                                
+                            })
+                            
+                            // $('.box-option-login').removeClass('commision')
+                        }
+                    }).catch((err)=>{
                         
-                    // })
-                    // localStorage.setItem('token',res.data)
-                    // $('#newloginModal').modal('hide')
-                    // $('#login_product').modal('hide')
-                    // $('.box-option-login').removeClass('commision')
-                    commision_check()
+                    })
+               
                 }else {
-                    // swal.fire("Login Gagal", "", "info");
                     Swal.fire({
                         html:`
                         <div class="o-circle c-container__circle o-circle__sign--failure">
                             <div class="o-circle__sign"></div>  
                         </div> 
-                       Pengisian data ada yang salah`,
+                        Silahkan Login`,
                         timer:2000,
-                        
                     })
-                    
-                    // $('.box-option-login').removeClass('commision')
+                    setTimeout(()=>{
+                        window.parent.$('.iframe').css('display','none')
+                        window.parent.$('.force-close-all-command').css('display','none')
+                    },1500)      
                 }
-            }).catch((err)=>{
-                
-            })
             }).catch((err)=>{
                 console.log(err)
             })
@@ -2560,24 +2672,48 @@ const replace_bo_to =(value,id)=>{
        var token = localStorage.getItem('token')
        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
        .then((res)=>{
-           var nama_customer = res.data.First_Name + ' ' + res.data.Last_Name
-            var limit_alamat  = parseInt(localStorage.getItem('limit_alamat'))
-            console.log(limit_alamat)
-            if(limit_alamat>0 && limit_alamat <5){
-                var next_limit = limit_alamat+1
-                console.log(next_limit)
-                change_alamat_customer(nama_customer,res.data.Contact_Number_1,'',next_limit,'new')
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
             }else {
-                Swal.fire({
-                    html:`
-                    <div class="o-circle c-container__circle o-circle__sign--failure">
-                        <div class="o-circle__sign"></div>  
-                    </div> 
-                    Alamat Maksimal 5`,
-                    timer:2000,
-                    
-                })
+                data_customer = res.data
+
             }
+            var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
+             var limit_alamat  = parseInt(localStorage.getItem('limit_alamat'))
+             console.log(limit_alamat)
+             if(limit_alamat>0 && limit_alamat <5){
+                 var next_limit = limit_alamat+1
+                 console.log(next_limit)
+                 change_alamat_customer(nama_customer,data_customer.Contact_Number_1,'',next_limit,'new')
+             }else {
+                 Swal.fire({
+                     html:`
+                     <div class="o-circle c-container__circle o-circle__sign--failure">
+                         <div class="o-circle__sign"></div>  
+                     </div> 
+                     Alamat Maksimal 5`,
+                     timer:2000,
+                     
+                 })
+             }
+       
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)      
+        }
            
        }).catch((err)=>{
            console.log(err)

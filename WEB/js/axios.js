@@ -815,6 +815,7 @@ const get_product_detail=(product_id)=>{
     window.parent.$('.modals-new-product-detail').css('display','block')
     window.parent.$('.modals-new-product-detail').attr('src',`../../WEB/Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
     
+    window.parent.$('.new-box-category').css('display','none')
     // $('.modals-lk').remove()
     // 
     // render_get_product_detail(product_id)
@@ -1082,44 +1083,7 @@ function back_to_home(){
     window.parent.$('.force-close-all-command-2').css('display','none')
 
 }
-// const find_province_from_address= async ()=>{
-//     return new Promise(async (resolve, reject) => {
-//         var province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
-//         var province_pilihan =''
-//         var token = localStorage.getItem('token')
-//         var kurir_pilihan = ''
-//         var kurir_kode = ''
-//         var alamat_pilihan = ''
-//         await get_all_couriers().done(async function(response){
-//             kurir_pilihan = response[0].Courier
-//             kurir_kode = response[0].Courier_Code
-//             await axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-//             .then(async (res)=>{
-//                 alamat_pilihan = res.data.Address_1
-//                 if(province_from_storage != undefined &&  province_from_storage.length != 0){
-//                     province_from_storage.forEach((val,index)=>{
-//                         if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
-//                             province_pilihan = val.Province
-//                             resolve(province_pilihan) 
-//                         }
-//                     })
-//                 }else {
-//                     await get_all_province_from_courier(kurir_pilihan,kurir_kode).done(async function(response){
-//                         response.forEach((val,index)=>{
-//                             if(alamat_pilihan.toUpperCase().includes(val.Province.toUpperCase())){
-//                                 province_pilihan = val.Province
-//                                 resolve(province_pilihan) 
-//                             }
-//                         })
-//                     })
-//                 }
-//             }).catch((err)=>{
-//                 
-//             })
-//         })
-//     })
 
-// }
 
 const render_group_buy=(product_id)=>{
     Swal.fire({
@@ -1675,51 +1639,79 @@ const render_group_buy=(product_id)=>{
                     
                     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                     .then((res)=>{
-                        
                         if(res.data){
-                            if(res.data.Address_1 !== 'NULL' && res.data.Address_1 != "undefined"){
-                                $('.option-alamat-gb').append(`
-                                <option value="${res.data.Address_1}" id="alamat_gb">${res.data.Address_1}</option> 
-                                `)
-                            }else if ( res.data.Address_2 !== 'NULL'&& res.data.Address_2 != "undefined"){
-                                $('.option-alamat-gb').append(`
-                                <option value="${res.data.Address_2}" id="alamat_gb">${res.data.Address_2}</option> 
-                                `)  
-                            }else if (res.data.Address_3 !== 'NULL' && res.data.Address_3 != "undefined"){
-                                $('.option-alamat-gb').append(`
-                                <option value="${res.data.Address_3 }" id="alamat_gb">${res.data.Address_3}</option> 
-                                `) 
-                            }else if (res.data.Address_4 !== 'NULL' && res.data.Address_4 != "undefined"){
-                                $('.option-alamat-gb').append(`
-                                <option value="${res.data.Address_4}" id="alamat_gb">${res.data.Address_4}</option> 
-                                `) 
-                            }else if (res.data.Address_5 !== 'NULL' && res.data.Address_5 != "undefined"){
-                                $('.option-alamat-gb').append(`
-                                <option value="${res.data.Address_5}" id="alamat_gb">${res.data.Address_5}</option> 
-                                `) 
+                            var data_customer
+                            var isCustomer_information = Array.isArray(res.data)
+                            if(isCustomer_information) {
+                                data_customer = res.data[0]
                             }else {
+                                data_customer = res.data
+            
+                            }
+                            if(data_customer){
+                                if(data_customer.Address_1 !== 'NULL' && data_customer.Address_1 != "undefined"){
+                                    $('.option-alamat-gb').append(`
+                                    <option value="${data_customer.Address_1}" id="alamat_gb">${data_customer.Address_1}</option> 
+                                    `)
+                                }else if ( data_customer.Address_2 !== 'NULL'&& data_customer.Address_2 != "undefined"){
+                                    $('.option-alamat-gb').append(`
+                                    <option value="${data_customer.Address_2}" id="alamat_gb">${data_customer.Address_2}</option> 
+                                    `)  
+                                }else if (data_customer.Address_3 !== 'NULL' && data_customer.Address_3 != "undefined"){
+                                    $('.option-alamat-gb').append(`
+                                    <option value="${data_customer.Address_3 }" id="alamat_gb">${data_customer.Address_3}</option> 
+                                    `) 
+                                }else if (data_customer.Address_4 !== 'NULL' && data_customer.Address_4 != "undefined"){
+                                    $('.option-alamat-gb').append(`
+                                    <option value="${data_customer.Address_4}" id="alamat_gb">${data_customer.Address_4}</option> 
+                                    `) 
+                                }else if (data_customer.Address_5 !== 'NULL' && data_customer.Address_5 != "undefined"){
+                                    $('.option-alamat-gb').append(`
+                                    <option value="${data_customer.Address_5}" id="alamat_gb">${data_customer.Address_5}</option> 
+                                    `) 
+                                }else {
+                                    
+                                }
+                            }else {
+                                // swal.fire("Login Terlebih Dahulu", "", "error");
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Login Terlebih Dahulu`,
+                                    timer:2000,
+                                    
+                                })
+                                var delayInMilliseconds = 1000; //1 second
+        
+                                setTimeout(function() {
+                                //your code to be executed after 1 second
+                                $('.box_iframe_groupbuy',window.parent.document).css('display','none')
+                                $('#loginModal',window.parent.document).modal('show')
                                 
+                                }, delayInMilliseconds);
                             }
                         }else {
-                            // swal.fire("Login Terlebih Dahulu", "", "error");
                             Swal.fire({
                                 html:`
                                 <div class="o-circle c-container__circle o-circle__sign--failure">
                                     <div class="o-circle__sign"></div>  
                                 </div> 
-                                Login Terlebih Dahulu`,
+                                Silahkan Login`,
                                 timer:2000,
-                                
                             })
                             var delayInMilliseconds = 1000; //1 second
-    
+        
                             setTimeout(function() {
                             //your code to be executed after 1 second
                             $('.box_iframe_groupbuy',window.parent.document).css('display','none')
                             $('#loginModal',window.parent.document).modal('show')
                             
                             }, delayInMilliseconds);
+                            
                         }
+                      
                      
                     }).catch((err)=>{
                         
@@ -4289,18 +4281,25 @@ function commafy( num ) {
                                     comment_parse.map((val,index)=>{
                                         axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${val.Customer_Code}`)
                                         .then((res)=>{
-
                                             if(res.data){
                                                 var link_gambar = res.data
                                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                                 .then((res)=>{
-                                                    // res.data.map((val,index)=>{
+                                                    if(res.data){
+                                                        var data_customer
+                                                        var isCustomer_information = Array.isArray(res.data)
+                                                        if(isCustomer_information) {
+                                                            data_customer = res.data[0]
+                                                        }else {
+                                                            data_customer = res.data
+                                        
+                                                        }
                                                         $('#nav-profile').append(`
                                                         <div class="user-card-id">
                                                             <div class="user-card-top-id">
                                                                 <img src="${link_gambar}" alt="">
                                                                 <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                    <p>${data_customer.First_Name} ${data_customer.Last_Name}</p>
                                                                     
                                                                 </div>
                                                             </div>
@@ -4309,25 +4308,38 @@ function commafy( num ) {
                                                             </div>
                                                         </div>
                                                         `)
-                                                    // })
+                                                    }else {
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div> 
+                                                            Silahkan Login`,
+                                                            timer:2000,
+                                                        })
+                                                        setTimeout(()=>{
+                                                            window.parent.$('.iframe').css('display','none')
+                                                            window.parent.$('.force-close-all-command').css('display','none')
+                                                        },1500)  
+                                                    }
                                                 }).catch((err)=>{
                                                     
                                                 })
                                             } else {
                                                 $('#nav-profile').append(`
-                                                        <div class="user-card-id">
-                                                            <div class="user-card-top-id">
-                                                                <img src="../img/accounts.png" alt="">
-                                                                <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                                    <p>*****</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-card-bot-id">
-                                                                <p>${val.Comment}</p>
+                                                    <div class="user-card-id">
+                                                        <div class="user-card-top-id">
+                                                            <img src="../img/accounts.png" alt="">
+                                                            <div class="user-card-desc-top-id">
+                                                                <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                <p>*****</p>
                                                             </div>
                                                         </div>
-                                                        `)
+                                                        <div class="user-card-bot-id">
+                                                            <p>${val.Comment}</p>
+                                                        </div>
+                                                    </div>
+                                                `)
                                             }
                                         }).catch((err)=>{
                                             
@@ -4781,40 +4793,63 @@ function commafy( num ) {
                                                 var link_gambar = res.data
                                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                                 .then((res)=>{                                                    
-                                                    // res.data.map((val,index)=>{
+                                                    
+                                                    if(res.data){
+                                                        var data_customer
+                                                        var isCustomer_information = Array.isArray(res.data)
+                                                        if(isCustomer_information) {
+                                                            data_customer = res.data[0]
+                                                        }else {
+                                                            data_customer = res.data
+                                        
+                                                        }
                                                         $('#nav-profile').append(`
-                                                        <div class="user-card-id">
-                                                            <div class="user-card-top-id">
-                                                                <img src="${link_gambar}" alt="">
-                                                                <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                                    
+                                                            <div class="user-card-id">
+                                                                <div class="user-card-top-id">
+                                                                    <img src="${link_gambar}" alt="">
+                                                                    <div class="user-card-desc-top-id">
+                                                                        <p>${data_customer.First_Name} ${data_customer.Last_Name}</p>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="user-card-bot-id">
+                                                                    <p>${val.Comment}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="user-card-bot-id">
-                                                                <p>${val.Comment}</p>
-                                                            </div>
-                                                        </div>
                                                         `)
-                                                    // })
+                                                    }else {
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div> 
+                                                            Silahkan Login`,
+                                                            timer:2000,
+                                                        })
+                                                        setTimeout(()=>{
+                                                            window.parent.$('.iframe').css('display','none')
+                                                            window.parent.$('.force-close-all-command').css('display','none')
+                                                        },1500)
+                                                        
+                                                    }
                                                 }).catch((err)=>{
                                                     
                                                 })
                                             } else {
                                                 $('#nav-profile').append(`
-                                                        <div class="user-card-id">
-                                                            <div class="user-card-top-id">
-                                                                <img src="../img/accounts.png" alt="">
-                                                                <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
-                                                                    <p>*****</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="user-card-bot-id">
-                                                                <p>${val.Comment}</p>
+                                                    <div class="user-card-id">
+                                                        <div class="user-card-top-id">
+                                                            <img src="../img/accounts.png" alt="">
+                                                            <div class="user-card-desc-top-id">
+                                                                <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                <p>*****</p>
                                                             </div>
                                                         </div>
-                                                        `)
+                                                        <div class="user-card-bot-id">
+                                                            <p>${val.Comment}</p>
+                                                        </div>
+                                                    </div>
+                                                `)
                                             }
                                         }).catch((err)=>{
                                             
@@ -5314,21 +5349,47 @@ function commafy( num ) {
                                 var link_gambar = res.data
                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                 .then((res)=>{
-                                    // res.data.map((val,index)=>{
-                                        $('#nav-profile').append(`
-                                        <div class="user-card-id">
-                                            <div class="user-card-top-id">
-                                                <img src="${link_gambar}" alt="">
-                                                <div class="user-card-desc-top-id">
-                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                        if(res.data){
+                                            var data_customer
+                                            var isCustomer_information = Array.isArray(res.data)
+                                            if(isCustomer_information) {
+                                                data_customer = res.data[0]
+                                            }else {
+                                                data_customer = res.data
+                            
+                                            }
+                                            $('#nav-profile').append(`
+                                            <div class="user-card-id">
+                                                <div class="user-card-top-id">
+                                                    <img src="${link_gambar}" alt="">
+                                                    <div class="user-card-desc-top-id">
+                                                        <p>${data_customer.First_Name} ${data_customer.Last_Name}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="user-card-bot-id">
+                                                    <p>${val.Comment}</p>
                                                 </div>
                                             </div>
-                                            <div class="user-card-bot-id">
-                                                <p>${val.Comment}</p>
-                                            </div>
-                                        </div>
-                                        `)
-                                    // })
+                                            `)
+                                    
+                                        }else {
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Silahkan Login`,
+                                                timer:2000,
+                                            })
+                                            setTimeout(()=>{
+                                                window.parent.location.reload()
+                                                window.parent.$('.iframe').css('display','none')
+                                                window.parent.$('.force-close-all-command').css('display','none')
+                                            },1500)
+                                            
+                                        }
+                                      
+                                    
                                 }).catch((err)=>{
                                     
                                 })
@@ -5808,13 +5869,21 @@ function commafy( num ) {
                                                 var link_gambar = res.data
                                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${val.Customer_Code}`)
                                                 .then((res)=>{
-                                                    // res.data.map((val,index)=>{
+                                                    if(res.data){
+                                                        var data_customer
+                                                        var isCustomer_information = Array.isArray(res.data)
+                                                        if(isCustomer_information) {
+                                                            data_customer = res.data[0]
+                                                        }else {
+                                                            data_customer = res.data
+                                        
+                                                        }
                                                         $('#nav-profile').append(`
                                                         <div class="user-card-id">
                                                             <div class="user-card-top-id">
                                                                 <img src="${link_gambar}" alt="">
                                                                 <div class="user-card-desc-top-id">
-                                                                    <p>${res.data.First_Name} ${res.data.Last_Name}</p>
+                                                                    <p>${data_customer.First_Name} ${data_customer.Last_Name}</p>
                                                                 </div>
                                                             </div>
                                                             <div class="user-card-bot-id">
@@ -5822,7 +5891,21 @@ function commafy( num ) {
                                                             </div>
                                                         </div>
                                                         `)
-                                                    // })
+                                                    }else {
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div> 
+                                                            Silahkan Login`,
+                                                            timer:2000,
+                                                        })
+                                                        setTimeout(()=>{
+                                                            window.parent.location.reload()
+                                                            window.parent.$('.iframe').css('display','none')
+                                                            window.parent.$('.force-close-all-command').css('display','none')
+                                                        },1500)     
+                                                    }
                                                 }).catch((err)=>{
                                                     
                                                 })
@@ -6578,7 +6661,7 @@ const check_user_for_login=()=>{
     $('#checking_password_register').empty()
     //clear form
     var token = localStorage.getItem('token')
-    if(token === null ){
+    if(token === null || token === false || token === 'false' ){
         $('#newloginTokpedModal').modal('show') // login baru
         $('.box_information_login').css('display','flex')
         $('#checking_email_login').empty()
@@ -6591,208 +6674,248 @@ const check_user_for_login=()=>{
     }else {
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{ 
-            var data_customer = res.data
-            
-            if(data_customer){
-                if(data_customer.User_Type === 'Customer'){
-                    console.log('masuk ke if')
-                    $('.btn-status-barang').css('display','none')
-                    $('.sup_delete').css('display','flex')
-                    $('.box-kumpulkan-profile').css('top','70px')
-
-                    $('#prof_perusahaan_nama').css('display','none')
-                    $('#prof_npwp').css('display','none')
-                    $('#prof_nik').css('display','none')
-                    
-                    $('#prof_thn').css('display','flex')
-                    $('#prof_bln').css('display','flex')
-                    $('#prof_tgl').css('display','flex')
-                    $('#id_ref_code').css('visibility','show')
-
-                    // $('.sup_delete').css('left','20px')
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
                 }else {
-                    console.log('masuk ke else')
-                    $('.btn-status-barang').css('display','block')
-                    $('.sup_delete').css('display','none')
-                    $('.box-kumpulkan-profile').css('top','0px')
-                    $('#id_ref_code').css('visibility','hidden')
+                    data_customer = res.data
 
-                    $('#prof_perusahaan_nama').css('display','flex')
-                    $('#prof_npwp').css('display','flex')
-                    $('#prof_nik').css('display','flex')
-                    
-                    $('#prof_thn').css('display','none')
-                    $('#prof_bln').css('display','none')
-                    $('#prof_tgl').css('display','none')
-                    
                 }
-
-                axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
-                .then((res)=>{
-                    
-                    if(res.data){
-                        $(`#img-profile-id`).attr(`src`, `${res.data}`);
-                        $(`#img-profile-big`).attr(`src`, `${res.data}`);
-                    }else {
-                        $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
-                        $(`#img-profile-big`).attr(`src`, `./img/accounts.png`);
-                    }
-                }).catch((err)=>{
-                    
-                })
+                if(data_customer){
+                    if(data_customer.User_Type === 'Customer'){
+                        console.log('masuk ke if')
+                        $('.btn-status-barang').css('display','none')
+                        $('.sup_delete').css('display','flex')
+                        $('.box-kumpulkan-profile').css('top','70px')
     
-                var tahun = data_customer.Birthday.slice(0,4)
-                var bulan = data_customer.Birthday.slice(5,7)
-                var hari = data_customer.Birthday.slice(8,10)
-                var new_tanggal_lahir = data_customer.Birthday
-                var newReferralCode = data_customer.Customer_Code
-                var tanggal_lahir = hari + ' ' + bulan + ' ' + tahun
-                var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
-                console.log(nama_customer)
-                $('#ncp-email').html(`${data_customer.Email}`)
-                $('#ncp-name').val(`${data_customer.First_Name}`)
-                $('#ncp-name-belakang').val(`${data_customer.Last_Name}`)
-                $('#ncp-lahir').html(new_tanggal_lahir)
-                $('#name-new-profile').val(nama_customer)
-                $('#ncp-hp-1').val(`${data_customer.Contact_Number_1}`)
-                $('#ncp-hp-2').val(`${data_customer.Contact_Number_2}`)
-                $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
-                $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
-                $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
-                $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
-                $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
-                $('#rekening_user').val(`${data_customer.bank_account_number}`)
-                $('#referral-profile').val(`${data_customer.extra_column_2}`)
-                $('#no_ktp_user').val(`${data_customer.ktp}`)
-                $('.ref-profile').val(token)
-                $('#npwp_supp_prof').val(data_customer.npwp)
-                
-                
-                $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
-                $('#nik_supp_profile').val(data_customer.extra_column_5)
-                $('#ref_code_from').val(`${data_customer.referral_customer_code}`)
-                var a = $('#refer-profile').val()
-                $('.new-content-isi-alamat').empty()
-
-
-                if(data_customer.Address_1 == ''){
-                    // 
-                }else{
-                    // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
-                    localStorage.setItem('limit_alamat',1)
-                    $('.new-content-isi-alamat').append(`
-                        <div class="new-box-alamat" id="alamat-active">
-                            <p>Alamat Pertama</p>
-                            <p>${nama_customer}</p>
-                            <p>${data_customer.Contact_Number_1}</p>
-                            <p>${data_customer.Address_1}</p>
-                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_1}',1)">
-                                Ubah Alamat                      
-                            </div>
-                        </div>
-                    `)
-                    // $('.new-profile-box').append(`
-                    //     <div class="login-name-3">
-                    //         <div class="box-name">
-                    //             <p>Alamat Lengkap</p>
-                    //         </div>
-                    //         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
-                    //     </div> 
+                        $('#prof_perusahaan_nama').css('display','none')
+                        $('#prof_npwp').css('display','none')
+                        $('#prof_nik').css('display','none')
+                        
+                        $('#prof_thn').css('display','flex')
+                        $('#prof_bln').css('display','flex')
+                        $('#prof_tgl').css('display','flex')
+                        $('#id_ref_code').css('visibility','show')
+    
+                        // $('.sup_delete').css('left','20px')
+                    }else {
+                        console.log('masuk ke else')
+                        $('.btn-status-barang').css('display','block')
+                        $('.sup_delete').css('display','none')
+                        $('.box-kumpulkan-profile').css('top','0px')
+                        $('#id_ref_code').css('visibility','hidden')
+    
+                        $('#prof_perusahaan_nama').css('display','flex')
+                        $('#prof_npwp').css('display','flex')
+                        $('#prof_nik').css('display','flex')
+                        
+                        $('#prof_thn').css('display','none')
+                        $('#prof_bln').css('display','none')
+                        $('#prof_tgl').css('display','none')
+                        
+                    }
+    
+                    axios.post(`https://customers.sold.co.id/get-profile-image?Customer_Code=${token}`)
+                    .then((res)=>{
+                        
+                        if(res.data){
+                            $(`#img-profile-id`).attr(`src`, `${res.data}`);
+                            $(`#img-profile-big`).attr(`src`, `${res.data}`);
+                        }else {
+                            $(`#img-profile-id`).attr(`src`, `./img/accounts.png`);
+                            $(`#img-profile-big`).attr(`src`, `./img/accounts.png`);
+                        }
+                    }).catch((err)=>{
+                        
+                    })
+        
+                    var tahun = data_customer.Birthday.slice(0,4)
+                    var bulan = data_customer.Birthday.slice(5,7)
+                    var hari = data_customer.Birthday.slice(8,10)
+                    var new_tanggal_lahir = data_customer.Birthday
+                    var newReferralCode = data_customer.Customer_Code
+                    var tanggal_lahir = hari + ' ' + bulan + ' ' + tahun
+                    var nama_customer = data_customer.First_Name + ' ' + data_customer.Last_Name
+                    console.log(nama_customer)
+                    $('#ncp-email').html(`${data_customer.Email}`)
+                    $('#ncp-name').val(`${data_customer.First_Name}`)
+                    $('#ncp-name-belakang').val(`${data_customer.Last_Name}`)
+                    $('#ncp-lahir').html(new_tanggal_lahir)
+                    $('#name-new-profile').val(nama_customer)
+                    $('#ncp-hp-1').val(`${data_customer.Contact_Number_1}`)
+                    $('#ncp-hp-2').val(`${data_customer.Contact_Number_2}`)
+                    $('#alamat_lengkap1_user').val(`${data_customer.Address_1}`)
+                    $('#alamat_lengkap2_user').val(`${data_customer.Address_2}`)
+                    $('#alamat_lengkap3_user').val(`${data_customer.Address_3}`)
+                    $('#alamat_lengkap4_user').val(`${data_customer.Address_4}`)
+                    $('#alamat_lengkap5_user').val(`${data_customer.Address_5}`)
+                    $('#rekening_user').val(`${data_customer.bank_account_number}`)
+                    $('#referral-profile').val(`${data_customer.extra_column_2}`)
+                    $('#no_ktp_user').val(`${data_customer.ktp}`)
+                    $('.ref-profile').val(token)
+                    $('#npwp_supp_prof').val(data_customer.npwp)
                     
-                    // `)
-                    // 
-                }
-                if(data_customer.Address_2 == ''){
-                    // 
-                }else{
-                    localStorage.setItem('limit_alamat',2)
-                    $('.new-content-isi-alamat').append(`
-                        <div class="new-box-alamat">
-                            <p>Alamat Kedua</p>
-                            <p>${nama_customer}</p>
-                            <p>${data_customer.Contact_Number_1}</p>
-                            <p>${data_customer.Address_2}</p>
-                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_2}',2)">
-                                Ubah Alamat                      
+                    
+                    $('#nama_perusahaan_profile').val(data_customer.Nama_Perusahaan)
+                    $('#nik_supp_profile').val(data_customer.extra_column_5)
+                    $('#ref_code_from').val(`${data_customer.referral_customer_code}`)
+                    var a = $('#refer-profile').val()
+                    $('.new-content-isi-alamat').empty()
+    
+    
+                    if(data_customer.Address_1 == ''){
+                        // 
+                    }else{
+                        // $('#alamat-new-profile').html(`${data_customer.Address_1}`)
+                        localStorage.setItem('limit_alamat',1)
+                        $('.new-content-isi-alamat').append(`
+                            <div class="new-box-alamat" id="alamat-active">
+                                <p>Alamat Pertama</p>
+                                <p>${nama_customer}</p>
+                                <p>${data_customer.Contact_Number_1}</p>
+                                <p>${data_customer.Address_1}</p>
+                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_1}',1)">
+                                    Ubah Alamat                      
+                                </div>
                             </div>
-                        </div>
-                    `)
-                    // 
-                }
-                if(data_customer.Address_3 == ''){
-                    // 
-                }else{
-                    localStorage.setItem('limit_alamat',3)
-                    $('.new-content-isi-alamat').append(`
-                        <div class="new-box-alamat">
-                            <p>Alamat Ketiga</p>
-                            <p>${nama_customer}</p>
-                            <p>${data_customer.Contact_Number_1}</p>
-                            <p>${data_customer.Address_3}</p>
-                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_3}',3)">
-                                Ubah Alamat                      
+                        `)
+                        // $('.new-profile-box').append(`
+                        //     <div class="login-name-3">
+                        //         <div class="box-name">
+                        //             <p>Alamat Lengkap</p>
+                        //         </div>
+                        //         <input type="text" class="form-reg-nama" value="${data_customer.Address_1}"  minlength="4" maxlength="15" id="alamat_lengkap1_user">
+                        //     </div> 
+                        
+                        // `)
+                        // 
+                    }
+                    if(data_customer.Address_2 == ''){
+                        // 
+                    }else{
+                        localStorage.setItem('limit_alamat',2)
+                        $('.new-content-isi-alamat').append(`
+                            <div class="new-box-alamat">
+                                <p>Alamat Kedua</p>
+                                <p>${nama_customer}</p>
+                                <p>${data_customer.Contact_Number_1}</p>
+                                <p>${data_customer.Address_2}</p>
+                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_2}',2)">
+                                    Ubah Alamat                      
+                                </div>
                             </div>
-                        </div>
-                    `)
-                }
-                if(data_customer.Address_4 == ''){
-                    // 
-                }else{
-                    localStorage.setItem('limit_alamat',4)
-                    $('.new-content-isi-alamat').append(`
-                        <div class="new-box-alamat">
-                            <p>Alamat Keempat</p>
-                            <p>${nama_customer}</p>
-                            <p>${data_customer.Contact_Number_1}</p>
-                            <p>${data_customer.Address_4}</p>
-                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_4}',4)">
-                                Ubah Alamat                      
+                        `)
+                        // 
+                    }
+                    if(data_customer.Address_3 == ''){
+                        // 
+                    }else{
+                        localStorage.setItem('limit_alamat',3)
+                        $('.new-content-isi-alamat').append(`
+                            <div class="new-box-alamat">
+                                <p>Alamat Ketiga</p>
+                                <p>${nama_customer}</p>
+                                <p>${data_customer.Contact_Number_1}</p>
+                                <p>${data_customer.Address_3}</p>
+                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_3}',3)">
+                                    Ubah Alamat                      
+                                </div>
                             </div>
-                        </div>
-                    `)
-                }
-                if(data_customer.Address_5 == ''){
-                    // 
-                }else{
-                    localStorage.setItem('limit_alamat',5)
-                    $('.new-content-isi-alamat').append(`
-                        <div class="new-box-alamat">
-                            <p>Alamat Kelima</p>
-                            <p>${nama_customer}</p>
-                            <p>${data_customer.Contact_Number_1}</p>
-                            <p>${data_customer.Address_5}</p>
-                            <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_5}',5)">
-                                Ubah Alamat                      
+                        `)
+                    }
+                    if(data_customer.Address_4 == ''){
+                        // 
+                    }else{
+                        localStorage.setItem('limit_alamat',4)
+                        $('.new-content-isi-alamat').append(`
+                            <div class="new-box-alamat">
+                                <p>Alamat Keempat</p>
+                                <p>${nama_customer}</p>
+                                <p>${data_customer.Contact_Number_1}</p>
+                                <p>${data_customer.Address_4}</p>
+                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_4}',4)">
+                                    Ubah Alamat                      
+                                </div>
                             </div>
-                        </div>
-                    `)
+                        `)
+                    }
+                    if(data_customer.Address_5 == ''){
+                        // 
+                    }else{
+                        localStorage.setItem('limit_alamat',5)
+                        $('.new-content-isi-alamat').append(`
+                            <div class="new-box-alamat">
+                                <p>Alamat Kelima</p>
+                                <p>${nama_customer}</p>
+                                <p>${data_customer.Contact_Number_1}</p>
+                                <p>${data_customer.Address_5}</p>
+                                <div class="btn-ubah-alamat" id="bua-1" onclick="change_alamat_customer('${nama_customer}','${data_customer.Contact_Number_1}','${data_customer.Address_5}',5)">
+                                    Ubah Alamat                      
+                                </div>
+                            </div>
+                        `)
+                    }
+                    
+                    $('#newProfileModal').modal('show')
+                }else {
+                    console.log('6760 else')
+                    // $('#loginModal').modal('show') // login lama
+                    $('#newloginTokpedModal').modal('show') // login baru
+                    $('.box_information_login').css('display','flex')
+                    $('#checking_email_login').empty()
+                    $('#checking_password_login').empty()
+                    $('#checking_email_register').empty()
+                    $('#checking_email_register_2').empty()
+                    $('#checking_password_register').empty()
+                    $('#checking_nama_register').empty()
+                    $('#checking_nohp_register').empty()
+                    // $('#newProfileModal').modal('show')
                 }
-                
-                $('#newProfileModal').modal('show')
+                // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL
+                $('.option-5').removeClass('background_grey')
+                $('.option-4').removeClass('background_grey')
+                $('.option-3').removeClass('background_grey')
+                $('.option-2').removeClass('background_grey')
+                $('.option-1').removeClass('background_grey')
+                $('.option-0').removeClass('background_grey')
+    
+                // NGAPUS CATEGORY PRODUCT
+                $('.new-box-category').css('display','none')
+           
             }else {
-                console.log('6760 else')
-                // $('#loginModal').modal('show') // login lama
-                $('#newloginTokpedModal').modal('show') // login baru
-                $('.box_information_login').css('display','flex')
-                $('#checking_email_login').empty()
-                $('#checking_password_login').empty()
-                $('#checking_email_register').empty()
-                $('#checking_email_register_2').empty()
-                $('#checking_password_register').empty()
-                $('#checking_nama_register').empty()
-                $('#checking_nohp_register').empty()
-                // $('#newProfileModal').modal('show')
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    $('#newloginTokpedModal').modal('show') // login baru
+                    $('.box_information_login').css('display','flex')
+                    $('#checking_email_login').empty()
+                    $('#checking_password_login').empty()
+                    $('#checking_email_register').empty()
+                    $('#checking_email_register_2').empty()
+                    $('#checking_password_register').empty()
+                    $('#checking_nama_register').empty()
+                    $('#checking_nohp_register').empty()
+                       // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL
+                $('.option-5').removeClass('background_grey')
+                $('.option-4').removeClass('background_grey')
+                $('.option-3').removeClass('background_grey')
+                $('.option-2').removeClass('background_grey')
+                $('.option-1').removeClass('background_grey')
+                $('.option-0').removeClass('background_grey')
+    
+                // NGAPUS CATEGORY PRODUCT
+                $('.new-box-category').css('display','none')
+                },1500)     
             }
-            // NGAPUS BACKGROUND ABU ABU ORDER LIST DLL
-            $('.option-5').removeClass('background_grey')
-            $('.option-4').removeClass('background_grey')
-            $('.option-3').removeClass('background_grey')
-            $('.option-2').removeClass('background_grey')
-            $('.option-1').removeClass('background_grey')
-            $('.option-0').removeClass('background_grey')
-
-            // NGAPUS CATEGORY PRODUCT
-            $('.new-box-category').css('display','none')
+            
         }).catch((err)=>{
             console.log(err)
         })
@@ -7287,82 +7410,105 @@ function payment_groupbuy_home(product_id){
                                 detail_product = res.data
                                 axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                 .then((res)=>{
-                                    
-                                    
-                                    customerDetails  ={
-                                        Customer_Code:token,
-                                        Total_Price: total_harga_shipping_with_product,
-                                        Total_Quantity : total_Quantity,
-                                        Unit:"pcs",
-                                        Shipping_Address: final_address,
-                                        Payment_Method : payment_method_pilihan,
-                                        Shipping_Fee: harga_shipping_qty,
-                                        Primary_Recipient_Name:res.data.First_Name + " " + res.data.Last_Name,
-                                        Shipping_Contact_Number:res.data.Contact_Number_1
-                                    }         
-                                    items.push( {
-                                            Customer_Code: token,
-                                            Product_Code: product_id,
-                                            Product_Name: detail_product.Name,
-                                            Quantity_Requested: $('.qty_groupbuy_home').val(),
-                                            Price_Based_On_Total_Quantity: harga_total_product
-                    
-                                    }) 
-                                    items.push( {
-                                        Customer_Code: token,
-                                        Product_Code: kurir_kode,
-                                        Product_Name: product_name_shipping,
-                                        Quantity_Requested: '1',
-                                        Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
-                
-                                    })  
-                                    var data = {
-                                        "Sales_Order_Data": customerDetails,
-                                        "Sales_Order_Detail_data": items
-                                    }
-                                    
-            
-                                    axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-                                        headers:{
-                                            "Content-Type":'application/json'
-                                        },
-                                        "data":JSON.stringify({
-                                            "Sales_Order_data":customerDetails,
-                                            "Sales_Order_Detail_data": items
-                                        })
-                                    }).then((res)=>{
-                                        if(res.data.status){
-                                            // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                                            Swal.fire({
-                                                html:`
-                                                <div class="o-circle c-container__circle o-circle__sign--success">
-                                                    <div class="o-circle__sign"></div>  
-                                                </div>   
-                                                Penambahan Data Berhasil
-                                                `,
-                                                timer:2000,
-                                                
-                                            })
-                                            $('.modals-product-detail').css('display','none')
-                                            $('.box-delete-success').css('display','block')
-                                            // tambahin gambar yg dari mas fauzi
-                                            
-                                            location.replace(`../Iframe/success.html`)
+                                    if(res.data){
+                                        var data_customer
+                                        var isCustomer_information = Array.isArray(res.data)
+                                        if(isCustomer_information) {
+                                            data_customer = res.data[0]
                                         }else {
-                                            Swal.fire({
-                                                html:`
-                                                <div class="o-circle c-container__circle o-circle__sign--failure">
-                                                    <div class="o-circle__sign"></div>  
-                                                </div> 
-                                                Pembelian Gagal`,
-                                                timer:2000,
-                                                
-                                            })
+                                            data_customer = res.data
+                        
+                                        }
+                                        customerDetails  ={
+                                            Customer_Code:token,
+                                            Total_Price: total_harga_shipping_with_product,
+                                            Total_Quantity : total_Quantity,
+                                            Unit:"pcs",
+                                            Shipping_Address: final_address,
+                                            Payment_Method : payment_method_pilihan,
+                                            Shipping_Fee: harga_shipping_qty,
+                                            Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name,
+                                            Shipping_Contact_Number:data_customer.Contact_Number_1
+                                        }         
+                                        items.push( {
+                                                Customer_Code: token,
+                                                Product_Code: product_id,
+                                                Product_Name: detail_product.Name,
+                                                Quantity_Requested: $('.qty_groupbuy_home').val(),
+                                                Price_Based_On_Total_Quantity: harga_total_product
+                        
+                                        }) 
+                                        items.push( {
+                                            Customer_Code: token,
+                                            Product_Code: kurir_kode,
+                                            Product_Name: product_name_shipping,
+                                            Quantity_Requested: '1',
+                                            Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
+                    
+                                        })  
+                                        var data = {
+                                            "Sales_Order_Data": customerDetails,
+                                            "Sales_Order_Detail_data": items
                                         }
                                         
-                                    }).catch((err)=>{
-                                        
-                                    })
+                
+                                        axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                            headers:{
+                                                "Content-Type":'application/json'
+                                            },
+                                            "data":JSON.stringify({
+                                                "Sales_Order_data":customerDetails,
+                                                "Sales_Order_Detail_data": items
+                                            })
+                                        }).then((res)=>{
+                                            if(res.data.status){
+                                                // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                Swal.fire({
+                                                    html:`
+                                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                                        <div class="o-circle__sign"></div>  
+                                                    </div>   
+                                                    Penambahan Data Berhasil
+                                                    `,
+                                                    timer:2000,
+                                                    
+                                                })
+                                                $('.modals-product-detail').css('display','none')
+                                                $('.box-delete-success').css('display','block')
+                                                // tambahin gambar yg dari mas fauzi
+                                                
+                                                location.replace(`../Iframe/success.html`)
+                                            }else {
+                                                Swal.fire({
+                                                    html:`
+                                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                        <div class="o-circle__sign"></div>  
+                                                    </div> 
+                                                    Pembelian Gagal`,
+                                                    timer:2000,
+                                                    
+                                                })
+                                            }
+                                            
+                                        }).catch((err)=>{
+                                            
+                                        })
+                                    }else {
+                                        Swal.fire({
+                                            html:`
+                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                <div class="o-circle__sign"></div>  
+                                            </div> 
+                                            Silahkan Login`,
+                                            timer:2000,
+                                        })
+                                        setTimeout(()=>{
+                                            window.parent.$('.iframe').css('display','none')
+                                            window.parent.$('.force-close-all-command').css('display','none')
+                                        },1500)     
+                                    }
+                                    
+                                 
                                     
             
                                 }).catch((err)=>{
@@ -7397,86 +7543,106 @@ function payment_groupbuy_home(product_id){
                                           detail_product = res.data
                                           axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                           .then((res)=>{
-                                              
-                                              data_customer = res.data
-                                              var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
-                                              
-                                              
-                                              customerDetails  ={
-                                                Customer_Code:token,
-                                                Total_Price: total_harga_shipping_with_product,
-                                                Total_Quantity : item_tersedia +1,
-                                                Unit:"pcs",
-                                                Shipping_Address: final_address,
-                                                Payment_Method : payment_method_pilihan,
-                                                Shipping_Fee: harga_shipping_qty,
-                                                Shipping_Contact_Number:res.data.Contact_Number_1,
-                                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
-                                            }         
-                                            items.push( {
-                                                    Customer_Code: token,
-                                                    Product_Code: product_id,
-                                                    Product_Name: detail_product.Name,
-                                                    Quantity_Requested: item_tersedia,
-                                                    Price_Based_On_Total_Quantity: harga_total_product
-                            
-                                            }) 
-                                            items.push( {
-                                                Customer_Code: token,
-                                                Product_Code: kurir_kode,
-                                                Product_Name: product_name_shipping,
-                                                Quantity_Requested: '1',
-                                                Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
-                        
-                                            })  
-                                            var data = {
-                                                "Sales_Order_Data": customerDetails,
-                                                "Sales_Order_Detail_data": items
-                                            }     
-                                            
-                                            
-                                                  
-                                                  
-                                                axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-                                                    headers:{
-                                                        "Content-Type":'application/json'
-                                                    },
-                                                    "data":JSON.stringify({
-                                                        "Sales_Order_data":customerDetails,
-                                                        "Sales_Order_Detail_data": items
-                                                    })
-                                                }).then((res)=>{
+                                            if(res.data){
+                                                var data_customer
+                                                var isCustomer_information = Array.isArray(res.data)
+                                                if(isCustomer_information) {
+                                                    data_customer = res.data[0]
+                                                }else {
+                                                    data_customer = res.data
+                                
+                                                }
+                                                
+                                                var harga_pembelian = item_tersedia * parseInt(detail_product.GroupBuy_SellPrice)
+                                                
+                                                
+                                                customerDetails  ={
+                                                  Customer_Code:token,
+                                                  Total_Price: total_harga_shipping_with_product,
+                                                  Total_Quantity : item_tersedia +1,
+                                                  Unit:"pcs",
+                                                  Shipping_Address: final_address,
+                                                  Payment_Method : payment_method_pilihan,
+                                                  Shipping_Fee: harga_shipping_qty,
+                                                  Shipping_Contact_Number:data_customer.Contact_Number_1,
+                                                  Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                              }         
+                                              items.push( {
+                                                      Customer_Code: token,
+                                                      Product_Code: product_id,
+                                                      Product_Name: detail_product.Name,
+                                                      Quantity_Requested: item_tersedia,
+                                                      Price_Based_On_Total_Quantity: harga_total_product
+                              
+                                              }) 
+                                              items.push( {
+                                                  Customer_Code: token,
+                                                  Product_Code: kurir_kode,
+                                                  Product_Name: product_name_shipping,
+                                                  Quantity_Requested: '1',
+                                                  Price_Based_On_Total_Quantity: total_harga_shipping_with_insurance_packing
+                          
+                                              })  
+                                              var data = {
+                                                  "Sales_Order_Data": customerDetails,
+                                                  "Sales_Order_Detail_data": items
+                                              }               
                                                     
-                                                    if(res.data){
-                                                        Swal.fire({
-                                                            html:`
-                                                            <div class="o-circle c-container__circle o-circle__sign--success">
-                                                                <div class="o-circle__sign"></div>  
-                                                            </div>   
-                                                            Pembelian Data Berhasil
-                                                            `,
-                                                            timer:2000,
-                                                            
-                                                        })
-                                                        // tambahin gambar yg dari mas fauzi
-                                                        
-                                                        location.replace(`../Iframe/success.html`)
-                                                    }else {
-                                                        // swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
-                                                        Swal.fire({
-                                                            html:`
-                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
-                                                                <div class="o-circle__sign"></div>  
-                                                            </div> 
-                                                            Pembelian Gagal, Silahkan Check Cart`,
-                                                            timer:2000,
-                                                            
-                                                        })
-                                                    }
-                                                    // $('.modals-product-detail').css('display','none')
-                                                }).catch((err)=>{
-                                                    
-                                                })         
+                                                  axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                      headers:{
+                                                          "Content-Type":'application/json'
+                                                      },
+                                                      "data":JSON.stringify({
+                                                          "Sales_Order_data":customerDetails,
+                                                          "Sales_Order_Detail_data": items
+                                                      })
+                                                  }).then((res)=>{
+                                                      
+                                                      if(res.data){
+                                                          Swal.fire({
+                                                              html:`
+                                                              <div class="o-circle c-container__circle o-circle__sign--success">
+                                                                  <div class="o-circle__sign"></div>  
+                                                              </div>   
+                                                              Pembelian Data Berhasil
+                                                              `,
+                                                              timer:2000,
+                                                              
+                                                          })
+                                                          // tambahin gambar yg dari mas fauzi
+                                                          
+                                                          location.replace(`../Iframe/success.html`)
+                                                      }else {
+                                                          // swal.fire("Pembelian Gagal, Silahkan Check Cart", "", "error");
+                                                          Swal.fire({
+                                                              html:`
+                                                              <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                  <div class="o-circle__sign"></div>  
+                                                              </div> 
+                                                              Pembelian Gagal, Silahkan Check Cart`,
+                                                              timer:2000,
+                                                              
+                                                          })
+                                                      }
+                                                      // $('.modals-product-detail').css('display','none')
+                                                  }).catch((err)=>{
+                                                      
+                                                  })         
+                                          
+                                            }else {
+                                                Swal.fire({
+                                                    html:`
+                                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                        <div class="o-circle__sign"></div>  
+                                                    </div> 
+                                                    Silahkan Login`,
+                                                    timer:2000,
+                                                })
+                                                setTimeout(()=>{
+                                                    window.parent.$('.iframe').css('display','none')
+                                                    window.parent.$('.force-close-all-command').css('display','none')
+                                                },1500)     
+                                            }
                                           }).catch((err)=>{
                                               
                                           })
@@ -7490,92 +7656,113 @@ function payment_groupbuy_home(product_id){
                                         detail_product = res.data
                                         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
                                         .then((res)=>{
-                                            data_customer =res.data
-                                            
-                                            customerDetails  ={
-                                                Customer_Code:token,
-                                                Total_Price: total_harga_shipping_with_product,
-                                                Total_Quantity : total_Quantity,
-                                                Unit:"pcs",
-                                                Shipping_Address: final_address,
-                                                Payment_Method : payment_method_pilihan,
-                                                Shipping_Fee: harga_shipping_qty,
-                                                Shipping_Contact_Number:res.data.Contact_Number_1,
-                                                Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
-                                            }         
-                                            items.push( {
-                                                    Customer_Code: token,
-                                                    Product_Code: product_id,
-                                                    Product_Name: product_name_shipping,
-                                                    Quantity_Requested: $('.qty_groupbuy_home').val(),
-                                                    Price_Based_On_Total_Quantity: harga_total_product
-                            
-                                            }) 
-                                            items.push( { // data kurir
-                                                Customer_Code: token,
-                                                Product_Code: kurir_kode,
-                                                Product_Name: product_name_shipping,
-                                                Quantity_Requested: '1',
-                                                Price_Based_On_Total_Quantity:total_harga_shipping_with_insurance_packing
-                        
-                                            })  
-                                            var data = {
-                                                "Sales_Order_Data": customerDetails,
-                                                "Sales_Order_Detail_data": items
-                                            }    
-                                            
-                                            
-                                            
-            
-                                            axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
-                                                headers:{
-                                                    "Content-Type":'application/json'
-                                                },
-                                                "data":JSON.stringify({
-                                                    "Sales_Order_data":customerDetails,
-                                                    "Sales_Order_Detail_data": items
-                                                })
-                                            }).then((res)=>{
-                                                if(res.data.status){
-                                                    
-                                                    // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
-                                                    Swal.fire({
-                                                        html:`
-                                                        <div class="o-circle c-container__circle o-circle__sign--success">
-                                                            <div class="o-circle__sign"></div>  
-                                                        </div>   
-                                                        Penambahan Data Berhasil
-                                                        `,
-                                                        timer:2000,
-                                                        
-                                                    })
-                                                    // close_all_open_window()
-                                                    $('.modals-product-detail').css('display','none')
-                                                    $('.box_iframe_groupbuy').css('display','none')
-                                                    
-                                                    
-                                                    $('.box_iframe_groupbuy').remove()
-                                                    // tambahin gambar yg dari mas fauzi
-                                                    
-                                                    location.replace(`../Iframe/success.html`)
-            
-                                                    
+                                            if(res.data){
+                                                var data_customer
+                                                var isCustomer_information = Array.isArray(res.data)
+                                                if(isCustomer_information) {
+                                                    data_customer = res.data[0]
                                                 }else {
-                                                    // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
-                                                    Swal.fire({
-                                                        html:`
-                                                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                                                            <div class="o-circle__sign"></div>  
-                                                        </div> 
-                                                        Penambahan Data Gagal, Silahkan Check Pengisian Data`,
-                                                        timer:2000,
-                                                        
-                                                    })
-                                                    $('.modals-product-detail').css('display','none')
+                                                    data_customer = res.data
+                                
                                                 }
-                                            }).catch((err)=>{
+                                                customerDetails  ={
+                                                    Customer_Code:token,
+                                                    Total_Price: total_harga_shipping_with_product,
+                                                    Total_Quantity : total_Quantity,
+                                                    Unit:"pcs",
+                                                    Shipping_Address: final_address,
+                                                    Payment_Method : payment_method_pilihan,
+                                                    Shipping_Fee: harga_shipping_qty,
+                                                    Shipping_Contact_Number:data_customer.Contact_Number_1,
+                                                    Primary_Recipient_Name:data_customer.First_Name + " " + data_customer.Last_Name
+                                                }         
+                                                items.push( {
+                                                        Customer_Code: token,
+                                                        Product_Code: product_id,
+                                                        Product_Name: product_name_shipping,
+                                                        Quantity_Requested: $('.qty_groupbuy_home').val(),
+                                                        Price_Based_On_Total_Quantity: harga_total_product
+                                
+                                                }) 
+                                                items.push( { // data kurir
+                                                    Customer_Code: token,
+                                                    Product_Code: kurir_kode,
+                                                    Product_Name: product_name_shipping,
+                                                    Quantity_Requested: '1',
+                                                    Price_Based_On_Total_Quantity:total_harga_shipping_with_insurance_packing
+                            
+                                                })  
+                                                var data = {
+                                                    "Sales_Order_Data": customerDetails,
+                                                    "Sales_Order_Detail_data": items
+                                                }    
+    
+                                                axios.post(`https://sales.sold.co.id/create-new-group-buy-sales-order-by-customer?Customer_Code=${token}`,data,{
+                                                    headers:{
+                                                        "Content-Type":'application/json'
+                                                    },
+                                                    "data":JSON.stringify({
+                                                        "Sales_Order_data":customerDetails,
+                                                        "Sales_Order_Detail_data": items
+                                                    })
+                                                }).then((res)=>{
+                                                    if(res.data.status){
+                                                        
+                                                        // swal.fire("Penambahan Data Berhasil, Silahkan Check Cart", "", "success");
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--success">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div>   
+                                                            Penambahan Data Berhasil
+                                                            `,
+                                                            timer:2000,
+                                                            
+                                                        })
+                                                        // close_all_open_window()
+                                                        $('.modals-product-detail').css('display','none')
+                                                        $('.box_iframe_groupbuy').css('display','none')
+                                                        
+                                                        
+                                                        $('.box_iframe_groupbuy').remove()
+                                                        // tambahin gambar yg dari mas fauzi
+                                                        
+                                                        location.replace(`../Iframe/success.html`)
+                
+                                                        
+                                                    }else {
+                                                        // swal.fire("Penambahan Data gagal, Silahkan Check Pengisian data", "", "success");
+                                                        Swal.fire({
+                                                            html:`
+                                                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                                <div class="o-circle__sign"></div>  
+                                                            </div> 
+                                                            Penambahan Data Gagal, Silahkan Check Pengisian Data`,
+                                                            timer:2000,
+                                                            
+                                                        })
+                                                        $('.modals-product-detail').css('display','none')
+                                                    }
+                                                }).catch((err)=>{
+                                                    
+                                                })
+                                             
+                                            }else {
+                                                Swal.fire({
+                                                    html:`
+                                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                        <div class="o-circle__sign"></div>  
+                                                    </div> 
+                                                    Silahkan Login`,
+                                                    timer:2000,
+                                                })
+                                                setTimeout(()=>{
+                                                    window.parent.$('.iframe').css('display','none')
+                                                    window.parent.$('.force-close-all-command').css('display','none')
+                                                },1500)
                                                 
-                                            })
+                                            }
+                                            
                                             // refresh()
             
                                         }).catch((err)=>{
@@ -8046,160 +8233,47 @@ const save_product_name=()=>{
         
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
-            
-            email = res.data.Email
-            //encrypt pass
-            var new_pass
-            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
-            .then((res)=>{
-                if(res.data){
-                    new_pass = res.data
-
-                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
-                    .then((res)=>{
-                        
-                        if(res.data){
-                            $("#"+product_id+"-name").prop('disabled',true) 
-                            $("#"+product_id+"-box_edit_name").css('display','block') // icon 
-                            $("#"+product_id+"-save_name").css('display','none') // icon
-                            $("#"+product_id+"-name").css('background-color','transparent')
-    
-                            var nama = $("#"+product_id+"-name").val()
-                            var harga = $("#"+product_id+"-harga").val()
-                            var qty = $("#"+product_id+"-qty").val()
-                            var token = localStorage.getItem('token')
-    
-                            
-                            
-                            
-                            
-    
-                            if(nama.length <5){
-                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                                .then((res)=>{
-                                    
-                                    $("#"+product_id+"-name").val(res.data.Name)
-                                    // swal.fire("Gagal Mengubah Data", "", "error");
-                                    Swal.fire({
-                                        html:`
-                                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                                            <div class="o-circle__sign"></div>  
-                                        </div> 
-                                        Gagal Mengubah Data`,
-                                        timer:2000,
-                                        
-                                    })
-                                    re_render_item_product()
-                                }).catch((err)=>{
-                                    
-                                })
-                            }else {
-                                axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
-                                .then((res)=>{
-                                    
-                                    if(res.data){
-                                        Swal.fire({
-                                            html:`
-                                            <div class="o-circle c-container__circle o-circle__sign--success">
-                                                <div class="o-circle__sign"></div>  
-                                            </div>   
-                                            Berhasil Mengubah Data
-                                            `,
-                                            timer:2000,
-                                            
-                                        })
-                                        $('#s_product_name').removeClass(product_id)
-                                        $('#s_product_name').removeClass('product_name')
-                                         $('#id_otp').val('')
-                                         $('#id_pass').val('')
-                                         re_render_item_product()
-                                    }else {
-                                        Swal.fire({
-                                            html:`
-                                            <div class="o-circle c-container__circle o-circle__sign--failure">
-                                                <div class="o-circle__sign"></div>  
-                                            </div> 
-                                            Gagal Mengubah Data`,
-                                            timer:2000,
-                                            
-                                        })
-                                        re_render_item_product()
-                                    }
-                                }).catch((err)=>{
-                                    
-                                })
-                            }
-                            // Swal.fire('Simpan Berhasil', '', 'success')
-                            $('#get_otp').modal('hide')
-                        }else {
-                            // Swal.fire('Simpan Gagal', '', 'error')
-                            Swal.fire({
-                                html:`
-                                <div class="o-circle c-container__circle o-circle__sign--failure">
-                                    <div class="o-circle__sign"></div>  
-                                </div> 
-                                Simpan Gagal`,
-                                timer:2000,
-                                
-                            })
-                        }
-                    }).catch((err)=>{
-                        
-                    })
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
                 }else {
-                    
-                    // Swal.fire('Password Minimal 6 character', '', 'error')
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Password Minimal 6`,
-                        timer:2000,
-                        
-                    })
-                }
-                
-        
-               
-            }).catch((err)=>{
-                
-            })
-        }).catch((err)=>{
-            
-        })
+                    data_customer = res.data
 
-    }else if (jenis_edit === 'product_sell_price'){
-        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-        .then((res)=>{
-            email = res.data.Email
-            var new_pass
-            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
-            .then((res)=>{
-                new_pass = res.data
-                if(res.data){
-                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
-                    .then((res)=>{
-                        if(res.data){
-                            $("#"+product_id+"-harga").prop('disabled',true) 
-                            $("#"+product_id+"-box_edit_harga").css('display','block') // icon 
-                            $("#"+product_id+"-save_harga").css('display','none') // icon
-                            $("#"+product_id+"-harga").css('background-color','transparent')
-                    
-                            var nama = $("#"+product_id+"-name").val()
-                            var harga = $("#"+product_id+"-harga").val()
-                            var qty = $("#"+product_id+"-qty").val()
-                            var token = localStorage.getItem('token')
+                }
+                email = data_customer.Email
+                //encrypt pass
+                var new_pass
+                axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+                .then((res)=>{
+                    if(res.data){
+                        new_pass = res.data
+    
+                        axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                        .then((res)=>{
                             
-                            
-                            
-                            
-                    
-                            if(harga <500){
-                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                            if(res.data){
+                                $("#"+product_id+"-name").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_name").css('display','block') // icon 
+                                $("#"+product_id+"-save_name").css('display','none') // icon
+                                $("#"+product_id+"-name").css('background-color','transparent')
+        
+                                var nama = $("#"+product_id+"-name").val()
+                                var harga = $("#"+product_id+"-harga").val()
+                                var qty = $("#"+product_id+"-qty").val()
+                                var token = localStorage.getItem('token')
+        
+                                
+                                
+                                
+                                
+        
+                                if(nama.length <5){
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
                                     .then((res)=>{
                                         
-                                        $("#"+product_id+"-harga").val(res.data.Sell_Price)
+                                        $("#"+product_id+"-name").val(res.data.Name)
                                         // swal.fire("Gagal Mengubah Data", "", "error");
                                         Swal.fire({
                                             html:`
@@ -8214,27 +8288,292 @@ const save_product_name=()=>{
                                     }).catch((err)=>{
                                         
                                     })
+                                }else {
+                                    axios.post(`http://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                    .then((res)=>{
+                                        
+                                        if(res.data){
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--success">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div>   
+                                                Berhasil Mengubah Data
+                                                `,
+                                                timer:2000,
+                                                
+                                            })
+                                            $('#s_product_name').removeClass(product_id)
+                                            $('#s_product_name').removeClass('product_name')
+                                             $('#id_otp').val('')
+                                             $('#id_pass').val('')
+                                             re_render_item_product()
+                                        }else {
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Gagal Mengubah Data`,
+                                                timer:2000,
+                                                
+                                            })
+                                            re_render_item_product()
+                                        }
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                }
+                                // Swal.fire('Simpan Berhasil', '', 'success')
+                                $('#get_otp').modal('hide')
                             }else {
-                                axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
-                                .then((res)=>{
+                                // Swal.fire('Simpan Gagal', '', 'error')
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Simpan Gagal`,
+                                    timer:2000,
                                     
-                                    if(res.data){
-                                        // swal.fire("Berhasil Mengubah Data", "", "success");
-                                        Swal.fire({
-                                            html:`
-                                            <div class="o-circle c-container__circle o-circle__sign--success">
-                                                <div class="o-circle__sign"></div>  
-                                            </div>   
-                                            Berhasil Mengubah Data
-                                            `,
-                                            timer:2000,
+                                })
+                            }
+                        }).catch((err)=>{
+                            
+                        })
+                    }else {
+                        
+                        // Swal.fire('Password Minimal 6 character', '', 'error')
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Password Minimal 6`,
+                            timer:2000,
+                            
+                        })
+                    }
+                    
+            
+                   
+                }).catch((err)=>{
+                    
+                })
+         
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    window.parent.$('.iframe').css('display','none')
+                    window.parent.$('.force-close-all-command').css('display','none')
+                },1500)
+                
+            }
+        }).catch((err)=>{
+            
+        })
+
+    }else if (jenis_edit === 'product_sell_price'){
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
+                }else {
+                    data_customer = res.data
+
+                }
+                email = data_customer.Email
+                var new_pass
+                axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+                .then((res)=>{
+                    new_pass = res.data
+                    if(res.data){
+                        axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                        .then((res)=>{
+                            if(res.data){
+                                $("#"+product_id+"-harga").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_harga").css('display','block') // icon 
+                                $("#"+product_id+"-save_harga").css('display','none') // icon
+                                $("#"+product_id+"-harga").css('background-color','transparent')
+                        
+                                var nama = $("#"+product_id+"-name").val()
+                                var harga = $("#"+product_id+"-harga").val()
+                                var qty = $("#"+product_id+"-qty").val()
+                                var token = localStorage.getItem('token')
+                                
+                                
+                                
+                                
+                        
+                                if(harga <500){
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                        .then((res)=>{
+                                            
+                                            $("#"+product_id+"-harga").val(res.data.Sell_Price)
+                                            // swal.fire("Gagal Mengubah Data", "", "error");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Gagal Mengubah Data`,
+                                                timer:2000,
+                                                
+                                            })
+                                            re_render_item_product()
+                                        }).catch((err)=>{
                                             
                                         })
-                                        $('#s_product_name').removeClass(product_id)
-                                        $('#s_product_name').removeClass('product_sell_price')
-                                        re_render_item_product()
-                                    }else {
-                                        re_render_item_product()
+                                }else {
+                                    axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                    .then((res)=>{
+                                        
+                                        if(res.data){
+                                            // swal.fire("Berhasil Mengubah Data", "", "success");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--success">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div>   
+                                                Berhasil Mengubah Data
+                                                `,
+                                                timer:2000,
+                                                
+                                            })
+                                            $('#s_product_name').removeClass(product_id)
+                                            $('#s_product_name').removeClass('product_sell_price')
+                                            re_render_item_product()
+                                        }else {
+                                            re_render_item_product()
+                                            // swal.fire("Gagal Mengubah Data", "", "error");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Gagal Mengubah Data`,
+                                                timer:2000,
+                                                
+                                            })
+                                        }
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                    // Swal.fire('Simpan Berhasil', '', 'success')
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--success">
+                                            <div class="o-circle__sign"></div>  
+                                        </div>   
+                                        Simpan Berhasil
+                                        `,
+                                        timer:2000,
+                                        
+                                    })
+                                    $('#get_otp').modal('hide')
+                                }
+                            }else {
+                                // Swal.fire('Simpan Gagal', '', 'error')
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Simpan Gagal`,
+                                    timer:2000,
+                                    
+                                })
+                            }
+                        }).catch((err)=>{
+                            
+                        })
+    
+                    }else {
+                        
+                        // Swal.fire('Password Minimal 6 character', '', 'error')
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Password Minimal 6 Character`,
+                            timer:2000,
+                            
+                        })
+                    }
+    
+                }).catch((err)=>{
+                    
+                })
+           
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    window.parent.$('.iframe').css('display','none')
+                    window.parent.$('.force-close-all-command').css('display','none')
+                },1500)      
+            }
+        }).catch((err)=>{
+
+        })
+    }else if ( jenis_edit === 'product_quantity'){
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
+                }else {
+                    data_customer = res.data
+
+                }
+                email = data_customer.Email     
+                var new_pass
+                axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+                .then((res)=>{
+                    if(res.data){
+                        new_pass = res.data            
+                        axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                        .then((res)=>{
+                            if(res.data){
+                                $("#"+product_id+"-qty").prop('disabled',true) 
+                                $("#"+product_id+"-box_edit_qty").css('display','block') // icon 
+                                $("#"+product_id+"-save_qty").css('display','none') // icon
+                                $("#"+product_id+"-qty").css('background-color','transparent')
+            
+                                var nama = $("#"+product_id+"-name").val()
+                                var harga = $("#"+product_id+"-harga").val()
+                                var qty = $("#"+product_id+"-qty").val()
+                                var token = localStorage.getItem('token')
+            
+                                
+                                
+                                
+                                
+            
+                                if(qty < 10){
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    .then((res)=>{
+                                        
+                                        $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
                                         // swal.fire("Gagal Mengubah Data", "", "error");
                                         Swal.fire({
                                             html:`
@@ -8245,91 +8584,308 @@ const save_product_name=()=>{
                                             timer:2000,
                                             
                                         })
-                                    }
-                                }).catch((err)=>{
+                                        re_render_item_product()
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                }else {
                                     
-                                })
+                                    axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                                    .then((res)=>{
+                                        
+                                        if(res.data){
+                                            // swal.fire("Berhasil Mengubah Data", "", "success");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--success">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div>   
+                                                Berhasil Mengubah Data
+                                                `,
+                                                timer:2000,
+                                                
+                                            })
+                                            $('#s_product_name').removeClass(product_id)
+                                            $('#s_product_name').removeClass('product_quantity')
+                                            re_render_item_product()
+                                        }else {
+                                            // swal.fire("Gagal Mengubah Data", "", "error");
+                                            Swal.fire({
+                                                html:`
+                                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                                    <div class="o-circle__sign"></div>  
+                                                </div> 
+                                                Gagal Mengubah Data`,
+                                                timer:2000,
+                                                
+                                            })
+                                            re_render_item_product()
+                                        }
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                }
                                 // Swal.fire('Simpan Berhasil', '', 'success')
+                                $('#get_otp').modal('hide')
+                            }else {
+                                // Swal.fire('Simpan Gagal', '', 'error')
                                 Swal.fire({
                                     html:`
-                                    <div class="o-circle c-container__circle o-circle__sign--success">
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
                                         <div class="o-circle__sign"></div>  
-                                    </div>   
-                                    Simpan Berhasil
-                                    `,
+                                    </div> 
+                                    Simpan Gagal`,
                                     timer:2000,
                                     
                                 })
-                                $('#get_otp').modal('hide')
                             }
-                        }else {
-                            // Swal.fire('Simpan Gagal', '', 'error')
-                            Swal.fire({
-                                html:`
-                                <div class="o-circle c-container__circle o-circle__sign--failure">
-                                    <div class="o-circle__sign"></div>  
-                                </div> 
-                                Simpan Gagal`,
-                                timer:2000,
-                                
-                            })
-                        }
-                    }).catch((err)=>{
+                        }).catch((err)=>{
+                            
+                        })
+                    }else {
                         
-                    })
-
-                }else {
+                        // Swal.fire('Password Minimal 6 character', '', 'error')
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Password Minimal 6 Character`,
+                            timer:2000,
+                            
+                        })
+                    }
+                }).catch((err)=>{
                     
-                    // Swal.fire('Password Minimal 6 character', '', 'error')
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Password Minimal 6 Character`,
-                        timer:2000,
-                        
-                    })
-                }
-
-            }).catch((err)=>{
-                
-            })
+                })
+           
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    window.parent.$('.iframe').css('display','none')
+                    window.parent.$('.force-close-all-command').css('display','none')
+                },1500)      
+            }
         }).catch((err)=>{
-
+            
         })
-    }else if ( jenis_edit === 'product_quantity'){
+    }else if (jenis_edit === 'product_discount'){
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
-            email = res.data.Email     
-            var new_pass
-            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
-            .then((res)=>{
-                if(res.data){
-                    new_pass = res.data            
-                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
-                    .then((res)=>{
-                        if(res.data){
-                            $("#"+product_id+"-qty").prop('disabled',true) 
-                            $("#"+product_id+"-box_edit_qty").css('display','block') // icon 
-                            $("#"+product_id+"-save_qty").css('display','none') // icon
-                            $("#"+product_id+"-qty").css('background-color','transparent')
-        
-                            var nama = $("#"+product_id+"-name").val()
-                            var harga = $("#"+product_id+"-harga").val()
-                            var qty = $("#"+product_id+"-qty").val()
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
+                }else {
+                    data_customer = res.data
+
+                }
+                email = data_customer.Email
+    
+                var new_pass
+                axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+                .then((res)=>{
+                    if(res.data){
+                        new_pass = res.data
+                        
+                        axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                        .then((res)=>{
+                            if(res.data){
+                       
+    
+                            var status = $("#"+product_id+"-status").val()
+                            if(status == 'on'){
+                                status = true
+                            }else {
+                                status = false
+                            }
+    
+                            var Product_Code = $("#"+product_id+"-pCode").val()
+                            var Name = $("#"+product_id+"-pName").val()
+                            var qty = $("#"+product_id+"-quantity").val()
+                            var price = $("#"+product_id+"-discount").val()
                             var token = localStorage.getItem('token')
-        
+    
                             
                             
                             
                             
-        
-                            if(qty < 10){
-                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                                .then((res)=>{
+                            
+                            
+                            
+                            
+                            axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                            .then((res)=>{
+                                
+                                if(res.data){
+                                    $('#get_otp').modal('hide')
+                                    $("#"+product_id+"-discount").prop('disabled',true) 
+                                    $("#"+product_id+"-box_edit_discount").css('display','block') // icon 
+                                    $("#"+product_id+"-save_discount").css('display','none') // icon
+                                    $("#"+product_id+"-discount").css('background-color','transparent')
+                                    $('#s_product_name').removeClass(product_id)
+                                    $('#s_product_name').removeClass('product_discount')
+                                    // swal.fire("Berhasil Mengubah Data", "", "success");
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--success">
+                                            <div class="o-circle__sign"></div>  
+                                        </div>   
+                                        Berhasil Mengubah Data
+                                        `,
+                                        timer:2000,
+                                        
+                                    })
+                                    // Swal.fire('Simpan Berhasil', '', 'success')
                                     
-                                    $("#"+product_id+"-qty").val(res.data.Stock_Quantity)
+                                }else {
+                                    // swal.fire("Gagal Mengubah Data", "", "error")    
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                                            <div class="o-circle__sign"></div>  
+                                        </div> 
+                                        Gagal Mengubah Data`,
+                                        timer:2000,
+                                        
+                                    })
+                                    axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
+                                    .then((res)=>{
+                                        
+                                        $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                }
+                            }).catch((err)=>{
+                                
+                            })
+                            }else {
+                                // Swal.fire('Simpan Gagal', '', 'error')
+                                Swal.fire({
+                                    html:`
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>  
+                                    </div> 
+                                    Simpan Gagal`,
+                                    timer:2000,
+                                    
+                                })
+                            }
+                        }).catch((err)=>{
+                            
+                        })
+    
+                    }else {
+                        
+                        // Swal.fire('Password Minimal 6 character', '', 'error')
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Password Minimal 6 Character`,
+                            timer:2000,
+                            
+                        })
+                    }
+                }).catch((err)=>{
+                    
+                })
+           
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    window.parent.$('.iframe').css('display','none')
+                    window.parent.$('.force-close-all-command').css('display','none')
+                },1500)      
+            }
+        }).catch((err)=>{
+            
+        })
+    }else if (jenis_edit === 'groupbuy_qty'){
+        
+        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
+        .then((res)=>{
+            if(res.data){
+                var data_customer
+                var isCustomer_information = Array.isArray(res.data)
+                if(isCustomer_information) {
+                    data_customer = res.data[0]
+                }else {
+                    data_customer = res.data
+
+                }
+                email = data_customer.Email
+    
+                var new_pass
+                axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
+                .then((res)=>{
+                    if(res.data){
+                        new_pass =res.data
+    
+                        axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
+                        .then((res)=>{
+                            if(res.data){
+    
+     
+    
+                            var status = $("#"+product_id+"-status").val()
+                            if(status == 'on'){
+                                status = true
+                            }else {
+                                status = false
+                            }
+    
+                            // discount price minimal 500perak
+                            // qty minimal 5
+                            var Product_Code = $("#"+product_id+"-pCode").val()
+                            var Name = $("#"+product_id+"-pName").val()
+                            var qty = $("#"+product_id+"-quantity").val()
+                            var price = $("#"+product_id+"-discount").val()
+                            var token = localStorage.getItem('token')
+                            
+                            
+                            
+                            
+                            axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
+                            .then((res)=>{
+                                
+                                if(res.data){
+                                    // swal.fire("Berhasil Mengubah Data", "", "success");
+                                    Swal.fire({
+                                        html:`
+                                        <div class="o-circle c-container__circle o-circle__sign--success">
+                                            <div class="o-circle__sign"></div>  
+                                        </div>   
+                                        Berhasil Mengubah Data
+                                        `,
+                                        timer:2000,
+                                        
+                                    })
+                                    $('#s_product_name').removeClass(product_id)
+                                    $('#s_product_name').removeClass('groupbuy_qty')
+                                    $('#get_otp').modal('hide')
+                                    $("#"+product_id+"-quantity").prop('disabled',true) 
+                                    $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
+                                    $("#"+product_id+"-save_quantity").css('display','none') // icon
+                                    $("#"+product_id+"-quantity").css('background-color','transparent')
+                                }else {
                                     // swal.fire("Gagal Mengubah Data", "", "error");
                                     Swal.fire({
                                         html:`
@@ -8340,315 +8896,66 @@ const save_product_name=()=>{
                                         timer:2000,
                                         
                                     })
-                                    re_render_item_product()
-                                }).catch((err)=>{
-                                    
-                                })
-                            }else {
-                                
-                                axios.post(`https://products.sold.co.id/update-product-name-price-quantity?Name=${nama}&Sell_Price=${harga}&Stock_Quantity=${qty}&Product_Code=${product_id}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
-                                .then((res)=>{
-                                    
-                                    if(res.data){
-                                        // swal.fire("Berhasil Mengubah Data", "", "success");
-                                        Swal.fire({
-                                            html:`
-                                            <div class="o-circle c-container__circle o-circle__sign--success">
-                                                <div class="o-circle__sign"></div>  
-                                            </div>   
-                                            Berhasil Mengubah Data
-                                            `,
-                                            timer:2000,
-                                            
-                                        })
-                                        $('#s_product_name').removeClass(product_id)
-                                        $('#s_product_name').removeClass('product_quantity')
-                                        re_render_item_product()
-                                    }else {
-                                        // swal.fire("Gagal Mengubah Data", "", "error");
-                                        Swal.fire({
-                                            html:`
-                                            <div class="o-circle c-container__circle o-circle__sign--failure">
-                                                <div class="o-circle__sign"></div>  
-                                            </div> 
-                                            Gagal Mengubah Data`,
-                                            timer:2000,
-                                            
-                                        })
-                                        re_render_item_product()
-                                    }
-                                }).catch((err)=>{
-                                    
-                                })
-                            }
-                            // Swal.fire('Simpan Berhasil', '', 'success')
-                            $('#get_otp').modal('hide')
-                        }else {
-                            // Swal.fire('Simpan Gagal', '', 'error')
-                            Swal.fire({
-                                html:`
-                                <div class="o-circle c-container__circle o-circle__sign--failure">
-                                    <div class="o-circle__sign"></div>  
-                                </div> 
-                                Simpan Gagal`,
-                                timer:2000,
+                                    $("#"+product_id+"-quantity").prop('disabled',true) 
+                                    $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
+                                    $("#"+product_id+"-save_quantity").css('display','none') // icon
+                                    $("#"+product_id+"-quantity").css('background-color','transparent')
+                                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                                    .then((res)=>{
+                                        $("#"+product_id+"-quantity").val(res.data.GroupBuy_SellQuantity)
+                                    }).catch((err)=>{
+                                        
+                                    })
+                                }
+                            }).catch((err)=>{
                                 
                             })
-                        }
-                    }).catch((err)=>{
-                        
-                    })
-                }else {
-                    
-                    // Swal.fire('Password Minimal 6 character', '', 'error')
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Password Minimal 6 Character`,
-                        timer:2000,
-                        
-                    })
-                }
-            }).catch((err)=>{
-                
-            })
-        }).catch((err)=>{
-            
-        })
-    }else if (jenis_edit === 'product_discount'){
-        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-        .then((res)=>{
-            email = res.data.Email
-
-            var new_pass
-            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
-            .then((res)=>{
-                if(res.data){
-                    new_pass = res.data
-                    
-                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
-                    .then((res)=>{
-                        if(res.data){
-                   
-
-                        var status = $("#"+product_id+"-status").val()
-                        if(status == 'on'){
-                            status = true
-                        }else {
-                            status = false
-                        }
-
-                        var Product_Code = $("#"+product_id+"-pCode").val()
-                        var Name = $("#"+product_id+"-pName").val()
-                        var qty = $("#"+product_id+"-quantity").val()
-                        var price = $("#"+product_id+"-discount").val()
-                        var token = localStorage.getItem('token')
-
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
-                        .then((res)=>{
-                            
-                            if(res.data){
-                                $('#get_otp').modal('hide')
-                                $("#"+product_id+"-discount").prop('disabled',true) 
-                                $("#"+product_id+"-box_edit_discount").css('display','block') // icon 
-                                $("#"+product_id+"-save_discount").css('display','none') // icon
-                                $("#"+product_id+"-discount").css('background-color','transparent')
-                                $('#s_product_name').removeClass(product_id)
-                                $('#s_product_name').removeClass('product_discount')
-                                // swal.fire("Berhasil Mengubah Data", "", "success");
-                                Swal.fire({
-                                    html:`
-                                    <div class="o-circle c-container__circle o-circle__sign--success">
-                                        <div class="o-circle__sign"></div>  
-                                    </div>   
-                                    Berhasil Mengubah Data
-                                    `,
-                                    timer:2000,
-                                    
-                                })
-                                // Swal.fire('Simpan Berhasil', '', 'success')
-                                
                             }else {
-                                // swal.fire("Gagal Mengubah Data", "", "error")    
+                                // Swal.fire('Simpan Gagal', '', 'error')
                                 Swal.fire({
                                     html:`
                                     <div class="o-circle c-container__circle o-circle__sign--failure">
                                         <div class="o-circle__sign"></div>  
                                     </div> 
-                                    Gagal Mengubah Data`,
+                                    Simpan Gagal`,
                                     timer:2000,
-                                    
-                                })
-                                axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${token}`)
-                                .then((res)=>{
-                                    
-                                    $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
-                                }).catch((err)=>{
                                     
                                 })
                             }
                         }).catch((err)=>{
                             
                         })
-                        }else {
-                            // Swal.fire('Simpan Gagal', '', 'error')
-                            Swal.fire({
-                                html:`
-                                <div class="o-circle c-container__circle o-circle__sign--failure">
-                                    <div class="o-circle__sign"></div>  
-                                </div> 
-                                Simpan Gagal`,
-                                timer:2000,
-                                
-                            })
-                        }
-                    }).catch((err)=>{
+                    }else {
                         
-                    })
-
-                }else {
-                    
-                    // Swal.fire('Password Minimal 6 character', '', 'error')
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Password Minimal 6 Character`,
-                        timer:2000,
-                        
-                    })
-                }
-            }).catch((err)=>{
-                
-            })
-        }).catch((err)=>{
-            
-        })
-    }else if (jenis_edit === 'groupbuy_qty'){
-        
-        axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-        .then((res)=>{
-            email = res.data.Email
-
-            var new_pass
-            axios.post(`https://customers.sold.co.id/password-generator?Password=${pass}`)
-            .then((res)=>{
-                if(res.data){
-                    new_pass =res.data
-
-                    axios.post(`https://customers.sold.co.id/verify-otp?Email=${email}&User_Password=${new_pass}&otp=${otp}`)
-                    .then((res)=>{
-                        if(res.data){
-
- 
-
-                        var status = $("#"+product_id+"-status").val()
-                        if(status == 'on'){
-                            status = true
-                        }else {
-                            status = false
-                        }
-
-                        // discount price minimal 500perak
-                        // qty minimal 5
-                        var Product_Code = $("#"+product_id+"-pCode").val()
-                        var Name = $("#"+product_id+"-pName").val()
-                        var qty = $("#"+product_id+"-quantity").val()
-                        var price = $("#"+product_id+"-discount").val()
-                        var token = localStorage.getItem('token')
-                        
-                        
-                        
-                        
-                        axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${status}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${pass}`)
-                        .then((res)=>{
-                            
-                            if(res.data){
-                                // swal.fire("Berhasil Mengubah Data", "", "success");
-                                Swal.fire({
-                                    html:`
-                                    <div class="o-circle c-container__circle o-circle__sign--success">
-                                        <div class="o-circle__sign"></div>  
-                                    </div>   
-                                    Berhasil Mengubah Data
-                                    `,
-                                    timer:2000,
-                                    
-                                })
-                                $('#s_product_name').removeClass(product_id)
-                                $('#s_product_name').removeClass('groupbuy_qty')
-                                $('#get_otp').modal('hide')
-                                $("#"+product_id+"-quantity").prop('disabled',true) 
-                                $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
-                                $("#"+product_id+"-save_quantity").css('display','none') // icon
-                                $("#"+product_id+"-quantity").css('background-color','transparent')
-                            }else {
-                                // swal.fire("Gagal Mengubah Data", "", "error");
-                                Swal.fire({
-                                    html:`
-                                    <div class="o-circle c-container__circle o-circle__sign--failure">
-                                        <div class="o-circle__sign"></div>  
-                                    </div> 
-                                    Gagal Mengubah Data`,
-                                    timer:2000,
-                                    
-                                })
-                                $("#"+product_id+"-quantity").prop('disabled',true) 
-                                $("#"+product_id+"-box_edit_quantity").css('display','block') // icon 
-                                $("#"+product_id+"-save_quantity").css('display','none') // icon
-                                $("#"+product_id+"-quantity").css('background-color','transparent')
-                                axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
-                                .then((res)=>{
-                                    $("#"+product_id+"-quantity").val(res.data.GroupBuy_SellQuantity)
-                                }).catch((err)=>{
-                                    
-                                })
-                            }
-                        }).catch((err)=>{
+                        // Swal.fire('Password Minimal 6 character', '', 'error')
+                        Swal.fire({
+                            html:`
+                            <div class="o-circle c-container__circle o-circle__sign--failure">
+                                <div class="o-circle__sign"></div>  
+                            </div> 
+                            Password Minimal 6 Character`,
+                            timer:2000,
                             
                         })
-                        }else {
-                            // Swal.fire('Simpan Gagal', '', 'error')
-                            Swal.fire({
-                                html:`
-                                <div class="o-circle c-container__circle o-circle__sign--failure">
-                                    <div class="o-circle__sign"></div>  
-                                </div> 
-                                Simpan Gagal`,
-                                timer:2000,
-                                
-                            })
-                        }
-                    }).catch((err)=>{
-                        
-                    })
-                }else {
+                    }
+                }).catch((err)=>{
                     
-                    // Swal.fire('Password Minimal 6 character', '', 'error')
-                    Swal.fire({
-                        html:`
-                        <div class="o-circle c-container__circle o-circle__sign--failure">
-                            <div class="o-circle__sign"></div>  
-                        </div> 
-                        Password Minimal 6 Character`,
-                        timer:2000,
-                        
-                    })
-                }
-            }).catch((err)=>{
-                
-            })
+                })
+           
+            }else {
+                Swal.fire({
+                    html:`
+                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                        <div class="o-circle__sign"></div>  
+                    </div> 
+                    Silahkan Login`,
+                    timer:2000,
+                })
+                setTimeout(()=>{
+                    window.parent.$('.iframe').css('display','none')
+                    window.parent.$('.force-close-all-command').css('display','none')
+                },1500)      
+            }
 
         }).catch((err)=>{
             
@@ -9076,417 +9383,440 @@ const check_status_item=()=>{
     var creator;
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        
-        
-        var Customer_Code = res.data.Customer_Code
-        creator = res.data.Creator
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
 
-        // FIND DATA BY CREATOR
-        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
-        .then((res)=>{
-            
-            res.data.map((val,index)=>{
+            }
+            var Customer_Code = data_customer.Customer_Code
+            creator = data_customer.Creator
+    
+            // FIND DATA BY CREATOR
+            axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+            .then((res)=>{
                 
-                
-                $('.input_total_row_gb').val('TOTAL ROW = ' + res.data.length)
-                
-               
-                
-                if(val.GroupBuy_Purchase === 'true'){
-                    if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
+                res.data.map((val,index)=>{
+                    
+                    
+                    $('.input_total_row_gb').val('TOTAL ROW = ' + res.data.length)
+                    
+                   
+                    
+                    if(val.GroupBuy_Purchase === 'true'){
+                        if(val.GroupBuy_SellPrice === 'NULL'  && val.GroupBuy_SellQuantity === 'NULL'){
+                            $('.tbody_detail_product').append(`
+                                 <tr class="tr_detail_prod">
+                                     <td>
+                                         <div class="box-switch">
+                                             <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                         </div> 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
                                              </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
                                          </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
                                                  
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
+                                             </div>             
                                          </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                     <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>
+                                                 <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>   
                                              </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
                                          </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                     <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>  
+                                                 <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>            
+                                             </div>
                                          </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
+                                     </td>
+                                 </tr>     
+                                 `) 
+                        }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                            $('.tbody_detail_product').append(`
+                                 <tr class="tr_detail_prod">
+                                     <td>
+                                         <div class="box-switch">
+                                             <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                         </div> 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                             </div>
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                 
+                                             </div>             
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                     <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>
+                                                 <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>   
+                                             </div>
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                     <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>  
+                                                 <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>            
+                                             </div>
+                                         </div>
+                                     </td>
+                                 </tr>     
+                                 `) 
+                        }else {
+                            $('.tbody_detail_product').append(`
+                                 <tr class="tr_detail_prod">
+                                     <td>
+                                         <div class="box-switch">
+                                             <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                         </div> 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                             </div>
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                 
+                                             </div>             
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                     <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>
+                                                 <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>   
+                                             </div>
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                     <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>  
+                                                 <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>            
+                                             </div>
+                                         </div>
+                                     </td>
+                                 </tr>     
+                                 `) 
+                        }
                     }else {
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input" checked data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
+                        if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
+                            $('.tbody_detail_product').append(`
+                                 <tr class="tr_detail_prod">
+                                     <td>
+                                         <div class="box-switch">
+                                             <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                         </div> 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
                                              </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
                                          </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
                                                  
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
+                                             </div>             
                                          </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }
-                }else {
-                    if(val.GroupBuy_SellPrice === 'NULL' && val.GroupBuy_SellQuantity === 'NULL'  ){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                     <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>
+                                                 <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>   
                                              </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
                                          </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
-                                         </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else if (val.GroupBuy_SellQuantity === 'NULL'){
-                        $('.tbody_detail_product').append(`
-                             <tr class="tr_detail_prod">
-                                 <td>
-                                     <div class="box-switch">
-                                         <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                     </div> 
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                         </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                             
-                                         </div>             
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                                 <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                                 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                     <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>  
+                                                 <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>            
                                              </div>
-                                             <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                                 
-                                             </div>   
                                          </div>
-                                     </div>
-                                 </td>
-                                 <td>
-                                     <div class="br-option">
-                                         <div class="br-option-input">
-                                             <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
-                                             <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                                 <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>  
-                                             <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                                 <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                                 
-                                             </div>            
+                                     </td>
+                                 </tr>     
+                                 `) 
+                        }else if (val.GroupBuy_SellQuantity === 'NULL'){
+                            $('.tbody_detail_product').append(`
+                                 <tr class="tr_detail_prod">
+                                     <td>
+                                         <div class="box-switch">
+                                             <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                         </div> 
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
+                                             </div>
                                          </div>
-                                     </div>
-                                 </td>
-                             </tr>     
-                             `) 
-                    }else {
-                        $('.tbody_detail_product').append(`
-                        <tr class="tr_detail_prod">
-                            <td>
-                                <div class="box-switch">
-                                    <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
-                                </div> 
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
-                                        
-                                    </div>             
-                                </div>
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
-                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
-                                            <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
-                                            
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
+                                                 
+                                             </div>             
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="0">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                     <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>
+                                                 <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>   
+                                             </div>
+                                         </div>
+                                     </td>
+                                     <td>
+                                         <div class="br-option">
+                                             <div class="br-option-input">
+                                                 <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="${val.GroupBuy_SellQuantity}">
+                                                 <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                     <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>  
+                                                 <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                     <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                     
+                                                 </div>            
+                                             </div>
+                                         </div>
+                                     </td>
+                                 </tr>     
+                                 `) 
+                        }else {
+                            $('.tbody_detail_product').append(`
+                            <tr class="tr_detail_prod">
+                                <td>
+                                    <div class="box-switch">
+                                        <input type="checkbox" class="detail_prod_input"  data-toggle="toggle" id="${val.Product_Code}-status" onclick="change_status_otp('${val.Product_Code}')">
+                                    </div> 
+                                </td>
+                                <td>
+                                    <div class="br-option">
+                                        <div class="br-option-input">
+                                            <input type="text" class="form_product detail_prod_input" disabled value="${val.Product_Code}" id="${val.Product_Code}-pCode">     
                                         </div>
-                                        <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
-                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
-                                            
-                                        </div>   
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="br-option">
-                                    <div class="br-option-input">
-                                        <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
-                                        <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
-                                            <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                </td>
+                                <td>
+                                    <div class="br-option">
+                                        <div class="br-option-input">
+                                            <input type="text" class="form_product detail_prod_input" disabled value="${val.Name}" id="${val.Product_Code}-pName">
                                             
-                                        </div>  
-                                        <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
-                                            <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
-                                            
-                                        </div>            
+                                        </div>             
                                     </div>
-                                </div>
-                            </td>
-                        </tr>     
-                        `) 
-                       
-                    }
-                }
-
-
-
-
-                // BATAS TABLE ATAS
-
-                $('.tbody_product').append(`
-                <tr>
-                    <td >
-                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>    
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>      
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
+                                </td>
+                                <td>
+                                    <div class="br-option">
+                                        <div class="br-option-input">
+                                            <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-discount" disabled value="${val.GroupBuy_SellPrice}">
+                                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_discount">
+                                                <i class="fas fa-edit icon-edit edit-discount" id="${val.Product_Code}-edit" onclick="edit_product_discount('${val.Product_Code}')"></i>
+                                                
+                                            </div>
+                                            <div class="box-name-save detail_prod_input" style="display:none" id="${val.Product_Code}-save_discount">
+                                                <i class="fas fa-check-square icon-save-discount" onclick="save_edit_discount('${val.Product_Code}')"></i>
+                                                
+                                            </div>   
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="br-option">
+                                        <div class="br-option-input">
+                                            <input type="text" class="form_product-2 detail_prod_input" id="${val.Product_Code}-quantity" disabled value="0">
+                                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_quantity">
+                                                <i class="fas fa-edit icon-edit"  id="${val.Product_Code}-edit" onclick="edit_product_quantity('${val.Product_Code}')"></i>
+                                                
+                                            </div>  
+                                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_quantity">
+                                                <i class="fas fa-check-square icon-save-discount" onclick="save_edit_quantity('${val.Product_Code}')"></i>
+                                                
+                                            </div>            
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>     
+                            `) 
                            
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                            
-                        </div>
-                    </td>
-                    <td>${val.Last_Updated}</td>
-                </tr>
-                `)
+                        }
+                    }
+    
+    
+    
+    
+                    // BATAS TABLE ATAS
+    
+                    $('.tbody_product').append(`
+                    <tr>
+                        <td >
+                            <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>    
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>      
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>   
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>   
+                               
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>   
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>   
+                                
+                            </div>
+                        </td>
+                        <td>${val.Last_Updated}</td>
+                    </tr>
+                    `)
+                })
+            }).catch((err)=>{
+                
             })
-        }).catch((err)=>{
-            
-        })
+       
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)      
+        }
+        
     }).catch((err)=>{
         
     })
@@ -9500,71 +9830,94 @@ const re_render_item_product=()=>{
     var creator;
     axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
     .then((res)=>{
-        
-        
-        var Customer_Code = res.data.Customer_Code
-        creator = res.data.Creator
+        if(res.data){
+            var data_customer
+            var isCustomer_information = Array.isArray(res.data)
+            if(isCustomer_information) {
+                data_customer = res.data[0]
+            }else {
+                data_customer = res.data
 
-        // FIND DATA BY CREATOR
-        axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
-        .then((res)=>{
-            
-            res.data.map((val,index)=>{
-
-
-                $('.tbody_product').append(`
-                <tr>
-                    <td >
-                        <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>    
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>      
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                           
-                        </div>
-                    </td>
-                    <td>
-                        <div class="box-prod-name hvr-grow">
-                            <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
-                            <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
-                                <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> EDIT</p>
-                            </div>   
-                            <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
-                                <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
-                                <p class="save-prod"> SAVE</p >
-                            </div>   
-                            
-                        </div>
-                    </td>
-                    <td>${val.Last_Updated}</td>
-                </tr>
-                `)
+            }
+            var Customer_Code = data_customer.Customer_Code
+            creator = data_customer.Creator
+    
+            // FIND DATA BY CREATOR
+            axios.post(`https://products.sold.co.id/get-products-belong-to-the-supplier?Creator=${Customer_Code}`)
+            .then((res)=>{
+                
+                res.data.map((val,index)=>{
+    
+    
+                    $('.tbody_product').append(`
+                    <tr>
+                        <td >
+                            <p onclick="to_detail_product('${val.Product_Code}')" class="p_code"> ${val.Product_Code}</p>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_name" value="${val.Name}" id="${val.Product_Code}-name">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_name">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_name('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>    
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_name">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_name('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>      
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_sell" value="${val.Sell_Price}" id="${val.Product_Code}-harga">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_harga">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_harga('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>   
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_harga">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_harga('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>   
+                               
+                            </div>
+                        </td>
+                        <td>
+                            <div class="box-prod-name hvr-grow">
+                                <input type="text" disabled class="prod_qty" value="${val.Stock_Quantity}"id="${val.Product_Code}-qty">
+                                <div class="box-name-edit" id="${val.Product_Code}-box_edit_qty">
+                                    <i class="fas fa-edit icon-edit-prod"  id="${val.Product_Code}-edit" onclick="edit_product_qty('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> EDIT</p>
+                                </div>   
+                                <div class="box-name-save" style="display:none" id="${val.Product_Code}-save_qty">
+                                    <i class="fas fa-check-square icon-save-prod" onclick="save_edit_qty('${val.Product_Code}')"></i>
+                                    <p class="save-prod"> SAVE</p >
+                                </div>   
+                                
+                            </div>
+                        </td>
+                        <td>${val.Last_Updated}</td>
+                    </tr>
+                    `)
+                })
+            }).catch((err)=>{
+                
             })
-        }).catch((err)=>{
-            
-        })
+       
+        }else {
+            Swal.fire({
+                html:`
+                <div class="o-circle c-container__circle o-circle__sign--failure">
+                    <div class="o-circle__sign"></div>  
+                </div> 
+                Silahkan Login`,
+                timer:2000,
+            })
+            setTimeout(()=>{
+                window.parent.$('.iframe').css('display','none')
+                window.parent.$('.force-close-all-command').css('display','none')
+            },1500)      
+        }
+        
     }).catch((err)=>{
         
     })
@@ -9593,56 +9946,80 @@ const get_status=(product_id,pass)=>{
 
             axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
             .then((res)=>{
-                email = res.data.Email
-                axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
-                .then((res)=>{
-                    
-                    
-                    if(res.data){
-                        // swal.fire("Berhasil Mengubah Data", "", "success");
-                        Swal.fire({
-                            html:`
-                            <div class="o-circle c-container__circle o-circle__sign--success">
-                                <div class="o-circle__sign"></div>  
-                            </div>   
-                            Berhasil Mengubah Data
-                            `,
-                            timer:2000,
-                            
-                        })
-                        $('#get_otp').modal('hide')
+                if(res.data){
+                    var data_customer
+                    var isCustomer_information = Array.isArray(res.data)
+                    if(isCustomer_information) {
+                        data_customer = res.data[0]
                     }else {
-                        // swal.fire("Gagal Mengubah Data", "", "error");
-                        Swal.fire({
-                            html:`
-                            <div class="o-circle c-container__circle o-circle__sign--failure">
-                                <div class="o-circle__sign"></div>  
-                            </div> 
-                            Gagal Mengubah Data`,
-                            timer:2000,
-                            
-                        })
-                        $('#get_otp').modal('hide')
-                        
-                    axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                        data_customer = res.data
+    
+                    }
+                    email = data_customer.Email
+                    axios.post(`https://products.sold.co.id/update-product-groupbuy-status-price-quantity?GroupBuy_Purchase=${result}&GroupBuy_SellPrice=${price}&GroupBuy_SellQuantity=${qty}&Product_Code=${Product_Code}&Customer_Code=${token}&Email=${email}&Password=${password}`)
                     .then((res)=>{
                         
                         
-                        // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
-                        if(res.data.GroupBuy_Purchase == 'true'){
-                            $('#'+product_id+"-status").prop('checked',true)
+                        if(res.data){
+                            // swal.fire("Berhasil Mengubah Data", "", "success");
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--success">
+                                    <div class="o-circle__sign"></div>  
+                                </div>   
+                                Berhasil Mengubah Data
+                                `,
+                                timer:2000,
+                                
+                            })
+                            $('#get_otp').modal('hide')
                         }else {
-                            $('#'+product_id+"-status").prop('checked',false)
+                            // swal.fire("Gagal Mengubah Data", "", "error");
+                            Swal.fire({
+                                html:`
+                                <div class="o-circle c-container__circle o-circle__sign--failure">
+                                    <div class="o-circle__sign"></div>  
+                                </div> 
+                                Gagal Mengubah Data`,
+                                timer:2000,
+                                
+                            })
+                            $('#get_otp').modal('hide')
                             
-                        }
+                        axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
+                        .then((res)=>{
+                            
+                            
+                            // $("#"+product_id+"-discount").val(res.data.GroupBuy_SellPrice)
+                            if(res.data.GroupBuy_Purchase == 'true'){
+                                $('#'+product_id+"-status").prop('checked',true)
+                            }else {
+                                $('#'+product_id+"-status").prop('checked',false)
+                                
+                            }
+                        }).catch((err)=>{
+                            
+                        })
+                    }
+        
                     }).catch((err)=>{
-                        
+        
                     })
+               
+                }else {
+                    Swal.fire({
+                        html:`
+                        <div class="o-circle c-container__circle o-circle__sign--failure">
+                            <div class="o-circle__sign"></div>  
+                        </div> 
+                        Silahkan Login`,
+                        timer:2000,
+                    })
+                    setTimeout(()=>{
+                        window.parent.$('.iframe').css('display','none')
+                        window.parent.$('.force-close-all-command').css('display','none')
+                    },1500)      
                 }
-    
-                }).catch((err)=>{
-    
-                })
             }).catch((err)=>{
                 
             })
