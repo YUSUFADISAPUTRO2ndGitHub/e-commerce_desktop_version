@@ -1070,6 +1070,7 @@
         position: relative;
         top:15px;
         height:50px;
+        font-size:9px;
     }
     .header-search-option {
         display: none;
@@ -1279,9 +1280,11 @@
 }
 
 @media only screen and (max-device-width:414px){
+   
     .new-card-cart {
         height:200px !important;
     }
+    
     .box-render-promo {
         flex-wrap: wrap;
         overflow: scroll;
@@ -1645,7 +1648,7 @@
         display: none !important;
     }
     .main-header-search{
-        width:65%;
+        width:95.2%;
     }
     .box-logo-header {
         width:20%;
@@ -1803,7 +1806,8 @@
         min-width:80%;
     }
     .box-render-search{
-        width:243px ;
+        /* width:243px ; */
+        width:95.2%;
         top:90% ;
         left:0% ;
     }

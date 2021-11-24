@@ -295,6 +295,7 @@ const get_product_detail_from_searching_page=(product_id)=>{
             window.parent.$('.box-product').css('display','none')
             window.parent.$('.modals-new-product-detail').css('display','block')
             window.parent.$('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
+            window.parent.$('.main-header .icon_back_header').css('display','flex')
 
         }
     })

@@ -6671,10 +6671,12 @@ img {
     flex-direction: column;
     /* border: 1px solid black; */
     color: #27aae1;
-    ;
-    ;
-
 }
+.main-header .icon_back_header{
+    display:none ;
+    color:#808080;
+}
+
 
 .input-address-box-1 {
     width: 80%;
