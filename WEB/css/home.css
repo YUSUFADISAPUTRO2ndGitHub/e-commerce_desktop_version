@@ -3441,15 +3441,7 @@ input:focus {
     margin:0px !important;
     /* background-color: red; */
 }
-.limited-text-short-breadcrumb {
-    width: 100%;
-    min-width:60%;
-    height:70px;
-    white-space:nowrap;
-    overflow:auto;
-    margin:0px !important;
-    /* background-color: red; */
-}
+
 
 
 .limited-text-commision {

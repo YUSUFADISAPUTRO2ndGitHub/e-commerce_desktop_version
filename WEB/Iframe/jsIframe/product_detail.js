@@ -475,6 +475,7 @@ function close_all_open_window_product(){
 }
 const render_product_detail_from_home = async (item_category) => {
   var product_id = item_category;
+//   console.log(product_id)
   Swal.fire({
     title: "Please Wait",
     html: ` 
@@ -511,7 +512,13 @@ const render_product_detail_from_home = async (item_category) => {
                 return val;
               }
             });
-            //
+
+            var data_similar = allData_storage.filter((val,index)=>{
+                if(val.Subcategory == res.data.Subcategory){
+                    return val
+                }
+            })
+            // console.log(data_similar, ' ini data similar')
             var split_product = data_for_render[0].Name.split(" ");
             var all_filter_product = [];
 
@@ -626,9 +633,12 @@ const render_product_detail_from_home = async (item_category) => {
                             <div class="box-input-ulasan">
                                 <p>Masukan Ulasan</p>
                                 <input type="text" maxlength="100" class="input-ulasan-npd">
-                                <div class="btn-upload-ulasan" onclick="send_comment_cust_product('${product_id}')">
+                                <div class="btn-upload-ulasan" onclick="send_comment_cust_product('3000000')">
                                     Masukan
                                 </div>
+                            </div>
+                            <div class="box-similar-product"> 
+                                
                             </div>
                         </div>
                         
@@ -818,6 +828,9 @@ const render_product_detail_from_home = async (item_category) => {
                                 Masukan
                             </div>
                         </div>
+                        <div class="box-similar-product"> 
+                        
+                        </div>
                     </div>
                     
                     <div class="npd-right">
@@ -884,11 +897,40 @@ const render_product_detail_from_home = async (item_category) => {
             `);
             }
             console.log('render selesai')
-            if (
-              data_for_render[0].Picture_2 == undefined ||
-              data_for_render[0].Picture_2 == null ||
-              data_for_render[0].Picture_2 == "NULL" ||
-              data_for_render[0].Picture_2 == ""
+
+            // render product similar
+            data_similar.map((val,index)=>{
+                var hargaAwal = parseInt(val.Sell_Price)
+                var discount = parseInt(val.Sell_Price * 0.1)
+                var hargaTotal = hargaAwal + discount
+                $('.box-similar-product').append(`
+                    <div class="card-item-similar  hvr-float-shadow " onclick="render_product_detail_from_home('${val.Product_Code}')">
+                        <div class="cr-promo-img "> 
+                            <img src="${val.Picture_1}" alt="" class="img-card " onclick="get_product_detail_from_main_page('${val.Product_Code}')" onload="loadImageBigScreen()">   
+                        </div>
+                        <div class="card-item-list">
+                            
+                            <p class="limited-text-short">${val.Name}</p>
+                            <div class="split-item">
+                                
+                                <div class="item-price-similar">
+                                    <p>RP. ${commafy(hargaTotal)}</p>
+                                    <p>Rp. ${commafy(hargaAwal)}</p>
+                                </div>
+                              
+                                <div class="buy-icon-similar" onclick="addToCart('${val.Product_Code}')">
+                                    <img src="/WEB/img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                    <img src="/WEB/img/badge_groupbuy.png" alt="" class="img-badge-best">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `)
+            })
+
+            // 
+
+            if (data_for_render[0].Picture_2 == undefined ||data_for_render[0].Picture_2 == null ||data_for_render[0].Picture_2 == "NULL" ||data_for_render[0].Picture_2 == ""
             ) {
             } else {
               $(".new-product-small-img-box").append(`
@@ -902,10 +944,7 @@ const render_product_detail_from_home = async (item_category) => {
             `);
             }
             if (
-              data_for_render[0].Picture_3 == undefined ||
-              data_for_render[0].Picture_3 == null ||
-              data_for_render[0].Picture_3 == "NULL" ||
-              data_for_render[0].Picture_3 == ""
+              data_for_render[0].Picture_3 == undefined ||data_for_render[0].Picture_3 == null ||data_for_render[0].Picture_3 == "NULL" ||data_for_render[0].Picture_3 == ""
             ) {
             } else {
               $(".new-product-small-img-box").append(`
@@ -915,13 +954,9 @@ const render_product_detail_from_home = async (item_category) => {
                 `);
             }
 
-            if (
-              data_for_render[0].extra_column_1 == undefined ||
-              data_for_render[0].extra_column_1 == null ||
-              data_for_render[0].extra_column_1 == "NULL" ||
-              data_for_render[0].extra_column_1 == ""
-            ) {
+            if (data_for_render[0].extra_column_1 == "NULL" ||data_for_render[0].extra_column_1 == "" || data_for_render[0].extra_column_1 == null) {
             } else {
+                console.log(data_for_render)
               $(".new-product-small-img-box").append(`
                     <div class="small-product-img" id="video-product" onclick="ganti_gambar_product('${data_for_render[0].extra_column_1}','video','video_product')"> 
                         <video  autoplay muted loop class="img-big" id="img-big-4" >
