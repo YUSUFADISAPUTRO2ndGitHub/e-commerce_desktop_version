@@ -641,6 +641,21 @@ const render_product_detail_from_home = async (item_category) => {
                                 
                             </div>
                         </div>
+
+                        <div class="npd-right-mobile">
+                            <div class="ins-npd-right-mobile">
+                                <div class="mobile-left-footer-1"> 
+                                    <img src="/WEB/marketplace/wa.png" alt="">
+                                </div>
+                                <div class="mobile-left-footer-2"> 
+                                    <p>Beli</p>
+                                </div>
+                                <div class="mobile-left-footer-3"> 
+                                    <p> + Keranjang </p>
+                                </div>
+
+                            </div>
+                        </div>
                         
                         <div class="npd-right">
                             <div class="npd-right-box-qty">
@@ -918,8 +933,7 @@ const render_product_detail_from_home = async (item_category) => {
                                     <p>Rp. ${commafy(hargaAwal)}</p>
                                 </div>
                               
-                                <div class="buy-icon-similar" onclick="addToCart('${val.Product_Code}')">
-                                    <img src="/WEB/img/cart.png" alt="" class="icon-buy" id="${val.Product_Code}">
+                                <div class="buy-icon-similar" >
                                     <img src="/WEB/img/badge_groupbuy.png" alt="" class="img-badge-best">
                                 </div>
                             </div>
