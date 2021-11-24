@@ -470,6 +470,9 @@ const hitung_biaya_product = (product_id, price, total_qty) => {
     console.log($(".total-qty-right"));
   }
 };
+function close_all_open_window_product(){
+   window.parent.location.reload()  
+}
 const render_product_detail_from_home = async (item_category) => {
   var product_id = item_category;
   Swal.fire({
@@ -528,14 +531,23 @@ const render_product_detail_from_home = async (item_category) => {
             var hargaTotal = hargaAwal + discount;
             $(".container-product").empty();
             console.log(detail_product_item.PIC_company_address)
-            var province_company_from_product =await find_province_from_product_company(detail_product_item.PIC_company_address);
+            var province_company_from_product = await find_province_from_product_company(detail_product_item.PIC_company_address);
             console.log(province_company_from_product);
             if (data_for_render[0].GroupBuy_Purchase == "false") {
               console.log("masuk ke if ");
               $(".container-product").append(
                 // render untuk bukan groupbuy
                 `
-                    <div class="new-product-detail-box">
+                    <div class="breadcrumb_product_detail"> 
+                        <nav aria-label="breadcrumb" class="bread-detail">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="new-product-detail-box"> 
                         <div class="npd-left">
                             <div class="product-detail-isi">
                                 <div class="npdl-left">
@@ -552,9 +564,7 @@ const render_product_detail_from_home = async (item_category) => {
                                 </div>   
                                 <div class="npdl-right">
                                     <div class="npd-left-product-name">
-                                        <p>${
-                                            data_for_render[0].Name
-                                        }</p>
+                                        <p>${data_for_render[0].Name}</p>
                                     </div>
                                     <div class="npd-left-product-price">
                                         <p>RP.${commafy(data_for_render[0].Sell_Price)}</p>
@@ -643,18 +653,14 @@ const render_product_detail_from_home = async (item_category) => {
                                                 <i class="fas fa-minus" onclick="kurang_qty_product('${
                                                     data_for_render[0]
                                                     .Stock_Quantity
-                                                }','${parseInt(
-        data_for_render[0].Sell_Price
-    )}')"></i>
+                                                }','${parseInt(data_for_render[0].Sell_Price)}')"></i>
                                                 <div class="box_for_total">
                                                     1
                                                 </div>
                                                 <i class="fas fa-plus" onclick="tambah_qty_product('${
                                                     data_for_render[0]
                                                     .Stock_Quantity
-                                                }','${parseInt(
-        data_for_render[0].Sell_Price
-    )}')"></i>
+                                                }','${parseInt(data_for_render[0].Sell_Price)}')"></i>
                                             </div>
                                             <p>Stok <span>${
                                                 data_for_render[0]
@@ -690,13 +696,20 @@ const render_product_detail_from_home = async (item_category) => {
                             </div>
                         </div>
                     </div>
-                    `
+                 `
               );
             } else {
               //render untuk groupbuy
               console.log("masuk ke else");
               $(".container-product").append(`
                 <div class="new-product-detail-box">
+                    <nav aria-label="breadcrumb" class="bread-detail">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Category</a></li>
+                            <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
+                        </ol>
+                    </nav>
                     <div class="npd-left">
                         <div class="product-detail-isi">
                             <div class="npdl-left">
