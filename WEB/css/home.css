@@ -10146,9 +10146,12 @@ option{
 .icon_bar_mobile {
     font-size:20px;
 }
-
+.icon_category_dropdown {
+    font-size:25px;
+    color:#27aae1;
+}
 .dropdown_menu_mobile {
-    height:230px  !important;
+    height:260px  !important;
 }
 .item_drop_mobile {
     height:50px !important;

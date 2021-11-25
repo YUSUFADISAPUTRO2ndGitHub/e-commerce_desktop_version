@@ -11235,5 +11235,9 @@ function calculateSize(img, maxWidth, maxHeight) {
     
     $('.list-group-item').removeClass('active-cl')
     close_all_open_window()
+    $('.dropdown .dropdown-toggle').removeClass('show')
+    $('.dropdown .dropdown_menu_mobile').removeClass('show')
+    
+    console.log($('.dropdown .dropdown-toggle'))
     // 
   }

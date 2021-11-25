@@ -3004,6 +3004,6 @@ const open_modal_bantuan=()=>{
 }
 
 const open_dropdown_menu=()=>{
-
+    $('.new-box-category').css('display','none')
     $('.dropdown_menu_mobile .item_drop_mobile').removeClass('background_grey')
 }
