@@ -808,7 +808,10 @@ const get_product_detail=(product_id)=>{
     // $('.modals-product-detail').attr('src',`../Iframe/itemDetail.html?product_id=${product_id}&render_from=home`)
     
     //close body
+    console.log(window.parent.$('.mobile-left-footer-3'))
+    console.log(window.parent.$('.mobile-left-footer-4'))
     window.parent.$('.main-body').css('display','none')
+
 
     window.parent.$('.close-button').css('display','none')
     window.parent.$('.modals-lk').css('display','none')
@@ -6670,8 +6673,10 @@ const check_user_for_login=()=>{
         $('#checking_nohp_register').empty()
     }else {
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
-        .then((res)=>{ 
+        .then((res)=>{
+            console.log(res.data) 
             if(res.data){
+                
                 var data_customer
                 var isCustomer_information = Array.isArray(res.data)
                 if(isCustomer_information) {

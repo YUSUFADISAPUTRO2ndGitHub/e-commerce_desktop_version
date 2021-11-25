@@ -10174,7 +10174,10 @@ option{
 
 .npd-right-mobile {
     width:100%;
-    height:200px;
+    /* height:200px; */
     /* border:1px solid black; */
     display: none;
+}
+.input_result_mobile_product {
+    color:#27aae1;
 }

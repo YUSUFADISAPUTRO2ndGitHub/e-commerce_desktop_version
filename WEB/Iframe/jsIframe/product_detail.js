@@ -260,11 +260,68 @@ const send_comment_cust_product = (product_id) => {
   }
 };
 
+const open_input_modals_mobile=(product_id)=>{
+    // tambah_product_ke_cart('${product_id}')
+    // $('.npd-right-mobile').css('height','200px')
+    $('.npd-right-mobile').animate({
+        height:'160px'
+    },500)
+    $('.mobile-left-footer-4').animate({
+        width:'90%'
+    },500)
+    $('.mobile-left-footer-2').css('display','none')
+    $('.mobile-left-footer-3').css('display','none')
+    $('.mobile-left-footer-4').css('display','flex')
+    $('.mobile-close-box').css('display','flex')
+    setTimeout(()=>{
+        $('.input-box-mobile').css('display','flex')
+    })
+}
+const close_input_modals_mobile =()=>{
+    $('.npd-right-mobile').animate({
+        height:'100px'
+    },500)
+    $('.mobile-left-footer-4').animate({
+        width:'40%'
+    },500)
+    $('.mobile-left-footer-2').css('display','flex')
+    $('.mobile-left-footer-3').css('display','flex')
+    $('.mobile-left-footer-4').css('display','none')
+    $('.mobile-close-box').css('display','none')
+    setTimeout(()=>{
+        $('.input-box-mobile').css('display','none')
+    })
+}
+const minus_btn_mobile_product=()=>{
+    var hasil = parseInt($('.input_result_mp').val())
+    console.log(hasil)
+    if(hasil === 1 || hasil <1  ){
+        $('#minus_btn_mobile_product').prop('disabled',true)
+        $('.icon_minus_mobile_product').css('color','#dedede')
+    }else {
+        $('#minus_btn_mobile_product').removeAttr('disabled')
+        $('.icon_minus_mobile_product').css('color','black')
+        var hitung = hasil - 1
+        $('.input_result_mp').val(hitung)
+    }
+}
+const plus_btn_mobile_product=(max_qty)=>{
+    var hasil = parseInt($('.input_result_mp').val())
+    console.log(hasil,max_qty)
+    if(hasil > 0  && hasil < max_qty ){
+        $('#plus_btn_mobile_product').removeAttr('disabled')
+        $('.icon_plus_mobile_product').css('color','black')
+        $('.icon_minus_mobile_product').css('color','black')
+        var hitung = hasil +1
+        $('.input_result_mp').val(hitung)
+    }else {
+        $('#plus_btn_mobile_product').prop('disabled',true)
+        $('.icon_plus_mobile_product').css('color','#dedede')
+    }
+}
+
 function addToCart(product_id, qty) {
-  axios
-    .post(
-      `https://products.sold.co.id/get-product-details?product_code=${product_id}`
-    )
+  axios.post(`https://products.sold.co.id/get-product-details?product_code=${product_id}`)
     .then((res) => {
       var quantity_product = parseInt(res.data.Stock_Quantity);
 
@@ -310,6 +367,7 @@ function addToCart(product_id, qty) {
                         `,
               timer: 2000,
             });
+            close_input_modals_mobile()
           } else {
             var data = {
               productNo: product_id,
@@ -330,6 +388,7 @@ function addToCart(product_id, qty) {
                         `,
               timer: 2000,
             });
+            close_input_modals_mobile()
           }
 
           var pushToStorage = JSON.stringify(dataParse);
@@ -357,6 +416,7 @@ function addToCart(product_id, qty) {
                     `,
             timer: 2000,
           });
+          close_input_modals_mobile()
         }
       }
     })
@@ -474,6 +534,7 @@ function close_all_open_window_product(){
    window.parent.location.reload()  
 }
 const render_product_detail_from_home = async (item_category) => {
+    
   var product_id = item_category;
 //   console.log(product_id)
   Swal.fire({
@@ -643,14 +704,37 @@ const render_product_detail_from_home = async (item_category) => {
                         </div>
 
                         <div class="npd-right-mobile">
-                            <div class="ins-npd-right-mobile">
-                                <div class="mobile-left-footer-1"> 
-                                    <img src="/WEB/marketplace/wa.png" alt="">
+                            <div class="mobile-close-box">
+                                <i class="fas fa-times btn_close_mobile_product" onclick="close_input_modals_mobile()"></i>
+                            </div>
+                            <div class="input-box-mobile"> 
+                                <p>Jumlah </p>
+                                <div class="box-for-input-mobile">
+                                    <div class="box-minus-input-mobile" id="minus_btn_mobile_product" onclick="minus_btn_mobile_product()">
+                                        <i class="fas fa-minus icon_minus_mobile_product"></i>
+                                    </div>
+                                    <div class="box-result-input-mobile" id="result_btn_mobile_product">
+                                        <input type="number" value="1" class="input_result_mobile_product input_result_mp"/>
+                                    </div>
+                                    <div class="box-minus-input-mobile" id="plus_btn_mobile_product" onclick="plus_btn_mobile_product('${data_for_render[0].Stock_Quantity}')">
+                                        <i class="fas fa-plus icon_plus_mobile_product" ></i>
+                                    </div>
                                 </div>
-                                <div class="mobile-left-footer-2"> 
+                            </div>
+                            <div class="ins-npd-right-mobile">
+                                
+                                <div class="mobile-left-footer-1"> 
+                                    <a href="https://wa.me/+6281393736797/?text=Saya ingin konsultasi" target="_blank" style="text-decoration:none"> 
+                                        <img src="/WEB/marketplace/wa.png" alt="">
+                                    </a>
+                                </div>
+                                <div class="mobile-left-footer-2" onclick="beli_product_sekarang('${product_id}')"> 
                                     <p>Beli</p>
                                 </div>
-                                <div class="mobile-left-footer-3"> 
+                                <div class="mobile-left-footer-3" onclick="open_input_modals_mobile('${product_id}')"> 
+                                    <p> + Keranjang </p>
+                                </div>
+                                <div class="mobile-left-footer-4" onclick="tambah_product_ke_cart('${product_id}')"> 
                                     <p> + Keranjang </p>
                                 </div>
 
@@ -666,7 +750,7 @@ const render_product_detail_from_home = async (item_category) => {
                                     </div>
                                     <i class="fas fa-chevron-down down-product-detail"></i>
                                 </div>
-                                <input type="number" class="input-qty-product-detail" onchange="hitung_biaya_product('${product_id}','${data_for_render[0].Sell_Price}','${data_for_render[0].Stock_Quantity}')">
+                                <input type="number" class="input-qty-product-detail input_result_mp" onchange="hitung_biaya_product('${product_id}','${data_for_render[0].Sell_Price}','${data_for_render[0].Stock_Quantity}')">
                                 <div class="total-qty-right">
                                     <div class="tqr-top">
                                         <p id="total-harga-p">Total Harga dan quantity</p>
@@ -845,6 +929,43 @@ const render_product_detail_from_home = async (item_category) => {
                         </div>
                         <div class="box-similar-product"> 
                         
+                        </div>
+                    </div>
+                    <div class="npd-right-mobile">
+                        <div class="mobile-close-box">
+                            <i class="fas fa-times btn_close_mobile_product" onclick="close_input_modals_mobile()"></i>
+                        </div>
+                        <div class="input-box-mobile"> 
+                            <p>Jumlah </p>
+                            <div class="box-for-input-mobile">
+                                <div class="box-minus-input-mobile" id="minus_btn_mobile_product" onclick="minus_btn_mobile_product()">
+                                    <i class="fas fa-minus icon_minus_mobile_product"></i>
+                                </div>
+                                <div class="box-result-input-mobile" id="result_btn_mobile_product">
+                                    <input type="number" value="1" class="input_result_mobile_product input_result_mp"/>
+                                </div>
+                                <div class="box-minus-input-mobile" id="plus_btn_mobile_product" onclick="plus_btn_mobile_product('${data_for_render[0].Stock_Quantity}')">
+                                    <i class="fas fa-plus icon_plus_mobile_product" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ins-npd-right-mobile">
+                            
+                            <div class="mobile-left-footer-1"> 
+                                <a href="https://wa.me/+6281393736797/?text=Saya ingin konsultasi" target="_blank" style="text-decoration:none"> 
+                                    <img src="/WEB/marketplace/wa.png" alt="">
+                                </a>
+                            </div>
+                            <div class="mobile-left-footer-2" onclick="beli_product_sekarang('${product_id}')"> 
+                                <p>Beli</p>
+                            </div>
+                            <div class="mobile-left-footer-3" onclick="open_input_modals_mobile('${product_id}')"> 
+                                <p> + Keranjang </p>
+                            </div>
+                            <div class="mobile-left-footer-4" onclick="tambah_product_ke_cart('${product_id}')"> 
+                                <p> + Keranjang </p>
+                            </div>
+
                         </div>
                     </div>
                     
@@ -1747,7 +1868,10 @@ const render_product_detail_from_home = async (item_category) => {
               })
               .catch((err) => {});
           }
-
+          console.log($('.mobile-left-footer-4'))
+            console.log($('.mobile-left-footer-3'))
+            $('.mobile-left-footer-3').css('display','flex')
+            $('.mobile-left-footer-4').css('display','none')
         //   console.log($('.new-product-img-box', ' new product img box'))
         })
         .catch((err) => {
@@ -1930,7 +2054,7 @@ const tambah_product_ke_cart = (product_id) => {
 
   get_product_detail_func(product_id).done(function(response){
     var max_qty = response.Stock_Quantity
-    var final_qty = $(".input-qty-product-detail").val();
+    var final_qty = $(".input_result_mp").val();
     if(max_qty >final_qty){
       addToCart(product_id, final_qty);
     }else {
