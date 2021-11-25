@@ -2575,9 +2575,12 @@
         justify-content: space-between;
         overflow: scroll;
     }
+    .img-badge-new {
+        left:9px;
+    }
 
     .box-render-new .card-item {
-        margin-right :5px !important;
+        /* margin-right :5px !important; */
         width:48.6% !important;
         min-width:48.6%  !important;
     }
