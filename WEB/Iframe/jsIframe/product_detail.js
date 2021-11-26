@@ -610,8 +610,10 @@ const render_product_detail_from_home = async (item_category) => {
           var allData_storage = JSON.parse(
             localStorage.getItem("all_data_product")
           );
+          var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
+          console.log(all_province_from_storage,'614', all_province_from_storage != null)
           // alldata_storage != undefined, gue rubah jadi == biar masuk ke else
-          if (allData_storage != undefined && allData_storage.length != 0) {
+          if (allData_storage != undefined && allData_storage.length != 0 && all_province_from_storage != null) {
             var data_for_render = allData_storage.filter((val, index) => {
               if (val.Product_Code == product_id) {
                 return val;

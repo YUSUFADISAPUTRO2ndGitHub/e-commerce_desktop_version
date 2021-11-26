@@ -336,6 +336,20 @@ const renderItemAll=()=>{
 // RENDER DATA HOME
 
 
+const find_subcategory_mobile=(subcategory,item)=>{
+    
+    
+    $('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $(item).addClass('item_category_mobile_active')
+}
+const find_product_mobile=(product)=>{
+    console.log(product)
+}
+
+const goto_page_mobile=(product)=>{
+    console.log(product,'347')
+}
+
 const renderCategory=()=>{
     // var subCat = 'ADHESIVE'
     // alert('render category jalan')
@@ -343,6 +357,7 @@ const renderCategory=()=>{
     .then((res)=>{
         
         res.data.map((val,index)=>{
+            console.log(val)
             var sub = val.Category.toUpperCase()    
             var split = sub.split(' ').join('_')
             
@@ -350,8 +365,53 @@ const renderCategory=()=>{
                 ` 
                 <li class="list-group-item category-list get-item close-category " val="${sub}" onclick="findSubCategory('${sub}')" id="id_sub-${split}">${sub}</li>
                 `
-                )
+            )
         })
+        $('.box-for-render-category-mobile').empty()
+        $('.box-for-render-subcategory-mobile').empty()
+        $('.box-for-render-product-mobile').empty()
+        res.data.map((val,index)=>{
+            axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${val.Category}`)
+            .then((res)=>{
+                // console.log(res.data[0])
+                // item_category_mobile_active class for active
+
+                // render for category mobile
+                $('.box-for-render-category-mobile').append(`
+                    <div class="item-box-category-mobile " onclick="find_subcategory_mobile('${val.Category}',this)">
+                        <img src="${res.data[0].Picture_1}" alt="">
+                        <p>${val.Category}</p>
+                    </div>
+                `)
+                res.data.map((val,index)=>{
+                    // console.log(val)
+                    axios.post(`https://products.sold.co.id/get-product-details?subcategory=${val.Subcategory}`)
+                    .then((res)=>{
+                        res.data.map((val,index)=>{
+                            // render for product mobile
+                            $('.box-for-render-product-mobile').append(`
+                                <div class="item-box-category-mobile" onclick="goto_page_mobile('${val.Name}')">
+                                    <img src="${val.Picture_1}" alt="">
+                                    <p>${val.Name}</p>
+                                </div>
+                            `)
+                        })
+                    }).catch((err)=>{
+                        console.log(err)
+                    })
+                    // render for subcategory mobile
+                    $('.box-for-render-subcategory-mobile').append(`
+                        <div class="item-box-category-mobile" onclick="find_product_mobile('${val.Subcategory}')">
+                            <img src="${val.Picture_1}" alt="">
+                            <p>${val.Subcategory}</p>
+                        </div>
+                    `)
+                })
+            }).catch((err)=>{
+                console.log(err)
+            })
+        })
+        
     }).catch((err)=>{
         
     })
