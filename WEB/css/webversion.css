@@ -492,7 +492,7 @@
         font-size:0.7em;
     }
     .modals-search-result {
-        top:16.5%;
+        top:12.5%;
         /* top:0%; */
         height:100vh;
     }
@@ -745,7 +745,7 @@
         font-size:0.7em;
     }
     .modals-search-result {
-        top:16.5%;
+        top:12.5%;
         /* top:0%; */
         height:100vh;
     }
@@ -2342,7 +2342,8 @@
         font-size:0.7em;
     }
     .modals-search-result {
-        top:16.5%;
+        /* top:16.5%; */
+        top:12.5%;
         /* top:0%; */
         height:100vh;
     }
