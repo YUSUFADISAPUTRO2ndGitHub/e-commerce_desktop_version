@@ -297,6 +297,9 @@ const get_product_detail_from_searching_page=(product_id)=>{
             window.parent.$('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?product_id=${product_id}&render_from=home`)
             window.parent.$('.main-header .icon_back_header').css('display','flex')
 
+            window.parent.$('.dropdown-toggle').removeClass('show')
+            window.parent.$('.dropdown_menu_mobile').removeClass('show')
+
         }
     })
 }

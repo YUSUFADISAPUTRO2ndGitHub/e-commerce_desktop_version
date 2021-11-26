@@ -533,6 +533,50 @@ const hitung_biaya_product = (product_id, price, total_qty) => {
 function close_all_open_window_product(){
    window.parent.location.reload()  
 }
+function close_all_open_window_product_detail(){
+    $('.new-box-category .list-group .get-item').removeClass('active-cl')
+    $(".force-close-all-command").css("display", "none");
+    $('.option-0').removeClass("background_grey");
+    $('.option-1').removeClass("background_grey");
+    $('.option-2').removeClass("background_grey");
+    $('.option-3').removeClass("background_grey");
+    $('.option-4').removeClass("background_grey");
+    $('.option-5').removeClass("background_grey");
+    $('.box-delete-success').css('display','none')
+
+    $(".force-close-all-command",window.parent.parent.document).css("display", "none");
+    $('.option-0',window.parent.parent.document).removeClass("background_grey");
+    $('.option-1',window.parent.parent.document).removeClass("background_grey");
+    $('.option-2',window.parent.parent.document).removeClass("background_grey");
+    $('.option-3',window.parent.parent.document).removeClass("background_grey");
+    $('.option-4',window.parent.parent.document).removeClass("background_grey");
+    $('.option-5',window.parent.parent.document).removeClass("background_grey");
+    $('.box-delete-success',window.parent.parent.document).css('display','none')    
+}
+function back_to_home(){
+    $('.box-product').css('display','flex')
+    $(".force-close-all-command-2").css("display", "none");
+    $('.main-body').css('display','block')
+    $('.box_mail_chimp').css('display','block')
+    $('.active_search').css('top','0px')
+    $('#newloginTokpedModal').modal('hide')
+    window.parent.$('.box-product').css('display','flex')
+    window.parent.$('.main-body').css('display','block')
+    window.parent.$('.box_mail_chimp').css('display','block')
+    window.parent.$('.force-close-all-command-2').css('display','none')
+
+}
+const open_category_home_from_product_detail=()=>{
+    back_to_home()
+    window.parent.$('.new-box-category').toggle(500)
+    
+    $('.list-group-item').removeClass('active-cl')
+    close_all_open_window_product_detail()
+    $('.dropdown .dropdown-toggle').removeClass('show')
+    $('.dropdown .dropdown_menu_mobile').removeClass('show')
+    
+    console.log($('.dropdown .dropdown-toggle'))
+  }
 const render_product_detail_from_home = async (item_category) => {
     
   var product_id = item_category;
@@ -610,7 +654,7 @@ const render_product_detail_from_home = async (item_category) => {
                         <nav aria-label="breadcrumb" class="bread-detail">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                <li class="breadcrumb-item" onclick="open_category_home_from_product_detail()"><a>Category</a></li>
                                 <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
                             </ol>
                         </nav>
@@ -815,7 +859,7 @@ const render_product_detail_from_home = async (item_category) => {
                     <nav aria-label="breadcrumb" class="bread-detail">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Category</a></li>
+                            <li class="breadcrumb-item" onclick="open_category_home_from_product_detail()"><a >Category</a></li>
                             <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
                         </ol>
                     </nav>

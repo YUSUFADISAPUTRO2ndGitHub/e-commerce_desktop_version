@@ -1256,6 +1256,10 @@ $(function(){
 
     // input name searching home
     $('.input-name').on('keyup',function () {
+        $('.dropdown-toggle').removeClass('show')
+        $('.dropdown_menu_mobile').removeClass('show')
+
+
         $('.close-button').css('display','block')
         $('.close-button-2').css('display','block')
         $('.input-name').css('z-index','100')

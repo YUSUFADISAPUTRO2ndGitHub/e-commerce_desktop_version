@@ -273,7 +273,10 @@
     }
 }
 @media only screen and (max-device-width:767px){
-    
+    .input-ulasan-npd
+     {
+         width:400px;
+     }
     #highlight-product {
         position: relative;
         top:15px;
@@ -448,8 +451,8 @@
         right:30%;
     }
     .modals-lk {
-        left:9%;
-        width:800px;
+        left:0% !important;
+        width:100% !important;
     }
     .npd-left-product-name {
         font-size:18px;
@@ -479,7 +482,8 @@
         left:0%;
     }
     .box-list-kategori{
-        width:570px !important;
+        /* width:570px !important; */
+        width:100% !important;
     }
     .card-all-item{
         width:200px;
@@ -495,6 +499,15 @@
 
 
 @media only screen and (max-device-width:640px){
+    .new-product-detail-box {
+        flex-direction: column;
+    }
+    .npd-left{
+        width:100%;
+    }
+    .npd-left-product-price p {
+        font-size:18px;
+    }
     .limited-text-short-breadcrumb {
         width: 100%;
         min-width:60% !important;
@@ -2504,7 +2517,8 @@
     }
     .box-similar-product {
         flex-wrap: wrap;
-        justify-content: space-around;
+        /* justify-content: space-around; */
+        justify-content: flex-start;
         overflow: scroll;
         padding-top:10px;
         height:600px;

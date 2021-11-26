@@ -336,6 +336,9 @@ $('.modals-new-product-detail').attr('src',`./Iframe/new_product_detail.html?pro
 $('.new-box-category').css('display','none')
 $('.box_mail_chimp').css('display','none')
 
+$('.dropdown-toggle').removeClass('show')
+$('.dropdown_menu_mobile').removeClass('show')
+
 }
 
 // // RENDER DATA HOME
@@ -584,6 +587,8 @@ const getAllItem_fromAllSubCat=(item)=>{
         $('.new-box-category').css('display','none')
         $('.box_mail_chimp').css('display','none')
 
+        $('.dropdown-toggle').removeClass('show')
+        $('.dropdown_menu_mobile').removeClass('show')
         Swal.fire({
             html:`
            
@@ -11239,5 +11244,4 @@ function calculateSize(img, maxWidth, maxHeight) {
     $('.dropdown .dropdown_menu_mobile').removeClass('show')
     
     console.log($('.dropdown .dropdown-toggle'))
-    // 
   }
