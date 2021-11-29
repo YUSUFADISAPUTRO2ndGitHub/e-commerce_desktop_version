@@ -658,7 +658,12 @@ body {
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
-    height:80px !important;
+    height:200px !important;
+    width:400px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+    
+    
     box-shadow:none !important;
     /* position: relative !important; */
     /* top:-5% !important; */
@@ -678,10 +683,27 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width:100%;
+    width:50% !important;
     position:relative;
     top:-5%;
     /* border:1px solid #dedede !important; */
+}
+.box-dropdown-qr-download {
+    width:50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.dropdown-qr-android{
+    width:70%;
+    height:40px;
+    border:1px solid black;
+}
+.dropdown-qr-android img{
+    width:100%;
+    height:100%;
 }
 
 .dropdown-menu {

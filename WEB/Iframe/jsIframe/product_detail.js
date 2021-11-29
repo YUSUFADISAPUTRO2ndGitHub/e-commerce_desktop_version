@@ -307,7 +307,7 @@ const minus_btn_mobile_product=()=>{
 }
 const plus_btn_mobile_product=(max_qty)=>{
     var hasil = parseInt($('.input_result_mp').val())
-    console.log(hasil,max_qty)
+    // console.log(hasil,max_qty)
     if(hasil > 0  && hasil < max_qty ){
         $('#plus_btn_mobile_product').removeAttr('disabled')
         $('.icon_plus_mobile_product').css('color','black')
@@ -423,13 +423,13 @@ function addToCart(product_id, qty) {
     .catch((err) => {});
 }
 const kurang_qty_product = (max_qty, price) => {
-  console.log(max_qty);
+//   console.log(max_qty);
   var qty_now = $(".input-qty-product-detail").val();
 
-  console.log(qty_now, " ini qty now");
+//   console.log(qty_now, " ini qty now");
   if (qty_now === 0 || qty_now < 0 || qty_now == -1) {
   } else if (qty_now > 0) {
-    console.log();
+    // console.log();
     var qty_minus = qty_now - 1;
     $(".box_for_total").html(qty_minus);
     $(".input-qty-product-detail").val(qty_minus);
@@ -446,11 +446,11 @@ const tambah_qty_product = (max_qty, price) => {
   var qty_now = parseInt($(".input-qty-product-detail").val());
 
   // alert(harga)
-  console.log(qty_now);
+//   console.log(qty_now);
   var max_qty_product = parseInt(max_qty);
 
   if (qty_now > max_qty_product) {
-    console.log(qty_now, "133");
+    // console.log(qty_now, "133");
     $(".box_for_total").html(max_qty_product);
     $(".input-qty-product-detail").val(max_qty_product);
   } else if (qty_now > 0 && qty_now < max_qty_product) {
@@ -479,13 +479,13 @@ const tambah_qty_product = (max_qty, price) => {
 };
 
 const hitung_biaya_product = (product_id, price, total_qty) => {
-  console.log(product_id, price, total_qty);
+//   console.log(product_id, price, total_qty);
   var qty_from_customer = parseInt($(".input-qty-product-detail").val());
-  console.log(qty_from_customer);
+//   console.log(qty_from_customer);
   var harga = parseInt(price) * parseInt(qty_from_customer);
   // console.log(parseInt(price),parseInt(total_qty))
   var isNan = isNaN(qty_from_customer);
-  console.log(isNan);
+//   console.log(isNan);
 
   if (qty_from_customer < 1) {
     $(".input-qty-product-detail").val(1);
@@ -527,7 +527,7 @@ const hitung_biaya_product = (product_id, price, total_qty) => {
             <p>Subtotal</p>
             <p>${commafy(harga)}</p>
         `);
-    console.log($(".total-qty-right"));
+    // console.log($(".total-qty-right"));
   }
 };
 function close_all_open_window_product(){
@@ -575,7 +575,7 @@ const open_category_home_from_product_detail=()=>{
     $('.dropdown .dropdown-toggle').removeClass('show')
     $('.dropdown .dropdown_menu_mobile').removeClass('show')
     
-    console.log($('.dropdown .dropdown-toggle'))
+    // console.log($('.dropdown .dropdown-toggle'))
   }
 
   const open_category_mobile_home_product_detail =()=>{
@@ -585,7 +585,7 @@ const open_category_home_from_product_detail=()=>{
     window.parent.$('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
     window.parent.$('.box-for-render-product-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
     // $('.new-box-category').toggle(500)
-    console.log(window.parent.$('.modals-new-product-detail').css('display','none'))
+    
     $('.box-for-render-subcategory-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
     $('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
     $('.box-for-render-product-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
@@ -632,7 +632,7 @@ const render_product_detail_from_home = async (item_category) => {
             localStorage.getItem("all_data_product")
           );
           var all_province_from_storage = JSON.parse(localStorage.getItem('all_province_tiki'))
-          console.log(all_province_from_storage,'614', all_province_from_storage != null)
+        //   console.log(all_province_from_storage,'614', all_province_from_storage != null)
           // alldata_storage != undefined, gue rubah jadi == biar masuk ke else
           if (allData_storage != undefined && allData_storage.length != 0 && all_province_from_storage != null) {
             var data_for_render = allData_storage.filter((val, index) => {
@@ -665,11 +665,11 @@ const render_product_detail_from_home = async (item_category) => {
             var discount = parseInt(data_for_render[0].Sell_Price * 0.1);
             var hargaTotal = hargaAwal + discount;
             $(".container-product").empty();
-            console.log(detail_product_item.PIC_company_address)
+            // console.log(detail_product_item.PIC_company_address)
             var province_company_from_product = await find_province_from_product_company(detail_product_item.PIC_company_address);
-            console.log(province_company_from_product);
+            // console.log(province_company_from_product);
             if (data_for_render[0].GroupBuy_Purchase == "false") {
-              console.log("masuk ke if ");
+            //   console.log("masuk ke if ");
               $(".container-product").append(
                 // render untuk bukan groupbuy
                 `
@@ -876,7 +876,7 @@ const render_product_detail_from_home = async (item_category) => {
               );
             } else {
               //render untuk groupbuy
-              console.log("masuk ke else");
+            //   console.log("masuk ke else");
               $(".container-product").append(`
                 <div class="new-product-detail-box">
                     <nav aria-label="breadcrumb" class="bread-detail">
@@ -1099,7 +1099,7 @@ const render_product_detail_from_home = async (item_category) => {
                 </div>
             `);
             }
-            console.log('render selesai')
+            // console.log('render selesai')
 
             // render product similar
             data_similar.map((val,index)=>{
