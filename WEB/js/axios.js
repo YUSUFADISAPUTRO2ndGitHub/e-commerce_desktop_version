@@ -339,6 +339,9 @@ $('.box_mail_chimp').css('display','none')
 $('.dropdown-toggle').removeClass('show')
 $('.dropdown_menu_mobile').removeClass('show')
 
+// close new category
+$('.new-box-category-mobile').css('display','none')
+
 }
 
 // // RENDER DATA HOME
@@ -11242,6 +11245,21 @@ function calculateSize(img, maxWidth, maxHeight) {
     close_all_open_window()
     $('.dropdown .dropdown-toggle').removeClass('show')
     $('.dropdown .dropdown_menu_mobile').removeClass('show')
+    
+    console.log($('.dropdown .dropdown-toggle'))
+  }
+
+  const open_category_mobile_home=()=>{
+    back_to_home()
+
+    // $('.new-box-category').toggle(500)
+    
+    // $('.list-group-item').removeClass('active-cl')
+    close_all_open_window()
+    // $('.dropdown .dropdown-toggle').removeClass('show')
+    // $('.dropdown .dropdown_menu_mobile').removeClass('show')
+
+    $('.new-box-category-mobile').css('display','flex')
     
     console.log($('.dropdown .dropdown-toggle'))
   }

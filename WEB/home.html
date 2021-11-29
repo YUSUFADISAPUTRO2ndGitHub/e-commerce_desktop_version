@@ -1853,7 +1853,7 @@
                             <img src="../WEB/img/qr-scan-icon.png" alt="error" class="icon-opt ">
                             <p>Bulk Order</p>
                         </a>
-                        <a class="dropdown-item item_drop_mobile" href="#" onclick="open_category_home()">
+                        <a class="dropdown-item item_drop_mobile" href="#" onclick="open_category_mobile_home()">
                             <i class="fas fa-th-large icon_category_dropdown"></i>
                             <!-- <img src="../WEB/img/shopping-cart.png" alt="error" class="icon-opt"> -->
                             <p>Kategori</p>
@@ -1872,14 +1872,14 @@
                 <ul class="list-group  lg_home"  >
                     <!-- render Category -->
     
-                    <!-- render Category -->
+                    <!-- render Category --> 
                 </ul>
             </div>
             <div class="new-box-category-mobile">
                 <div class="searching-cat-subcat-mobile">
                     <div class="searching-box-with-close">
                         <p></p>
-                        <i class="far fa-times-circle icon_close_category_mobile" ></i>
+                        <i class="far fa-times-circle icon_close_category_mobile" onclick="btn_close_new_category_mobile()" ></i>
                     </div>
                     <!-- <input type="text" class="input-search-cat-subcat-mobile" placeholder="Category / Subcategory"> -->
                 </div>
@@ -1928,7 +1928,7 @@
                         <!-- RENDER SUB CATEGORY MOBILE -->
                     </div>
                 </div>
-                <div class="subcategory-mobile-box">
+                <div class="subcategory-mobile-box" id="subcategory-id-mobile-box">
                     <p>Product</p>
                     <div class="box-for-render-product-mobile">
                         <!-- RENDER PRODUCT MOBILE -->

@@ -8235,7 +8235,7 @@ option{
     position: absolute;
     left:0;
     top:16.5%;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 .searching-box-with-close {
