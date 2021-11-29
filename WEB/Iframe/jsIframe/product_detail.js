@@ -577,6 +577,27 @@ const open_category_home_from_product_detail=()=>{
     
     console.log($('.dropdown .dropdown-toggle'))
   }
+
+  const open_category_mobile_home_product_detail =()=>{
+    back_to_home()
+    window.parent.$('.modals-new-product-detail').css('display','none')
+    window.parent.$('.box-for-render-subcategory-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    window.parent.$('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    window.parent.$('.box-for-render-product-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    // $('.new-box-category').toggle(500)
+    console.log(window.parent.$('.modals-new-product-detail').css('display','none'))
+    $('.box-for-render-subcategory-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $('.box-for-render-product-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    // close_all_open_window()
+    $('.dropdown .dropdown-toggle').removeClass('show')
+    $('.dropdown .dropdown_menu_mobile').removeClass('show')
+
+
+    $('.new-box-category-mobile').css('display','flex')
+
+    window.parent.$('.new-box-category-mobile').css('display','flex')
+  }
 const render_product_detail_from_home = async (item_category) => {
     
   var product_id = item_category;
@@ -656,7 +677,7 @@ const render_product_detail_from_home = async (item_category) => {
                         <nav aria-label="breadcrumb" class="bread-detail">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
-                                <li class="breadcrumb-item" onclick="open_category_home_from_product_detail()"><a>Category</a></li>
+                                <li class="breadcrumb-item" onclick="open_category_mobile_home_product_detail()"><a>Category</a></li>
                                 <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
                             </ol>
                         </nav>
@@ -861,7 +882,7 @@ const render_product_detail_from_home = async (item_category) => {
                     <nav aria-label="breadcrumb" class="bread-detail">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
-                            <li class="breadcrumb-item" onclick="open_category_home_from_product_detail()"><a >Category</a></li>
+                            <li class="breadcrumb-item" onclick="open_category_mobile_home_product_detail()"><a >Category</a></li>
                             <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
                         </ol>
                     </nav>
@@ -2153,3 +2174,67 @@ const ganti_gambar_product = (src_gambar, status, id_product) => {
 
 
 
+
+const find_subcategory_mobile=(category,item)=>{
+    
+    
+    $('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $(item).addClass('item_category_mobile_active')
+    $('html, body').animate({
+        scrollTop: $(".subcategory-mobile-box").offset().top
+    }, 300);
+    
+    
+    axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Sub_Category_Based_On_Category=${category}`)
+    .then((res)=>{
+        // console.log(res.data)
+        $('.box-for-render-subcategory-mobile').empty()
+        res.data.map((val,index)=>{
+            $('.box-for-render-subcategory-mobile').append(`
+                <div class="item-box-category-mobile " onclick="find_product_mobile('${val.Subcategory}',this)">
+                    <img src="${val.Picture_1}" alt="">
+                    <p>${val.Subcategory}</p>
+                </div>
+            `)
+        })
+
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+const find_product_mobile=(product,item)=>{
+    console.log(product)
+    $('.box-for-render-subcategory-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $(item).addClass('item_category_mobile_active')
+    $('html, body').animate({
+        scrollTop: $("#subcategory-id-mobile-box").offset().top
+    }, 500);
+    axios.post(`https://products.sold.co.id/get-product-details?subcategory=${product}`)
+    .then((res)=>{
+        console.log(res.data)
+        $('.box-for-render-product-mobile').empty()
+        res.data.map((val,index)=>{
+            $('.box-for-render-product-mobile').append(`
+                <div class="item-box-category-mobile " onclick="goto_page_mobile('${val.Product_Code}',this)">
+                    <img src="${val.Picture_1}" alt="">
+                    <p>${val.Name}</p>
+                </div>
+            `)
+        })
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+const goto_page_mobile=(product_id,item)=>{
+    console.log(product_id,'347')
+    $('.box-for-render-product-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $(item).addClass('item_category_mobile_active')
+
+    console.log(product_id)
+    $('.new-box-category-mobile').css('display','none')
+    get_product_detail_from_main_page(product_id)
+}
+const btn_close_new_category_mobile =()=>{
+    $('.new-box-category-mobile').css('display','none')
+}

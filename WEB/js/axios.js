@@ -11254,10 +11254,12 @@ function calculateSize(img, maxWidth, maxHeight) {
 
     // $('.new-box-category').toggle(500)
     
-    // $('.list-group-item').removeClass('active-cl')
+    $('.box-for-render-subcategory-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $('.box-for-render-category-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
+    $('.box-for-render-product-mobile .item-box-category-mobile').removeClass('item_category_mobile_active')
     close_all_open_window()
-    // $('.dropdown .dropdown-toggle').removeClass('show')
-    // $('.dropdown .dropdown_menu_mobile').removeClass('show')
+    $('.dropdown .dropdown-toggle').removeClass('show')
+    $('.dropdown .dropdown_menu_mobile').removeClass('show')
 
     $('.new-box-category-mobile').css('display','flex')
     
