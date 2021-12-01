@@ -21,6 +21,10 @@ const on_select_ref=()=>{
 function forgot_modal_request(){
     $('#newloginModal').modal('hide')
 }
+function open_download_app(){
+    $('.close-button').css('display','block')
+    
+}
 function cart_requested(x){
     back_to_home()
     $('.dropdown_menu_mobile').removeClass('show')

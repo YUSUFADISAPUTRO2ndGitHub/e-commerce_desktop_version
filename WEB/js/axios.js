@@ -1075,7 +1075,11 @@ function close_all_open_window(){
     $('.option-3',window.parent.parent.document).removeClass("background_grey");
     $('.option-4',window.parent.parent.document).removeClass("background_grey");
     $('.option-5',window.parent.parent.document).removeClass("background_grey");
-    $('.box-delete-success',window.parent.parent.document).css('display','none')    
+    $('.box-delete-success',window.parent.parent.document).css('display','none')   
+    
+    $('.dropdown2 .dropdown-toggle').removeClass('show')
+    $('.dropdown2 .menu-download-app').removeClass('show')
+    console.log($('.dropdown .dropdown-toggle'))
 }
 
 function back_to_home(){

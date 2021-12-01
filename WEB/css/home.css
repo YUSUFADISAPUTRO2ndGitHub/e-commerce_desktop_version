@@ -661,9 +661,7 @@ body {
     height:200px !important;
     width:400px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
-    
-    
+      
     box-shadow:none !important;
     /* position: relative !important; */
     /* top:-5% !important; */
@@ -692,14 +690,15 @@ body {
     width:50%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
 }
 .dropdown-qr-android{
     width:70%;
     height:40px;
-    border:1px solid black;
+    /* border:1px solid black; */
+    margin:5px;
 }
 .dropdown-qr-android img{
     width:100%;
@@ -10358,4 +10357,19 @@ option{
 }
 .input_result_mobile_product {
     color:#27aae1;
+}
+
+.a-dropdown-item{
+    width:50% !important;
+    height:100% !important;
+}
+.a-dropdown-item img{
+    width: 80%;
+    height:80%;
+}
+.a-dropdown-item:hover{
+    background-color: transparent !important;;
+}
+#ios-icon-header{
+    display:none;
 }

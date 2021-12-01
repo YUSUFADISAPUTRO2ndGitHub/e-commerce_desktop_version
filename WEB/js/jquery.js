@@ -4,6 +4,14 @@ var index = 0
 $(function(){
     $('.dropdown-toggle').dropdown()
 
+   
+        $('#id_dropdown_toggle_qr').mouseenter(function(){
+            $('.dropdown2 .dropdown-toggle').addClass('show')
+            $('.dropdown2 .menu-download-app').addClass('show')
+            $('.close-button').css('display','block')
+
+        })
+
     $('#left-btn-profile').on('click',function(){
         $('.newlogin-left').css('width','80px')
         $('.detail-profile-left').css('display','none')
