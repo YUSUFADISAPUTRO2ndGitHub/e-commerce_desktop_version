@@ -11264,23 +11264,24 @@ function calculateSize(img, maxWidth, maxHeight) {
     close_all_open_window()
     // $('.dropdown .dropdown-toggle').toggle(500)
     // $('.dropdown .dropdown_menu_mobile').toggle(500)
-    // $('.dropdown .dropdown-toggle').removeClass('show')
-    // $('.dropdown .dropdown_menu_mobile').removeClass('show')
+    $('.dropdown .dropdown-toggle').removeClass('show')
+    $('.dropdown .dropdown_menu_mobile').removeClass('show')
 
     // $('.new-box-category-mobile').css('display','flex')
 
-     var category = $('.new-box-category-mobile').hasClass('display_new_category')
+     var category = $('.new-box-category-mobile').hasClass('hide_new_category')
      console.log(category)
     if(category) {
         console.log('masuk ke if')
-        $('.new-box-category-mobile').css('display','flex')
-        $('.new-box-category-mobile').addClass('hide_new_category')
-        $('.new-box-category-mobile').removeClass('display_new_category')
-    }else {
-        console.log('masuk ke else')
-        $('.new-box-category-mobile').css('display','none')
+        // $('.new-box-category-mobile').css('display','flex')
         $('.new-box-category-mobile').removeClass('hide_new_category')
         $('.new-box-category-mobile').addClass('display_new_category')
+    }else {
+        console.log('masuk ke else')
+        // $('.new-box-category-mobile').css('display','none')
+        console.log($('.new-box-category-mobile'))
+        $('.new-box-category-mobile').removeClass('display_new_category')
+        $('.new-box-category-mobile').addClass('hide_new_category')
     }
     
   }
