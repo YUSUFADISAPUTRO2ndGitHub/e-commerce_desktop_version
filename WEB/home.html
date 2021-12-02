@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
     <!-- <link rel="preload" as="script" href="./js/preload.js" crossorigin="anonymous"> -->
     
     <link rel="stylesheet" href="../WEB/css/home.css">
@@ -18,18 +20,6 @@
 
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://soldays.id">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-    <!-- GOOGLE ANALYTICS -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCQGHBY1MG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-SCQGHBY1MG');
-    </script> -->
-
-<!-- GOOGLE ANALYTICS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 
@@ -165,6 +155,10 @@
                 <div class="login-tokped-border">
                     <!-- KHUSUS LOGIN -->
                     <div class="tokped-border-login">
+                        <div class="kembali-box-login-tokped" onclick="back_to_home()">
+                            <i class="fas fa-arrow-left" ></i>
+                            <p>Kembali</p>
+                        </div>
                         <div class="status-tokped">
                             <p>Masuk</p>
                             <p onclick="onclick_to_register()">Daftar</p>
@@ -1876,8 +1870,6 @@
                         </a>
                     </div>
                   </div>
-                  
-                
             </div>
 
             <div class="new-box-category" style="display: none;">

@@ -521,6 +521,12 @@
 
 
 @media only screen and (max-device-width:640px){
+    .cart-counter{
+        font-size:0.1em;
+    }
+    .icon-opt {
+        width:25px;
+    }
     .new-product-detail-box {
         flex-direction: column;
     }
@@ -638,7 +644,7 @@
         width:45%;
     }
     .header-option{
-        width:35%;
+        width:50%;
     }
     .main-about {
         padding-left:60px;
@@ -718,8 +724,8 @@
         top:16.5% ;
     }
     .iframe {
-        right:9% !important;
-        top:16.5% !important;
+        right:12.3% !important;
+        top:11.5% !important;
     }
     .cart-counter {
         top:30%;

@@ -2236,5 +2236,7 @@ const goto_page_mobile=(product_id,item)=>{
     get_product_detail_from_main_page(product_id)
 }
 const btn_close_new_category_mobile =()=>{
-    $('.new-box-category-mobile').css('display','none')
+    // $('.new-box-category-mobile').css('display','none')
+    $('.new-box-category-mobile').removeClass('display_new_category')
+    $('.new-box-category-mobile').addClass('hide_new_category')
 }

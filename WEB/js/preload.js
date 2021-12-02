@@ -747,7 +747,7 @@ const renderOptionSearch=()=>{
         axios.post(`https://products.sold.co.id/get-product-details?Get_ALL_Category=true`)
         .then((res)=>{
             res.data.map((val,index)=>{
-                if(index<5){
+                if(index<4){
                     $('.header-search-option').append(`
                     <p  class="hvr-grow" onclick="getAllItem_fromAllCat('${val.Category}')">${val.Category}</p>
                     `)
