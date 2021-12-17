@@ -7,6 +7,10 @@ body {
 * {
     font-family: "Nunito Sans", sans-serif;
 }
+.jendralbos-footer{
+    font-size:0.8em;
+    color:#9a9a9a;
+}
 .hide_new_category{
     display: none !important;
 }
