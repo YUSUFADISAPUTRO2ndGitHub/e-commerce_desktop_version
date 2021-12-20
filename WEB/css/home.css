@@ -7,6 +7,13 @@ body {
 * {
     font-family: "Nunito Sans", sans-serif;
 }
+.box-hubungi-kami {
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+}
 .jendralbos-footer{
     font-size:0.8em;
     color:#9a9a9a;
@@ -1792,7 +1799,7 @@ body {
     /* background-color: red; */
 }
 .solped-footer-right {
-    width:40%;
+    width:30%;
     height:100%;
     /* background-color: red; */
     display: flex;
@@ -1813,6 +1820,14 @@ body {
     flex-direction: column;
     /* border:1px solid black; */
     padding:10px;
+}
+.solped-footer-3{
+    height:240px;
+    width:20%;
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+
 }
 .logo-box-footer {
     width:100%;

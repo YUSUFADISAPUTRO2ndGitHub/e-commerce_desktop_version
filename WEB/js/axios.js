@@ -6673,6 +6673,7 @@ const check_user_for_login=()=>{
     $('#checking_password_register').empty()
     //clear form
     var token = localStorage.getItem('token')
+    console.log(token)
     if(token === null || token === false || token === 'false' ){
         $('#newloginTokpedModal').modal('show') // login baru
         $('.box_information_login').css('display','flex')
@@ -6684,6 +6685,7 @@ const check_user_for_login=()=>{
         $('#checking_nama_register').empty()
         $('#checking_nohp_register').empty()
     }else {
+        console.log(token)
         axios.post(`https://customers.sold.co.id/get-customer-information?Customer_Code=${token}`)
         .then((res)=>{
             console.log(res.data) 
