@@ -878,14 +878,16 @@ const render_product_detail_from_home = async (item_category) => {
               //render untuk groupbuy
             //   console.log("masuk ke else");
               $(".container-product").append(`
-                <div class="new-product-detail-box">
+                <div class="breadcrumb_product_detail"> 
                     <nav aria-label="breadcrumb" class="bread-detail">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item" onclick="close_all_open_window_product()"><a >Home</a></li>
-                            <li class="breadcrumb-item" onclick="open_category_mobile_home_product_detail()"><a >Category</a></li>
+                            <li class="breadcrumb-item" onclick="open_category_mobile_home_product_detail()"><a>Category</a></li>
                             <li class="breadcrumb-item active limited-text-short-breadcrumb" aria-current="page">${data_for_render[0].Name}</li>
                         </ol>
                     </nav>
+                </div>
+                <div class="new-product-detail-box">
                     <div class="npd-left">
                         <div class="product-detail-isi">
                             <div class="npdl-left">

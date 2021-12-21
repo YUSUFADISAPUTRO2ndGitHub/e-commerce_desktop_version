@@ -468,7 +468,7 @@ body {
     /* border:1px solid blue */
 }
 .npd-right-box-qty{
-    position: fixed;
+    /* position: fixed; */
     width:250px;
     height:350px;
     /* height:500px; */
