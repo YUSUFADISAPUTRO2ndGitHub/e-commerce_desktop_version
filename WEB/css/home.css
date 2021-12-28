@@ -1799,7 +1799,7 @@ body {
     /* background-color: red; */
 }
 .solped-footer-right {
-    width:30%;
+    width:25%;
     height:100%;
     /* background-color: red; */
     display: flex;
@@ -1815,6 +1815,15 @@ body {
 .solped-footer-1 {
     height: 240px;
     width:15%;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    /* border:1px solid black; */
+    padding:10px;
+}
+.solped-footer-4 {
+    height: 240px;
+    width:25%;
     /* background-color: blue; */
     display: flex;
     flex-direction: column;
@@ -10394,7 +10403,7 @@ option{
 
 
 .map_soldays{
-    width: 100%;
+    width: 90%;
     height:60%;
     border:1px solid black;
 }
